@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding ="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  <PropertyGroup Label="Globals" >
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{b54b5a74-b581-4c20-946d-2da479642537}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksApplication.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComposable.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksConfigProvider.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksLed.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksMqttConfigProvider.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksMqttConnector.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksMqttDebugResponder.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksTimer.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksWiFiConfigurator.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksWifiConnector.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\evt\ksEventHandle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\ksIotFrameworkLib.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksApplication.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksComponent.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksComposable.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksConstants.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksConfigProvider.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksLed.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksMqttConfigProvider.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksMqttConnector.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksMqttDebugResponder.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksTimer.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksWiFiConfigurator.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksWifiConnector.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\evt\ksEvent.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\evt\ksEventBase.h" />
+<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\evt\ksEventHandle.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+<Text Include="$(MSBuildThisFileDirectory)readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)ksIotFrameworkLib.vcxitems.filters" />
+  </ItemGroup>
+</Project>
