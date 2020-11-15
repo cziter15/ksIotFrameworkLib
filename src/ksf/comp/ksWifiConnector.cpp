@@ -18,6 +18,7 @@ namespace ksf
 	bool ksWifiConnector::init(ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
+		WiFi.setAutoReconnect(true);
 		WiFi.begin();
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
