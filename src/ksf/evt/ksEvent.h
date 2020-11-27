@@ -19,7 +19,7 @@ namespace ksf
 			std::vector<std::function<void(Params...)>> callbacks;
 
 		public:
-			void registerEvent(std::shared_ptr<ksEventHandle>& outHandle, std::function<void(Params...)> function)
+			void registerEvent(std::shared_ptr<ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 			{
 				outHandle = std::make_shared<ksEventHandle>(this, (int)callbacks.size());
 				callbacks.push_back(function);
