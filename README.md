@@ -25,6 +25,20 @@ The aim of this project is to provide simple kick-start application pattern for 
 ## Building application
 To build an application simply create new class inherited from ksApplication. Inside init method add components and setup them, then call base ksApplication's init method. You can also optionally override loop method, but remember that baseclass method (ksApplication's loop) iterates over component list executing loop call on each registered component.
 
+## RTTI - compiler flags
+Component subsystem requires RTTI C++ feature. To enable, simply pass `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
+Whole example setup:
+```
+# ksIotFramework build property overrides
+#
+
+compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frtti
+
+network.password=ota_ksiotframework
+network.auth_upload=yes
+network.port=8266
+```
+
 ## Dependencies
 This project depends on following libraries:
 * Arduino for ESP8266/32
