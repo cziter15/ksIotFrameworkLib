@@ -9,7 +9,12 @@ namespace ksf
 	ksWiFiConfigurator::ksWiFiConfigurator(const String& devicePrefixName) : deviceName(devicePrefixName)
 	{
 		deviceName += '-';
+
+#ifdef ESP32
+		deviceName += (int)ESP.getEfuseMac();
+#else
 		deviceName += ESP.getChipId();
+#endif
 	}
 
 	bool ksWiFiConfigurator::init(ksComposable* owner)

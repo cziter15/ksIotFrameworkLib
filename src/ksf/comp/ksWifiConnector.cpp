@@ -12,7 +12,12 @@ namespace ksf
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
-		WiFi.hostname(hostname);
+		#ifdef ESP32
+			WiFi.setHostname(hostname);
+		#else
+			WiFi.hostname(hostname);
+		#endif
+	
 	}
 
 	bool ksWifiConnector::init(ksComposable* owner)
