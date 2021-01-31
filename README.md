@@ -25,6 +25,33 @@ The aim of this project is to provide simple kick-start application pattern for 
 ## Building application
 To build an application simply create new class inherited from ksApplication. Inside init method add components and setup them, then call base ksApplication's init method. You can also optionally override loop method, but remember that baseclass method (ksApplication's loop) iterates over component list executing loop call on each registered component.
 
+## A word of warning
+The idea was to prevent launching application when any component initialization fail. This will lead to false returned from ksApplication::init method, but due to inheritance, user can override it's behaviour. Application will then try to launch and after initialization, it will tick every component, even if one of them failed to initialize. This can lead to crashes, especially inside loop method.
+
+So the flow is:
+- Add components (addComponent simply construct class and add it's pointer to app component list).
+- Run ksApplicaiton:init (it will iterate through component list and initialize them, returning false if any init failed).
+- If ksApplication::init() does not return true, simply return false in your app init method
+
+```
+bool EnergyMonitor::init()
+{
+	addComponent<ksf::ksWifiConnector>(EnergyMonitorConfig::emonDeviceName);
+	addComponent<ksf::ksMqttDebugResponder>();
+	mqtt = addComponent<ksf::ksMqttConnector>();
+	statusLed = addComponent<ksf::ksLed>(STATUS_LED_PIN);
+	eventLed = addComponent<ksf::ksLed>(EVENT_LED_PIN);
+
+	auto sensor_timer = addComponent<ksf::ksTimer>(EMON_TIMER_INTERVAL, true);
+	auto sec_timer = addComponent<ksf::ksTimer>(EMON_SEC_TIMER, true);
+	
+	if (!ksApplication::init())
+		return false;
+  
+  /* [...] */
+}
+```
+
 ## RTTI - compiler flags
 Component subsystem requires RTTI C++ feature. To enable, simply pass `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
 Whole example setup:
