@@ -33,7 +33,7 @@ So the flow is:
 - Run ksApplicaiton:init (it will iterate through component list and initialize them, returning false if any init failed).
 - If ksApplication::init() does not return true, simply return false in your app init method
 
-```
+```c++
 bool EnergyMonitor::init()
 {
 	addComponent<ksf::ksWifiConnector>(EnergyMonitorConfig::emonDeviceName);
@@ -55,9 +55,8 @@ bool EnergyMonitor::init()
 ## RTTI - compiler flags
 Component subsystem requires RTTI C++ feature. To enable, simply pass `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
 Whole example setup:
-```
+```ini
 # ksIotFramework build property overrides
-#
 
 compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frtti
 
