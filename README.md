@@ -57,12 +57,7 @@ Component subsystem requires RTTI C++ feature. To enable, simply pass `-frtti` i
 Whole example setup:
 ```ini
 # ksIotFramework build property overrides
-
 compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frtti
-
-network.password=ota_ksiotframework
-network.auth_upload=yes
-network.port=8266
 ```
 
 ## Dependencies
