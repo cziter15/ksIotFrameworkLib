@@ -47,8 +47,8 @@ bool EnergyMonitor::init()
 	
 	if (!ksApplication::init())
 		return false;
-  
-  /* [...] */
+
+	/* [ Rest of application initialization code ] */
 }
 ```
 
