@@ -27,21 +27,28 @@ namespace ksf
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 
+		lastWifiCheckTime = millis();
+
 		return true;
 	}
 
 	bool ksWifiConnector::loop()
 	{
+		unsigned long currentTime = millis();
+
 		if (!WiFi.isConnected())
 		{
-			if (millis() - lastWifiCheckTime > KSF_WIFI_TIMEOUT_MS)
+			if (currentTime - lastWifiCheckTime > KSF_WIFI_TIMEOUT_MS)
 			{
-				lastWifiCheckTime = millis();
+				lastWifiCheckTime = currentTime;
 				return false;
 			}
 		}
+		else 
+		{
+			lastWifiCheckTime = currentTime;
+		}
 
-		lastWifiCheckTime = millis();
 		return true;
 	}
 }
