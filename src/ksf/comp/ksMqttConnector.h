@@ -10,8 +10,8 @@ namespace ksf
 	class ksMqttConnector : public ksComponent
 	{
 		protected:
-			std::shared_ptr<WiFiClient> MqttWifiClient;
-			std::shared_ptr<PubSubClient> MqttClient;
+			std::shared_ptr<WiFiClient> mqttWifiClient;
+			std::shared_ptr<PubSubClient> mqttClient;
 
 			unsigned long lastConnectionTimeTick = 0;
 			unsigned long lastTryReconnectTime = 0;
@@ -20,9 +20,9 @@ namespace ksf
 			virtual void mqttConnectedInternal();
 			virtual void mqttMessageInternal(char* topic, unsigned char* payload, unsigned int length);
 
-			String saved_login;
-			String saved_password;
-			String saved_prefix;
+			String savedLogin;
+			String savedPassword;
+			String savedPrefix;
 
 		public:
 			bool init(class ksComposable* owner) override;

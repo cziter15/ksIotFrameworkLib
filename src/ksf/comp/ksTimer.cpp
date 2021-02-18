@@ -18,27 +18,27 @@ namespace ksf
 
 	void ksTimer::set(unsigned int interval, bool looping)
 	{
-		last_tick = millis();
-		timer_inteval = interval;
-		timer_looping = looping;
+		lastTick = millis();
+		timerInterval = interval;
+		timerLooping = looping;
 	}
 
 	bool ksTimer::init(ksComposable* owner)
 	{
-		last_tick = millis();
+		lastTick = millis();
 		return true;
 	}
 
 	bool ksTimer::loop()
 	{
-		if (timer_inteval > 0)
+		if (timerInterval > 0)
 		{
-			if (millis() - last_tick > timer_inteval)
+			if (millis() - lastTick > timerInterval)
 			{
 				onTimerExpired.broadcast();
-				last_tick = millis();
+				lastTick = millis();
 
-				if (!timer_looping)
+				if (!timerLooping)
 					unset();
 			}
 		}

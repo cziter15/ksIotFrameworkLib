@@ -7,9 +7,9 @@ namespace ksf
 	class ksTimer : public ksComponent
 	{
 		private:
-			bool timer_looping = false;
-			unsigned int timer_inteval = 0;
-			unsigned int last_tick = 0;
+			bool timerLooping = false;
+			unsigned int timerInterval = 0;
+			unsigned int lastTick = 0;
 
 		public:
 			ksEvent<> onTimerExpired;
