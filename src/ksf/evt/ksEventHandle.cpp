@@ -7,14 +7,14 @@
 
 namespace ksf
 {
-	ksEventHandle::ksEventHandle(ksEventBase* evt, std::size_t index) :
-		cb_evtbase(evt), cb_index(index)
+	ksEventHandle::ksEventHandle(ksEventBase* evt, std::size_t uid) :
+		cb_evtbase(evt), cb_uid(uid)
 	{
 		
 	}
 
 	ksEventHandle::~ksEventHandle()
 	{
-		cb_evtbase->unbind(cb_index);
+		cb_evtbase->unbind(cb_uid);
 	}
 }

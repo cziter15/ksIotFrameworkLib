@@ -14,10 +14,10 @@ namespace ksf
 	{
 		protected:
 			ksEventBase* cb_evtbase = nullptr;
-			std::size_t cb_index = 0;
+			std::size_t cb_uid = 0;
 
 		public:
-			ksEventHandle(ksEventBase* cb_evtbase, std::size_t index);
+			ksEventHandle(ksEventBase* cb_evtbase, std::size_t uid);
 			virtual ~ksEventHandle();
 	};
 }
