@@ -12,7 +12,7 @@ namespace ksf
 			unsigned int lastTick = 0;
 
 		public:
-			ksEvent<> onTimerExpired;
+			DECLARE_KS_EVENT(onTimerExpired)
 
 			ksTimer();
 			ksTimer(unsigned int interval, bool looping = true);

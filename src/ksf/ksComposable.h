@@ -15,15 +15,15 @@ namespace ksf
 
 		public:
 			template <class Type, class... Params>
-			std::shared_ptr<Type> addComponent(Params...rest)
+			std::weak_ptr<Type> addComponent(Params...rest)
 			{
 				std::shared_ptr<Type> ptr = std::make_shared<Type>(rest...);
 				components.push_back(ptr);
-				return ptr;
+				return std::weak_ptr<Type>(ptr);
 			}
 
 			template <class Type>
-			std::shared_ptr<Type> addComponent()
+			std::weak_ptr<Type> addComponent()
 			{
 				std::shared_ptr<Type> ptr = std::make_shared<Type>();
 				components.push_back(ptr);
@@ -31,24 +31,30 @@ namespace ksf
 			}
 
 			template <class Type>
-			void findComponents(std::vector<Type*>& outComponents)
+			void findComponents(std::vector<std::weak_ptr<Type>>& outComponents)
 			{
 				outComponents.clear();
 
 				for (auto& comp : components)
-					if (Type* castedComp = dynamic_cast<Type*>(comp.get()))
-						outComponents.push_back(castedComp);
+				{
+					std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
+
+					if (!castedComp_wp.expired())
+					{
+						outComponents.push_back(castedComp_wp);
+					}
+				}
 			}
 
 			template <class Type>
-			Type* findComponent()
+			std::weak_ptr<Type> findComponent()
 			{
-				std::vector<Type*> comps;
-				findComponents<Type>(comps);
-				return comps.size() > 0 ? comps[0] : nullptr;
+				std::vector<std::weak_ptr<Type>> comps_wp;
+				findComponents<Type>(comps_wp);
+				return comps_wp.size() > 0 ? comps_wp[0] : std::weak_ptr<Type>();
 			}
 
-			bool removeComponent(std::shared_ptr<ksComponent> component);
+			bool forceRemoveComponent(std::weak_ptr<ksComponent> component);
 			void forEachComponent(std::function<bool(std::shared_ptr<ksComponent>&)> functor);
 	};
 }

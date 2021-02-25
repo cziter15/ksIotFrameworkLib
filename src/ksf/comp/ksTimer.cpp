@@ -35,7 +35,7 @@ namespace ksf
 		{
 			if (millis() - lastTick > timerInterval)
 			{
-				onTimerExpired.broadcast();
+				onTimerExpired->broadcast();
 				lastTick = millis();
 
 				if (!timerLooping)

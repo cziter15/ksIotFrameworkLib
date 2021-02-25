@@ -6,7 +6,7 @@
 #pragma once
 namespace ksf
 {
-	class ksEventBase
+	class ksEventBase : public std::enable_shared_from_this<ksEventBase>
 	{
 		friend class ksEventHandle;
 

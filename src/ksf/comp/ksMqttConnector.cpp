@@ -48,7 +48,7 @@ namespace ksf
 		mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT);
 		mqttClient->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 
-		onConnected.broadcast();
+		onConnected->broadcast();
 	}
 
 	void ksMqttConnector::mqttMessageInternal(char* topic, unsigned char* payload, unsigned int length)
@@ -57,9 +57,11 @@ namespace ksf
 		String topicStr(std::move(String(topic).substring(savedPrefix.length())));
 
 		payloadStr.reserve(length);
-		payloadStr.concat((const char*)payload, length);
 
-		onMesssage.broadcast(topicStr, payloadStr);
+		for (unsigned int payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
+			payloadStr += (char)payload[payload_ch_idx];
+
+		onMesssage->broadcast(topicStr, payloadStr);
 	}
 
 	void ksMqttConnector::subscribe(const String& topic)
@@ -84,7 +86,7 @@ namespace ksf
 		{
 			if (wasConnected)
 			{
-				onDisconnected.broadcast();
+				onDisconnected->broadcast();
 				wasConnected = false;
 
 				connectionTimeSeconds = 0;

@@ -12,7 +12,7 @@ namespace ksf
 			static const char cmdChannelName[];
 			static const char logChannelName[];
 
-			ksMqttConnector* mqtt = nullptr;
+			std::weak_ptr<ksMqttConnector> mqtt_wp;
 			ksComposable* app = nullptr;
 
 			std::shared_ptr<ksEventHandle> connEventHandle;

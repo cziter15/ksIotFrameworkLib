@@ -3,15 +3,18 @@
 
 namespace ksf 
 {
-	bool ksComposable::removeComponent(std::shared_ptr<ksComponent> component)
+	bool ksComposable::forceRemoveComponent(std::weak_ptr<ksComponent> component)
 	{
-		auto it = std::find(components.begin(), components.end(), component);
-	
-		if (it != components.end())
+		if (auto sp = component.lock())
 		{
-			it->reset();
-			components.erase(it);
-			return true;
+			auto it = std::find(components.begin(), components.end(), sp);
+
+			if (it != components.end())
+			{
+				it->reset();
+				components.erase(it);
+				return true;
+			}
 		}
 
 		return false;

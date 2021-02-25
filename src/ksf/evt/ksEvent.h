@@ -10,6 +10,9 @@
 #include "ksEventBase.h"
 #include "ksEventHandle.h"
 
+#define DECLARE_KS_EVENT(evtName, ...) \
+	std::shared_ptr<ksf::ksEvent<__VA_ARGS__>> evtName = std::make_shared<ksf::ksEvent<__VA_ARGS__>>();
+
 namespace ksf
 {
 	template <typename... Params>
@@ -23,7 +26,8 @@ namespace ksf
 			void registerEvent(std::shared_ptr<ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 			{
 				++lastUid;
-				outHandle = std::make_shared<ksEventHandle>(this, lastUid);
+				outHandle = std::make_shared<ksEventHandle>(shared_from_this(), lastUid);
+			
 				callbacks.emplace_back(lastUid, std::move(function));
 			}
 

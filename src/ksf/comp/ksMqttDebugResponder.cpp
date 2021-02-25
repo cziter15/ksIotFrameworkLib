@@ -19,11 +19,14 @@ namespace ksf
 	bool ksMqttDebugResponder::init(ksComposable* owner)
 	{
 		app = owner;
-		mqtt = owner->findComponent<ksMqttConnector>();
+		mqtt_wp = owner->findComponent<ksMqttConnector>();
 
-		mqtt->onConnected.registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
-		mqtt->onMesssage.registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
-
+		if (auto mqtt_sp = mqtt_wp.lock())
+		{
+			mqtt_sp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
+			mqtt_sp->onMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
+		}
+	
 		return true;
 	}
 
@@ -34,49 +37,53 @@ namespace ksf
 
 	void ksMqttDebugResponder::onConnected()
 	{
-		mqtt->subscribe(cmdChannelName);
+		if (auto mqtt_sp = mqtt_wp.lock())
+			mqtt_sp->subscribe(cmdChannelName);
 	}
 
 	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
 	{
-		if (topic.equals(cmdChannelName))
+		if (auto mqtt_sp = mqtt_wp.lock())
 		{
-			if (message.equals("netinfo"))
+			if (topic.equals(cmdChannelName))
 			{
-				mqtt->publish(logChannelName,
-					"IP: " + WiFi.localIP().toString() + ", " +
-					"CT: " + String(mqtt->connectionTimeSeconds) + " s, " +
-					"RC: " + String(mqtt->reconnectCounter) + ", " +
-					"RSSI " + String(WiFi.RSSI()) + " dBm"
-				);
-			}
-			else if (message.equals("meminfo"))
-			{
-				mqtt->publish(logChannelName,
-					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
-					"Free psram: " + String(
+				if (message.equals("netinfo"))
+				{
+					mqtt_sp->publish(logChannelName,
+						"IP: " + WiFi.localIP().toString() + ", " +
+						"CT: " + String(mqtt_sp->connectionTimeSeconds) + " s, " +
+						"RC: " + String(mqtt_sp->reconnectCounter) + ", " +
+						"RSSI " + String(WiFi.RSSI()) + " dBm"
+					);
+				}
+				else if (message.equals("meminfo"))
+				{
+					mqtt_sp->publish(logChannelName,
+						"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
+						"Free psram: " + String(
 #ifdef ESP32
-						ESP.getFreePsram()
+							ESP.getFreePsram()
 #else
-						0
+							0
 #endif
-					) + " b, " +
-					"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
-					"CPU: " + String(ESP.getCpuFreqMHz()) + " MHz"
-				);
-			}
-			else if (message.equals("remove_dbg"))
-			{
-				mqtt->publish(logChannelName, "removed ksMqttDebugResponder");
-				app->removeComponent(shared_from_this());
-			}
-			else if (message.equals("break_app"))
-			{
-				breakloop = true;
-			}
-			else 
-			{
-				mqtt->publish(logChannelName, "command not supported: " + message);
+						) + " b, " +
+						"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
+						"CPU: " + String(ESP.getCpuFreqMHz()) + " MHz"
+					);
+				}
+				else if (message.equals("remove_dbg"))
+				{
+					mqtt_sp->publish(logChannelName, "removed ksMqttDebugResponder");
+					queueDestroy();
+				}
+				else if (message.equals("break_app"))
+				{
+					breakloop = true;
+				}
+				else
+				{
+					mqtt_sp->publish(logChannelName, "command not supported: " + message);
+				}
 			}
 		}
 	}
