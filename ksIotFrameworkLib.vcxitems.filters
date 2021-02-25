@@ -57,6 +57,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComposable.cpp">
       <Filter>Source Files\ksf</Filter>
     </ClCompile>
+	<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComponent.cpp">
+      <Filter>Source Files\ksf</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.cpp">
       <Filter>Source Files\ksf</Filter>
     </ClCompile>

@@ -29,6 +29,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksWifiConnector.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\evt\ksEventHandle.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksApplication.cpp" />
+	<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComposable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.cpp" />
   </ItemGroup>
