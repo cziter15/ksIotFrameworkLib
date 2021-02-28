@@ -17,13 +17,16 @@ namespace ksf
 		#else
 			WiFi.hostname(hostname);
 		#endif
-	
 	}
 
 	bool ksWifiConnector::init(ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
 		WiFi.begin();
+
+		#ifdef ESP32
+			WiFi.setSleep(WIFI_PS_MAX_MODEM);
+		#endif
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 
