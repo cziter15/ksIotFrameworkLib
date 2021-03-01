@@ -76,6 +76,10 @@ namespace ksf
 					mqtt_sp->publish(logChannelName, "removed ksMqttDebugResponder");
 					queueDestroy();
 				}
+				else if (message.equals("restart_device"))
+				{
+					ESP.restart();
+				}
 				else if (message.equals("break_app"))
 				{
 					breakloop = true;
