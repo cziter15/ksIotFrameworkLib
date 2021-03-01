@@ -28,6 +28,8 @@ namespace ksf
 			bool init(class ksComposable* owner) override;
 			bool loop() override;
 
+			bool isConnected() const;
+
 			DECLARE_KS_EVENT(onMesssage, const String&, const String&)
 			DECLARE_KS_EVENT(onConnected)
 			DECLARE_KS_EVENT(onDisconnected)

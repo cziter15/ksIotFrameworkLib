@@ -116,4 +116,12 @@ namespace ksf
 
 		return true;
 	}
+
+	bool ksMqttConnector::isConnected() const
+	{
+		if (!WiFi.isConnected() || !mqttClient)
+			return false;
+
+		return mqttClient->connected();
+	}
 }

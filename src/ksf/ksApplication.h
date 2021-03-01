@@ -8,12 +8,16 @@
 	{														\
 		while(application.loop())							\
 		{													\
-			delay(delayTime);								\
+			if (delayTime == 0)								\
+				yield();									\
+			else											\
+				delay(delayTime);							\
 		}													\
 	}														\
 }
 
-#define RUN_APP_BLOCKING_LOOPED(appClass) RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
+#define RUN_APP_BLOCKING_LOOPED(appClass) RUN_APP_BLOCKING_LOOPED_TIME(appClass, 0)
+#define RUN_APP_BLOCKING_LOOPED_DELAY(appClass)  RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
 
 namespace ksf
 {
