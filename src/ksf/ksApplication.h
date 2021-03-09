@@ -13,6 +13,18 @@
 	}														\
 }
 
+#define RUN_APP_BLOCKING_LOOPED_NODELAY(appClass)			\
+{															\
+	appClass application;									\
+	if (application.init())									\
+	{														\
+		while(application.loop())							\
+		{													\
+			yield();										\
+		}													\
+	}														\
+}
+
 #define RUN_APP_BLOCKING_LOOPED(appClass) RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
 
 namespace ksf
