@@ -12,4 +12,14 @@ namespace ksf
 
 		return false;
 	}
+
+	bool ksComponent::loop()
+	{
+		return true;
+	}
+
+	void ksComponent::postInit()
+	{
+
+	}
 }

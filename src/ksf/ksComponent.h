@@ -15,7 +15,7 @@ namespace ksf
 			bool queueDestroy();
 
 			virtual bool init(ksComposable* owner) = 0;
-			virtual bool loop() = 0;
-			virtual void postInit() {}
+			virtual bool loop();
+			virtual void postInit();
 	};
 }
