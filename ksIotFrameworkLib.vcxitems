@@ -32,6 +32,7 @@
 	<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComposable.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.cpp" />
+	<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksConstants.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksConfigProvider.h" />

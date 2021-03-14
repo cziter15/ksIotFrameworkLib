@@ -63,6 +63,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.cpp">
       <Filter>Source Files\ksf</Filter>
     </ClCompile>
+	<ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\ksConstants.cpp">
+      <Filter>Source Files\ksf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)src\ksf\comp\ksConfigProvider.h">

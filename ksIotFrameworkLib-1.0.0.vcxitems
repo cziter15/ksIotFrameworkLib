@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksApplication.cpp" />
+<ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConstants.cpp" />
 <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComposable.cpp" />
 <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksComponent.cpp" />
 <ClCompile Include="$(MSBuildThisFileDirectory)src\ksf\ksConfig.cpp" />
