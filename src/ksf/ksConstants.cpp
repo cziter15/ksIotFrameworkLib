@@ -23,10 +23,10 @@ namespace ksf
 
 #ifdef ESP32
 		esp_base_mac_addr_set(mac);
+		SPIFFS.begin(true);
 #else
 		wifi_set_macaddr(STATION_IF, mac);
+		SPIFFS.begin();
 #endif
-
-		SPIFFS.begin(true);
 	}
 }
