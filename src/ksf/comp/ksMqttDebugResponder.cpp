@@ -59,16 +59,13 @@ namespace ksf
 				else if (message.equals("meminfo"))
 				{
 					mqtt_sp->publish(logChannelName,
-						"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
-						"Free psram: " + String(
-#ifdef ESP32
-							ESP.getFreePsram()
-#else
-							0
-#endif
-						) + " b, " +
 						"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
-						"CPU: " + String(ESP.getCpuFreqMHz()) + " MHz"
+						"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
+#ifdef ESP32
+						"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
+						"Chip temperature: " + String(temperatureRead(), 1) + " °C, " +	
+#endif
+						"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz"
 					);
 				}
 				else if (message.equals("remove_dbg"))
