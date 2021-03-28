@@ -56,14 +56,14 @@ namespace ksf
 						"RSSI " + String(WiFi.RSSI()) + " dBm"
 					);
 				}
-				else if (message.equals("meminfo"))
+				else if (message.equals("sysinfo"))
 				{
 					mqtt_sp->publish(logChannelName,
 						"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
 						"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
 						"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
-						"Chip temperature: " + String(temperatureRead(), 1) + " °C, " +	
+						"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
 #endif
 						"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz"
 					);
@@ -73,7 +73,7 @@ namespace ksf
 					mqtt_sp->publish(logChannelName, "removed ksMqttDebugResponder");
 					queueDestroy();
 				}
-				else if (message.equals("restart_device"))
+				else if (message.equals("restart"))
 				{
 					ESP.restart();
 				}
