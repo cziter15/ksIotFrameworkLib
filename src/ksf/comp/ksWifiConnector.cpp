@@ -23,6 +23,7 @@ namespace ksf
 	{
 		WiFi.mode(WIFI_STA);
 		WiFi.begin();
+		WiFi.setAutoReconnect(true);
 
 		#ifdef ESP32
 			WiFi.setSleep(WIFI_PS_MAX_MODEM);
