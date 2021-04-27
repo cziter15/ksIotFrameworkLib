@@ -6,13 +6,14 @@ namespace ksf
 	class ksLed : public ksComponent
 	{
 		protected:
-			unsigned short ledPin = 0;
+			unsigned char ledPin = 0;
+
 			unsigned int lastBlinkTime = 0;
 			unsigned int blinkInterval = 0;
 			unsigned int blinkLoops = 0;
 
 		public:
-			ksLed(unsigned short pin);
+			ksLed(unsigned char pin);
 
 			bool init(class ksComposable* owner) override;
 			bool loop() override;

@@ -7,6 +7,7 @@
 #include "ksf/evt/ksEvent.h"
 #include "ksf/comp/ksConfigProvider.h"
 #include "ksf/comp/ksLed.h"
+#include "ksf/comp/ksResetButton.h"
 #include "ksf/comp/ksMqttConfigProvider.h"
 #include "ksf/comp/ksMqttConnector.h"
 #include "ksf/comp/ksMqttDebugResponder.h"

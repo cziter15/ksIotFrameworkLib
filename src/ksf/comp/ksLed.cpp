@@ -4,14 +4,14 @@
 
 namespace ksf
 {
-	ksLed::ksLed(unsigned short pin) : ledPin(pin)
+	ksLed::ksLed(unsigned char pin) : ledPin(pin)
 	{
 	}
 
 	bool ksLed::init(ksComposable* owner)
 	{
 		pinMode(ledPin, OUTPUT);
-		digitalWrite(ledPin, LOW);
+		setEnabled(false);
 		return true;
 	}
 
@@ -57,6 +57,7 @@ namespace ksf
 
 	ksLed::~ksLed()
 	{
-		setEnabled(false);
+		setEnabled(false); // disable led
+		pinMode(ledPin, INPUT); //default to input
 	}
 }

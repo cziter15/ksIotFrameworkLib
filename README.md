@@ -15,6 +15,7 @@ The aim of this project is to provide simple kick-start application pattern for 
 | ------------- | ------------- |
 | ksConfigProvider  | Used to manage parameters, configurator component calls each config provider to handle parameter inject/capture on WiFi configuration stage. |
 | ksLed  | Used to handle diodes, easy blinking, turn off, turn on etc. |
+| ksResetButton  | Used to break from app loop or reset whole device (to trigger config portal). |
 | ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix etc..). |
 | ksMqttConnector  | Used to maintain connection with Mqtt, user can bind to onMessage, onConnected events. |
 | ksMqttDebugResponder  | Provides debug commands for app with ksMqttConnector component. |
