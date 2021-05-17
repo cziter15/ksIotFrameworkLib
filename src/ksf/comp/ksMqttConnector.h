@@ -41,7 +41,7 @@ namespace ksf
 			virtual void unsubscribe(const String& topic);
 			virtual void publish(const String& topic, const String& payload, bool retain = false);
 
-			virtual void setupConnection(String broker, String port, String login, String password, String prefix);
+			virtual void setupConnection(String broker, String port, String login, String password, String prefix, bool secure = false);
 	};
 }
 

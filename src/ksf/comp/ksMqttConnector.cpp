@@ -11,6 +11,8 @@
 #include <ESP8266WiFi.h>
 #endif
 
+#include <WiFiClientSecure.h>
+
 using namespace std::placeholders;
 
 namespace ksf
@@ -25,9 +27,9 @@ namespace ksf
 		return mqttClient != nullptr;
 	}
 
-	void ksMqttConnector::setupConnection(String broker, String port, String login, String password, String prefix)
+	void ksMqttConnector::setupConnection(String broker, String port, String login, String password, String prefix, bool secure)
 	{
-		mqttWifiClient = std::make_shared<WiFiClient>();
+		mqttWifiClient = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
 		mqttClient = std::make_shared<PubSubClient>(*mqttWifiClient.get());
 
 		savedLogin = login;
