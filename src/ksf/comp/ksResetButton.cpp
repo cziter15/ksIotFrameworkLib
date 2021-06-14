@@ -17,7 +17,7 @@ namespace ksf
 	#define SHORT_TRIGGER 50
 	#define LONG_TRIGGER 5000
 
-	ksResetButton::ksResetButton(unsigned char pin, unsigned char triggerBy) 
+	ksResetButton::ksResetButton(uint8_t pin, uint8_t triggerBy)
 		: buttonPin(pin), triggerState(triggerBy)
 	{
 
@@ -32,7 +32,7 @@ namespace ksf
 
 	bool ksResetButton::loop()
 	{
-		unsigned char currentState = digitalRead(buttonPin);
+		uint8_t currentState = digitalRead(buttonPin);
 
 		if (currentState != lastState)
 		{

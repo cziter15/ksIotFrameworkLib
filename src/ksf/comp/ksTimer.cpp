@@ -6,7 +6,7 @@ namespace ksf
 {
 	ksTimer::ksTimer() {}
 
-	ksTimer::ksTimer(unsigned int interval, bool looping)
+	ksTimer::ksTimer(uint32_t interval, bool looping)
 	{
 		set(interval, looping);
 	}
@@ -16,7 +16,7 @@ namespace ksf
 		set(0, false);
 	}
 
-	void ksTimer::set(unsigned int interval, bool looping)
+	void ksTimer::set(uint32_t interval, bool looping)
 	{
 		lastTick = millis();
 		timerInterval = interval;

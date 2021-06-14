@@ -13,12 +13,12 @@ namespace ksf
 			std::shared_ptr<WiFiClient> mqttWifiClient;
 			std::shared_ptr<PubSubClient> mqttClient;
 
-			unsigned long lastConnectionTimeTick = 0;
-			unsigned long lastTryReconnectTime = 0;
+			uint32_t lastConnectionTimeTick = 0;
+			uint32_t lastTryReconnectTime = 0;
 			bool wasConnected = false;
 
 			virtual void mqttConnectedInternal();
-			virtual void mqttMessageInternal(char* topic, unsigned char* payload, unsigned int length);
+			virtual void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
 
 			String savedLogin;
 			String savedPassword;
@@ -34,8 +34,8 @@ namespace ksf
 			DECLARE_KS_EVENT(onConnected)
 			DECLARE_KS_EVENT(onDisconnected)
 
-			unsigned long connectionTimeSeconds = 0;
-			unsigned long reconnectCounter = 0;
+			uint32_t connectionTimeSeconds = 0;
+			uint32_t reconnectCounter = 0;
 
 			virtual void subscribe(const String& topic);
 			virtual void unsubscribe(const String& topic);

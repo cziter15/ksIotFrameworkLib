@@ -5,7 +5,7 @@ namespace ksf
 	class ksWifiConnector : public ksComponent
 	{
 		protected:
-			unsigned long lastWifiCheckTime = 0;
+			uint32_t lastWifiCheckTime = 0;
 
 		public:
 			ksWifiConnector(const char* hostname);

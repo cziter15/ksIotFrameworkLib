@@ -4,7 +4,7 @@
 
 namespace ksf
 {
-	ksLed::ksLed(unsigned char pin) : ledPin(pin)
+	ksLed::ksLed(uint8_t pin) : ledPin(pin)
 	{
 	}
 
@@ -37,7 +37,7 @@ namespace ksf
 		return digitalRead(ledPin) == 1;
 	}
 
-	void ksLed::setBlinking(unsigned int interval, unsigned int loops)
+	void ksLed::setBlinking(uint32_t interval, uint32_t loops)
 	{
 		setEnabled(interval > 0);
 		blinkInterval = interval;

@@ -11,7 +11,7 @@ namespace ksf
 		deviceName += '-';
 
 #ifdef ESP32
-		deviceName += (int)ESP.getEfuseMac();
+		deviceName += (uint32_t)ESP.getEfuseMac();
 #else
 		deviceName += ESP.getChipId();
 #endif

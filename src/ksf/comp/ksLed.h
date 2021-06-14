@@ -6,19 +6,19 @@ namespace ksf
 	class ksLed : public ksComponent
 	{
 		protected:
-			unsigned char ledPin = 0;
+			uint8_t ledPin = 0;
 
-			unsigned int lastBlinkTime = 0;
-			unsigned int blinkInterval = 0;
-			unsigned int blinkLoops = 0;
+			uint32_t lastBlinkTime = 0;
+			uint32_t blinkInterval = 0;
+			uint32_t blinkLoops = 0;
 
 		public:
-			ksLed(unsigned char pin);
+			ksLed(uint8_t pin);
 
 			bool init(class ksComposable* owner) override;
 			bool loop() override;
 
-			virtual void setBlinking(unsigned int interval, unsigned int loops = 0);
+			virtual void setBlinking(uint32_t interval, uint32_t loops = 0);
 			virtual bool isBlinking() const;
 
 			virtual bool isEnabled() const;

@@ -53,14 +53,14 @@ namespace ksf
 		onConnected->broadcast();
 	}
 
-	void ksMqttConnector::mqttMessageInternal(char* topic, unsigned char* payload, unsigned int length)
+	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
 		String payloadStr((char*)0);
 		String topicStr(std::move(String(topic).substring(savedPrefix.length())));
 
 		payloadStr.reserve(length);
 
-		for (unsigned int payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
+		for (uint32_t payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
 			payloadStr += (char)payload[payload_ch_idx];
 
 		onMesssage->broadcast(topicStr, payloadStr);

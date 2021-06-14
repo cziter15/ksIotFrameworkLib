@@ -38,7 +38,7 @@ namespace ksf
 
 	bool ksWifiConnector::loop()
 	{
-		unsigned long currentTime = millis();
+		uint32_t currentTime = millis();
 
 		if (!WiFi.isConnected())
 		{
