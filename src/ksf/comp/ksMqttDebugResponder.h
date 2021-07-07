@@ -21,11 +21,15 @@ namespace ksf
 			bool breakloop = false;
 
 			virtual void onConnected();
+			virtual void onMessage(const String& topic, const String& message);
 
 		public:
 			virtual bool init(class ksComposable* owner) override;
 			virtual bool loop() override;
-			virtual void onMessage(const String& topic, const String& message);
+
+			void respond(String message) const;
+
+			DECLARE_KS_EVENT(customDebugHandler, ksf::ksMqttDebugResponder*, const String&, bool&)
 	};
 }
 

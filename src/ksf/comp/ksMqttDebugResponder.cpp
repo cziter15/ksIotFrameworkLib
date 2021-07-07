@@ -41,50 +41,62 @@ namespace ksf
 			mqtt_sp->subscribe(cmdChannelName);
 	}
 
-	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
+	void ksMqttDebugResponder::respond(String message) const
 	{
 		if (auto mqtt_sp = mqtt_wp.lock())
 		{
-			if (topic.equals(cmdChannelName))
+			mqtt_sp->publish(logChannelName, message, false);
+		}
+	}
+
+	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
+	{
+		if (topic.equals(cmdChannelName))
+		{
+			if (message.equals("netinfo"))
 			{
-				if (message.equals("netinfo"))
+				if (auto mqtt_sp = mqtt_wp.lock())
 				{
-					mqtt_sp->publish(logChannelName,
+					respond(
 						"IP: " + WiFi.localIP().toString() + ", " +
 						"CT: " + String(mqtt_sp->connectionTimeSeconds) + " s, " +
 						"RC: " + String(mqtt_sp->reconnectCounter) + ", " +
 						"RSSI " + String(WiFi.RSSI()) + " dBm"
 					);
 				}
-				else if (message.equals("sysinfo"))
-				{
-					mqtt_sp->publish(logChannelName,
-						"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
-						"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
+			}
+			else if (message.equals("sysinfo"))
+			{
+				respond(
+					"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
+					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
-						"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
-						"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
+					"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
+					"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
 #endif
-						"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz"
-					);
-				}
-				else if (message.equals("remove_dbg"))
-				{
-					mqtt_sp->publish(logChannelName, "removed ksMqttDebugResponder");
-					queueDestroy();
-				}
-				else if (message.equals("restart"))
-				{
-					ESP.restart();
-				}
-				else if (message.equals("break_app"))
-				{
-					breakloop = true;
-				}
-				else
-				{
-					mqtt_sp->publish(logChannelName, "command not supported: " + message);
-				}
+					"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz"
+				);
+			}
+			else if (message.equals("remove_dbg"))
+			{
+				respond("removed ksMqttDebugResponder");
+				queueDestroy();
+			}
+			else if (message.equals("restart"))
+			{
+				ESP.restart();
+			}
+			else if (message.equals("break_app"))
+			{
+				breakloop = true;
+			}
+			else
+			{
+				bool dbgMsgHandled = false;
+				customDebugHandler->broadcast(this, message, dbgMsgHandled);
+					
+				if (!dbgMsgHandled)
+					respond("command not supported: " + message);
 			}
 		}
 	}
