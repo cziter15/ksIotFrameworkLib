@@ -44,9 +44,7 @@ namespace ksf
 	void ksMqttDebugResponder::respond(String message) const
 	{
 		if (auto mqtt_sp = mqtt_wp.lock())
-		{
 			mqtt_sp->publish(logChannelName, message, false);
-		}
 	}
 
 	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
