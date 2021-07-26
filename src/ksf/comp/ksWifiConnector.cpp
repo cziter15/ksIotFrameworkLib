@@ -3,9 +3,9 @@
 #include "ksWifiConnector.h"
 
 #ifdef ESP32
-#include <WiFi.h>
+	#include <WiFi.h>
 #else
-#include <ESP8266WiFi.h>
+	#include <ESP8266WiFi.h>
 #endif
 
 namespace ksf
@@ -22,8 +22,8 @@ namespace ksf
 	bool ksWifiConnector::init(ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
+		WiFi.setAutoReconnect(false);
 		WiFi.begin();
-		WiFi.setAutoReconnect(true);
 
 		#ifdef ESP32
 			WiFi.setSleep(WIFI_PS_MAX_MODEM);
@@ -31,8 +31,8 @@ namespace ksf
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 
-		lastWifiCheckTime = millis();
-
+		lastReconnectTryTime = lastWifiCheckTime = millis();
+		
 		return true;
 	}
 
@@ -42,7 +42,12 @@ namespace ksf
 
 		if (!WiFi.isConnected())
 		{
-			if (currentTime - lastWifiCheckTime > KSF_WIFI_TIMEOUT_MS)
+			if (currentTime - lastReconnectTryTime > KSF_WIFI_RECONNECT_TIME_MS)
+			{
+				WiFi.reconnect();
+				lastReconnectTryTime = currentTime;
+			}
+			else if (currentTime - lastWifiCheckTime > KSF_WIFI_TIMEOUT_MS)
 			{
 				lastWifiCheckTime = currentTime;
 				return false;
@@ -50,7 +55,7 @@ namespace ksf
 		}
 		else 
 		{
-			lastWifiCheckTime = currentTime;
+			lastReconnectTryTime = lastWifiCheckTime = currentTime;
 		}
 
 		return true;

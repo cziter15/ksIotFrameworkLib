@@ -6,6 +6,7 @@ namespace ksf
 	{
 		protected:
 			uint32_t lastWifiCheckTime = 0;
+			uint32_t lastReconnectTryTime = 0;
 
 		public:
 			ksWifiConnector(const char* hostname);
