@@ -19,18 +19,20 @@ namespace ksf
 
 	bool ksApplication::loop()
 	{
-		for (auto it = components.begin(); it != components.end(); ++it)
+		for (auto it = components.begin(); it != components.end();)
 		{
 			// This will erase components that queued themselves for destroy by queueDestroy() method.
 			if ((*it)->isMarkedToDestroy)
 			{
-				components.erase(it);
+				it = components.erase(it);
 				continue;
 			}
 
 			// If any component loop failed, break application.
 			if (!(*it)->loop())
 				return false;
+
+			++it;
 		}
 
 		return true;

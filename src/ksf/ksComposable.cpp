@@ -23,7 +23,7 @@ namespace ksf
 	void ksComposable::forEachComponent(std::function<bool(std::shared_ptr<ksComponent>&)> functor)
 	{
 		for (auto it = components.begin(); it != components.end(); ++it)
-			if (functor(*it) == true)
+			if (functor(*it))
 				break;
 	}
 }
