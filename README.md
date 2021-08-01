@@ -71,6 +71,7 @@ This project depends on following libraries:
 PubSubClient library does not set timeout on client connect method and it may block sometimes causing reset of MCU. To satisfy watchdog, you can modify connect method (example below) and define ESP32_CONNECTION_TIMEOUT to be under watchdog timeout. You can also disable watchdog, but I wouldn't recommend it.
 
 https://github.com/knolleary/pubsubclient/pull/842
+
 https://github.com/espressif/arduino-esp32/pull/5487
 
 ```c++
