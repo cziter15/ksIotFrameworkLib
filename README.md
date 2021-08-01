@@ -68,7 +68,7 @@ This project depends on following libraries:
 * PubSubClient https://github.com/knolleary/pubsubclient
 
 ## PubSubClient quirks
-PubSubClient library does not set timeout on client connect method and it may block sometimes causing ESP32 to reset. To satisfy watchdog, you can modify connect method (example below) and define ESP32_CONNECTION_TIMEOUT to be under watchdog timeout. You can also disable watchdog, but I wouldn't recommend it.
+PubSubClient library does not set timeout on client connect method and it may block sometimes causing reset of MCU. To satisfy watchdog, you can modify connect method (example below) and define ESP32_CONNECTION_TIMEOUT to be under watchdog timeout. You can also disable watchdog, but I wouldn't recommend it.
 
 ```c++
 boolean PubSubClient::connect(const char *id, const char *user, const char *pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage, boolean cleanSession) {
