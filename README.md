@@ -66,3 +66,34 @@ This project depends on following libraries:
 * Arduino for ESP8266/32
 * WiFiManager https://github.com/tzapu/WiFiManager
 * PubSubClient https://github.com/knolleary/pubsubclient
+
+## PubSubClient quirks
+PubSubClient library does not properly set timeout on ESP32. This requires modification to satisfy watchdog
+
+```c++
+boolean PubSubClient::connect(const char *id, const char *user, const char *pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage, boolean cleanSession) {
+    if (!connected()) {
+        int result = 0;
+
+        if(_client->connected()) {
+            result = 1;
+        } else {
+            if (domain != NULL) {
+#ifdef ESP32
+                WiFiClient* wfc = (WiFiClient*)_client;
+                result = wfc->connect(this->domain, this->port, ESP32_CONNECTION_TIMEOUT);
+#else
+                result = _client->connect(this->domain, this->port);
+#endif
+            } else {
+#ifdef ESP32
+                WiFiClient* wfc = (WiFiClient*)_client;
+                result = wfc->connect(this->ip, this->port, ESP32_CONNECTION_TIMEOUT);
+#else
+                result = _client->connect(this->ip, this->port);
+#endif
+            }
+        }
+	
+	// [...]
+```
