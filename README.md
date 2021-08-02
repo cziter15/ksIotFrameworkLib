@@ -71,7 +71,7 @@ This project depends on following libraries:
 Up to 1.0.6 arduino-ESP32 connect method variant without timeout specified defaulted to no timeout. PubSubClient uses one of these variants and it may lead to device hang or reset (caused by watchdog).
 
 Later versions should have my contributed fix, eliminating the problem from arduino-esp32 side:
-https://github.com/espressif/arduino-esp32/pull/5487
+- https://github.com/espressif/arduino-esp32/pull/5487
 
 Fix can be also done in PubSubClient, but please read discussion first.
-https://github.com/knolleary/pubsubclient/pull/842
+- https://github.com/knolleary/pubsubclient/pull/842
