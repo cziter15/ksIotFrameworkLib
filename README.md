@@ -67,37 +67,11 @@ This project depends on following libraries:
 * WiFiManager https://github.com/tzapu/WiFiManager
 * PubSubClient https://github.com/knolleary/pubsubclient
 
-## PubSubClient quirks
-PubSubClient library does not set timeout on client connect method and it may block sometimes causing reset of MCU. To satisfy watchdog, you can modify connect method (example below) and define ESP32_CONNECTION_TIMEOUT to be under watchdog timeout. You can also disable watchdog, but I wouldn't recommend it.
+## PubSubClient related quirks
+Up to 1.0.6 arduino-ESP32 connect method variant without timeout specified defaulted to no timeout. PubSubClient uses one of these variants and it may lead to device hang or reset (caused by watchdog).
 
-https://github.com/knolleary/pubsubclient/pull/842
-
+Later versions should have my contributed fix, eliminating the problem from arduino-esp32 side:
 https://github.com/espressif/arduino-esp32/pull/5487
 
-```c++
-boolean PubSubClient::connect(const char *id, const char *user, const char *pass, const char* willTopic, uint8_t willQos, boolean willRetain, const char* willMessage, boolean cleanSession) {
-    if (!connected()) {
-        int result = 0;
-
-        if(_client->connected()) {
-            result = 1;
-        } else {
-            if (domain != NULL) {
-#ifdef ESP32
-                WiFiClient* wfc = (WiFiClient*)_client;
-                result = wfc->connect(this->domain, this->port, ESP32_CONNECTION_TIMEOUT);
-#else
-                result = _client->connect(this->domain, this->port);
-#endif
-            } else {
-#ifdef ESP32
-                WiFiClient* wfc = (WiFiClient*)_client;
-                result = wfc->connect(this->ip, this->port, ESP32_CONNECTION_TIMEOUT);
-#else
-                result = _client->connect(this->ip, this->port);
-#endif
-            }
-        }
-	
-	// [...]
-```
+Fix can be also done in PubSubClient, but please read discussion first.
+https://github.com/knolleary/pubsubclient/pull/842
