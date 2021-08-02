@@ -64,6 +64,8 @@ compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frt
 ## Dependencies
 This project depends on following libraries:
 ### Arduino for ESP8266/32
+- https://github.com/espressif/arduino-esp32
+- https://github.com/esp8266/Arduino
 ### WiFiManager 
 - https://github.com/tzapu/WiFiManager
 ### PubSubClient 
