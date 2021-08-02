@@ -63,9 +63,11 @@ compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frt
 
 ## Dependencies
 This project depends on following libraries:
-* Arduino for ESP8266/32
-* WiFiManager https://github.com/tzapu/WiFiManager
-* PubSubClient https://github.com/knolleary/pubsubclient
+### Arduino for ESP8266/32
+### WiFiManager 
+- https://github.com/tzapu/WiFiManager
+### PubSubClient 
+- https://github.com/knolleary/pubsubclient
 
 ## PubSubClient related quirks
 Up to 1.0.6 arduino-ESP32 connect method variant without timeout specified defaulted to no timeout. PubSubClient uses one of these variants and it may lead to device hang or reset (caused by watchdog).
