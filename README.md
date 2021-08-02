@@ -64,11 +64,14 @@ compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frt
 ## Dependencies
 This project depends on following libraries:
 ### Arduino for ESP8266/32
+Arduino development environment for Espressif MCUs.
 - https://github.com/espressif/arduino-esp32
 - https://github.com/esp8266/Arduino
-### WiFiManager 
+### WiFiManager
+Works like access point, so user can connect and setup device on first run.
 - https://github.com/tzapu/WiFiManager
-### PubSubClient 
+### PubSubClient
+Handles MQTT (MQ Telemetry Transport) protocol.
 - https://github.com/knolleary/pubsubclient
 
 ## PubSubClient related quirks
