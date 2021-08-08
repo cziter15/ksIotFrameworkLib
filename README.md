@@ -63,6 +63,22 @@ compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frt
 
 ## Dependencies
 This project depends on following libraries:
-* Arduino for ESP8266/32
-* WiFiManager https://github.com/tzapu/WiFiManager
-* PubSubClient https://github.com/knolleary/pubsubclient
+### Arduino for ESP8266/32
+Arduino development environment for Espressif MCUs.
+- https://github.com/espressif/arduino-esp32
+- https://github.com/esp8266/Arduino
+### WiFiManager
+Works like access point, so user can connect and setup device on first run.
+- https://github.com/tzapu/WiFiManager
+### PubSubClient
+Handles MQTT (MQ Telemetry Transport) protocol.
+- https://github.com/knolleary/pubsubclient
+
+## PubSubClient related quirks
+Up to 1.0.6 arduino-ESP32 connect method variant without timeout specified defaulted to no timeout. PubSubClient uses one of these variants and it may lead to device hang or reset (caused by watchdog).
+
+Later versions should have my contributed fix, eliminating the problem from arduino-esp32 side:
+- https://github.com/espressif/arduino-esp32/pull/5487
+
+Fix can be also done in PubSubClient, but please read discussion first.
+- https://github.com/knolleary/pubsubclient/pull/842
