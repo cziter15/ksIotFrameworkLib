@@ -22,6 +22,7 @@ namespace ksf
 	bool ksWifiConnector::init(ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
+		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 		WiFi.begin();
 
