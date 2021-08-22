@@ -60,6 +60,9 @@ Whole example setup:
 # ksIotFramework build property overrides
 compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frtti
 ```
+## Saving power
+By default, this framework supports modem power saving. This requires DTIM set on access point. Best value for me is 3.
+It allows ESP32 to go down from around 100mA to 20mA.
 
 ## Dependencies
 This project depends on following libraries:
