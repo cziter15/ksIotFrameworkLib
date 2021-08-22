@@ -27,7 +27,7 @@ namespace ksf
 		WiFi.begin();
 
 		#ifdef ESP32
-			WiFi.setSleep(WIFI_PS_MAX_MODEM);
+			WiFi.setSleep(true);
 		#endif
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
