@@ -72,7 +72,7 @@ Arduino development environment for Espressif MCUs.
 - https://github.com/esp8266/Arduino
 ### WiFiManager
 Works like access point, so user can connect and setup device on first run.
-- https://github.com/tzapu/WiFiManager
+- https://github.com/cziter15/WiFiManager (original at https://github.com/tzapu/WiFiManager)
 ### PubSubClient
 Handles MQTT (MQ Telemetry Transport) protocol.
 - https://github.com/knolleary/pubsubclient
