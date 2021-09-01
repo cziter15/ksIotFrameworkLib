@@ -88,4 +88,7 @@ Fix can be also done in PubSubClient, but please read discussion first.
 
 ## WiFiManager related quirks
 Versions 2.0 of Arduino ESP32 have changed WiFi callbacks, causing WiFiManager compilation fail.
-I've fixed that, you can grab modiffied WiFiManager from here: https://github.com/cziter15/WiFiManager
+
+I've fixed that, so you can grab modiffied WiFiManager from here: 
+
+https://github.com/cziter15/WiFiManager
