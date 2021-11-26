@@ -37,9 +37,9 @@ namespace ksf
 			uint32_t connectionTimeSeconds = 0;
 			uint32_t reconnectCounter = 0;
 
-			virtual void subscribe(const String& topic);
-			virtual void unsubscribe(const String& topic);
-			virtual void publish(const String& topic, const String& payload, bool retain = false);
+			virtual void subscribe(const String& topic, bool skipDevicePrefix = false);
+			virtual void unsubscribe(const String& topic, bool skipDevicePrefix = false);
+			virtual void publish(const String& topic, const String& payload, bool retain = false, bool skipDevicePrefix = false);
 
 			virtual void setupConnection(String broker, String port, String login, String password, String prefix, bool secure = false);
 	};

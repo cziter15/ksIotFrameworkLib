@@ -56,7 +56,10 @@ namespace ksf
 	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
 		String payloadStr((char*)0);
-		String topicStr(std::move(String(topic).substring(savedPrefix.length())));
+		String topicStr(topic);
+
+		if (topicStr.startsWith(savedPrefix))
+			topicStr = topicStr.substring(savedPrefix.length());
 
 		payloadStr.reserve(length);
 
@@ -66,19 +69,25 @@ namespace ksf
 		onMesssage->broadcast(topicStr, payloadStr);
 	}
 
-	void ksMqttConnector::subscribe(const String& topic)
+	void ksMqttConnector::subscribe(const String& topic, bool skipDevicePrefix)
 	{
-		mqttClient->subscribe(String(savedPrefix + topic).c_str());
+		if (skipDevicePrefix)
+			mqttClient->subscribe(String(topic).c_str());
+		else	
+			mqttClient->subscribe(String(savedPrefix + topic).c_str());
 	}
 
-	void ksMqttConnector::unsubscribe(const String& topic)
+	void ksMqttConnector::unsubscribe(const String& topic, bool skipDevicePrefix)
 	{
-		mqttClient->unsubscribe(String(savedPrefix + topic).c_str());
+		if (skipDevicePrefix)
+			mqttClient->subscribe(String(topic).c_str());
+		else
+			mqttClient->unsubscribe(String(savedPrefix + topic).c_str());
 	}
 
-	void ksMqttConnector::publish(const String& topic, const String& payload, bool retain)
+	void ksMqttConnector::publish(const String& topic, const String& payload, bool retain, bool skipDevicePrefix)
 	{
-		String publishTopic = savedPrefix + topic;
+		String publishTopic = skipDevicePrefix ? topic : savedPrefix + topic;
 		mqttClient->publish(publishTopic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 	}
 
