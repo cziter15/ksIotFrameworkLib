@@ -23,6 +23,11 @@ namespace ksf
 			std::size_t lastUid = 0;
 
 		public:
+			bool hasAnyCallbacks() const
+			{
+				return callbacks.size() > 0;
+			}
+
 			void registerEvent(std::shared_ptr<ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 			{
 				++lastUid;

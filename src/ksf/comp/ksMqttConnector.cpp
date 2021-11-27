@@ -55,18 +55,21 @@ namespace ksf
 
 	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
-		String payloadStr((char*)0);
-		String topicStr(topic);
+		if (onMesssage->hasAnyCallbacks())
+		{
+			String payloadStr((char*)0);
+			payloadStr.reserve(length);
 
-		if (topicStr.startsWith(savedPrefix))
-			topicStr = topicStr.substring(savedPrefix.length());
+			String topicStr(topic);
 
-		payloadStr.reserve(length);
+			if (topicStr.startsWith(savedPrefix))
+				topicStr.remove(0, savedPrefix.length());
 
-		for (uint32_t payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
-			payloadStr += (char)payload[payload_ch_idx];
+			for (uint32_t payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
+				payloadStr += (char)payload[payload_ch_idx];
 
-		onMesssage->broadcast(topicStr, payloadStr);
+			onMesssage->broadcast(topicStr, payloadStr);
+		}
 	}
 
 	void ksMqttConnector::subscribe(const String& topic, bool skipDevicePrefix)
