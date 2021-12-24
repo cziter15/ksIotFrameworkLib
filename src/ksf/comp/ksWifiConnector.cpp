@@ -4,7 +4,9 @@
 
 #ifdef ESP32
 	#include <WiFi.h>
+	#include <esp_wifi.h>
 #else
+	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
 #endif
 
@@ -19,11 +21,31 @@ namespace ksf
 		#endif
 	}
 
+	void ksWifiConnector::setupMacAddress()
+	{
+		#ifdef ESP32
+			uint32_t chipId = (uint32_t)ESP.getEfuseMac();
+		#else
+			uint32_t chipId = ESP.getChipId();
+		#endif
+
+		auto chipIdBytes = (uint8_t*)&chipId;
+		uint8_t mac_sta[6] = { 0xfa, 0xf1, chipIdBytes[2], chipIdBytes[1], chipIdBytes[3], chipIdBytes[0] };
+
+		#ifdef ESP32
+			esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
+		#else
+			wifi_set_macaddr(STATION_IF, mac_sta);
+		#endif
+	}
+
 	bool ksWifiConnector::init(ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
+		setupMacAddress();
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
+
 		WiFi.begin();
 
 		#ifdef ESP32
