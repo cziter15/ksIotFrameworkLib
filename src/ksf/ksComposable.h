@@ -11,7 +11,7 @@ namespace ksf
 	class ksComposable
 	{
 		protected:
-			std::vector<std::shared_ptr<ksComponent>> components;
+			std::vector<std::shared_ptr<ksComponent>> components, stillValidComponents;
 
 		public:
 			template <class Type, class... Params>

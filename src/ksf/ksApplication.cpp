@@ -19,21 +19,17 @@ namespace ksf
 
 	bool ksApplication::loop()
 	{
-		for (auto it = components.begin(); it != components.end();)
+		for (auto& comp : components)
 		{
-			// This will erase components that queued themselves for destroy by queueDestroy() method.
-			if ((*it)->isMarkedToDestroy)
-			{
-				it = components.erase(it);
-				continue;
-			}
+			if (!comp->isMarkedToDestroy)
+				stillValidComponents.push_back(comp);
 
-			// If any component loop failed, break application.
-			if (!(*it)->loop())
+			if (!comp->loop())
 				return false;
-
-			++it;
 		}
+
+		components = std::move(stillValidComponents);
+		stillValidComponents.clear();
 
 		return true;
 	}
