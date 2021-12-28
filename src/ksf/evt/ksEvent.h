@@ -25,7 +25,7 @@ namespace ksf
 		public:
 			bool hasAnyCallbacks() const
 			{
-				return callbacks.size() > 0;
+				return !callbacks.empty();
 			}
 
 			void registerEvent(std::shared_ptr<ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
