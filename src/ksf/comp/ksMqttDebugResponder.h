@@ -6,7 +6,7 @@
 namespace ksf
 {
 	class ksMqttConnector;
-	class ksMqttDebugResponder : public ksComponent
+	class ksMqttDebugResponder : public ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
 	{
 		protected:
 			static const char cmdChannelName[];
@@ -25,6 +25,7 @@ namespace ksf
 
 		public:
 			virtual bool init(class ksComposable* owner) override;
+			virtual void postInit() override;
 			virtual bool loop() override;
 
 			void respond(String message) const;

@@ -19,15 +19,18 @@ namespace ksf
 	bool ksMqttDebugResponder::init(ksComposable* owner)
 	{
 		app = owner;
-		mqtt_wp = owner->findComponent<ksMqttConnector>();
+		return true;
+	}
+
+	void ksMqttDebugResponder::postInit()
+	{
+		mqtt_wp = app->findComponent<ksMqttConnector>();
 
 		if (auto mqtt_sp = mqtt_wp.lock())
 		{
 			mqtt_sp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
 			mqtt_sp->onMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
 		}
-	
-		return true;
 	}
 
 	bool ksMqttDebugResponder::loop()
@@ -78,7 +81,7 @@ namespace ksf
 			else if (message.equals("remove_dbg"))
 			{
 				respond("removed ksMqttDebugResponder");
-				queueDestroy();
+				app->queueRemoveComponent(shared_from_this());
 			}
 			else if (message.equals("restart"))
 			{

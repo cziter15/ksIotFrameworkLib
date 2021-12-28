@@ -31,6 +31,8 @@ namespace ksf
 				return ptr;
 			}
 
+			void queueRemoveComponent(const std::shared_ptr<ksComponent>& component);
+
 			template <class Type>
 			void findComponents(std::vector<std::weak_ptr<Type>>& outComponents)
 			{

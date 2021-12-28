@@ -24,9 +24,6 @@ namespace ksf
 	{
 		for (auto& comp : components.items())
 		{
-			if (comp->isMarkedToDestroy)
-				components.queueRemove(comp);
-
 			if (!comp->loop())
 				return false;
 		}
