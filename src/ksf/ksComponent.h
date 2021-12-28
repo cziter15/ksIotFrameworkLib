@@ -12,7 +12,6 @@ namespace ksf
 			bool isMarkedToDestroy = false;
 
 		public:
-			bool queueDestroy();
 
 			virtual bool init(ksComposable* owner) = 0;
 			virtual bool loop();
