@@ -41,7 +41,7 @@ namespace ksf
 
 					for (auto& item : list)
 					{
-						if (std::find(pendingRemove.begin(), pendingRemove.end(), item) == pendingRemove.end())
+						if (std::find(pendingRemove.begin(), pendingRemove.end(), item) != pendingRemove.end())
 							remainingItems.push_back(item);
 					}
 
