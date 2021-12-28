@@ -3,26 +3,9 @@
 
 namespace ksf 
 {
-	bool ksComposable::forceRemoveComponent(std::weak_ptr<ksComponent> component)
-	{
-		if (auto sp = component.lock())
-		{
-			auto it = std::find(components.begin(), components.end(), sp);
-
-			if (it != components.end())
-			{
-				it->reset();
-				components.erase(it);
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	void ksComposable::forEachComponent(std::function<bool(std::shared_ptr<ksComponent>&)> functor)
 	{
-		for (auto it = components.begin(); it != components.end(); ++it)
+		for (auto it = components.items().begin(); it != components.items().end(); ++it)
 			if (functor(*it))
 				break;
 	}

@@ -1,5 +1,6 @@
 #pragma once
 #include "ksf/ksApplication.h"
+#include "ksf/ksSafeList.h"
 #include "ksf/ksComponent.h"
 #include "ksf/ksComposable.h"
 #include "ksf/ksConfig.h"

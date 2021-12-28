@@ -3,6 +3,7 @@
 #include <functional>
 #include <algorithm>
 #include <memory>
+#include "ksSafeList.h"
 
 namespace ksf 
 {
@@ -11,14 +12,14 @@ namespace ksf
 	class ksComposable
 	{
 		protected:
-			std::vector<std::shared_ptr<ksComponent>> components, stillValidComponents;
+			ksSafeList<std::shared_ptr<ksComponent>> components;
 
 		public:
 			template <class Type, class... Params>
 			std::weak_ptr<Type> addComponent(Params...rest)
 			{
 				std::shared_ptr<Type> ptr = std::make_shared<Type>(rest...);
-				components.push_back(ptr);
+				components.queueAdd(ptr);
 				return std::weak_ptr<Type>(ptr);
 			}
 
@@ -26,7 +27,7 @@ namespace ksf
 			std::weak_ptr<Type> addComponent()
 			{
 				std::shared_ptr<Type> ptr = std::make_shared<Type>();
-				components.push_back(ptr);
+				components.queueAdd(ptr);
 				return ptr;
 			}
 
@@ -35,7 +36,7 @@ namespace ksf
 			{
 				outComponents.clear();
 
-				for (auto& comp : components)
+				for (auto& comp : components.items())
 				{
 					std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
 
@@ -54,7 +55,6 @@ namespace ksf
 				return comps_wp.size() > 0 ? comps_wp[0] : std::weak_ptr<Type>();
 			}
 
-			bool forceRemoveComponent(std::weak_ptr<ksComponent> component);
 			void forEachComponent(std::function<bool(std::shared_ptr<ksComponent>&)> functor);
 	};
 }

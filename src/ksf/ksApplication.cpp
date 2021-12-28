@@ -5,13 +5,16 @@ namespace ksf
 {
 	bool ksApplication::init()
 	{
+		// Synchronize components added before ksApplication base init.
+		components.synchronizeQueues();
+
 		// Run initialization
-		for (auto it = components.begin(); it != components.end(); ++it)
+		for (auto it = components.items().begin(); it != components.items().end(); ++it)
 			if (!(*it)->init(this))
 				return false;
 
 		// Run post-init event for components
-		for (auto it = components.begin(); it != components.end(); ++it)
+		for (auto it = components.items().begin(); it != components.items().end(); ++it)
 			(*it)->postInit();
 
 		return true;
@@ -19,17 +22,16 @@ namespace ksf
 
 	bool ksApplication::loop()
 	{
-		for (auto& comp : components)
+		for (auto& comp : components.items())
 		{
-			if (!comp->isMarkedToDestroy)
-				stillValidComponents.push_back(comp);
+			if (comp->isMarkedToDestroy)
+				components.queueRemove(comp);
 
 			if (!comp->loop())
 				return false;
 		}
 
-		components = std::move(stillValidComponents);
-		stillValidComponents.clear();
+		components.synchronizeQueues();
 
 		return true;
 	}
