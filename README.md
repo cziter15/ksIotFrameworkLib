@@ -43,7 +43,7 @@ The idea was to prevent launching application when any component initialization 
 
 **Do not add components inside loop() method. If you want to destroy component from loop just queue component to destroy (queueDestroy) method. To add component from loop method, then some kind of queue should be implemented.**
 
-So the flow is:
+### So the flow is...
 - Add components (addComponent simply construct class and add it's pointer to app component list).
 - Run ksApplicaiton:init (it will iterate through component list and initialize them, returning false if any init failed).
 - If ksApplication::init() does not return true, simply return false in your app init method
