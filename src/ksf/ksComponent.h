@@ -8,9 +8,6 @@ namespace ksf
 	{
 		friend class ksApplication;
 
-		protected:
-			bool isMarkedToDestroy = false;
-
 		public:
 
 			virtual bool init(ksComposable* owner) = 0;
