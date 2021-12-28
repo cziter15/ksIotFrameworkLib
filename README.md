@@ -30,7 +30,7 @@ The aim of this project is to provide simple kick-start application pattern for 
 | ksWiFiConnector | Handles WiFi connection. |
 
 ### Rules:
-- Components can be added inside component init methods. Keep in mind that list will be updated after init iteration.
+- Components can be added only in app init method, before calling base init method.
 - Method **findComponent** must not be called from component init methods.
 - Method **postInit** is the best place to obtain other component weak pointer, by calling **findComponent**.
 - Currently dynamic (from outside of **init** method) coponent creation is not supported.
