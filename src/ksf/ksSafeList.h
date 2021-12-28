@@ -16,26 +16,16 @@ namespace ksf
 				return list;
 			}
 
-			void queueAdd(EntryType&& item)
-			{
-				pendingAdd.emplace_back(item);
-			}
-
-			void queueRemove(EntryType&& item)
-			{
-				pendingRemove.emplace_back(item);
-			}
-
-			void queueAdd(EntryType item)
+			void queueAdd(const EntryType& item)
 			{
 				pendingAdd.push_back(item);
 			}
 
-			void queueRemove(EntryType item)
+			void queueRemove(const EntryType& item)
 			{
 				pendingRemove.push_back(item);
 			}
-			
+
 			void unsafeEraseAllQueues()
 			{
 				pendingAdd.clear();
