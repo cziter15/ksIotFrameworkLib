@@ -29,6 +29,12 @@ The aim of this project is to provide simple kick-start application pattern for 
 | ksWiFiConfigurator | Base WiFi configurator component, brings WiFi management portal, allow config providers to inject and capture parameters. |
 | ksWiFiConnector | Handles WiFi connection. |
 
+### Rules:
+- Components can be added inside component init methods. Keep in mind that list will be updated after init iteration.
+- Method **findComponent** must not be called from component init methods.
+- Method **postInit** is the best place to obtain other component weak pointer, by calling **findComponent**.
+- Currently dynamic (from outside of **init** method) coponent creation is not supported.
+
 ## Building application
 To build an application simply create new class inherited from ksApplication. Inside init method add components and setup them, then call base ksApplication's init method. You can also optionally override loop method, but remember that baseclass method (ksApplication's loop) iterates over component list executing loop call on each registered component.
 
