@@ -35,7 +35,14 @@ namespace ksf
 			{
 				pendingRemove.push_back(item);
 			}
-
+			
+			void unsafeEraseAllQueues()
+			{
+				pendingAdd.clear();
+				pendingRemove.clear();
+				list.clear();
+			}
+			
 			void synchronizeQueues()
 			{
 				if (pendingRemove.size() > 0)
