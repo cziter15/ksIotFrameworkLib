@@ -79,6 +79,9 @@ By default, this framework supports modem power saving. This requires DTIM set o
 It allows ESP32 to go down from around 100mA to 20mA.
 
 ## Dependencies
+
+**Unfortunately, right now, there is a lot of manual work to do to setup dependencies. WiFiManager, ksIotFrameworkLib must be installed as ZIP. It's recommended to setup Git to track ksIotFrameworkLib directory to follow latest changes on this repository. PubSubClient and ArduinoOTA can be downloaded within library manager.**
+
 This project depends on following libraries:
 ### Arduino for ESP8266/32
 Arduino development environment for Espressif MCUs.
