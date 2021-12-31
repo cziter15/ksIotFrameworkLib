@@ -94,11 +94,5 @@ Works like access point, so user can connect and setup device on first run.
 Handles MQTT (MQ Telemetry Transport) protocol.
 - https://github.com/knolleary/pubsubclient
 
-## PubSubClient related quirks
-Up to 1.0.6 arduino-ESP32 connect method variant without timeout specified defaulted to no timeout. PubSubClient uses one of these variants and it may lead to device hang or reset (caused by watchdog).
-
-Later versions should have my contributed fix, eliminating the problem from arduino-esp32 side:
-- https://github.com/espressif/arduino-esp32/pull/5487
-
-Fix can be also done in PubSubClient, but please read discussion first.
-- https://github.com/knolleary/pubsubclient/pull/842
+## PubSubClient / WiFiManager related quirks
+All quirks have been fixed. Keep your Arduino-esp8266 or Ardunino-esp32 up to date.
