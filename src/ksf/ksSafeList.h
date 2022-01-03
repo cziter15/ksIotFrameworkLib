@@ -35,6 +35,12 @@ namespace ksf
 			
 			void synchronizeQueues()
 			{
+				if (!pendingAdd.empty())
+				{
+					list.insert(list.end(), pendingAdd.begin(), pendingAdd.end());
+					pendingAdd.clear();
+				}
+
 				if (!pendingRemove.empty())
 				{
 					std::vector< EntryType > remainingItems;
@@ -47,12 +53,6 @@ namespace ksf
 
 					list = std::move(remainingItems);
 					pendingRemove.clear();
-				}
-
-				if (!pendingAdd.empty())
-				{
-					list.insert(list.end(), pendingAdd.begin(), pendingAdd.end());
-					pendingAdd.clear();
 				}
 			}
 	};
