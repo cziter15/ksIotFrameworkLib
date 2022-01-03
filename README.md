@@ -79,6 +79,9 @@ By default, this framework supports modem power saving. This requires DTIM set o
 It allows ESP32 to go down from around 100mA to 20mA.
 
 ## Dependencies
+
+**Unfortunately, right now, there is a lot of manual work to do to setup dependencies. WiFiManager, ksIotFrameworkLib must be installed as ZIP. It's recommended to setup Git to track ksIotFrameworkLib directory to follow latest changes on this repository. PubSubClient and ArduinoOTA can be downloaded within library manager.**
+
 This project depends on following libraries:
 ### Arduino for ESP8266/32
 Arduino development environment for Espressif MCUs.
@@ -86,23 +89,10 @@ Arduino development environment for Espressif MCUs.
 - https://github.com/esp8266/Arduino
 ### WiFiManager
 Works like access point, so user can connect and setup device on first run.
-- https://github.com/cziter15/WiFiManager (original at https://github.com/tzapu/WiFiManager)
+- https://github.com/tzapu/WiFiManager
 ### PubSubClient
 Handles MQTT (MQ Telemetry Transport) protocol.
 - https://github.com/knolleary/pubsubclient
 
-## PubSubClient related quirks
-Up to 1.0.6 arduino-ESP32 connect method variant without timeout specified defaulted to no timeout. PubSubClient uses one of these variants and it may lead to device hang or reset (caused by watchdog).
-
-Later versions should have my contributed fix, eliminating the problem from arduino-esp32 side:
-- https://github.com/espressif/arduino-esp32/pull/5487
-
-Fix can be also done in PubSubClient, but please read discussion first.
-- https://github.com/knolleary/pubsubclient/pull/842
-
-## WiFiManager related quirks
-Above 1.0.6 version of Arduino ESP32, they have changed WiFi callbacks, causing WiFiManager compilation fail.
-
-I've fixed that, so you can grab modiffied WiFiManager from here: 
-
-https://github.com/cziter15/WiFiManager
+## PubSubClient / WiFiManager related quirks
+All quirks have been fixed. Keep your Arduino-esp8266 or Ardunino-esp32 up to date.
