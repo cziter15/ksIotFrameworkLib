@@ -8,10 +8,10 @@ namespace ksf
 	class ksSafeList
 	{
 		protected:
-			std::vector< EntryType > list, pendingAdd, pendingRemove;
+			std::vector<EntryType> list, pendingAdd, pendingRemove;
 
 		public:
-			std::vector< EntryType >& items()
+			const std::vector<EntryType>& getList() const
 			{
 				return list;
 			}

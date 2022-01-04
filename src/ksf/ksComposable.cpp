@@ -8,9 +8,9 @@ namespace ksf
 		components.queueRemove(component);
 	}
 
-	void ksComposable::forEachComponent(std::function<bool(std::shared_ptr<ksComponent>&)> functor)
+	void ksComposable::forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)> functor)
 	{
-		for (auto it = components.items().begin(); it != components.items().end(); ++it)
+		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
 			if (functor(*it))
 				break;
 	}

@@ -38,7 +38,7 @@ namespace ksf
 			{
 				outComponents.clear();
 
-				for (auto& comp : components.items())
+				for (auto& comp : components.getList())
 				{
 					std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
 
@@ -57,6 +57,6 @@ namespace ksf
 				return comps_wp.empty() ? std::weak_ptr<Type>() : comps_wp[0];
 			}
 
-			void forEachComponent(std::function<bool(std::shared_ptr<ksComponent>&)> functor);
+			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)> functor);
 	};
 }
