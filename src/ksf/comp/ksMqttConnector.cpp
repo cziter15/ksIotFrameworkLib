@@ -75,7 +75,7 @@ namespace ksf
 	void ksMqttConnector::subscribe(const String& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
-			mqttClient->subscribe(String(topic).c_str());
+			mqttClient->subscribe(topic.c_str());
 		else	
 			mqttClient->subscribe(String(savedPrefix + topic).c_str());
 	}
@@ -83,15 +83,17 @@ namespace ksf
 	void ksMqttConnector::unsubscribe(const String& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
-			mqttClient->subscribe(String(topic).c_str());
+			mqttClient->subscribe(topic.c_str());
 		else
 			mqttClient->unsubscribe(String(savedPrefix + topic).c_str());
 	}
 
 	void ksMqttConnector::publish(const String& topic, const String& payload, bool retain, bool skipDevicePrefix)
 	{
-		String publishTopic = skipDevicePrefix ? topic : savedPrefix + topic;
-		mqttClient->publish(publishTopic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+		if (skipDevicePrefix)
+			mqttClient->publish(topic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+		else
+			mqttClient->publish(String(savedPrefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 	}
 
 	bool ksMqttConnector::loop()
