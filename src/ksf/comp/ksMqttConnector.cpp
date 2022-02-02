@@ -27,7 +27,7 @@ namespace ksf
 		return mqttClient != nullptr;
 	}
 
-	void ksMqttConnector::setupConnection(String broker, String port, String login, String password, String prefix, bool secure)
+	void ksMqttConnector::setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure)
 	{
 		mqttWifiClient = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
 		mqttClient = std::make_shared<PubSubClient>(*mqttWifiClient.get());
@@ -83,7 +83,7 @@ namespace ksf
 	void ksMqttConnector::unsubscribe(const String& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
-			mqttClient->subscribe(topic.c_str());
+			mqttClient->unsubscribe(topic.c_str());
 		else
 			mqttClient->unsubscribe(String(savedPrefix + topic).c_str());
 	}

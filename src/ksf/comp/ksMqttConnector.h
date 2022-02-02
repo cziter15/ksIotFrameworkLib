@@ -41,7 +41,7 @@ namespace ksf
 			virtual void unsubscribe(const String& topic, bool skipDevicePrefix = false);
 			virtual void publish(const String& topic, const String& payload, bool retain = false, bool skipDevicePrefix = false);
 
-			virtual void setupConnection(String broker, String port, String login, String password, String prefix, bool secure = false);
+			virtual void setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure = false);
 	};
 }
 
