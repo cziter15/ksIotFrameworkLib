@@ -75,7 +75,7 @@ namespace ksf
 			else if (message.equals("sysinfo"))
 			{
 				respond(
-					"Devide uptime: " + String(deviceUptimeSeconds) + " sec, " +
+					"Device uptime: " + String(deviceUptimeSeconds) + " sec, " +
 					"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
