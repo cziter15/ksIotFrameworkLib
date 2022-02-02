@@ -12,6 +12,9 @@ namespace ksf
 			static const char cmdChannelName[];
 			static const char logChannelName[];
 
+			uint32_t secondTimer = 0;
+			uint32_t deviceUptimeSeconds = 0;
+
 			std::weak_ptr<ksMqttConnector> mqtt_wp;
 			ksComposable* app = nullptr;
 

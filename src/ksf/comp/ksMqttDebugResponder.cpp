@@ -35,6 +35,12 @@ namespace ksf
 
 	bool ksMqttDebugResponder::loop()
 	{
+		if (millis() - secondTimer > KSF_ONE_SECOND_MS)
+		{
+			secondTimer = millis();
+			deviceUptimeSeconds++;
+		}
+
 		return breakloop == false;
 	}
 
@@ -69,6 +75,7 @@ namespace ksf
 			else if (message.equals("sysinfo"))
 			{
 				respond(
+					"Devide uptime: " + String(deviceUptimeSeconds) + " sec, " +
 					"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
