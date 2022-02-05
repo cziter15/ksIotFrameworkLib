@@ -4,8 +4,20 @@
 
 namespace ksf 
 {
+	class ksSafeListInterface
+	{
+		friend class ksSafeListScopedSync;
+
+		protected:
+			ksSafeListInterface();
+
+		public:
+			virtual void unsafeEraseAllQueues() = 0;
+			virtual void synchronizeQueues() = 0;
+	};
+
 	template <typename EntryType>
-	class ksSafeList
+	class ksSafeList : public ksSafeListInterface
 	{
 		protected:
 			std::vector<EntryType> list, pendingAdd, pendingRemove;
@@ -26,14 +38,14 @@ namespace ksf
 				pendingRemove.push_back(item);
 			}
 
-			void unsafeEraseAllQueues()
+			void unsafeEraseAllQueues() override
 			{
 				pendingAdd.clear();
 				pendingRemove.clear();
 				list.clear();
 			}
 			
-			void synchronizeQueues()
+			void synchronizeQueues() override
 			{
 				if (!pendingAdd.empty())
 				{
@@ -55,5 +67,15 @@ namespace ksf
 					pendingRemove.clear();
 				}
 			}
+	};
+
+	class ksSafeListScopedSync
+	{
+		protected:
+			ksSafeListInterface* listPtr;
+		
+		public:
+			ksSafeListScopedSync(ksSafeListInterface& listRef);
+			~ksSafeListScopedSync();
 	};
 }

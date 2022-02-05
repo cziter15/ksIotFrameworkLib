@@ -22,13 +22,16 @@ namespace ksf
 
 	bool ksApplication::loop()
 	{
-		for (auto& comp : components.getList())
 		{
-			if (!comp->loop())
-				return false;
-		}
+			// Loop through all components and synchronize list at end of scope.
+			ksf::ksSafeListScopedSync scoped(components);
 
-		components.synchronizeQueues();
+			for (auto& comp : components.getList())
+			{
+				if (!comp->loop())
+					return false;
+			}
+		}
 
 		return true;
 	}
