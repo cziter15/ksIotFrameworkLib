@@ -17,15 +17,15 @@ namespace ksf
 	#define SHORT_TRIGGER 50
 	#define LONG_TRIGGER 5000
 
-	ksResetButton::ksResetButton(uint8_t pin, uint8_t triggerBy)
-		: buttonPin(pin), triggerState(triggerBy)
+	ksResetButton::ksResetButton(uint8_t pin, uint8_t triggerBy, uint8_t mode)
+		: buttonPin(pin), triggerState(triggerBy), pmode(mode)
 	{
 
 	}
 
 	bool ksResetButton::init(ksComposable* owner)
 	{
-		pinMode(buttonPin, INPUT);
+		pinMode(buttonPin, pmode);
 		lastState = digitalRead(buttonPin);
 		return true;
 	}
