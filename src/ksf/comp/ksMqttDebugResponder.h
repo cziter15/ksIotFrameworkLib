@@ -9,9 +9,6 @@ namespace ksf
 	class ksMqttDebugResponder : public ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
 	{
 		protected:
-			static const char cmdChannelName[];
-			static const char logChannelName[];
-
 			uint32_t secondTimer = 0;
 			uint32_t deviceUptimeSeconds = 0;
 

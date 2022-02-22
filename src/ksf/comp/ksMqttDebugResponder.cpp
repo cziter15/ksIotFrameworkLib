@@ -13,9 +13,6 @@ using namespace std::placeholders;
 
 namespace ksf
 {
-	const char ksMqttDebugResponder::cmdChannelName[] = "cmd";
-	const char ksMqttDebugResponder::logChannelName[] = "log";
-
 	bool ksMqttDebugResponder::init(ksComposable* owner)
 	{
 		app = owner;
@@ -47,18 +44,18 @@ namespace ksf
 	void ksMqttDebugResponder::onConnected()
 	{
 		if (auto mqtt_sp = mqtt_wp.lock())
-			mqtt_sp->subscribe(cmdChannelName);
+			mqtt_sp->subscribe("cmd");
 	}
 
 	void ksMqttDebugResponder::respond(String message) const
 	{
 		if (auto mqtt_sp = mqtt_wp.lock())
-			mqtt_sp->publish(logChannelName, message, false);
+			mqtt_sp->publish("log", message, false);
 	}
 
 	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
 	{
-		if (topic.equals(cmdChannelName))
+		if (topic.equals("cmd"))
 		{
 			if (message.equals("netinfo"))
 			{
