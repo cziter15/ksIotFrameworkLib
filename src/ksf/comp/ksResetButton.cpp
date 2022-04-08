@@ -44,7 +44,7 @@ namespace ksf
 			{
 				releasedTime = millis();
 
-				unsigned long pressDuration = releasedTime - pressedTime;
+				uint32_t pressDuration = releasedTime - pressedTime;
 
 				if (pressDuration > LONG_TRIGGER)
 				{

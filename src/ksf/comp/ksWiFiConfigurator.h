@@ -8,7 +8,7 @@ namespace ksf
 	class ksWiFiConfigurator : public ksComponent
 	{
 		protected:
-			class ksComposable* parent;
+			class ksComposable* parent = nullptr;
 			WiFiManager manager;
 
 			String deviceName;
