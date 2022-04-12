@@ -13,7 +13,7 @@ The aim of this project is to provide simple kick-start application pattern for 
 ## Utilities
 | Utility  | Function |
 | ------------- | ------------- |
-| ksEvent  | Provides simple vent broadcasting system. Used for MQTT events etc. |
+| ksEvent  | Provides simple event broadcasting system. Used for MQTT events etc. |
 | ksSafeList  | Safe list in context of manipulating items while iterating them. Contains three underlying queues - pending to add, pending to remove and actual item list. Call **queueAdd** or **queueRemove** while iterating and then call **synchronizeQueues**. Component system relies on this mechanism. |
 
 ## Components
