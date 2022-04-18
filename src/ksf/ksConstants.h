@@ -36,6 +36,5 @@
 
 namespace ksf
 {
-	extern const char* getCompileDate();
-	extern void initKsfFramework(const char* compileDate = __DATE__ " " __TIME__);
+	extern void initKsfFramework();
 }

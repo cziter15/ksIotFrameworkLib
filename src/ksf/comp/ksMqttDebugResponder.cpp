@@ -72,7 +72,7 @@ namespace ksf
 			else if (message.equals("sysinfo"))
 			{
 				respond(
-					"Build date: " + String(getCompileDate()) + ", " +
+					"Build hash: " + ESP.getSketchMD5() + ", " +
 					"Device uptime: " + String(deviceUptimeSeconds) + " sec, " +
 					"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +

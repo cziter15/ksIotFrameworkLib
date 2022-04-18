@@ -9,17 +9,8 @@
 
 namespace ksf
 {
-	const char* gCompileDate = "";
-
-	const char* getCompileDate()
+	void initKsfFramework()
 	{
-		return gCompileDate;
-	}
-
-	void initKsfFramework(const char* compileDate)
-	{
-		gCompileDate = compileDate;
-
 #ifdef ESP32
 		/* Initialize filesystem. */
 		SPIFFS.begin(true);

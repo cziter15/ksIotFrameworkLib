@@ -57,6 +57,6 @@ namespace ksf
 				return comps_wp.empty() ? std::weak_ptr<Type>() : comps_wp[0];
 			}
 
-			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)> functor);
+			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& functor);
 	};
 }
