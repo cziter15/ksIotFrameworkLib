@@ -23,6 +23,8 @@ namespace ksf
 			virtual void onConnected();
 			virtual void onMessage(const String& topic, const String& message);
 
+			String getResetReason();
+
 		public:
 			virtual bool init(class ksComposable* owner) override;
 			virtual void postInit() override;
@@ -33,4 +35,3 @@ namespace ksf
 			DECLARE_KS_EVENT(customDebugHandler, ksf::ksMqttDebugResponder*, const String&, bool&)
 	};
 }
-

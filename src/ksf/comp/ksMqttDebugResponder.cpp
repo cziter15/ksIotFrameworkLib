@@ -53,6 +53,33 @@ namespace ksf
 			mqtt_sp->publish("log", message, false);
 	}
 
+	String ksMqttDebugResponder::getResetReason()
+	{
+#ifdef ESP32
+		switch ((int)esp_reset_reason())
+		{
+			case 1:		return String("POWERON_RESET");
+			case 3:		return String("SW_RESET");
+			case 4:		return String("OWDT_RESET");
+			case 5:		return String("DEEPSLEEP_RESET");
+			case 6:		return String("SDIO_RESET");
+			case 7:		return String("TG0WDT_SYS_RESET");
+			case 8:		return String("TG1WDT_SYS_RESET");
+			case 9:		return String("RTCWDT_SYS_RESET");
+			case 10:	return String("INTRUSION_RESET");
+			case 11:	return String("TGWDT_CPU_RESET");
+			case 12:	return String("SW_CPU_RESET");
+			case 13:	return String("RTCWDT_CPU_RESET");
+			case 14:	return String("EXT_CPU_RESET");
+			case 15:	return String("RTCWDT_BROWN_OUT_RESET");
+			case 16:	return String("RTCWDT_RTC_RESET");
+			default:	return String("NO_MEAN");
+		}
+#else
+		return ESP.getResetReason();
+#endif
+	}
+
 	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
 	{
 		if (topic.equals("cmd"))
@@ -80,7 +107,8 @@ namespace ksf
 					"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
 					"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
 #endif
-					"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz"
+					"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz, "
+					"Reset reason: " + String(getResetReason())
 				);
 			}
 			else if (message.equals("remove_dbg"))
