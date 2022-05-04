@@ -56,18 +56,18 @@ namespace ksf
 	String ksMqttDebugResponder::getResetReason()
 	{
 #ifdef ESP32
-		switch ((int)esp_reset_reason())
+		switch (esp_reset_reason())
 		{
-			case 1:		return String("Reset due to power-on event");
-			case 3:		return String("Software reset via esp_restart");
-			case 4:		return String("Software reset due to exception/panic");
-			case 5:		return String("Reset (software or hardware) due to interrupt watchdog");
-			case 6:		return String("Reset due to task watchdog");
-			case 7:		return String("Reset due to other watchdogs");
-			case 8:		return String("Reset after exiting deep sleep mode");
-			case 9:		return String("Brownout reset (software or hardware)");
-			case 10:	return String("Reset over SDIO");
-			default:	return String("Reset reason can not be determined");
+			case ESP_RST_POWERON:	return String("Power On");
+			case ESP_RST_SW:		return String("Software/System restart");
+			case ESP_RST_PANIC:		return String("Exception");
+			case ESP_RST_INT_WDT:	return String("Watchdog (interrupt)");
+			case ESP_RST_TASK_WDT:	return String("Watchdog (task)");
+			case ESP_RST_WDT:		return String("Watchdog (other)");
+			case ESP_RST_DEEPSLEEP:	return String("Deep-Sleep Wake");
+			case ESP_RST_BROWNOUT:	return String("Brownout");
+			case ESP_RST_SDIO:		return String("SDIO");
+			default:				return String("Unknown");
 		}
 #else
 		return ESP.getResetReason();
