@@ -58,22 +58,16 @@ namespace ksf
 #ifdef ESP32
 		switch ((int)esp_reset_reason())
 		{
-			case 1:		return String("POWERON_RESET");
-			case 3:		return String("SW_RESET");
-			case 4:		return String("OWDT_RESET");
-			case 5:		return String("DEEPSLEEP_RESET");
-			case 6:		return String("SDIO_RESET");
-			case 7:		return String("TG0WDT_SYS_RESET");
-			case 8:		return String("TG1WDT_SYS_RESET");
-			case 9:		return String("RTCWDT_SYS_RESET");
-			case 10:	return String("INTRUSION_RESET");
-			case 11:	return String("TGWDT_CPU_RESET");
-			case 12:	return String("SW_CPU_RESET");
-			case 13:	return String("RTCWDT_CPU_RESET");
-			case 14:	return String("EXT_CPU_RESET");
-			case 15:	return String("RTCWDT_BROWN_OUT_RESET");
-			case 16:	return String("RTCWDT_RTC_RESET");
-			default:	return String("NO_MEAN");
+			case 1:		return String("Reset due to power-on event");
+			case 3:		return String("Software reset via esp_restart");
+			case 4:		return String("Software reset due to exception/panic");
+			case 5:		return String("Reset (software or hardware) due to interrupt watchdog");
+			case 6:		return String("Reset due to task watchdog");
+			case 7:		return String("Reset due to other watchdogs");
+			case 8:		return String("Reset after exiting deep sleep mode");
+			case 9:		return String("Brownout reset (software or hardware)");
+			case 10:	return String("Reset over SDIO");
+			default:	return String("Reset reason can not be determined");
 		}
 #else
 		return ESP.getResetReason();
