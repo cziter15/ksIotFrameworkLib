@@ -105,7 +105,7 @@ namespace ksf
 				respond(
 					"Build hash: " + ESP.getSketchMD5() + ", " +
 					"Device uptime: " + String(deviceUptimeSeconds) + " sec, " +
-					"Free sketch: " + String(ESP.getFreeSketchSpace()) + " b, " +
+					"Free fw space: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
 					"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
@@ -117,11 +117,13 @@ namespace ksf
 			}
 			else if (message.equals("remove_dbg"))
 			{
-				respond("removed ksMqttDebugResponder");
+				respond("removing ksMqttDebugResponder");
 				app->queueRemoveComponent(shared_from_this());
 			}
 			else if (message.equals("restart"))
 			{
+				respond("restarting chip");
+				delay(500);
 				ESP.restart();
 			}
 			else if (message.equals("break_app"))
