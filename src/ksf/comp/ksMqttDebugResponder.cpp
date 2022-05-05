@@ -117,12 +117,12 @@ namespace ksf
 			}
 			else if (message.equals("remove_dbg"))
 			{
-				respond("removing ksMqttDebugResponder");
+				respond("Removing ksMqttDebugResponder. Commands will not be available.");
 				app->queueRemoveComponent(shared_from_this());
 			}
 			else if (message.equals("restart"))
 			{
-				respond("restarting chip");
+				respond("Restarting system. It may take few seconds.");
 				delay(500);
 				ESP.restart();
 			}
