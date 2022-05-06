@@ -7,6 +7,18 @@
 #define KSF_CAP_WIFI_CONNECT_TIMEOUT 10
 #define KSF_WIFI_TIMEOUT_MS 120000UL
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
+#define KSF_NO_RTTI 1
+
+#if KSF_NO_RTTI
+	typedef void* typeid_t;
+
+	template <typename T>
+	typeid_t get_type_id() noexcept
+	{
+		static char type_id;
+		return &type_id;
+	}
+#endif
 
 #define RUN_APP_BLOCKING_LOOPED_TIME(appClass, delayTime)	\
 {															\
