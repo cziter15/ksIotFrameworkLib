@@ -15,6 +15,8 @@
 	template <typename T>
 	typeid_t get_type_id() noexcept
 	{
+		// this hack allows to get individual pointer for each individual type
+		// very useful to compare types when RTTI is disabled
 		static char type_id;
 		return &type_id;
 	}
