@@ -51,7 +51,7 @@ namespace ksf
 			/*
 				Operator bool override. Returns true if configFilename is not empty.
 			*/
-			operator bool() const override;
+			operator bool() const;
 	};
 }
 
