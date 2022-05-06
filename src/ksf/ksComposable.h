@@ -13,9 +13,13 @@ namespace ksf
 	class ksComposable
 	{
 		protected:
-			ksSafeList<std::shared_ptr<ksComponent>> components;
+			ksSafeList<std::shared_ptr<ksComponent>> components;	//< An array with shared_ptr of components (holding main reference).
 
 		public:
+			/*
+				Instantiates a component of passed type transferring all passed parameters as
+				constructor parameters to the component. Signature must match with component constructor.
+			*/
 			template <class Type, class... Params>
 			std::weak_ptr<Type> addComponent(Params...rest)
 			{
@@ -27,6 +31,10 @@ namespace ksf
 				return std::weak_ptr<Type>(ptr);
 			}
 
+			/*
+				Instantiates a component of passed type. Same as function above, but this is a variant
+				for components that simply don't have parameters in construction method.
+			*/
 			template <class Type>
 			std::weak_ptr<Type> addComponent()
 			{
@@ -38,8 +46,14 @@ namespace ksf
 				return ptr;
 			}
 
-			void queueRemoveComponent(const std::shared_ptr<ksComponent>& component);
+			/*
+				Finds components of passed template type.
 
+				RTTI variant uses dynamic_pointer_cast, which will respect all C++ underlying mechanisms of pointer casting.
+				NON-RTTI variant simply compares individual type (static casting and direct type check, won't respect inheritance).
+
+				@param outComponents - vector of weak pointers to matching components, might be empty as well.
+			*/
 			template <class Type>
 			void findComponents(std::vector<std::weak_ptr<Type>>& outComponents)
 			{
@@ -59,6 +73,10 @@ namespace ksf
 				}
 			}
 
+			/*
+				Finds components by passed template type. See findComponents, as this function calls it directly and returns first found component.
+				@return - weak pointer of found component, might be invalid (unable to lock to get shared ptr)
+			*/
 			template <class Type>
 			std::weak_ptr<Type> findComponent()
 			{
@@ -67,6 +85,16 @@ namespace ksf
 				return comps_wp.empty() ? std::weak_ptr<Type>() : comps_wp[0];
 			}
 
+			/*
+				Queues component to be removed. It will happen on queue synchronization (synchronizeQueues).
+				@param component - component to remove.
+			*/
+			void queueRemoveComponent(const std::shared_ptr<ksComponent>& component);
+
+			/*
+				Executes a functor for each component.
+				@param functor - Function to execute.
+			*/
 			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& functor);
 	};
 }

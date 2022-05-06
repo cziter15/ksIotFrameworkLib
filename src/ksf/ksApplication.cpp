@@ -5,15 +5,15 @@ namespace ksf
 {
 	bool ksApplication::init()
 	{
-		// Synchronize components added before ksApplication base init.
+		/* Synchronize components added before ksApplication base init. */
 		components.synchronizeQueues();
 
-		// Run initialization
+		/* Run initialization */
 		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
 			if (!(*it)->init(this))
 				return false;
 
-		// Run post-init event for components
+		/* Run post-init event for components. */
 		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
 			(*it)->postInit();
 
@@ -23,7 +23,7 @@ namespace ksf
 	bool ksApplication::loop()
 	{
 		{
-			// Loop through all components and synchronize list at end of scope.
+			/* Loop through all components and synchronize list at end of scope. */
 			ksf::ksSafeListScopedSync scoped(components);
 
 			for (auto& comp : components.getList())
