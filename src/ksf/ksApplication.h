@@ -11,13 +11,9 @@
 
 #include "ksComposable.h"
 
-namespace ksf
-{
-	class ksComposable;
-}
-
 namespace ksf 
 {
+	class ksComposable;
 	class ksApplication : public ksComposable
 	{
 		public:
