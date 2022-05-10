@@ -32,21 +32,6 @@ namespace ksf
 			}
 
 			/*
-				Instantiates a component of passed type. Same as function above, but this is a variant
-				for components that simply don't have parameters in construction method.
-			*/
-			template <class Type>
-			std::weak_ptr<Type> addComponent()
-			{
-				std::shared_ptr<Type> ptr = std::make_shared<Type>();
-				#if KSF_NO_RTTI
-					ptr->comp_type_id = get_type_id<Type>();
-				#endif
-				components.queueAdd(ptr);
-				return ptr;
-			}
-
-			/*
 				Finds components of passed template type.
 
 				RTTI variant uses dynamic_pointer_cast, which will respect all C++ underlying mechanisms of pointer casting.
