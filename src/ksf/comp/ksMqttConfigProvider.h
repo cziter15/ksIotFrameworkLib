@@ -20,20 +20,34 @@ namespace ksf
 	class ksMqttConfigProvider : public ksConfigProvider
 	{
 		protected:
-			static const char ksfMqttConfigFile[];
+			static const char ksfMqttConfigFile[];					//< Static char-string "mqtt.conf"
 
-			static const char ksfBrokerParamName[];
-			static const char ksfUserParamName[];
-			static const char ksfPortParamName[];
-			static const char ksfDefPort[];
-			static const char ksfPasswordParamName[];
-			static const char ksfPrefixParamName[];
+			static const char ksfBrokerParamName[];					//< Static char-string "broker"
+			static const char ksfUserParamName[];					//< Static char-string "user"
+			static const char ksfPortParamName[];					//< Static char-string "port"
+			static const char ksfDefPort[];							//< Static char-string "port"
+			static const char ksfPasswordParamName[];				//< Static char-string "password"
+			static const char ksfPrefixParamName[];					//< Static char-string "prefix"
 
-			std::vector<class WiFiManagerParameter*> params;
+			std::vector<class WiFiManagerParameter*> params;		//< Vector of WiFiManagerParameter pointers.
 
 		public:
+			/*
+				Injects MQTT config provider's WiFiManager parameters.
+				@param manager - WiFiManager reference.
+			*/
 			void injectManagerParameters(WiFiManager& manager) override;
+
+			/*
+				Captures MQTT config provider's WiFiManager parameters.
+				@param manager - WiFiManager reference.
+			*/
 			void captureManagerParameters(WiFiManager& manager) override;
+
+			/*
+				Configures MQTT connector from config provider.
+				@param connector - ksMqttConnector reference.
+			*/
 			virtual void setupMqttConnector(ksMqttConnector& connector);
 	};
 }

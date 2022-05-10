@@ -25,13 +25,22 @@ namespace ksf
 		friend class ksApplication;
 
 		public:
-			/* Method called to initialize component. */
+			/*
+				Initializes component.
+				@param owner - pointer to owning composable interface (application).
+				@return - true on success, false on fail.
+			*/
 			virtual bool init(ksComposable* owner) = 0;
 
-			/* Called from application loop. */
+			/* 
+				Called from application loop.
+				@return - true on success, false on fail.
+			*/
 			virtual bool loop();
 
-			/* Method called after component initialization. */
+			/* 
+				Method called after component initialization. 
+			*/
 			virtual void postInit();
 	};
 }

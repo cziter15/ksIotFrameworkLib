@@ -5,6 +5,10 @@
  *	All licensing information can be found inside  LICENSE.md file
  *
  * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	
+ *	ksLed component
+ *	Handles LED functionality (pinmode setup, blinking)
+ * 
  */
 
 #include "../ksComposable.h"
@@ -13,9 +17,7 @@
 
 namespace ksf
 {
-	ksLed::ksLed(uint8_t pin) : ledPin(pin)
-	{
-	}
+	ksLed::ksLed(uint8_t pin) : ledPin(pin) {}
 
 	bool ksLed::init(ksComposable* owner)
 	{
@@ -66,7 +68,7 @@ namespace ksf
 
 	ksLed::~ksLed()
 	{
-		setEnabled(false); // disable led
-		pinMode(ledPin, INPUT); //default to input
+		setEnabled(false);
+		pinMode(ledPin, INPUT);
 	}
 }
