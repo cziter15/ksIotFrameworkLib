@@ -17,10 +17,16 @@ namespace ksf
 	class ksApplication : public ksComposable
 	{
 		public:
-			/* Method called to initialize application. */
+			/* 
+				Initializes application.
+				@return - true on success, false on fail (will break application initialization).
+			*/
 			virtual bool init();
 
-			/* Called every application tick (see ksConstants). */
+			/* 
+				Called every application tick (see ksConstants). 
+				@return - true on success, false on fail (will break application execution).
+			*/
 			virtual bool loop();
 	};
 }

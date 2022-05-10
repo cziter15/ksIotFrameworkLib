@@ -38,16 +38,27 @@ namespace ksf
 				return list;
 			}
 
+			/*
+				Queues item to be added to the list at next synchronizeQueues call.
+				@param item - item reference.
+			*/
 			void queueAdd(const EntryType& item)
 			{
 				pendingAdd.push_back(item);
 			}
 
+			/*
+				Queues item to be removed from the list at next synchronizeQueues call.
+				@param item - item reference.
+			*/
 			void queueRemove(const EntryType& item)
 			{
 				pendingRemove.push_back(item);
 			}
 
+			/*
+				Unsafely erases all queues (pendingAdd, pendingRemove and current list).
+			*/
 			void unsafeEraseAllQueues() override
 			{
 				pendingAdd.clear();
@@ -55,6 +66,11 @@ namespace ksf
 				list.clear();
 			}
 			
+			/*
+				Synchronizes underlying list with queues.
+				Adds items from pendingAdd list.
+				Removes item by using pendingRemove list.
+			*/
 			void synchronizeQueues() override
 			{
 				if (!pendingAdd.empty())
@@ -79,6 +95,9 @@ namespace ksf
 			}
 	};
 
+	/* 
+		Wrapper that simply calls synchronizeQueues on passed ksSafeList at the end of scope.
+	*/
 	class ksSafeListScopedSync
 	{
 		protected:
