@@ -56,7 +56,7 @@ namespace ksf
 			mqtt_sp->subscribe("cmd");
 	}
 
-	void ksMqttDebugResponder::respond(String message) const
+	void ksMqttDebugResponder::respond(const String& message) const
 	{
 		if (auto mqtt_sp = mqtt_wp.lock())
 			mqtt_sp->publish("log", message, false);
