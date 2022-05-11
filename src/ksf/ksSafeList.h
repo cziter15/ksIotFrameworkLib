@@ -33,6 +33,10 @@ namespace ksf
 			std::vector<EntryType> list, pendingAdd, pendingRemove;
 
 		public:
+			/*
+				Retrieves list reference.
+				@return - reference to vector of items (underlying list).
+			*/
 			const std::vector<EntryType>& getList() const
 			{
 				return list;
