@@ -1,1 +1,0 @@
-Warning. Please enable rtti!
