@@ -44,8 +44,8 @@ namespace ksf
 
 			/*
 				Used to setBlinking parameters.
-				@param interval - time in ms between LED state toggle.
-				@param loops - number of loops.
+				@param interval - time in ms between LED state toggle (0 to disable blinking).
+				@param loops - number of loops (0 for infinite loop).
 			*/
 			virtual void setBlinking(uint32_t interval, uint32_t loops = 0);
 
