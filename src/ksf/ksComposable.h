@@ -27,7 +27,7 @@ namespace ksf
 
 		public:
 			/*
-				Instantiates a component of passed type transferring all passed parameters asconstructor parameters to the component. 
+				Instantiates a component of privided type, passing all passed parameters as constructor parameters to the component. 
 				Keep in mind that passed parameters must match target component constructor parameters.
 			*/
 			template <class Type, class... Params>
@@ -42,7 +42,7 @@ namespace ksf
 			}
 
 			/*
-				Finds components of passed template type.
+				Tries to find components of passed template type.
 
 				RTTI variant uses dynamic_pointer_cast, which will respect all C++ underlying mechanisms of pointer casting.
 				NON-RTTI variant simply compares individual type (static casting and direct type check, won't respect inheritance).
@@ -69,8 +69,8 @@ namespace ksf
 			}
 
 			/*
-				Finds components by passed template type. See findComponents, as this function calls it directly and returns first found component.
-				@return - weak pointer of found component, might be invalid (unable to lock to get shared ptr)
+				Tries to find components by passed template type. See findComponents, as findComponent calls it directly and returns first element.
+				@return - weak pointer of component, might be invalid/expired (unable to lock to get shared ptr).
 			*/
 			template <class Type>
 			std::weak_ptr<Type> findComponent()
