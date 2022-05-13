@@ -50,8 +50,7 @@ namespace ksf
 			void registerEvent(std::shared_ptr<ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 			{
 				++lastUid;
-				outHandle = std::make_shared<ksEventHandle>(shared_from_this(), lastUid);
-			
+				outHandle = std::make_shared<ksEventHandle>(weak_from_this(), lastUid);
 				callbacks.emplace_back(lastUid, std::move(function));
 			}
 
