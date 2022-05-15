@@ -20,9 +20,9 @@
 
 using namespace std::placeholders;
 
-namespace ksf
+namespace ksf::comps
 {
-	bool ksMqttDebugResponder::init(ksComposable* owner)
+	bool ksMqttDebugResponder::init(ksf::ksComposable* owner)
 	{
 		app = owner;
 		return true;

@@ -13,7 +13,7 @@
 #include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"
 
-namespace ksf
+namespace ksf::comps
 {
 	const char ksMqttConfigProvider::ksfMqttConfigFile[] = "mqtt.conf";
 

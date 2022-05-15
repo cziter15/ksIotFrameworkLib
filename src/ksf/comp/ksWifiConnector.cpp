@@ -19,7 +19,7 @@
 	#include <ESP8266WiFi.h>
 #endif
 
-namespace ksf
+namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
@@ -48,7 +48,7 @@ namespace ksf
 		#endif
 	}
 
-	bool ksWifiConnector::init(ksComposable* owner)
+	bool ksWifiConnector::init(ksf::ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
 		setupMacAddress();

@@ -14,35 +14,38 @@
 
 class WiFiManager;
 
-namespace ksf 
+namespace ksf
 {
-	class ksComposable;
-	class ksConfigProvider : public ksComponent
+	namespace comps
 	{
-		public:
-			/*
-				Initializes config provider component.
-				@param owner - pointer to owning composable interface (application).
-				@return - true on success, false on fail.
-			*/
-			bool init(ksComposable* owner) override;
+		class ksComposable;
+		class ksConfigProvider : public ksf::ksComponent
+		{
+			public:
+				/*
+					Initializes config provider component.
+					@param owner - pointer to owning composable interface (application).
+					@return - true on success, false on fail.
+				*/
+				bool init(ksf::ksComposable* owner) override;
 
-			/*
-				Overridable method to inject WiFiManager parameters.
-				@param manager - WiFiManager reference.
-			*/
-			virtual void injectManagerParameters(WiFiManager& manager) = 0;
+				/*
+					Overridable method to inject WiFiManager parameters.
+					@param manager - WiFiManager reference.
+				*/
+				virtual void injectManagerParameters(WiFiManager& manager) = 0;
 
-			/*
-				Overridable method to capture WiFiManager parameters.
-				@param manager - WiFiManager reference.
-			*/
-			virtual void captureManagerParameters(WiFiManager& manager) = 0;
+				/*
+					Overridable method to capture WiFiManager parameters.
+					@param manager - WiFiManager reference.
+				*/
+				virtual void captureManagerParameters(WiFiManager& manager) = 0;
 
-			/*
-				Called from application loop.
-				@return - true on success, false on fail.
-			*/
-			bool loop() override;
-	};
+				/*
+					Called from application loop.
+					@return - true on success, false on fail.
+				*/
+				bool loop() override;
+		};
+	}
 }

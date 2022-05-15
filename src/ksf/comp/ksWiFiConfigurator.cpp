@@ -13,7 +13,7 @@
 #include "ksLed.h"
 #include "../ksConstants.h"
 
-namespace ksf
+namespace ksf::comps
 {
 	ksWiFiConfigurator::ksWiFiConfigurator(const String& devicePrefixName) : deviceName(devicePrefixName)
 	{
@@ -26,7 +26,7 @@ namespace ksf
 #endif
 	}
 
-	bool ksWiFiConfigurator::init(ksComposable* owner)
+	bool ksWiFiConfigurator::init(ksf::ksComposable* owner)
 	{
 		parent = owner;
 		return true;

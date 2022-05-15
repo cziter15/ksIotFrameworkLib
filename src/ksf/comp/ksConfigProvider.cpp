@@ -11,9 +11,9 @@
 #include "../ksConfig.h"
 #include <WiFiManager.h>
 
-namespace ksf
+namespace ksf::comps
 {
-	bool ksConfigProvider::init(ksComposable* owner)
+	bool ksConfigProvider::init(ksf::ksComposable* owner)
 	{
 		return true;
 	}

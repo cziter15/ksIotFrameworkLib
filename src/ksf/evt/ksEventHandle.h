@@ -14,25 +14,28 @@
 
 namespace ksf
 {
-	class ksEventBase;
-	class ksEventHandle
+	namespace evt
 	{
-		protected:
-			std::weak_ptr<ksEventBase> cb_evtbase_wp;	//< Weak pointer to ksEventBase.
-			std::size_t cb_uid = 0;						//< Unique callback ID.
+		class ksEventBase;
+		class ksEventHandle
+		{
+			protected:
+				std::weak_ptr<ksEventBase> cb_evtbase_wp;	//< Weak pointer to ksEventBase.
+				std::size_t cb_uid = 0;						//< Unique callback ID.
 
-		public:
-			/*
-				Constructs event handle.
+			public:
+				/*
+					Constructs event handle.
 
-				@param cb_evtbase_wp - event name to be generated inside class.
-				@param uid - unique callback ID.
-			*/
-			ksEventHandle(const std::weak_ptr<ksEventBase>& cb_evtbase_wp, std::size_t uid);
+					@param cb_evtbase_wp - event name to be generated inside class.
+					@param uid - unique callback ID.
+				*/
+				ksEventHandle(const std::weak_ptr<ksEventBase>& cb_evtbase_wp, std::size_t uid);
 
-			/*
-				Event handle destructor. Unbinds callback (removes from the list by ID).
-			*/
-			virtual ~ksEventHandle();
-	};
+				/*
+					Event handle destructor. Unbinds callback (removes from the list by ID).
+				*/
+				virtual ~ksEventHandle();
+		};
+	}
 }

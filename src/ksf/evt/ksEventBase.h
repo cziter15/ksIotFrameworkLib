@@ -11,11 +11,14 @@
 
 namespace ksf
 {
-	class ksEventBase : public std::enable_shared_from_this<ksEventBase>
+	namespace evt
 	{
-		friend class ksEventHandle;
+		class ksEventBase : public std::enable_shared_from_this<ksEventBase>
+		{
+				friend class ksEventHandle;
 
-		protected:
-			virtual void unbind(size_t Index) = 0;
-	};
+			protected:
+				virtual void unbind(size_t Index) = 0;
+		};
+	}
 }

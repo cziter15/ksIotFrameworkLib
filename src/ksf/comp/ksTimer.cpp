@@ -11,7 +11,7 @@
 #include "ksTimer.h"
 #include "Arduino.h"
 
-namespace ksf
+namespace ksf::comps
 {
 	ksTimer::ksTimer() {}
 
@@ -32,7 +32,7 @@ namespace ksf
 		timerLooping = looping;
 	}
 
-	bool ksTimer::init(ksComposable* owner)
+	bool ksTimer::init(ksf::ksComposable* owner)
 	{
 		lastTick = millis();
 		return true;

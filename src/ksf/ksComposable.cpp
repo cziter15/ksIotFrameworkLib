@@ -10,7 +10,7 @@
 #include "ksComposable.h"
 #include "ksComponent.h"
 
-namespace ksf 
+namespace ksf
 {
 	void ksComposable::queueRemoveComponent(const std::shared_ptr<ksComponent>& component)
 	{

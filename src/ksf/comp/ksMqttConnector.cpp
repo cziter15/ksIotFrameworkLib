@@ -24,9 +24,9 @@
 
 using namespace std::placeholders;
 
-namespace ksf
+namespace ksf::comps
 {
-	bool ksMqttConnector::init(ksComposable* owner)
+	bool ksMqttConnector::init(ksf::ksComposable* owner)
 	{
 		ksMqttConfigProvider provider;
 

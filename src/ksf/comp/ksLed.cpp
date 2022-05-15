@@ -15,11 +15,12 @@
 #include "ksLed.h"
 #include "Arduino.h"
 
-namespace ksf
+namespace ksf::comps
 {
-	ksLed::ksLed(uint8_t pin) : ledPin(pin) {}
+	ksLed::ksLed(uint8_t pin) : ledPin(pin)
+	{}
 
-	bool ksLed::init(ksComposable* owner)
+	bool ksLed::init(ksf::ksComposable* owner)
 	{
 		pinMode(ledPin, OUTPUT);
 		setEnabled(false);
