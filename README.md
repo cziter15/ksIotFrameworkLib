@@ -10,6 +10,14 @@ The aim of this project is to provide simple kick-start application pattern for 
   <img src="docfiles/app_diagram.png">
 </p>
 
+- User defines applications and is able to execute one application at a time.
+- Each application consist of components.
+- Each application has three methods iterating over components init, postInit and loop.
+- Init is called on component initialization (after construction).
+- PostInit is called after component initialization. This method is usually used to grab weak pointer to other component.
+- Loop is called eery application loop.
+- Init and loop method can break appliation. Returning false will escape from main application loop causing next app to be executed (e.g. config).
+
 ## Utilities
 | Utility  | Function |
 | ------------- | ------------- |
