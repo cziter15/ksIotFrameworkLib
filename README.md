@@ -57,8 +57,8 @@ bool EnergyMonitor::init()
 	statusLed = addComponent<ksf::comps::ksLed>(STATUS_LED_PIN);
 	eventLed = addComponent<ksf::comps::ksLed>(EVENT_LED_PIN);
 
-	auto sensor_timer = addComponent<ksf::ksTimer>(EMON_TIMER_INTERVAL, true);
-	auto sec_timer = addComponent<ksf::ksTimer>(EMON_SEC_TIMER, true);
+	auto sensor_timer = addComponent<ksf::comps::ksTimer>(EMON_TIMER_INTERVAL, true);
+	auto sec_timer = addComponent<ksf::comps::ksTimer>(EMON_SEC_TIMER, true);
 	
 	if (!ksApplication::init())
 		return false;
