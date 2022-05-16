@@ -16,8 +16,6 @@ namespace ksf
 		return true;
 	}
 
-	void ksComponent::postInit()
-	{
-
-	}
+	void ksComponent::postInit() 
+	{}
 }

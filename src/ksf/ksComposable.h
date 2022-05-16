@@ -19,7 +19,6 @@
 namespace ksf 
 {
 	class ksComponent;
-
 	class ksComposable
 	{
 		protected:
@@ -27,7 +26,7 @@ namespace ksf
 
 		public:
 			/*
-				Instantiates a component of privided type, passing all passed parameters as constructor parameters to the component. 
+				Instantiates a component of passed type, handing over all template parameters as constructor parameters to the component. 
 				Keep in mind that passed parameters must match target component constructor parameters.
 			*/
 			template <class Type, class... Params>
