@@ -46,7 +46,7 @@ namespace ksf::comps
 
 	bool ksLed::isEnabled() const
 	{
-		return digitalRead(ledPin) == 1;
+		return digitalRead(ledPin) == HIGH;
 	}
 
 	void ksLed::setBlinking(uint32_t interval, uint32_t loops)
@@ -64,7 +64,7 @@ namespace ksf::comps
 
 	void ksLed::setEnabled(bool isEnabled)
 	{
-		digitalWrite(ledPin, isEnabled ? 1 : 0);
+		digitalWrite(ledPin, isEnabled ? HIGH : LOW);
 	}
 
 	ksLed::~ksLed()
