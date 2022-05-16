@@ -82,6 +82,6 @@ namespace ksf
 					for (auto cb = callbacks.begin(); cb != callbacks.end(); ++cb)
 						cb->second(params...);
 				}
-			};
+		};
 	}
 }
