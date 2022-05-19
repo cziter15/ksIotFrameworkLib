@@ -3,6 +3,8 @@
   <img src="doc/header.jpg">
 </p>
 
+## Idea - what and why?
+
 The aim of this project is to provide simple kick-start application pattern for ESP 8266/32 IoT app development. Last year I was creating a lot of esp apps for multiple devices and realized that I everytime need to copy whole app and modify few classes. The purpose of this project is to tidy this process up.
 
 ## Architecture
