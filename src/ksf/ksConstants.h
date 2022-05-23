@@ -31,7 +31,7 @@
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
 
 /* Tells the framework if it should use RTTI (0) or not (1). Non-RTTI builds are smaller. */
-#define KSF_NO_RTTI 1
+#define KSF_NO_RTTI 0
 
 #if KSF_NO_RTTI
 	typedef void* typeid_t;
