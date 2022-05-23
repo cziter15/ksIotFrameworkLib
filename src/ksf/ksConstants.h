@@ -30,22 +30,6 @@
 /* Time in milliseconds that must pass without WiFi connection to retry connection. */
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
 
-/* Tells the framework if it should use RTTI (0) or not (1). Non-RTTI builds are smaller. */
-#define KSF_NO_RTTI 0
-
-#if KSF_NO_RTTI
-	typedef void* typeid_t;
-
-	template <typename T>
-	typeid_t get_type_id()
-	{
-		// this hack allows to get individual pointer for each individual type
-		// very useful to compare types when RTTI is disabled
-		static char type_id;
-		return &type_id;
-	}
-#endif
-
 /* Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait) */
 #define RUN_APP_BLOCKING_LOOPED_TIME(appClass, delayTime)	\
 {															\

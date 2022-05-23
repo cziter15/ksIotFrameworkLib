@@ -77,9 +77,9 @@ bool EnergyMonitor::init()
 }
 ```
 
-## RTTI - compiler flags (RTTI is not required by default as of 06/05/22)
-If you are using RTTI, you can configure ksConstants.h define to tell framework to use RTTI features.
-You also need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
+## RTTI - compiler flags
+RTTI is required to properly cast component types and so on. By default RTTI is disabled.
+You need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
 Whole example setup:
 ```ini
 # ksIotFramework build property overrides

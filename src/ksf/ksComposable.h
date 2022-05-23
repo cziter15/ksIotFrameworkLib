@@ -33,9 +33,6 @@ namespace ksf
 			std::weak_ptr<Type> addComponent(Params...rest)
 			{
 				std::shared_ptr<Type> ptr = std::make_shared<Type>(rest...);
-				#if KSF_NO_RTTI
-					ptr->comp_type_id = get_type_id<Type>();
-				#endif
 				components.queueAdd(ptr);
 				return std::weak_ptr<Type>(ptr);
 			}
@@ -55,15 +52,9 @@ namespace ksf
 
 				for (auto& comp : components.getList())
 				{
-					#if KSF_NO_RTTI
-						std::weak_ptr<Type> castedComp_wp = std::static_pointer_cast<Type>(comp);
-						if (!castedComp_wp.expired() && castedComp_wp.lock()->comp_type_id == get_type_id<Type>())
-							outComponents.push_back(castedComp_wp);
-					#else
-						std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
-						if (!castedComp_wp.expired())
-							outComponents.push_back(castedComp_wp);
-					#endif
+					std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
+					if (!castedComp_wp.expired())
+						outComponents.push_back(castedComp_wp);
 				}
 			}
 
