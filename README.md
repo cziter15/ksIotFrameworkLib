@@ -3,6 +3,8 @@
   <img src="doc/header.jpg">
 </p>
 
+## Idea - what and why?
+
 The aim of this project is to provide simple kick-start application pattern for ESP 8266/32 IoT app development. Last year I was creating a lot of esp apps for multiple devices and realized that I everytime need to copy whole app and modify few classes. The purpose of this project is to tidy this process up.
 
 ## Architecture
@@ -15,7 +17,7 @@ The aim of this project is to provide simple kick-start application pattern for 
 - Each application has three methods iterating over components init, postInit and loop.
 - Init is called on component initialization (after construction).
 - PostInit is called after component initialization. This method is usually used to grab weak pointer to other component.
-- Loop is called eery application loop.
+- Loop is called every application loop.
 - Init and loop method can break appliation. Returning false will escape from main application loop causing next app to be executed (e.g. config).
 
 ## Utilities
