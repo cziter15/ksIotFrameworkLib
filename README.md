@@ -107,3 +107,7 @@ Handles MQTT (MQ Telemetry Transport) protocol.
 
 ## PubSubClient / WiFiManager related quirks
 All quirks have been fixed. Keep your Arduino-esp8266 or Ardunino-esp32 up to date.
+
+## Donate
+Feel free to support development (of course optionally) :)
+[<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif">](https://www.paypal.com/donate/?hosted_button_id=A3QTXX6MN9LN8)
