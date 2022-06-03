@@ -56,6 +56,21 @@ namespace ksf::comps
 	void ksMqttConnector::mqttConnectedInternal()
 	{
 		mqttWifiClient->setNoDelay(true);
+
+		/* 
+		*	There's an inconsistency in setTimeout implementation between Arduino for ESP32 and ESP8266.
+		*	ESP32's WiFi client setTimeout method want seconds, while ESP8266's one wants milliseconds.
+		*	I've wasted some time to get what's really going on here, but eventually caught that.
+		* 
+		*	Timeout is required because underlying connect method is blocking. Without timeout it may trigger watchdog.
+		*/
+
+		#ifdef ESP32
+			mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT_SEC);
+		#else
+			mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
+		#endif
+		
 		mqttClient->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 		onConnected->broadcast();
 	}
