@@ -56,9 +56,7 @@ namespace ksf::comps
 	void ksMqttConnector::mqttConnectedInternal()
 	{
 		mqttWifiClient->setNoDelay(true);
-		mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT_SEC);
 		mqttClient->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
-
 		onConnected->broadcast();
 	}
 
@@ -107,36 +105,34 @@ namespace ksf::comps
 
 	bool ksMqttConnector::loop()
 	{
-		if (!mqttClient->loop())
+		if (mqttClient->loop())
 		{
-			if (wasConnected)
+			if (millis() - lastConnectionTimeTick > KSF_ONE_SECOND_MS)
 			{
-				onDisconnected->broadcast();
-				wasConnected = false;
-
-				connectionTimeSeconds = 0;
-				lastTryReconnectTime = millis();
-			}
-				
-			if (millis() - lastTryReconnectTime > KSF_MQTT_RECONNECT_DELAY_MS)
-			{
-				if (WiFi.isConnected())
-				{
-					if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str()))
-					{
-						++reconnectCounter;
-						wasConnected = true;
-						mqttConnectedInternal();
-					}
-
-					lastTryReconnectTime = millis();
-				}
+				lastConnectionTimeTick = millis();
+				++connectionTimeSeconds;
 			}
 		}
-		else if (millis() - lastConnectionTimeTick > KSF_ONE_SECOND_MS)
+		else if (wasConnected)
 		{
-			lastConnectionTimeTick = millis();
-			++connectionTimeSeconds;
+			connectionTimeSeconds = 0;
+			lastTryReconnectTime = millis();
+			wasConnected = false;
+			onDisconnected->broadcast();
+		}
+		else if (millis() - lastTryReconnectTime > KSF_MQTT_RECONNECT_DELAY_MS)
+		{
+			if (WiFi.isConnected())
+			{
+				if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str()))
+				{
+					++reconnectCounter;
+					wasConnected = true;
+					mqttConnectedInternal();
+				}
+			}
+
+			lastTryReconnectTime = millis();
 		}
 
 		return true;
