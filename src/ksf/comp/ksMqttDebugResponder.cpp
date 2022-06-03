@@ -44,7 +44,7 @@ namespace ksf::comps
 		if (millis() - secondTimer > KSF_ONE_SECOND_MS)
 		{
 			secondTimer = millis();
-			deviceUptimeSeconds++;
+			applicationUptimeSeconds++;
 		}
 
 		return breakloop == false;
@@ -113,7 +113,7 @@ namespace ksf::comps
 			{
 				respond(
 					"Build hash: " + ESP.getSketchMD5() + ", " +
-					"Device uptime: " + String(deviceUptimeSeconds) + " sec, " +
+					"Application (component) uptime: " + String(applicationUptimeSeconds) + " sec, " +
 					"Free fw space: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
