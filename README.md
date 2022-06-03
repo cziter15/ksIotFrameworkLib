@@ -78,7 +78,7 @@ bool EnergyMonitor::init()
 ```
 
 ## RTTI - compiler flags
-RTTI is required to properly cast component types and so on. By default RTTI is disabled.
+RTTI is required to properly cast component types and so on. By default RTTI for ESP32/ESP8266 is disabled in Arduino framework.
 You need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
 Whole example setup:
 ```ini
