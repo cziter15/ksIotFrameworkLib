@@ -46,8 +46,8 @@ namespace ksf::comps
 
 	bool ksWiFiConfigurator::loop()
 	{
-		manager.setConfigPortalTimeout(KSF_CAP_PORTAL_TIMEOUT_SECONDS);
-		manager.setConnectTimeout(KSF_CAP_WIFI_CONNECT_TIMEOUT);
+		manager.setConfigPortalTimeout(KSF_CAP_PORTAL_TIMEOUT_SEC);
+		manager.setConnectTimeout(KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC);
 
 		std::vector<std::weak_ptr<ksConfigProvider>> configComps_wp;
 		parent->findComponents<ksConfigProvider>(configComps_wp);

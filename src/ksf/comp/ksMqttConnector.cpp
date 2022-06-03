@@ -56,7 +56,7 @@ namespace ksf::comps
 	void ksMqttConnector::mqttConnectedInternal()
 	{
 		mqttWifiClient->setNoDelay(true);
-		mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT);
+		mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT_SEC);
 		mqttClient->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 
 		onConnected->broadcast();
@@ -118,7 +118,7 @@ namespace ksf::comps
 				lastTryReconnectTime = millis();
 			}
 				
-			if (millis() - lastTryReconnectTime > KSF_MQTT_RECONNECT_DELAY)
+			if (millis() - lastTryReconnectTime > KSF_MQTT_RECONNECT_DELAY_MS)
 			{
 				if (WiFi.isConnected())
 				{

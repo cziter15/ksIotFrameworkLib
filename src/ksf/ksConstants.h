@@ -13,16 +13,16 @@
 #define KSF_ONE_SECOND_MS 1000UL
 
 /* MQTT reconnect delay in milliseconds. How much time in ms need to pass to retry connection. */
-#define KSF_MQTT_RECONNECT_DELAY 5000UL
+#define KSF_MQTT_RECONNECT_DELAY_MS 5000UL
 
-/* MQTT socket timeout in milliseconds. On ESP32 is also used as connect (blocking) timeout. */
-#define KSF_MQTT_TIMEOUT 3000UL
+/* MQTT socket timeout in seconds. On ESP32 is also used as connect (blocking) timeout. */
+#define KSF_MQTT_TIMEOUT_SEC 3UL
 
 /* Time in seconds for how much configuration portal should be available. Device will reset after that time. */
-#define KSF_CAP_PORTAL_TIMEOUT_SECONDS 120 
+#define KSF_CAP_PORTAL_TIMEOUT_SEC 120UL
 
 /* Configuration portal maximum time limit for test connection to AP. */
-#define KSF_CAP_WIFI_CONNECT_TIMEOUT 10
+#define KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC 10UL
 
 /* Time in milliseconds that must pass without WiFi connection to trigger device restart. */
 #define KSF_WIFI_TIMEOUT_MS 120000UL
