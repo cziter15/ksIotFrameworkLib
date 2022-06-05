@@ -113,7 +113,7 @@ namespace ksf::comps
 			{
 				respond(
 					"Build hash: " + ESP.getSketchMD5() + ", " +
-					"Application (component) uptime: " + String(applicationUptimeSeconds) + " sec, " +
+					"App uptime: " + String(applicationUptimeSeconds) + " sec, " +
 					"Free fw space: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32
