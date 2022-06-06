@@ -14,6 +14,9 @@
         "name": "Krzysztof Strehlau"
       }
     ],
+    "build" : {
+        "unflags" : "-f-no-rtti"
+    },
     "license": "MIT",
     "dependencies": {
       "tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
