@@ -30,9 +30,9 @@ namespace ksf
 				Keep in mind that passed parameters must match target component constructor parameters.
 			*/
 			template <class Type, class... Params>
-			std::weak_ptr<Type> addComponent(Params...rest)
+			std::weak_ptr<Type> addComponent(Params... arg)
 			{
-				std::shared_ptr<Type> ptr = std::make_shared<Type>(rest...);
+				std::shared_ptr<Type> ptr = std::make_shared<Type>(arg...);
 				components.queueAdd(ptr);
 				return std::weak_ptr<Type>(ptr);
 			}

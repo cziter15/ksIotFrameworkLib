@@ -79,34 +79,25 @@ bool EnergyMonitor::init()
 
 ## RTTI - compiler flags
 RTTI is required to properly cast component types and so on. By default RTTI for ESP32/ESP8266 is disabled in Arduino framework.
-You need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
-Whole example setup:
-```ini
-# ksIotFramework build property overrides
-compiler.cpp.extra_flags=-fno-split-wide-types -finline-limit=3 -ffast-math -frtti
-```
+
+**If using platformio, simply add `build_unflags = -fno-rtti` line to your env configuration in platformio.ini file**
+
+Bare arduino projects need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
+
 ## Saving power
 By default, this framework supports modem power saving. This requires DTIM set on access point. Best value for me is 3.
 It allows ESP32 to go down from around 100mA to 20mA.
 
 ## Dependencies
+**Highly recommended to use platformio as it will automatically download dependencies.**
 
-**Unfortunately, right now, there is a lot of manual work to do to setup dependencies. WiFiManager, ksIotFrameworkLib must be installed as ZIP. It's recommended to setup Git to track ksIotFrameworkLib directory to follow latest changes on this repository. PubSubClient and ArduinoOTA can be downloaded within library manager.**
+### Frameworks
+- Arduino for ESP32 [ https://github.com/espressif/arduino-esp32 ]
+- Arduino for ESP8266 [ https://github.com/esp8266/Arduino ]
 
-This project depends on following libraries:
-### Arduino for ESP8266/32
-Arduino development environment for Espressif MCUs.
-- https://github.com/espressif/arduino-esp32
-- https://github.com/esp8266/Arduino
-### WiFiManager
-Works like access point, so user can connect and setup device on first run.
-- https://github.com/tzapu/WiFiManager
-### PubSubClient
-Handles MQTT (MQ Telemetry Transport) protocol.
-- https://github.com/knolleary/pubsubclient
-
-## PubSubClient / WiFiManager related quirks
-All quirks have been fixed. Keep your Arduino-esp8266 or Ardunino-esp32 up to date.
+### Libraries
+- WiFiManager [ https://github.com/tzapu/WiFiManager ]
+- PubSubClient [ https://github.com/knolleary/pubsubclient ]
 
 ## Donate
 Feel free to support development (of course optionally) :)
