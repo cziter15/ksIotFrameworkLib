@@ -14,9 +14,6 @@
         "name": "Krzysztof Strehlau"
       }
     ],
-    "build" : {
-        "extraScript" : "unflag_nortti.py"
-    },
     "license": "MIT",
     "dependencies": {
       "tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
