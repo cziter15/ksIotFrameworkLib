@@ -17,7 +17,7 @@
 
 namespace ksf
 {
-	ksConfig::ksConfig(String configFile)
+	ksConfig::ksConfig(const String& configFile)
 	{
 		if (configFile.length() > 0)
 		{

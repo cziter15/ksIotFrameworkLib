@@ -30,7 +30,7 @@ namespace ksf
 				Constructor that opens specified file.
 				@param configFile - filename of config to open/create.
 			*/
-			ksConfig(String configFile);
+			ksConfig(const String& configFile);
 
 			/*
 				Sets specified parameter (in memory).
