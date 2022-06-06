@@ -28,4 +28,13 @@ namespace ksf
 		SPIFFS.begin();
 #endif
 	}
+
+	unsigned long long millis64() 
+	{
+		static unsigned long low32, high32;
+		unsigned long new_low32 = millis();
+		if (new_low32 < low32) high32++;
+		low32 = new_low32;
+		return (unsigned long long) high32 << 32 | low32;
+	}
 }

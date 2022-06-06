@@ -41,12 +41,6 @@ namespace ksf::comps
 
 	bool ksMqttDebugResponder::loop()
 	{
-		if (millis() - secondTimer > KSF_ONE_SECOND_MS)
-		{
-			secondTimer = millis();
-			applicationUptimeSeconds++;
-		}
-
 		return breakloop == false;
 	}
 
@@ -111,9 +105,10 @@ namespace ksf::comps
 			}
 			else if (message.equals("sysinfo"))
 			{
+				unsigned long uptimeSec = millis64() / 1000;
 				respond(
 					"Build hash: " + ESP.getSketchMD5() + ", " +
-					"App uptime: " + String(applicationUptimeSeconds) + " sec, " +
+					"Device uptime: " + String(uptimeSec) + " sec, " +
 					"Free fw space: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
 #ifdef ESP32

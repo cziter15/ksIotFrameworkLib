@@ -21,9 +21,6 @@ namespace ksf
 		class ksMqttDebugResponder : public ksf::ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
 		{
 			protected:
-				uint32_t secondTimer = 0;							//< Timestamp used to count seconds (ms).
-				uint32_t applicationUptimeSeconds = 0;				//< Application (component) uptime in seconds.
-
 				std::weak_ptr<ksMqttConnector> mqtt_wp;				//< Weak pointer to MQTT connector.
 				ksComposable* app = nullptr;						//< Raw pointer to ownning composable (app).
 

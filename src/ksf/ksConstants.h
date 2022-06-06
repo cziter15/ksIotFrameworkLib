@@ -63,4 +63,5 @@ namespace ksf
 {
 	/* Method that performs ksf framework initialization. Must be called as early as possible. */
 	extern void initKsfFramework();
+	extern unsigned long long millis64();
 }
