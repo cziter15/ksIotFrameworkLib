@@ -81,6 +81,7 @@ bool EnergyMonitor::init()
 RTTI is required to properly cast component types and so on. By default RTTI for ESP32/ESP8266 is disabled in Arduino framework.
 
 **If using platformio, simply add `build_unflags = -fno-rtti` line to your env configuration in platformio.ini file**
+
 Bare arduino projects need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
 
 ## Saving power
