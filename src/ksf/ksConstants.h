@@ -31,37 +31,49 @@
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
 
 /* Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait) */
-#define RUN_APP_BLOCKING_LOOPED_TIME(appClass, delayTime)	\
-{															\
-	appClass application;									\
-	if (application.init())									\
-	{														\
-		while(application.loop())							\
-		{													\
-			delay(delayTime);								\
-		}													\
-	}														\
+#define KSF_RUN_APP_BLOCKING_LOOPED_TIME(appClass, delayTime)	\
+{																\
+	appClass application;										\
+	if (application.init())										\
+	{															\
+		while(application.loop())								\
+		{														\
+			delay(delayTime);									\
+		}														\
+	}															\
 }
 
 /* Helper macro that handles app (appClass) initialization and calls loop method as frequent as possible (no-wait). */
-#define RUN_APP_BLOCKING_LOOPED_NODELAY(appClass)			\
-{															\
-	appClass application;									\
-	if (application.init())									\
-	{														\
-		while(application.loop())							\
-		{													\
-			yield();										\
-		}													\
-	}														\
+#define KSF_RUN_APP_BLOCKING_LOOPED_NODELAY(appClass)			\
+{																\
+	appClass application;										\
+	if (application.init())										\
+	{															\
+		while(application.loop())								\
+		{														\
+			yield();											\
+		}														\
+	}															\
 }
 
 /* Helper macro that handles app (appClass) initialization and calls loop method every one ms (wait) */
-#define RUN_APP_BLOCKING_LOOPED(appClass) RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
+#define KSF_RUN_APP_BLOCKING_LOOPED(appClass) KSF_RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
+
+/* Helper macro for init ks Framework. */
+#define KSF_FRAMEWORK_INIT() ksf::initKsfFramework();
 
 namespace ksf
 {
-	/* Method that performs ksf framework initialization. Must be called as early as possible. */
+	/*
+		Initializes ksIotFramework.
+	*/
 	extern void initKsfFramework();
+
+	/*
+		Retrieves device uptime in milliseconds (64 bit wide). This function uses standard millis() implementation but
+		handles roll-over, should be called at least two times in every 49.7 day window to work properly.
+
+		@return Milliseconds that have passed since device boot/restart.
+	*/
 	extern unsigned long long millis64();
 }
