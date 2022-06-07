@@ -70,9 +70,12 @@ namespace ksf
 	extern void initKsfFramework();
 
 	/*
-		Retrieves device uptime in milliseconds (64 bit wide). This function uses standard millis() implementation but
-		handles roll-over, should be called at least two times in every 49.7 day window to work properly.
+		Updates device uptime, handling millis() function rollover. Must be called at least two times per 49.7 days.
+	*/
+	extern void updateDeviceUptime();
 
+	/*
+		Retrieves device uptime in milliseconds (64 bit wide).
 		@return Milliseconds that have passed since device boot/restart.
 	*/
 	extern unsigned long long millis64();

@@ -18,6 +18,8 @@
 
 namespace ksf
 {
+	static unsigned long uptime_low32, uptime_high32;
+
 	void initKsfFramework()
 	{
 #ifdef ESP32
@@ -29,12 +31,15 @@ namespace ksf
 #endif
 	}
 
+	void updateDeviceUptime()
+	{
+		unsigned long new_low32 = millis();
+		if (new_low32 < uptime_low32) uptime_high32++;
+		uptime_low32 = new_low32;
+	}
+
 	unsigned long long millis64() 
 	{
-		static unsigned long low32, high32;
-		unsigned long new_low32 = millis();
-		if (new_low32 < low32) high32++;
-		low32 = new_low32;
-		return (unsigned long long) high32 << 32 | low32;
+		return (unsigned long long) uptime_high32 << 32 | uptime_low32;
 	}
 }

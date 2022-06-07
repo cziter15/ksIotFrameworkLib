@@ -79,8 +79,13 @@ namespace ksf::comps
 				config_file.setParam(param->getID(), param->getValue());
 		}
 
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wdelete-non-virtual-dtor"
+
 		for	(auto& param : params)
 			delete param;
+
+		#pragma GCC diagnostic pop
 
 		params.clear();
 	}

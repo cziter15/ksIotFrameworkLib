@@ -43,7 +43,7 @@ namespace ksf
 		}
 
 		/* This call will keep millis64 on track (handles rollover). */
-		millis64();
+		updateDeviceUptime();
 
 		return true;
 	}
