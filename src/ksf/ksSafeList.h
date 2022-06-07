@@ -2,7 +2,7 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *	
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
  * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
@@ -35,7 +35,7 @@ namespace ksf
 		public:
 			/*
 				Retrieves list reference.
-				@return - reference to vector of items (underlying list).
+				@return Reference to vector of items (underlying list).
 			*/
 			const std::vector<EntryType>& getList() const
 			{
@@ -44,7 +44,7 @@ namespace ksf
 
 			/*
 				Queues item to be added to the list at next synchronizeQueues call.
-				@param item - item reference.
+				@param item Item reference.
 			*/
 			void queueAdd(const EntryType& item)
 			{
@@ -53,7 +53,7 @@ namespace ksf
 
 			/*
 				Queues item to be removed from the list at next synchronizeQueues call.
-				@param item - item reference.
+				@param item Item reference.
 			*/
 			void queueRemove(const EntryType& item)
 			{

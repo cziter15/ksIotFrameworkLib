@@ -2,9 +2,9 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -19,13 +19,13 @@ namespace ksf
 		public:
 			/* 
 				Initializes application.
-				@return - true on success, false on fail (will break application initialization).
+				@return True on success, false on fail (will break application initialization).
 			*/
 			virtual bool init();
 
 			/* 
 				Called every application tick (see ksConstants). 
-				@return - true on success, false on fail (will break application execution).
+				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();
 	};

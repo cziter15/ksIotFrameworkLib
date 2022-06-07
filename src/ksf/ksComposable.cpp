@@ -1,8 +1,8 @@
 /*
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
- *
+ *	
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
  * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
@@ -17,11 +17,11 @@ namespace ksf
 		components.queueRemove(component);
 	}
 
-	void ksComposable::forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& functor)
+	void ksComposable::forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& function)
 	{
-		/* Simply iterateand call functor for each component. */
+		/* Simply iterate and call passed function for each component. */
 		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
-			if (functor(*it))
+			if (function(*it))
 				break;
 	}
 }

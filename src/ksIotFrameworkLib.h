@@ -1,4 +1,4 @@
-/*    
+/*
  *	Copyright (c) 2019-2022, Krzysztof Strehlau
  *	
  *	This file is part of the ksIotFramework library.
@@ -11,7 +11,7 @@
 #pragma once
 
 #ifndef __GXX_RTTI
-    #error RTTI support is required for ksIotFrameworkLib. Please edit your platformio.ini file or board.txt file to enable RTTI!
+	#error RTTI support is required for ksIotFrameworkLib. Please edit your platformio.ini file or board.txt file to enable RTTI!
 #endif
 
 #include "ksf/ksApplication.h"

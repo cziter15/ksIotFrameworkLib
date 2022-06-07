@@ -2,9 +2,9 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -17,8 +17,8 @@
  /*
 	 Defines user event. Usage: DECLARE_KS_EVENT( your_event_name, event parameters... ).
 
-	 @param evtName - event name to be generated inside class.
-	 @param params... - event parameters.
+	 @param evtName Event name to be generated inside class.
+	 @param params... Event parameters.
  */
 #define DECLARE_KS_EVENT(evtName, ...) \
 	std::shared_ptr<ksf::evt::ksEvent<__VA_ARGS__>> evtName = std::make_shared<ksf::evt::ksEvent<__VA_ARGS__>>();
@@ -31,13 +31,13 @@ namespace ksf
 		class ksEvent : public evt::ksEventBase
 		{
 			protected:
-				std::vector<std::pair<std::size_t, std::function<void(Params...)>>> callbacks;		//< List of bond callbacks.
-				std::size_t lastUid = 0;															//< Last unique callback ID for this event (used as counter).
+				std::vector<std::pair<std::size_t, std::function<void(Params...)>>> callbacks;		// List of bond callbacks.
+				std::size_t lastUid = 0;															// Last unique callback ID for this event (used as counter).
 
 			public:
 				/*
 					Queries if event has any bound callbacks.
-					@return - true if any callback is bound, false if no callback is bound.
+					@return True if any callback is bound, false if no callback is bound.
 				*/
 				bool hasAnyCallbacks() const
 				{
@@ -46,8 +46,9 @@ namespace ksf
 
 				/*
 					Registers event (binds to callback list).
-					@param outHandle - reference to outHandle shared ptr (will be set to shared_ptr of ksEventHandle, will unbind from the list on pointer destruction).
-					@param function - lvalue reference to callback function.
+
+					@param outHandle Reference to outHandle shared ptr (will be set to shared_ptr of ksEventHandle, will unbind from the list on pointer destruction).
+					@param function Lvalue reference to callback function.
 				*/
 				void registerEvent(std::shared_ptr<ksf::evt::ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 				{
@@ -59,7 +60,8 @@ namespace ksf
 				/*
 					Unbinds event callback by specified unique ID. This ID is automatically assigned
 					by registerEvent function and ksEventHandle uses it to unbind automatically upon destruction.
-					@param cbUid - unique id of the callback to unbind.
+
+					@param cbUid Unique id of the callback to unbind.
 				*/
 				void unbind(std::size_t cbUid) override
 				{
@@ -75,7 +77,7 @@ namespace ksf
 
 				/*
 					Broadcast event (calls all bound callbacks).
-					@param User defined parameters (va args).
+					@param args User defined parameters (va args).
 				*/
 				void broadcast(Params... params)
 				{

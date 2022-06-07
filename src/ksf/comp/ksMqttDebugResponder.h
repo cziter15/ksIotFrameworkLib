@@ -2,9 +2,9 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -21,13 +21,13 @@ namespace ksf
 		class ksMqttDebugResponder : public ksf::ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
 		{
 			protected:
-				std::weak_ptr<ksMqttConnector> mqtt_wp;				//< Weak pointer to MQTT connector.
-				ksComposable* app = nullptr;						//< Raw pointer to ownning composable (app).
+				std::weak_ptr<ksMqttConnector> mqtt_wp;					// Weak pointer to MQTT connector.
+				ksComposable* app = nullptr;							// Raw pointer to ownning composable (app).
 
-				std::shared_ptr<evt::ksEventHandle> connEventHandle;		//< Event handle for connection delegate.
-				std::shared_ptr<evt::ksEventHandle> msgEventHandle;		//< Event handle for message delegate.
+				std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
+				std::shared_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
 
-				bool breakloop = false;								//< Boolean (settable by command) to break execution from loop.
+				bool breakloop = false;									// Boolean (set by command) to break from app loop.
 
 				/*
 					Function called on MQTT connection.
@@ -35,15 +35,16 @@ namespace ksf
 				virtual void onConnected();
 
 				/*
-					Function called on MQTT message.
-					@param topic - topic of arrived message.
-					@param message - message/payload.
+					Function called on MQTT message arrival.
+
+					@param topic Topic of arrived message.
+					@param message Message/payload.
 				*/
 				virtual void onMessage(const String& topic, const String& message);
 
 				/*
 					Returns last known reset reason.
-					@return - string describing reset reason.
+					@return String with reset reason description.
 				*/
 				String getResetReason();
 
@@ -52,8 +53,9 @@ namespace ksf
 
 				/*
 					Initializes MQTT debug responder component.
-					@param owner - pointer to owning composable interface (application).
-					@return - true on success, false on fail.
+
+					@param owner Pointer to ownning ksComposable object (application).
+					@return True on success, false on fail.
 				*/
 				virtual bool init(class ksf::ksComposable* owner) override;
 
@@ -65,7 +67,7 @@ namespace ksf
 
 				/*
 					Handles MQTT debug connector component loop logic.
-					@return - true on success, false on fail.
+					@return True on success, false on fail.
 				*/
 				virtual bool loop() override;
 

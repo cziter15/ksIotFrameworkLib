@@ -1,10 +1,10 @@
 /*
- *	Copyright (c) 2019-2022, Krzysztof Strehlau
- *	
- *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	This file is part of the ksIotFramework library.
+ *	All licensing information can be found inside LICENSE.md file
+ *
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -22,7 +22,7 @@ namespace ksf
 	class ksComposable
 	{
 		protected:
-			ksSafeList<std::shared_ptr<ksComponent>> components;	//< An array with shared_ptr of components (holding main reference).
+			ksSafeList<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
 
 		public:
 			/*
@@ -43,7 +43,7 @@ namespace ksf
 				RTTI variant uses dynamic_pointer_cast, which will respect all C++ underlying mechanisms of pointer casting.
 				NON-RTTI variant simply compares individual type (static casting and direct type check, won't respect inheritance).
 
-				@param outComponents - vector of weak pointers to matching components, might be empty as well.
+				@param outComponents Vector of weak pointers to be filled with matching components, might be empty as well.
 			*/
 			template <class Type>
 			void findComponents(std::vector<std::weak_ptr<Type>>& outComponents)
@@ -59,8 +59,10 @@ namespace ksf
 			}
 
 			/*
-				Tries to find components by passed template type. See findComponents, as findComponent calls it directly and returns first element.
-				@return - weak pointer of component, might be invalid/expired (unable to lock to get shared ptr).
+				Tries to find components by passed template type. 
+				See findComponents, as findComponent calls it directly and returns first element.
+
+				@return Weak pointer of component, might be invalid/expired (unable to lock to get shared ptr).
 			*/
 			template <class Type>
 			std::weak_ptr<Type> findComponent()
@@ -72,14 +74,14 @@ namespace ksf
 
 			/*
 				Queues component to be removed. It will happen on queue synchronization (synchronizeQueues).
-				@param component - component to remove.
+				@param component Component to be removed.
 			*/
 			void queueRemoveComponent(const std::shared_ptr<ksComponent>& component);
 
 			/*
-				Executes a functor for each component.
-				@param functor - Function to execute.
+				Executes a function for each component.
+				@param function Function to be executed.
 			*/
-			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& functor);
+			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& function);
 	};
 }

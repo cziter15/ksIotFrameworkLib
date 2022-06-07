@@ -2,9 +2,9 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -18,23 +18,24 @@ namespace ksf
 		class ksLed : public ksf::ksComponent
 		{
 			protected:
-				uint8_t ledPin = 0;					//< Saved LED pin number.
+				uint8_t ledPin = 0;					// Saved LED pin number.
 
-				uint32_t lastBlinkTime = 0;			//< Last blink time (ms).
-				uint32_t blinkInterval = 0;			//< Current blink interval (ms)
-				uint32_t blinkLoops = 0;			//< Number of remaining loops.
+				uint32_t lastBlinkTime = 0;			// Last blink time (ms).
+				uint32_t blinkInterval = 0;			// Current blink interval (ms)
+				uint32_t blinkLoops = 0;			// Number of remaining loops.
 
 			public:
 				/*
-					Constructor, save passed pin.
-					@param pin - pin assigned to LED.
+					Constructs ksLed object, assigning passed pin number.
+					@param pin Pin assigned to LED.
 				*/
 				ksLed(uint8_t pin);
 
 				/*
 					Initializes ksLed component.
-					@param owner - Pointer to owner composable (application).
-					@return - true if init succedeed, otherwise false.
+					
+					@param owner Pointer to ownning ksComposable object (application).
+					@return True if init succedeed, otherwise false.
 				*/
 				bool init(class ksf::ksComposable* owner) override;
 
@@ -45,26 +46,27 @@ namespace ksf
 				bool loop() override;
 
 				/*
-					Used to setBlinking parameters.
-					@param interval - time in ms between LED state toggle (0 to disable blinking).
-					@param loops - number of loops (0 for infinite loop).
+					Used to set LED blink parameters.
+
+					@param interval Time in ms between LED state toggle (0 to disable blinking).
+					@param loops Number of loops (0 for infinite loop).
 				*/
 				virtual void setBlinking(uint32_t interval, uint32_t loops = 0);
 
 				/*
-					@return - true if LED is set up to blink, otherwise false.
+					@return True if LED is set up to blink, otherwise false.
 				*/
 				virtual bool isBlinking() const;
 
 				/*
 					Checks if LED is currently enabled.
-					@return - true if assigned LED pin is HIGH, otherwise falsse.
+					@return True if assigned LED pin is HIGH, otherwise false.
 				*/
 				virtual bool isEnabled() const;
 
 				/*
 					Sets LED enabled state.
-					@param enabled - true if LED should be enabled, otherwise false.
+					@param enabled True if LED should be enabled, otherwise false.
 				*/
 				virtual void setEnabled(bool enabled);
 

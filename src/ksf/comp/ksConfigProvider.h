@@ -2,9 +2,9 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -24,26 +24,27 @@ namespace ksf
 			public:
 				/*
 					Initializes config provider component.
-					@param owner - pointer to owning composable interface (application).
-					@return - true on success, false on fail.
+
+					@param owner Pointer to ownning ksComposable object (application).
+					@return True on success, false on fail.
 				*/
 				bool init(ksf::ksComposable* owner) override;
 
 				/*
 					Overridable method to inject WiFiManager parameters.
-					@param manager - WiFiManager reference.
+					@param manager WiFiManager reference.
 				*/
 				virtual void injectManagerParameters(WiFiManager& manager) = 0;
 
 				/*
 					Overridable method to capture WiFiManager parameters.
-					@param manager - WiFiManager reference.
+					@param manager WiFiManager reference.
 				*/
 				virtual void captureManagerParameters(WiFiManager& manager) = 0;
 
 				/*
 					Called from application loop.
-					@return - true on success, false on fail.
+					@return True on success, false on fail.
 				*/
 				bool loop() override;
 		};

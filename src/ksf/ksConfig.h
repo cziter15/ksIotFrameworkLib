@@ -2,9 +2,9 @@
  *	Copyright (c) 2021-2022, Krzysztof Strehlau
  *
  *	This file is part of the ksIotFramework library.
- *	All licensing information can be found inside  LICENSE.md file
+ *	All licensing information can be found inside LICENSE.md file
  *
- * 	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
 #pragma once
@@ -21,34 +21,36 @@ namespace ksf
 	class ksConfig
 	{
 		protected:
-			bool isDirty = false;						//< True if config params are modiffied and should be saved.
-			std::map<String, String> configParams;		//< Config parameters as key-value pair.
-			String configFilename;						//< Config filename.
+			bool isDirty = false;						// True if config params are modiffied and should be saved.
+			std::map<String, String> configParams;		// Config parameters as key-value pair.
+			String configFilename;						// Config filename.
 
 		public:
 			/* 
 				Constructor that opens specified file.
-				@param configFile - filename of config to open/create.
+				@param configFile Filename of config to open/create.
 			*/
 			ksConfig(const String& configFile);
 
 			/*
 				Sets specified parameter (in memory).
-				@param paramName - parameter name.
-				@param paramValue - parameter value.
+
+				@param paramName Pparameter name.
+				@param paramValue Parameter value.
 			*/
 			void setParam(const String& paramName, String paramValue);
 
 
 			/*
 				Retrieves specified parameter's value.
-				@param paramName - parameter name.
-				@param defaultValue - default value to return (if not found).
+
+				@param paramName Parameter name.
+				@param defaultValue Default value to return (if not found).
 			*/
 			const String& getParam(const String& paramName, const String& defaultValue = String()) const;
 
 			/*
-				Destructor that saves changes if isDirty flag is set to true.
+				Destructor that save changes if isDirty flag is set to true.
 			*/
 			virtual ~ksConfig();
 
