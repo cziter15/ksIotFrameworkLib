@@ -70,7 +70,7 @@ namespace ksf
 	extern void initKsfFramework();
 
 	/*
-		Updates device uptime, handling millis() function rollover. Must be called at least two times per 49.7 days.
+		Updates device uptime, handling millis() function rollover.
 	*/
 	extern void updateDeviceUptime();
 
