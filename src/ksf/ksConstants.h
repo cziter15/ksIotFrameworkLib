@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <inttypes.h>
+
 /* Simply ONE second in milliseconds. */
 #define KSF_ONE_SECOND_MS 1000UL
 
@@ -78,5 +80,5 @@ namespace ksf
 		Retrieves device uptime in milliseconds (64 bit wide).
 		@return Milliseconds that have passed since device boot/restart.
 	*/
-	extern unsigned long long millis64();
+	extern uint64_t millis64();
 }

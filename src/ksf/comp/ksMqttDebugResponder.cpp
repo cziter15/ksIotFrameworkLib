@@ -105,7 +105,7 @@ namespace ksf::comps
 			}
 			else if (message.equals("sysinfo"))
 			{
-				unsigned long uptimeSec = millis64() / 1000;
+				uint32_t uptimeSec = (uint32_t)(millis64() / 1000);
 				respond(
 					"Build hash: " + ESP.getSketchMD5() + ", " +
 					"Device uptime: " + String(uptimeSec) + " sec, " +

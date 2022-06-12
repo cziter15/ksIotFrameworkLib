@@ -18,7 +18,7 @@
 
 namespace ksf
 {
-	static unsigned long uptime_low32, uptime_high32;
+	static uint32_t uptime_low32, uptime_high32;
 
 	void initKsfFramework()
 	{
@@ -33,13 +33,13 @@ namespace ksf
 
 	void updateDeviceUptime()
 	{
-		unsigned long new_low32 = millis();
+		uint32_t new_low32 = millis();
 		if (new_low32 < uptime_low32) uptime_high32++;
 		uptime_low32 = new_low32;
 	}
 
-	unsigned long long millis64() 
+	uint64_t millis64() 
 	{
-		return (unsigned long long) uptime_high32 << 32 | uptime_low32;
+		return (uint64_t) uptime_high32 << 32 | uptime_low32;
 	}
 }

@@ -18,7 +18,7 @@ namespace ksf
 			friend class ksEventHandle;
 
 			protected:
-				virtual void unbind(size_t Index) = 0;
+				virtual void unbind(std::size_t Index) = 0;
 		};
 	}
 }
