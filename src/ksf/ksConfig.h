@@ -38,7 +38,7 @@ namespace ksf
 				@param paramName Pparameter name.
 				@param paramValue Parameter value.
 			*/
-			void setParam(const String& paramName, String paramValue);
+			void setParam(const String& paramName, const String& paramValue);
 
 
 			/*

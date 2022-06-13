@@ -42,7 +42,7 @@ namespace ksf
 		}
 	}
 
-	void ksConfig::setParam(const String& paramName, String paramValue)
+	void ksConfig::setParam(const String& paramName, const String& paramValue)
 	{
 		isDirty = true;
 		configParams[paramName] = paramValue;
