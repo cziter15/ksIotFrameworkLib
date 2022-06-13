@@ -9,7 +9,6 @@
 
 #include "ksConfigProvider.h"
 #include "../ksConfig.h"
-#include <WiFiManager.h>
 
 namespace ksf::comps
 {
