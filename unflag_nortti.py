@@ -1,7 +1,7 @@
 try:
 	Import("projenv", "env")
-
-	for e in (env, DefaultEnvironment(), projenv):
+	
+	for e in (env, projenv):
 		e.ProcessUnFlags("-fno-rtti")
 
 except BaseException as err:
