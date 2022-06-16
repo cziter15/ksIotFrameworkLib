@@ -1,8 +1,14 @@
 try:
 	Import("projenv", "env")
 	
-	for e in (env, projenv):
-		e.ProcessUnFlags("-fno-rtti")
+	global_env = DefaultEnvironment()
+	
+	for e in (env, global_env, projenv):
+		try:
+			e['CXXFLAGS'].remove("-fno-rtti")
+		except:
+			pass
+		e['CXXFLAGS'].append("-frtti")
 
 except BaseException as err:
 	print("\033[91m[ksIotFrameworkLib:] Error while trying unflag_nortti.py!\033[0m")
