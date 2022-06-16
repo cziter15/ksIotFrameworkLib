@@ -71,6 +71,12 @@ namespace ksf
 				virtual void setEnabled(bool enabled);
 
 				/*
+					PIN number getter.
+					@return PIN assigned to the LED.
+				*/
+				uint8_t getPin() const { return ledPin; }
+
+				/*
 					Destructor, disables LED and restores pin state.
 				*/
 				virtual ~ksLed();

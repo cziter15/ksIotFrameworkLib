@@ -51,6 +51,12 @@ namespace ksf
 				bool loop() override;
 
 				/*
+					PIN number getter.
+					@return PIN assigned to the reset button.
+				*/
+				uint8_t getPin() const { return buttonPin; }
+
+				/*
 					Destructs ksResetButton, restoring INPUT pin state.
 				*/
 				virtual ~ksResetButton();
