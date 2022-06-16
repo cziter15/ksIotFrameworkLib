@@ -1,13 +1,12 @@
 try:
 	Import("projenv", "env")
-
-	for e in (env, projenv):
+	
+	for e in (env, DefaultEnvironment(), projenv):
 		try:
-			e['CXXFLAGS'].remove("-fno-rtti")
+			e['CXXFLAGS'].append("-frtti")
 		except:
 			pass
-		e['CXXFLAGS'].append("-frtti")
-
+		
 except BaseException as err:
 	print("\033[91m[ksIotFrameworkLib:] Error while trying unflag_nortti.py!\033[0m")
 	print("\033[33m[ksIotFrameworkLib:] Are you on latest platformio dev?\033[0m")
