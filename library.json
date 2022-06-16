@@ -15,8 +15,7 @@
 			}
 		],
 		"build" : {
-				"unflags" : "-f-no-rtti",
-				"extraScript": "unflag_nortti.py"
+			"extraScript": "unflag_nortti.py"
 		},
 		"license": "MIT",
 		"dependencies": {
