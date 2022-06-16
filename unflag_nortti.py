@@ -1,9 +1,7 @@
 try:
 	Import("projenv", "env")
-	
-	global_env = DefaultEnvironment()
-	
-	for e in (env, global_env, projenv):
+
+	for e in (env, projenv):
 		try:
 			e['CXXFLAGS'].remove("-fno-rtti")
 		except:
