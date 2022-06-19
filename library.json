@@ -1,27 +1,27 @@
 {
-    "name": "ksIotFrameworkLib",
-    "version": "1.0.0",
-    "description": "Arduino based Library for ESP32/ESP8266 - composition oriented internet of things framework that provides easy to use architecture, handles device setup (wifi manager), network connectivity, MQTT telemetry protocol and more... ",
-    "keywords": "planet, happiness, people",
-    "repository":
-    {
-      "type": "git",
-      "url": "https://github.com/cziter15/ksIotFrameworkLib.git"
-    },
-    "authors":
-    [
-      {
-        "name": "Krzysztof Strehlau"
-      }
-    ],
-    "build" : {
-        "unflags" : "-f-no-rtti"
-    },
-    "license": "MIT",
-    "dependencies": {
-      "tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
-      "knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient"
-    },
-    "frameworks": "arduino",
-    "platforms": "esp32,esp8266"
-  }
+		"name": "ksIotFrameworkLib",
+		"version": "1.0.0",
+		"description": "Arduino based Library for ESP32/ESP8266 - composition oriented internet of things framework that provides easy to use architecture, handles device setup (wifi manager), network connectivity, MQTT telemetry protocol and more... ",
+		"keywords": "planet, happiness, people",
+		"repository":
+		{
+			"type": "git",
+			"url": "https://github.com/cziter15/ksIotFrameworkLib.git"
+		},
+		"authors":
+		[
+			{
+				"name": "Krzysztof Strehlau"
+			}
+		],
+		"build" : {
+				"extraScript" : "rtti_fix.py"
+		},
+		"license": "MIT",
+		"dependencies": {
+			"tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
+			"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient"
+		},
+		"frameworks": "arduino",
+		"platforms": "esp32,esp8266"
+	}
