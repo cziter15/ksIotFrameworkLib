@@ -72,7 +72,7 @@ namespace ksf::comps
 	{
 		uint32_t currentTime = millis();
 
-		if (!WiFi.isConnected())
+		if (!WiFi.localIP().isSet()) // todo: this can be probably optimized
 		{
 			if (currentTime - lastReconnectTryTime > KSF_WIFI_RECONNECT_TIME_MS)
 			{
