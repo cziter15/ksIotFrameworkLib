@@ -1,3 +1,7 @@
+#StopTheWar
+War is a non-sense, totally outdated, wrong-way of human beings. Help stop the war:
+https://community.platformio.org/t/platformio-is-a-ukrainian-project-please-help-us-stop-the-war/26330
+
 # ksIotFrameworkLib
 <p align="center">
   <img src="doc/header.jpg">
