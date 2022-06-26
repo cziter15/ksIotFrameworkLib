@@ -2,7 +2,7 @@
 I've recenly switched to PlatformIO as basic endpoint for this library and I'm super-happy with this. Amazing support, amazing epxierence! I really loved PlatformIO. PlatformIO is a Ukrainian project, so I've decided to say something...
 
 War is a non-sense (always, anytime), totally outdated, wrong-way of human beings... waste of our civilization (limited) time, waste of limited resources.
-This lib - ksIotFramework is polish project, please help our brave neighbours (UA) to stop this stupid war, totally unneceessary at this time. People should go to be united, not divided at this moment. Imperial times are the past, not the future, mister Putin. We need to be united, to save Earth.
+This lib - ksIotFramework is polish project, please help our brave neighbours (UA) to stop this stupid war, totally unneceessary at this time. People should go to be united, not divided at this moment. Imperial times are the past, not the future, mister Putin. We need to be united (no matter if you are from Russia, Poland, Ukraine, Estionia, USA or Bangladesh), to save the Earth.
 
 https://community.platformio.org/t/platformio-is-a-ukrainian-project-please-help-us-stop-the-war/26330
 
