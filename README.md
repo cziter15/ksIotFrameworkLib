@@ -1,6 +1,6 @@
 ## StopTheWar
 
-War is a non-sense, totally outdated, wrong-way of human beings... waste of our civilization (limited) time, waste of limited resources.
+War is a non-sense (always, anytime), totally outdated, wrong-way of human beings... waste of our civilization (limited) time, waste of limited resources.
 This lib - ksIotFramework is polish project, please help our brave neighbours (UA) to stop this stupid war, totally unneceessary at this time. People should going to be united, not divided at this moment. Imperial times are the past, not the future, mister Putin.
 
 https://community.platformio.org/t/platformio-is-a-ukrainian-project-please-help-us-stop-the-war/26330
