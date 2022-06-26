@@ -72,7 +72,7 @@ namespace ksf::comps
 	{
 		uint32_t currentTime = millis();
 
-		if (!WiFi.isConnected())
+		if (!isConnected())
 		{
 			if (currentTime - lastReconnectTryTime > KSF_WIFI_RECONNECT_TIME_MS)
 			{
@@ -91,5 +91,14 @@ namespace ksf::comps
 		}
 
 		return true;
+	}
+
+	bool ksWifiConnector::isConnected() const
+	{
+		#ifdef ESP32
+			return WiFi.isConnected();
+		#else
+			return WiFi.RSSI() != 31;
+		#endif
 	}
 }

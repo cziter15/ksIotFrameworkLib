@@ -10,16 +10,10 @@
 #include "../ksComposable.h"
 #include "../ksConstants.h"
 #include "../ksConfig.h"
+#include "ksWifiConnector.h"
 #include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"
 #include <PubSubClient.h>
-
-#ifdef ESP32
-#include <WiFi.h>
-#else
-#include <ESP8266WiFi.h>
-#endif
-
 #include <WiFiClientSecure.h>
 
 using namespace std::placeholders;
@@ -32,6 +26,8 @@ namespace ksf::comps
 
 		provider.init(owner);
 		provider.setupMqttConnector(*this);
+
+		wifiCon_wp = owner->findComponent<ksWifiConnector>();
 
 		return mqttClient != nullptr;
 	}
@@ -137,13 +133,16 @@ namespace ksf::comps
 		}
 		else if (millis() - lastTryReconnectTime > KSF_MQTT_RECONNECT_DELAY_MS)
 		{
-			if (WiFi.isConnected())
+			if (auto wifiCon_sp = wifiCon_wp.lock())
 			{
-				if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str()))
+				if (wifiCon_sp->isConnected())
 				{
-					++reconnectCounter;
-					wasConnected = true;
-					mqttConnectedInternal();
+					if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str()))
+					{
+						++reconnectCounter;
+						wasConnected = true;
+						mqttConnectedInternal();
+					}
 				}
 			}
 
@@ -155,9 +154,11 @@ namespace ksf::comps
 
 	bool ksMqttConnector::isConnected() const
 	{
-		if (!WiFi.isConnected() || !mqttClient)
-			return false;
-
-		return mqttClient->connected();
+		if (mqttClient)
+			if (auto wifiCon_sp = wifiCon_wp.lock())
+				if (wifiCon_sp->isConnected())
+					return mqttClient->connected();
+		
+		return false;
 	}
 }

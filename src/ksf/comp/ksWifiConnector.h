@@ -49,6 +49,12 @@ namespace ksf
 					@return True on success, false on fail.
 				*/
 				virtual bool loop() override;
+
+				/*
+					Returns connection state.
+					@return True if connected, false if not.
+				*/
+				virtual bool isConnected() const;
 		};
 	}
 }
