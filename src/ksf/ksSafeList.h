@@ -19,10 +19,22 @@ namespace ksf
 		friend class ksSafeListScopedSync;
 
 		protected:
+			/*
+				Constructs ksSafeList.
+			*/
 			ksSafeListInterface();
 
 		public:
+			/*
+				Unsafely (in context of the purpose) erases elements from underlying lists.
+				This method must not be called while iterating ksSafeList (for example it's forbidden to erase components in component loop).
+			*/
 			virtual void unsafeEraseAllQueues() = 0;
+
+			/*
+				This method 'synchronizes' underlying queues. Typically called after iteration to avoid manipulation of the list while iterating.
+				Under the hood, it iterates underlying list by looking for items to remove or add (two another underlying lists).
+			*/
 			virtual void synchronizeQueues() = 0;
 	};
 
@@ -61,7 +73,8 @@ namespace ksf
 			}
 
 			/*
-				Unsafely erases all queues (pendingAdd, pendingRemove and current list).
+				Unsafely (in context of the purpose) erases elements from underlying lists.
+				This method must not be called while iterating ksSafeList (for example it's forbidden to erase components in component loop).
 			*/
 			void unsafeEraseAllQueues() override
 			{
@@ -71,9 +84,8 @@ namespace ksf
 			}
 			
 			/*
-				Synchronizes underlying list with queues.
-				Adds items from pendingAdd list.
-				Removes item by using pendingRemove list.
+				This method 'synchronizes' underlying queues. Typically called after iteration to avoid manipulation of the list while iterating.
+				Under the hood, it iterates underlying list by looking for items to remove or add (two another underlying lists).
 			*/
 			void synchronizeQueues() override
 			{
@@ -105,10 +117,19 @@ namespace ksf
 	class ksSafeListScopedSync
 	{
 		protected:
-			ksSafeListInterface* listPtr;
+			ksSafeListInterface* listPtr;				// Unsafe list pointer (this class should be used only in small scopes!).
 		
 		public:
+			/* 
+				ksSafeListScopedSync constructor.
+				@param listRef Reference to ksSafeListInterface / ksSafeList (casted internally to a pointer).
+			*/
 			ksSafeListScopedSync(ksSafeListInterface& listRef);
+
+			/* 
+				ksSafeListScopedSync destructor.
+				Calls synchronizeQueues on passed list instance.
+			*/
 			~ksSafeListScopedSync();
 	};
 }
