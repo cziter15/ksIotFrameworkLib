@@ -20,9 +20,27 @@ namespace ksf
 			uint32_t lastTriggerTime = 0;
 
 		public:
+			/*
+				Constructs ksSimpleTimer.
+				@param intervalMs - Initial timer interval in milliseconds.
+			*/
 			ksSimpleTimer(uint32_t intervalMs);
+
+			/*
+				Sets new timer interval.
+				@param intervalMs - Initial timer interval in milliseconds.
+			*/
 			void setInterval(uint32_t intervalMs);
+
+			/*
+				Restarts the timer (sets last trigger time to current time w/o triggering the timer).
+			*/
 			void restart();
+
+			/*
+				Checks if timer interval just passed.
+				@return True if timer just triggered, otherwise false.
+			*/	
 			bool triggered();
 	};
 }
