@@ -62,8 +62,6 @@ namespace ksf::comps
 		#endif
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
-
-		lastReconnectTryTime = lastWifiCheckTime = millis();
 		
 		return true;
 	}
@@ -74,20 +72,15 @@ namespace ksf::comps
 
 		if (!isConnected())
 		{
-			if (currentTime - lastReconnectTryTime > KSF_WIFI_RECONNECT_TIME_MS)
-			{
+			if (wifiReconnectTimer.triggered())
 				WiFi.reconnect();
-				lastReconnectTryTime = currentTime;
-			}
-			else if (currentTime - lastWifiCheckTime > KSF_WIFI_TIMEOUT_MS)
-			{
-				lastWifiCheckTime = currentTime;
+			else if (wifiTimeoutTimer.triggered())
 				return false;
-			}
 		}
 		else 
 		{
-			lastReconnectTryTime = lastWifiCheckTime = currentTime;
+			wifiReconnectTimer.restart();
+			wifiTimeoutTimer.restart();
 		}
 
 		return true;

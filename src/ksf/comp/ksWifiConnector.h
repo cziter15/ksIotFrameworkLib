@@ -10,6 +10,7 @@
 #pragma once
 
 #include "../ksComponent.h"
+#include "../ksSimpleTimer.h"
 
 namespace ksf
 {
@@ -18,8 +19,8 @@ namespace ksf
 		class ksWifiConnector : public ksf::ksComponent
 		{
 			protected:
-				uint32_t lastWifiCheckTime = 0;			// Last WiFi connection check timestamp (ms since boot).
-				uint32_t lastReconnectTryTime = 0;		// Last WiFi reconnection timestamp (ms since boot).
+				ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				// Wifi timer - timeout.
+				ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		// Wifi timer - reconnect.
 
 				/*
 					Configures MAC address for devices using ksIotFrameworkLib.

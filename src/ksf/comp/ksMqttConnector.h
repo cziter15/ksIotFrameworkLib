@@ -11,6 +11,7 @@
 
 #include "../ksComponent.h"
 #include "../evt/ksEvent.h"
+#include "../ksSimpleTimer.h"
 
 class WiFiClient;
 class PubSubClient;
@@ -23,18 +24,19 @@ namespace ksf
 		class ksMqttConnector : public ksf::ksComponent
 		{
 			protected:
-				std::shared_ptr<WiFiClient> mqttWifiClient;		// Shared pointer to WiFiClient used to connect to MQTT.
-				std::shared_ptr<PubSubClient> mqttClient;		// Shared pointer to PubSubClient (MQTT client).
+				std::shared_ptr<WiFiClient> mqttWifiClient;						// Shared pointer to WiFiClient used to connect to MQTT.
+				std::shared_ptr<PubSubClient> mqttClient;						// Shared pointer to PubSubClient (MQTT client).
 
-				std::weak_ptr<ksWifiConnector> wifiCon_wp;		// Weak pointer to WiFi connector.
+				std::weak_ptr<ksWifiConnector> wifiCon_wp;						// Weak pointer to WiFi connector.
 
-				uint32_t lastConnectionTimeTick = 0;			// Last connection tick time (ms since boot).
-				uint32_t lastTryReconnectTime = 0;				// Last connection try time (ms since boot).
-				bool wasConnected = false;						// True if connected in previous loop.
+				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
+				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer used to reconnect MQTT.
 
-				String savedLogin;								// Saved MQTT login.
-				String savedPassword;							// Saved MQTT password.
-				String savedPrefix;								// Saved MQTT prefix.
+				bool wasConnected = false;										// True if connected in previous loop.
+
+				String savedLogin;												// Saved MQTT login.
+				String savedPassword;											// Saved MQTT password.
+				String savedPrefix;												// Saved MQTT prefix.
 
 				/*
 					Called on MQTT connected (internal function).

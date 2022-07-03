@@ -118,20 +118,19 @@ namespace ksf::comps
 	{
 		if (mqttClient->loop())
 		{
-			if (millis() - lastConnectionTimeTick > KSF_ONE_SECOND_MS)
+			if (oneSecTimer.triggered())
 			{
-				lastConnectionTimeTick = millis();
 				++connectionTimeSeconds;
 			}
 		}
 		else if (wasConnected)
 		{
 			connectionTimeSeconds = 0;
-			lastTryReconnectTime = millis();
+			reconnectTimer.restart();
 			wasConnected = false;
 			onDisconnected->broadcast();
 		}
-		else if (millis() - lastTryReconnectTime > KSF_MQTT_RECONNECT_DELAY_MS)
+		else if (reconnectTimer.triggered())
 		{
 			if (auto wifiCon_sp = wifiCon_wp.lock())
 			{
@@ -145,8 +144,6 @@ namespace ksf::comps
 					}
 				}
 			}
-
-			lastTryReconnectTime = millis();
 		}
 
 		return true;

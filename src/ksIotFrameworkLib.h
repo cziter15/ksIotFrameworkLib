@@ -15,6 +15,7 @@
 #endif
 
 #include "ksf/ksApplication.h"
+#include "ksf/ksSimpleTimer.h"
 #include "ksf/ksSafeList.h"
 #include "ksf/ksComponent.h"
 #include "ksf/ksComposable.h"
@@ -27,7 +28,6 @@
 #include "ksf/comp/ksMqttConfigProvider.h"
 #include "ksf/comp/ksMqttConnector.h"
 #include "ksf/comp/ksMqttDebugResponder.h"
-#include "ksf/comp/ksTimer.h"
 #include "ksf/comp/ksWiFiConfigurator.h"
 #include "ksf/comp/ksWifiConnector.h"
 #include <WiFiManager.h>
