@@ -43,19 +43,19 @@ namespace ksf
 					@param owner Pointer to ownning ksComposable object (application).
 					@return True if init succedeed, otherwise false.
 				*/
-				virtual bool init(class ksf::ksComposable* owner) override;
+				bool init(class ksf::ksComposable* owner) override;
 
 				/*
 					Handles WiFi connector component loop logic.
 					@return True on success, false on fail.
 				*/
-				virtual bool loop() override;
+				bool loop() override;
 
 				/*
 					Returns connection state.
 					@return True if connected, false if not.
 				*/
-				virtual bool isConnected() const;
+				bool isConnected() const;
 		};
 	}
 }

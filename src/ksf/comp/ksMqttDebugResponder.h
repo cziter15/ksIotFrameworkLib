@@ -32,7 +32,7 @@ namespace ksf
 				/*
 					Function called on MQTT connection.
 				*/
-				virtual void onConnected();
+				void onConnected();
 
 				/*
 					Function called on MQTT message arrival.
@@ -40,7 +40,7 @@ namespace ksf
 					@param topic Topic of arrived message.
 					@param message Message/payload.
 				*/
-				virtual void onMessage(const String& topic, const String& message);
+				void onMessage(const String& topic, const String& message);
 
 				/*
 					Returns last known reset reason.
@@ -57,19 +57,19 @@ namespace ksf
 					@param owner Pointer to ownning ksComposable object (application).
 					@return True on success, false on fail.
 				*/
-				virtual bool init(class ksf::ksComposable* owner) override;
+				bool init(class ksf::ksComposable* owner) override;
 
 				/*
 					Method called after component initialization.
 					Used to setup message callbacks.
 				*/
-				virtual void postInit() override;
+				void postInit() override;
 
 				/*
 					Handles MQTT debug connector component loop logic.
 					@return True on success, false on fail.
 				*/
-				virtual bool loop() override;
+				bool loop() override;
 
 				/*
 					Publishes response to command request.

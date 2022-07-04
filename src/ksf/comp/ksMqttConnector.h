@@ -29,6 +29,9 @@ namespace ksf
 
 				std::weak_ptr<ksWifiConnector> wifiCon_wp;						// Weak pointer to WiFi connector.
 
+				uint32_t connectionTimeSeconds = 0;								// MQTT connection time counter (in seconds).
+				uint32_t reconnectCounter = 0;									// MQTT reconnection counter.
+
 				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
 				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer used to reconnect MQTT.
 
@@ -42,7 +45,7 @@ namespace ksf
 					Called on MQTT connected (internal function).
 					Binds onMessage callback, calls bound onConnected callbacks, configures some parameters.
 				*/
-				virtual void mqttConnectedInternal();
+				void mqttConnectedInternal();
 
 				/*
 					Called on MQTT message arrival (internal function).
@@ -51,15 +54,12 @@ namespace ksf
 					@param payload Message payload.
 					@param length Payload length.
 				*/
-				virtual void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
+				void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
 
 			public:
 				DECLARE_KS_EVENT(onMesssage, const String&, const String&)		// onMesssage event that user can bind to.
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
-
-				uint32_t connectionTimeSeconds = 0;								// MQTT connection time counter (in seconds).
-				uint32_t reconnectCounter = 0;									// MQTT reconnection counter.
 
 				/*
 					Initializes MQTT connector component.
@@ -82,12 +82,24 @@ namespace ksf
 				bool isConnected() const;
 
 				/*
+					Retrieves connection time in seconds.
+					@return MQTT connection time in seconds.
+				*/
+				uint32_t getConnectionTimeSeconds() const { return connectionTimeSeconds; }
+
+				/*
+					Retrieves MQTT reconnect counter.
+					@return Number of MQTT reconnects.
+				*/
+				uint32_t getReconnectCounter() const { return reconnectCounter; }
+
+				/*
 					Subscribes to MQTT topic.
 
 					@param topic Topic to subscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
 				*/
-				virtual void subscribe(const String& topic, bool skipDevicePrefix = false);
+				void subscribe(const String& topic, bool skipDevicePrefix = false);
 
 				/*
 					Unsubscribes to MQTT topic.
@@ -95,7 +107,7 @@ namespace ksf
 					@param topic Topic to unsubscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
 				*/
-				virtual void unsubscribe(const String& topic, bool skipDevicePrefix = false);
+				void unsubscribe(const String& topic, bool skipDevicePrefix = false);
 
 				/*
 					Publishes payload to MQTT topic.
@@ -105,7 +117,7 @@ namespace ksf
 					@param retain True if this publish should be retained, otherwise false.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
 				*/
-				virtual void publish(const String& topic, const String& payload, bool retain = false, bool skipDevicePrefix = false);
+				void publish(const String& topic, const String& payload, bool retain = false, bool skipDevicePrefix = false);
 
 				/*
 					Configures MQTT connection parameters.
@@ -116,7 +128,7 @@ namespace ksf
 					@param password MQTT user password.
 					@param secure True if use SSL, otherwise false.
 				*/
-				virtual void setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure = false);
+				void setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure = false);
 		};
 	}
 }

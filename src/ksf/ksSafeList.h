@@ -130,6 +130,6 @@ namespace ksf
 				ksSafeListScopedSync destructor.
 				Calls synchronizeQueues on passed list instance.
 			*/
-			~ksSafeListScopedSync();
+			virtual ~ksSafeListScopedSync();
 	};
 }

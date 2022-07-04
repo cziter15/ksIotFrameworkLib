@@ -51,24 +51,24 @@ namespace ksf
 					@param interval Time in ms between LED state toggle (0 to disable blinking).
 					@param loops Number of loops (0 for infinite loop).
 				*/
-				virtual void setBlinking(uint32_t interval, uint32_t loops = 0);
+				void setBlinking(uint32_t intervalMs, uint32_t numLoops = 0);
 
 				/*
 					@return True if LED is set up to blink, otherwise false.
 				*/
-				virtual bool isBlinking() const;
+				bool isBlinking() const;
 
 				/*
 					Checks if LED is currently enabled.
 					@return True if assigned LED pin is HIGH, otherwise false.
 				*/
-				virtual bool isEnabled() const;
+				bool isEnabled() const;
 
 				/*
 					Sets LED enabled state.
 					@param enabled True if LED should be enabled, otherwise false.
 				*/
-				virtual void setEnabled(bool enabled);
+				void setEnabled(bool enabled);
 
 				/*
 					PIN number getter.

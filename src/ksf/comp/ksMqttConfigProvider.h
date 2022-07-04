@@ -50,7 +50,7 @@ namespace ksf
 					Configures MQTT connector from config provider.
 					@param connector ksMqttConnector reference.
 				*/
-				virtual void setupMqttConnector(ksMqttConnector& connector);
+				void setupMqttConnector(ksMqttConnector& connector);
 		};
 	}
 }

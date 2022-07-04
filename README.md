@@ -1,5 +1,5 @@
 ## StopTheWar
-I've recenly switched to PlatformIO as basic endpoint for this library and I'm super-happy with this. Amazing support, amazing epxierence! I really loved PlatformIO. PlatformIO is a Ukrainian project, so I've decided to link their message here...
+I've recently switched to PlatformIO as base endpoint for this library and I'm super-happy with this. Amazing support, amazing epxierence! I really loved PlatformIO. PlatformIO is a Ukrainian project, so I've decided to link their message here...
 
 https://community.platformio.org/t/platformio-is-a-ukrainian-project-please-help-us-stop-the-war/26330
 

@@ -28,7 +28,7 @@ namespace ksf
 					@param owner Pointer to ownning ksComposable object (application).
 					@return True on success, false on fail.
 				*/
-				bool init(ksf::ksComposable* owner) override;
+				virtual bool init(ksf::ksComposable* owner) override;
 
 				/*
 					Overridable method to inject WiFiManager parameters.
@@ -46,7 +46,7 @@ namespace ksf
 					Called from application loop.
 					@return True on success, false on fail.
 				*/
-				bool loop() override;
+				virtual bool loop() override;
 		};
 	}
 }

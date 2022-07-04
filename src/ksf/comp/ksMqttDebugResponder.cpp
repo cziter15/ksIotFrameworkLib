@@ -97,8 +97,8 @@ namespace ksf::comps
 				{
 					respond(
 						"IP: " + WiFi.localIP().toString() + ", " +
-						"CT: " + String(mqtt_sp->connectionTimeSeconds) + " s, " +
-						"RC: " + String(mqtt_sp->reconnectCounter) + ", " +
+						"CT: " + String(mqtt_sp->getConnectionTimeSeconds()) + " s, " +
+						"RC: " + String(mqtt_sp->getReconnectCounter()) + ", " +
 						"RSSI " + String(WiFi.RSSI()) + " dBm"
 					);
 				}
