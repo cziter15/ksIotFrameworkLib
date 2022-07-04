@@ -68,8 +68,6 @@ namespace ksf::comps
 
 	bool ksWifiConnector::loop()
 	{
-		uint32_t currentTime = millis();
-
 		if (!isConnected())
 		{
 			if (wifiReconnectTimer.triggered())
