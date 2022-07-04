@@ -45,12 +45,12 @@ namespace ksf::comps
 		return digitalRead(ledPin) == HIGH;
 	}
 
-	void ksLed::setBlinking(uint32_t interval, uint32_t loops)
+	void ksLed::setBlinking(uint32_t intervalMs, uint32_t numLoops)
 	{
-		setEnabled(interval > 0);
-		blinkInterval = interval;
+		setEnabled(intervalMs > 0);
+		blinkInterval = intervalMs;
 		lastBlinkTime = millis();
-		blinkLoops = loops;
+		blinkLoops = numLoops;
 	}
 
 	bool ksLed::isBlinking() const
