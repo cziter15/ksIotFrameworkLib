@@ -1,8 +1,5 @@
 ## StopTheWar
-I've recenly switched to PlatformIO as basic endpoint for this library and I'm super-happy with this. Amazing support, amazing epxierence! I really loved PlatformIO. PlatformIO is a Ukrainian project, so I've decided to say something...
-
-War is a non-sense (always, anytime), totally outdated, wrong-way of human beings... waste of our civilization (limited) time, waste of limited resources.
-This lib - ksIotFramework is polish project, please help our brave neighbours (UA) to stop this stupid war, totally unneceessary at this time. People should go to be united, not divided at this moment. Imperial times are the past, not the future, mister Putin. We need to be united (no matter if you are from Russia, Poland, Ukraine, Estionia, USA or Bangladesh), to save the Earth.
+I've recenly switched to PlatformIO as basic endpoint for this library and I'm super-happy with this. Amazing support, amazing epxierence! I really loved PlatformIO. PlatformIO is a Ukrainian project, so I've decided to link their message here...
 
 https://community.platformio.org/t/platformio-is-a-ukrainian-project-please-help-us-stop-the-war/26330
 
@@ -32,6 +29,7 @@ The aim of this project is to provide simple kick-start application pattern for 
 | Utility  | Function |
 | ------------- | ------------- |
 | ksEvent  | Provides simple event broadcasting system. Used for MQTT events etc. |
+| ksSimpleTimer  | Very simple "timer" mechanism. In triggered() method calculates and check if specified interval just passed. |
 | ksSafeList  | Safe list in context of manipulating items while iterating them. Contains three underlying queues - pending to add, pending to remove and actual item list. Call **queueAdd** or **queueRemove** while iterating and then call **synchronizeQueues**. Component system relies on this mechanism. |
 
 ## Components
@@ -43,7 +41,6 @@ The aim of this project is to provide simple kick-start application pattern for 
 | ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix etc..). |
 | ksMqttConnector  | Used to maintain connection with Mqtt, user can bind to onMessage, onConnected events. |
 | ksMqttDebugResponder  | Provides debug commands for app with ksMqttConnector component. |
-| ksTimer  | Easy timer component with multiple events support. |
 | ksWiFiConfigurator | Base WiFi configurator component, brings WiFi management portal, allow config providers to inject and capture parameters. |
 | ksWiFiConnector | Handles WiFi connection. |
 
