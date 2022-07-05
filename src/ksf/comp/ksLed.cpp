@@ -13,7 +13,8 @@
 
 namespace ksf::comps
 {
-	ksLed::ksLed(uint8_t pin) : ledPin(pin)
+	ksLed::ksLed(uint8_t pin) 
+		: ledPin(pin)
 	{}
 
 	bool ksLed::init(ksf::ksComposable* owner)

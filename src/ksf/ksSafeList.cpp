@@ -11,7 +11,8 @@
 
 namespace ksf 
 {
-	ksSafeListInterface::ksSafeListInterface() {}
+	ksSafeListInterface::ksSafeListInterface() 
+	{}
 	
 	ksSafeListScopedSync::ksSafeListScopedSync(ksSafeListInterface& listRef)
 	{

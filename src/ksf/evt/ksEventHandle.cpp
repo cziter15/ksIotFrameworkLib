@@ -12,8 +12,8 @@
 
 namespace ksf::evt
 {
-	ksEventHandle::ksEventHandle(const std::weak_ptr<ksEventBase>& evtbase_wp, std::size_t uid) :
-		cb_evtbase_wp(evtbase_wp), cb_uid(uid)
+	ksEventHandle::ksEventHandle(const std::weak_ptr<ksEventBase>& evtbase_wp, std::size_t uid) 
+		: cb_evtbase_wp(evtbase_wp), cb_uid(uid)
 	{}
 
 	ksEventHandle::~ksEventHandle()
