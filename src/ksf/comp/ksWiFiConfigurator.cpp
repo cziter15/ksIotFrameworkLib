@@ -20,11 +20,11 @@ namespace ksf::comps
 	{
 		deviceName += '-';
 
-#ifdef ESP32
-		deviceName += (uint32_t)ESP.getEfuseMac();
-#else
-		deviceName += ESP.getChipId();
-#endif
+		#ifdef ESP32
+			deviceName += (uint32_t)ESP.getEfuseMac();
+		#else
+			deviceName += ESP.getChipId();
+		#endif
 	}
 
 	bool ksWiFiConfigurator::init(ksf::ksComposable* owner)
