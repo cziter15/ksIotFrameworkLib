@@ -12,11 +12,11 @@
 #include "Arduino.h"
 
 #ifdef ESP32
-#include <SPIFFS.h>
-#include <WiFi.h>
+	#include <SPIFFS.h>
+	#include <WiFi.h>
 #else
-#include <FS.h>
-#include <ESP8266WiFi.h>
+	#include <FS.h>
+	#include <ESP8266WiFi.h>
 #endif
 
 #include <Esp.h>

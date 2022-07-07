@@ -13,9 +13,9 @@
 #include "../ksConstants.h"
 
 #ifdef ESP32
-#include <WiFi.h>
+	#include <WiFi.h>
 #else
-#include <ESP8266WiFi.h>
+	#include <ESP8266WiFi.h>
 #endif
 
 using namespace std::placeholders;
@@ -58,33 +58,33 @@ namespace ksf::comps
 
 	String ksMqttDebugResponder::getResetReason()
 	{
-#ifdef ESP32
-		switch (esp_reset_reason())
-		{
-			case ESP_RST_POWERON:
-				return String("Power On");
-			case ESP_RST_SW:
-				return String("Software/System restart");
-			case ESP_RST_PANIC:
-				return String("Exception");
-			case ESP_RST_INT_WDT:
-				return String("Watchdog (interrupt)");
-			case ESP_RST_TASK_WDT:
-				return String("Watchdog (task)");
-			case ESP_RST_WDT:
-				return String("Watchdog (other)");
-			case ESP_RST_DEEPSLEEP:
-				return String("Deep-Sleep Wake");
-			case ESP_RST_BROWNOUT:
-				return String("Brownout");
-			case ESP_RST_SDIO:
-				return String("SDIO");
-			default:
-				return String("Unknown");
-		}
-#else
-		return ESP.getResetReason();
-#endif
+		#ifdef ESP32
+			switch (esp_reset_reason())
+			{
+				case ESP_RST_POWERON:
+					return String("Power On");
+				case ESP_RST_SW:
+					return String("Software/System restart");
+				case ESP_RST_PANIC:
+					return String("Exception");
+				case ESP_RST_INT_WDT:
+					return String("Watchdog (interrupt)");
+				case ESP_RST_TASK_WDT:
+					return String("Watchdog (task)");
+				case ESP_RST_WDT:
+					return String("Watchdog (other)");
+				case ESP_RST_DEEPSLEEP:
+					return String("Deep-Sleep Wake");
+				case ESP_RST_BROWNOUT:
+					return String("Brownout");
+				case ESP_RST_SDIO:
+					return String("SDIO");
+				default:
+					return String("Unknown");
+			}
+		#else
+			return ESP.getResetReason();
+		#endif
 	}
 
 	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
@@ -111,10 +111,10 @@ namespace ksf::comps
 					"Device uptime: " + String(uptimeSec) + " sec, " +
 					"Free fw space: " + String(ESP.getFreeSketchSpace()) + " b, " +
 					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
-#ifdef ESP32
-					"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
-					"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
-#endif
+					#ifdef ESP32
+						"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
+						"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
+					#endif
 					"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz, "
 					"Reset reason: " + getResetReason()
 				);
