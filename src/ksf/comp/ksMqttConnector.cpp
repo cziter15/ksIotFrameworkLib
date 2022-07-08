@@ -32,6 +32,10 @@ namespace ksf::comps
 		return mqttClient != nullptr;
 	}
 
+	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus)
+		: useConnectionStatusTopic(sendConnectionStatus)
+	{}
+
 	void ksMqttConnector::setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure)
 	{
 		mqttWifiClient = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
@@ -114,14 +118,30 @@ namespace ksf::comps
 			mqttClient->publish(String(savedPrefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 	}
 
+	bool ksMqttConnector::connectToBroker()
+	{
+		if (useConnectionStatusTopic)
+		{
+			String willTopic{savedPrefix + "connected"};
+			
+			if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str(), willTopic.c_str(), 0, true, "0"))
+			{
+				mqttClient->publish(willTopic.c_str(), (const uint8_t*)"1", 1, true);
+				return true;
+			}
+
+			return false;
+		}
+
+		return mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str());
+	}
+
 	bool ksMqttConnector::loop()
 	{
 		if (mqttClient->loop())
 		{
 			if (oneSecTimer.triggered())
-			{
 				++connectionTimeSeconds;
-			}
 		}
 		else if (wasConnected)
 		{
@@ -134,14 +154,12 @@ namespace ksf::comps
 		{
 			if (auto wifiCon_sp = wifiCon_wp.lock())
 			{
-				if (wifiCon_sp->isConnected())
+				if (wifiCon_sp->isConnected() && connectToBroker())
 				{
-					if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str()))
-					{
-						++reconnectCounter;
-						wasConnected = true;
-						mqttConnectedInternal();
-					}
+					oneSecTimer.restart();
+					++reconnectCounter;
+					wasConnected = true;
+					mqttConnectedInternal();
 				}
 			}
 		}

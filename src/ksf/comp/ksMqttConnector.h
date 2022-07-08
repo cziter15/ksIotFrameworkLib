@@ -31,6 +31,7 @@ namespace ksf
 
 				uint32_t connectionTimeSeconds = 0;								// MQTT connection time counter (in seconds).
 				uint32_t reconnectCounter = 0;									// MQTT reconnection counter.
+				bool useConnectionStatusTopic = true;							// Connection status topic.
 
 				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
 				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer used to reconnect MQTT.
@@ -40,6 +41,11 @@ namespace ksf
 				String savedLogin;												// Saved MQTT login.
 				String savedPassword;											// Saved MQTT password.
 				String savedPrefix;												// Saved MQTT prefix.
+
+				/*
+					Called to connect to broker.
+				*/
+				bool connectToBroker();
 
 				/*
 					Called on MQTT connected (internal function).
@@ -60,6 +66,8 @@ namespace ksf
 				DECLARE_KS_EVENT(onMesssage, const String&, const String&)		// onMesssage event that user can bind to.
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
+
+				ksMqttConnector(bool sendConnectionStatus = true);
 
 				/*
 					Initializes MQTT connector component.
