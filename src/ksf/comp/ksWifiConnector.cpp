@@ -86,10 +86,6 @@ namespace ksf::comps
 
 	bool ksWifiConnector::isConnected() const
 	{
-		#ifdef ESP32
-			return WiFi.isConnected();
-		#else
-			return WiFi.RSSI() != 31;
-		#endif
+		return WiFi.isConnected();
 	}
 }
