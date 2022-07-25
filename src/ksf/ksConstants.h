@@ -62,14 +62,14 @@
 #define KSF_RUN_APP_BLOCKING_LOOPED(appClass) KSF_RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
 
 /* Helper macro for init ks Framework. */
-#define KSF_FRAMEWORK_INIT() ksf::initKsfFramework();
+#define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
 namespace ksf
 {
 	/*
 		Initializes ksIotFramework.
 	*/
-	extern void initKsfFramework();
+	extern void initializeFramework();
 
 	/*
 		Updates device uptime, handling millis() function rollover.

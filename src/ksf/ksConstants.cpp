@@ -19,7 +19,7 @@ namespace ksf
 {
 	static uint32_t uptime_low32, uptime_high32;
 
-	void initKsfFramework()
+	void initializeFramework()
 	{
 		#ifdef ESP32
 			/* Initialize filesystem. */
