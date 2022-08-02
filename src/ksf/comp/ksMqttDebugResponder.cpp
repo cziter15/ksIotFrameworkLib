@@ -130,6 +130,38 @@ namespace ksf::comps
 				delay(500);
 				ESP.restart();
 			}
+			else if (message.equals("rfcalib"))
+			{
+				respond("Erasing RF CAL data, please wait...");
+				delay(500);
+				
+				#ifdef ESP32
+					esp_phy_erase_cal_data_in_nvs();
+				#else
+					flash_size_map size_map = system_get_flash_size_map();
+					uint32 rf_cal_sec{0};
+
+					switch (size_map) 
+					{
+						case FLASH_SIZE_4M_MAP_256_256: 	rf_cal_sec = 128 - 5;	break;
+						case FLASH_SIZE_8M_MAP_512_512: 	rf_cal_sec = 256 - 5; 	break;
+						case FLASH_SIZE_16M_MAP_512_512: 	rf_cal_sec = 512 - 5;	break;
+						case FLASH_SIZE_16M_MAP_1024_1024:	rf_cal_sec = 512 - 5;	break;
+						case FLASH_SIZE_32M_MAP_512_512:	rf_cal_sec = 1024 - 5;	break;
+						case FLASH_SIZE_32M_MAP_1024_1024:	rf_cal_sec = 1024 - 5;	break;
+						case FLASH_SIZE_64M_MAP_1024_1024:	rf_cal_sec = 2048 - 5;	break;
+						case FLASH_SIZE_128M_MAP_1024_1024:	rf_cal_sec = 4096 - 5;	break;
+						default: break;
+					}
+				
+					ESP.flashEraseSector(rf_cal_sec);
+				#endif
+
+				respond("Erasing RF CAL done, restarting. It may take few seconds.");
+				delay(500);
+
+				ESP.restart();
+			}
 			else if (message.equals("break_app"))
 			{
 				breakloop = true;
