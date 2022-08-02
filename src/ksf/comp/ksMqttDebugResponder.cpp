@@ -14,6 +14,7 @@
 
 #ifdef ESP32
 	#include <WiFi.h>
+	#include <esp_phy_init.h>
 #else
 	#include <ESP8266WiFi.h>
 #endif
