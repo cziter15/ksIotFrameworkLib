@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <vector>
+#include <list>
 #include <algorithm>
 
 namespace ksf 
@@ -42,14 +42,14 @@ namespace ksf
 	class ksSafeList : public ksSafeListInterface
 	{
 		protected:
-			std::vector<EntryType> list, pendingAdd, pendingRemove;
+			std::list<EntryType> list, pendingAdd, pendingRemove;
 
 		public:
 			/*
 				Retrieves list reference.
 				@return Reference to vector of items (underlying list).
 			*/
-			const std::vector<EntryType>& getList() const
+			const std::list<EntryType>& getList() const
 			{
 				return list;
 			}
@@ -97,15 +97,11 @@ namespace ksf
 
 				if (!pendingRemove.empty())
 				{
-					std::vector< EntryType > remainingItems;
-
-					for (auto& item : list)
+					list.remove_if([&](const EntryType& item) -> bool
 					{
-						if (std::find(pendingRemove.begin(), pendingRemove.end(), item) == pendingRemove.end())
-							remainingItems.push_back(item);
-					}
+						return std::find(pendingRemove.begin(), pendingRemove.end(), item) != pendingRemove.end();
+					});
 
-					list = std::move(remainingItems);
 					pendingRemove.clear();
 				}
 			}
