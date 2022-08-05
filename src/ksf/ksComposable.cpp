@@ -17,11 +17,13 @@ namespace ksf
 		components.queueRemove(component);
 	}
 
-	void ksComposable::forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& function)
+	bool ksComposable::forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>&& function)
 	{
 		/* Simply iterate and call passed function for each component. */
 		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
-			if (function(*it))
-				break;
+			if (!function(*it)) // If predicate returned false, stop iterating.
+				return false;
+
+		return true;
 	}
 }

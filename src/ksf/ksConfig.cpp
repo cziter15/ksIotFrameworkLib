@@ -22,7 +22,7 @@ namespace ksf
 		if (configFile.length() > 0)
 		{
 			configFilename = configFile.charAt(0) != '/' ? "/" + configFile : configFile;
-			File fileReader = SPIFFS.open(configFilename.c_str(), "r");
+			auto fileReader = SPIFFS.open(configFilename.c_str(), "r");
 
 			while (fileReader.available())
 			{
@@ -61,7 +61,7 @@ namespace ksf
 	{
 		if (isDirty)
 		{
-			File fileWriter = SPIFFS.open(configFilename.c_str(), "w");
+			auto fileWriter = SPIFFS.open(configFilename.c_str(), "w");
 
 			for (auto& entry : configParams)
 			{

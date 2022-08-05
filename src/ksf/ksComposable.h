@@ -32,7 +32,7 @@ namespace ksf
 			template <class Type, class... Params>
 			std::weak_ptr<Type> addComponent(Params... arg)
 			{
-				std::shared_ptr<Type> ptr = std::make_shared<Type>(arg...);
+				auto ptr = std::make_shared<Type>(arg...);
 				components.queueAdd(ptr);
 				return std::weak_ptr<Type>(ptr);
 			}
@@ -50,7 +50,7 @@ namespace ksf
 			{
 				outComponents.clear();
 
-				for (auto& comp : components.getList())
+				for (const auto& comp : components.getList())
 				{
 					std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
 					if (!castedComp_wp.expired())
@@ -79,9 +79,11 @@ namespace ksf
 			void queueRemoveComponent(const std::shared_ptr<ksComponent>& component);
 
 			/*
-				Executes a function for each component.
-				@param function Function to be executed.
+				Executes a function on each component.
+				
+				@param function Function to be executed. Should return true to continue iteration.
+				@return True if successfully iterated through all components, otherwise false.
 			*/
-			void forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>& function);
+			bool forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>&& function);
 	};
 }

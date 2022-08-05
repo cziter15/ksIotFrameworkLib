@@ -18,28 +18,23 @@ namespace ksf
 		components.synchronizeQueues();
 
 		/* Run initialization */
-		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
-			if (!(*it)->init(this))
-				return false;
+		if (!forEachComponent([&](const auto& comp) -> bool { return comp->init(this); }))
+			return false;
 
 		/* Run post-init event for components. */
-		for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
-			(*it)->postInit();
-
-		return true;
+		return forEachComponent([&](const auto& comp) -> bool {
+			comp->postInit(); 
+			return true;
+		});
 	}
 
 	bool ksApplication::loop()
 	{
+		/* Loop through all components and synchronize list at end of scope. */
 		{
-			/* Loop through all components and synchronize list at end of scope. */
 			ksf::ksSafeListScopedSync scoped(components);
-
-			for (auto& comp : components.getList())
-			{
-				if (!comp->loop())
-					return false;
-			}
+			if (!forEachComponent([&](const auto& comp) -> bool { return comp->loop(); } ))
+				return false;
 		}
 
 		/* This call will keep millis64 on track (handles rollover). */
