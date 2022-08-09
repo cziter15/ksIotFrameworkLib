@@ -11,7 +11,7 @@
 		{"name": "Krzysztof Strehlau"}
 	],
 	"build": {
-		"extraScript": "rtti_fix.py"
+		"extraScript": "pio-scripts/extraScript.py"
 	},
 	"license": "MIT",
 	"dependencies": {
