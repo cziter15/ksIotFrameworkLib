@@ -84,6 +84,15 @@ namespace ksf
 				@param function Function to be executed. Should return true to continue iteration.
 				@return True if successfully iterated through all components, otherwise false.
 			*/
-			bool forEachComponent(std::function<bool(const std::shared_ptr<ksComponent>&)>&& function);
+			template <typename _Predicate>
+			bool forEachComponent(_Predicate function)
+			{
+				/* Simply iterate and call passed function for each component. */
+				for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
+					if (!function(*it)) // If predicate returned false, stop iterating.
+						return false;
+
+				return true;
+			}
 	};
 }

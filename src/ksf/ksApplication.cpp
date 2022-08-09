@@ -18,11 +18,11 @@ namespace ksf
 		components.synchronizeQueues();
 
 		/* Run initialization */
-		if (!forEachComponent([&](const std::shared_ptr<ksComponent>& comp) -> bool { return comp->init(this); }))
+		if (!forEachComponent([&](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); }))
 			return false;
 
 		/* Run post-init event for components. */
-		return forEachComponent([&](const std::shared_ptr<ksComponent>& comp) -> bool {
+		return forEachComponent([](const std::shared_ptr<ksComponent>& comp) {
 			comp->postInit(); 
 			return true;
 		});
@@ -33,7 +33,7 @@ namespace ksf
 		/* Loop through all components and synchronize list at end of scope. */
 		{
 			ksf::ksSafeListScopedSync scoped(components);
-			if (!forEachComponent([&](const std::shared_ptr<ksComponent>& comp) -> bool { return comp->loop(); } ))
+			if (!forEachComponent([](const std::shared_ptr<ksComponent>& comp) { return comp->loop(); } ))
 				return false;
 		}
 
