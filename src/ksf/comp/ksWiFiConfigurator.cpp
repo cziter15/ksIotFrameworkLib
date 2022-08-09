@@ -39,10 +39,8 @@ namespace ksf::comps
 		parent->findComponents<ksLed>(ledComps_wp);
 
 		for (auto& ledComp_wp : ledComps_wp)
-		{
 			if (auto ledComp_sp = ledComp_wp.lock())
 				ledComp_sp->setEnabled(true);
-		}
 	}
 
 	bool ksWiFiConfigurator::loop()
@@ -53,17 +51,15 @@ namespace ksf::comps
 		std::vector<std::weak_ptr<ksConfigProvider>> configComps_wp;
 		parent->findComponents<ksConfigProvider>(configComps_wp);
 
-		for (auto& configComp_wp : configComps_wp) {
+		for (auto& configComp_wp : configComps_wp)
 			if (auto configComp_sp = configComp_wp.lock())
 				configComp_sp->injectManagerParameters(manager);
-		}
 
 		manager.startConfigPortal(deviceName.c_str());
 
-		for (auto& configComp_wp : configComps_wp) {
+		for (auto& configComp_wp : configComps_wp)
 			if (auto configComp_sp = configComp_wp.lock())
 				configComp_sp->captureManagerParameters(manager);
-		}
 
 		return false;
 	}
