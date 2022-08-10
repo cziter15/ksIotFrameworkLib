@@ -25,6 +25,16 @@ namespace ksf
 		{
 			protected:
 				std::vector<std::unique_ptr<WiFiManagerParameter>> params;
+
+				/*
+					Adds new param to WiFiManager configuration process.
+					This method should be called only from injectManagerParameters function.
+
+					@param manager WiFiManager reference.
+					@param label Label and ID to identify parameter.
+					@param defaultValue Default value (visible as hint for the user).
+					@param maxLength Maximum string length.
+				*/
 				void addNewParam(WiFiManager& manager, const char* label, const char* defaultValue, int maxLength = 50);
 
 			public:
