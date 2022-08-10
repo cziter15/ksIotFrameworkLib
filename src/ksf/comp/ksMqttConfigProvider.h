@@ -31,8 +31,6 @@ namespace ksf
 				static const char ksfPasswordParamName[];				// Static char-string "password"
 				static const char ksfPrefixParamName[];					// Static char-string "prefix"
 
-				std::vector<class WiFiManagerParameter*> params;		// Vector of WiFiManagerParameter pointers.
-
 			public:
 				/*
 					Injects MQTT config provider's WiFiManager parameters.

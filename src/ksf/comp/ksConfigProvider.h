@@ -10,9 +10,11 @@
 #pragma once
 
 #include "../ksComponent.h"
+#include <memory>
 #include <vector>
 
 class WiFiManager;
+class WiFiManagerParameter;
 
 namespace ksf
 {
@@ -21,6 +23,10 @@ namespace ksf
 		class ksComposable;
 		class ksConfigProvider : public ksf::ksComponent
 		{
+			protected:
+				std::vector<std::unique_ptr<WiFiManagerParameter>> params;
+				void addNewParam(WiFiManager& manager, const char* label, const char* defaultValue, int maxLength = 50);
+
 			public:
 				/*
 					Initializes config provider component.

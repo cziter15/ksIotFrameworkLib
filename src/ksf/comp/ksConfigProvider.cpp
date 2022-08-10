@@ -9,6 +9,7 @@
 
 #include "ksConfigProvider.h"
 #include "../ksConfig.h"
+#include "WiFiManager.h"
 
 namespace ksf::comps
 {
@@ -20,5 +21,11 @@ namespace ksf::comps
 	bool ksConfigProvider::loop()
 	{
 		return true;
+	}
+
+	void ksConfigProvider::addNewParam(WiFiManager& manager, const char* label, const char* defaultValue, int maxLength)
+	{
+		auto& param = params.emplace_back(std::make_unique<WiFiManagerParameter>(label, label, defaultValue, maxLength));
+		manager.addParameter(param.get());
 	}
 }

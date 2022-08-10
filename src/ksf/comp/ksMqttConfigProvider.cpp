@@ -54,20 +54,12 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(ksfMqttConfigFile)
 		{
-			params.push_back(new WiFiManagerParameter(ksfBrokerParamName, ksfBrokerParamName, config_file.getParam(ksfBrokerParamName, "").c_str(), 50));
-			manager.addParameter(params.back());
-
-			params.push_back(new WiFiManagerParameter(ksfPortParamName, ksfPortParamName, config_file.getParam(ksfPortParamName, ksfDefPort).c_str(), 5));
-			manager.addParameter(params.back());
-
-			params.push_back(new WiFiManagerParameter(ksfUserParamName, ksfUserParamName, config_file.getParam(ksfUserParamName, "").c_str(), 25));
-			manager.addParameter(params.back());
-
-			params.push_back(new WiFiManagerParameter(ksfPasswordParamName, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName, "").c_str(), 50));
-			manager.addParameter(params.back());
-
-			params.push_back(new WiFiManagerParameter(ksfPrefixParamName, ksfPrefixParamName, config_file.getParam(ksfPrefixParamName, "").c_str(), 50));
-			manager.addParameter(params.back());
+			addNewParam(manager, ksfBrokerParamName, config_file.getParam(ksfBrokerParamName).c_str());
+			addNewParam(manager, ksfPortParamName, config_file.getParam(ksfPortParamName).c_str());
+			addNewParam(manager, ksfUserParamName, config_file.getParam(ksfUserParamName).c_str());
+			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
+			addNewParam(manager, ksfPrefixParamName, config_file.getParam(ksfPrefixParamName).c_str());
+			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
 		}
 	}
 
@@ -78,14 +70,6 @@ namespace ksf::comps
 			for (auto& param : params)
 				config_file.setParam(param->getID(), param->getValue());
 		}
-
-		#pragma GCC diagnostic push
-		#pragma GCC diagnostic ignored "-Wdelete-non-virtual-dtor"
-
-		for	(auto& param : params)
-			delete param;
-
-		#pragma GCC diagnostic pop
 
 		params.clear();
 	}
