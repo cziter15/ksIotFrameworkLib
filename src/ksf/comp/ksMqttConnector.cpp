@@ -29,6 +29,10 @@ namespace ksf::comps
 
 		wifiCon_wp = owner->findComponent<ksWifiConnector>();
 
+		/*
+			mqttClient will not be created only when setupConnection is called properly.
+			That means init will return false when no config file found.
+		*/
 		return mqttClient != nullptr;
 	}
 

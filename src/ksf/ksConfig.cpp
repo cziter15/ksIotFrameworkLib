@@ -8,12 +8,7 @@
  */
 
 #include "ksConfig.h"
-
-#ifdef ESP32
-	#include "SPIFFS.h"
-#else
-	#include "FS.h"
-#endif
+#include "LittleFS.h"
 
 namespace ksf
 {
@@ -22,7 +17,7 @@ namespace ksf
 		if (configFile.length() > 0)
 		{
 			configFilename = configFile.charAt(0) != '/' ? "/" + configFile : configFile;
-			auto fileReader = SPIFFS.open(configFilename.c_str(), "r");
+			auto fileReader = LittleFS.open(configFilename.c_str(), "r");
 
 			while (fileReader.available())
 			{
@@ -61,7 +56,7 @@ namespace ksf
 	{
 		if (isDirty)
 		{
-			auto fileWriter = SPIFFS.open(configFilename.c_str(), "w");
+			auto fileWriter = LittleFS.open(configFilename.c_str(), "w");
 
 			for (auto& entry : configParams)
 			{

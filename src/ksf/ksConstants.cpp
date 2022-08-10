@@ -8,12 +8,7 @@
  */
 
 #include "ksConstants.h"
-
-#ifdef ESP32
-	#include "SPIFFS.h"
-#else
-	#include "FS.h"
-#endif
+#include "LittleFS.h"
 
 namespace ksf
 {
@@ -23,10 +18,10 @@ namespace ksf
 	{
 		#ifdef ESP32
 			/* Initialize filesystem. */
-			SPIFFS.begin(true);
+			LittleFS.begin(true);
 		#else
 			/* Initialize filesystem. */
-			SPIFFS.begin();
+			LittleFS.begin();
 		#endif
 	}
 

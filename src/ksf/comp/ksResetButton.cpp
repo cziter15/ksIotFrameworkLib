@@ -12,13 +12,12 @@
 #include "Arduino.h"
 
 #ifdef ESP32
-	#include <SPIFFS.h>
 	#include <WiFi.h>
 #else
-	#include <FS.h>
 	#include <ESP8266WiFi.h>
 #endif
 
+#include <LittleFS.h>
 #include <Esp.h>
 
 namespace ksf::comps
@@ -56,7 +55,7 @@ namespace ksf::comps
 				if (pressDuration > LONG_TRIGGER)
 				{
 					WiFi.disconnect(true);
-					SPIFFS.format();
+					LittleFS.format();
 					ESP.restart();
 					return false;
 				}
