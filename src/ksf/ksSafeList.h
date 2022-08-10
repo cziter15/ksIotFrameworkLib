@@ -38,18 +38,18 @@ namespace ksf
 			virtual void synchronizeQueues() = 0;
 	};
 
-	template <typename EntryType>
+	template <typename _EntryType>
 	class ksSafeList : public ksSafeListInterface
 	{
 		protected:
-			std::list<EntryType> list, pendingAdd, pendingRemove;
+			std::list<_EntryType> list, pendingAdd, pendingRemove;
 
 		public:
 			/*
 				Retrieves list reference.
 				@return Reference to vector of items (underlying list).
 			*/
-			const std::list<EntryType>& getList() const
+			const std::list<_EntryType>& getList() const
 			{
 				return list;
 			}
@@ -58,7 +58,7 @@ namespace ksf
 				Queues item to be added to the list at next synchronizeQueues call.
 				@param item Item reference.
 			*/
-			void queueAdd(const EntryType& item)
+			void queueAdd(const _EntryType& item)
 			{
 				pendingAdd.push_back(item);
 			}
@@ -67,7 +67,7 @@ namespace ksf
 				Queues item to be removed from the list at next synchronizeQueues call.
 				@param item Item reference.
 			*/
-			void queueRemove(const EntryType& item)
+			void queueRemove(const _EntryType& item)
 			{
 				pendingRemove.push_back(item);
 			}
@@ -97,7 +97,7 @@ namespace ksf
 
 				if (!pendingRemove.empty())
 				{
-					list.remove_if([&](const EntryType& item) -> bool {
+					list.remove_if([&](const _EntryType& item) -> bool {
 						return std::find(pendingRemove.begin(), pendingRemove.end(), item) != pendingRemove.end();
 					});
 

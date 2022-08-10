@@ -29,12 +29,12 @@ namespace ksf
 				Instantiates a component of passed type, handing over all template parameters as constructor parameters to the component. 
 				Keep in mind that passed parameters must match target component constructor parameters.
 			*/
-			template <class Type, class... Params>
-			std::weak_ptr<Type> addComponent(Params... arg)
+			template <class _Type, class... _Params>
+			std::weak_ptr<_Type> addComponent(_Params... arg)
 			{
-				auto ptr = std::make_shared<Type>(arg...);
+				auto ptr = std::make_shared<_Type>(arg...);
 				components.queueAdd(ptr);
-				return std::weak_ptr<Type>(ptr);
+				return std::weak_ptr<_Type>(ptr);
 			}
 
 			/*
@@ -45,14 +45,14 @@ namespace ksf
 
 				@param outComponents Vector of weak pointers to be filled with matching components, might be empty as well.
 			*/
-			template <class Type>
-			void findComponents(std::vector<std::weak_ptr<Type>>& outComponents)
+			template <class _Type>
+			void findComponents(std::vector<std::weak_ptr<_Type>>& outComponents)
 			{
 				outComponents.clear();
 
 				for (const auto& comp : components.getList())
 				{
-					std::weak_ptr<Type> castedComp_wp = std::dynamic_pointer_cast<Type>(comp);
+					std::weak_ptr<_Type> castedComp_wp = std::dynamic_pointer_cast<_Type>(comp);
 					if (!castedComp_wp.expired())
 						outComponents.push_back(castedComp_wp);
 				}
@@ -64,12 +64,12 @@ namespace ksf
 
 				@return Weak pointer of component, might be invalid/expired (unable to lock to get shared ptr).
 			*/
-			template <class Type>
-			std::weak_ptr<Type> findComponent()
+			template <class _Type>
+			std::weak_ptr<_Type> findComponent()
 			{
-				std::vector<std::weak_ptr<Type>> comps_wp;
-				findComponents<Type>(comps_wp);
-				return comps_wp.empty() ? std::weak_ptr<Type>() : comps_wp[0];
+				std::vector<std::weak_ptr<_Type>> comps_wp;
+				findComponents<_Type>(comps_wp);
+				return comps_wp.empty() ? std::weak_ptr<_Type>() : comps_wp[0];
 			}
 
 			/*
@@ -88,7 +88,7 @@ namespace ksf
 			bool forEachComponent(_Predicate function)
 			{
 				/* Simply iterate and call passed function for each component. */
-				for (auto it = components.getList().begin(); it != components.getList().end(); ++it)
+				for (auto it = components.getList().cbegin(); it != components.getList().cend(); ++it)
 					if (!function(*it)) // If predicate returned false, stop iterating.
 						return false;
 
