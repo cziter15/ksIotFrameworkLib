@@ -41,4 +41,4 @@ class Colors:
 	White				= "\033[97m"
 
 def ksPrintLog(color, text):
-	print(Colors.Green + color + "[ksIotFrameworkLib] " + text + Colors.End)
+	print(Colors.Cyan + "[ksIotFrameworkLib] " + color + text + Colors.End)
