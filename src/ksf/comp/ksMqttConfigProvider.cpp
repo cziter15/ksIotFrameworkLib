@@ -35,15 +35,19 @@ namespace ksf::comps
 			String password = config_file.getParam(ksfPasswordParamName);
 			String prefix = config_file.getParam(ksfPrefixParamName);
 
-			String slash(("/"));
+			if (prefix.length() > 0)
+			{
+				/* MQTT topic delimeter (slash). */
+				const char topicDelimeter =  '/';
 
-			// Apply prefix correction
-			if (!prefix.startsWith(slash))
-				prefix = slash + prefix;
+				/* Apply prefix correction. */
+				if (prefix.begin()[0] != topicDelimeter)
+					prefix = topicDelimeter + prefix;
 
-			// Apply prefix suffix correction
-			if (!prefix.endsWith(slash))
-				prefix += slash;
+				/* Apply suffix correction. */
+				if (prefix.end()[0] != topicDelimeter)
+					prefix += topicDelimeter;
+			}
 
 			if (savedBroker.length() > 0)
 				connector.setupConnection(savedBroker, port, login, password, prefix);
