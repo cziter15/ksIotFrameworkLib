@@ -30,7 +30,7 @@ namespace ksf
 					@param cb_evtbase_wp Weak pointer to event object.
 					@param uid Unique callback ID.
 				*/
-				ksEventHandle(const std::weak_ptr<ksEventBase>& cb_evtbase_wp, std::size_t uid);
+				ksEventHandle(std::weak_ptr<ksEventBase>&& cb_evtbase_wp, std::size_t uid);
 
 				/*
 					Event handle destructor. Unbinds callback (removes from the list by ID).
