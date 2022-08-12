@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <vector>
 #include <list>
 #include <algorithm>
 
@@ -42,7 +43,8 @@ namespace ksf
 	class ksSafeList : public ksSafeListInterface
 	{
 		protected:
-			std::list<_EntryType> list, pendingAdd, pendingRemove;
+			std::list<_EntryType> list, pendingAdd;
+			std::vector<_EntryType> pendingRemove;
 
 		public:
 			/*
@@ -91,8 +93,7 @@ namespace ksf
 			{
 				if (!pendingAdd.empty())
 				{
-					list.insert(list.end(), pendingAdd.begin(), pendingAdd.end());
-					pendingAdd.clear();
+					list.splice(list.end(), pendingAdd);
 				}
 
 				if (!pendingRemove.empty())
