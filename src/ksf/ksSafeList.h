@@ -97,7 +97,7 @@ namespace ksf
 
 				if (!pendingRemove.empty())
 				{
-					list.remove_if([&](const _EntryType& item) -> bool {
+					list.remove_if([&](const _EntryType& item) {
 						return std::find(pendingRemove.begin(), pendingRemove.end(), item) != pendingRemove.end();
 					});
 
