@@ -46,12 +46,12 @@ namespace ksf::comps
 		return digitalRead(pin) == HIGH;
 	}
 
-	void ksLed::setBlinking(uint32_t intervalMs, uint32_t numLoops)
+	void ksLed::setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops)
 	{
-		setEnabled(intervalMs > 0);
-		blinkIntervalMs = intervalMs;
+		setEnabled(blinkIntervalMs > 0);
+		this->blinkIntervalMs = blinkIntervalMs;
+		this->blinkLoops = blinkLoops;
 		lastBlinkTime = millis();
-		blinkLoops = numLoops;
 	}
 
 	bool ksLed::isBlinking() const
@@ -59,9 +59,9 @@ namespace ksf::comps
 		return blinkIntervalMs > 0;
 	}
 
-	void ksLed::setEnabled(bool isEnabled)
+	void ksLed::setEnabled(bool enabled)
 	{
-		digitalWrite(pin, isEnabled ? HIGH : LOW);
+		digitalWrite(pin, enabled ? HIGH : LOW);
 	}
 
 	ksLed::~ksLed()
