@@ -25,18 +25,18 @@ namespace ksf::comps
 {
 	bool ksMqttDebugResponder::init(ksf::ksComposable* owner)
 	{
-		app = owner;
+		this->owner = owner;
 		return true;
 	}
 
 	void ksMqttDebugResponder::postInit()
 	{
-		mqtt_wp = app->findComponent<ksMqttConnector>();
+		mqttConnWp = owner->findComponent<ksMqttConnector>();
 
-		if (auto mqtt_sp = mqtt_wp.lock())
+		if (auto mqttConnSp = mqttConnWp.lock())
 		{
-			mqtt_sp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
-			mqtt_sp->onMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
+			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
+			mqttConnSp->onMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
 		}
 	}
 
@@ -47,14 +47,14 @@ namespace ksf::comps
 
 	void ksMqttDebugResponder::onConnected()
 	{
-		if (auto mqtt_sp = mqtt_wp.lock())
-			mqtt_sp->subscribe("cmd");
+		if (auto mqttConnSp = mqttConnWp.lock())
+			mqttConnSp->subscribe("cmd");
 	}
 
 	void ksMqttDebugResponder::respond(const String& message) const
 	{
-		if (auto mqtt_sp = mqtt_wp.lock())
-			mqtt_sp->publish("log", message, false);
+		if (auto mqttConnSp = mqttConnWp.lock())
+			mqttConnSp->publish("log", message, false);
 	}
 
 	String ksMqttDebugResponder::getResetReason()
@@ -94,12 +94,12 @@ namespace ksf::comps
 		{
 			if (message.equals("netinfo"))
 			{
-				if (auto mqtt_sp = mqtt_wp.lock())
+				if (auto mqttConnSp = mqttConnWp.lock())
 				{
 					respond(
 						"IP: " + WiFi.localIP().toString() + ", " +
-						"CT: " + String(mqtt_sp->getConnectionTimeSeconds()) + " s, " +
-						"RC: " + String(mqtt_sp->getReconnectCounter()) + ", " +
+						"CT: " + String(mqttConnSp->getConnectionTimeSeconds()) + " s, " +
+						"RC: " + String(mqttConnSp->getReconnectCounter()) + ", " +
 						"RSSI " + String(WiFi.RSSI()) + " dBm"
 					);
 				}
@@ -123,7 +123,7 @@ namespace ksf::comps
 			else if (message.equals("remove_dbg"))
 			{
 				respond("Removing ksMqttDebugResponder. Commands will not be available.");
-				app->queueRemoveComponent(shared_from_this());
+				owner->queueRemoveComponent(shared_from_this());
 			}
 			else if (message.equals("restart"))
 			{

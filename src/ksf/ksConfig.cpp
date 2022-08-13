@@ -16,8 +16,8 @@ namespace ksf
 	{
 		if (configFile.length() > 0)
 		{
-			configFilename = configFile.charAt(0) != '/' ? "/" + configFile : configFile;
-			auto fileReader = LittleFS.open(configFilename.c_str(), "r");
+			this->configFile = configFile.charAt(0) != '/' ? "/" + configFile : configFile;
+			auto fileReader = LittleFS.open(this->configFile.c_str(), "r");
 
 			while (fileReader.available())
 			{
@@ -56,7 +56,7 @@ namespace ksf
 	{
 		if (isDirty)
 		{
-			auto fileWriter = LittleFS.open(configFilename.c_str(), "w");
+			auto fileWriter = LittleFS.open(configFile.c_str(), "w");
 
 			for (auto& entry : configParams)
 			{
@@ -70,6 +70,6 @@ namespace ksf
 
 	ksConfig::operator bool() const
 	{
-		return configFilename.length() > 0;
+		return configFile.length() > 0;
 	}
 }

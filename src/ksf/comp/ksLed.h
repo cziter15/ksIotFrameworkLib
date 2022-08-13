@@ -18,10 +18,10 @@ namespace ksf
 		class ksLed : public ksf::ksComponent
 		{
 			protected:
-				uint8_t ledPin = 0;					// Saved LED pin number.
+				uint8_t pin = 0;					// Saved LED pin number.
 
 				uint32_t lastBlinkTime = 0;			// Last blink time (ms).
-				uint32_t blinkInterval = 0;			// Current blink interval (ms)
+				uint32_t blinkIntervalMs = 0;		// Current blink interval (ms)
 				uint32_t blinkLoops = 0;			// Number of remaining loops.
 
 			public:
@@ -48,10 +48,10 @@ namespace ksf
 				/*
 					Used to set LED blink parameters.
 
-					@param interval Time in ms between LED state toggle (0 to disable blinking).
-					@param loops Number of loops (0 for infinite loop).
+					@param blinkIntervalMs Time in ms between LED state toggle (0 to disable blinking).
+					@param blinkLoops Number of loops (0 for infinite loop).
 				*/
-				void setBlinking(uint32_t intervalMs, uint32_t numLoops = 0);
+				void setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops = 0);
 
 				/*
 					@return True if LED is set up to blink, otherwise false.
@@ -74,7 +74,7 @@ namespace ksf
 					PIN number getter.
 					@return PIN assigned to the LED.
 				*/
-				uint8_t getPin() const { return ledPin; }
+				uint8_t getPin() const { return pin; }
 
 				/*
 					Destructor, disables LED and restores pin state.

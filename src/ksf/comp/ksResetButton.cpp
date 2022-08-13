@@ -25,20 +25,20 @@ namespace ksf::comps
 	#define SHORT_TRIGGER 50
 	#define LONG_TRIGGER 5000
 
-	ksResetButton::ksResetButton(uint8_t pin, uint8_t triggerBy, uint8_t mode)
-		: buttonPin(pin), triggerState(triggerBy), pmode(mode)
+	ksResetButton::ksResetButton(uint8_t pin, uint8_t triggerState, uint8_t mode)
+		: pin(pin), triggerState(triggerState), mode(mode)
 	{}
 
 	bool ksResetButton::init(ksf::ksComposable* owner)
 	{
-		pinMode(buttonPin, pmode);
-		lastState = digitalRead(buttonPin);
+		pinMode(pin, mode);
+		lastState = digitalRead(pin);
 		return true;
 	}
 
 	bool ksResetButton::loop()
 	{
-		uint8_t currentState = digitalRead(buttonPin);
+		uint8_t currentState = digitalRead(pin);
 
 		if (currentState != lastState)
 		{
@@ -73,6 +73,6 @@ namespace ksf::comps
 
 	ksResetButton::~ksResetButton()
 	{
-		pinMode(buttonPin, INPUT);
+		pinMode(pin, INPUT);
 	}
 }

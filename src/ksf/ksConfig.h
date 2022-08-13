@@ -23,7 +23,7 @@ namespace ksf
 		protected:
 			bool isDirty = false;						// True if config params are modiffied and should be saved.
 			std::map<String, String> configParams;		// Config parameters as key-value pair.
-			String configFilename;						// Config filename.
+			String configFile;							// Config filename.
 
 		public:
 			/* 

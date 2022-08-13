@@ -19,13 +19,13 @@ namespace ksf
 
 	void ksSimpleTimer::setInterval(uint32_t intervalMs)
 	{
-		interval = intervalMs;
+		this->intervalMs = intervalMs;
 		restart();
 	}
 
 	bool ksSimpleTimer::triggered()
 	{
-		if (millis() - lastTriggerTime > interval)
+		if (millis() - lastTriggerTime > intervalMs)
 		{
 			restart();
 			return true;

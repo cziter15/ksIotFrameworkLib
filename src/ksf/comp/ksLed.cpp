@@ -14,21 +14,21 @@
 namespace ksf::comps
 {
 	ksLed::ksLed(uint8_t pin) 
-		: ledPin(pin)
+		: pin(pin)
 	{}
 
 	bool ksLed::init(ksf::ksComposable* owner)
 	{
-		pinMode(ledPin, OUTPUT);
+		pinMode(pin, OUTPUT);
 		setEnabled(false);
 		return true;
 	}
 
 	bool ksLed::loop()
 	{
-		if (blinkInterval > 0)
+		if (blinkIntervalMs > 0)
 		{
-			if (millis() - lastBlinkTime > blinkInterval)
+			if (millis() - lastBlinkTime > blinkIntervalMs)
 			{
 				setEnabled(!isEnabled());
 				lastBlinkTime = millis();
@@ -43,30 +43,30 @@ namespace ksf::comps
 
 	bool ksLed::isEnabled() const
 	{
-		return digitalRead(ledPin) == HIGH;
+		return digitalRead(pin) == HIGH;
 	}
 
 	void ksLed::setBlinking(uint32_t intervalMs, uint32_t numLoops)
 	{
 		setEnabled(intervalMs > 0);
-		blinkInterval = intervalMs;
+		blinkIntervalMs = intervalMs;
 		lastBlinkTime = millis();
 		blinkLoops = numLoops;
 	}
 
 	bool ksLed::isBlinking() const
 	{
-		return blinkInterval > 0;
+		return blinkIntervalMs > 0;
 	}
 
 	void ksLed::setEnabled(bool isEnabled)
 	{
-		digitalWrite(ledPin, isEnabled ? HIGH : LOW);
+		digitalWrite(pin, isEnabled ? HIGH : LOW);
 	}
 
 	ksLed::~ksLed()
 	{
 		setEnabled(false);
-		pinMode(ledPin, INPUT);
+		pinMode(pin, INPUT);
 	}
 }

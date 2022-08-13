@@ -29,18 +29,18 @@ namespace ksf::comps
 
 	bool ksWiFiConfigurator::init(ksf::ksComposable* owner)
 	{
-		parent = owner;
+		this->owner = owner;
 		return true;
 	}
 
 	void ksWiFiConfigurator::postInit()
 	{
-		std::vector<std::weak_ptr<ksLed>> ledComps_wp;
-		parent->findComponents<ksLed>(ledComps_wp);
+		std::vector<std::weak_ptr<ksLed>> ledCompsWp;
+		owner->findComponents<ksLed>(ledCompsWp);
 
-		for (auto& ledComp_wp : ledComps_wp)
-			if (auto ledComp_sp = ledComp_wp.lock())
-				ledComp_sp->setEnabled(true);
+		for (auto& ledCompWp : ledCompsWp)
+			if (auto ledCompSp = ledCompWp.lock())
+				ledCompSp->setEnabled(true);
 	}
 
 	bool ksWiFiConfigurator::loop()
@@ -48,18 +48,18 @@ namespace ksf::comps
 		manager.setConfigPortalTimeout(KSF_CAP_PORTAL_TIMEOUT_SEC);
 		manager.setConnectTimeout(KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC);
 
-		std::vector<std::weak_ptr<ksConfigProvider>> configComps_wp;
-		parent->findComponents<ksConfigProvider>(configComps_wp);
+		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+		owner->findComponents<ksConfigProvider>(configCompsWp);
 
-		for (auto& configComp_wp : configComps_wp)
-			if (auto configComp_sp = configComp_wp.lock())
-				configComp_sp->injectManagerParameters(manager);
+		for (auto& configCompWp : configCompsWp)
+			if (auto configCompSp = configCompWp.lock())
+				configCompSp->injectManagerParameters(manager);
 
 		manager.startConfigPortal(deviceName.c_str());
 
-		for (auto& configComp_wp : configComps_wp)
-			if (auto configComp_sp = configComp_wp.lock())
-				configComp_sp->captureManagerParameters(manager);
+		for (auto& configCompWp : configCompsWp)
+			if (auto configCompSp = configCompWp.lock())
+				configCompSp->captureManagerParameters(manager);
 
 		return false;
 	}

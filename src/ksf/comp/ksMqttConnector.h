@@ -24,23 +24,23 @@ namespace ksf
 		class ksMqttConnector : public ksf::ksComponent
 		{
 			protected:
-				std::shared_ptr<WiFiClient> mqttWifiClient;						// Shared pointer to WiFiClient used to connect to MQTT.
-				std::shared_ptr<PubSubClient> mqttClient;						// Shared pointer to PubSubClient (MQTT client).
+				std::shared_ptr<WiFiClient> wifiClientSp;						// Shared pointer to WiFiClient used to connect to MQTT.
+				std::shared_ptr<PubSubClient> mqttClientSp;						// Shared pointer to PubSubClient (MQTT client).
 
-				std::weak_ptr<ksWifiConnector> wifiCon_wp;						// Weak pointer to WiFi connector.
+				std::weak_ptr<ksWifiConnector> wifiConnWp;						// Weak pointer to WiFi connector.
 
 				uint32_t connectionTimeSeconds = 0;								// MQTT connection time counter (in seconds).
 				uint32_t reconnectCounter = 0;									// MQTT reconnection counter.
-				bool useConnectionStatusTopic = true;							// Connection status topic.
+				bool sendConnectionStatus = true;								// Connection status topic.
 
 				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
 				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer used to reconnect MQTT.
 
 				bool wasConnected = false;										// True if connected in previous loop.
 
-				String savedLogin;												// Saved MQTT login.
-				String savedPassword;											// Saved MQTT password.
-				String savedPrefix;												// Saved MQTT prefix.
+				String login;													// Saved MQTT login.
+				String password;												// Saved MQTT password.
+				String prefix;													// Saved MQTT prefix.
 
 				/*
 					Called to connect to broker.
@@ -67,6 +67,10 @@ namespace ksf
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
 
+				/*
+					Constructs ksMqttConnector objec.
+					@param sendConnectionStatus True if should send connection status in connected topic.
+				*/
 				ksMqttConnector(bool sendConnectionStatus = true);
 
 				/*

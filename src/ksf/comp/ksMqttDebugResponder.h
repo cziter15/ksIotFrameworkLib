@@ -21,8 +21,8 @@ namespace ksf
 		class ksMqttDebugResponder : public ksf::ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
 		{
 			protected:
-				std::weak_ptr<ksMqttConnector> mqtt_wp;					// Weak pointer to MQTT connector.
-				ksComposable* app = nullptr;							// Raw pointer to ownning composable (app).
+				std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
+				ksComposable* owner = nullptr;							// Raw pointer to ownning composable (app).
 
 				std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
 				std::shared_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
@@ -73,6 +73,7 @@ namespace ksf
 
 				/*
 					Publishes response to command request.
+					@param message Message string reference.
 				*/
 				void respond(const String& message) const;
 		};

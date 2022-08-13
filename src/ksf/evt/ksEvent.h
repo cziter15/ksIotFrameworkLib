@@ -32,7 +32,7 @@ namespace ksf
 		{
 			protected:
 				std::vector<std::pair<std::size_t, std::function<void(Params...)>>> callbacks;		// List of bond callbacks.
-				std::size_t lastUid = 0;															// Last unique callback ID for this event (used as counter).
+				std::size_t lastCallbackUID = 0;													// Last unique callback ID for this event (used as counter).
 
 			public:
 				/*
@@ -52,22 +52,22 @@ namespace ksf
 				*/
 				void registerEvent(std::shared_ptr<ksf::evt::ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 				{
-					++lastUid;
-					outHandle = std::make_shared<ksf::evt::ksEventHandle>(weak_from_this(), lastUid);
-					callbacks.emplace_back(lastUid, std::move(function));
+					++lastCallbackUID;
+					outHandle = std::make_shared<ksf::evt::ksEventHandle>(weak_from_this(), lastCallbackUID);
+					callbacks.emplace_back(lastCallbackUID, std::move(function));
 				}
 
 				/*
 					Unbinds event callback by specified unique ID. This ID is automatically assigned
 					by registerEvent function and ksEventHandle uses it to unbind automatically upon destruction.
 
-					@param cbUid Unique id of the callback to unbind.
+					@param callbackUID Unique id of the callback to unbind.
 				*/
-				void unbind(std::size_t cbUid) override
+				void unbind(std::size_t callbackUID) override
 				{
 					for (auto cb = callbacks.begin(); cb != callbacks.end(); ++cb)
 					{
-						if (cb->first == cbUid)
+						if (cb->first == callbackUID)
 						{
 							callbacks.erase(cb);
 							break;

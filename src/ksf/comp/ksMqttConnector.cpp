@@ -27,39 +27,39 @@ namespace ksf::comps
 		provider.init(owner);
 		provider.setupMqttConnector(*this);
 
-		wifiCon_wp = owner->findComponent<ksWifiConnector>();
+		wifiConnWp = owner->findComponent<ksWifiConnector>();
 
 		/*
 			mqttClient will not be created only when setupConnection is called properly.
 			That means init will return false when no config file found.
 		*/
-		return mqttClient != nullptr;
+		return mqttClientSp != nullptr;
 	}
 
 	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus)
-		: useConnectionStatusTopic(sendConnectionStatus)
+		: sendConnectionStatus(sendConnectionStatus)
 	{}
 
 	void ksMqttConnector::setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure)
 	{
-		mqttWifiClient = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
-		mqttClient = std::make_shared<PubSubClient>(*mqttWifiClient.get());
+		wifiClientSp = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
+		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
 
-		savedLogin = login;
-		savedPassword = password;
-		savedPrefix = prefix;
+		this->login = login;
+		this->password = password;
+		this->prefix = prefix;
 
 		IPAddress serverIP;
 
 		if (serverIP.fromString(broker.c_str()))
-			mqttClient->setServer(serverIP, port.toInt());
+			mqttClientSp->setServer(serverIP, port.toInt());
 		else
-			mqttClient->setServer(broker.c_str(), port.toInt());
+			mqttClientSp->setServer(broker.c_str(), port.toInt());
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
 	{
-		mqttWifiClient->setNoDelay(true);
+		wifiClientSp->setNoDelay(true);
 
 		/* 
 		*	There's an inconsistency in setTimeout implementation between Arduino for ESP32 and ESP8266.
@@ -70,12 +70,12 @@ namespace ksf::comps
 		*/
 
 		#ifdef ESP32
-			mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT_SEC);
+			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
 		#else
-			mqttWifiClient->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
+			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
 		#endif
 		
-		mqttClient->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
+		mqttClientSp->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 		onConnected->broadcast();
 	}
 
@@ -88,8 +88,8 @@ namespace ksf::comps
 
 			String topicStr(topic);
 
-			if (topicStr.startsWith(savedPrefix))
-				topicStr.remove(0, savedPrefix.length());
+			if (topicStr.startsWith(prefix))
+				topicStr.remove(0, prefix.length());
 
 			for (uint32_t payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
 				payloadStr += (char)payload[payload_ch_idx];
@@ -101,48 +101,48 @@ namespace ksf::comps
 	void ksMqttConnector::subscribe(const String& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
-			mqttClient->subscribe(topic.c_str());
+			mqttClientSp->subscribe(topic.c_str());
 		else	
-			mqttClient->subscribe(String(savedPrefix + topic).c_str());
+			mqttClientSp->subscribe(String(prefix + topic).c_str());
 	}
 
 	void ksMqttConnector::unsubscribe(const String& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
-			mqttClient->unsubscribe(topic.c_str());
+			mqttClientSp->unsubscribe(topic.c_str());
 		else
-			mqttClient->unsubscribe(String(savedPrefix + topic).c_str());
+			mqttClientSp->unsubscribe(String(prefix + topic).c_str());
 	}
 
 	void ksMqttConnector::publish(const String& topic, const String& payload, bool retain, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
-			mqttClient->publish(topic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+			mqttClientSp->publish(topic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 		else
-			mqttClient->publish(String(savedPrefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+			mqttClientSp->publish(String(prefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 	}
 
 	bool ksMqttConnector::connectToBroker()
 	{
-		if (useConnectionStatusTopic)
+		if (sendConnectionStatus)
 		{
-			String willTopic{savedPrefix + "connected"};
+			String willTopic{prefix + "connected"};
 			
-			if (mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str(), willTopic.c_str(), 0, true, "0"))
+			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
 			{
-				mqttClient->publish(willTopic.c_str(), (const uint8_t*)"1", 1, true);
+				mqttClientSp->publish(willTopic.c_str(), (const uint8_t*)"1", 1, true);
 				return true;
 			}
 
 			return false;
 		}
 
-		return mqttClient->connect(WiFi.macAddress().c_str(), savedLogin.c_str(), savedPassword.c_str());
+		return mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str());
 	}
 
 	bool ksMqttConnector::loop()
 	{
-		if (mqttClient->loop())
+		if (mqttClientSp->loop())
 		{
 			if (oneSecTimer.triggered())
 				++connectionTimeSeconds;
@@ -156,7 +156,7 @@ namespace ksf::comps
 		}
 		else if (reconnectTimer.triggered())
 		{
-			if (auto wifiCon_sp = wifiCon_wp.lock())
+			if (auto wifiCon_sp = wifiConnWp.lock())
 			{
 				if (wifiCon_sp->isConnected() && connectToBroker())
 				{
@@ -173,10 +173,10 @@ namespace ksf::comps
 
 	bool ksMqttConnector::isConnected() const
 	{
-		if (mqttClient)
-			if (auto wifiCon_sp = wifiCon_wp.lock())
-				if (wifiCon_sp->isConnected())
-					return mqttClient->connected();
+		if (mqttClientSp)
+			if (auto wifiConnSp = wifiConnWp.lock())
+				if (wifiConnSp->isConnected())
+					return mqttClientSp->connected();
 		
 		return false;
 	}
