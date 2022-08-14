@@ -156,9 +156,9 @@ namespace ksf::comps
 		}
 		else if (reconnectTimer.triggered())
 		{
-			if (auto wifiCon_sp = wifiConnWp.lock())
+			if (auto wifiConnSp = wifiConnWp.lock())
 			{
-				if (wifiCon_sp->isConnected() && connectToBroker())
+				if (wifiConnSp->isConnected() && connectToBroker())
 				{
 					oneSecTimer.restart();
 					++reconnectCounter;
