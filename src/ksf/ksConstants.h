@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <inttypes.h>
+#include <stdint.h>
 
 /* Simply ONE second in milliseconds. */
 #define KSF_ONE_SECOND_MS 1000UL
