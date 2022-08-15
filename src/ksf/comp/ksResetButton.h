@@ -23,8 +23,8 @@ namespace ksf
 				uint8_t triggerState = 0;			// State that triggers reset logic.
 				uint8_t lastState = 0;				// Previous state (used to debouce).
 				uint8_t mode = INPUT;				// Cached pin mode.
-				uint32_t pressedTime = 0;			// Press timestamp (ms since boot).
-				uint32_t releasedTime = 0;			// Release timestamp (ms since boot).
+				uint32_t pressedTime = 0;			// Press timestamp (milliseconds since boot).
+				uint32_t releasedTime = 0;			// Release timestamp (milliseconds since boot).
 
 			public:
 				/*

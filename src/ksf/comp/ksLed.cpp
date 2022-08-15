@@ -28,10 +28,10 @@ namespace ksf::comps
 	{
 		if (blinkIntervalMs > 0)
 		{
-			if (millis() - lastBlinkTime > blinkIntervalMs)
+			if (millis() - lastBlinkTimeMs > blinkIntervalMs)
 			{
 				setEnabled(!isEnabled());
-				lastBlinkTime = millis();
+				lastBlinkTimeMs = millis();
 
 				if (blinkLoops > 0 && --blinkLoops == 0)
 					setBlinking(0);
@@ -51,7 +51,7 @@ namespace ksf::comps
 		setEnabled(blinkIntervalMs > 0);
 		this->blinkIntervalMs = blinkIntervalMs;
 		this->blinkLoops = blinkLoops;
-		lastBlinkTime = millis();
+		lastBlinkTimeMs = millis();
 	}
 
 	bool ksLed::isBlinking() const

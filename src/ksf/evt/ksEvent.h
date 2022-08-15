@@ -81,7 +81,7 @@ namespace ksf
 				*/
 				void broadcast(Params... params)
 				{
-					for (auto cb = callbacks.begin(); cb != callbacks.end(); ++cb)
+					for (auto cb = callbacks.cbegin(); cb != callbacks.cend(); ++cb)
 						cb->second(params...);
 				}
 		};

@@ -22,16 +22,16 @@ namespace ksf::comps
 {
 	bool ksMqttConnector::init(ksf::ksComposable* owner)
 	{
-		ksMqttConfigProvider provider;
+		ksMqttConfigProvider cfgProvider;
 
-		provider.init(owner);
-		provider.setupMqttConnector(*this);
+		cfgProvider.init(owner);
+		cfgProvider.setupMqttConnector(*this);
 
 		wifiConnWp = owner->findComponent<ksWifiConnector>();
 
 		/*
-			mqttClient will not be created only when setupConnection is called properly.
-			That means init will return false when no config file found.
+			Object mqttClientSp is created by setupConnection method.
+			That means init will return false when no MQTT config file found.
 		*/
 		return mqttClientSp != nullptr;
 	}

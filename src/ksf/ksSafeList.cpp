@@ -16,12 +16,12 @@ namespace ksf
 	
 	ksSafeListScopedSync::ksSafeListScopedSync(ksSafeListInterface& listRef)
 	{
-		listPtr = &listRef;
+		listRawPtr = &listRef;
 	}
 
 	ksSafeListScopedSync::~ksSafeListScopedSync()
 	{
-		if (listPtr)
-			listPtr->synchronizeQueues();
+		if (listRawPtr)
+			listRawPtr->synchronizeQueues();
 	}
 }

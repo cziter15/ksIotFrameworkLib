@@ -52,9 +52,9 @@ namespace ksf
 
 				for (const auto& comp : components.getList())
 				{
-					std::weak_ptr<_Type> castedComp_wp = std::dynamic_pointer_cast<_Type>(comp);
-					if (!castedComp_wp.expired())
-						outComponents.push_back(castedComp_wp);
+					std::weak_ptr<_Type> castedCompWp = std::dynamic_pointer_cast<_Type>(comp);
+					if (!castedCompWp.expired())
+						outComponents.push_back(castedCompWp);
 				}
 			}
 
@@ -67,9 +67,9 @@ namespace ksf
 			template <class _Type>
 			std::weak_ptr<_Type> findComponent()
 			{
-				std::vector<std::weak_ptr<_Type>> comps_wp;
-				findComponents<_Type>(comps_wp);
-				return comps_wp.empty() ? std::weak_ptr<_Type>() : comps_wp[0];
+				std::vector<std::weak_ptr<_Type>> foundCompsWp;
+				findComponents<_Type>(foundCompsWp);
+				return foundCompsWp.empty() ? std::weak_ptr<_Type>() : foundCompsWp[0];
 			}
 
 			/*

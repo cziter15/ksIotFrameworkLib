@@ -24,8 +24,8 @@ namespace ksf
 		class ksConfigProvider : public ksf::ksComponent
 		{
 			protected:
-				std::vector<std::unique_ptr<WiFiManagerParameter>> params;
-
+				std::vector<std::unique_ptr<WiFiManagerParameter>> params;	// Unique pointers of parameters (deletes them safely).
+				
 				/*
 					Adds new param to WiFiManager configuration process.
 					This method should be called only from injectManagerParameters function.

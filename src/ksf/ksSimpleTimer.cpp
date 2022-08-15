@@ -25,7 +25,7 @@ namespace ksf
 
 	bool ksSimpleTimer::triggered()
 	{
-		if (millis() - lastTriggerTime > intervalMs)
+		if (millis() - lastTriggerTimeMs > intervalMs)
 		{
 			restart();
 			return true;
@@ -36,6 +36,6 @@ namespace ksf
 
 	void ksSimpleTimer::restart()
 	{
-		lastTriggerTime = millis();
+		lastTriggerTimeMs = millis();
 	}
 }

@@ -20,8 +20,8 @@ namespace ksf
 			protected:
 				uint8_t pin = 0;					// Saved LED pin number.
 
-				uint32_t lastBlinkTime = 0;			// Last blink time (ms).
-				uint32_t blinkIntervalMs = 0;		// Current blink interval (ms)
+				uint32_t lastBlinkTimeMs = 0;		// Last blink time (milliseconds since boot).
+				uint32_t blinkIntervalMs = 0;		// Current blink interval (milliseconds).
 				uint32_t blinkLoops = 0;			// Number of remaining loops.
 
 			public:

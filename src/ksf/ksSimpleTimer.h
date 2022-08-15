@@ -16,8 +16,8 @@ namespace ksf
 	class ksSimpleTimer
 	{
 		protected:
-			uint32_t intervalMs = 0;
-			uint32_t lastTriggerTime = 0;
+			uint32_t intervalMs = 0;			// Timer interval (milliseconds).
+			uint32_t lastTriggerTimeMs = 0;		// Last trigger time (milliseconds since boot).
 
 		public:
 			/*

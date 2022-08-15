@@ -113,7 +113,7 @@ namespace ksf
 	class ksSafeListScopedSync
 	{
 		protected:
-			ksSafeListInterface* listPtr;				// Unsafe list pointer (this class should be used only in small scopes!).
+			ksSafeListInterface* listRawPtr;	// Unsafe list pointer (this class should be used only in small scopes!).
 		
 		public:
 			/* 
