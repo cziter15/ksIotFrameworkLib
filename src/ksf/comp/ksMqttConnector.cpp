@@ -81,7 +81,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
-		if (onMesssage->hasAnyCallbacks())
+		if (onMesssage->isBound())
 		{
 			String payloadStr((char*)0);
 			payloadStr.reserve(length);

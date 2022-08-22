@@ -39,7 +39,7 @@ namespace ksf
 					Queries if event has any bound callbacks.
 					@return True if any callback is bound, false if no callback is bound.
 				*/
-				bool hasAnyCallbacks() const
+				bool isBound() const
 				{
 					return !callbacks.empty();
 				}
