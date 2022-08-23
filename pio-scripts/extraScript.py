@@ -12,13 +12,21 @@ try:
 
 	ksPrintLog(Colors.Green, "Running extra script for library.")
 
-	unflagEnvCounter = 0
+	flagCounter = 0
 	for e in (env, DefaultEnvironment(), projenv):
 		e.ProcessUnFlags("-fno-rtti")
-		unflagEnvCounter += 1
-	ksPrintLog(Colors.Magenta, "Successfully processed unflags for [" + str(unflagEnvCounter) + "] environments.")
+		e.ProcessUnFlags("-std=gnu++11")
+		flagCounter += 1
+	ksPrintLog(Colors.Magenta, "Successfully processed unflags for [" + str(flagCounter) + "] environments.")
+
+	flagCounter = 0
+	for e in (env, DefaultEnvironment(), projenv):
+		e.ProcessFlags("-std=c++17")
+		e.ProcessFlags("-std=gnu++17")
+		flagCounter += 1
+	ksPrintLog(Colors.Magenta, "Successfully added flags for [" + str(flagCounter) + "] environments.")
 
 	ksPrintLog(Colors.Green, "Extra script finished.")
 except BaseException as err:
-	ksPrintLog(Colors.Red, "Error while executing fix_rtti script. Are you on newest platformio core?")
+	ksPrintLog(Colors.Red, "Error while executing script. Are you on newest platformio core?")
 	ksPrintLog(Colors.Yellow, str(err))
