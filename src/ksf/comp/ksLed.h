@@ -18,11 +18,11 @@ namespace ksf
 		class ksLed : public ksf::ksComponent
 		{
 			protected:
-				uint8_t pin = 0;					// Saved LED pin number.
+				uint8_t pin{0};						// Saved LED pin number.
 
-				uint32_t lastBlinkTimeMs = 0;		// Last blink time (milliseconds since boot).
-				uint32_t blinkIntervalMs = 0;		// Current blink interval (milliseconds).
-				uint32_t blinkLoops = 0;			// Number of remaining loops.
+				uint32_t lastBlinkTimeMs{0};		// Last blink time (milliseconds since boot).
+				uint32_t blinkIntervalMs{0};		// Current blink interval (milliseconds).
+				uint32_t blinkLoops{0};				// Number of remaining loops.
 
 			public:
 				/*

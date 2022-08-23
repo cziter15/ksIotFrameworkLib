@@ -20,7 +20,7 @@ namespace ksf
 		class ksWiFiConfigurator : public ksf::ksComponent
 		{
 			protected:
-				class ksf::ksComposable* owner = nullptr;		// Raw pointer to ownning composable (app).
+				class ksf::ksComposable* owner{nullptr};		// Raw pointer to ownning composable (app).
 				WiFiManager manager;				 			// WiFiManager object.
 				std::string deviceName;					 		// Device name - prefix plus Chip ID. Used as config AP name and hostname.
 

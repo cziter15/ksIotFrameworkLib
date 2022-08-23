@@ -22,12 +22,12 @@ namespace ksf
 		{
 			protected:
 				std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
-				ksComposable* owner = nullptr;							// Raw pointer to ownning composable (app).
+				ksComposable* owner{nullptr};							// Raw pointer to ownning composable (app).
 
 				std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
 				std::shared_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
 
-				bool breakloop = false;									// Boolean (set by command) to break from app loop.
+				bool breakloop{false};									// Boolean (set by command) to break from app loop.
 
 				/*
 					Function called on MQTT connection.

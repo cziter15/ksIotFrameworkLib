@@ -21,7 +21,7 @@ namespace ksf
 		{
 			protected:
 				std::weak_ptr<ksEventBase> eventBaseWp;		// Weak pointer to object.
-				std::size_t callbackUID = 0;				// Unique callback ID.
+				std::size_t callbackUID{0};					// Unique callback ID.
 
 			public:
 				/*

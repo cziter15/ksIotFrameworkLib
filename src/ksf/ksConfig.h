@@ -21,7 +21,7 @@ namespace ksf
 	class ksConfig
 	{
 		protected:
-			bool isDirty = false;									// True if config params are modiffied and should be saved.
+			bool isDirty{false};									// True if config params are modiffied and should be saved.
 			std::map<std::string, std::string> configParams;		// Config parameters as key-value pair.
 			std::string configFile;									// Config filename.
 

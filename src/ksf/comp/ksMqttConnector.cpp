@@ -83,8 +83,8 @@ namespace ksf::comps
 	{
 		if (onMesssage->isBound())
 		{
-			std::string_view payloadStr((char*)payload, length);
-			std::string topicStr(topic);
+			std::string_view payloadStr(reinterpret_cast<const char*>(payload), length);
+			std::string_view topicStr(topic);
 
 			if (topicStr.find(prefix) != std::string::npos)
 				topicStr = topicStr.substr(prefix.length());
