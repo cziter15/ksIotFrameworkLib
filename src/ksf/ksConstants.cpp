@@ -36,4 +36,15 @@ namespace ksf
 	{
 		return (uint64_t) uptime_high32 << 32 | uptime_low32;
 	}
+
+	std::string to_string(double value, const int base)
+	{
+		char buf[33];
+		return dtostrf(value, (base + 2), base, buf);
+	}
+
+	std::string to_string(float value, const int base)
+	{
+		return to_string(static_cast<double>(value), base);
+	}
 }

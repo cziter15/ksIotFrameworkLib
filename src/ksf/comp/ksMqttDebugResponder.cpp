@@ -114,7 +114,7 @@ namespace ksf::comps
 					"Free heap: " + std::to_string(ESP.getFreeHeap()) + " b, " +
 					#ifdef ESP32
 						"Free PSRAM: " + std::to_string(ESP.getFreePsram()) + " b, "
-						"Chip temperature: " + std::to_string(temperatureRead(), 1) + " [C], "
+						"Chip temperature: " + ksf::to_string(temperatureRead(), 1) + " [C], "
 					#endif
 					"CPU clock: " + std::to_string(ESP.getCpuFreqMHz()) + " MHz, "
 					"Reset reason: " + getResetReason().c_str()

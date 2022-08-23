@@ -10,6 +10,9 @@
 #pragma once
 
 #include <stdint.h>
+#include <limits>
+#include <string>
+#include "stdlib_noniso.h"
 
 /* Simply ONE second in milliseconds. */
 #define KSF_ONE_SECOND_MS 1000UL
@@ -81,4 +84,10 @@ namespace ksf
 		@return Milliseconds that have passed since device boot/restart.
 	*/
 	extern uint64_t millis64();
+
+	/*
+		Helper functions co convert floating point / fixed point values to stirng.
+	*/
+	extern std::string to_string(double value, const int base);
+	extern std::string to_string(float value, const int base);
 }
