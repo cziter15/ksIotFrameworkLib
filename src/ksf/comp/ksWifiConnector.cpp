@@ -33,7 +33,7 @@ namespace ksf::comps
 	void ksWifiConnector::setupMacAddress()
 	{
 		#ifdef ESP32
-			uint32_t chipId = reinterpret_cast<uint32_t>(ESP.getEfuseMac());
+			uint32_t chipId = static_cast<uint32_t>(ESP.getEfuseMac());
 		#else
 			uint32_t chipId = ESP.getChipId();
 		#endif
