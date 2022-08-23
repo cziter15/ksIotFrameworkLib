@@ -15,7 +15,7 @@
 
 namespace ksf::comps
 {
-	ksWiFiConfigurator::ksWiFiConfigurator(const String& devicePrefixName) 
+	ksWiFiConfigurator::ksWiFiConfigurator(const std::string& devicePrefixName) 
 		: deviceName(devicePrefixName)
 	{
 		deviceName += '-';

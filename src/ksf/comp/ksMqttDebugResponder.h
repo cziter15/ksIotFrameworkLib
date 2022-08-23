@@ -11,7 +11,7 @@
 
 #include "../ksComponent.h"
 #include "../evt/ksEvent.h"
-#include <WString.h>
+#include <string_view>
 
 namespace ksf
 {
@@ -40,16 +40,16 @@ namespace ksf
 					@param topic Topic of arrived message.
 					@param message Message/payload.
 				*/
-				void onMessage(const String& topic, const String& message);
+				void onMessage(const std::string_view& topic, const std::string_view& message);
 
 				/*
 					Returns last known reset reason.
-					@return String with reset reason description.
+					@return std::string with reset reason description.
 				*/
-				String getResetReason();
+				std::string getResetReason();
 
 			public:
-				DECLARE_KS_EVENT(customDebugHandler, ksMqttDebugResponder*, const String&, bool&) //< Event that provides custom message handler.
+				DECLARE_KS_EVENT(customDebugHandler, ksMqttDebugResponder*, const std::string_view&, bool&) //< Event that provides custom message handler.
 
 				/*
 					Initializes MQTT debug responder component.
@@ -75,7 +75,7 @@ namespace ksf
 					Publishes response to command request.
 					@param message Message string reference.
 				*/
-				void respond(const String& message) const;
+				void respond(const std::string& message) const;
 		};
 	}
 	

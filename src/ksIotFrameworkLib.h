@@ -29,4 +29,3 @@
 #include "ksf/comp/ksMqttDebugResponder.h"
 #include "ksf/comp/ksWiFiConfigurator.h"
 #include "ksf/comp/ksWifiConnector.h"
-#include "WString.h"

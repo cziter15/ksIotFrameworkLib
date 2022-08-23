@@ -51,87 +51,87 @@ namespace ksf::comps
 			mqttConnSp->subscribe("cmd");
 	}
 
-	void ksMqttDebugResponder::respond(const String& message) const
+	void ksMqttDebugResponder::respond(const std::string& message) const
 	{
 		if (auto mqttConnSp = mqttConnWp.lock())
 			mqttConnSp->publish("log", message, false);
 	}
 
-	String ksMqttDebugResponder::getResetReason()
+	std::string ksMqttDebugResponder::getResetReason()
 	{
 		#ifdef ESP32
 			switch (esp_reset_reason())
 			{
 				case ESP_RST_POWERON:
-					return String("Power On");
+					return std::string("Power On");
 				case ESP_RST_SW:
-					return String("Software/System restart");
+					return std::string("Software/System restart");
 				case ESP_RST_PANIC:
-					return String("Exception");
+					return std::string("Exception");
 				case ESP_RST_INT_WDT:
-					return String("Watchdog (interrupt)");
+					return std::string("Watchdog (interrupt)");
 				case ESP_RST_TASK_WDT:
-					return String("Watchdog (task)");
+					return std::string("Watchdog (task)");
 				case ESP_RST_WDT:
-					return String("Watchdog (other)");
+					return std::string("Watchdog (other)");
 				case ESP_RST_DEEPSLEEP:
-					return String("Deep-Sleep Wake");
+					return std::string("Deep-Sleep Wake");
 				case ESP_RST_BROWNOUT:
-					return String("Brownout");
+					return std::string("Brownout");
 				case ESP_RST_SDIO:
-					return String("SDIO");
+					return std::string("SDIO");
 				default:
-					return String("Unknown");
+					return std::string("Unknown");
 			}
 		#else
-			return ESP.getResetReason();
+			return {ESP.getResetReason().c_str()};
 		#endif
 	}
 
-	void ksMqttDebugResponder::onMessage(const String& topic, const String& message)
+	void ksMqttDebugResponder::onMessage(const std::string_view& topic, const std::string_view& message)
 	{
-		if (topic.equals("cmd"))
+		if (topic.compare("cmd") == 0)
 		{
-			if (message.equals("netinfo"))
+			if (message.compare("netinfo") == 0)
 			{
 				if (auto mqttConnSp = mqttConnWp.lock())
 				{
 					respond(
-						"IP: " + WiFi.localIP().toString() + ", " +
-						"CT: " + String(mqttConnSp->getConnectionTimeSeconds()) + " s, " +
-						"RC: " + String(mqttConnSp->getReconnectCounter()) + ", " +
-						"RSSI " + String(WiFi.RSSI()) + " dBm"
+						"IP: " + std::string{WiFi.localIP().toString().c_str()} + ", " +
+						"CT: " + std::to_string(mqttConnSp->getConnectionTimeSeconds()) + " s, "
+						"RC: " + std::to_string(mqttConnSp->getReconnectCounter()) + ", "
+						"RSSI " + std::to_string(WiFi.RSSI()) + " dBm"
 					);
 				}
 			}
-			else if (message.equals("sysinfo"))
+			else if (message.compare("sysinfo") == 0)
 			{
 				uint32_t uptimeSec = (uint32_t)(millis64() / 1000);
 				respond(
-					"Build hash: " + ESP.getSketchMD5() + ", " +
-					"Device uptime: " + String(uptimeSec) + " sec, " +
-					"Free fw space: " + String(ESP.getFreeSketchSpace()) + " b, " +
-					"Free heap: " + String(ESP.getFreeHeap()) + " b, " +
+					"Build hash: " + std::string(ESP.getSketchMD5().c_str()) + ", "
+					"Device uptime: " + std::to_string(uptimeSec) + " sec, "
+					"Free fw space: " + std::to_string(ESP.getFreeSketchSpace()) + " b, "
+					"Free heap: " + std::to_string(ESP.getFreeHeap()) + " b, " +
 					#ifdef ESP32
-						"Free PSRAM: " + String(ESP.getFreePsram()) + " b, " +
-						"Chip temperature: " + String(temperatureRead(), 1) + " [C], " +	
+						"Free PSRAM: " + std::to_string(ESP.getFreePsram()) + " b, "
+						"Chip temperature: " + std::to_string(temperatureRead(), 1) + " [C], "
 					#endif
-					"CPU clock: " + String(ESP.getCpuFreqMHz()) + " MHz, "
-					"Reset reason: " + getResetReason()
+					"CPU clock: " + std::to_string(ESP.getCpuFreqMHz()) + " MHz, "
+					"Reset reason: " + getResetReason().c_str()
 				);
 			}
-			else if (message.equals("remove_dbg"))
+			else if (message.compare("remove_dbg") == 0)
 			{
 				respond("Removing ksMqttDebugResponder. Commands will not be available.");
 				owner->queueRemoveComponent(shared_from_this());
 			}
-			else if (message.equals("restart"))
+			else if (message.compare("restart") == 0)
 			{
 				respond("Restarting system. It may take few seconds.");
 				delay(500);
 				ESP.restart();
 			}
-			else if (message.equals("rfcalib"))
+			else if (message.compare("rfcalib") == 0)
 			{
 				respond("Erasing RF CAL data, please wait...");
 				delay(500);
@@ -163,7 +163,7 @@ namespace ksf::comps
 
 				ESP.restart();
 			}
-			else if (message.equals("break_app"))
+			else if (message.compare("break_app") == 0)
 			{
 				breakloop = true;
 			}
@@ -173,7 +173,7 @@ namespace ksf::comps
 				customDebugHandler->broadcast(this, message, dbgMsgHandled);
 					
 				if (!dbgMsgHandled)
-					respond("command not supported: " + message);
+					respond("command not supported: " + std::string(message));
 			}
 		}
 	}

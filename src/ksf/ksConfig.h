@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <WString.h>
+#include <string>
 #include <map>
 
 /* Wrapper macro that allows to create nice file-manipulating sections. */
@@ -21,16 +21,16 @@ namespace ksf
 	class ksConfig
 	{
 		protected:
-			bool isDirty = false;						// True if config params are modiffied and should be saved.
-			std::map<String, String> configParams;		// Config parameters as key-value pair.
-			String configFile;							// Config filename.
+			bool isDirty = false;									// True if config params are modiffied and should be saved.
+			std::map<std::string, std::string> configParams;		// Config parameters as key-value pair.
+			std::string configFile;									// Config filename.
 
 		public:
 			/* 
 				Constructor that opens specified file.
 				@param configFile Filename of config to open/create.
 			*/
-			ksConfig(const String& configFile);
+			ksConfig(const std::string& configFile);
 
 			/*
 				Sets specified parameter (in memory).
@@ -38,7 +38,7 @@ namespace ksf
 				@param paramName Pparameter name.
 				@param paramValue Parameter value.
 			*/
-			void setParam(const String& paramName, const String& paramValue);
+			void setParam(const std::string& paramName, const std::string& paramValue);
 
 
 			/*
@@ -47,7 +47,7 @@ namespace ksf
 				@param paramName Parameter name.
 				@param defaultValue Default value to return (if not found).
 			*/
-			const String& getParam(const String& paramName, const String& defaultValue = String()) const;
+			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
 
 			/*
 				Destructor that save changes if isDirty flag is set to true.

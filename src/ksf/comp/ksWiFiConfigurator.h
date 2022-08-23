@@ -10,8 +10,8 @@
 #pragma once
 
 #include "../ksComponent.h"
-#include <WString.h>
 #include <WiFiManager.h>
+#include <string>
 
 namespace ksf
 {
@@ -22,14 +22,14 @@ namespace ksf
 			protected:
 				class ksf::ksComposable* owner = nullptr;		// Raw pointer to ownning composable (app).
 				WiFiManager manager;				 			// WiFiManager object.
-				String deviceName;					 			// Device name - prefix plus Chip ID. Used as config AP name and hostname.
+				std::string deviceName;					 		// Device name - prefix plus Chip ID. Used as config AP name and hostname.
 
 			public:
 				/*
 					Constructs ksWiFiConfigurator.
 					@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname.
 				*/
-				ksWiFiConfigurator(const String& devicePrefixName = String("ksWiFiConfigurator"));
+				ksWiFiConfigurator(const std::string& devicePrefixName = "ksWiFiConfigurator");
 
 				/*
 					Initializes ksWiFiConfigurator component.

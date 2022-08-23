@@ -40,7 +40,7 @@ namespace ksf::comps
 		: sendConnectionStatus(sendConnectionStatus)
 	{}
 
-	void ksMqttConnector::setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure)
+	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, bool secure)
 	{
 		wifiClientSp = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
 		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
@@ -52,9 +52,9 @@ namespace ksf::comps
 		IPAddress serverIP;
 
 		if (serverIP.fromString(broker.c_str()))
-			mqttClientSp->setServer(serverIP, port.toInt());
+			mqttClientSp->setServer(serverIP, std::stoi(port));
 		else
-			mqttClientSp->setServer(broker.c_str(), port.toInt());
+			mqttClientSp->setServer(broker.c_str(), std::stoi(port));
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
@@ -83,50 +83,45 @@ namespace ksf::comps
 	{
 		if (onMesssage->isBound())
 		{
-			String payloadStr((char*)0);
-			payloadStr.reserve(length);
+			std::string_view payloadStr((char*)payload, length);
+			std::string topicStr(topic);
 
-			String topicStr(topic);
-
-			if (topicStr.startsWith(prefix))
-				topicStr.remove(0, prefix.length());
-
-			for (uint32_t payload_ch_idx = 0; payload_ch_idx < length; ++payload_ch_idx)
-				payloadStr += (char)payload[payload_ch_idx];
+			if (topicStr.find(prefix) != std::string::npos)
+				topicStr = topicStr.substr(prefix.length());
 
 			onMesssage->broadcast(topicStr, payloadStr);
 		}
 	}
 
-	void ksMqttConnector::subscribe(const String& topic, bool skipDevicePrefix)
+	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
 			mqttClientSp->subscribe(topic.c_str());
 		else	
-			mqttClientSp->subscribe(String(prefix + topic).c_str());
+			mqttClientSp->subscribe(std::string(prefix + topic).c_str());
 	}
 
-	void ksMqttConnector::unsubscribe(const String& topic, bool skipDevicePrefix)
+	void ksMqttConnector::unsubscribe(const std::string& topic, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
 			mqttClientSp->unsubscribe(topic.c_str());
 		else
-			mqttClientSp->unsubscribe(String(prefix + topic).c_str());
+			mqttClientSp->unsubscribe(std::string(prefix + topic).c_str());
 	}
 
-	void ksMqttConnector::publish(const String& topic, const String& payload, bool retain, bool skipDevicePrefix)
+	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
 	{
 		if (skipDevicePrefix)
 			mqttClientSp->publish(topic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 		else
-			mqttClientSp->publish(String(prefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+			mqttClientSp->publish(std::string(prefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 	}
 
 	bool ksMqttConnector::connectToBroker()
 	{
 		if (sendConnectionStatus)
 		{
-			String willTopic{prefix + "connected"};
+			std::string willTopic{prefix + "connected"};
 			
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
 			{

@@ -12,20 +12,20 @@
 
 namespace ksf
 {
-	ksConfig::ksConfig(const String& configFile)
+	ksConfig::ksConfig(const std::string& configFile)
 	{
 		if (configFile.length() > 0)
 		{
-			this->configFile = configFile.charAt(0) != '/' ? "/" + configFile : configFile;
+			this->configFile = configFile[0] != '/' ? "/" + configFile : configFile;
 			auto fileReader = LittleFS.open(this->configFile.c_str(), "r");
 
 			while (fileReader.available())
 			{
-				String name = fileReader.readStringUntil('\n');
-				name = name.substring(0, name.length() - 1);
+				std::string name{fileReader.readStringUntil('\n').c_str()};
+				name = name.substr(0, name.length() - 1);
 
-				String val = fileReader.readStringUntil('\n');
-				val = val.substring(0, val.length() - 1);
+				std::string val{fileReader.readStringUntil('\n').c_str()};
+				val = val.substr(0, val.length() - 1);
 
 				setParam(name, val);
 			}
@@ -37,13 +37,13 @@ namespace ksf
 		}
 	}
 
-	void ksConfig::setParam(const String& paramName, const String& paramValue)
+	void ksConfig::setParam(const std::string& paramName, const std::string& paramValue)
 	{
 		isDirty = true;
 		configParams[paramName] = paramValue;
 	}
 
-	const String& ksConfig::getParam(const String& paramName, const String& defaultValue) const
+	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
 		const auto& found = configParams.find(paramName);
 		if (found != configParams.end())
@@ -60,8 +60,8 @@ namespace ksf
 
 			for (auto& entry : configParams)
 			{
-				fileWriter.println(entry.first);
-				fileWriter.println(entry.second);
+				fileWriter.println(entry.first.c_str());
+				fileWriter.println(entry.second.c_str());
 			}
 
 			fileWriter.close();

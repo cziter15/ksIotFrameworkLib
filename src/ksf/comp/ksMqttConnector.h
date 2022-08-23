@@ -13,6 +13,9 @@
 #include "../evt/ksEvent.h"
 #include "../ksSimpleTimer.h"
 
+#include <string>
+#include <string_view>
+
 class WiFiClient;
 class PubSubClient;
 
@@ -38,9 +41,9 @@ namespace ksf
 
 				bool wasConnected = false;										// True if connected in previous loop.
 
-				String login;													// Saved MQTT login.
-				String password;												// Saved MQTT password.
-				String prefix;													// Saved MQTT prefix.
+				std::string login;													// Saved MQTT login.
+				std::string password;												// Saved MQTT password.
+				std::string prefix;													// Saved MQTT prefix.
 
 				/*
 					Called to connect to broker.
@@ -63,7 +66,7 @@ namespace ksf
 				void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
 
 			public:
-				DECLARE_KS_EVENT(onMesssage, const String&, const String&)		// onMesssage event that user can bind to.
+				DECLARE_KS_EVENT(onMesssage, const std::string_view&, const std::string_view&)		// onMesssage event that user can bind to.
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
 
@@ -111,7 +114,7 @@ namespace ksf
 					@param topic Topic to subscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
 				*/
-				void subscribe(const String& topic, bool skipDevicePrefix = false);
+				void subscribe(const std::string& topic, bool skipDevicePrefix = false);
 
 				/*
 					Unsubscribes to MQTT topic.
@@ -119,7 +122,7 @@ namespace ksf
 					@param topic Topic to unsubscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
 				*/
-				void unsubscribe(const String& topic, bool skipDevicePrefix = false);
+				void unsubscribe(const std::string& topic, bool skipDevicePrefix = false);
 
 				/*
 					Publishes payload to MQTT topic.
@@ -129,7 +132,7 @@ namespace ksf
 					@param retain True if this publish should be retained, otherwise false.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
 				*/
-				void publish(const String& topic, const String& payload, bool retain = false, bool skipDevicePrefix = false);
+				void publish(const std::string& topic, const std::string& payload, bool retain = false, bool skipDevicePrefix = false);
 
 				/*
 					Configures MQTT connection parameters.
@@ -140,7 +143,7 @@ namespace ksf
 					@param password MQTT user password.
 					@param secure True if use SSL, otherwise false.
 				*/
-				void setupConnection(const String& broker, const String& port, const String& login, const String& password, const String& prefix, bool secure = false);
+				void setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, bool secure = false);
 		};
 	}
 }

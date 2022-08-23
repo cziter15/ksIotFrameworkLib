@@ -28,12 +28,12 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(ksfMqttConfigFile)
 		{
-			String savedBroker = config_file.getParam(ksfBrokerParamName);
-			String port = config_file.getParam(ksfPortParamName, ksfDefPort);
+			std::string savedBroker = config_file.getParam(ksfBrokerParamName);
+			std::string port = config_file.getParam(ksfPortParamName, ksfDefPort);
 
-			String login = config_file.getParam(ksfUserParamName);
-			String password = config_file.getParam(ksfPasswordParamName);
-			String prefix = config_file.getParam(ksfPrefixParamName);
+			std::string login = config_file.getParam(ksfUserParamName);
+			std::string password = config_file.getParam(ksfPasswordParamName);
+			std::string prefix = config_file.getParam(ksfPrefixParamName);
 
 			if (prefix.length() > 0)
 			{
@@ -41,11 +41,11 @@ namespace ksf::comps
 				const char topicDelimeter =  '/';
 
 				/* Apply prefix correction. */
-				if (prefix.begin()[0] != topicDelimeter)
+				if (prefix.front() != topicDelimeter)
 					prefix = topicDelimeter + prefix;
 
 				/* Apply suffix correction. */
-				if (prefix.end()[0] != topicDelimeter)
+				if (prefix.back() != topicDelimeter)
 					prefix += topicDelimeter;
 			}
 
