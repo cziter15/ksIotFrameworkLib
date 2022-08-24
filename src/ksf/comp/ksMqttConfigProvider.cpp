@@ -28,17 +28,18 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(ksfMqttConfigFile)
 		{
-			std::string savedBroker = config_file.getParam(ksfBrokerParamName);
-			std::string port = config_file.getParam(ksfPortParamName, ksfDefPort);
+			auto& savedBroker = config_file.getParam(ksfBrokerParamName);
+			auto& port = config_file.getParam(ksfPortParamName, ksfDefPort);
 
-			std::string login = config_file.getParam(ksfUserParamName);
-			std::string password = config_file.getParam(ksfPasswordParamName);
-			std::string prefix = config_file.getParam(ksfPrefixParamName);
+			auto& login = config_file.getParam(ksfUserParamName);
+			auto& password = config_file.getParam(ksfPasswordParamName);
+
+			auto prefix = config_file.getParam(ksfPrefixParamName);
 
 			if (prefix.length() > 0)
 			{
 				/* MQTT topic delimeter (slash). */
-				const char topicDelimeter =  '/';
+				const char topicDelimeter{'/'};
 
 				/* Apply prefix correction. */
 				if (prefix.front() != topicDelimeter)
