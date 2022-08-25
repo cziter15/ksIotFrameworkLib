@@ -19,6 +19,8 @@
 	#include <ESP8266WiFi.h>
 #endif
 
+#include <LittleFS.h>
+
 using namespace std::placeholders;
 
 namespace ksf::comps
@@ -161,6 +163,13 @@ namespace ksf::comps
 				respond("Erasing RF CAL done, restarting. It may take few seconds.");
 				delay(500);
 
+				ESP.restart();
+			}
+			else if (message.compare("format") == 0)
+			{
+				LittleFS.format();
+				respond("Erasing flash done, restarting. It may take few seconds.");
+				delay(500);
 				ESP.restart();
 			}
 			else if (message.compare("break_app") == 0)
