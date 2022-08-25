@@ -93,7 +93,7 @@ RTTI is required to properly cast component types and so on. By default RTTI for
 **If using platformio, simply add `build_unflags = -fno-rtti` line to your env configuration in platformio.ini file.**
 **Recently added functionality handles this automatically, it works now on platformio dev, but will be available with pio 6.0.3 release.**
 
-Bare arduino projects need to have `-frtti` in `compiler.cpp.extra_flags=` option in your board.txt file.
+Bare arduino projects need to have `-frtti` and C++17 enabled in `compiler.cpp.extra_flags=` option in board.txt file.
 
 ## Saving power
 By default, this framework supports modem power saving. This requires DTIM set on access point. Best value for me is 3.
