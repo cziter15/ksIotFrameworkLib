@@ -11,12 +11,15 @@
 
 #include <memory>
 #include "ksConstants.h"
+#include "ksRtti.h"
 
 namespace ksf 
 {
 	class ksComposable;
-	class ksComponent
+	class ksComponent : public ksRtti
 	{
+		KS_RTTI_DECLARATIONS(ksComponent, ksRtti)
+
 		friend class ksApplication;
 
 		public:

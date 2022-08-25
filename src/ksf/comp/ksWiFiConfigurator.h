@@ -17,8 +17,10 @@ namespace ksf
 {
 	namespace comps 
 	{
-		class ksWiFiConfigurator : public ksf::ksComponent
+		class ksWiFiConfigurator : public ksComponent
 		{
+			KS_RTTI_DECLARATIONS(ksWiFiConfigurator, ksComponent)
+
 			protected:
 				class ksf::ksComposable* owner{nullptr};		// Raw pointer to ownning composable (app).
 				WiFiManager manager;				 			// WiFiManager object.

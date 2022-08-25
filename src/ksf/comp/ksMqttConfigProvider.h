@@ -21,6 +21,8 @@ namespace ksf
 		class ksMqttConnector;
 		class ksMqttConfigProvider : public ksConfigProvider
 		{
+			KS_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
+
 			protected:
 				static const char ksfMqttConfigFile[];					// Static char-string "mqtt.conf".
 

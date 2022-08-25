@@ -18,8 +18,10 @@ namespace ksf
 	namespace comps
 	{
 		class ksMqttConnector;
-		class ksMqttDebugResponder : public ksf::ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
+		class ksMqttDebugResponder : public ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
 		{
+			KS_RTTI_DECLARATIONS(ksMqttDebugResponder, ksComponent)
+
 			protected:
 				std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
 				ksComposable* owner{nullptr};							// Raw pointer to ownning composable (app).

@@ -21,8 +21,10 @@ namespace ksf
 	namespace comps
 	{
 		class ksComposable;
-		class ksConfigProvider : public ksf::ksComponent
+		class ksConfigProvider : public ksComponent
 		{
+			KS_RTTI_DECLARATIONS(ksConfigProvider, ksComponent)
+
 			protected:
 				std::vector<std::unique_ptr<WiFiManagerParameter>> params;	// Unique pointers of parameters (deletes them safely).
 				

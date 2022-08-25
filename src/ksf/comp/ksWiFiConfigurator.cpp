@@ -21,9 +21,9 @@ namespace ksf::comps
 		deviceName += '-';
 
 		#ifdef ESP32
-			deviceName += (uint32_t)ESP.getEfuseMac();
+			deviceName += std::to_string(ESP.getEfuseMac());
 		#else
-			deviceName += ESP.getChipId();
+			deviceName += std::to_string(ESP.getChipId());
 		#endif
 	}
 

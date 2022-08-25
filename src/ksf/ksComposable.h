@@ -12,9 +12,8 @@
 #include <vector>
 #include <functional>
 #include <algorithm>
-#include <memory>
 #include "ksSafeList.h"
-#include "ksConstants.h"
+#include "ksComponent.h"
 
 namespace ksf 
 {
@@ -40,9 +39,6 @@ namespace ksf
 			/*
 				Tries to find components of passed template type.
 
-				RTTI variant uses dynamic_pointer_cast, which will respect all C++ underlying mechanisms of pointer casting.
-				NON-RTTI variant simply compares individual type (static casting and direct type check, won't respect inheritance).
-
 				@param outComponents Vector of weak pointers to be filled with matching components, might be empty as well.
 			*/
 			template <class _Type>
@@ -52,9 +48,12 @@ namespace ksf
 
 				for (const auto& comp : components.getList())
 				{
-					std::weak_ptr<_Type> castedCompWp = std::dynamic_pointer_cast<_Type>(comp);
-					if (!castedCompWp.expired())
-						outComponents.push_back(castedCompWp);
+					if (comp->is(_Type::typeIdClass()))
+					{
+						std::weak_ptr<_Type> castedCompWp = std::static_pointer_cast<_Type>(comp);
+						if (!castedCompWp.expired())
+							outComponents.push_back(castedCompWp);
+					}
 				}
 			}
 

@@ -15,8 +15,10 @@ namespace ksf
 {
 	namespace comps
 	{
-		class ksLed : public ksf::ksComponent
+		class ksLed : public ksComponent
 		{
+			KS_RTTI_DECLARATIONS(ksLed, ksComponent)
+
 			protected:
 				uint8_t pin{0};						// Saved LED pin number.
 

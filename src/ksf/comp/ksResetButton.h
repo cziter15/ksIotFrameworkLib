@@ -16,8 +16,10 @@ namespace ksf
 {
 	namespace comps
 	{
-		class ksResetButton : public ksf::ksComponent
+		class ksResetButton : public ksComponent
 		{
+			KS_RTTI_DECLARATIONS(ksResetButton, ksComponent)
+
 			protected:
 				uint8_t pin{0};						// Cached pin number.
 				uint8_t triggerState{0};			// State that triggers reset logic.

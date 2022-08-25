@@ -14,7 +14,7 @@ try:
 
 	flagCounter = 0
 	for e in (env, DefaultEnvironment(), projenv):
-		e.ProcessUnFlags("-fno-rtti")
+		#e.ProcessUnFlags("-fno-rtti")
 		e.ProcessUnFlags("-std=gnu++11")
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully processed unflags for [" + str(flagCounter) + "] environments.")
