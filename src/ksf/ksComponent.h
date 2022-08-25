@@ -18,7 +18,7 @@ namespace ksf
 	class ksComposable;
 	class ksComponent : public ksRtti
 	{
-		KS_RTTI_DECLARATIONS(ksComponent, ksRtti)
+		KSF_RTTI_DECLARATIONS(ksComponent, ksRtti)
 
 		friend class ksApplication;
 

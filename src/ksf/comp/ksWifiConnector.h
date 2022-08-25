@@ -18,7 +18,7 @@ namespace ksf
 	{
 		class ksWifiConnector : public ksComponent
 		{
-			KS_RTTI_DECLARATIONS(ksWifiConnector, ksComponent)
+			KSF_RTTI_DECLARATIONS(ksWifiConnector, ksComponent)
 			
 			protected:
 				ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				// Wifi timer - timeout.

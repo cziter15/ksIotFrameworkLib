@@ -18,7 +18,7 @@ namespace ksf
 	{
 		class ksResetButton : public ksComponent
 		{
-			KS_RTTI_DECLARATIONS(ksResetButton, ksComponent)
+			KSF_RTTI_DECLARATIONS(ksResetButton, ksComponent)
 
 			protected:
 				uint8_t pin{0};						// Cached pin number.

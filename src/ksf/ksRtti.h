@@ -1,3 +1,13 @@
+/*
+ *	Original author: Paul Varcholik
+ *	Additional authors: Shao Voon Wong, Krzysztof Strehlau
+ *
+ *	This file is part of the ksIotFramework library.
+ *	All licensing information can be found inside LICENSE.md file.
+ *
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ */
+
 #pragma once
 
 #include <stddef.h>
@@ -28,9 +38,7 @@ namespace ksf
 			T* as() 
 			{
 				if (is(T::typeIdClass()))
-				{
 					return (T*)this;
-				}
 
 				return nullptr;
 			}
@@ -38,15 +46,13 @@ namespace ksf
 			const T* as() const
 			{
 				if (is(T::typeIdClass()))
-				{
 					return (T*)this;
-				}
 
 				return nullptr;
 			}
 	};
 
-	#define KS_RTTI_DECLARATIONS(Type, ParentType)									\
+	#define KSF_RTTI_DECLARATIONS(Type, ParentType)									\
 		public:																		\
 			virtual const size_t typeIdInstance() const								\
 			{																		\
@@ -59,14 +65,14 @@ namespace ksf
 			virtual ksf::ksRtti* queryInterface( const size_t id )					\
 			{																		\
 				if (id == typeIdClass())											\
-					return (ksf::ksRtti*)this;											\
+					return (ksf::ksRtti*)this;										\
 				else																\
 					return ParentType::queryInterface(id);							\
 			}																		\
 			virtual const ksf::ksRtti* queryInterface( const size_t id ) const		\
 			{																		\
 				if (id == typeIdClass())											\
-					return (ksf::ksRtti*)this;											\
+					return (ksf::ksRtti*)this;										\
 				else																\
 					return ParentType::queryInterface(id);							\
 			}																		\

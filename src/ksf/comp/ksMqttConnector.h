@@ -26,7 +26,7 @@ namespace ksf
 		class ksWifiConnector;
 		class ksMqttConnector : public ksComponent
 		{
-			KS_RTTI_DECLARATIONS(ksMqttConnector, ksComponent)
+			KSF_RTTI_DECLARATIONS(ksMqttConnector, ksComponent)
 
 			protected:
 				std::shared_ptr<WiFiClient> wifiClientSp;						// Shared pointer to WiFiClient used to connect to MQTT.
