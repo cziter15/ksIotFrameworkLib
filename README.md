@@ -87,13 +87,12 @@ bool EnergyMonitor::init()
 }
 ```
 
-## RTTI - compiler flags
-RTTI is required to properly cast component types and so on. By default RTTI for ESP32/ESP8266 is disabled in Arduino framework.
+## Compiler flags
+Bare arduino projects need to have C++17 enabled in `compiler.cpp.extra_flags=` option in board.txt file.
 
-**If using platformio, simply add `build_unflags = -fno-rtti` line to your env configuration in platformio.ini file.**
-**Recently added functionality handles this automatically, it works now on platformio dev, but will be available with pio 6.0.3 release.**
-
-Bare arduino projects need to have `-frtti` and C++17 enabled in `compiler.cpp.extra_flags=` option in board.txt file.
+## Custom RTTI
+Use KSF_RTTI_DECLARATIONS macro to provide proper run time type information generation for proper casting of components.
+See ksConfigProvider.h for example. Your application components should use this macro, otherwise component finding mechanism won't work.
 
 ## Saving power
 By default, this framework supports modem power saving. This requires DTIM set on access point. Best value for me is 3.
