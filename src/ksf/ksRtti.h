@@ -18,16 +18,6 @@ namespace ksf
 	{
 		public:
 			virtual const size_t getInstanceType() const = 0;
-			
-			virtual ksRtti* downcastTo(const size_t)
-			{
-				return nullptr;
-			}
-
-			virtual const ksRtti* downcastTo(const size_t) const
-			{
-				return nullptr;
-			}
 
 			virtual bool isA(const size_t id) const
 			{
@@ -61,20 +51,6 @@ namespace ksf
 			static const size_t getClassType()										\
 			{																		\
 				static int d = 0; return (size_t) &d; 								\
-			}																		\
-			virtual ksf::ksRtti* downcastTo( const size_t id )						\
-			{																		\
-				if (id == getClassType())											\
-					return (ksf::ksRtti*)this;										\
-				else																\
-					return ParentType::downcastTo(id);								\
-			}																		\
-			virtual const ksf::ksRtti* downcastTo( const size_t id ) const			\
-			{																		\
-				if (id == getClassType())											\
-					return (ksf::ksRtti*)this;										\
-				else																\
-					return ParentType::downcastTo(id);								\
 			}																		\
 			virtual bool isA(const size_t id) const									\
 			{																		\
