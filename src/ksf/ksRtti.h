@@ -24,29 +24,29 @@ namespace ksf
 				return false;
 			}
 
-			template <typename T>
-			T* as() 
+			template <typename _Type>
+			_Type* as() 
 			{
-				if (is(T::getClassType()))
-					return (T*)this;
+				if (is(_Type::getClassType()))
+					return (_Type*)this;
 
 				return nullptr;
 			}
-			template <typename T>
-			const T* as() const
+			template <typename _Type>
+			const _Type* as() const
 			{
-				if (is(T::getClassType()))
-					return (T*)this;
+				if (is(_Type::getClassType()))
+					return (_Type*)this;
 
 				return nullptr;
 			}
 	};
 
-	#define KSF_RTTI_DECLARATIONS(Type, ParentType)									\
+	#define KSF_RTTI_DECLARATIONS(_Type, _ParentType)								\
 		public:																		\
 			virtual const size_t getInstanceType() const							\
 			{																		\
-				return Type::getClassType(); 										\
+				return _Type::getClassType(); 										\
 			}																		\
 			static const size_t getClassType()										\
 			{																		\
@@ -57,7 +57,7 @@ namespace ksf
 				if (id == getClassType())											\
 					return true;													\
 				else																\
-					return ParentType::isA(id);										\
+					return _ParentType::isA(id);									\
 			}																		\
 		private:
 }
