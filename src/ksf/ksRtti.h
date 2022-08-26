@@ -17,19 +17,19 @@ namespace ksf
 	class ksRtti
 	{
 		public:
-			virtual const size_t typeIdInstance() const = 0;
+			virtual const size_t getInstanceType() const = 0;
 			
-			virtual ksRtti* queryInterface(const size_t)
+			virtual ksRtti* downcastTo(const size_t)
 			{
 				return nullptr;
 			}
 
-			virtual const ksRtti* queryInterface(const size_t) const
+			virtual const ksRtti* downcastTo(const size_t) const
 			{
 				return nullptr;
 			}
 
-			virtual bool is(const size_t id) const
+			virtual bool isA(const size_t id) const
 			{
 				return false;
 			}
@@ -37,7 +37,7 @@ namespace ksf
 			template <typename T>
 			T* as() 
 			{
-				if (is(T::typeIdClass()))
+				if (is(T::getClassType()))
 					return (T*)this;
 
 				return nullptr;
@@ -45,7 +45,7 @@ namespace ksf
 			template <typename T>
 			const T* as() const
 			{
-				if (is(T::typeIdClass()))
+				if (is(T::getClassType()))
 					return (T*)this;
 
 				return nullptr;
@@ -54,34 +54,34 @@ namespace ksf
 
 	#define KSF_RTTI_DECLARATIONS(Type, ParentType)									\
 		public:																		\
-			virtual const size_t typeIdInstance() const								\
+			virtual const size_t getInstanceType() const							\
 			{																		\
-				return Type::typeIdClass(); 										\
+				return Type::getClassType(); 										\
 			}																		\
-			static const size_t typeIdClass()										\
+			static const size_t getClassType()										\
 			{																		\
 				static int d = 0; return (size_t) &d; 								\
 			}																		\
-			virtual ksf::ksRtti* queryInterface( const size_t id )					\
+			virtual ksf::ksRtti* downcastTo( const size_t id )						\
 			{																		\
-				if (id == typeIdClass())											\
+				if (id == getClassType())											\
 					return (ksf::ksRtti*)this;										\
 				else																\
-					return ParentType::queryInterface(id);							\
+					return ParentType::downcastTo(id);								\
 			}																		\
-			virtual const ksf::ksRtti* queryInterface( const size_t id ) const		\
+			virtual const ksf::ksRtti* downcastTo( const size_t id ) const			\
 			{																		\
-				if (id == typeIdClass())											\
+				if (id == getClassType())											\
 					return (ksf::ksRtti*)this;										\
 				else																\
-					return ParentType::queryInterface(id);							\
+					return ParentType::downcastTo(id);								\
 			}																		\
-			virtual bool is(const size_t id) const									\
+			virtual bool isA(const size_t id) const									\
 			{																		\
-				if (id == typeIdClass())											\
+				if (id == getClassType())											\
 					return true;													\
 				else																\
-					return ParentType::is(id);										\
+					return ParentType::isA(id);										\
 			}																		\
 		private:
 }

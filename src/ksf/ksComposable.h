@@ -48,7 +48,7 @@ namespace ksf
 
 				for (const auto& comp : components.getList())
 				{
-					if (comp->is(_Type::typeIdClass()))
+					if (comp->isA(_Type::getClassType()))
 					{
 						std::weak_ptr<_Type> castedCompWp = std::static_pointer_cast<_Type>(comp);
 						if (!castedCompWp.expired())
