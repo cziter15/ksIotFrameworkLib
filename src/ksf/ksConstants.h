@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <limits>
 #include <string>
+#include <charconv>
 #include "stdlib_noniso.h"
 
 /* Simply ONE second in milliseconds. */
@@ -90,4 +91,23 @@ namespace ksf
 	*/
 	extern std::string to_string(double value, const int base);
 	extern std::string to_string(float value, const int base);
+
+	/*
+		Helper functions co convert other values to stirng.
+	*/
+	template <typename _Type>
+	inline std::string to_string(const _Type& input)
+	{
+		return std::to_string(input);
+	}
+
+	/*
+		Helper functions co convert from string to another type.
+	*/
+	template <typename _In, typename _Out>
+	bool from_chars(const _In& input, _Out& out)
+	{
+		const auto& result = std::from_chars(input.data(), input.data() + input.size(), out);
+		return result.ec == std::errc();
+	}
 }

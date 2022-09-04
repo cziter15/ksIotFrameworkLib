@@ -16,11 +16,11 @@
 namespace ksf::comps
 {
 	const char ksMqttConfigProvider::ksfMqttConfigFile[] = "mqtt.conf";
+	const char ksMqttConfigProvider::ksfDefPort[] = "1883";
 
 	const char ksMqttConfigProvider::ksfBrokerParamName[] = "broker";
 	const char ksMqttConfigProvider::ksfUserParamName[] = "user";
 	const char ksMqttConfigProvider::ksfPortParamName[] = "port";
-	const char ksMqttConfigProvider::ksfDefPort[] = "1883";
 	const char ksMqttConfigProvider::ksfPasswordParamName[] = "password";
 	const char ksMqttConfigProvider::ksfPrefixParamName[] = "prefix";
 
@@ -64,7 +64,6 @@ namespace ksf::comps
 			addNewParam(manager, ksfUserParamName, config_file.getParam(ksfUserParamName).c_str());
 			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
 			addNewParam(manager, ksfPrefixParamName, config_file.getParam(ksfPrefixParamName).c_str());
-			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
 		}
 	}
 
