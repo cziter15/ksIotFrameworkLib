@@ -64,7 +64,7 @@ namespace ksf::comps
 			addNewParam(manager, ksfBrokerParamName, config_file.getParam(ksfBrokerParamName).c_str());
 			addNewParam(manager, ksfPortParamName, config_file.getParam(ksfPortParamName).c_str(), 5);
 			addNewParam(manager, ksfUserParamName, config_file.getParam(ksfUserParamName).c_str());
-			addNewParam(manager, ksfFingerprintParamName, config_file.getParam(ksfFingerprintParamName).c_str());
+			addNewParam(manager, ksfFingerprintParamName, config_file.getParam(ksfFingerprintParamName).c_str(), 110); //TODO: maybe ifdef?
 			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
 			addNewParam(manager, ksfPrefixParamName, config_file.getParam(ksfPrefixParamName).c_str());
 		}
