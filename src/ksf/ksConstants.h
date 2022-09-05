@@ -102,12 +102,23 @@ namespace ksf
 	}
 
 	/*
-		Helper functions co convert from string to another type.
+		Helper function to convert from string to another type.
 	*/
 	template <typename _In, typename _Out>
 	bool from_chars(const _In& input, _Out& out)
 	{
 		const auto& result = std::from_chars(input.data(), input.data() + input.size(), out);
 		return result.ec == std::errc();
+	}
+
+	/*
+		Helper function to convert from hex to uint8_t
+	*/
+	inline uint8_t htoi (unsigned char c)
+	{
+		if (c>='0' && c <='9') return c - '0';
+		else if (c>='A' && c<='F') return 10 + c - 'A';
+		else if (c>='a' && c<='f') return 10 + c - 'a';
+		else return 255;
 	}
 }

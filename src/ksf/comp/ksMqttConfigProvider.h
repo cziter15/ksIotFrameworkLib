@@ -29,6 +29,7 @@ namespace ksf
 				static const char ksfBrokerParamName[];					// Static char-string "broker".
 				static const char ksfUserParamName[];					// Static char-string "user".
 				static const char ksfPortParamName[];					// Static char-string "port".
+				static const char ksfFingerprintParamName[];			// Static char-string "fingerprint".
 				static const char ksfDefPort[];							// Static char-string "port".
 				static const char ksfPasswordParamName[];				// Static char-string "password".
 				static const char ksfPrefixParamName[];					// Static char-string "prefix".

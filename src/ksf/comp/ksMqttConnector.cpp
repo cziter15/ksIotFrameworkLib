@@ -40,9 +40,35 @@ namespace ksf::comps
 		: sendConnectionStatus(sendConnectionStatus)
 	{}
 
-	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, bool secure)
+	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint)
 	{
-		wifiClientSp = secure ? std::make_shared<WiFiClientSecure>() : std::make_shared<WiFiClient>();
+		if (!fingerprint.empty())
+		{
+			uint8_t fingerprintBytes[20];
+
+			if (fingerprint.size() / 2 == 20)
+			{
+				for (uint8_t idx = 0; idx < 20;)
+				{
+					uint8_t c = ksf::htoi(fingerprint[idx*2]);
+					uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
+
+					if ((c>15) || (d>15))
+						return;
+
+					fingerprintBytes[idx++] = (c<<4)|d;
+				}
+			}
+
+			auto secureClient = std::make_shared<WiFiClientSecure>();
+			secureClient->setFingerprint(fingerprintBytes);
+			wifiClientSp = std::move(secureClient);
+		}
+		else
+		{
+			wifiClientSp = std::make_shared<WiFiClient>();
+		}
+
 		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
 
 		this->login = login;

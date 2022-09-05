@@ -21,6 +21,7 @@ namespace ksf::comps
 	const char ksMqttConfigProvider::ksfBrokerParamName[] = "broker";
 	const char ksMqttConfigProvider::ksfUserParamName[] = "user";
 	const char ksMqttConfigProvider::ksfPortParamName[] = "port";
+	const char ksMqttConfigProvider::ksfFingerprintParamName[] = "SSLFingerprint";
 	const char ksMqttConfigProvider::ksfPasswordParamName[] = "password";
 	const char ksMqttConfigProvider::ksfPrefixParamName[] = "prefix";
 
@@ -35,6 +36,7 @@ namespace ksf::comps
 			auto& password = config_file.getParam(ksfPasswordParamName);
 
 			auto prefix = config_file.getParam(ksfPrefixParamName);
+			auto fingerprint = config_file.getParam(ksfFingerprintParamName);
 
 			if (prefix.length() > 0)
 			{
@@ -51,7 +53,7 @@ namespace ksf::comps
 			}
 
 			if (savedBroker.length() > 0)
-				connector.setupConnection(savedBroker, port, login, password, prefix);
+				connector.setupConnection(savedBroker, port, login, password, prefix, fingerprint);
 		}
 	}
 
@@ -60,8 +62,9 @@ namespace ksf::comps
 		USING_CONFIG_FILE(ksfMqttConfigFile)
 		{
 			addNewParam(manager, ksfBrokerParamName, config_file.getParam(ksfBrokerParamName).c_str());
-			addNewParam(manager, ksfPortParamName, config_file.getParam(ksfPortParamName).c_str());
+			addNewParam(manager, ksfPortParamName, config_file.getParam(ksfPortParamName).c_str(), 5);
 			addNewParam(manager, ksfUserParamName, config_file.getParam(ksfUserParamName).c_str());
+			addNewParam(manager, ksfFingerprintParamName, config_file.getParam(ksfFingerprintParamName).c_str());
 			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
 			addNewParam(manager, ksfPrefixParamName, config_file.getParam(ksfPrefixParamName).c_str());
 		}

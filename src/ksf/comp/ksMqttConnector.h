@@ -143,9 +143,9 @@ namespace ksf
 					@param port MQTT broker port.
 					@param login MQTT user login.
 					@param password MQTT user password.
-					@param secure True if use SSL, otherwise false.
+					@param fingerprint Server cert fingerprint (or empty)
 				*/
-				void setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, bool secure = false);
+				void setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint);
 		};
 	}
 }
