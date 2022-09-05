@@ -47,8 +47,7 @@ namespace ksf
 				std::string password;											// Saved MQTT password.
 				std::string prefix;												// Saved MQTT prefix.
 
-				std::vector<uint8_t> fingerprintVec;							// Cert fingerprint.
-
+				std::string fingerprint;
 				/*
 					Called to connect to broker.
 				*/
@@ -68,14 +67,6 @@ namespace ksf
 					@param length Payload length.
 				*/
 				void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
-
-				
-				/*
-					Called to parse fingerprint.
-
-					@param fingerprint In fingerprint SHA1 or SHA256
-				*/
-				bool parseFingerprint(const std::string& fingerprint);
 
 			public:
 				DECLARE_KS_EVENT(onMesssage, const std::string_view&, const std::string_view&)		// onMesssage event that user can bind to.

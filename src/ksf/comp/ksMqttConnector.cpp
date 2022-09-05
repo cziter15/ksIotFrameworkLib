@@ -40,41 +40,34 @@ namespace ksf::comps
 		: sendConnectionStatus(sendConnectionStatus)
 	{}
 
-	bool ksMqttConnector::parseFingerprint(const std::string& fingerprint)
-	{
-		#if ESP8266
-			const uint8_t fpLen = 20;
-		#else
-			const uint8_t fpLen = 32;
-		#endif
-
-		if (fingerprint.size() / 2 == fpLen)
-		{
-			fingerprintVec.resize(fpLen);
-			for (uint8_t idx = 0; idx < fpLen;)
-			{
-				uint8_t c = ksf::htoi(fingerprint[idx*2]);
-				uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
-
-				if ((c>15) || (d>15))
-					return false;
-
-				fingerprintVec[idx++] = (c<<4)|d;
-			}
-		}
-
-		return true;
-	}
-
 	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint)
 	{
 		if (!fingerprint.empty())
 		{
-			if (parseFingerprint(fingerprint))
-			{
-				auto secureClient = std::make_shared<WiFiClientSecure>();
-				wifiClientSp = std::move(secureClient);
-			}
+			#if ESP8266
+				const uint8_t fingerprintData[20];
+				if (fingerprint.size() / 2 == 20)
+				{
+					for (uint8_t idx = 0; idx < 20;)
+					{
+						uint8_t c = ksf::htoi(fingerprint[idx*2]);
+						uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
+
+						if ((c>15) || (d>15))
+							return false;
+
+						fingerprintData[idx++] = (c<<4)|d;
+					}
+				}
+			#endif
+				
+			auto secureClient = std::make_shared<WiFiClientSecure>();
+
+			#if ESP8266
+				secureClient->setFingerprint(fingerprintData);
+			#endif
+
+			wifiClientSp = std::move(secureClient);
 		}
 		else
 		{
@@ -86,6 +79,10 @@ namespace ksf::comps
 		this->login = login;
 		this->password = password;
 		this->prefix = prefix;
+
+		#if ESP32
+			this->fingerprint = fingerprint;
+		#endif
 
 		IPAddress serverIP;
 
@@ -160,16 +157,18 @@ namespace ksf::comps
 		if (sendConnectionStatus)
 		{
 			std::string willTopic{prefix + "connected"};
-			
-			#if ESP8266
-				if (fingerprintVec.size() > 0)
-					reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())->setFingerprint(fingerprintVec.data());
-			#endif
 
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
 			{
 				#if ESP32
-					
+					if (fingerprint.size() > 0)
+					{
+						if (reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())->verify(fingerprint.c_str(), nullptr))
+						{
+							mqttClientSp->disconnect();
+							return true;
+						}
+					}
 				#endif
 
 				mqttClientSp->publish(willTopic.c_str(), (const uint8_t*)"1", 1, true);
