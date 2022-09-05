@@ -57,10 +57,7 @@ namespace ksf::comps
 						uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
 
 						if ((c>15) || (d>15))
-						{
-							fingerprintValid = false;
-							break;
-						}
+							return;
 
 						fingerprintData[idx++] = (c<<4)|d;
 					}
