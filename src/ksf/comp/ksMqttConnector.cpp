@@ -72,6 +72,7 @@ namespace ksf::comps
 					secureClient->setFingerprint(fingerprintData);
 				#elif ESP32
 					this->fingerprint = fingerprint;
+					secureClient->setInsecure();
 				#endif
 
 				wifiClientSp = std::move(secureClient);
@@ -165,13 +166,10 @@ namespace ksf::comps
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
 			{
 				#if ESP32
-					if (fingerprint.size() > 0)
+					if (fingerprint.size() > 0 && !reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())->verify(fingerprint.c_str(), nullptr))
 					{
-						if (reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())->verify(fingerprint.c_str(), nullptr))
-						{
-							mqttClientSp->disconnect();
-							return true;
-						}
+						mqttClientSp->disconnect();
+						return true;
 					}
 				#endif
 
