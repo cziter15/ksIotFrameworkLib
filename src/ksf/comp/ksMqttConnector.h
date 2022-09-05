@@ -47,7 +47,10 @@ namespace ksf
 				std::string password;											// Saved MQTT password.
 				std::string prefix;												// Saved MQTT prefix.
 
-				std::string fingerprint;
+#if ESP32
+				std::string fingerprint;										// Saved fingerprint (for ESP32 validation).
+#endif
+
 				/*
 					Called to connect to broker.
 				*/
