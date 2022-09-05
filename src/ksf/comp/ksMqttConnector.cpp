@@ -44,8 +44,10 @@ namespace ksf::comps
 	{
 		if (!fingerprint.empty())
 		{
+			bool fingerprintValid{true};
+
 			#if ESP8266
-				const uint8_t fingerprintData[20];
+				uint8_t fingerprintData[20];
 				if (fingerprint.size() / 2 == 20)
 				{
 					for (uint8_t idx = 0; idx < 20;)
@@ -54,20 +56,25 @@ namespace ksf::comps
 						uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
 
 						if ((c>15) || (d>15))
-							return false;
+						{
+							fingerprintValid = false;
+							break;
+						}
 
 						fingerprintData[idx++] = (c<<4)|d;
 					}
 				}
 			#endif
-				
-			auto secureClient = std::make_shared<WiFiClientSecure>();
 
-			#if ESP8266
-				secureClient->setFingerprint(fingerprintData);
-			#endif
+			if (fingerprintValid)
+			{
+				auto secureClient = std::make_shared<WiFiClientSecure>();
+				wifiClientSp = std::move(secureClient);
 
-			wifiClientSp = std::move(secureClient);
+				#if ESP8266
+					secureClient->setFingerprint(fingerprintData);
+				#endif
+			}
 		}
 		else
 		{
