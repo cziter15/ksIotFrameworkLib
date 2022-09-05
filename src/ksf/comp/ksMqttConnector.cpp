@@ -40,29 +40,41 @@ namespace ksf::comps
 		: sendConnectionStatus(sendConnectionStatus)
 	{}
 
+	bool ksMqttConnector::parseFingerprint(const std::string& fingerprint)
+	{
+		#if ESP8266
+			const uint8_t fpLen = 20;
+		#else
+			const uint8_t fpLen = 32;
+		#endif
+
+		if (fingerprint.size() / 2 == fpLen)
+		{
+			fingerprintVec.resize(fpLen);
+			for (uint8_t idx = 0; idx < fpLen;)
+			{
+				uint8_t c = ksf::htoi(fingerprint[idx*2]);
+				uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
+
+				if ((c>15) || (d>15))
+					return false;
+
+				fingerprintVec[idx++] = (c<<4)|d;
+			}
+		}
+
+		return true;
+	}
+
 	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint)
 	{
 		if (!fingerprint.empty())
 		{
-			uint8_t fingerprintBytes[20];
-
-			if (fingerprint.size() / 2 == 20)
+			if (parseFingerprint(fingerprint))
 			{
-				for (uint8_t idx = 0; idx < 20;)
-				{
-					uint8_t c = ksf::htoi(fingerprint[idx*2]);
-					uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
-
-					if ((c>15) || (d>15))
-						return;
-
-					fingerprintBytes[idx++] = (c<<4)|d;
-				}
+				auto secureClient = std::make_shared<WiFiClientSecure>();
+				wifiClientSp = std::move(secureClient);
 			}
-
-			auto secureClient = std::make_shared<WiFiClientSecure>();
-			secureClient->setFingerprint(fingerprintBytes);
-			wifiClientSp = std::move(secureClient);
 		}
 		else
 		{
@@ -149,8 +161,17 @@ namespace ksf::comps
 		{
 			std::string willTopic{prefix + "connected"};
 			
+			#if ESP8266
+				if (fingerprintVec.size() > 0)
+					reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())->setFingerprint(fingerprintVec.data());
+			#endif
+
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
 			{
+				#if ESP32
+					
+				#endif
+
 				mqttClientSp->publish(willTopic.c_str(), (const uint8_t*)"1", 1, true);
 				return true;
 			}
