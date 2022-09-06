@@ -18,6 +18,7 @@
 
 class WiFiClient;
 class PubSubClient;
+class ksCertFingerprintBase;
 
 namespace ksf
 {
@@ -47,9 +48,7 @@ namespace ksf
 				std::string password;											// Saved MQTT password.
 				std::string prefix;												// Saved MQTT prefix.
 
-#if ESP32
-				std::string fingerprint;										// Saved fingerprint (for ESP32 validation).
-#endif
+				std::shared_ptr<ksCertFingerprintBase> certFingerprint;			// Cert fingerprint validator.
 
 				/*
 					Called to connect to broker.

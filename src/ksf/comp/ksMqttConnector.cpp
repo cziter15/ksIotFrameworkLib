@@ -10,6 +10,7 @@
 #include "../ksComposable.h"
 #include "../ksConstants.h"
 #include "../ksConfig.h"
+#include "../ksCertUtils.h"
 #include "ksWifiConnector.h"
 #include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"
@@ -44,39 +45,11 @@ namespace ksf::comps
 	{
 		if (!fingerprint.empty())
 		{
-			#if ESP32
-				bool fingerprintValid{fingerprint.size() / 2 == 32};
-			#elif ESP8266
-				bool fingerprintValid{fingerprint.size() / 2 == 20};
-				uint8_t fingerprintData[20];
-				if (fingerprintValid)
-				{
-					for (uint8_t idx = 0; idx < 20;)
-					{
-						uint8_t c = ksf::htoi(fingerprint[idx*2]);
-						uint8_t d = ksf::htoi(fingerprint[idx*2+1]);
-
-						if ((c>15) || (d>15))
-							return;
-
-						fingerprintData[idx++] = (c<<4)|d;
-					}
-				}
-			#endif
-
-			if (fingerprintValid)
-			{
-				auto secureClient = std::make_shared<WiFiClientSecure>();
-				
-				#if ESP8266
-					secureClient->setFingerprint(fingerprintData);
-				#elif ESP32
-					this->fingerprint = fingerprint;
-					secureClient->setInsecure();
-				#endif
-
+			auto secureClient = std::make_shared<WiFiClientSecure>();
+			certFingerprint = std::make_shared<ksCertFingerprintHolder>();
+			
+			if (certFingerprint->setup(secureClient.get(), fingerprint))
 				wifiClientSp = std::move(secureClient);
-			}
 		}
 		else
 		{
@@ -165,15 +138,13 @@ namespace ksf::comps
 
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
 			{
-				#if ESP32
-					if (fingerprint.size() > 0 && !reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())->verify(fingerprint.c_str(), nullptr))
-					{
-						mqttClientSp->disconnect();
-						return true;
-					}
-				#endif
+				if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
+				{
+					mqttClientSp->disconnect();
+					return false;
+				}
 
-				mqttClientSp->publish(willTopic.c_str(), (const uint8_t*)"1", 1, true);
+				mqttClientSp->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
 				return true;
 			}
 
