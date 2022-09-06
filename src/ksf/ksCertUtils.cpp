@@ -10,15 +10,15 @@ namespace ksf
 		else return 255;
 	}
 	
-	bool ksCertFingerprintBase::stringToBytes(const std::string& string, uint8_t * bytes, uint8_t len)
+	bool ksCertFingerprintBase::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen)
 	{
-		if (string.size() != len * 2)
+		if (fingerprint.size() != bytesLen * 2)
 			return false;
 
-		for (uint8_t idx = 0; idx < len;)
+		for (uint8_t idx = 0; idx < bytesLen;)
 		{
-			uint8_t c = htoi(string[idx*2]);
-			uint8_t d = htoi(string[idx*2+1]);
+			uint8_t c = htoi(fingerprint[idx*2]);
+			uint8_t d = htoi(fingerprint[idx*2+1]);
 
 			if ((c>15) || (d>15))
 				return false;
@@ -32,7 +32,7 @@ namespace ksf
 #ifdef ESP32
 	bool ksCertFingerprintESP32::setup(WiFiClientSecure* clientSecure, const std::string& fingerprint)
 	{
-		if (stringToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
+		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
 		{
 			clientSecure->setInsecure();
 			return true;
@@ -62,7 +62,7 @@ namespace ksf
 	bool ksCertFingerprintESP8266::setup(WiFiClientSecure* clientSecure, const std::string& fingerprint)
 	{
 		uint8_t fingerprintBytes[20];
-		if (stringToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
+		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
 		{
 			clientSecure->setFingerprint(fingerprintBytes);
 			return true;
