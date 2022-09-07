@@ -62,18 +62,19 @@ namespace ksf::comps
 		this->password = password;
 		this->prefix = prefix;
 
-		IPAddress serverIP;
-
-		if (serverIP.fromString(broker.c_str()))
-			mqttClientSp->setServer(serverIP, std::stoi(port));
-		else
-			mqttClientSp->setServer(broker.c_str(), std::stoi(port));
+		uint16_t portNumber;
+		if (ksf::from_chars(port, portNumber))
+		{
+			IPAddress serverIP;
+			if (serverIP.fromString(broker.c_str()))
+				mqttClientSp->setServer(serverIP, portNumber);
+			else
+				mqttClientSp->setServer(broker.c_str(), portNumber);
+		}	
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
 	{
-		wifiClientSp->setNoDelay(true);
-
 		/* 
 		*	There's an inconsistency in setTimeout implementation between Arduino for ESP32 and ESP8266.
 		*	ESP32's WiFi client setTimeout method want seconds, while ESP8266's one wants milliseconds.
