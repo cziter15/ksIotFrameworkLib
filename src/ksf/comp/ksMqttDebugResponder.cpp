@@ -85,7 +85,8 @@ namespace ksf::comps
 				default:
 					return std::string("Unknown");
 			}
-		#else
+		#endif
+		#ifdef ESP8266
 			return {ESP.getResetReason().c_str()};
 		#endif
 	}
@@ -140,7 +141,8 @@ namespace ksf::comps
 				
 				#ifdef ESP32
 					esp_phy_erase_cal_data_in_nvs();
-				#else
+				#endif
+				#ifdef ESP8266
 					flash_size_map size_map = system_get_flash_size_map();
 					uint32 rf_cal_sec{0};
 

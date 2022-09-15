@@ -23,18 +23,15 @@ namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
-		#ifdef ESP32
-			WiFi.setHostname(hostname);
-		#else
-			wifi_station_set_hostname(hostname);
-		#endif
+		WiFi.setHostname(hostname);
 	}
 
 	void ksWifiConnector::setupMacAddress()
 	{
 		#ifdef ESP32
 			uint32_t chipId = static_cast<uint32_t>(ESP.getEfuseMac());
-		#else
+		#endif
+		#ifdef ESP8266
 			uint32_t chipId = ESP.getChipId();
 		#endif
 
@@ -43,7 +40,8 @@ namespace ksf::comps
 
 		#ifdef ESP32
 			esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
-		#else
+		#endif
+		#ifdef ESP8266
 			wifi_set_macaddr(STATION_IF, mac_sta);
 		#endif
 	}
@@ -51,13 +49,15 @@ namespace ksf::comps
 	bool ksWifiConnector::init(ksf::ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
+
 		setupMacAddress();
+
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 
 		WiFi.begin();
 
-		#if ESP32
+		#ifdef ESP32
 			WiFi.setSleep(true);
 		#endif
 
@@ -66,12 +66,12 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksWifiConnector::onConnectedInternal()
+	void ksWifiConnector::wifiConnectedInternal()
 	{
 		onConnected->broadcast();
 	}
 
-	void ksWifiConnector::onDisconnectedInternal()
+	void ksWifiConnector::wifiDisconnectedInternal()
 	{
 		onDisconnected->broadcast();
 	}
@@ -80,16 +80,17 @@ namespace ksf::comps
 	{
 		if (!isConnected())
 		{
-			if (wifiReconnectTimer.triggered())
-				WiFi.reconnect();
-			else if (wifiTimeoutTimer.triggered())
+			if (wifiTimeoutTimer.triggered())
 				return false;
 
 			if (wasConnected)
 			{
-				onDisconnectedInternal();
 				wasConnected = false;
+				wifiDisconnectedInternal();
 			}
+
+			if (wifiReconnectTimer.triggered())
+				WiFi.reconnect();
 		}
 		else 
 		{
@@ -98,8 +99,8 @@ namespace ksf::comps
 
 			if (!wasConnected)
 			{
-				onConnectedInternal();
 				wasConnected = true;
+				wifiConnectedInternal();
 			}
 		}
 

@@ -37,12 +37,12 @@ namespace ksf
 				/*
 					Internal method called on WiFi connection.
 				*/
-				void onConnectedInternal();
+				void wifiConnectedInternal();
 
 				/*
 					Internal method called on WiFi diconnection.
 				*/
-				void onDisconnectedInternal();
+				void wifiDisconnectedInternal();
 
 			public:
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.

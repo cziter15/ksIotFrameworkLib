@@ -22,7 +22,8 @@ namespace ksf::comps
 
 		#ifdef ESP32
 			deviceName += std::to_string(ESP.getEfuseMac());
-		#else
+		#endif
+		#ifdef ESP8266
 			deviceName += std::to_string(ESP.getChipId());
 		#endif
 	}

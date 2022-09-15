@@ -21,6 +21,10 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
+	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus)
+		: sendConnectionStatus(sendConnectionStatus)
+	{}
+
 	bool ksMqttConnector::init(ksf::ksComposable* owner)
 	{
 		ksMqttConfigProvider cfgProvider;
@@ -36,10 +40,6 @@ namespace ksf::comps
 		*/
 		return mqttClientSp != nullptr;
 	}
-
-	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus)
-		: sendConnectionStatus(sendConnectionStatus)
-	{}
 
 	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint)
 	{
@@ -82,10 +82,10 @@ namespace ksf::comps
 		* 
 		*	Timeout is required because underlying connect method is blocking. Without timeout it may trigger watchdog.
 		*/
-
 		#ifdef ESP32
 			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
-		#else
+		#endif
+		#ifdef ESP8266
 			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
 		#endif
 		
