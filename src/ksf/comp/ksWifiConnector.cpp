@@ -26,7 +26,12 @@ namespace ksf::comps
 		#ifdef ESP32
 			WiFi.setHostname(hostname);
 		#else
-			WiFi.hostname(hostname);
+			/* 
+				Don't use Arduino-Esp8266's APIs as it will not properly trigger DHCP renew, because
+				we're not yet connected to the WiFi. Just only pass hostname to ESP SDK to retrieve it later.
+				This trick also help us to avoid unnecessary string in memory.
+			*/
+			wifi_station_set_hostname(hostname);
 		#endif
 	}
 
@@ -57,7 +62,17 @@ namespace ksf::comps
 
 		WiFi.begin();
 
-		#ifdef ESP32
+		#ifdef ESP8266
+			/* 
+				Umm, this is ugly hack. WiFi hostname for Station has been already set, but
+				we need to propagate this change to DHCP server. To avoid unnecessary copying
+				just pass the pointer from already set name. Calling Arduino-Esp8266's implementation
+				will trigger necessary dhcp renew and set proper netif parameters.
+			*/
+			WiFi.hostname(wifi_station_get_hostname());
+		#endif
+
+		#if ESP32
 			WiFi.setSleep(true);
 		#endif
 
