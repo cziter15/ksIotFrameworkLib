@@ -62,6 +62,17 @@ namespace ksf::comps
 
 		WiFi.begin();
 
+		#if ESP32
+			WiFi.setSleep(true);
+		#endif
+
+		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
+		
+		return true;
+	}
+
+	void ksWifiConnector::onConnectedInternal()
+	{
 		#ifdef ESP8266
 			/* 
 				Umm, this is ugly hack. WiFi hostname for Station has been already set, but
@@ -72,13 +83,12 @@ namespace ksf::comps
 			WiFi.hostname(wifi_station_get_hostname());
 		#endif
 
-		#if ESP32
-			WiFi.setSleep(true);
-		#endif
+		onConnected->broadcast();
+	}
 
-		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
-		
-		return true;
+	void ksWifiConnector::onDisconnectedInternal()
+	{
+		onDisconnected->broadcast();
 	}
 
 	bool ksWifiConnector::loop()
@@ -89,11 +99,23 @@ namespace ksf::comps
 				WiFi.reconnect();
 			else if (wifiTimeoutTimer.triggered())
 				return false;
+
+			if (wasConnected)
+			{
+				onDisconnectedInternal();
+				wasConnected = false;
+			}
 		}
 		else 
 		{
 			wifiReconnectTimer.restart();
 			wifiTimeoutTimer.restart();
+
+			if (!wasConnected)
+			{
+				onConnectedInternal();
+				wasConnected = true;
+			}
 		}
 
 		return true;

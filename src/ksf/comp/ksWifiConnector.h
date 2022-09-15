@@ -11,6 +11,7 @@
 
 #include "../ksComponent.h"
 #include "../ksSimpleTimer.h"
+#include "../evt/ksEvent.h"
 
 namespace ksf
 {
@@ -24,6 +25,7 @@ namespace ksf
 				ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				// Wifi timer - timeout.
 				ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		// Wifi timer - reconnect.
 
+				bool wasConnected{false};											// True if connected in previous loop.
 				/*
 					Configures MAC address for devices using ksIotFrameworkLib.
 
@@ -32,7 +34,20 @@ namespace ksf
 				*/
 				void setupMacAddress();
 
+				/*
+					Internal method called on WiFi connection.
+				*/
+				void onConnectedInternal();
+
+				/*
+					Internal method called on WiFi diconnection.
+				*/
+				void onDisconnectedInternal();
+
 			public:
+				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
+				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
+
 				/*
 					Constructs ksWifiConnector component.
 					@param hostname Hostname to be used by WiFi class.
