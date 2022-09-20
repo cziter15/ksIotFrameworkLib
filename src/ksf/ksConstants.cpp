@@ -10,6 +10,9 @@
 #include "ksConstants.h"
 #include "LittleFS.h"
 
+#if ESP8266
+	#include <ESP8266WiFi.h>
+#endif
 namespace ksf
 {
 	static uint32_t uptime_low32, uptime_high32;
@@ -19,9 +22,19 @@ namespace ksf
 		#ifdef ESP32
 			/* Initialize filesystem. */
 			LittleFS.begin(true);
-		#else
+		#endif
+
+		#if ESP8266
 			/* Initialize filesystem. */
 			LittleFS.begin();
+
+			/*
+				This is workaround for issue that esp8266 doesn't get properly notified about WiFi disconnection.
+				See more: https://github.com/esp8266/Arduino/issues/7432
+			*/
+			WiFi.onStationModeDisconnected([](const WiFiEventStationModeDisconnected & event) {
+				WiFi.disconnect();
+			});
 		#endif
 	}
 
