@@ -80,7 +80,7 @@ namespace ksf::comps
 	{
 		if (wifiIpCheckTimer.triggered())
 		{
-			gotIpAddress = WiFi.localIP().isSet();
+			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
 			wifiIpCheckTimer.restart();
 		}
 
