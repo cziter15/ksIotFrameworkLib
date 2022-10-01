@@ -79,10 +79,7 @@ namespace ksf::comps
 	bool ksWifiConnector::loop()
 	{
 		if (wifiIpCheckTimer.triggered())
-		{
 			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
-			wifiIpCheckTimer.restart();
-		}
 
 		if (!isConnected())
 		{
