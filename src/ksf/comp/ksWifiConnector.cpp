@@ -21,13 +21,13 @@
 
 namespace ksf::comps
 {
-	ksWifiConnector::ksWifiConnector(const char* hostname)
-	{
-		WiFi.setHostname(hostname);
-	}
+	ksWifiConnector::ksWifiConnector(const std::string& hostname) 
+		: cachedHostname(hostname)
+	{}
 
-	void ksWifiConnector::setupMacAddress()
+	void ksWifiConnector::setupMacAndHostname()
 	{
+		/* Get chip ID/EfuseMac. */
 		#ifdef ESP32
 			uint32_t chipId = static_cast<uint32_t>(ESP.getEfuseMac());
 		#endif
@@ -35,23 +35,29 @@ namespace ksf::comps
 			uint32_t chipId = ESP.getChipId();
 		#endif
 
+		/* Generate MAC address. */
 		auto chipIdBytes = reinterpret_cast<uint8_t*>(&chipId);
 		uint8_t mac_sta[6] = { 0xfa, 0xf1, chipIdBytes[2], chipIdBytes[1], chipIdBytes[3], chipIdBytes[0] };
 
+		/* Set MAC address. */
 		#ifdef ESP32
 			esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
 		#endif
 		#ifdef ESP8266
 			wifi_set_macaddr(STATION_IF, mac_sta);
 		#endif
+
+		/* Set cached and clear buffer. */
+		WiFi.setHostname(cachedHostname.c_str());
+		cachedHostname.clear();
 	}
 
 	bool ksWifiConnector::init(ksf::ksComposable* owner)
 	{
 		WiFi.mode(WIFI_STA);
 
-		setupMacAddress();
-
+		setupMacAndHostname();
+		
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 
