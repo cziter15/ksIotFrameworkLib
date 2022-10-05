@@ -120,6 +120,6 @@ namespace ksf::comps
 
 	bool ksWifiConnector::isConnected() const
 	{
-		return gotIpAddress;
+		return WiFi.isConnected() && gotIpAddress;
 	}
 }
