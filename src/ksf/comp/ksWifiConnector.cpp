@@ -23,7 +23,7 @@ namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
-		/* On ESP8266 setting hostname works only outside STA mode. */
+		/* On ESP32 setting hostname works only outside STA mode. */
 		#if ESP32
 			WiFi.mode(WIFI_OFF);
 			WiFi.setHostname(hostname);
@@ -103,7 +103,7 @@ namespace ksf::comps
 			if (wifiReconnectTimer.triggered())
 				WiFi.reconnect();
 		}
-		else 
+		else
 		{
 			wifiReconnectTimer.restart();
 			wifiTimeoutTimer.restart();
