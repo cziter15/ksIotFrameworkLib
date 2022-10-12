@@ -12,11 +12,13 @@
 #include "ksMqttConnector.h"
 #include "../ksConstants.h"
 
-#ifdef ESP32
+#if ESP32
 	#include <WiFi.h>
 	#include <esp_phy_init.h>
-#else
+#elif ESP8266
 	#include <ESP8266WiFi.h>
+#else			
+	#error Platform not implemented.
 #endif
 
 #include <LittleFS.h>
@@ -61,7 +63,7 @@ namespace ksf::comps
 
 	std::string ksMqttDebugResponder::getResetReason()
 	{
-		#ifdef ESP32
+		#if ESP32
 			switch (esp_reset_reason())
 			{
 				case ESP_RST_POWERON:
@@ -85,9 +87,10 @@ namespace ksf::comps
 				default:
 					return std::string("Unknown");
 			}
-		#endif
-		#ifdef ESP8266
+		#elif ESP8266
 			return {ESP.getResetReason().c_str()};
+		#else			
+			#error Platform not implemented.
 		#endif
 	}
 
@@ -115,7 +118,7 @@ namespace ksf::comps
 					"Device uptime: " + std::to_string(uptimeSec) + " sec, "
 					"Free fw space: " + std::to_string(ESP.getFreeSketchSpace()) + " b, "
 					"Free heap: " + std::to_string(ESP.getFreeHeap()) + " b, " +
-					#ifdef ESP32
+					#if ESP32
 						"Free PSRAM: " + std::to_string(ESP.getFreePsram()) + " b, "
 						"Chip temperature: " + ksf::to_string(temperatureRead(), 1) + " [C], "
 					#endif
@@ -139,10 +142,9 @@ namespace ksf::comps
 				respond("Erasing RF CAL data, please wait...");
 				delay(500);
 				
-				#ifdef ESP32
+				#if ESP32
 					esp_phy_erase_cal_data_in_nvs();
-				#endif
-				#ifdef ESP8266
+				#elif ESP8266
 					flash_size_map size_map = system_get_flash_size_map();
 					uint32 rf_cal_sec{0};
 
@@ -160,6 +162,8 @@ namespace ksf::comps
 					}
 				
 					ESP.flashEraseSector(rf_cal_sec);
+				#else			
+					#error Platform not implemented.
 				#endif
 
 				respond("Erasing RF CAL done, restarting. It may take few seconds.");

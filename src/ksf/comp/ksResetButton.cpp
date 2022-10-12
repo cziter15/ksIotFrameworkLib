@@ -11,10 +11,12 @@
 #include "ksResetButton.h"
 #include "Arduino.h"
 
-#ifdef ESP32
+#if ESP32
 	#include <WiFi.h>
-#else
+#elif ESP8266
 	#include <ESP8266WiFi.h>
+#else			
+	#error Platform not implemented.
 #endif
 
 #include <LittleFS.h>
@@ -54,7 +56,7 @@ namespace ksf::comps
 
 				if (pressDuration > LONG_TRIGGER)
 				{
-					WiFi.disconnect(true);
+					WiFi.mode(WIFI_OFF);
 					LittleFS.format();
 					ESP.restart();
 					return false;

@@ -20,11 +20,12 @@ namespace ksf::comps
 	{
 		deviceName += '-';
 
-		#ifdef ESP32
+		#if ESP32
 			deviceName += std::to_string(ESP.getEfuseMac());
-		#endif
-		#ifdef ESP8266
+		#elif ESP8266
 			deviceName += std::to_string(ESP.getChipId());
+		#else			
+			#error Platform not implemented.
 		#endif
 	}
 

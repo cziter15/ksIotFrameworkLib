@@ -82,11 +82,12 @@ namespace ksf::comps
 		* 
 		*	Timeout is required because underlying connect method is blocking. Without timeout it may trigger watchdog.
 		*/
-		#ifdef ESP32
+		#if ESP32
 			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
-		#endif
-		#ifdef ESP8266
+		#elif ESP8266
 			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
+		#else			
+			#error Platform not implemented.
 		#endif
 		
 		mqttClientSp->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
