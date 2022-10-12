@@ -188,11 +188,6 @@ namespace ksf::comps
 
 	bool ksMqttConnector::isConnected() const
 	{
-		if (mqttClientSp)
-			if (auto wifiConnSp = wifiConnWp.lock())
-				if (wifiConnSp->isConnected())
-					return mqttClientSp->connected();
-		
-		return false;
+		return mqttClientSp ? mqttClientSp->connected() : false;
 	}
 }

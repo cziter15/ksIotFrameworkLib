@@ -97,6 +97,7 @@ namespace ksf::comps
 			if (wasConnected)
 			{
 				wasConnected = false;
+				WiFi.disconnect(); // Need to sync. Sometimes we can lost IP for a while, while connected() still returns true.
 				wifiDisconnectedInternal();
 			}
 
