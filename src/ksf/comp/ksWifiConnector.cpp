@@ -83,7 +83,7 @@ namespace ksf::comps
 		#if ESP32
 			return esp_wifi_connect() == ESP_OK;
 		#elif ESP8266
-			return wifi_station_connect() == ESP_OK;
+			return wifi_station_connect();
 		#else
 			#error Platform not implemented.
 		#endif
@@ -94,7 +94,7 @@ namespace ksf::comps
 		#if ESP32
 			return esp_wifi_disconnect() == ESP_OK;
 		#elif ESP8266
-			return wifi_station_disconnect() == ESP_OK;
+			return wifi_station_disconnect();
 		#else
 			#error Platform not implemented.
 		#endif
