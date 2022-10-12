@@ -47,6 +47,16 @@ namespace ksf
 				*/
 				void wifiDisconnectedInternal();
 
+				/*
+					Internal method to connect to AP.
+				*/
+				bool connectStation();
+
+				/*
+					Internal method to disconnect from AP.
+				*/
+				bool disconnectStation();
+
 			public:
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.

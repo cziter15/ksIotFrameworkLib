@@ -78,6 +78,30 @@ namespace ksf::comps
 		return true;
 	}
 
+	bool ksWifiConnector::connectStation()
+	{
+		#if ESP32
+			return esp_wifi_connect() == ESP_OK;
+		#elif ESP8266
+			return wifi_station_connect() == ESP_OK;
+		#else
+			#error Platform not implemented.
+		#endif
+	}
+
+	bool ksWifiConnector::disconnectStation()
+	{
+		#if ESP32
+			return esp_wifi_disconnect() == ESP_OK;
+		#elif ESP8266
+			return wifi_station_disconnect() == ESP_OK;
+		#else
+			#error Platform not implemented.
+		#endif
+
+		return false;
+	}
+
 	void ksWifiConnector::wifiConnectedInternal()
 	{
 		onConnected->broadcast();
@@ -101,13 +125,7 @@ namespace ksf::comps
 			if (wasConnected)
 			{
 				/* Enforce WiFi disconnect when IP lost. */
-				#if ESP32
-					esp_wifi_disconnect();
-				#elif ESP8266
-					wifi_station_disconnect();
-				#else
-					#error Platform not implemented.
-				#endif
+				disconnectStation();
 
 				wasConnected = false;
 				wifiDisconnectedInternal();
@@ -115,7 +133,10 @@ namespace ksf::comps
 
 			if (wifiReconnectTimer.hasTimePassed())
 			{
-				WiFi.reconnect();
+				/* Enforce WiFi full reconnect flow here. */
+				disconnectStation();
+				connectStation();
+
 				wifiReconnectTimer.restart();
 			}
 		}
