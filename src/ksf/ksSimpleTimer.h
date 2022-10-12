@@ -38,9 +38,15 @@ namespace ksf
 			void restart();
 
 			/*
-				Checks if timer interval just passed.
+				Checks if timer interval just passed and restarts the timer if so.
 				@return True if timer just triggered, otherwise false.
 			*/	
 			bool triggered();
+			
+			/*
+				Only checks if timer interval just passed. Restarting timer relies on user.
+				@return True if timer just triggered, otherwise false.
+			*/	
+			bool hasTimePassed() const;
 	};
 }

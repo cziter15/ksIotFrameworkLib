@@ -96,13 +96,18 @@ namespace ksf::comps
 
 			if (wasConnected)
 			{
+				/* Enforce WiFi disconnect when IP lost. */
+				WiFi.disconnect();
+
 				wasConnected = false;
-				WiFi.disconnect(); // Need to sync. Sometimes we can lost IP for a while, while connected() still returns true.
 				wifiDisconnectedInternal();
 			}
 
-			if (wifiReconnectTimer.triggered())
+			if (wifiReconnectTimer.hasTimePassed())
+			{
 				WiFi.reconnect();
+				wifiReconnectTimer.restart();
+			}
 		}
 		else
 		{

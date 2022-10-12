@@ -23,9 +23,14 @@ namespace ksf
 		restart();
 	}
 
+	bool ksSimpleTimer::hasTimePassed() const
+	{
+		return millis() - lastTriggerTimeMs > intervalMs;
+	}
+
 	bool ksSimpleTimer::triggered()
 	{
-		if (millis() - lastTriggerTimeMs > intervalMs)
+		if (hasTimePassed())
 		{
 			restart();
 			return true;

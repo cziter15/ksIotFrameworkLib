@@ -165,11 +165,11 @@ namespace ksf::comps
 		else if (wasConnected)
 		{
 			connectionTimeSeconds = 0;
-			reconnectTimer.restart();
 			wasConnected = false;
+			reconnectTimer.restart();
 			onDisconnected->broadcast();
 		}
-		else if (reconnectTimer.triggered())
+		else if (reconnectTimer.hasTimePassed())
 		{
 			if (auto wifiConnSp = wifiConnWp.lock())
 			{
@@ -180,6 +180,9 @@ namespace ksf::comps
 					wasConnected = true;
 					mqttConnectedInternal();
 				}
+
+				/* Because connectToBroker can block for few seconds, restart timer. */
+				reconnectTimer.restart();
 			}
 		}
 
