@@ -8,6 +8,7 @@
  */
 
 #include "ksCertUtils.h"
+#include "ksConstants.h"
 
 namespace ksf
 {
@@ -44,7 +45,7 @@ namespace ksf
 		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
 		{
 			clientSecure->setInsecure();
-			clientSecure->setHandshakeTimeout(clientSecure->getTimeout());
+			clientSecure->setHandshakeTimeout(KSF_MQTT_TIMEOUT_SEC);
 			return true;
 		}
 
