@@ -44,6 +44,7 @@ namespace ksf
 		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
 		{
 			clientSecure->setInsecure();
+			clientSecure->setHandshakeTimeout(clientSecure->getTimeout());
 			return true;
 		}
 
