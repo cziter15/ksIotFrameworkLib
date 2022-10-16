@@ -124,7 +124,11 @@ namespace ksf::comps
 
 			if (wasConnected)
 			{
-				/* Enforce WiFi disconnect when IP lost. */
+				/*
+					Enforce WiFi disconnect when IP lost. 
+					Unable to call WiFi.disconnect() here due to issue on arduino-esp8266
+					See https://github.com/esp8266/Arduino/issues/8689 for reference.
+				*/
 				disconnectStation();
 
 				wasConnected = false;
