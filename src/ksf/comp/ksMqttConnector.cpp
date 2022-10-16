@@ -118,12 +118,12 @@ namespace ksf::comps
 		}
 	}
 
-	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix)
+	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, int qos)
 	{
 		if (skipDevicePrefix)
-			mqttClientSp->subscribe(topic.c_str());
+			mqttClientSp->subscribe(topic.c_str(), qos);
 		else	
-			mqttClientSp->subscribe(std::string(prefix + topic).c_str());
+			mqttClientSp->subscribe(std::string(prefix + topic).c_str(), qos);
 	}
 
 	void ksMqttConnector::unsubscribe(const std::string& topic, bool skipDevicePrefix)

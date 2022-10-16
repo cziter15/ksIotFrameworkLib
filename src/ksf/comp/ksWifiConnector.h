@@ -49,11 +49,13 @@ namespace ksf
 
 				/*
 					Internal method to connect to AP.
+					@return True if connect succedeed, otherwise false.
 				*/
 				bool connectStation();
 
 				/*
 					Internal method to disconnect from AP.
+					@return True if disconnected properly, otherwise false.
 				*/
 				bool disconnectStation();
 

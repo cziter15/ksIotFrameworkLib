@@ -118,8 +118,9 @@ namespace ksf
 
 					@param topic Topic to subscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
+					@param qos Quality of service level (0 or 1 - see PubSubClient limitations).
 				*/
-				void subscribe(const std::string& topic, bool skipDevicePrefix = false);
+				void subscribe(const std::string& topic, bool skipDevicePrefix = false, int qos = 0);
 
 				/*
 					Unsubscribes to MQTT topic.
