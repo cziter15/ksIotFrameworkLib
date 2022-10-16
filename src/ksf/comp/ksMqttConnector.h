@@ -37,7 +37,9 @@ namespace ksf
 
 				uint32_t connectionTimeSeconds{0};								// MQTT connection time counter (in seconds).
 				uint32_t reconnectCounter{0};									// MQTT reconnection counter.
+
 				bool sendConnectionStatus{true};								// Connection status topic.
+				bool usePersistentSession{false};								// Persistent session or not.
 
 				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
 				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer used to reconnect MQTT.
@@ -79,7 +81,7 @@ namespace ksf
 					Constructs ksMqttConnector objec.
 					@param sendConnectionStatus True if should send connection status in connected topic.
 				*/
-				ksMqttConnector(bool sendConnectionStatus = true);
+				ksMqttConnector(bool sendConnectionStatus = true, bool usePersistentSession = false);
 
 				/*
 					Initializes MQTT connector component.

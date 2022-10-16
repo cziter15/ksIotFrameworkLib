@@ -21,8 +21,8 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus)
-		: sendConnectionStatus(sendConnectionStatus)
+	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus, bool usePersistentSession)
+		: sendConnectionStatus(sendConnectionStatus), usePersistentSession(usePersistentSession)
 	{}
 
 	bool ksMqttConnector::init(ksf::ksComposable* owner)
@@ -148,7 +148,7 @@ namespace ksf::comps
 		{
 			std::string willTopic{prefix + "connected"};
 
-			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0"))
+			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
 			{
 				if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
 				{
@@ -163,7 +163,7 @@ namespace ksf::comps
 			return false;
 		}
 
-		return mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str());
+		return mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !usePersistentSession);
 	}
 
 	bool ksMqttConnector::loop()
