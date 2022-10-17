@@ -73,6 +73,12 @@ namespace ksf
 				void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
 
 			public:
+				enum class QosLevel
+				{
+					QOS_AT_LEAST_ONCE,
+					QOS_EXACTLY_ONCE
+				};
+
 				DECLARE_KS_EVENT(onMesssage, const std::string_view&, const std::string_view&)		// onMesssage event that user can bind to.
 				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
@@ -120,9 +126,9 @@ namespace ksf
 
 					@param topic Topic to subscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
-					@param qos Quality of service level (0 or 1 - see PubSubClient limitations).
+					@param qos Quality of service level.
 				*/
-				void subscribe(const std::string& topic, bool skipDevicePrefix = false, int qos = 0);
+				void subscribe(const std::string& topic, bool skipDevicePrefix = false, ksMqttConnector::QosLevel = ksMqttConnector::QosLevel::QOS_AT_LEAST_ONCE);
 
 				/*
 					Unsubscribes to MQTT topic.
