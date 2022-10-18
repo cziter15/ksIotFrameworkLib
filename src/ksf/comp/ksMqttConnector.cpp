@@ -63,6 +63,8 @@ namespace ksf::comps
 		this->prefix = prefix;
 
 		/* 
+		*	Set timeout for blocking calls (eg. connect). MQTT is handled async-like.
+		*
 		*	There's an inconsistency in setTimeout implementation between Arduino for ESP32 and ESP8266.
 		*	ESP32's WiFi client setTimeout method want seconds, while ESP8266's one wants milliseconds.
 		*	I've wasted some time to get what's really going on here, but eventually caught that.
