@@ -54,11 +54,11 @@ namespace ksf
 
 	bool ksCertFingerprintESP32::verify(WiFiClientSecure* client) const
 	{
-		static const char characters[] = "0123456789ABCDEF";
+		static const char characters[] {"0123456789ABCDEF"};
 
 		std::string fingerprintStr(sizeof(fingerprintBytes) * 2, 0);
 		
-		auto buf = const_cast<char *>(fingerprintStr.data());
+		auto buf{const_cast<char *>(fingerprintStr.data())};
 		for (const auto &oneInputByte : fingerprintBytes)
 		{
 			*buf++ = characters[oneInputByte >> 4];

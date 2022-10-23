@@ -25,7 +25,7 @@ namespace ksf::comps
 
 	void ksConfigProvider::addNewParam(WiFiManager& manager, const char* label, const char* defaultValue, int maxLength)
 	{
-		auto param = new WiFiManagerParameter(label, label, defaultValue, maxLength);
+		auto param{new WiFiManagerParameter(label, label, defaultValue, maxLength)};
 		params.emplace_back(param);
 		manager.addParameter(param);
 	}

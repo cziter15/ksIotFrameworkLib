@@ -29,7 +29,7 @@ namespace ksf
 
 	void updateDeviceUptime()
 	{
-		uint32_t new_low32 = millis();
+		uint32_t new_low32{millis()};
 		if (new_low32 < uptime_low32) uptime_high32++;
 		uptime_low32 = new_low32;
 	}

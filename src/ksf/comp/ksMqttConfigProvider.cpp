@@ -29,14 +29,14 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(ksfMqttConfigFile)
 		{
-			auto& savedBroker = config_file.getParam(ksfBrokerParamName);
-			auto& port = config_file.getParam(ksfPortParamName, ksfDefPort);
+			auto& savedBroker{config_file.getParam(ksfBrokerParamName)};
+			auto& port{config_file.getParam(ksfPortParamName, ksfDefPort)};
 
-			auto& login = config_file.getParam(ksfUserParamName);
-			auto& password = config_file.getParam(ksfPasswordParamName);
+			auto& login{config_file.getParam(ksfUserParamName)};
+			auto& password{config_file.getParam(ksfPasswordParamName)};
 
-			auto prefix = config_file.getParam(ksfPrefixParamName);
-			auto fingerprint = config_file.getParam(ksfFingerprintParamName);
+			auto prefix{config_file.getParam(ksfPrefixParamName)};
+			auto fingerprint{config_file.getParam(ksfFingerprintParamName)};
 
 			if (prefix.length() > 0)
 			{

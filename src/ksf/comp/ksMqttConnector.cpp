@@ -110,8 +110,8 @@ namespace ksf::comps
 	{
 		if (onMesssage->isBound())
 		{
-			std::string_view payloadStr(reinterpret_cast<const char*>(payload), length);
-			std::string_view topicStr(topic);
+			std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
+			std::string_view topicStr{topic};
 
 			if (topicStr.find(prefix) != std::string::npos)
 				topicStr = topicStr.substr(prefix.length());
@@ -122,7 +122,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, ksMqttConnector::QosLevel qos)
 	{
-		uint8_t qosLevel = static_cast<uint8_t>(qos);
+		uint8_t qosLevel{static_cast<uint8_t>(qos)};
 
 		if (skipDevicePrefix)
 			mqttClientSp->subscribe(topic.c_str(), qosLevel);
@@ -186,7 +186,7 @@ namespace ksf::comps
 		}
 		else if (reconnectTimer.hasTimePassed())
 		{
-			if (auto wifiConnSp = wifiConnWp.lock())
+			if (auto wifiConnSp{wifiConnWp.lock()})
 			{
 				if (wifiConnSp->isConnected() && connectToBroker())
 				{
@@ -196,7 +196,7 @@ namespace ksf::comps
 					mqttConnectedInternal();
 				}
 
-				/* Because connectToBroker can block for few seconds, restart timer. */
+				/* This must be done after connectToBroker, because connect can block for few seconds. */
 				reconnectTimer.restart();
 			}
 		}

@@ -110,7 +110,7 @@ namespace ksf
 	template <typename _In, typename _Out>
 	bool from_chars(const _In& input, _Out& out)
 	{
-		const auto& result = std::from_chars(input.data(), input.data() + input.size(), out);
+		const auto& result{std::from_chars(input.data(), input.data() + input.size(), out)};
 		return result.ec == std::errc();
 	}
 }

@@ -37,7 +37,7 @@ namespace ksf::comps
 	{
 		mqttConnWp = owner->findComponent<ksMqttConnector>();
 
-		if (auto mqttConnSp = mqttConnWp.lock())
+		if (auto mqttConnSp{mqttConnWp.lock()})
 		{
 			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
 			mqttConnSp->onMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
@@ -51,13 +51,13 @@ namespace ksf::comps
 
 	void ksMqttDebugResponder::onConnected()
 	{
-		if (auto mqttConnSp = mqttConnWp.lock())
+		if (auto mqttConnSp{mqttConnWp.lock()})
 			mqttConnSp->subscribe("cmd");
 	}
 
 	void ksMqttDebugResponder::respond(const std::string& message) const
 	{
-		if (auto mqttConnSp = mqttConnWp.lock())
+		if (auto mqttConnSp{mqttConnWp.lock()})
 			mqttConnSp->publish("log", message, false);
 	}
 
@@ -67,25 +67,25 @@ namespace ksf::comps
 			switch (esp_reset_reason())
 			{
 				case ESP_RST_POWERON:
-					return std::string("Power On");
+					return {"Power On"};
 				case ESP_RST_SW:
-					return std::string("Software/System restart");
+					return {"Software/System restart"};
 				case ESP_RST_PANIC:
-					return std::string("Exception");
+					return {"Exception"};
 				case ESP_RST_INT_WDT:
-					return std::string("Watchdog (interrupt)");
+					return {"Watchdog (interrupt)"};
 				case ESP_RST_TASK_WDT:
-					return std::string("Watchdog (task)");
+					return {"Watchdog (task)"};
 				case ESP_RST_WDT:
-					return std::string("Watchdog (other)");
+					return {"Watchdog (other)"};
 				case ESP_RST_DEEPSLEEP:
-					return std::string("Deep-Sleep Wake");
+					return {"Deep-Sleep Wake"};
 				case ESP_RST_BROWNOUT:
-					return std::string("Brownout");
+					return {"Brownout"};
 				case ESP_RST_SDIO:
-					return std::string("SDIO");
+					return {"SDIO"};
 				default:
-					return std::string("Unknown");
+					return {"Unknown"};
 			}
 		#elif ESP8266
 			return {ESP.getResetReason().c_str()};
@@ -100,7 +100,7 @@ namespace ksf::comps
 		{
 			if (message.compare("netinfo") == 0)
 			{
-				if (auto mqttConnSp = mqttConnWp.lock())
+				if (auto mqttConnSp{mqttConnWp.lock()})
 				{
 					respond(
 						"IP: " + std::string{WiFi.localIP().toString().c_str()} + ", " +
@@ -112,7 +112,7 @@ namespace ksf::comps
 			}
 			else if (message.compare("sysinfo") == 0)
 			{
-				uint32_t uptimeSec = (uint32_t)(millis64() / 1000);
+				uint32_t uptimeSec{(uint32_t)(millis64() / 1000)};
 				respond(
 					"Build hash: " + std::string(ESP.getSketchMD5().c_str()) + ", "
 					"Device uptime: " + std::to_string(uptimeSec) + " sec, "
@@ -145,7 +145,7 @@ namespace ksf::comps
 				#if ESP32
 					esp_phy_erase_cal_data_in_nvs();
 				#elif ESP8266
-					flash_size_map size_map = system_get_flash_size_map();
+					flash_size_map size_map{system_get_flash_size_map()};
 					uint32 rf_cal_sec{0};
 
 					switch (size_map) 
@@ -184,11 +184,11 @@ namespace ksf::comps
 			}
 			else
 			{
-				bool dbgMsgHandled = false;
+				bool dbgMsgHandled{false};
 				customDebugHandler->broadcast(this, message, dbgMsgHandled);
 					
 				if (!dbgMsgHandled)
-					respond("command not supported: " + std::string(message));
+					respond("command not supported: " + std::string{message});
 			}
 		}
 	}

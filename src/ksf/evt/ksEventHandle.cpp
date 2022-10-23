@@ -18,7 +18,7 @@ namespace ksf::evt
 
 	ksEventHandle::~ksEventHandle()
 	{
-		if (auto eventBaseSp = eventBaseWp.lock())
+		if (auto eventBaseSp{eventBaseWp.lock()})
 			eventBaseSp->unbind(callbackUID);
 	}
 }

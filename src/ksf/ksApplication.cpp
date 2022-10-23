@@ -32,7 +32,7 @@ namespace ksf
 	{
 		/* Loop through all components and synchronize list at end of scope. */
 		{
-			ksf::ksSafeListScopedSync scoped(components);
+			ksf::ksSafeListScopedSync scoped{components};
 			if (!forEachComponent([](const std::shared_ptr<ksComponent>& comp) { return comp->loop(); } ))
 				return false;
 		}

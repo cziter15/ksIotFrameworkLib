@@ -50,7 +50,7 @@ namespace ksf
 			}																		\
 			static const size_t getClassType()										\
 			{																		\
-				static int d = 0; return (size_t) &d; 								\
+				static int d{0}; return (size_t)&d; 								\
 			}																		\
 			virtual bool isA(const size_t id) const									\
 			{																		\

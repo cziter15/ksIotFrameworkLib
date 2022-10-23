@@ -17,7 +17,7 @@ namespace ksf
 		if (configFile.length() > 0)
 		{
 			this->configFile = configFile[0] != '/' ? "/" + configFile : configFile;
-			auto fileReader = LittleFS.open(this->configFile.c_str(), "r");
+			auto fileReader{LittleFS.open(this->configFile.c_str(), "r")};
 
 			while (fileReader.available())
 			{
@@ -45,7 +45,7 @@ namespace ksf
 
 	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
-		const auto& found = configParams.find(paramName);
+		const auto& found{configParams.find(paramName)};
 		if (found != configParams.end())
 			return found->second;
 
@@ -56,7 +56,7 @@ namespace ksf
 	{
 		if (isDirty)
 		{
-			auto fileWriter = LittleFS.open(configFile.c_str(), "w");
+			auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
 
 			for (auto& entry : configParams)
 			{

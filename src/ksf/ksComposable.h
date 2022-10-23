@@ -50,7 +50,7 @@ namespace ksf
 				{
 					if (comp->isA(_Type::getClassType()))
 					{
-						std::weak_ptr<_Type> castedCompWp = std::static_pointer_cast<_Type>(comp);
+						std::weak_ptr<_Type> castedCompWp{std::static_pointer_cast<_Type>(comp)};
 						if (!castedCompWp.expired())
 							outComponents.push_back(castedCompWp);
 					}
@@ -87,7 +87,7 @@ namespace ksf
 			bool forEachComponent(_Predicate function)
 			{
 				/* Simply iterate and call passed function for each component. */
-				for (auto it = components.getList().cbegin(); it != components.getList().cend(); ++it)
+				for (auto it{components.getList().cbegin()}; it != components.getList().cend(); ++it)
 					if (!function(*it)) // If predicate returned false, stop iterating.
 						return false;
 

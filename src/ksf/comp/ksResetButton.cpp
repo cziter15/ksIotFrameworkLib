@@ -34,13 +34,13 @@ namespace ksf::comps
 	bool ksResetButton::init(ksf::ksComposable* owner)
 	{
 		pinMode(pin, mode);
-		lastState = digitalRead(pin);
+		lastState = static_cast<uint8_t>(digitalRead(pin));
 		return true;
 	}
 
 	bool ksResetButton::loop()
 	{
-		uint8_t currentState = digitalRead(pin);
+		uint8_t currentState{static_cast<uint8_t>(digitalRead(pin))};
 
 		if (currentState != lastState)
 		{
@@ -52,7 +52,7 @@ namespace ksf::comps
 			{
 				releasedTime = millis();
 
-				uint32_t pressDuration = releasedTime - pressedTime;
+				uint32_t pressDuration{releasedTime - pressedTime};
 
 				if (pressDuration > LONG_TRIGGER)
 				{
