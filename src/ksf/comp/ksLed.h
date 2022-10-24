@@ -10,6 +10,7 @@
 #pragma once
 
 #include "../ksComponent.h"
+#include <Arduino.h>
 
 namespace ksf
 {
@@ -21,7 +22,7 @@ namespace ksf
 
 			protected:
 				uint8_t pin{0};						// Saved LED pin number.
-
+				bool activeLow{false};				// If false means that the led is turned on.
 				uint32_t lastBlinkTimeMs{0};		// Last blink time (milliseconds since boot).
 				uint32_t blinkIntervalMs{0};		// Current blink interval (milliseconds).
 				uint32_t blinkLoops{0};				// Number of remaining loops.
@@ -30,8 +31,9 @@ namespace ksf
 				/*
 					Constructs ksLed object, assigning passed pin number.
 					@param pin Pin assigned to LED.
+					@param activeLow Drive low to enable?
 				*/
-				ksLed(uint8_t pin);
+				ksLed(uint8_t pin, bool activeLow = false);
 
 				/*
 					Initializes ksLed component.
