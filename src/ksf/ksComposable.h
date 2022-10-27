@@ -31,6 +31,10 @@ namespace ksf
 			template <class _Type, class... _Params>
 			std::weak_ptr<_Type> addComponent(_Params... arg)
 			{
+				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&_Type::getInstanceType)>::value, 
+					"Trying to add component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
+				);
+
 				auto ptr = std::make_shared<_Type>(arg...);
 				components.queueAdd(ptr);
 				return std::weak_ptr<_Type>(ptr);
@@ -44,6 +48,10 @@ namespace ksf
 			template <class _Type>
 			void findComponents(std::vector<std::weak_ptr<_Type>>& outComponents)
 			{
+				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&_Type::getInstanceType)>::value, 
+					"Trying to find components without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
+				);
+
 				outComponents.clear();
 
 				for (const auto& comp : components.getList())
@@ -66,6 +74,10 @@ namespace ksf
 			template <class _Type>
 			std::weak_ptr<_Type> findComponent()
 			{
+				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&_Type::getInstanceType)>::value, 
+					"Trying to find component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
+				);
+
 				std::vector<std::weak_ptr<_Type>> foundCompsWp;
 				findComponents<_Type>(foundCompsWp);
 				return foundCompsWp.empty() ? std::weak_ptr<_Type>() : foundCompsWp[0];
