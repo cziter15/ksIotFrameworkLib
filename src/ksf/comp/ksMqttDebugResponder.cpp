@@ -129,7 +129,7 @@ namespace ksf::comps
 			else if (message.compare("remove_dbg") == 0)
 			{
 				respond("Removing ksMqttDebugResponder. Commands will not be available.");
-				owner->queueRemoveComponent(shared_from_this());
+				owner->queueComponentForRemoval(shared_from_this());
 			}
 			else if (message.compare("restart") == 0)
 			{

@@ -87,7 +87,7 @@ namespace ksf
 				Queues component to be removed. It will happen on queue synchronization (synchronizeQueues).
 				@param component Component to be removed.
 			*/
-			void queueRemoveComponent(const std::shared_ptr<ksComponent>& component);
+			void queueComponentForRemoval(const std::shared_ptr<ksComponent>& component);
 
 			/*
 				Executes a function on each component.
