@@ -12,30 +12,27 @@
 #include <memory>
 #include <cstddef>
 
-namespace ksf
+namespace ksf::evt
 {
-	namespace evt
+	class ksEventBase;
+	class ksEventHandle
 	{
-		class ksEventBase;
-		class ksEventHandle
-		{
-			protected:
-				std::weak_ptr<ksEventBase> eventBaseWp;		// Weak pointer to object.
-				std::size_t callbackUID{0};					// Unique callback ID.
+		protected:
+			std::weak_ptr<ksEventBase> eventBaseWp;		// Weak pointer to object.
+			std::size_t callbackUID{0};					// Unique callback ID.
 
-			public:
-				/*
-					Constructs event handle.
+		public:
+			/*
+				Constructs event handle.
 
-					@param eventBaseWp Weak pointer to event object.
-					@param callbackUID Unique callback ID.
-				*/
-				ksEventHandle(std::weak_ptr<ksEventBase>&& eventBaseWp, std::size_t callbackUID);
+				@param eventBaseWp Weak pointer to event object.
+				@param callbackUID Unique callback ID.
+			*/
+			ksEventHandle(std::weak_ptr<ksEventBase>&& eventBaseWp, std::size_t callbackUID);
 
-				/*
-					Event handle destructor. Unbinds callback (removes from the list by ID).
-				*/
-				virtual ~ksEventHandle();
-		};
-	}
+			/*
+				Event handle destructor. Unbinds callback (removes from the list by ID).
+			*/
+			virtual ~ksEventHandle();
+	};
 }
