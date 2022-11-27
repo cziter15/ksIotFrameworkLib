@@ -45,7 +45,7 @@ namespace ksf::comps
 	{
 		if (!fingerprint.empty())
 		{
-			auto secureClient = std::make_shared<WiFiClientSecure>();
+			auto secureClient{std::make_shared<WiFiClientSecure>()};
 			certFingerprint = std::make_shared<ksCertFingerprintHolder>();
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))

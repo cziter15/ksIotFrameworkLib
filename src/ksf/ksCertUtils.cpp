@@ -25,7 +25,7 @@ namespace ksf
 		if (fingerprint.size() != bytesLen * 2)
 			return false;
 
-		for (uint8_t idx = 0; idx < bytesLen;)
+		for (uint8_t idx{0}; idx < bytesLen;)
 		{
 			uint8_t c = htoi(fingerprint[idx*2]);
 			uint8_t d = htoi(fingerprint[idx*2+1]);

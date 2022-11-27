@@ -32,7 +32,7 @@ namespace ksf
 		{
 			protected:
 				std::vector<std::pair<std::size_t, std::function<void(Params...)>>> callbacks;		// List of bond callbacks.
-				std::size_t lastCallbackUID = 0;													// Last unique callback ID for this event (used as counter).
+				std::size_t lastCallbackUID{0};														// Last unique callback ID for this event (used as counter).
 
 			public:
 				/*

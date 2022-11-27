@@ -41,7 +41,7 @@ namespace ksf::comps
 		owner->findComponents<ksLed>(ledCompsWp);
 
 		for (auto& ledCompWp : ledCompsWp)
-			if (auto ledCompSp = ledCompWp.lock())
+			if (auto ledCompSp{ledCompWp.lock()})
 				ledCompSp->setEnabled(true);
 	}
 
@@ -54,13 +54,13 @@ namespace ksf::comps
 		owner->findComponents<ksConfigProvider>(configCompsWp);
 
 		for (auto& configCompWp : configCompsWp)
-			if (auto configCompSp = configCompWp.lock())
+			if (auto configCompSp{configCompWp.lock()})
 				configCompSp->injectManagerParameters(manager);
 
 		manager.startConfigPortal(deviceName.c_str());
 
 		for (auto& configCompWp : configCompsWp)
-			if (auto configCompSp = configCompWp.lock())
+			if (auto configCompSp{configCompWp.lock()})
 				configCompSp->captureManagerParameters(manager);
 
 		return false;
