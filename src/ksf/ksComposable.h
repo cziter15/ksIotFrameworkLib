@@ -27,6 +27,8 @@ namespace ksf
 			/*
 				Instantiates a component of passed type, handing over all template parameters as constructor parameters to the component. 
 				Keep in mind that passed parameters must match target component constructor parameters.
+
+				@return Weak pointer to added component.
 			*/
 			template <class _Type, class... _Params>
 			std::weak_ptr<_Type> addComponent(_Params... arg)
@@ -85,6 +87,7 @@ namespace ksf
 
 			/*
 				Queues component to be removed. It will happen on queue synchronization (synchronizeQueues).
+
 				@param component Component to be removed.
 			*/
 			void queueComponentForRemoval(const std::shared_ptr<ksComponent>& component);

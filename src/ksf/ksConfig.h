@@ -14,7 +14,7 @@
 
 /* Wrapper macro that allows to create nice file-manipulating sections. */
 #define USING_CONFIG_FILE(fileName) \
-	if (ksf::ksConfig config_file = ksf::ksConfig(fileName))
+	if (ksf::ksConfig config_file{ksf::ksConfig(fileName)})
 
 namespace ksf
 {
@@ -28,15 +28,16 @@ namespace ksf
 		public:
 			/* 
 				Constructor that opens specified file.
-				@param configFile Filename of config to open/create.
+
+				@param configFile Name of the config file to open/create.
 			*/
 			ksConfig(const std::string& configFile);
 
 			/*
 				Sets specified parameter (in memory).
 
-				@param paramName Pparameter name.
-				@param paramValue Parameter value.
+				@param paramName Target parameter name.
+				@param paramValue Target parameter value.
 			*/
 			void setParam(const std::string& paramName, const std::string& paramValue);
 
@@ -46,18 +47,22 @@ namespace ksf
 
 				@param paramName Parameter name.
 				@param defaultValue Default value to return (if not found).
+				@return Reference to string with value of requested parameter (or defaultValue if not found).
 			*/
 			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
+
+			/*
+				Operator bool override. Returns true if configFilename is not empty.
+
+				@return True if configFilename is not empty., otherwise false.
+			*/
+			operator bool() const;
+
 
 			/*
 				Destructor that save changes if isDirty flag is set to true.
 			*/
 			virtual ~ksConfig();
-
-			/*
-				Operator bool override. Returns true if configFilename is not empty.
-			*/
-			operator bool() const;
 	};
 }
 

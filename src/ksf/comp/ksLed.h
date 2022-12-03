@@ -30,27 +30,29 @@ namespace ksf
 			public:
 				/*
 					Constructs ksLed object, assigning passed pin number.
-					@param pin Pin assigned to LED.
-					@param activeLow Drive low to enable?
+
+					@param pin Pin number assigned to LED.
+					@param activeLow True if pin should be driven LOW to enable LED. Otherwise false.
 				*/
 				ksLed(uint8_t pin, bool activeLow = false);
 
 				/*
 					Initializes ksLed component.
 					
-					@param owner Pointer to ownning ksComposable object (application).
+					@param owner Pointer to the ksComposable owning the object (application).
 					@return True if init succedeed, otherwise false.
 				*/
 				bool init(class ksf::ksComposable* owner) override;
 
 				/*
-					ksLed component loop.
-					Handles LED blinking logic.
+					Handles logic of the ksLed component.
+
+					@return True if everything is okay, otherwise false to break application logic.
 				*/
 				bool loop() override;
 
 				/*
-					Used to set LED blink parameters.
+					Used to set LED blinking parameters.
 
 					@param blinkIntervalMs Time in ms between LED state toggle (0 to disable blinking).
 					@param blinkLoops Number of loops (0 for infinite loop).
@@ -75,13 +77,14 @@ namespace ksf
 				void setEnabled(bool enabled);
 
 				/*
-					PIN number getter.
-					@return PIN assigned to the LED.
+					Returns assigned pin number.
+
+					@return Assigned pin number.
 				*/
 				uint8_t getPin() const { return pin; }
 
 				/*
-					Destructor, disables LED and restores pin state.
+					Destructor, disables LED and restores INPUT pin state.
 				*/
 				virtual ~ksLed();
 		};

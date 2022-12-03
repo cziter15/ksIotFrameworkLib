@@ -49,12 +49,14 @@ namespace ksf
 
 				/*
 					Internal method to connect to AP.
+
 					@return True if connect succedeed, otherwise false.
 				*/
 				bool connectStation();
 
 				/*
 					Internal method to disconnect from AP.
+
 					@return True if disconnected properly, otherwise false.
 				*/
 				bool disconnectStation();
@@ -65,6 +67,7 @@ namespace ksf
 
 				/*
 					Constructs ksWifiConnector component.
+
 					@param hostname Hostname to be used by WiFi class.
 				*/
 				ksWifiConnector(const char* hostname);
@@ -79,12 +82,14 @@ namespace ksf
 
 				/*
 					Handles WiFi connector component loop logic.
+
 					@return True on success, false on fail.
 				*/
 				bool loop() override;
 
 				/*
 					Returns connection state.
+
 					@return True if connected, false if not.
 				*/
 				bool isConnected() const;

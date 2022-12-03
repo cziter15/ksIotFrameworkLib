@@ -29,12 +29,14 @@ namespace ksf
 			public:
 				/*
 					Constructs ksWiFiConfigurator.
+
 					@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname.
 				*/
 				ksWiFiConfigurator(const std::string& devicePrefixName = "ksWiFiConfigurator");
 
 				/*
 					Initializes ksWiFiConfigurator component.
+
 					@param owner Pointer to ownning ksComposable object (application).
 					@return True if init succedeed, otherwise false.
 				*/

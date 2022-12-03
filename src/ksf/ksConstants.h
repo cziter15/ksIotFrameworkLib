@@ -82,6 +82,7 @@ namespace ksf
 
 	/*
 		Retrieves device uptime in milliseconds (64 bit wide).
+		
 		@return Milliseconds that have passed since device boot/restart.
 	*/
 	extern uint64_t millis64();
@@ -103,7 +104,7 @@ namespace ksf
 
 	/*
 		Helper function to convert from string to another type.
-		
+
 		@param input Input - string, string_view etc.
 		@param out Output reference - can be int, double (anything that  std::from_chars support)
 	*/

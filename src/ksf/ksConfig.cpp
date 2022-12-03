@@ -58,7 +58,7 @@ namespace ksf
 		{
 			auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
 
-			for (auto& entry : configParams)
+			for (const auto& entry : configParams)
 			{
 				fileWriter.println(entry.first.c_str());
 				fileWriter.println(entry.second.c_str());

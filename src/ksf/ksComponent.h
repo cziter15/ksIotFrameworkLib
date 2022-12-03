@@ -33,6 +33,7 @@ namespace ksf
 
 			/* 
 				Called from application loop.
+
 				@return True on success, false on fail.
 			*/
 			virtual bool loop();

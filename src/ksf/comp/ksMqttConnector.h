@@ -84,7 +84,8 @@ namespace ksf
 				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
 
 				/*
-					Constructs ksMqttConnector objec.
+					Constructs ksMqttConnector object.
+
 					@param sendConnectionStatus True if should send connection status in connected topic.
 				*/
 				ksMqttConnector(bool sendConnectionStatus = true, bool usePersistentSession = false);
@@ -99,24 +100,28 @@ namespace ksf
 
 				/*
 					Called from application loop. Handles MqttConnector logic.
+
 					@return True on success, false on fail.
 				*/
 				bool loop() override;
 
 				/*
 					Retrieves connection state.
+
 					@return True if connected, otherwise false.
 				*/
 				bool isConnected() const;
 
 				/*
 					Retrieves connection time in seconds.
+
 					@return MQTT connection time in seconds.
 				*/
 				uint32_t getConnectionTimeSeconds() const { return connectionTimeSeconds; }
 
 				/*
 					Retrieves MQTT reconnect counter.
+
 					@return Number of MQTT reconnects.
 				*/
 				uint32_t getReconnectCounter() const { return reconnectCounter; }

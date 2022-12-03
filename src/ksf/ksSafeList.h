@@ -20,22 +20,10 @@ namespace ksf
 		friend class ksSafeListScopedSync;
 
 		protected:
-			/*
-				Constructs ksSafeList.
-			*/
 			ksSafeListInterface();
 
 		public:
-			/*
-				Unsafely (in context of the purpose) erases elements from underlying lists.
-				This method must not be called while iterating ksSafeList (for example it's forbidden to erase components in component loop).
-			*/
-			virtual void unsafeEraseAllQueues() = 0;
-
-			/*
-				This method 'synchronizes' underlying queues. Typically called after iteration to avoid manipulation of the list while iterating.
-				Under the hood, it iterates underlying list by looking for items to remove or add (two another underlying lists).
-			*/
+			virtual void forceErase() = 0;
 			virtual void synchronizeQueues() = 0;
 	};
 
@@ -43,12 +31,13 @@ namespace ksf
 	class ksSafeList : public ksSafeListInterface
 	{
 		protected:
-			std::list<_EntryType> list, pendingAdd;
-			std::vector<_EntryType> pendingRemove;
+			std::list<_EntryType> list, pendingAdd;			// Underlying lists of elements.
+			std::vector<_EntryType> pendingRemove;			// Vector of items waiting to be removed.
 
 		public:
 			/*
-				Retrieves list reference.
+				Retrieves const underlting list reference.
+
 				@return Reference to vector of items (underlying list).
 			*/
 			const std::list<_EntryType>& getList() const
@@ -58,6 +47,7 @@ namespace ksf
 
 			/*
 				Queues item to be added to the list at next synchronizeQueues call.
+
 				@param item Item reference.
 			*/
 			void queueAdd(const _EntryType& item)
@@ -67,6 +57,7 @@ namespace ksf
 
 			/*
 				Queues item to be removed from the list at next synchronizeQueues call.
+
 				@param item Item reference.
 			*/
 			void queueRemove(const _EntryType& item)
@@ -75,10 +66,10 @@ namespace ksf
 			}
 
 			/*
-				Unsafely (in context of the purpose) erases elements from underlying lists.
-				This method must not be called while iterating ksSafeList (for example it's forbidden to erase components in component loop).
+				Forcibly erases all underlying lists and queues.
+				Please don't call while iterating or accessing elements on the list.
 			*/
-			void unsafeEraseAllQueues() override
+			void forceErase() override
 			{
 				pendingAdd.clear();
 				pendingRemove.clear();
@@ -86,15 +77,14 @@ namespace ksf
 			}
 			
 			/*
-				This method 'synchronizes' underlying queues. Typically called after iteration to avoid manipulation of the list while iterating.
-				Under the hood, it iterates underlying list by looking for items to remove or add (two another underlying lists).
+				Inserts pending-add items at the end of the lists then 
+				removes pending-remove items from the list
+				Please don't call while iterating or accessing elements on the list.
 			*/
 			void synchronizeQueues() override
 			{
 				if (!pendingAdd.empty())
-				{
 					list.splice(list.end(), pendingAdd);
-				}
 
 				if (!pendingRemove.empty())
 				{

@@ -48,13 +48,15 @@ namespace ksf
 
 				/*
 					Handles reset button component loop logic.
+
 					@return True on success, false on fail.
 				*/
 				bool loop() override;
 
 				/*
-					PIN number getter.
-					@return PIN assigned to the reset button.
+					Retrieves assigned pin number.
+
+					@return PIN number assigned to the reset button.
 				*/
 				uint8_t getPin() const { return pin; }
 

@@ -37,6 +37,7 @@ namespace ksf
 			public:
 				/*
 					Queries if event has any bound callbacks.
+
 					@return True if any callback is bound, false if no callback is bound.
 				*/
 				bool isBound() const
@@ -77,6 +78,7 @@ namespace ksf
 
 				/*
 					Broadcast event (calls all bound callbacks).
+
 					@param args User defined parameters (va args).
 				*/
 				void broadcast(Params... params)

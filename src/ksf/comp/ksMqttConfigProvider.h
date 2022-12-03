@@ -37,18 +37,21 @@ namespace ksf
 			public:
 				/*
 					Injects MQTT config provider's WiFiManager parameters.
+
 					@param manager WiFiManager reference.
 				*/
 				void injectManagerParameters(WiFiManager& manager) override;
 
 				/*
 					Captures MQTT config provider's WiFiManager parameters.
+
 					@param manager WiFiManager reference.
 				*/
 				void captureManagerParameters(WiFiManager& manager) override;
 
 				/*
 					Configures MQTT connector from config provider.
+
 					@param connector ksMqttConnector reference.
 				*/
 				void setupMqttConnector(ksMqttConnector& connector);

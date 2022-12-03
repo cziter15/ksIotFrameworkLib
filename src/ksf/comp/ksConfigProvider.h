@@ -29,8 +29,8 @@ namespace ksf
 				std::vector<std::unique_ptr<WiFiManagerParameter>> params;	// Unique pointers of parameters (deletes them safely).
 				
 				/*
-					Adds new param to WiFiManager configuration process.
-					This method should be called only from injectManagerParameters function.
+					Adds a new param to the WiFiManager configuration process.
+					This method must be called only inside injectManagerParameters function.
 
 					@param manager WiFiManager reference.
 					@param label Label and ID to identify parameter.
@@ -50,18 +50,21 @@ namespace ksf
 
 				/*
 					Overridable method to inject WiFiManager parameters.
+
 					@param manager WiFiManager reference.
 				*/
 				virtual void injectManagerParameters(WiFiManager& manager) = 0;
 
 				/*
 					Overridable method to capture WiFiManager parameters.
+
 					@param manager WiFiManager reference.
 				*/
 				virtual void captureManagerParameters(WiFiManager& manager) = 0;
 
 				/*
 					Called from application loop.
+
 					@return True on success, false on fail.
 				*/
 				virtual bool loop() override;

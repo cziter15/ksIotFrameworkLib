@@ -46,6 +46,7 @@ namespace ksf
 
 				/*
 					Returns last known reset reason.
+
 					@return std::string with reset reason description.
 				*/
 				std::string getResetReason();
@@ -69,12 +70,14 @@ namespace ksf
 
 				/*
 					Handles MQTT debug connector component loop logic.
+
 					@return True on success, false on fail.
 				*/
 				bool loop() override;
 
 				/*
 					Publishes response to command request.
+
 					@param message Message string reference.
 				*/
 				void respond(const std::string& message) const;
