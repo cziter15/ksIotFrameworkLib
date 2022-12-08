@@ -14,14 +14,12 @@ namespace ksf
 	ksSafeListInterface::ksSafeListInterface() 
 	{}
 	
-	ksSafeListScopedSync::ksSafeListScopedSync(ksSafeListInterface& listRef)
-	{
-		listRawPtr = &listRef;
-	}
+	ksSafeListScopedSync::ksSafeListScopedSync(ksSafeListInterface& listRef) 
+		: listRawPtr(&listRef)
+	{}
 
 	ksSafeListScopedSync::~ksSafeListScopedSync()
 	{
-		if (listRawPtr)
-			listRawPtr->applyPendingOperations();
+		listRawPtr->applyPendingOperations();
 	}
 }
