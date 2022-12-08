@@ -27,6 +27,8 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
+	constexpr auto otaBootReason{"OTA Update"};
+
 	bool ksMqttDebugResponder::init(ksf::ksComposable* owner)
 	{
 		this->owner = owner;
@@ -63,13 +65,14 @@ namespace ksf::comps
 
 	std::string ksMqttDebugResponder::getResetReason()
 	{
+		bool otaBoot{ksf::isFirstOtaBoot()};
 		#if ESP32
 			switch (esp_reset_reason())
 			{
 				case ESP_RST_POWERON:
 					return {"Power On"};
 				case ESP_RST_SW:
-					return {"Software/System restart"};
+					return otaBoot ? {otaBootReason} : {"Software/System restart"};
 				case ESP_RST_PANIC:
 					return {"Exception"};
 				case ESP_RST_INT_WDT:
@@ -88,6 +91,9 @@ namespace ksf::comps
 					return {"Unknown"};
 			}
 		#elif ESP8266
+			if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
+				return {otaBootReason};
+
 			return {ESP.getResetReason().c_str()};
 		#else			
 			#error Platform not implemented.

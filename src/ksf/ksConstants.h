@@ -114,4 +114,17 @@ namespace ksf
 		const auto& result{std::from_chars(input.data(), input.data() + input.size(), out)};
 		return result.ec == std::errc();
 	}
+
+	
+	/*
+		Retrieves if the device has been boot after OTA.
+		
+		@return True if started after OTA.
+	*/
+	extern bool isFirstOtaBoot();
+
+	/*
+		Saves OTA boot indicator.
+	*/
+	extern void saveOtaBootIndicator();
 }

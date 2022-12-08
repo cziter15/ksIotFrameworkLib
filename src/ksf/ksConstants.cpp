@@ -12,7 +12,11 @@
 
 namespace ksf
 {
+	constexpr auto otaBootIndicatorFile{"ksf-booted-from-ota"};
+
+	static bool bootedFromOta{false};
 	static uint32_t uptime_low32, uptime_high32;
+
 
 	void initializeFramework()
 	{
@@ -25,6 +29,18 @@ namespace ksf
 			/* Initialize filesystem. */
 			LittleFS.begin();
 		#endif
+
+		bootedFromOta = LittleFS.remove(otaBootIndicatorFile);
+	}
+
+	void saveOtaBootIndicator()
+	{
+		LittleFS.open(otaBootIndicatorFile, "w");
+	}
+
+	bool isFirstOtaBoot()
+	{
+		return bootedFromOta;
 	}
 
 	void updateDeviceUptime()
