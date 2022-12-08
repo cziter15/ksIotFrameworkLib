@@ -72,7 +72,7 @@ namespace ksf::comps
 				case ESP_RST_POWERON:
 					return {"Power On"};
 				case ESP_RST_SW:
-					return otaBoot ? {otaBootReason} : {"Software/System restart"};
+					return {otaBoot ? otaBootReason : "Software/System restart"};
 				case ESP_RST_PANIC:
 					return {"Exception"};
 				case ESP_RST_INT_WDT:
