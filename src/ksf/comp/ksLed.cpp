@@ -26,16 +26,15 @@ namespace ksf::comps
 
 	bool ksLed::loop()
 	{
-		if (blinkIntervalMs > 0)
+		/* If interval is set, check if time interval passed and we should toggle LED state. */
+		if (blinkIntervalMs > 0 && (millis() - lastBlinkTimeMs > blinkIntervalMs))
 		{
-			if (millis() - lastBlinkTimeMs > blinkIntervalMs)
-			{
-				setEnabled(!isEnabled());
-				lastBlinkTimeMs = millis();
+			setEnabled(!isEnabled());
 
-				if (blinkLoops > 0 && --blinkLoops == 0)
-					setBlinking(0);
-			}
+			if (blinkLoops > 0 && --blinkLoops == 0)
+				setBlinking(0);
+			else
+				lastBlinkTimeMs = millis();
 		}
 
 		return true;

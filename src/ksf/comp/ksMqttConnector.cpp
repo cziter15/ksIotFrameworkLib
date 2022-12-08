@@ -108,42 +108,32 @@ namespace ksf::comps
 
 	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
-		if (onMesssage->isBound())
-		{
-			std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
-			std::string_view topicStr{topic};
+		if (!onMesssage->isBound())
+			return;
 
-			if (topicStr.find(prefix) != std::string::npos)
-				topicStr = topicStr.substr(prefix.length());
+		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
+		std::string_view topicStr{topic};
 
-			onMesssage->broadcast(topicStr, payloadStr);
-		}
+		if (topicStr.find(prefix) != std::string::npos)
+			topicStr = topicStr.substr(prefix.length());
+
+		onMesssage->broadcast(topicStr, payloadStr);
 	}
 
 	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, ksMqttConnector::QosLevel qos)
 	{
 		uint8_t qosLevel{static_cast<uint8_t>(qos)};
-
-		if (skipDevicePrefix)
-			mqttClientSp->subscribe(topic.c_str(), qosLevel);
-		else	
-			mqttClientSp->subscribe(std::string(prefix + topic).c_str(), qosLevel);
+		mqttClientSp->subscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), qosLevel);
 	}
 
 	void ksMqttConnector::unsubscribe(const std::string& topic, bool skipDevicePrefix)
 	{
-		if (skipDevicePrefix)
-			mqttClientSp->unsubscribe(topic.c_str());
-		else
-			mqttClientSp->unsubscribe(std::string(prefix + topic).c_str());
+		mqttClientSp->unsubscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str());
 	}
 
 	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
 	{
-		if (skipDevicePrefix)
-			mqttClientSp->publish(topic.c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
-		else
-			mqttClientSp->publish(std::string(prefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+		mqttClientSp->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
 	}
 
 	bool ksMqttConnector::connectToBroker()

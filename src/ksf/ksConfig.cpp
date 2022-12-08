@@ -14,27 +14,29 @@ namespace ksf
 {
 	ksConfig::ksConfig(const std::string& configFile)
 	{
-		if (configFile.length() > 0)
+		if (configFile.length() == 0)
+			return;
+
+		/* Assemble file path. */
+		this->configFile = configFile[0] != '/' ? "/" + configFile : configFile;
+
+		/* Construct reader. */
+		auto fileReader{LittleFS.open(this->configFile.c_str(), "r")};
+
+		/* Read until EOF. */
+		while (fileReader.available())
 		{
-			this->configFile = configFile[0] != '/' ? "/" + configFile : configFile;
-			auto fileReader{LittleFS.open(this->configFile.c_str(), "r")};
+			std::string name{fileReader.readStringUntil('\n').c_str()};
+			name = name.substr(0, name.length() - 1);
 
-			while (fileReader.available())
-			{
-				std::string name{fileReader.readStringUntil('\n').c_str()};
-				name = name.substr(0, name.length() - 1);
+			std::string val{fileReader.readStringUntil('\n').c_str()};
+			val = val.substr(0, val.length() - 1);
 
-				std::string val{fileReader.readStringUntil('\n').c_str()};
-				val = val.substr(0, val.length() - 1);
-
-				setParam(name, val);
-			}
-
-			isDirty = false;
-
-			if (fileReader)
-				fileReader.close();
+			setParam(name, val);
 		}
+
+		if (fileReader)
+			fileReader.close();
 	}
 
 	void ksConfig::setParam(const std::string& paramName, const std::string& paramValue)
@@ -46,30 +48,26 @@ namespace ksf
 	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
 		const auto& found{configParams.find(paramName)};
-		if (found != configParams.end())
-			return found->second;
-
-		return defaultValue;
-	}
-
-	ksConfig::~ksConfig()
-	{
-		if (isDirty)
-		{
-			auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
-
-			for (const auto& entry : configParams)
-			{
-				fileWriter.println(entry.first.c_str());
-				fileWriter.println(entry.second.c_str());
-			}
-
-			fileWriter.close();
-		}
+		return found == configParams.end() ? defaultValue : found->second;
 	}
 
 	ksConfig::operator bool() const
 	{
 		return configFile.length() > 0;
+	}
+
+	ksConfig::~ksConfig()
+	{
+		if (!isDirty)
+			return;
+
+		/* If marked dirty, save changes to FS. */
+		auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
+		for (const auto& entry : configParams)
+		{
+			fileWriter.println(entry.first.c_str());
+			fileWriter.println(entry.second.c_str());
+		}
+		fileWriter.close();
 	}
 }
