@@ -12,8 +12,8 @@
 
 namespace ksf
 {
-	void ksComposable::queueComponentForRemoval(const std::shared_ptr<ksComponent>& component)
+	void ksComposable::markComponentToRemove(const std::shared_ptr<ksComponent>& component)
 	{
-		components.queueRemove(component);
+		components.remove(component);
 	}
 }

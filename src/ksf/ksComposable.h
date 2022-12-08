@@ -38,7 +38,7 @@ namespace ksf
 				);
 
 				auto ptr = std::make_shared<_Type>(arg...);
-				components.queueAdd(ptr);
+				components.add(ptr);
 				return std::weak_ptr<_Type>(ptr);
 			}
 
@@ -56,7 +56,7 @@ namespace ksf
 
 				outComponents.clear();
 
-				for (const auto& comp : components.getList())
+				for (const auto& comp : components.getRef())
 				{
 					if (comp->isA(_Type::getClassType()))
 					{
@@ -90,7 +90,7 @@ namespace ksf
 
 				@param component Component to be removed.
 			*/
-			void queueComponentForRemoval(const std::shared_ptr<ksComponent>& component);
+			void markComponentToRemove(const std::shared_ptr<ksComponent>& component);
 
 			/*
 				Executes a function on each component.
@@ -102,7 +102,7 @@ namespace ksf
 			bool forEachComponent(_Predicate function)
 			{
 				/* Simply iterate and call passed function for each component. */
-				for (auto it{components.getList().cbegin()}; it != components.getList().cend(); ++it)
+				for (auto it{components.getRef().cbegin()}; it != components.getRef().cend(); ++it)
 					if (!function(*it)) // If predicate returned false, stop iterating.
 						return false;
 

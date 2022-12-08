@@ -15,7 +15,7 @@ namespace ksf
 	bool ksApplication::init()
 	{
 		/* Synchronize components added before ksApplication base init. */
-		components.synchronizeQueues();
+		components.applyPendingOperations();
 
 		/* Run initialization */
 		if (!forEachComponent([&](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); }))

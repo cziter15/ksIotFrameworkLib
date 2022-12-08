@@ -22,6 +22,6 @@ namespace ksf
 	ksSafeListScopedSync::~ksSafeListScopedSync()
 	{
 		if (listRawPtr)
-			listRawPtr->synchronizeQueues();
+			listRawPtr->applyPendingOperations();
 	}
 }

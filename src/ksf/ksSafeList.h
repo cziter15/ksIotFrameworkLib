@@ -23,16 +23,15 @@ namespace ksf
 			ksSafeListInterface();
 
 		public:
-			virtual void forceErase() = 0;
-			virtual void synchronizeQueues() = 0;
+			virtual void applyPendingOperations() = 0;
 	};
 
 	template <typename _EntryType>
 	class ksSafeList : public ksSafeListInterface
 	{
 		protected:
-			std::list<_EntryType> list, pendingAdd;			// Underlying lists of elements.
-			std::vector<_EntryType> pendingRemove;			// Vector of items waiting to be removed.
+			std::list<_EntryType> list, pendingAdditions;			// Underlying lists of elements.
+			std::vector<_EntryType> pendingRemovals;				// Vector of items waiting to be removed.
 
 		public:
 			/*
@@ -40,7 +39,7 @@ namespace ksf
 
 				@return Reference to vector of items (underlying list).
 			*/
-			const std::list<_EntryType>& getList() const
+			const std::list<_EntryType>& getRef() const
 			{
 				return list;
 			}
@@ -50,9 +49,9 @@ namespace ksf
 
 				@param item Item reference.
 			*/
-			void queueAdd(const _EntryType& item)
+			void add(const _EntryType& item)
 			{
-				pendingAdd.push_back(item);
+				pendingAdditions.push_back(item);
 			}
 
 			/*
@@ -60,39 +59,38 @@ namespace ksf
 
 				@param item Item reference.
 			*/
-			void queueRemove(const _EntryType& item)
+			void remove(const _EntryType& item)
 			{
-				pendingRemove.push_back(item);
+				pendingRemovals.push_back(item);
 			}
 
 			/*
-				Forcibly erases all underlying lists and queues.
+				Clears all underlying lists.
 				Please don't call while iterating or accessing elements on the list.
 			*/
-			void forceErase() override
+			void clearAll()
 			{
-				pendingAdd.clear();
-				pendingRemove.clear();
+				pendingAdditions.clear();
+				pendingRemovals.clear();
 				list.clear();
 			}
 			
 			/*
-				Inserts pending-add items at the end of the lists then 
-				removes pending-remove items from the list
+				Applies pending operations.
 				Please don't call while iterating or accessing elements on the list.
 			*/
-			void synchronizeQueues() override
+			void applyPendingOperations() override
 			{
-				if (!pendingAdd.empty())
-					list.splice(list.end(), pendingAdd);
+				if (!pendingAdditions.empty())
+					list.splice(list.end(), pendingAdditions);
 
-				if (!pendingRemove.empty())
+				if (!pendingRemovals.empty())
 				{
 					list.remove_if([&](const _EntryType& item) {
-						return std::find(pendingRemove.begin(), pendingRemove.end(), item) != pendingRemove.end();
+						return std::find(pendingRemovals.begin(), pendingRemovals.end(), item) != pendingRemovals.end();
 					});
 
-					pendingRemove.clear();
+					pendingRemovals.clear();
 				}
 			}
 	};
