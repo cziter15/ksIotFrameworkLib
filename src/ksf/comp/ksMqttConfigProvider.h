@@ -23,17 +23,6 @@ namespace ksf
 		{
 			KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
 
-			protected:
-				static const char ksfMqttConfigFile[];					// Static char-string "mqtt.conf".
-
-				static const char ksfBrokerParamName[];					// Static char-string "broker".
-				static const char ksfUserParamName[];					// Static char-string "user".
-				static const char ksfPortParamName[];					// Static char-string "port".
-				static const char ksfFingerprintParamName[];			// Static char-string "fingerprint".
-				static const char ksfDefPort[];							// Static char-string "port".
-				static const char ksfPasswordParamName[];				// Static char-string "password".
-				static const char ksfPrefixParamName[];					// Static char-string "prefix".
-
 			public:
 				/*
 					Injects MQTT config provider's WiFiManager parameters.

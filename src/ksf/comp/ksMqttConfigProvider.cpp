@@ -15,15 +15,14 @@
 
 namespace ksf::comps
 {
-	const char ksMqttConfigProvider::ksfMqttConfigFile[] = "mqtt.conf";
-	const char ksMqttConfigProvider::ksfDefPort[] = "1883";
-
-	const char ksMqttConfigProvider::ksfBrokerParamName[] = "broker";
-	const char ksMqttConfigProvider::ksfUserParamName[] = "user";
-	const char ksMqttConfigProvider::ksfPortParamName[] = "port";
-	const char ksMqttConfigProvider::ksfFingerprintParamName[] = "SSLFingerprint";
-	const char ksMqttConfigProvider::ksfPasswordParamName[] = "password";
-	const char ksMqttConfigProvider::ksfPrefixParamName[] = "prefix";
+	constexpr auto ksfMqttConfigFile{"mqtt.conf"};
+	constexpr auto ksfDefPort{"1883"};
+	constexpr auto ksfBrokerParamName{"broker"};
+	constexpr auto ksfUserParamName{"user"};
+	constexpr auto ksfPortParamName{"port"};
+	constexpr auto ksfFingerprintParamName{"SSLFingerprint"};
+	constexpr auto ksfPasswordParamName{"password"};
+	constexpr auto ksfPrefixParamName{"prefix"};
 
 	void ksMqttConfigProvider::setupMqttConnector(ksMqttConnector& connector)
 	{
