@@ -12,11 +12,10 @@
 
 namespace ksf
 {
-	constexpr auto otaBootIndicatorFile{"/ksf.otabooted"};
+	constexpr auto otaBootIndicatorFile{"/ksf.otabooted"};		// Name of the OTA boot indicator file.
+	static bool bootedFromOta{false};							// Will be true if this launch is just after OTA flash.
 
-	static bool bootedFromOta{false};
-	static uint32_t uptime_low32, uptime_high32;
-
+	static uint32_t uptime_low32, uptime_high32;				// Variables for assembling 64-bit version of millis.
 
 	void initializeFramework()
 	{
