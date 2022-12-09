@@ -88,13 +88,28 @@ namespace ksf
 	extern uint64_t millis64();
 
 	/*
-		Helper functions co convert floating point / fixed point values to stirng.
+		Helper functionn double values into stirng.
+		GCC is missing double support in std::to_string.
+
+		@param value Double value to be converted.
+		@param base Requested decimal points.
 	*/
 	extern std::string to_string(double value, const int base);
+
+	/*
+		Helper functionn float values into stirng.
+		GCC is missing float support in std::to_string.
+
+		@param value Float value to be converted.
+		@param base Requested decimal points.
+		@return Converted value in a form of string.
+	*/
 	extern std::string to_string(float value, const int base);
 
 	/*
-		Helper functions co convert other values to stirng.
+		Helper functionn to convert passed value into stirng.
+		@param input Value to be converted.
+		@return Converted value in a form of string.
 	*/
 	template <typename _Type>
 	inline std::string to_string(const _Type& input)
@@ -107,6 +122,7 @@ namespace ksf
 
 		@param input Input - string, string_view etc.
 		@param out Output reference - can be int, double (anything that  std::from_chars support)
+		@return True if conversion succeded, otherwise false.
 	*/
 	template <typename _In, typename _Out>
 	bool from_chars(const _In& input, _Out& out)
