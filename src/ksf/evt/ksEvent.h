@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <memory>
+#include <functional>
 #include "ksEventBase.h"
 #include "ksEventHandle.h"
 
