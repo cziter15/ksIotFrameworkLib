@@ -15,19 +15,8 @@
 
 namespace ksf 
 {
-	class ksSafeListInterface
-	{
-		friend class ksSafeListScopedSync;
-
-		protected:
-			ksSafeListInterface();
-
-		public:
-			virtual void applyPendingOperations() = 0;
-	};
-
 	template <typename _EntryType>
-	class ksSafeList : public ksSafeListInterface
+	class ksSafeList
 	{
 		protected:
 			std::list<_EntryType> list, pendingAdditions;			// Underlying lists of elements.
@@ -79,7 +68,7 @@ namespace ksf
 				Applies pending operations.
 				Please don't call while iterating or accessing elements on the list.
 			*/
-			void applyPendingOperations() override
+			void applyPendingOperations()
 			{
 				if (!pendingAdditions.empty())
 					list.splice(list.end(), pendingAdditions);
@@ -98,22 +87,29 @@ namespace ksf
 	/* 
 		Wrapper that simply calls synchronizeQueues on passed ksSafeList at the end of scope.
 	*/
+	template <typename _ListType>
 	class ksSafeListScopedSync
 	{
 		protected:
-			ksSafeListInterface* listRawPtr;	// Unsafe list pointer (this class should be used only in small scopes!).
+			_ListType* listRawPtr;	// Unsafe list pointer (to used only in small scopes!).
 		
 		public:
 			/* 
 				ksSafeListScopedSync constructor.
-				@param listRef Reference to ksSafeListInterface / ksSafeList (casted internally to a pointer).
+				@param listRef Reference to the list (casted internally to a pointer).
 			*/
-			ksSafeListScopedSync(ksSafeListInterface& listRef);
+			ksSafeListScopedSync(_ListType& listRef)
+			{
+				listRawPtr = (_ListType*)&listRef;
+			}
 
 			/* 
 				ksSafeListScopedSync destructor.
 				Calls synchronizeQueues on passed list instance.
 			*/
-			virtual ~ksSafeListScopedSync();
+			~ksSafeListScopedSync()
+			{
+				listRawPtr->applyPendingOperations();
+			}
 	};
 }
