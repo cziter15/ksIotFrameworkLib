@@ -20,7 +20,7 @@ namespace ksf
 		else return 255;
 	}
 	
-	bool ksCertFingerprintBase::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const
+	bool ksCertFingerprint::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const
 	{
 		if (fingerprint.size() != bytesLen * 2)
 			return false;

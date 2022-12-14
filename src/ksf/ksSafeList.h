@@ -54,7 +54,7 @@ namespace ksf
 			}
 
 			/*
-				Clears all underlying lists.
+				Clears all pending operations and the list itself.
 				Please don't call while iterating or accessing elements on the list.
 			*/
 			void clearAll()
@@ -65,7 +65,7 @@ namespace ksf
 			}
 			
 			/*
-				Applies pending operations.
+				Applies all pending operations to the list.
 				Please don't call while iterating or accessing elements on the list.
 			*/
 			void applyPendingOperations()

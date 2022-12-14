@@ -15,7 +15,7 @@
 
 namespace ksf
 {
-	class ksCertFingerprintBase
+	class ksCertFingerprint
 	{
 		protected:
 			/*
@@ -48,7 +48,7 @@ namespace ksf
 	};
 
 #ifdef ESP32
-	class ksCertFingerprintESP32 : public ksCertFingerprintBase
+	class ksCertFingerprintESP32 : public ksCertFingerprint
 	{
 		private:
 			uint8_t fingerprintBytes[32];	// Fingerprint string transformed into array of bytes.
@@ -77,7 +77,7 @@ namespace ksf
 #endif
 
 #ifdef ESP8266
-	class ksCertFingerprintESP8266 : public ksCertFingerprintBase
+	class ksCertFingerprintESP8266 : public ksCertFingerprint
 	{
 		public:
 			/*
