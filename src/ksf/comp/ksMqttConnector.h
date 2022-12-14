@@ -10,9 +10,8 @@
 #pragma once
 
 #include "../ksComponent.h"
-#include "../event/ksEvent.h"
+#include "../evt/ksEvent.h"
 #include "../ksSimpleTimer.h"
-
 #include <string>
 #include <string_view>
 

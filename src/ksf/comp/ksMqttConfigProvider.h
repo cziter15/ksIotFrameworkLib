@@ -14,12 +14,10 @@
 
 class WiFiManager;
 
-namespace ksf
+namespace ksf::comps
 {
-	namespace comps
-	{
-		class ksMqttConnector;
-		class ksMqttConfigProvider : public ksConfigProvider
+	class ksMqttConnector;
+	class ksMqttConfigProvider : public ksConfigProvider
 		{
 			KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
 
@@ -45,5 +43,4 @@ namespace ksf
 				*/
 				void setupMqttConnector(ksMqttConnector& connector);
 		};
-	}
 }

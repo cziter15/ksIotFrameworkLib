@@ -9,9 +9,9 @@
 
 #pragma once
 
-#include <memory>
 #include "ksConstants.h"
 #include "ksRtti.h"
+#include <memory>
 
 namespace ksf 
 {

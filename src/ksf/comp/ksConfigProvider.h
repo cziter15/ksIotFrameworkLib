@@ -16,12 +16,10 @@
 class WiFiManager;
 class WiFiManagerParameter;
 
-namespace ksf
+namespace ksf::comps
 {
-	namespace comps
-	{
-		class ksComposable;
-		class ksConfigProvider : public ksComponent
+	class ksComposable;
+	class ksConfigProvider : public ksComponent
 		{
 			KSF_RTTI_DECLARATIONS(ksConfigProvider, ksComponent)
 
@@ -69,5 +67,4 @@ namespace ksf
 				*/
 				virtual bool loop() override;
 		};
-	}
 }

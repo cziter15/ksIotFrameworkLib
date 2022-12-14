@@ -9,11 +9,11 @@
 
 #pragma once
 
+#include "ksSafeList.h"
+#include "ksComponent.h"
 #include <vector>
 #include <functional>
 #include <algorithm>
-#include "ksSafeList.h"
-#include "ksComponent.h"
 
 namespace ksf 
 {

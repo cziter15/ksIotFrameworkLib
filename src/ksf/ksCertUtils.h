@@ -11,7 +11,6 @@
 
 #include <string>
 #include <stdint.h>
-
 #include <WiFiClientSecure.h>
 
 namespace ksf

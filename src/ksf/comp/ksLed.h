@@ -12,11 +12,9 @@
 #include "../ksComponent.h"
 #include <Arduino.h>
 
-namespace ksf
+namespace ksf::comps
 {
-	namespace comps
-	{
-		class ksLed : public ksComponent
+	class ksLed : public ksComponent
 		{
 			KSF_RTTI_DECLARATIONS(ksLed, ksComponent)
 
@@ -88,5 +86,4 @@ namespace ksf
 				*/
 				virtual ~ksLed();
 		};
-	}
 }

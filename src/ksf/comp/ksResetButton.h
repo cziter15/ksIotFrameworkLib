@@ -12,11 +12,9 @@
 #include "../ksComponent.h"
 #include <Arduino.h>
 
-namespace ksf
+namespace ksf::comps
 {
-	namespace comps
-	{
-		class ksResetButton : public ksComponent
+	class ksResetButton : public ksComponent
 		{
 			KSF_RTTI_DECLARATIONS(ksResetButton, ksComponent)
 
@@ -65,5 +63,4 @@ namespace ksf
 				*/
 				virtual ~ksResetButton();
 		};
-	}
 }

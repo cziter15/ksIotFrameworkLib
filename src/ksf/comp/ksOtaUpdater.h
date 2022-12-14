@@ -10,46 +10,43 @@
 #pragma once
 
 #include "../ksComponent.h"
-#include "../event/ksEvent.h"
+#include "../evt/ksEvent.h"
 #include "ArduinoOTA.h"
 
-namespace ksf
+namespace ksf::comps
 {
-	namespace comps
+	class ksOtaUpdater : public ksComponent
 	{
-		class ksOtaUpdater : public ksComponent
-		{
-			KSF_RTTI_DECLARATIONS(ksOtaUpdater, ksComponent)
+		KSF_RTTI_DECLARATIONS(ksOtaUpdater, ksComponent)
 
-			protected:
-				ArduinoOTAClass ArduinoOTA;		// Arduino OTA object.
+		protected:
+			ArduinoOTAClass ArduinoOTA;		// Arduino OTA object.
 
-			public:
-				DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
-				DECLARE_KS_EVENT(onUpdateEnd)					// onUpdateEnd event that user can bind to.
+		public:
+			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
+			DECLARE_KS_EVENT(onUpdateEnd)					// onUpdateEnd event that user can bind to.
 
-				/*
-					Constructor, used to construct OTA updater component.
-					
-					@param hostname Hostname of the device.
-					@param password Passwor required to flash.
-				*/
-				ksOtaUpdater(const char* hostname, const char* password = "ota_ksiotframework");
+			/*
+				Constructor, used to construct OTA updater component.
+				
+				@param hostname Hostname of the device.
+				@param password Passwor required to flash.
+			*/
+			ksOtaUpdater(const char* hostname, const char* password = "ota_ksiotframework");
 
-				/*
-					Initializes OTA component.
+			/*
+				Initializes OTA component.
 
-					@param owner Pointer to ownning ksComposable object (application).
-					@return True on success, false on fail.
-				*/
-				bool init(class ksf::ksComposable* owner) override;
+				@param owner Pointer to ownning ksComposable object (application).
+				@return True on success, false on fail.
+			*/
+			bool init(class ksf::ksComposable* owner) override;
 
-				/*
-					Handles OTA component loop logic.
+			/*
+				Handles OTA component loop logic.
 
-					@return True on success, false on fail.
-				*/
-				bool loop() override;
-		};
-	}
+				@return True on success, false on fail.
+			*/
+			bool loop() override;
+	};
 }
