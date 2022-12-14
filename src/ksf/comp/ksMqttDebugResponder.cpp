@@ -105,10 +105,10 @@ namespace ksf::comps
 	void ksMqttDebugResponder::onMessage(const std::string_view& topic, const std::string_view& message)
 	{
 		/* If topic is not equal to cmd, break here. */
-		if (topic.compare("cmd") != 0)
+		if (topic != "cmd")
 			return;
 
-		if (message.compare("netinfo") == 0)
+		if (message == "netinfo")
 		{
 			if (auto mqttConnSp{mqttConnWp.lock()})
 			{
@@ -120,7 +120,7 @@ namespace ksf::comps
 				);
 			}
 		}
-		else if (message.compare("sysinfo") == 0)
+		else if (message == "sysinfo")
 		{
 			uint32_t uptimeSec{(uint32_t)(millis64() / 1000)};
 			respond(
@@ -136,18 +136,18 @@ namespace ksf::comps
 				"Reset reason: " + getResetReason().c_str()
 			);
 		}
-		else if (message.compare("remove_dbg") == 0)
+		else if (message == "remove_dbg")
 		{
 			respond("Removing ksMqttDebugResponder. Commands will not be available.");
 			owner->markComponentToRemove(shared_from_this());
 		}
-		else if (message.compare("restart") == 0)
+		else if (message == "restart")
 		{
 			respond("Restarting system. It may take few seconds.");
 			delay(500);
 			ESP.restart();
 		}
-		else if (message.compare("rfcalib") == 0)
+		else if (message == "rfcalib")
 		{
 			respond("Erasing RF CAL data, please wait...");
 			delay(500);
@@ -181,14 +181,14 @@ namespace ksf::comps
 
 			ESP.restart();
 		}
-		else if (message.compare("format") == 0)
+		else if (message == "format")
 		{
 			LittleFS.format();
 			respond("Erasing flash done, restarting. It may take few seconds.");
 			delay(500);
 			ESP.restart();
 		}
-		else if (message.compare("break_app") == 0)
+		else if (message == "break_app")
 		{
 			breakloop = true;
 		}

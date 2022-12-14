@@ -49,7 +49,7 @@ namespace ksf
 				std::string password;											// Saved MQTT password.
 				std::string prefix;												// Saved MQTT prefix.
 
-				std::shared_ptr<ksCertFingerprint> certFingerprint;			// Cert fingerprint validator.
+				std::shared_ptr<ksCertFingerprint> certFingerprint;				// Cert fingerprint validator.
 
 				/*
 					Called to connect to broker.
