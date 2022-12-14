@@ -8,11 +8,11 @@
  */
 
 #include "ksEventHandle.h"
-#include "ksEventBase.h"
+#include "ksEventInterface.h"
 
 namespace ksf::evt
 {
-	ksEventHandle::ksEventHandle(std::weak_ptr<ksEventBase>&& eventBaseWp, std::size_t callbackUID) 
+	ksEventHandle::ksEventHandle(std::weak_ptr<ksEventInterface>&& eventBaseWp, std::size_t callbackUID) 
 		: eventBaseWp(std::move(eventBaseWp)), callbackUID(callbackUID)
 	{}
 

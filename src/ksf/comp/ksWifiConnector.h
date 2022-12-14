@@ -11,7 +11,7 @@
 
 #include "../ksComponent.h"
 #include "../ksSimpleTimer.h"
-#include "../evt/ksEvent.h"
+#include "../event/ksEvent.h"
 
 namespace ksf
 {

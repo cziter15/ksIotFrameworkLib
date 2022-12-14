@@ -10,7 +10,7 @@
 #pragma once
 
 #include "../ksComponent.h"
-#include "../evt/ksEvent.h"
+#include "../event/ksEvent.h"
 #include "ArduinoOTA.h"
 
 namespace ksf

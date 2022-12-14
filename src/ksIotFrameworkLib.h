@@ -16,7 +16,7 @@
 #include "ksf/ksComposable.h"
 #include "ksf/ksConfig.h"
 #include "ksf/ksConstants.h"
-#include "ksf/evt/ksEvent.h"
+#include "ksf/event/ksEvent.h"
 #include "ksf/comp/ksConfigProvider.h"
 #include "ksf/comp/ksLed.h"
 #include "ksf/comp/ksResetButton.h"
