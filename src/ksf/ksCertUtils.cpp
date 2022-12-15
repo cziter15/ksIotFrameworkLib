@@ -25,15 +25,15 @@ namespace ksf
 		if (fingerprint.size() != bytesLen * 2)
 			return false;
 
-		for (uint8_t idx{0}; idx < bytesLen;)
+		for (uint8_t chidx{0}, bidx{0}; chidx < fingerprint.size(); chidx += 2)
 		{
-			uint8_t c = htoi(fingerprint[idx*2]);
-			uint8_t d = htoi(fingerprint[idx*2+1]);
+			uint8_t c = htoi(fingerprint[chidx]);
+			uint8_t d = htoi(fingerprint[chidx+1]);
 
 			if ((c>15) || (d>15))
 				return false;
 
-			bytes[idx++] = (c<<4)|d;
+			bytes[bidx++] = (c<<4)|d;
 		}
 
 		return true;
