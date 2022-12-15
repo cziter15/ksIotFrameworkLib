@@ -11,9 +11,7 @@
 
 #include "ksSafeList.h"
 #include "ksComponent.h"
-#include <vector>
-#include <functional>
-#include <algorithm>
+#include <memory>
 
 namespace ksf 
 {
