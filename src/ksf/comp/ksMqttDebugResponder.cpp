@@ -74,7 +74,7 @@ namespace ksf::comps
 						return PGM_("OTA Update");
 					return PGM_("Software/System restart");
 				case ESP_RST_PANIC:
-					return PGM_("Exception"};
+					return PGM_("Exception");
 				case ESP_RST_INT_WDT:
 					return PGM_("Watchdog (interrupt)");
 				case ESP_RST_TASK_WDT:
@@ -127,7 +127,7 @@ namespace ksf::comps
 				"Free heap: ") + std::to_string(ESP.getFreeHeap()) + PGM_(" b, "
 				#if ESP32
 					"Free PSRAM: ") + std::to_string(ESP.getFreePsram()) + PGM_(" b, "
-					"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_" [C], "
+					"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_(" [C], "
 
 				#endif
 				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
