@@ -69,12 +69,16 @@ namespace ksf
 
 	std::string string_from_progmem(const char* pgm_ptr)
 	{
-		std::string result;
+		#if ESP8266
+			std::string result;
 
-		ssize_t size{strlen_P(pgm_ptr)};
-		result.resize(size);
-		memcpy_P(result.data(), pgm_ptr, size);
+			ssize_t size{strlen_P(pgm_ptr)};
+			result.resize(size);
+			memcpy_P(result.data(), pgm_ptr, size);
 
-		return result;
+			return result;
+		#else
+			return {pgm_ptr};
+		#endif
 	}
 }
