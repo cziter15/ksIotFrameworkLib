@@ -12,9 +12,10 @@
 
 namespace ksf
 {
-	constexpr auto otaBootIndicatorFile{"/ksf.otabooted"};		// Name of the OTA boot indicator file.
-	static bool bootedFromOta{false};							// Will be true if this launch is just after OTA flash.
+	
+	#define OTA_FILENAME_TEXT_PGM PGM_("/ksf.otabooted")
 
+	static bool bootedFromOta{false};							// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;				// Variables for assembling 64-bit version of millis.
 
 	void initializeFramework()
@@ -29,12 +30,12 @@ namespace ksf
 			LittleFS.begin();
 		#endif
 
-		bootedFromOta = LittleFS.remove(otaBootIndicatorFile);
+		bootedFromOta = LittleFS.remove(OTA_FILENAME_TEXT_PGM.c_str());
 	}
 
 	void saveOtaBootIndicator()
 	{
-		auto indicatorFile{LittleFS.open(otaBootIndicatorFile, "w")};
+		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT_PGM.c_str(), "w")};
 		indicatorFile.close();
 	}
 
