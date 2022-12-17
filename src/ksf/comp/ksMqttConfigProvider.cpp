@@ -15,27 +15,29 @@
 
 namespace ksf::comps
 {
-	constexpr auto ksfMqttConfigFile{"mqtt.conf"};
-	constexpr auto ksfDefPort{"1883"};
-	constexpr auto ksfBrokerParamName{"broker"};
-	constexpr auto ksfUserParamName{"user"};
-	constexpr auto ksfPortParamName{"port"};
-	constexpr auto ksfFingerprintParamName{"SSLFingerprint"};
-	constexpr auto ksfPasswordParamName{"password"};
-	constexpr auto ksfPrefixParamName{"prefix"};
+	/* Assign PGM returned strings to a set of macros. */
+	#define MQTT_FILENAME_TEXT 			PGM_("mqtt.conf")
+	#define DEFPORT_AS_TEXT_PGM 		PGM_("1883")
+	#define BROKER_TEXT_PGM				PGM_("broker")
+	#define USER_TEXT_PGM 				PGM_("user")
+	#define PORT_TEXT_PGM 				PGM_("port")
+	#define FINGERPRINT_TEXT_PGM 		PGM_("SSLFingerprint")
+	#define PASSWORD_TEXT_PGM 			PGM_("password")
+	#define PREFIX_TEXT_PGM 			PGM_("prefix")
 
 	void ksMqttConfigProvider::setupMqttConnector(ksMqttConnector& connector)
 	{
-		USING_CONFIG_FILE(ksfMqttConfigFile)
+		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			auto& savedBroker{config_file.getParam(ksfBrokerParamName)};
-			auto& port{config_file.getParam(ksfPortParamName, ksfDefPort)};
+			auto ksfBrokerParamName{BROKER_TEXT_PGM};
+			auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
+			auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
 
-			auto& login{config_file.getParam(ksfUserParamName)};
-			auto& password{config_file.getParam(ksfPasswordParamName)};
+			auto& login{config_file.getParam(USER_TEXT_PGM)};
+			auto& password{config_file.getParam(PASSWORD_TEXT_PGM)};
 
-			auto prefix{config_file.getParam(ksfPrefixParamName)};
-			auto fingerprint{config_file.getParam(ksfFingerprintParamName)};
+			auto prefix{config_file.getParam(PREFIX_TEXT_PGM)};
+			auto fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
 
 			if (prefix.length() > 0)
 			{
@@ -58,20 +60,31 @@ namespace ksf::comps
 
 	void ksMqttConfigProvider::injectManagerParameters(WiFiManager& manager)
 	{
-		USING_CONFIG_FILE(ksfMqttConfigFile)
+		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			addNewParam(manager, ksfBrokerParamName, config_file.getParam(ksfBrokerParamName).c_str());
-			addNewParam(manager, ksfPortParamName, config_file.getParam(ksfPortParamName).c_str(), 5);
-			addNewParam(manager, ksfUserParamName, config_file.getParam(ksfUserParamName).c_str());
-			addNewParam(manager, ksfFingerprintParamName, config_file.getParam(ksfFingerprintParamName).c_str(), 110); //TODO: maybe ifdef?
-			addNewParam(manager, ksfPasswordParamName, config_file.getParam(ksfPasswordParamName).c_str());
-			addNewParam(manager, ksfPrefixParamName, config_file.getParam(ksfPrefixParamName).c_str());
+			auto brokerParamName{BROKER_TEXT_PGM};
+			addNewParam(manager, brokerParamName.c_str(), config_file.getParam(brokerParamName).c_str());
+
+			auto portParamName{PORT_TEXT_PGM};
+			addNewParam(manager, portParamName.c_str(), config_file.getParam(portParamName).c_str(), 5);
+
+			auto userParamName{USER_TEXT_PGM};	
+			addNewParam(manager, userParamName.c_str(), config_file.getParam(userParamName).c_str());
+			
+			auto fpParamName{FINGERPRINT_TEXT_PGM};	
+			addNewParam(manager, fpParamName.c_str(), config_file.getParam(fpParamName).c_str(), 110);
+			
+			auto passwordParamName{PASSWORD_TEXT_PGM};	
+			addNewParam(manager, passwordParamName.c_str(), config_file.getParam(passwordParamName).c_str());
+
+			auto prefixParamName{PREFIX_TEXT_PGM};
+			addNewParam(manager, prefixParamName.c_str(), config_file.getParam(prefixParamName).c_str());
 		}
 	}
 
 	void ksMqttConfigProvider::captureManagerParameters(WiFiManager& manager)
 	{
-		USING_CONFIG_FILE(ksfMqttConfigFile)
+		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			for (auto& param : params)
 				config_file.setParam(param->getID(), param->getValue());

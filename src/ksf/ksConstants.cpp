@@ -65,4 +65,15 @@ namespace ksf
 	{
 		return to_string(static_cast<double>(value), base);
 	}
+
+	std::string string_from_progmem(const char* pgm_ptr)
+	{
+		std::string result;
+
+		ssize_t size{strlen_P(pgm_ptr)};
+		result.resize(size);
+		memcpy_P(result.data(), pgm_ptr, size);
+
+		return result;
+	}
 }

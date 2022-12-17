@@ -68,6 +68,8 @@
 /* Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
+#define PGM_(x) ksf::string_from_progmem(PSTR(x))
+
 namespace ksf
 {
 	/*
@@ -143,4 +145,12 @@ namespace ksf
 		Saves OTA boot indicator.
 	*/
 	extern void saveOtaBootIndicator();
+
+	/*
+		Converts string from progmem to std::string.
+
+		@param pgm_ptr Pointer to string in progmem.
+		@return String from progmem.
+	*/
+	extern std::string string_from_progmem(const char* pgm_ptr);
 }

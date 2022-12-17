@@ -18,7 +18,7 @@ namespace ksf
 			return;
 
 		/* Assemble file path. */
-		this->configFile = configFile[0] != '/' ? "/" + configFile : configFile;
+		this->configFile = configFile[0] != '/' ? '/' + configFile : configFile;
 
 		/* Construct reader. */
 		auto fileReader{LittleFS.open(this->configFile.c_str(), "r")};

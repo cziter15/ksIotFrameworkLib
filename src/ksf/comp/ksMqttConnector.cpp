@@ -58,6 +58,7 @@ namespace ksf::comps
 
 		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
 
+		// This should be saved to a file rater than to a memory.
 		this->login = login;
 		this->password = password;
 		this->prefix = prefix;
@@ -140,8 +141,10 @@ namespace ksf::comps
 	{
 		if (sendConnectionStatus)
 		{
-			std::string willTopic{prefix + "connected"};
+			std::string willTopic{prefix + PGM_("connected")};
 
+			// TODO: Here we can use saved credentials instead of memory ones.
+			
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
 			{
 				if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))

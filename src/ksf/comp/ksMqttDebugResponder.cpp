@@ -27,8 +27,6 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	constexpr auto otaBootReason{"OTA Update"};
-
 	bool ksMqttDebugResponder::init(ksf::ksComposable* owner)
 	{
 		this->owner = owner;
@@ -70,32 +68,31 @@ namespace ksf::comps
 			switch (esp_reset_reason())
 			{
 				case ESP_RST_POWERON:
-					return {"Power On"};
+					return PGM_("Power On");
 				case ESP_RST_SW:
 					if (otaBoot)
-						return {otaBootReason};
-					return {"Software/System restart"};
+						return PGM_("OTA Update");
+					return PGM_("Software/System restart");
 				case ESP_RST_PANIC:
-					return {"Exception"};
+					return PGM_("Exception"};
 				case ESP_RST_INT_WDT:
-					return {"Watchdog (interrupt)"};
+					return PGM_("Watchdog (interrupt)");
 				case ESP_RST_TASK_WDT:
-					return {"Watchdog (task)"};
+					return PGM_("Watchdog (task)");
 				case ESP_RST_WDT:
-					return {"Watchdog (other)"};
+					return PGM_("Watchdog (other)");
 				case ESP_RST_DEEPSLEEP:
-					return {"Deep-Sleep Wake"};
+					return PGM_("Deep-Sleep Wake");
 				case ESP_RST_BROWNOUT:
-					return {"Brownout"};
+					return PGM_("Brownout");
 				case ESP_RST_SDIO:
-					return {"SDIO"};
+					return PGM_("SDIO");
 				default:
-					return {"Unknown"};
+					return PGM_("Unknown");
 			}
 		#elif ESP8266
 			if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
-				return {otaBootReason};
-
+				return PGM_("OTA Update");
 			return {ESP.getResetReason().c_str()};
 		#else			
 			#error Platform not implemented.
@@ -108,48 +105,49 @@ namespace ksf::comps
 		if (topic != "cmd")
 			return;
 
-		if (message == "netinfo")
+		if (message == PGM_("netinfo"))
 		{
 			if (auto mqttConnSp{mqttConnWp.lock()})
 			{
 				respond(
-					"IP: " + std::string{WiFi.localIP().toString().c_str()} + ", " +
-					"CT: " + std::to_string(mqttConnSp->getConnectionTimeSeconds()) + " s, "
-					"RC: " + std::to_string(mqttConnSp->getReconnectCounter()) + ", "
-					"RSSI " + std::to_string(WiFi.RSSI()) + " dBm"
+					PGM_("IP: ") + std::string{WiFi.localIP().toString().c_str()} + 
+					PGM_(", CT: ") + std::to_string(mqttConnSp->getConnectionTimeSeconds()) + 
+					PGM_(" s, RC: ") + std::to_string(mqttConnSp->getReconnectCounter()) + 
+					PGM_(", RSSI ") + std::to_string(WiFi.RSSI()) + PGM_(" dBm")
 				);
 			}
 		}
-		else if (message == "sysinfo")
+		else if (message == PGM_("sysinfo"))
 		{
 			uint32_t uptimeSec{(uint32_t)(millis64() / 1000)};
 			respond(
-				"Build hash: " + std::string(ESP.getSketchMD5().c_str()) + ", "
-				"Device uptime: " + std::to_string(uptimeSec) + " sec, "
-				"Free fw space: " + std::to_string(ESP.getFreeSketchSpace()) + " b, "
-				"Free heap: " + std::to_string(ESP.getFreeHeap()) + " b, " +
+				PGM_("Build hash: ") + std::string(ESP.getSketchMD5().c_str()) + PGM_(", "
+				"Device uptime: ") + std::to_string(uptimeSec) + PGM_(" sec, "
+				"Free fw space: ") + std::to_string(ESP.getFreeSketchSpace()) + PGM_(" b, "
+				"Free heap: ") + std::to_string(ESP.getFreeHeap()) + PGM_(" b, "
 				#if ESP32
-					"Free PSRAM: " + std::to_string(ESP.getFreePsram()) + " b, "
-					"Chip temperature: " + ksf::to_string(temperatureRead(), 1) + " [C], "
+					"Free PSRAM: ") + std::to_string(ESP.getFreePsram()) + PGM_(" b, "
+					"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_" [C], "
+
 				#endif
-				"CPU clock: " + std::to_string(ESP.getCpuFreqMHz()) + " MHz, "
-				"Reset reason: " + getResetReason().c_str()
+				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
+				"Reset reason: ") + getResetReason().c_str()
 			);
 		}
-		else if (message == "remove_dbg")
+		else if (message == PGM_("remove_dbg"))
 		{
-			respond("Removing ksMqttDebugResponder. Commands will not be available.");
+			respond(PGM_("Removing ksMqttDebugResponder. Commands will not be available."));
 			owner->markComponentToRemove(shared_from_this());
 		}
-		else if (message == "restart")
+		else if (message == PGM_("restart"))
 		{
-			respond("Restarting system. It may take few seconds.");
+			respond(PGM_("Restarting system. It may take few seconds."));
 			delay(500);
 			ESP.restart();
 		}
-		else if (message == "rfcalib")
+		else if (message == PGM_("rfcalib"))
 		{
-			respond("Erasing RF CAL data, please wait...");
+			respond(PGM_("Erasing RF CAL data, please wait..."));
 			delay(500);
 			
 			#if ESP32
@@ -176,19 +174,19 @@ namespace ksf::comps
 				#error Platform not implemented.
 			#endif
 
-			respond("Erasing RF CAL done, restarting. It may take few seconds.");
+			respond(PGM_("Erasing RF CAL done, restarting. It may take few seconds."));
 			delay(500);
 
 			ESP.restart();
 		}
-		else if (message == "format")
+		else if (message == PGM_("format"))
 		{
 			LittleFS.format();
-			respond("Erasing flash done, restarting. It may take few seconds.");
+			respond(PGM_("Erasing flash done, restarting. It may take few seconds."));
 			delay(500);
 			ESP.restart();
 		}
-		else if (message == "break_app")
+		else if (message == PGM_("break_app"))
 		{
 			breakloop = true;
 		}
@@ -198,7 +196,7 @@ namespace ksf::comps
 			customDebugHandler->broadcast(this, message, dbgMsgHandled);
 				
 			if (!dbgMsgHandled)
-				respond("command not supported: " + std::string{message});
+				respond(PGM_("command not supported: ") + std::string{message});
 		}
 	}
 }

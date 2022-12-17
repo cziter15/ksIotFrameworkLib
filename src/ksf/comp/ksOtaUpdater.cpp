@@ -12,10 +12,10 @@
 
 namespace ksf::comps
 {
-	ksOtaUpdater::ksOtaUpdater(const char* hostname, const char* password)
+	ksOtaUpdater::ksOtaUpdater(const std::string& hostname, const std::string& password)
 	{
-		ArduinoOTA.setHostname(hostname);
-		ArduinoOTA.setPassword(password);
+		ArduinoOTA.setHostname(hostname.c_str());
+		ArduinoOTA.setPassword(password.c_str());
 
 		ArduinoOTA.onStart([&]() {
 			onUpdateStart->broadcast();
@@ -26,6 +26,11 @@ namespace ksf::comps
 			ksf::saveOtaBootIndicator();
 			onUpdateEnd->broadcast();
 		});
+	}
+
+	ksOtaUpdater::ksOtaUpdater(const std::string& hostname)
+	{
+		ksOtaUpdater(hostname, PGM_("ota_ksiotframework"));
 	}
 
 	bool ksOtaUpdater::init(class ksf::ksComposable* owner)
