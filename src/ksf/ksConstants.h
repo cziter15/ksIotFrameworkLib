@@ -69,7 +69,7 @@
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
 /* Helper macro for program memory stored strings. */
-#define PGM_(x) ksf::string_from_progmem(PSTR(x))
+#define PGM_(x) ksf::string_from_progmem(PSTR(x), sizeof(x))
 
 namespace ksf
 {
@@ -110,7 +110,8 @@ namespace ksf
 	extern std::string to_string(float value, const int base);
 
 	/*
-		Helper functionn to convert passed value into stirng.
+		Helper function template to convert a string into another type.
+
 		@param input Value to be converted.
 		@return Converted value in a form of string.
 	*/
@@ -136,22 +137,23 @@ namespace ksf
 
 	
 	/*
-		Retrieves if the device has been boot after OTA.
+		Checks whether recent device restart was caused by OTA update.
 		
-		@return True if started after OTA.
+		@return True if OTA caused reboot, otherwise false.
 	*/
 	extern bool isFirstOtaBoot();
 
 	/*
-		Saves OTA boot indicator.
+		Saves OTA boot indicator to EEPROM.
 	*/
 	extern void saveOtaBootIndicator();
 
 	/*
-		Converts string from progmem to std::string.
+		Helper function to load char array from program memory into std::string.
 
-		@param pgm_ptr Pointer to string in progmem.
-		@return String from progmem.
+		@param pgm_str_ptr Pointer to string in program memory.
+		@param pgm_str_len Length of string in program memory.
+		@return String in a form of std::string.
 	*/
-	extern std::string string_from_progmem(const char* pgm_ptr);
+	extern std::string string_from_progmem(const char* pgm_str_ptr, ssize_t pgm_str_len);
 }
