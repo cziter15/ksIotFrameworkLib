@@ -69,7 +69,7 @@
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
 /* Helper macro for program memory stored strings. */
-#define PGM_(x) ksf::string_from_progmem(PSTR(x), sizeof(x))
+#define PGM_(x) ksf::string_from_progmem(PSTR(x), sizeof(x) - 1)
 
 namespace ksf
 {
