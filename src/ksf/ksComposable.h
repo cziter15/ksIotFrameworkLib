@@ -26,7 +26,7 @@ namespace ksf
 				Instantiates a component of passed type, handing over all template parameters as constructor parameters to the component. 
 				Keep in mind that passed parameters must match target component constructor parameters.
 
-				@return Weak pointer to added component.
+				@return Weak pointer to the newly created component.
 			*/
 			template <class _Type, class... _Params>
 			std::weak_ptr<_Type> addComponent(_Params... arg)
@@ -41,9 +41,9 @@ namespace ksf
 			}
 
 			/*
-				Tries to find components of passed template type.
+				Looks for all components of passed type and puts them into passed vector.
 
-				@param outComponents Vector of weak pointers to be filled with matching components, might be empty as well.
+				@param outComponents Vector of weak pointers to components of passed type.
 			*/
 			template <class _Type>
 			void findComponents(std::vector<std::weak_ptr<_Type>>& outComponents)
@@ -66,10 +66,9 @@ namespace ksf
 			}
 
 			/*
-				Tries to find components by passed template type. 
-				See findComponents, as findComponent calls it directly and returns first element.
+				Looks for a component of passed type and returns a weak pointer to it.
 
-				@return Weak pointer of component, might be invalid/expired (unable to lock to get shared ptr).
+				@return Weak pointer to the component of passed type.
 			*/
 			template <class _Type>
 			std::weak_ptr<_Type> findComponent()
@@ -78,23 +77,26 @@ namespace ksf
 					"Trying to find component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
-				std::vector<std::weak_ptr<_Type>> foundCompsWp;
-				findComponents<_Type>(foundCompsWp);
-				return foundCompsWp.empty() ? std::weak_ptr<_Type>() : foundCompsWp[0];
+				for (const auto& comp : components.getRef())
+					if (comp->isA(_Type::getClassType()))
+						return std::static_pointer_cast<_Type>(comp);
+
+				return std::weak_ptr<_Type>();
 			}
 
 			/*
-				Queues component to be removed. It will happen on queue synchronization (synchronizeQueues).
+				Mark a component to be removed. It will be removed on next update cycle.
+				This is a safe way to remove a component from a composable object.
 
 				@param component Component to be removed.
 			*/
 			void markComponentToRemove(const std::shared_ptr<ksComponent>& component);
 
 			/*
-				Executes a function on each component.
+				Iterates through all components and calls passed function for each of them.
 				
-				@param function Function to be executed. Should return true to continue iteration.
-				@return True if successfully iterated through all components, otherwise false.
+				@param function Function to be called for each component. It must return bool and accept a shared_ptr to ksComponent as a parameter.
+				@return True if all components were iterated, false if function returned false for any of them.
 			*/
 			template <typename _Predicate>
 			bool forEachComponent(_Predicate function)

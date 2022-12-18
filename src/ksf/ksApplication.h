@@ -19,12 +19,14 @@ namespace ksf
 		public:
 			/* 
 				Initializes application.
-				@return True on success, false on fail (will break application initialization).
+
+				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool init();
 
 			/* 
-				Called every application tick (see ksConstants). 
+				Executes application loop.
+
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();

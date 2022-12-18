@@ -52,13 +52,13 @@ namespace ksf::comps
 	void ksMqttDebugResponder::onConnected()
 	{
 		if (auto mqttConnSp{mqttConnWp.lock()})
-			mqttConnSp->subscribe("cmd");
+			mqttConnSp->subscribe(PGM_("cmd"));
 	}
 
 	void ksMqttDebugResponder::respond(const std::string& message) const
 	{
 		if (auto mqttConnSp{mqttConnWp.lock()})
-			mqttConnSp->publish("log", message, false);
+			mqttConnSp->publish(PGM_("log"), message, false);
 	}
 
 	std::string ksMqttDebugResponder::getResetReason()

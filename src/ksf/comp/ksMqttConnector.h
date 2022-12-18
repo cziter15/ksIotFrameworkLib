@@ -30,18 +30,18 @@ namespace ksf
 
 			protected:
 				std::shared_ptr<WiFiClient> wifiClientSp;						// Shared pointer to WiFiClient used to connect to MQTT.
-				std::shared_ptr<PubSubClient> mqttClientSp;						// Shared pointer to PubSubClient (MQTT client).
+				std::shared_ptr<PubSubClient> mqttClientSp;						// Shared pointer to PubSubClient used to connect to MQTT.
 
 				std::weak_ptr<ksWifiConnector> wifiConnWp;						// Weak pointer to WiFi connector.
 
-				uint32_t connectionTimeSeconds{0};								// MQTT connection time counter (in seconds).
+				uint32_t connectionTimeSeconds{0};								// Time of connection to MQTT broker in seconds.
 				uint32_t reconnectCounter{0};									// MQTT reconnection counter.
 
-				bool sendConnectionStatus{true};								// Connection status topic.
-				bool usePersistentSession{false};								// Persistent session or not.
+				bool sendConnectionStatus{true};								// Send connection status to MQTT or not.
+				bool usePersistentSession{false};								// Use persistent session or not.
 
 				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
-				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer used to reconnect MQTT.
+				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer that counts time between reconnection attempts.
 
 				bool wasConnected{false};										// True if connected in previous loop.
 
@@ -49,15 +49,17 @@ namespace ksf
 				std::string password;											// Saved MQTT password.
 				std::string prefix;												// Saved MQTT prefix.
 
-				std::shared_ptr<ksCertFingerprint> certFingerprint;				// Cert fingerprint validator.
+				std::shared_ptr<ksCertFingerprint> certFingerprint;				// Shared pointer to fingerprint validator.
 
 				/*
-					Called to connect to broker.
+					Connects to MQTT broker.
+
+					@return True on success, false on fail.
 				*/
 				bool connectToBroker();
 
 				/*
-					Called on MQTT connected (internal function).
+					Called on MQTT connection (internal function).
 					Binds onMessage callback, calls bound onConnected callbacks, configures some parameters.
 				*/
 				void mqttConnectedInternal();
@@ -78,21 +80,22 @@ namespace ksf
 					QOS_EXACTLY_ONCE
 				};
 
-				DECLARE_KS_EVENT(onMesssage, const std::string_view&, const std::string_view&)		// onMesssage event that user can bind to.
-				DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
-				DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
+				DECLARE_KS_EVENT(onMesssage, const std::string_view&, const std::string_view&)	// onMessage event that user can bind to.
+				DECLARE_KS_EVENT(onConnected)													// onConnected event that user can bind to.
+				DECLARE_KS_EVENT(onDisconnected)												// onDisconnected event that user can bind to.
 
 				/*
 					Constructs ksMqttConnector object.
 
-					@param sendConnectionStatus True if should send connection status in connected topic.
+					@param sendConnectionStatus If true, sends connection status to MQTT broker.
+					@param usePersistentSession If true, uses persistent session.
 				*/
 				ksMqttConnector(bool sendConnectionStatus = true, bool usePersistentSession = false);
 
 				/*
 					Initializes MQTT connector component.
 
-					@param owner Pointer to ownning ksComposable object (application).
+					@param owner Pointer to ksComposable object that owns this component.
 					@return True on success, false on fail.
 				*/
 				bool init(class ksf::ksComposable* owner) override;
@@ -135,7 +138,7 @@ namespace ksf
 				void subscribe(const std::string& topic, bool skipDevicePrefix = false, ksMqttConnector::QosLevel = ksMqttConnector::QosLevel::QOS_AT_LEAST_ONCE);
 
 				/*
-					Unsubscribes to MQTT topic.
+					Unsubscribes from MQTT topic.
 
 					@param topic Topic to unsubscribe.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
@@ -143,7 +146,7 @@ namespace ksf
 				void unsubscribe(const std::string& topic, bool skipDevicePrefix = false);
 
 				/*
-					Publishes payload to MQTT topic.
+					Publishes to MQTT topic.
 
 					@param topic Topic to publish to.
 					@param payload Payload to be published.
@@ -153,13 +156,13 @@ namespace ksf
 				void publish(const std::string& topic, const std::string& payload, bool retain = false, bool skipDevicePrefix = false);
 
 				/*
-					Configures MQTT connection parameters.
+					Sets up MQTT connection.
 
-					@param broker MQTT broker IP / domain.
+					@param broker MQTT broker address. Can be IP or hostname.
 					@param port MQTT broker port.
 					@param login MQTT user login.
 					@param password MQTT user password.
-					@param fingerprint Server cert fingerprint (or empty)
+					@param fingerprint MQTT broker certificate fingerprint. If empty, secure connection won't be used.
 				*/
 				void setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint);
 		};

@@ -32,8 +32,8 @@ namespace ksf::comps
 
 					@param manager WiFiManager reference.
 					@param label Label and ID to identify parameter.
-					@param defaultValue Default value (visible as hint for the user).
-					@param maxLength Maximum string length.
+					@param defaultValue Default value of parameter.
+					@param maxLength Maximum length of parameter value.
 				*/
 				void addNewParam(WiFiManager& manager, const char* label, const char* defaultValue, int maxLength = 50);
 
@@ -41,7 +41,7 @@ namespace ksf::comps
 				/*
 					Initializes config provider component.
 
-					@param owner Pointer to ownning ksComposable object (application).
+					@param owner Pointer to ksComposable object that owns this component.
 					@return True on success, false on fail.
 				*/
 				virtual bool init(ksf::ksComposable* owner) override;
@@ -61,7 +61,7 @@ namespace ksf::comps
 				virtual void captureManagerParameters(WiFiManager& manager) = 0;
 
 				/*
-					Called from application loop.
+					Executes config provider component's logic.
 
 					@return True on success, false on fail.
 				*/

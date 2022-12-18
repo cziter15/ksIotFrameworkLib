@@ -19,7 +19,7 @@ namespace ksf
 	{
 		protected:
 			/*
-				Converts passed fingerprint string to the static array of bytes.
+				Converts fingerprint string into array of bytes.
 				
 				@param fingerprint Fingerprint string.
 				@param bytes Output buffer pointer.
@@ -41,8 +41,8 @@ namespace ksf
 			/*
 				Performs certificate fingerprint validation (platform dependent).
 				
-				@param client Pointer to WiFiClientSecure.
-				@return True if fingerprint validation passed, otherwise false.
+				@param client Pointer of WiFiClientSecure.
+				@return True on verification pass, otherwise false.
 			*/
 			virtual bool verify(WiFiClientSecure* client) const;
 	};
@@ -55,12 +55,12 @@ namespace ksf
 
 		public:
 			/*
-				Performs certificate fingerprint setup (platform dependent).
+				Performs fingerprint setup (platform dependent).
 				On ESP32 it will copy fingerprint into fingerprintBytes.
 				
 				@param client Pointer of WiFiClientSecure.
 				@param fingerprint Fingerprint string.
-				@return True if setup has been successfull, otherwise false.
+				@return True if setup passed, otherwise false.
 			*/
 			bool setup(WiFiClientSecure* client, const std::string& fingerprint) override;
 
@@ -68,7 +68,7 @@ namespace ksf
 				Converts bytes into a string and performs fingerprint validation.
 
 				@param client Pointer of WiFiClientSecure.
-				@return True on verification pass, otherwise false.
+				@return True if verification passed, otherwise false.
 			*/
 			bool verify(WiFiClientSecure* client) const override;
 	};
@@ -82,19 +82,19 @@ namespace ksf
 		public:
 			/*
 				Performs fingerprint setup (platform dependent).
-				On ESP8266 it will pass fingerprint to WiFiClientSecure's setFingerprint method.
-				
-				@param client Pointer to WiFiClientSecure.
+
+				@param client Pointer of WiFiClientSecure.
 				@param fingerprint Fingerprint string.
 				@return True if setup passed, otherwise false.
 			*/
 			bool setup(WiFiClientSecure* client, const std::string& fingerprint) override;
 
 			/*
+				Converts bytes into a string and performs fingerprint validation.
 				Always returns true on ESP8266 as this functionality is handled under the hood.
 
-				@param client Pointer to WiFiClientSecure.
-				@return Always true on ESP8266.
+				@param client Pointer of WiFiClientSecure.
+				@return Always true in case of ESP8266.
 			*/
 			bool verify(WiFiClientSecure* client) const override;
 	};

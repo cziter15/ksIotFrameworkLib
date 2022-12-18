@@ -22,18 +22,18 @@ namespace ksf
 			KSF_RTTI_DECLARATIONS(ksWiFiConfigurator, ksComponent)
 
 			protected:
-				class ksf::ksComposable* owner{nullptr};		// Raw pointer to ownning composable (app).
+				class ksf::ksComposable* owner{nullptr};		//  Pointer to ksComposable object that owns this component.
 				WiFiManager manager;				 			// WiFiManager object.
-				std::string deviceName;					 		// Device name - prefix plus Chip ID. Used as config AP name and hostname.
+				std::string deviceName;					 		// Device name (prefix).
 
 			public:
 				/*
-					Constructs ksWiFiConfigurator.
+					Constructs WiFi configurator object.
 				*/
 				ksWiFiConfigurator();
 
 				/*
-					Constructs ksWiFiConfigurator.
+					Constructs WiFi configurator object.
 
 					@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname.
 				*/
@@ -42,7 +42,7 @@ namespace ksf
 				/*
 					Initializes ksWiFiConfigurator component.
 
-					@param owner Pointer to ownning ksComposable object (application).
+					@param owner Pointer to ksComposable object that owns this component.
 					@return True if init succedeed, otherwise false.
 				*/
 				bool init(class ksf::ksComposable* owner) override;

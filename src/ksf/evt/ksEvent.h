@@ -18,7 +18,7 @@
  /*
 	 Defines user event. Usage: DECLARE_KS_EVENT( your_event_name, event parameters... ).
 
-	 @param evtName Event name to be generated inside class.
+	 @param evtName Name of the event field that will be generated inside class.
 	 @param params... Event parameters.
  */
 #define DECLARE_KS_EVENT(evtName, ...) \
@@ -35,9 +35,9 @@ namespace ksf::evt
 
 		public:
 			/*
-				Queries if event has any bound callbacks.
+				Returns whether any callback is bound to this event.
 
-				@return True if any callback is bound, false if no callback is bound.
+				@return True if any callback is bound to this event. False otherwise.
 			*/
 			bool isBound() const
 			{
@@ -47,7 +47,7 @@ namespace ksf::evt
 			/*
 				Registers event (binds to callback list).
 
-				@param outHandle Reference to outHandle shared ptr (will be set to shared_ptr of ksEventHandle, will unbind from the list on pointer destruction).
+				@param outHandle Reference to outHandle shared ptr (destruction of ksEventHandle object will unbind the event).
 				@param function Lvalue reference to callback function.
 			*/
 			void registerEvent(std::shared_ptr<ksf::evt::ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
@@ -76,9 +76,9 @@ namespace ksf::evt
 			}
 
 			/*
-				Broadcast event (calls all bound callbacks).
+				Broadcasts event to all bound callbacks.
 
-				@param args User defined parameters (va args).
+				@param args Event parameters.
 			*/
 			void broadcast(Params... params)
 			{

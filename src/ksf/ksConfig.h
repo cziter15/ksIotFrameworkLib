@@ -21,46 +21,46 @@ namespace ksf
 	class ksConfig
 	{
 		protected:
-			bool isDirty{false};									// True if config params are modiffied and should be saved.
-			std::map<std::string, std::string> configParams;		// Config parameters as key-value pair.
+			bool isDirty{false};									// True if config contents has been modified (and should be saved).
+			std::map<std::string, std::string> configParams;		// Config parameters.
 			std::string configFile;									// Config filename.
 
 		public:
 			/* 
-				Constructor that opens specified file.
+				Constructor that opens (or creates) specified config file and loads its contents into memory.
 
-				@param configFile Name of the config file to open/create.
+				@param configFile Config file name.
 			*/
 			ksConfig(const std::string& configFile);
 
 			/*
-				Sets specified parameter (in memory).
+				Sets specified parameter's value. If parameter does not exist, it will be created.
 
-				@param paramName Target parameter name.
-				@param paramValue Target parameter value.
+				@param paramName Parameter name.
+				@param paramValue Parameter value.
 			*/
 			void setParam(const std::string& paramName, const std::string& paramValue);
 
 
 			/*
-				Retrieves specified parameter's value.
+				Gets specified parameter's value. If parameter does not exist, defaultValue will be returned.
 
 				@param paramName Parameter name.
-				@param defaultValue Default value to return (if not found).
-				@return Reference to string with value of requested parameter (or defaultValue if not found).
+				@param defaultValue Default value to return if parameter does not exist.
+				@return Parameter value or defaultValue if parameter does not exist.
 			*/
 			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
 
 			/*
 				Operator bool override. Returns true if configFilename is not empty.
 
-				@return True if configFilename is not empty., otherwise false.
+				@return True if configFilename is not empty, otherwise false.
 			*/
 			operator bool() const;
 
 
 			/*
-				Destructor that save changes if isDirty flag is set to true.
+				Saves config content to flash. If config contents has not been modified, nothing will be saved.
 			*/
 			virtual ~ksConfig();
 	};

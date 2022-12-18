@@ -12,12 +12,25 @@
 
 namespace ksf
 {
+	/*
+		Convert ascii char into a byte value
+
+		@param c - ascii char
+		@return - byte value
+	*/
 	inline uint8_t htoi (unsigned char c)
 	{
-		if (c>='0' && c <='9') return c - '0';
-		else if (c>='A' && c<='F') return 10 + c - 'A';
-		else if (c>='a' && c<='f') return 10 + c - 'a';
-		else return 255;
+		if (c>='0' && c <='9') 
+			return c - '0';/*
+			
+			
+			*/
+		if (c>='A' && c<='F') 
+			return 10 + c - 'A';
+		if (c>='a' && c<='f') 
+			return 10 + c - 'a';
+
+		return 255;
 	}
 	
 	bool ksCertFingerprint::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const

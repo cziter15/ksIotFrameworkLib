@@ -19,15 +19,15 @@ namespace ksf::comps
 			KSF_RTTI_DECLARATIONS(ksLed, ksComponent)
 
 			protected:
-				uint8_t pin{0};						// Saved LED pin number.
-				bool activeLow{false};				// If false means that the led is turned on.
-				uint32_t lastBlinkTimeMs{0};		// Last blink time (milliseconds since boot).
-				uint32_t blinkIntervalMs{0};		// Current blink interval (milliseconds).
-				uint32_t blinkLoops{0};				// Number of remaining loops.
+				uint8_t pin{0};						// Pin number assigned to LED.
+				bool activeLow{false};				// True if pin should be driven LOW to enable LED. Otherwise false.
+				uint32_t lastBlinkTimeMs{0};		// Last time LED state was toggled (milliseconds).
+				uint32_t blinkIntervalMs{0};		// Time in ms between LED state toggle (0 to disable blinking).
+				uint32_t blinkLoops{0};				// Number of loops (0 for infinite loop).
 
 			public:
 				/*
-					Constructs ksLed object, assigning passed pin number.
+					Constructs LED object, assigning passed pin number.
 
 					@param pin Pin number assigned to LED.
 					@param activeLow True if pin should be driven LOW to enable LED. Otherwise false.
@@ -35,22 +35,22 @@ namespace ksf::comps
 				ksLed(uint8_t pin, bool activeLow = false);
 
 				/*
-					Initializes ksLed component.
+					Initializes LED component.
 					
-					@param owner Pointer to the ksComposable owning the object (application).
+					@param owner Pointer to ksComposable object that owns this component.
 					@return True if init succedeed, otherwise false.
 				*/
 				bool init(class ksf::ksComposable* owner) override;
 
 				/*
-					Handles logic of the ksLed component.
+					Executes LED component logic.
 
 					@return True if everything is okay, otherwise false to break application logic.
 				*/
 				bool loop() override;
 
 				/*
-					Used to set LED blinking parameters.
+					Sets LED blinking state.
 
 					@param blinkIntervalMs Time in ms between LED state toggle (0 to disable blinking).
 					@param blinkLoops Number of loops (0 for infinite loop).
@@ -58,26 +58,30 @@ namespace ksf::comps
 				void setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops = 0);
 
 				/*
-					@return True if LED is set up to blink, otherwise false.
+					Returns whether LED is currently blinking.
+
+					@return True if LED is currently blinking, otherwise false.
 				*/
 				bool isBlinking() const;
 
 				/*
-					Checks if LED is currently enabled.
-					@return True if assigned LED pin is HIGH, otherwise false.
+					Returns whether LED is enabled.
+
+					@return True if LED is enabled, otherwise false.
 				*/
 				bool isEnabled() const;
 
 				/*
-					Sets LED enabled state.
-					@param enabled True if LED should be enabled, otherwise false.
+					Enables or disables LED.
+					
+					@param enabled True to enable LED, false to disable.
 				*/
 				void setEnabled(bool enabled);
 
 				/*
-					Returns assigned pin number.
+					Returns pin number assigned to LED.
 
-					@return Assigned pin number.
+					@return Pin number assigned to LED.
 				*/
 				uint8_t getPin() const { return pin; }
 

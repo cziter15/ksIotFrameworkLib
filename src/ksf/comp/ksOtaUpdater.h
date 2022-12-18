@@ -20,7 +20,7 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksOtaUpdater, ksComponent)
 
 		protected:
-			ArduinoOTAClass ArduinoOTA;		// Arduino OTA object.
+			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
@@ -45,7 +45,7 @@ namespace ksf::comps
 			/*
 				Initializes OTA component.
 
-				@param owner Pointer to ownning ksComposable object (application).
+				@param owner Pointer to owning ksComposable object (application).
 				@return True on success, false on fail.
 			*/
 			bool init(class ksf::ksComposable* owner) override;

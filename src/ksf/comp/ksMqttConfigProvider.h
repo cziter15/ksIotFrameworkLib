@@ -37,9 +37,9 @@ namespace ksf::comps
 				void captureManagerParameters(WiFiManager& manager) override;
 
 				/*
-					Configures MQTT connector from config provider.
+					Setup MQTT connector with captured parameters.
 
-					@param connector ksMqttConnector reference.
+					@param connector MQTT connector reference.
 				*/
 				void setupMqttConnector(ksMqttConnector& connector);
 		};

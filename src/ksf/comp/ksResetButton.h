@@ -21,16 +21,16 @@ namespace ksf::comps
 			protected:
 				uint8_t pin{0};						// Cached pin number.
 				uint8_t triggerState{0};			// State that triggers reset logic.
-				uint8_t lastState{0};				// Previous state (used to debouce).
+				uint8_t lastState{0};				// Previous state (for debouncing).
 				uint8_t mode{INPUT};				// Cached pin mode.
 				uint32_t pressedTime{0};			// Press timestamp (milliseconds since boot).
 				uint32_t releasedTime{0};			// Release timestamp (milliseconds since boot).
 
 			public:
 				/*
-					Constructor, used to pass reset button configuration parameters.
+					Constructs  reset button component.
 
-					@param pin Pin assigned to reset button.
+					@param pin PIN number to use.
 					@param triggerState State that triggers reset logic (LOW or HIGH).
 					@param mode Pin mode to set (INPUT / INPUT_PULLUP etc).
 				*/
@@ -39,7 +39,7 @@ namespace ksf::comps
 				/*
 					Initializes reset button component.
 
-					@param owner Pointer to ownning ksComposable object (application).
+					@param owner Pointer to ksComposable object that owns this component.
 					@return True on success, false on fail.
 				*/
 				bool init(class ksf::ksComposable* owner) override;

@@ -55,7 +55,7 @@ namespace ksf::comps
 			/*
 				Initializes MQTT debug responder component.
 
-				@param owner Pointer to ownning ksComposable object (application).
+				@param owner Pointer to ksComposable object that owns this component.
 				@return True on success, false on fail.
 			*/
 			bool init(class ksf::ksComposable* owner) override;
@@ -74,7 +74,7 @@ namespace ksf::comps
 			bool loop() override;
 
 			/*
-				Publishes response to command request.
+				Responds to MQTT debug message. Publishes response message to MQTT debug topic.
 
 				@param message Message string reference.
 			*/

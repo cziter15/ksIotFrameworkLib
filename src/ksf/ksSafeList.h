@@ -19,8 +19,9 @@ namespace ksf
 	class ksSafeList
 	{
 		protected:
-			std::list<_EntryType> list, pendingAdditions;			// Underlying lists of elements.
-			std::vector<_EntryType> pendingRemovals;				// Vector of items waiting to be removed.
+			std::list<_EntryType> list;					// Underlying list.
+			std::list<_EntryType> pendingAdditions;		// List of items waiting to be added.
+			std::vector<_EntryType> pendingRemovals;	// List of items waiting to be removed.
 
 		public:
 			/*
@@ -34,7 +35,8 @@ namespace ksf
 			}
 
 			/*
-				Queues item to be added to the list at next synchronizeQueues call.
+				Adds an item to the list of pending additions.
+				The item will be added to the list by applyPendingOperations method.
 
 				@param item Item reference.
 			*/
@@ -44,7 +46,8 @@ namespace ksf
 			}
 
 			/*
-				Queues item to be removed from the list at next synchronizeQueues call.
+				Adds an item to the list of pending removals.
+				The item will be removed from the list by applyPendingOperations method.
 
 				@param item Item reference.
 			*/
@@ -54,7 +57,7 @@ namespace ksf
 			}
 
 			/*
-				Clears all pending operations and the list itself.
+				Removes all items from the list.
 				Please don't call while iterating or accessing elements on the list.
 			*/
 			void clearAll()
@@ -65,51 +68,47 @@ namespace ksf
 			}
 			
 			/*
-				Applies all pending operations to the list.
+				Applies pending operations (additions and removals).
 				Please don't call while iterating or accessing elements on the list.
 			*/
 			void applyPendingOperations()
 			{
-				if (!pendingAdditions.empty())
-					list.splice(list.end(), pendingAdditions);
+				list.splice(list.end(), pendingAdditions);
 
-				if (!pendingRemovals.empty())
-				{
-					list.remove_if([&](const _EntryType& item) {
-						return std::find(pendingRemovals.begin(), pendingRemovals.end(), item) != pendingRemovals.end();
-					});
+				list.remove_if([&](const _EntryType& item) {
+					return std::find(pendingRemovals.begin(), pendingRemovals.end(), item) != pendingRemovals.end();
+				});
 
-					pendingRemovals.clear();
-				}
+				pendingRemovals.clear();
 			}
 	};
 
 	/* 
-		Wrapper that simply calls synchronizeQueues on passed ksSafeList at the end of scope.
+		Scoped synchronization class for ksSafeList.
+		Applies pending operations on the list when the object goes out of scope.
 	*/
 	template <typename _ListType>
 	class ksSafeListScopedSync
 	{
 		protected:
-			_ListType* listRawPtr;	// Unsafe list pointer (to used only in small scopes!).
+			_ListType& listReference;	// Reference to ksSafeList instance.
 		
 		public:
 			/* 
 				ksSafeListScopedSync constructor.
-				@param listRef Reference to the list (casted internally to a pointer).
+				@param listRef Reference to ksSafeList instance.
 			*/
 			ksSafeListScopedSync(_ListType& listRef)
-			{
-				listRawPtr = (_ListType*)&listRef;
-			}
+				: listReference(listRef)
+			{}
 
 			/* 
 				ksSafeListScopedSync destructor.
-				Calls synchronizeQueues on passed list instance.
+				Applies pending operations on the list.
 			*/
 			~ksSafeListScopedSync()
 			{
-				listRawPtr->applyPendingOperations();
+				listReference.applyPendingOperations();
 			}
 	};
 }

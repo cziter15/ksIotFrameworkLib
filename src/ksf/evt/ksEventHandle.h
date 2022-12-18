@@ -18,7 +18,7 @@ namespace ksf::evt
 	class ksEventHandle
 	{
 		protected:
-			std::weak_ptr<ksEventInterface> eventBaseWp;	// Weak pointer to object.
+			std::weak_ptr<ksEventInterface> eventBaseWp;	// Weak pointer to event object.
 			std::size_t callbackUID{0};						// Unique callback ID.
 
 		public:
@@ -31,7 +31,7 @@ namespace ksf::evt
 			ksEventHandle(std::weak_ptr<ksEventInterface>&& eventBaseWp, std::size_t callbackUID);
 
 			/*
-				Event handle destructor. Unbinds callback (removes from the list by ID).
+				Destructs event handle. Unbinds assigned callback from the list.
 			*/
 			virtual ~ksEventHandle();
 	};
