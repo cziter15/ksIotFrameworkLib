@@ -21,6 +21,14 @@ namespace ksf::comps
 	{
 		KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
 
+		protected:
+			std::string brokerParamName;
+			std::string portParamName;
+			std::string userParamName;
+			std::string fpParamName;
+			std::string passwordParamName;
+			std::string prefixParamName;
+
 		public:
 			/*
 				Injects MQTT config provider's WiFiManager parameters.

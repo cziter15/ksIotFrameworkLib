@@ -71,8 +71,12 @@ namespace ksf
 	{
 		#if ESP8266
 			std::string result;
-			result.resize(pgm_str_len);
-			memcpy_P(result.data(), pgm_str_ptr, result.size());
+			// Resize the string to the correct length.
+			result.resize(pgm_str_len + 1);
+			// Copy the content from PROGMEM to the string.
+			memcpy_P(result.data(), pgm_str_ptr, pgm_str_len);
+			// Null-terminate the string. This is critical for some functions.
+			result[pgm_str_len] = '\0';
 			return result;
 		#else
 			return {pgm_str_ptr};
