@@ -7,10 +7,6 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
-#include "../ksConstants.h"
-#include "ksWifiConnector.h"
-
 #if ESP32
 	#include <WiFi.h>
 	#include <esp_wifi.h>
@@ -20,6 +16,10 @@
 #else 			
 	#error Platform not implemented.
 #endif
+
+#include "../ksApplication.h"
+#include "../ksConstants.h"
+#include "ksWifiConnector.h"
 
 namespace ksf::comps
 {
@@ -65,7 +65,7 @@ namespace ksf::comps
 		#endif
 	}
 
-	bool ksWifiConnector::init(ksf::ksComposable* owner)
+	bool ksWifiConnector::init(ksApplication* owner)
 	{
 		WiFi.begin();
 

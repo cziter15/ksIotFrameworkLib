@@ -7,11 +7,11 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
+#include "../ksApplication.h"
+#include "../ksConstants.h"
 #include "ksWiFiConfigurator.h"
 #include "ksConfigProvider.h"
 #include "ksLed.h"
-#include "../ksConstants.h"
 
 namespace ksf::comps
 {
@@ -37,7 +37,7 @@ namespace ksf::comps
 		#endif
 	}
 
-	bool ksWiFiConfigurator::init(ksf::ksComposable* owner)
+	bool ksWiFiConfigurator::init(ksApplication* owner)
 	{
 		this->owner = owner;
 		return true;

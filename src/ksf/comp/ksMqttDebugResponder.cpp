@@ -7,11 +7,7 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
-#include "ksMqttDebugResponder.h"
-#include "ksMqttConnector.h"
-#include "../ksConstants.h"
-
+#include <LittleFS.h>
 #if ESP32
 	#include <WiFi.h>
 	#include <esp_phy_init.h>
@@ -21,13 +17,16 @@
 	#error Platform not implemented.
 #endif
 
-#include <LittleFS.h>
+#include "../ksApplication.h"
+#include "../ksConstants.h"
+#include "ksMqttDebugResponder.h"
+#include "ksMqttConnector.h"
 
 using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	bool ksMqttDebugResponder::init(ksf::ksComposable* owner)
+	bool ksMqttDebugResponder::init(ksApplication* owner)
 	{
 		this->owner = owner;
 		return true;

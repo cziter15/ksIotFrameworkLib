@@ -7,8 +7,8 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "ksSimpleTimer.h"
 #include "Arduino.h"
+#include "ksSimpleTimer.h"
 
 namespace ksf 
 {

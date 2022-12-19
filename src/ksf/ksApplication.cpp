@@ -9,9 +9,13 @@
 
 #include "ksApplication.h"
 #include "ksComponent.h"
-
-namespace ksf 
+namespace ksf
 {
+	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent>& component)
+	{
+		components.remove(component);
+	}
+
 	bool ksApplication::init()
 	{
 		/* Synchronize components added before ksApplication base init. */

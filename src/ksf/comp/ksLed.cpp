@@ -7,9 +7,9 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
-#include "ksLed.h"
 #include "Arduino.h"
+#include "../ksApplication.h"
+#include "ksLed.h"
 
 namespace ksf::comps
 {
@@ -17,7 +17,7 @@ namespace ksf::comps
 		: pin(pin), activeLow(activeLow)
 	{}
 
-	bool ksLed::init(ksf::ksComposable* owner)
+	bool ksLed::init(ksApplication* owner)
 	{
 		pinMode(pin, OUTPUT);
 		setEnabled(false);

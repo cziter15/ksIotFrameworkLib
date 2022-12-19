@@ -7,15 +7,16 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
+
+#include <PubSubClient.h>
+#include <WiFiClientSecure.h>
+#include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "../ksConfig.h"
 #include "../ksCertUtils.h"
 #include "ksWifiConnector.h"
 #include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"
-#include <PubSubClient.h>
-#include <WiFiClientSecure.h>
 
 using namespace std::placeholders;
 
@@ -25,7 +26,7 @@ namespace ksf::comps
 		: sendConnectionStatus(sendConnectionStatus), usePersistentSession(usePersistentSession)
 	{}
 
-	bool ksMqttConnector::init(ksf::ksComposable* owner)
+	bool ksMqttConnector::init(ksApplication* owner)
 	{
 		ksMqttConfigProvider cfgProvider;
 

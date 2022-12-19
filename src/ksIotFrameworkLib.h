@@ -13,7 +13,6 @@
 #include "ksf/ksSimpleTimer.h"
 #include "ksf/ksSafeList.h"
 #include "ksf/ksComponent.h"
-#include "ksf/ksComposable.h"
 #include "ksf/ksConfig.h"
 #include "ksf/ksConstants.h"
 #include "ksf/evt/ksEvent.h"

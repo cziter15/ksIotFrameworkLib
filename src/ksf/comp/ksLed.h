@@ -9,85 +9,85 @@
 
 #pragma once
 
-#include "../ksComponent.h"
 #include <Arduino.h>
+#include "../ksComponent.h"
 
 namespace ksf::comps
 {
 	class ksLed : public ksComponent
-		{
-			KSF_RTTI_DECLARATIONS(ksLed, ksComponent)
+	{
+		KSF_RTTI_DECLARATIONS(ksLed, ksComponent)
 
-			protected:
-				uint8_t pin{0};						// Pin number assigned to LED.
-				bool activeLow{false};				// True if pin should be driven LOW to enable LED. Otherwise false.
-				uint32_t lastBlinkTimeMs{0};		// Last time LED state was toggled (milliseconds).
-				uint32_t blinkIntervalMs{0};		// Time in ms between LED state toggle (0 to disable blinking).
-				uint32_t blinkLoops{0};				// Number of loops (0 for infinite loop).
+		protected:
+			uint8_t pin{0};						// Pin number assigned to LED.
+			bool activeLow{false};				// True if pin should be driven LOW to enable LED. Otherwise false.
+			uint32_t lastBlinkTimeMs{0};		// Last time LED state was toggled (milliseconds).
+			uint32_t blinkIntervalMs{0};		// Time in ms between LED state toggle (0 to disable blinking).
+			uint32_t blinkLoops{0};				// Number of loops (0 for infinite loop).
 
-			public:
-				/*
-					Constructs LED object, assigning passed pin number.
+		public:
+			/*
+				Constructs LED object, assigning passed pin number.
 
-					@param pin Pin number assigned to LED.
-					@param activeLow True if pin should be driven LOW to enable LED. Otherwise false.
-				*/
-				ksLed(uint8_t pin, bool activeLow = false);
+				@param pin Pin number assigned to LED.
+				@param activeLow True if pin should be driven LOW to enable LED. Otherwise false.
+			*/
+			ksLed(uint8_t pin, bool activeLow = false);
 
-				/*
-					Initializes LED component.
-					
-					@param owner Pointer to ksComposable object that owns this component.
-					@return True if init succedeed, otherwise false.
-				*/
-				bool init(class ksf::ksComposable* owner) override;
+			/*
+				Initializes LED component.
+				
+				@param owner Pointer to ksApplication object that owns this component.
+				@return True if init succedeed, otherwise false.
+			*/
+			bool init(ksApplication* owner) override;
 
-				/*
-					Executes LED component logic.
+			/*
+				Executes LED component logic.
 
-					@return True if everything is okay, otherwise false to break application logic.
-				*/
-				bool loop() override;
+				@return True if everything is okay, otherwise false to break application logic.
+			*/
+			bool loop() override;
 
-				/*
-					Sets LED blinking state.
+			/*
+				Sets LED blinking state.
 
-					@param blinkIntervalMs Time in ms between LED state toggle (0 to disable blinking).
-					@param blinkLoops Number of loops (0 for infinite loop).
-				*/
-				void setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops = 0);
+				@param blinkIntervalMs Time in ms between LED state toggle (0 to disable blinking).
+				@param blinkLoops Number of loops (0 for infinite loop).
+			*/
+			void setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops = 0);
 
-				/*
-					Returns whether LED is currently blinking.
+			/*
+				Returns whether LED is currently blinking.
 
-					@return True if LED is currently blinking, otherwise false.
-				*/
-				bool isBlinking() const;
+				@return True if LED is currently blinking, otherwise false.
+			*/
+			bool isBlinking() const;
 
-				/*
-					Returns whether LED is enabled.
+			/*
+				Returns whether LED is enabled.
 
-					@return True if LED is enabled, otherwise false.
-				*/
-				bool isEnabled() const;
+				@return True if LED is enabled, otherwise false.
+			*/
+			bool isEnabled() const;
 
-				/*
-					Enables or disables LED.
-					
-					@param enabled True to enable LED, false to disable.
-				*/
-				void setEnabled(bool enabled);
+			/*
+				Enables or disables LED.
+				
+				@param enabled True to enable LED, false to disable.
+			*/
+			void setEnabled(bool enabled);
 
-				/*
-					Returns pin number assigned to LED.
+			/*
+				Returns pin number assigned to LED.
 
-					@return Pin number assigned to LED.
-				*/
-				uint8_t getPin() const { return pin; }
+				@return Pin number assigned to LED.
+			*/
+			uint8_t getPin() const { return pin; }
 
-				/*
-					Destructor, disables LED and restores INPUT pin state.
-				*/
-				virtual ~ksLed();
-		};
+			/*
+				Destructor, disables LED and restores INPUT pin state.
+			*/
+			virtual ~ksLed();
+	};
 }

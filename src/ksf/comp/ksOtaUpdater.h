@@ -9,9 +9,9 @@
 
 #pragma once
 
-#include "../ksComponent.h"
-#include "../evt/ksEvent.h"
 #include "ArduinoOTA.h"
+#include "../evt/ksEvent.h"
+#include "../ksComponent.h"
 
 namespace ksf::comps
 {
@@ -45,10 +45,10 @@ namespace ksf::comps
 			/*
 				Initializes OTA component.
 
-				@param owner Pointer to owning ksComposable object (application).
+				@param owner Pointer to ksApplication object that owns this component.
 				@return True on success, false on fail.
 			*/
-			bool init(class ksf::ksComposable* owner) override;
+			bool init(ksApplication* owner) override;
 
 			/*
 				Handles OTA component loop logic.

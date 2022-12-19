@@ -9,8 +9,8 @@
 
 #pragma once
 
-#include "ksConfigProvider.h"
 #include <WiFiManager.h>
+#include "ksConfigProvider.h"
 
 class WiFiManager;
 
@@ -18,29 +18,29 @@ namespace ksf::comps
 {
 	class ksMqttConnector;
 	class ksMqttConfigProvider : public ksConfigProvider
-		{
-			KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
+	{
+		KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
 
-			public:
-				/*
-					Injects MQTT config provider's WiFiManager parameters.
+		public:
+			/*
+				Injects MQTT config provider's WiFiManager parameters.
 
-					@param manager WiFiManager reference.
-				*/
-				void injectManagerParameters(WiFiManager& manager) override;
+				@param manager WiFiManager reference.
+			*/
+			void injectManagerParameters(WiFiManager& manager) override;
 
-				/*
-					Captures MQTT config provider's WiFiManager parameters.
+			/*
+				Captures MQTT config provider's WiFiManager parameters.
 
-					@param manager WiFiManager reference.
-				*/
-				void captureManagerParameters(WiFiManager& manager) override;
+				@param manager WiFiManager reference.
+			*/
+			void captureManagerParameters(WiFiManager& manager) override;
 
-				/*
-					Setup MQTT connector with captured parameters.
+			/*
+				Setup MQTT connector with captured parameters.
 
-					@param connector MQTT connector reference.
-				*/
-				void setupMqttConnector(ksMqttConnector& connector);
-		};
+				@param connector MQTT connector reference.
+			*/
+			void setupMqttConnector(ksMqttConnector& connector);
+	};
 }

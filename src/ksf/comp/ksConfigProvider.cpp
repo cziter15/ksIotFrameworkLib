@@ -7,13 +7,13 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "ksConfigProvider.h"
-#include "../ksConfig.h"
 #include "WiFiManager.h"
+#include "../ksConfig.h"
+#include "ksConfigProvider.h"
 
 namespace ksf::comps
 {
-	bool ksConfigProvider::init(ksf::ksComposable* owner)
+	bool ksConfigProvider::init(ksApplication* owner)
 	{
 		return true;
 	}

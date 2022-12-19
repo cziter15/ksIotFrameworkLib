@@ -9,11 +9,12 @@
 
 #pragma once
 
+#include <string>
+#include <string_view>
+
 #include "../ksComponent.h"
 #include "../evt/ksEvent.h"
 #include "../ksSimpleTimer.h"
-#include <string>
-#include <string_view>
 
 class WiFiClient;
 class PubSubClient;
@@ -95,10 +96,10 @@ namespace ksf
 				/*
 					Initializes MQTT connector component.
 
-					@param owner Pointer to ksComposable object that owns this component.
+					@param owner Pointer to ksApplication object that owns this component.
 					@return True on success, false on fail.
 				*/
-				bool init(class ksf::ksComposable* owner) override;
+				bool init(ksApplication* owner) override;
 
 				/*
 					Called from application loop. Handles MqttConnector logic.

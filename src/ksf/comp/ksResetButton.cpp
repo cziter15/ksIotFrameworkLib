@@ -7,7 +7,7 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
+#include "../ksApplication.h"
 #include "ksResetButton.h"
 #include "Arduino.h"
 
@@ -31,7 +31,7 @@ namespace ksf::comps
 		: pin(pin), triggerState(triggerState), mode(mode)
 	{}
 
-	bool ksResetButton::init(ksf::ksComposable* owner)
+	bool ksResetButton::init(ksApplication* owner)
 	{
 		pinMode(pin, mode);
 		lastState = static_cast<uint8_t>(digitalRead(pin));

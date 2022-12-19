@@ -7,8 +7,9 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "ksOtaUpdater.h"
+#include "../ksApplication.h"
 #include "../ksConstants.h"
+#include "ksOtaUpdater.h"
 
 namespace ksf::comps
 {
@@ -33,7 +34,7 @@ namespace ksf::comps
 		ksOtaUpdater(hostname, PGM_("ota_ksiotframework"));
 	}
 
-	bool ksOtaUpdater::init(class ksf::ksComposable* owner)
+	bool ksOtaUpdater::init(ksApplication* owner)
 	{
 		ArduinoOTA.begin();
 		return true;

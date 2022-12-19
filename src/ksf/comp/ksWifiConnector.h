@@ -9,9 +9,9 @@
 
 #pragma once
 
+#include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 #include "../ksSimpleTimer.h"
-#include "../evt/ksEvent.h"
 
 namespace ksf::comps
 {
@@ -73,10 +73,10 @@ namespace ksf::comps
 			/*
 				Initializes WiFi connector component.
 
-					@param owner Pointer to ksComposable object that owns this component.
+				@param owner Pointer to ksApplication object that owns this component.
 				@return True on success, false on fail.
 			*/
-			bool init(class ksf::ksComposable* owner) override;
+			bool init(ksApplication* owner) override;
 
 			/*
 				Handles WiFi connector component loop logic.

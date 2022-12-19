@@ -14,7 +14,7 @@
 
 namespace ksf 
 {
-	class ksComposable;
+	class ksApplication;
 	class ksComponent : public ksRtti
 	{
 		KSF_RTTI_DECLARATIONS(ksComponent, ksRtti)
@@ -28,7 +28,7 @@ namespace ksf
 				@param owner Pointer to owning composable interface (application).
 				@return True on success, false on fail.
 			*/
-			virtual bool init(ksComposable* owner) = 0;
+			virtual bool init(ksApplication* owner) = 0;
 
 			/* 
 				Called from application loop.

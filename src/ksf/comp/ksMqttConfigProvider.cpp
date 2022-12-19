@@ -7,7 +7,7 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksComposable.h"
+#include "../ksApplication.h"
 #include "../ksConfig.h"
 #include "ksWiFiConfigurator.h"
 #include "ksMqttConnector.h"
