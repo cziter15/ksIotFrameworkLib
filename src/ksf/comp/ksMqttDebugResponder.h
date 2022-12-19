@@ -9,9 +9,9 @@
 
 #pragma once
 
-#include "../ksComponent.h"
-#include "../evt/ksEvent.h"
 #include <string_view>
+#include "../evt/ksEvent.h"
+#include "../ksComponent.h"
 
 namespace ksf::comps
 {
@@ -22,7 +22,7 @@ namespace ksf::comps
 
 		protected:
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
-			ksComposable* owner{nullptr};							// Raw pointer to ownning composable (app).
+			ksApplication* owner{nullptr};							// Pointer to application that owns this component.
 
 			std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
 			std::shared_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
@@ -55,10 +55,10 @@ namespace ksf::comps
 			/*
 				Initializes MQTT debug responder component.
 
-				@param owner Pointer to ksComposable object that owns this component.
+				@param owner Pointer to ksApplication object that owns this component.
 				@return True on success, false on fail.
 			*/
-			bool init(class ksf::ksComposable* owner) override;
+			bool init(ksApplication* owner) override;
 
 			/*
 				Method called after component initialization.
