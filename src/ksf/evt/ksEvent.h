@@ -22,7 +22,7 @@
 	 @param params... Event parameters.
  */
 #define DECLARE_KS_EVENT(evtName, ...) \
-	auto evtName{std::make_shared<ksf::evt::ksEvent<__VA_ARGS__>>()};
+	std::shared_ptr<ksf::evt::ksEvent<__VA_ARGS__>> evtName {std::make_shared<ksf::evt::ksEvent<__VA_ARGS__>>()};
 
 namespace ksf::evt
 {
