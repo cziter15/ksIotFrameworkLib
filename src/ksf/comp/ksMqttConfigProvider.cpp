@@ -29,7 +29,6 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			auto ksfBrokerParamName{BROKER_TEXT_PGM};
 			auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
 			auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
 
