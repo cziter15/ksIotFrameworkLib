@@ -73,7 +73,7 @@ namespace ksf::comps
 			WiFi.setSleep(true);
 		#endif
 
-		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
+		configTime(0, 0, PGM_("pool.ntp.org").c_str(), PGM_("time.nist.gov").c_str());
 		
 		return true;
 	}

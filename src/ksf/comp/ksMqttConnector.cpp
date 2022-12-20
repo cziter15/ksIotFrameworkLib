@@ -59,7 +59,7 @@ namespace ksf::comps
 
 		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
 
-		// This should be saved to a file rater than to a memory.
+		// TODO : This could be optimized to save memory.
 		this->login = login;
 		this->password = password;
 		this->prefix = prefix;
