@@ -13,7 +13,7 @@
 namespace ksf::evt
 {
 	ksEventHandle::ksEventHandle(std::weak_ptr<ksEventInterface>&& eventBaseWp, std::size_t callbackUID) 
-		: eventBaseWp(std::move(eventBaseWp)), callbackUID(callbackUID)
+		: eventBaseWp(eventBaseWp), callbackUID(callbackUID)
 	{}
 
 	ksEventHandle::~ksEventHandle()
