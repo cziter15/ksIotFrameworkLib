@@ -22,7 +22,7 @@
 	 @param params... Event parameters.
  */
 #define DECLARE_KS_EVENT(evtName, ...) \
-	std::shared_ptr<ksf::evt::ksEvent<__VA_ARGS__>> evtName = std::make_shared<ksf::evt::ksEvent<__VA_ARGS__>>();
+	auto evtName{std::make_shared<ksf::evt::ksEvent<__VA_ARGS__>>()};
 
 namespace ksf::evt
 {
@@ -54,7 +54,7 @@ namespace ksf::evt
 			{
 				++lastCallbackUID;
 				outHandle = std::make_shared<ksf::evt::ksEventHandle>(weak_from_this(), lastCallbackUID);
-				callbacks.emplace_back(lastCallbackUID, std::move(function));
+				callbacks.emplace_back(lastCallbackUID, function);
 			}
 
 			/*
