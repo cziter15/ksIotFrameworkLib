@@ -29,14 +29,14 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
-			auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
+			const auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
+			const auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
 
-			auto& login{config_file.getParam(USER_TEXT_PGM)};
-			auto& password{config_file.getParam(PASSWORD_TEXT_PGM)};
+			const auto& login{config_file.getParam(USER_TEXT_PGM)};
+			const auto& password{config_file.getParam(PASSWORD_TEXT_PGM)};
+			const auto& fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
 
 			auto prefix{config_file.getParam(PREFIX_TEXT_PGM)};
-			auto fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
 
 			if (prefix.length() > 0)
 			{
@@ -58,26 +58,26 @@ namespace ksf::comps
 	}
 
 	void ksMqttConfigProvider::injectManagerParameters(WiFiManager& manager)
-	{
-		/* 
-			Use move semantics to move underlying strings and cache through injection process.
-			This is required because WiFiManager uses pointers to strings and they must be valid.
-		*/
-		brokerParamName = std::move(BROKER_TEXT_PGM);
-		portParamName = std::move(PORT_TEXT_PGM);
-		userParamName = std::move(USER_TEXT_PGM);
-		fpParamName = std::move(FINGERPRINT_TEXT_PGM);
-		passwordParamName = std::move(PASSWORD_TEXT_PGM);
-		prefixParamName = std::move(PREFIX_TEXT_PGM);
-		
+	{		
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			addNewParam(manager, brokerParamName.c_str(), config_file.getParam(brokerParamName).c_str());
-			addNewParam(manager, portParamName.c_str(), config_file.getParam(portParamName).c_str(), 5);
-			addNewParam(manager, userParamName.c_str(), config_file.getParam(userParamName).c_str());
-			addNewParam(manager, fpParamName.c_str(), config_file.getParam(fpParamName).c_str(), 110);
-			addNewParam(manager, passwordParamName.c_str(), config_file.getParam(passwordParamName).c_str());
-			addNewParam(manager, prefixParamName.c_str(), config_file.getParam(prefixParamName).c_str());
+			auto brokerParamName{BROKER_TEXT_PGM};
+			addNewParam(manager, brokerParamName.c_str(), config_file.getParam(brokerParamName));
+
+			auto portParamName{PORT_TEXT_PGM};
+			addNewParam(manager, portParamName.c_str(), config_file.getParam(portParamName), 5);
+			
+			auto userParamName{USER_TEXT_PGM};
+			addNewParam(manager, userParamName.c_str(), config_file.getParam(userParamName));
+
+			auto fpParamName{FINGERPRINT_TEXT_PGM};
+			addNewParam(manager, fpParamName.c_str(), config_file.getParam(fpParamName), 110);
+
+			auto passwordParamName{PASSWORD_TEXT_PGM};
+			addNewParam(manager, passwordParamName, config_file.getParam(passwordParamName));
+
+			auto prefixParamName{PREFIX_TEXT_PGM};
+			addNewParam(manager, prefixParamName, config_file.getParam(prefixParamName));
 		}
 	}
 
@@ -86,7 +86,7 @@ namespace ksf::comps
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			for (auto& param : params)
-				config_file.setParam(param->getID(), param->getValue());
+				config_file.setParam(param.second->getID(), param.second->getValue());
 		}
 
 		params.clear();

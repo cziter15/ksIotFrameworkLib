@@ -9,8 +9,8 @@
 
 #pragma once
 
-#include <memory>
-#include <vector>
+#include <utility>
+#include <list>
 #include "../ksComponent.h"
 
 class WiFiManager;
@@ -24,7 +24,7 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksConfigProvider, ksComponent)
 
 		protected:
-			std::vector<std::unique_ptr<WiFiManagerParameter>> params;	// Unique pointers of parameters (deletes them safely).
+			std::list<std::pair<std::string, std::unique_ptr<WiFiManagerParameter>>> params;	// WiFiManager parameters
 			
 			/*
 				Adds a new param to the WiFiManager configuration process.
@@ -35,7 +35,7 @@ namespace ksf::comps
 				@param defaultValue Default value of parameter.
 				@param maxLength Maximum length of parameter value.
 			*/
-			void addNewParam(WiFiManager& manager, const char* label, const char* defaultValue, int maxLength = 50);
+			void addNewParam(WiFiManager& manager, const std::string& label, const std::string& defaultValue, int maxLength = 50);
 
 		public:
 			/*
