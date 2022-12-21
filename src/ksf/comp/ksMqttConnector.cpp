@@ -42,7 +42,7 @@ namespace ksf::comps
 		return mqttClientSp != nullptr;
 	}
 
-	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, const std::string& login, const std::string& password, const std::string& prefix, const std::string& fingerprint)
+	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
 		if (!fingerprint.empty())
 		{
@@ -60,9 +60,9 @@ namespace ksf::comps
 		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
 
 		// TODO : This could be optimized to save memory.
-		this->login = login;
-		this->password = password;
-		this->prefix = prefix;
+		this->login = std::move(login);
+		this->password = std::move(password);
+		this->prefix = std::move(prefix);
 
 		/* 
 		*	Set timeout for blocking calls (eg. connect). MQTT is handled async-like.

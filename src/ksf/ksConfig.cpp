@@ -32,17 +32,17 @@ namespace ksf
 			std::string val{fileReader.readStringUntil('\n').c_str()};
 			val = val.substr(0, val.length() - 1);
 
-			setParam(name, val);
+			setParam(name, std::move(val));
 		}
 
 		if (fileReader)
 			fileReader.close();
 	}
 
-	void ksConfig::setParam(const std::string& paramName, const std::string& paramValue)
+	void ksConfig::setParam(const std::string& paramName, std::string paramValue)
 	{
 		isDirty = true;
-		configParams[paramName] = paramValue;
+		configParams[paramName] = std::move(paramValue);
 	}
 
 	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const

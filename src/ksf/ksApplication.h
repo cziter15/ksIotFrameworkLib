@@ -35,9 +35,10 @@ namespace ksf
 					"Trying to add component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
-				auto ptr = std::make_shared<_Type>(arg...);
-				components.add(ptr);
-				return std::weak_ptr<_Type>(ptr);
+				auto sharedPtr{std::make_shared<_Type>(arg...)};
+				auto weakPtr{std::weak_ptr<_Type>(sharedPtr)};
+				components.add(std::move(sharedPtr));
+				return weakPtr;
 			}
 
 			/*
@@ -107,7 +108,7 @@ namespace ksf
 
 				@param component Component to be removed.
 			*/
-			void markComponentToRemove(const std::shared_ptr<ksComponent>& component);
+			void markComponentToRemove(const std::shared_ptr<ksComponent> component);
 
 			/* 
 				Initializes application.

@@ -23,10 +23,16 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksConfigProvider::addNewParam(WiFiManager& manager, const std::string& label, const std::string& defaultValue, int maxLength)
+	void ksConfigProvider::addNewParam(WiFiManager& manager, std::string label, std::string defaultValue, int maxLength)
 	{
-		auto& par{params.emplace_back(label, nullptr)};
+		auto& par{params.emplace_back(std::move(label), nullptr)};
 		par.second = std::make_unique<WiFiManagerParameter>(par.first.c_str(), par.first.c_str(), defaultValue.c_str(), maxLength);
 		manager.addParameter(par.second.get());
+	}
+
+	void ksConfigProvider::addNewParamWithConfigDefault(WiFiManager& manager, ksConfig& config, std::string label, int maxLength)
+	{
+		auto& defaultValue{config.getParam(label)};
+		return addNewParam(manager, std::move(label), std::move(defaultValue), maxLength);
 	}
 }

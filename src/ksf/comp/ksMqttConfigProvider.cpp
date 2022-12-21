@@ -29,13 +29,19 @@ namespace ksf::comps
 	{
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
+			/*
+				These parameters are taken by reference as no transfer of the data is needed or possible.
+				Port is converted to int, fingerprint is mapped to a vector of bytes and broker is copied internally.
+			*/
 			const auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
 			const auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
-
-			const auto& login{config_file.getParam(USER_TEXT_PGM)};
-			const auto& password{config_file.getParam(PASSWORD_TEXT_PGM)};
 			const auto& fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
-
+			
+			/*
+				These parameters are copied here. Later they are moved directly to the fields of the connector.
+			*/
+			auto login{config_file.getParam(USER_TEXT_PGM)};
+			auto password{config_file.getParam(PASSWORD_TEXT_PGM)};
 			auto prefix{config_file.getParam(PREFIX_TEXT_PGM)};
 
 			if (prefix.length() > 0)
@@ -52,8 +58,9 @@ namespace ksf::comps
 					prefix += topicDelimeter;
 			}
 
+
 			if (savedBroker.length() > 0)
-				connector.setupConnection(savedBroker, port, login, password, prefix, fingerprint);
+				connector.setupConnection(savedBroker, port, std::move(login), std::move(password), std::move(prefix), fingerprint);
 		}
 	}
 
@@ -61,23 +68,12 @@ namespace ksf::comps
 	{		
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			auto brokerParamName{BROKER_TEXT_PGM};
-			addNewParam(manager, brokerParamName, config_file.getParam(brokerParamName));
-
-			auto portParamName{PORT_TEXT_PGM};
-			addNewParam(manager, portParamName, config_file.getParam(portParamName), 5);
-			
-			auto userParamName{USER_TEXT_PGM};
-			addNewParam(manager, userParamName, config_file.getParam(userParamName));
-
-			auto fpParamName{FINGERPRINT_TEXT_PGM};
-			addNewParam(manager, fpParamName, config_file.getParam(fpParamName), 110);
-
-			auto passwordParamName{PASSWORD_TEXT_PGM};
-			addNewParam(manager, passwordParamName, config_file.getParam(passwordParamName));
-
-			auto prefixParamName{PREFIX_TEXT_PGM};
-			addNewParam(manager, prefixParamName, config_file.getParam(prefixParamName));
+			addNewParamWithConfigDefault(manager, config_file, BROKER_TEXT_PGM);
+			addNewParamWithConfigDefault(manager, config_file, PORT_TEXT_PGM, 5);
+			addNewParamWithConfigDefault(manager, config_file, USER_TEXT_PGM);
+			addNewParamWithConfigDefault(manager, config_file, FINGERPRINT_TEXT_PGM, 110);
+			addNewParamWithConfigDefault(manager, config_file, PASSWORD_TEXT_PGM);
+			addNewParamWithConfigDefault(manager, config_file, PREFIX_TEXT_PGM);
 		}
 	}
 

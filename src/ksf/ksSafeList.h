@@ -40,9 +40,9 @@ namespace ksf
 
 				@param item Item reference.
 			*/
-			void add(const _EntryType& item)
+			void add(const _EntryType&& item)
 			{
-				pendingAdditions.push_back(item);
+				pendingAdditions.emplace_back(item);
 			}
 
 			/*
@@ -51,9 +51,9 @@ namespace ksf
 
 				@param item Item reference.
 			*/
-			void remove(const _EntryType& item)
+			void remove(const _EntryType&& item)
 			{
-				pendingRemovals.push_back(item);
+				pendingRemovals.emplace_back(item);
 			}
 
 			/*

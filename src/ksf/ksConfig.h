@@ -39,7 +39,7 @@ namespace ksf
 				@param paramName Parameter name.
 				@param paramValue Parameter value.
 			*/
-			void setParam(const std::string& paramName, const std::string& paramValue);
+			void setParam(const std::string& paramName, const std::string paramValue);
 
 
 			/*

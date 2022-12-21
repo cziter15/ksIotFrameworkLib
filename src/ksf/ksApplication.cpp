@@ -11,9 +11,9 @@
 #include "ksComponent.h"
 namespace ksf
 {
-	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent>& component)
+	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent> component)
 	{
-		components.remove(component);
+		components.remove(std::move(component));
 	}
 
 	bool ksApplication::init()

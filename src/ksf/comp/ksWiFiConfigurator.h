@@ -21,7 +21,7 @@ namespace ksf::comps
 
 		protected:
 			ksApplication* owner{nullptr};		//  Pointer to ksApplication object that owns this component.
-			WiFiManager manager;				 // WiFiManager object.
+			WiFiManager manager;				// WiFiManager object.
 			std::string deviceName;				// Device name (prefix).
 
 		public:
@@ -35,7 +35,7 @@ namespace ksf::comps
 
 				@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname.
 			*/
-			ksWiFiConfigurator(const std::string& devicePrefixName);
+			ksWiFiConfigurator(std::string devicePrefixName);
 
 			/*
 				Initializes ksWiFiConfigurator component.

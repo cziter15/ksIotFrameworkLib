@@ -20,12 +20,11 @@ namespace ksf::comps
 		ksWiFiConfigurator(PGM_("KSFDevice"));
 	}
 	
-	ksWiFiConfigurator::ksWiFiConfigurator(const std::string& devicePrefixName) 
-		: deviceName(devicePrefixName)
+	ksWiFiConfigurator::ksWiFiConfigurator(std::string devicePrefixName)
+		 // As the device name is our field, we are able to move, it's better to do so than using const ref
+		: deviceName(std::move(devicePrefixName))
 	{
-		// TODO: Device name can be moved to PROGMEM. This will however require saving device name to EEPROM.
-		// Same things happen to ksMqttConfigurator, that can use saved credentials to connect to MQTT broker.
-
+		// TODO: Try PGM macro in all instances.
 		deviceName += '-';
 
 		#if ESP32

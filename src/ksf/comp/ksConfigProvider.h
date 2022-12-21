@@ -16,6 +16,11 @@
 class WiFiManager;
 class WiFiManagerParameter;
 
+namespace ksf
+{
+	class ksConfig;
+}
+
 namespace ksf::comps
 {
 
@@ -24,18 +29,29 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksConfigProvider, ksComponent)
 
 		protected:
-			std::list<std::pair<std::string, std::unique_ptr<WiFiManagerParameter>>> params;	// WiFiManager parameters
+			std::list<std::pair<std::string, std::unique_ptr<WiFiManagerParameter>>> params;	// WiFiManager parameters.
 			
 			/*
 				Adds a new param to the WiFiManager configuration process.
 				This method must be called only inside injectManagerParameters function.
 
 				@param manager WiFiManager reference.
-				@param label Label and ID to identify parameter.
+				@param label Shared ID/Label to identify parameter.
 				@param defaultValue Default value of parameter.
 				@param maxLength Maximum length of parameter value.
 			*/
-			void addNewParam(WiFiManager& manager, const std::string& label, const std::string& defaultValue, int maxLength = 50);
+			void addNewParam(WiFiManager& manager, std::string label, std::string defaultValue, int maxLength = 50);
+
+			/*
+				Adds a new param to the WiFiManager configuration process. Default value is taken from ksConfig object.
+				This method must be called only inside injectManagerParameters function.
+
+				@param manager WiFiManager reference.
+				@param label Shared ID/Label to identify parameter.
+				@param config ksConfig reference.
+				@param maxLength Maximum length of parameter value.
+			*/
+			void addNewParamWithConfigDefault(WiFiManager& manager, ksConfig& config, std::string label, int maxLength = 50);
 
 		public:
 			/*
