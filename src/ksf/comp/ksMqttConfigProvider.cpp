@@ -62,16 +62,16 @@ namespace ksf::comps
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			auto brokerParamName{BROKER_TEXT_PGM};
-			addNewParam(manager, brokerParamName.c_str(), config_file.getParam(brokerParamName));
+			addNewParam(manager, brokerParamName, config_file.getParam(brokerParamName));
 
 			auto portParamName{PORT_TEXT_PGM};
-			addNewParam(manager, portParamName.c_str(), config_file.getParam(portParamName), 5);
+			addNewParam(manager, portParamName, config_file.getParam(portParamName), 5);
 			
 			auto userParamName{USER_TEXT_PGM};
-			addNewParam(manager, userParamName.c_str(), config_file.getParam(userParamName));
+			addNewParam(manager, userParamName, config_file.getParam(userParamName));
 
 			auto fpParamName{FINGERPRINT_TEXT_PGM};
-			addNewParam(manager, fpParamName.c_str(), config_file.getParam(fpParamName), 110);
+			addNewParam(manager, fpParamName, config_file.getParam(fpParamName), 110);
 
 			auto passwordParamName{PASSWORD_TEXT_PGM};
 			addNewParam(manager, passwordParamName, config_file.getParam(passwordParamName));
