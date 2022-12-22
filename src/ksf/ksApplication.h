@@ -61,7 +61,7 @@ namespace ksf
 					{
 						std::weak_ptr<_Type> castedCompWp{std::static_pointer_cast<_Type>(comp)};
 						if (!castedCompWp.expired())
-							outComponents.push_back(castedCompWp);
+							outComponents.emplace_back(std::move(castedCompWp));
 					}
 				}
 			}
