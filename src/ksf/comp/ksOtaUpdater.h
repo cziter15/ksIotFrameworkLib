@@ -56,5 +56,10 @@ namespace ksf::comps
 				@return True on success, false on fail.
 			*/
 			bool loop() override;
+
+			/*
+				Handles OTA component post init logic.
+			*/
+			void postInit() override;
 	};
 }

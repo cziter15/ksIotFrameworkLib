@@ -17,16 +17,6 @@ namespace ksf::comps
 	{
 		ArduinoOTA.setHostname(hostname.c_str());
 		ArduinoOTA.setPassword(password.c_str());
-
-		ArduinoOTA.onStart([&]() {
-			onUpdateStart->broadcast();
-		});
-
-		/* Save OTA boot indicator. This will save small file to FS to indicate ota update for next boot. */
-		ArduinoOTA.onEnd([&]() {
-			ksf::saveOtaBootIndicator();
-			onUpdateEnd->broadcast();
-		});
 	}
 
 	ksOtaUpdater::ksOtaUpdater(const std::string& hostname)
@@ -36,8 +26,21 @@ namespace ksf::comps
 
 	bool ksOtaUpdater::init(ksApplication* owner)
 	{
-		ArduinoOTA.begin();
+		ArduinoOTA.onStart([&]() {
+			onUpdateStart->broadcast();
+		});
+
+		/* Save OTA boot indicator. This will save small file to FS to indicate ota update for next boot. */
+		ArduinoOTA.onEnd([&]() {
+			ksf::saveOtaBootIndicator();
+			onUpdateEnd->broadcast();
+		});
 		return true;
+	}
+
+	void ksOtaUpdater::postInit()
+	{
+		ArduinoOTA.begin();
 	}
 
 	bool ksOtaUpdater::loop()
