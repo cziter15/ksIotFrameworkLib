@@ -30,6 +30,8 @@ namespace ksf
 			comp->postInit(); 
 			return true;
 		});
+
+		return true;
 	}
 
 	bool ksApplication::loop()
