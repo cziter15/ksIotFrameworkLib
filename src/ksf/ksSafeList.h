@@ -40,9 +40,10 @@ namespace ksf
 
 				@param item Item r-value reference.
 			*/
-			void add(const _EntryType&& item)
+			template <typename T>
+			void add(T&& item)
 			{
-				pendingAdditions.emplace_back(std::forward<const _EntryType>(item));
+				pendingAdditions.emplace_back(std::forward<T>(item));
 			}
 
 			/*
@@ -51,9 +52,10 @@ namespace ksf
 
 				@param item Item r-value reference.
 			*/
-			void remove(const _EntryType&& item)
+			template <typename T>
+			void remove(T&& item)
 			{
-				pendingRemovals.emplace_back(std::forward<const _EntryType>(item));
+				pendingRemovals.emplace_back(std::forward<T>(item));
 			}
 
 			/*
