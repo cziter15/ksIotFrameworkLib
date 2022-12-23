@@ -25,7 +25,7 @@ namespace ksf::evt
 			/*
 				Constructs event handle.
 
-				@param eventBaseWp Weak pointer to event object.
+				@param eventBaseWp R-value reference to weak pointer to event object.
 				@param callbackUID Unique callback ID.
 			*/
 			ksEventHandle(std::weak_ptr<ksEventInterface>&& eventBaseWp, std::size_t callbackUID);

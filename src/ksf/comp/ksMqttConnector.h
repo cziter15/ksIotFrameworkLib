@@ -159,7 +159,7 @@ namespace ksf
 				/*
 					Sets up MQTT connection.
 
-					@param broker MQTT broker address. Can be IP or hostname.
+					@param broker MQTT broker address. Can be IP or hostname
 					@param port MQTT broker port.
 					@param login MQTT user login.
 					@param password MQTT user password.

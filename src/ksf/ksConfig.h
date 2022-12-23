@@ -37,7 +37,7 @@ namespace ksf
 				Sets specified parameter's value. If parameter does not exist, it will be created.
 
 				@param paramName Parameter name.
-				@param paramValue Parameter value.
+				@param paramValue Parameter value (use std::move when possible).
 			*/
 			void setParam(const std::string& paramName, const std::string paramValue);
 

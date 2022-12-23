@@ -38,22 +38,22 @@ namespace ksf
 				Adds an item to the list of pending additions.
 				The item will be added to the list by applyPendingOperations method.
 
-				@param item Item reference.
+				@param item Item r-value reference.
 			*/
 			void add(const _EntryType&& item)
 			{
-				pendingAdditions.emplace_back(item);
+				pendingAdditions.emplace_back(std::forward<const _EntryType>(item));
 			}
 
 			/*
 				Adds an item to the list of pending removals.
 				The item will be removed from the list by applyPendingOperations method.
 
-				@param item Item reference.
+				@param item Item r-value reference.
 			*/
 			void remove(const _EntryType&& item)
 			{
-				pendingRemovals.emplace_back(item);
+				pendingRemovals.emplace_back(std::forward<const _EntryType>(item));
 			}
 
 			/*
