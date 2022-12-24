@@ -7,15 +7,24 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
+#if ESP32
+	#include <WiFi.h>
+	#include <esp_wifi.h>
+#elif ESP8266
+	#include <user_interface.h>
+	#include <ESP8266WiFi.h>
+#else 			
+	#error Platform not implemented.
+#endif
+
 #include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "ksOtaUpdater.h"
 
 namespace ksf::comps
 {
-	ksOtaUpdater::ksOtaUpdater(const std::string& hostname, const std::string& password)
+	ksOtaUpdater::ksOtaUpdater(const std::string& password)
 	{
-		ArduinoOTA.setHostname(hostname.c_str());
 		ArduinoOTA.setPassword(password.c_str());
 
 		ArduinoOTA.onStart([&]() {
@@ -29,9 +38,9 @@ namespace ksf::comps
 		});
 	}
 
-	ksOtaUpdater::ksOtaUpdater(const std::string& hostname)
+	ksOtaUpdater::ksOtaUpdater()
 	{
-		ksOtaUpdater(hostname, PGM_("ota_ksiotframework"));
+		ksOtaUpdater(PGM_("ota_ksiotframework"));
 	}
 
 	bool ksOtaUpdater::init(ksApplication* owner)
@@ -41,6 +50,7 @@ namespace ksf::comps
 
 	void ksOtaUpdater::postInit()
 	{
+		ArduinoOTA.setHostname(WiFi.getHostname());
 		ArduinoOTA.begin();
 	}
 

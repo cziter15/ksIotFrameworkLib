@@ -29,18 +29,15 @@ namespace ksf::comps
 			/*
 				Constructor, used to construct OTA updater component.
 				
-				@param hostname Hostname of the device.
 				@param password Password required to flash.
 			*/
-			ksOtaUpdater(const std::string& hostname, const std::string& password);
+			ksOtaUpdater(const std::string& password);
 
 			/*
 				Constructor, used to construct OTA updater component.
-				Uses the default password "ota_ksiotframework".
-				
-				@param hostname Hostname of the device.
+				Uses the default password "ota_ksiotframework"
 			*/
-			ksOtaUpdater(const std::string& hostname);
+			ksOtaUpdater();
 
 			/*
 				Initializes OTA component.
