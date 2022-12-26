@@ -13,93 +13,107 @@ https://community.platformio.org/t/platformio-is-a-ukrainian-project-please-help
   <img src="doc/header.jpg">
 </p>
 
-## Idea - what and why?
+## What and why?
 
-The aim of this project is to provide simple kick-start application pattern for ESP 8266/32 IoT app development. Last year I was creating a lot of esp apps for multiple devices and realized that I everytime need to copy whole app and modify few classes. The purpose of this project is to tidy this process up.
+The goal of this project is to create a simple template or starting point for developing Internet of Things (IoT) applications using the ESP 8266/32 microcontroller. I noticed that I was frequently copying and modifying existing applications when creating new ones for different devices, and I wanted to streamline this process. This project aims to do just that by providing a more organized approach to starting new IoT projects with the ESP 8266/32.
 
 ## Architecture
 <p align="center">
   <img src="doc/app_diagram.png">
 </p>
 
-- User defines applications and is able to execute one application at a time.
-- Each application consist of components.
-- Each application has three methods iterating over components init, postInit and loop.
-- Init is called on component initialization (after construction).
-- PostInit is called after component initialization. This method is usually used to grab weak pointer to other component.
-- Loop is called every application loop.
-- Init and loop method can break appliation. Returning false will escape from main application loop causing next app to be executed (e.g. config).
+- The user can define and execute one application at a time.
+- Each application consists of components.
+- Each application has three methods that iterate over the components: init, postInit, and loop.
+- The init method is called during component initialization (after construction).
+- The postInit method is called after component initialization. It is typically used to obtain a weak pointer to another component.
+- The loop method is called during each iteration of the application loop.
+- The init and loop methods can cause the application to exit prematurely. If either method returns false, it will cause the main application loop to terminate and the next application to be executed (e.g. the config application).
 
 ## Utilities
 | Utility  | Function |
 | ------------- | ------------- |
-| ksEvent  | Provides simple event broadcasting system. Used for MQTT events etc. |
-| ksSimpleTimer  | Very simple "timer" mechanism. In triggered() method calculates and check if specified interval just passed. |
-| ksSafeList  | Safe list in context of manipulating items while iterating them. Contains three underlying queues - pending to add, pending to remove and actual item list. Call **queueAdd** or **queueRemove** while iterating and then call **synchronizeQueues**. Component system relies on this mechanism. |
+| ksEvent  | Provides a simple event broadcasting system. Used for MQTT events, etc. |
+| ksSimpleTimer  | A very simple "timer" mechanism. In the triggered() method, it calculates and checks if the specified interval has just passed. |
+| ksSafeList  | A safe list for manipulating items while iterating over them. Contains three underlying lists: pending to add, pending to remove, and the actual item list. Call **add** or **remove** while iterating and then call **applyPendingOperations**. The component system relies on this mechanism. |
 
 ## Components
 | Component  | Function |
 | ------------- | ------------- |
-| ksConfigProvider  | Used to manage parameters, configurator component calls each config provider to handle parameter inject/capture on WiFi configuration stage. |
-| ksLed  | Used to handle diodes, easy blinking, turn off, turn on etc. |
-| ksResetButton  | Used to break from app loop or reset whole device (to trigger config portal). |
-| ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix etc..). |
-| ksMqttConnector  | Used to maintain connection with Mqtt, user can bind to onMessage, onConnected events. |
-| ksMqttDebugResponder  | Provides debug commands for app with ksMqttConnector component. |
-| ksWiFiConfigurator | Base WiFi configurator component, brings WiFi management portal, allow config providers to inject and capture parameters. |
-| ksWiFiConnector | Handles WiFi connection. |
+| ksConfigProvider  |Used to manage parameters. The configurator component calls each config provider to handle parameter injection/capture during the WiFi configuration stage. |
+| ksLed  | Used to control diodes, including blinking, turning off, and turning on. |
+| ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix, etc.). |
+| ksMqttConnector  | Used to maintain a connection with MQTT. The user can bind to the onMessage and onConnected events. |
+| ksMqttDebugResponder  | Provides debug commands for apps using the ksMqttConnector component. |
+| ksOtaUpdater  | Configures and handles over-the-air (OTA) update functionality. |
+| ksResetButton  | Used to exit the app loop or reset the entire device (to trigger the config portal). |
+| ksWiFiConfigurator | The base WiFi configurator component, providing WiFi management portal and allowing config providers to inject and capture parameters. |
+| ksWiFiConnector | Manages WiFi connection (triggers events, handles reconnection etc.). |
 
 ### Rules:
-- Components can be added only in app init method, before calling base init method.
-- Method **findComponent** must not be called from component init methods.
-- Method **postInit** is the best place to obtain other component weak pointer, by calling **findComponent**.
-- Currently dynamic (from outside of **init** method) coponent creation is not supported.
+- Components can only be added in the app's **init** method, before calling the **base init** method.
+- The **findComponent** method **must not** be called from component **init** methods.
+- The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**.
+- Currently, dynamic component creation (from outside the **init** method) is not supported.
 
 ## Building application
-To build an application simply create new class inherited from ksApplication. Inside init method add components and setup them, then call base ksApplication's init method. You can also optionally override loop method, but remember that baseclass method (ksApplication's loop) iterates over component list executing loop call on each registered component.
+To build an application, simply create a new class inherited from ksApplication. Inside the init method, add and set up components, then call the base ksApplication's init method. You can also optionally override the loop method, but remember that the base class method (ksApplication's loop) iterates over the list of registered components and executes the loop call on each of them.
 
 ## A word of warning
-The idea was to prevent launching application when any component initialization fail. This will lead to false returned from ksApplication::init (base class) method, but due to inheritance, user can override it's behaviour. Application will then try to launch and after initialization, it will tick every component, even if one of them failed to initialize. This can lead to crashes, especially inside loop method.
+The idea was to prevent launching the application if any component initialization fails. This will cause the ksApplication::init (base class) method to return false, but due to inheritance, the user can override this behavior. The application will then try to launch and, after initialization, it will tick every component, even if one of them failed to initialize. This can result in crashes, especially in the loop method.
 
-**Do not add components inside loop() method. If you want to destroy component from loop just queue component to destroy (queueDestroy) method. To add component from loop method, then some kind of queue should be implemented.**
+**Do not add components inside loop() method. To destroy component, please use _markComponentToRemove_ method.**
 
-### So the flow is...
-- Add components (addComponent simply construct class and add it's pointer to app component list).
-- Run ksApplicaiton:init (it will iterate through component list and initialize them, returning false if any init failed).
-- If ksApplication::init() does not return true, simply return false in your app init method
+### The flow is as follows:
+- Add components (addComponent simply constructs a class and adds its pointer to the app component list).
+- Run ksApplication::init (it will iterate through the component list and initialize them, returning false if any initialization fails).
+- If ksApplication::init() does not return true, simply return false in your app's init method.
 
 ```c++
 bool EnergyMonitor::init()
 {
-	addComponent<ksf::comps::ksWifiConnector>(EnergyMonitorConfig::emonDeviceName);
-	addComponent<ksf::comps::ksMqttDebugResponder>();
-	mqtt = addComponent<ksf::comps::ksMqttConnector>();
-	statusLed = addComponent<ksf::comps::ksLed>(STATUS_LED_PIN);
-	eventLed = addComponent<ksf::comps::ksLed>(EVENT_LED_PIN);
+	/* Add WiFi connector component. */
+	addComponent<ksf::comps::ksWifiConnector>(apps::config::EnergyMonitorConfig::emonDeviceName);
 
-	auto sensor_timer = addComponent<ksf::comps::ksTimer>(EMON_TIMER_INTERVAL, true);
-	auto sec_timer = addComponent<ksf::comps::ksTimer>(EMON_SEC_TIMER, true);
-	
+	/* Add MQTT components. */
+	addComponent<ksf::comps::ksMqttDebugResponder>();
+	mqttWp = addComponent<ksf::comps::ksMqttConnector>();
+
+	/* Add LED indicator components. */
+	statusLedWp = addComponent<ksf::comps::ksLed>(STATUS_LED_PIN);
+	eventLedWp = addComponent<ksf::comps::ksLed>(EVENT_LED_PIN);
+
+	/* Create OTA component. */
+	addComponent<ksf::comps::ksOtaUpdater>();
+
+	/* Add sensor component. */
+	auto sensorCompWp{addComponent<components::EnergySensor>(ANA_PIN)};
+
+	/* Setup reset button. */
+	addComponent<ksf::comps::ksResetButton>(CFG_PUSH_PIN, LOW);
+
 	if (!ksApplication::init())
 		return false;
 
 	/* [ Rest of application initialization code ] */
+
+	return true;
 }
 ```
 
 ## Compiler flags
-Bare arduino projects need to have C++17 enabled in `compiler.cpp.extra_flags=` option in board.txt file.
+Bare Arduino projects need to have C++17 enabled via `compiler.cpp.extra_flags=` option in the board.txt file.
 
 ## Custom RTTI
-Use KSF_RTTI_DECLARATIONS macro to provide proper run time type information generation for proper casting of components.
-See ksConfigProvider.h for example. Your application components should use this macro, otherwise component finding mechanism won't work.
+Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components. 
+See ksConfigProvider.h for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
 ## Saving power
-By default, this framework supports modem power saving. This requires DTIM set on access point. Best value for me is 3.
-It allows ESP32 to go down from around 100mA to 20mA.
+By default, this framework supports power saving for the modem. This requires the DTIM to be set on the access point. 
+The best value for me is 3. It allows the ESP32 to go down from around 100mA to 20mA.
 
 ## Dependencies
-**Highly recommended to use platformio as it will automatically download dependencies.**
+**It is highly recommended to use PlatformIO as it will automatically download dependencies!**
 
 ### Frameworks
 - Arduino for ESP32 [ https://github.com/espressif/arduino-esp32 ]
