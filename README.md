@@ -62,7 +62,7 @@ To build an application, simply create a new class inherited from ksApplication.
 ## A word of warning
 The idea was to prevent launching the application if any component initialization fails. This will cause the ksApplication::init (base class) method to return false, but due to inheritance, the user can override this behavior. The application will then try to launch and, after initialization, it will tick every component, even if one of them failed to initialize. This can result in crashes, especially in the loop method.
 
-**Do not add components inside loop() method. To destroy component, please use **markComponentToRemove** method.
+**Do not add components inside loop() method. To destroy component, please use _markComponentToRemove_ method.**
 
 ### The flow is as follows:
 - Add components (addComponent simply constructs a class and adds its pointer to the app component list).
