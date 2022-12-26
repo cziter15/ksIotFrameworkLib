@@ -33,9 +33,9 @@ The goal of this project is to create a simple template or starting point for de
 ## Utilities
 | Utility  | Function |
 | ------------- | ------------- |
-| ksEvent  | Provides simple event broadcasting system. Used for MQTT events etc. |
-| ksSimpleTimer  | Very simple "timer" mechanism. In triggered() method calculates and check if specified interval just passed. |
-| ksSafeList  | Safe list in context of manipulating items while iterating them. Contains three underlying queues - pending to add, pending to remove and actual item list. Call **queueAdd** or **queueRemove** while iterating and then call **synchronizeQueues**. Component system relies on this mechanism. |
+| ksEvent  | Provides a simple event broadcasting system. Used for MQTT events, etc. |
+| ksSimpleTimer  | A very simple "timer" mechanism. In the triggered() method, it calculates and checks if the specified interval has just passed. |
+| ksSafeList  | A safe list for manipulating items while iterating over them. Contains three underlying lists: pending to add, pending to remove, and the actual item list. Call **add** or **remove** while iterating and then call **applyPendingOperations**. The component system relies on this mechanism. |
 
 ## Components
 | Component  | Function |
