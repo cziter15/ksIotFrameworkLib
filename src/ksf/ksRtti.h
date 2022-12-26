@@ -40,11 +40,11 @@ namespace ksf
 
 				@return Pointer to object of given type or nullptr if object is not of given type.
 			*/
-			template <typename _Type>
-			_Type* as() 
+			template <typename TType>
+			TType* as() 
 			{
-				if (is(_Type::getClassType()))
-					return (_Type*)this;
+				if (is(TType::getClassType()))
+					return (TType*)this;
 
 				return nullptr;
 			}
@@ -54,11 +54,11 @@ namespace ksf
 
 				@return Const pointer to object of given type or nullptr if object is not of given type.
 			*/
-			template <typename _Type>
-			const _Type* as() const
+			template <typename TType>
+			const TType* as() const
 			{
-				if (is(_Type::getClassType()))
-					return (_Type*)this;
+				if (is(TType::getClassType()))
+					return (TType*)this;
 
 				return nullptr;
 			}

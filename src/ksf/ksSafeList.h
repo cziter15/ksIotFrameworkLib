@@ -15,13 +15,13 @@
 
 namespace ksf 
 {
-	template <typename _EntryType>
+	template <typename TEntryType>
 	class ksSafeList
 	{
 		protected:
-			std::list<_EntryType> list;					// Underlying list.
-			std::list<_EntryType> pendingAdditions;		// List of items waiting to be added.
-			std::vector<_EntryType> pendingRemovals;	// List of items waiting to be removed.
+			std::list<TEntryType> list;					// Underlying list.
+			std::list<TEntryType> pendingAdditions;		// List of items waiting to be added.
+			std::vector<TEntryType> pendingRemovals;	// List of items waiting to be removed.
 
 		public:
 			/*
@@ -29,7 +29,7 @@ namespace ksf
 
 				@return Reference to vector of items (underlying list).
 			*/
-			const std::list<_EntryType>& getRef() const
+			const std::list<TEntryType>& getRef() const
 			{
 				return list;
 			}
@@ -40,10 +40,10 @@ namespace ksf
 
 				@param item Item r-value reference.
 			*/
-			template <typename T>
-			void add(T&& item)
+			template <typename TRefType>
+			void add(TRefType&& item)
 			{
-				pendingAdditions.emplace_back(std::forward<T>(item));
+				pendingAdditions.emplace_back(std::forward<TRefType>(item));
 			}
 
 			/*
@@ -52,10 +52,10 @@ namespace ksf
 
 				@param item Item r-value reference.
 			*/
-			template <typename T>
-			void remove(T&& item)
+			template <typename TRefType>
+			void remove(TRefType&& item)
 			{
-				pendingRemovals.emplace_back(std::forward<T>(item));
+				pendingRemovals.emplace_back(std::forward<TRefType>(item));
 			}
 
 			/*
@@ -77,7 +77,7 @@ namespace ksf
 			{
 				list.splice(list.end(), pendingAdditions);
 
-				list.remove_if([&](const _EntryType& item) {
+				list.remove_if([&](const TEntryType& item) {
 					return std::find(pendingRemovals.begin(), pendingRemovals.end(), item) != pendingRemovals.end();
 				});
 
@@ -89,18 +89,18 @@ namespace ksf
 		Scoped synchronization class for ksSafeList.
 		Applies pending operations on the list when the object goes out of scope.
 	*/
-	template <typename _ListType>
+	template <typename TListType>
 	class ksSafeListScopedSync
 	{
 		protected:
-			_ListType& listReference;	// Reference to ksSafeList instance.
+			TListType& listReference;	// Reference to ksSafeList instance.
 		
 		public:
 			/* 
 				ksSafeListScopedSync constructor.
 				@param listRef Reference to ksSafeList instance.
 			*/
-			ksSafeListScopedSync(_ListType& listRef)
+			ksSafeListScopedSync(TListType& listRef)
 				: listReference(listRef)
 			{}
 

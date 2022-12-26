@@ -28,15 +28,15 @@ namespace ksf
 
 				@return Weak pointer to the newly created component.
 			*/
-			template <class _Type, class... _Params>
-			std::weak_ptr<_Type> addComponent(_Params... arg)
+			template <class TComponentType, class... TParams>
+			std::weak_ptr<TComponentType> addComponent(TParams... arg)
 			{
-				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&_Type::getInstanceType)>::value, 
+				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
 					"Trying to add component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
-				auto sharedPtr{std::make_shared<_Type>(arg...)};
-				auto weakPtr{std::weak_ptr<_Type>(sharedPtr)};
+				auto sharedPtr{std::make_shared<TComponentType>(arg...)};
+				auto weakPtr{std::weak_ptr<TComponentType>(sharedPtr)};
 				components.add(std::move(sharedPtr));
 				return weakPtr;
 			}
@@ -46,10 +46,10 @@ namespace ksf
 
 				@param outComponents Vector of weak pointers to components of passed type.
 			*/
-			template <class _Type>
-			void findComponents(std::vector<std::weak_ptr<_Type>>& outComponents)
+			template <class TComponentType>
+			void findComponents(std::vector<std::weak_ptr<TComponentType>>& outComponents)
 			{
-				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&_Type::getInstanceType)>::value, 
+				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
 					"Trying to find components without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
@@ -57,9 +57,9 @@ namespace ksf
 
 				for (const auto& comp : components.getRef())
 				{
-					if (comp->isA(_Type::getClassType()))
+					if (comp->isA(TComponentType::getClassType()))
 					{
-						std::weak_ptr<_Type> castedCompWp{std::static_pointer_cast<_Type>(comp)};
+						std::weak_ptr<TComponentType> castedCompWp{std::static_pointer_cast<TComponentType>(comp)};
 						if (!castedCompWp.expired())
 							outComponents.emplace_back(std::move(castedCompWp));
 					}
@@ -71,18 +71,18 @@ namespace ksf
 
 				@return Weak pointer to the component of passed type.
 			*/
-			template <class _Type>
-			std::weak_ptr<_Type> findComponent()
+			template <class TComponentType>
+			std::weak_ptr<TComponentType> findComponent()
 			{
-				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&_Type::getInstanceType)>::value, 
+				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
 					"Trying to find component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
 				for (const auto& comp : components.getRef())
-					if (comp->isA(_Type::getClassType()))
-						return std::static_pointer_cast<_Type>(comp);
+					if (comp->isA(TComponentType::getClassType()))
+						return std::static_pointer_cast<TComponentType>(comp);
 
-				return std::weak_ptr<_Type>();
+				return std::weak_ptr<TComponentType>();
 			}
 
 			/*
@@ -91,8 +91,8 @@ namespace ksf
 				@param function Function to be called for each component. It must return bool and accept a shared_ptr to ksComponent as a parameter.
 				@return True if all components were iterated, false if function returned false for any of them.
 			*/
-			template <typename _Predicate>
-			bool forEachComponent(_Predicate function)
+			template <typename TPredicate>
+			bool forEachComponent(TPredicate function)
 			{
 				/* Simply iterate and call passed function for each component. */
 				for (auto it{components.getRef().cbegin()}; it != components.getRef().cend(); ++it)
