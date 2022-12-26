@@ -21,6 +21,10 @@
 
 namespace ksf::comps
 {
+	ksOtaUpdater::ksOtaUpdater()
+		: ksOtaUpdater(PGM_("ota_ksiotframework"))
+	{}
+
 	ksOtaUpdater::ksOtaUpdater(const std::string& password)
 	{
 		ArduinoOTA.setPassword(password.c_str());
@@ -29,16 +33,10 @@ namespace ksf::comps
 			onUpdateStart->broadcast();
 		});
 
-		/* Save OTA boot indicator. This will save small file to FS to indicate ota update for next boot. */
 		ArduinoOTA.onEnd([&]() {
 			ksf::saveOtaBootIndicator();
 			onUpdateEnd->broadcast();
 		});
-	}
-
-	ksOtaUpdater::ksOtaUpdater()
-	{
-		ksOtaUpdater(PGM_("ota_ksiotframework"));
 	}
 
 	bool ksOtaUpdater::init(ksApplication* owner)
@@ -48,7 +46,7 @@ namespace ksf::comps
 
 	void ksOtaUpdater::postInit()
 	{
-		ArduinoOTA.setHostname(WiFi.getHostname());
+		ArduinoOTA.setHostname(WiFi.getHostname()); // TODO: To consider, maybe it should go through WiFiConnector component.
 		ArduinoOTA.begin();
 	}
 
