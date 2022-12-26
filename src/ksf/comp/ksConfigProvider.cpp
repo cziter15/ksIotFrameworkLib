@@ -13,16 +13,6 @@
 
 namespace ksf::comps
 {
-	bool ksConfigProvider::init(ksApplication* owner)
-	{
-		return true;
-	}
-
-	bool ksConfigProvider::loop()
-	{
-		return true;
-	}
-
 	void ksConfigProvider::addNewParam(WiFiManager& manager, std::string label, std::string defaultValue, int maxLength)
 	{
 		auto& par{params.emplace_back(std::move(label), nullptr)};

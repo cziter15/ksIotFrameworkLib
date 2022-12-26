@@ -109,7 +109,7 @@ namespace ksf::comps
 			if (auto mqttConnSp{mqttConnWp.lock()})
 			{
 				respond(
-					PGM_("IP: ") + std::string{WiFi.localIP().toString().c_str()} + 
+					PGM_("IP: ") + WiFi.localIP().toString().c_str() + 
 					PGM_(", CT: ") + std::to_string(mqttConnSp->getConnectionTimeSeconds()) + 
 					PGM_(" s, RC: ") + std::to_string(mqttConnSp->getReconnectCounter()) + 
 					PGM_(", RSSI ") + std::to_string(WiFi.RSSI()) + PGM_(" dBm")
@@ -120,7 +120,7 @@ namespace ksf::comps
 		{
 			uint32_t uptimeSec{(uint32_t)(millis64() / 1000)};
 			respond(
-				PGM_("Build hash: ") + std::string(ESP.getSketchMD5().c_str()) + PGM_(", "
+				PGM_("Build hash: ") + ESP.getSketchMD5().c_str() + PGM_(", "
 				"Device uptime: ") + std::to_string(uptimeSec) + PGM_(" sec, "
 				"Free fw space: ") + std::to_string(ESP.getFreeSketchSpace()) + PGM_(" b, "
 				"Free heap: ") + std::to_string(ESP.getFreeHeap()) + PGM_(" b, "
@@ -130,7 +130,7 @@ namespace ksf::comps
 
 				#endif
 				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
-				"Reset reason: ") + getResetReason().c_str()
+				"Reset reason: ") + getResetReason()
 			);
 		}
 		else if (message == PGM_("remove_dbg"))

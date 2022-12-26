@@ -55,14 +55,6 @@ namespace ksf::comps
 
 		public:
 			/*
-				Initializes config provider component.
-
-				@param owner Pointer to ksApplication object that owns this component.
-				@return True on success, false on fail.
-			*/
-			virtual bool init(ksApplication* owner) override;
-
-			/*
 				Overridable method to inject WiFiManager parameters.
 
 				@param manager WiFiManager reference.
@@ -75,12 +67,5 @@ namespace ksf::comps
 				@param manager WiFiManager reference.
 			*/
 			virtual void captureManagerParameters(WiFiManager& manager) = 0;
-
-			/*
-				Executes config provider component's logic.
-
-				@return True on success, false on fail.
-			*/
-			virtual bool loop() override;
 	};
 }

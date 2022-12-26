@@ -40,14 +40,6 @@ namespace ksf::comps
 			ksOtaUpdater();
 
 			/*
-				Initializes OTA component.
-
-				@param owner Pointer to ksApplication object that owns this component.
-				@return True on success, false on fail.
-			*/
-			bool init(ksApplication* owner) override;
-
-			/*
 				Handles OTA component loop logic.
 
 				@return True on success, false on fail.

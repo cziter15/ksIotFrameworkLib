@@ -28,7 +28,7 @@ namespace ksf
 				@param owner Pointer to owning composable interface (application).
 				@return True on success, false on fail.
 			*/
-			virtual bool init(ksApplication* owner) = 0;
+			virtual bool init(ksApplication* owner);
 
 			/* 
 				Called from application loop.

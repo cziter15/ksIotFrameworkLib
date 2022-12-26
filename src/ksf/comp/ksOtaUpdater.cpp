@@ -39,11 +39,6 @@ namespace ksf::comps
 		});
 	}
 
-	bool ksOtaUpdater::init(ksApplication* owner)
-	{
-		return true;
-	}
-
 	void ksOtaUpdater::postInit()
 	{
 		ArduinoOTA.setHostname(WiFi.getHostname()); // TODO: To consider, maybe it should go through WiFiConnector component.
