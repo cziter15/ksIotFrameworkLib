@@ -12,11 +12,10 @@
 
 namespace ksf
 {
-	
-	#define OTA_FILENAME_TEXT_PGM PGM_("/ksf.otabooted")
+	#define OTA_FILENAME_TEXT_PGM PGM_("/ksf.otabooted")	// Name of the file that indicates that the device was just flashed with OTA.
 
-	static bool bootedFromOta{false};							// Will be true if this launch is just after OTA flash.
-	static uint32_t uptime_low32, uptime_high32;				// Variables for assembling 64-bit version of millis.
+	static bool bootedFromOta{false};						// Will be true if this launch is just after OTA flash.
+	static uint32_t uptime_low32, uptime_high32;			// Variables for assembling 64-bit version of millis.
 
 	void initializeFramework()
 	{
