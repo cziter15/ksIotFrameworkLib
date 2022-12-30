@@ -32,13 +32,13 @@ namespace ksf
 			std::weak_ptr<TComponentType> addComponent(TParams... arg)
 			{
 				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
-					"Trying to add component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
+					"You're calling addComponent, but provided type lacks RTTI implementation. . Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
-				auto sharedPtr{std::make_shared<TComponentType>(arg...)};
-				auto weakPtr{std::weak_ptr<TComponentType>(sharedPtr)};
-				components.add(std::move(sharedPtr));
-				return weakPtr;
+				auto componentSp{std::make_shared<TComponentType>(arg...)};
+				auto componentWp{std::weak_ptr<TComponentType>(componentSp)};
+				components.add(std::move(componentSp));
+				return componentWp;
 			}
 
 			/*
@@ -50,7 +50,7 @@ namespace ksf
 			void findComponents(std::vector<std::weak_ptr<TComponentType>>& outComponents)
 			{
 				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
-					"Trying to find components without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
+					"You're calling findComponents, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
 				outComponents.clear();
@@ -75,7 +75,7 @@ namespace ksf
 			std::weak_ptr<TComponentType> findComponent()
 			{
 				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
-					"Trying to find component without RTTI implemented. Did you miss KSF_RTTI_DECLARATIONS?"
+					"You're calling findComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
 				for (const auto& comp : components.getRef())
