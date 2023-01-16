@@ -135,7 +135,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
 	{
-		mqttClientSp->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), (const uint8_t*)payload.c_str(), payload.length(), retain);
+		mqttClientSp->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
 	}
 
 	bool ksMqttConnector::connectToBroker()
