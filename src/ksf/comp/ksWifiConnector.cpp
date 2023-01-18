@@ -33,6 +33,7 @@ namespace ksf::comps
 		#elif ESP8266
 			/* On ESP8266 setting hostname works only in STA mode. */
 			WiFi.mode(WIFI_STA);
+			WiFi.setHostname(hostname);
 			wifi_station_set_hostname(hostname);
 		#else
 			#error Platform not implemented.
