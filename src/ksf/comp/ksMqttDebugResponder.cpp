@@ -109,7 +109,8 @@ namespace ksf::comps
 			if (auto mqttConnSp{mqttConnWp.lock()})
 			{
 				respond(
-					PGM_("IP: ") + WiFi.localIP().toString().c_str() + 
+					PGM_("HN: ") + WiFi.getHostname() + 
+					PGM_(", IP: ") + WiFi.localIP().toString().c_str() + 
 					PGM_(", CT: ") + std::to_string(mqttConnSp->getConnectionTimeSeconds()) + 
 					PGM_(" s, RC: ") + std::to_string(mqttConnSp->getReconnectCounter()) + 
 					PGM_(", RSSI ") + std::to_string(WiFi.RSSI()) + PGM_(" dBm")
