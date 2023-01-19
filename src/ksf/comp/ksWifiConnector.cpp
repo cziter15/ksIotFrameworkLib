@@ -25,23 +25,23 @@ namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
+		WiFi.mode(WIFI_OFF);
+
 		#if ESP32
-			/* On ESP32 setting hostname works only outside STA mode. */
-			WiFi.mode(WIFI_OFF);
+			/* On ESP32 hostname must be set when not in STA mode. */
 			WiFi.setHostname(hostname);
-			WiFi.mode(WIFI_STA);
-		#elif ESP8266
-			/* On ESP8266 setting hostname works only in STA mode. */
-			WiFi.mode(WIFI_STA);
-			WiFi.setHostname(hostname);
-			wifi_station_set_hostname(hostname);
-		#else
-			#error Platform not implemented.
 		#endif
+
+		WiFi.mode(WIFI_STA);
 
 		setupMacAddress();
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
+
+		#if ESP8266
+			/* On ESP8266 hostname must be set when in STA mode. */
+			WiFi.setHostname(hostname);
+		#endif
 	}
 
 	void ksWifiConnector::setupMacAddress()
