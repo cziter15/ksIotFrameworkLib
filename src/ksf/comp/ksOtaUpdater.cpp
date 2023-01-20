@@ -9,14 +9,17 @@
 
 #if ESP32
 	#include <WiFi.h>
+	#include <ESPmDNS.h>
 #elif ESP8266
 	#include <ESP8266WiFi.h>
+	#include <ESP8266mDNS.h>
 #else 			
 	#error Platform not implemented.
 #endif
 
 #include "../ksApplication.h"
 #include "../ksConstants.h"
+#include "ksWifiConnector.h"
 #include "ksOtaUpdater.h"
 
 namespace ksf::comps
@@ -39,16 +42,41 @@ namespace ksf::comps
 		});
 	}
 
+	bool ksOtaUpdater::init(ksApplication* owner)
+	{
+		if (auto wifiConnSp{owner->findComponent<ksWifiConnector>().lock()})
+		{
+			wifiConnSp->onConnected->registerEvent(wifiConnEventHandleSp, std::bind(&ksOtaUpdater::onWifiConnected, this));
+			wifiConnSp->onDisconnected->registerEvent(wifiDisconnEventHandleSp, std::bind(&ksOtaUpdater::onWifiDisconnected, this));		
+		}
+		return true;
+	}
+
 	void ksOtaUpdater::postInit()
 	{
-		ArduinoOTA.setHostname(WiFi.getHostname()); // TODO: To consider, maybe it should go through WiFiConnector component.
-		ArduinoOTA.begin();
+		ArduinoOTA.begin(false);
+	}
+
+	void ksOtaUpdater::onWifiConnected()
+	{
+		MDNS.begin(WiFi.getHostname());
+		mdnsAlive = true;
+	}
+
+	void ksOtaUpdater::onWifiDisconnected()
+	{
+		mdnsAlive = false;
+		MDNS.end();
 	}
 
 	bool ksOtaUpdater::loop()
 	{
 		/* Handle OTA stuff. */
 		ArduinoOTA.handle();
+
+		/* Handle MDNS stuff. */
+		if (mdnsAlive)
+			MDNS.update();
 		
 		return true;
 	}
