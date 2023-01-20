@@ -52,7 +52,14 @@ namespace ksf::comps
 		}
 
 		/* Initialize Arduino OTA. */
-		ArduinoOTA.begin(false);
+		#if ESP8266
+			ArduinoOTA.begin(false);
+		#elif ESP32
+			ArduinoOTA.setMdnsEnabled(false);
+			ArduinoOTA.begin();
+		#else 
+			#error Platform not implemented.
+		#endif
 
 		return true;
 	}
@@ -60,12 +67,12 @@ namespace ksf::comps
 	void ksOtaUpdater::onWifiConnected()
 	{
 		MDNS.begin(WiFi.getHostname());
-		isMdnsAlive = true;
+		isWifiAlive = true;
 	}
 
 	void ksOtaUpdater::onWifiDisconnected()
 	{
-		isMdnsAlive = false;
+		isWifiAlive = false;
 		MDNS.end();
 	}
 
@@ -75,8 +82,10 @@ namespace ksf::comps
 		ArduinoOTA.handle();
 
 		/* Handle MDNS stuff. */
-		if (isMdnsAlive)
-			MDNS.update();
+		#if ESP266
+			if (isWifiAlive)
+				MDNS.update();
+		#endif
 		
 		return true;
 	}
