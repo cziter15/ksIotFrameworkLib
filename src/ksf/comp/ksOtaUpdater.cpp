@@ -82,7 +82,7 @@ namespace ksf::comps
 		ArduinoOTA.handle();
 
 		/* Handle MDNS stuff. */
-		#if ESP266
+		#if ESP8266
 			if (isWifiAlive)
 				MDNS.update();
 		#endif
