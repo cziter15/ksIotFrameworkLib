@@ -44,28 +44,28 @@ namespace ksf::comps
 
 	bool ksOtaUpdater::init(ksApplication* owner)
 	{
+		/* Bind to WiFi events. */
 		if (auto wifiConnSp{owner->findComponent<ksWifiConnector>().lock()})
 		{
 			wifiConnSp->onConnected->registerEvent(wifiConnEventHandleSp, std::bind(&ksOtaUpdater::onWifiConnected, this));
 			wifiConnSp->onDisconnected->registerEvent(wifiDisconnEventHandleSp, std::bind(&ksOtaUpdater::onWifiDisconnected, this));		
 		}
-		return true;
-	}
 
-	void ksOtaUpdater::postInit()
-	{
+		/* Initialize Arduino OTA. */
 		ArduinoOTA.begin(false);
+
+		return true;
 	}
 
 	void ksOtaUpdater::onWifiConnected()
 	{
 		MDNS.begin(WiFi.getHostname());
-		mdnsAlive = true;
+		isMdnsAlive = true;
 	}
 
 	void ksOtaUpdater::onWifiDisconnected()
 	{
-		mdnsAlive = false;
+		isMdnsAlive = false;
 		MDNS.end();
 	}
 
@@ -75,7 +75,7 @@ namespace ksf::comps
 		ArduinoOTA.handle();
 
 		/* Handle MDNS stuff. */
-		if (mdnsAlive)
+		if (isMdnsAlive)
 			MDNS.update();
 		
 		return true;

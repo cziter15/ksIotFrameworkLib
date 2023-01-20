@@ -21,9 +21,9 @@ namespace ksf::comps
 
 		protected:
 			ArduinoOTAClass ArduinoOTA;											// Arduino OTA object.
-			std::shared_ptr<ksf::evt::ksEventHandle> wifiConnEventHandleSp;		// onWiFiConnected event that user can bind to.
-			std::shared_ptr<ksf::evt::ksEventHandle> wifiDisconnEventHandleSp;	// onWiFiConnected event that user can bind to.		
-			bool mdnsAlive{false};												// Flag indicating if mDNS is alive.
+			std::shared_ptr<ksf::evt::ksEventHandle> wifiConnEventHandleSp;		// Wifi connected event that user can bind to.
+			std::shared_ptr<ksf::evt::ksEventHandle> wifiDisconnEventHandleSp;	// Wifi disconnected event that user can bind to.	
+			bool isMdnsAlive{false};											// Flag indicating if mDNS is alive.
 
 			/*
 				Handles WiFi connected event.
@@ -65,10 +65,5 @@ namespace ksf::comps
 				@return True on success, false on fail.
 			*/
 			bool loop() override;
-
-			/*
-				Handles OTA component post init logic.
-			*/
-			void postInit() override;
 	};
 }
