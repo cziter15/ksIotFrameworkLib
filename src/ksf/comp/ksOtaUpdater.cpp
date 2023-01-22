@@ -67,12 +67,10 @@ namespace ksf::comps
 	void ksOtaUpdater::onWifiConnected()
 	{
 		MDNS.begin(WiFi.getHostname());
-		isWifiAlive = true;
 	}
 
 	void ksOtaUpdater::onWifiDisconnected()
 	{
-		isWifiAlive = false;
 		MDNS.end();
 	}
 
@@ -83,10 +81,10 @@ namespace ksf::comps
 
 		/* Handle MDNS stuff. */
 		#if ESP8266
-			if (isWifiAlive)
+			if (MDNS.isRunning())
 				MDNS.update();
 		#endif
-		
+
 		return true;
 	}
 }
