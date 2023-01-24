@@ -36,35 +36,6 @@
 /* Time in milliseconds that must pass without WiFi connection to retry connection. */
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
 
-/* Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait) */
-#define KSF_RUN_APP_BLOCKING_LOOPED_TIME(appClass, delayTime)	\
-{																\
-	appClass application;										\
-	if (application.init())										\
-	{															\
-		while(application.loop())								\
-		{														\
-			delay(delayTime);									\
-		}														\
-	}															\
-}
-
-/* Helper macro that handles app (appClass) initialization and calls loop method as frequent as possible (no-wait). */
-#define KSF_RUN_APP_BLOCKING_LOOPED_NODELAY(appClass)			\
-{																\
-	appClass application;										\
-	if (application.init())										\
-	{															\
-		while(application.loop())								\
-		{														\
-			yield();											\
-		}														\
-	}															\
-}
-
-/* Helper macro that handles app (appClass) initialization and calls loop method every one ms (wait) */
-#define KSF_RUN_APP_BLOCKING_LOOPED(appClass) KSF_RUN_APP_BLOCKING_LOOPED_TIME(appClass, 1)
-
 /* Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
