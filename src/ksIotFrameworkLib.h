@@ -25,3 +25,5 @@
 #include "ksf/comp/ksWiFiConfigurator.h"
 #include "ksf/comp/ksWifiConnector.h"
 #include "ksf/comp/ksOtaUpdater.h"
+
+#include "ksf/ksAppRotator.h"
