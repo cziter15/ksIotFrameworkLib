@@ -15,18 +15,18 @@ namespace ksf
 	{
 		private:
 			uint8_t appIndex{0};												// Index of the current application.
-			std::shared_ptr<ksApplication> currentApplication{nullptr};			// Pointer to the current application.
+			std::unique_ptr<ksApplication> currentApplication{nullptr};			// Pointer to the current application.
 
 			/*
 				Helper function template to create an application object.
 			*/
 			template <class T>
-			static std::shared_ptr<ksApplication> create() 
+			static std::unique_ptr<ksApplication> create() 
 			{
-				return std::make_shared<T>();
+				return std::make_unique<T>();
 			}
 
-			static constexpr std::array<std::shared_ptr<ksApplication>(*)(), sizeof...(Types)> creators{create<Types>...};		// Array of application creators.
+			static constexpr std::array<std::unique_ptr<ksApplication>(*)(), sizeof...(Types)> creators{create<Types>...};		// Array of application creators.
 
 		public:
 			/*
@@ -43,7 +43,7 @@ namespace ksf
 
 				/* If not initialized, then destroy and try to do our business next delay. */
 				if (!currentApplication->init()) 
-					currentApplication = nullptr;
+					currentApplication.reset();
 			}
 
 			/*
