@@ -39,11 +39,11 @@ namespace ksf
 					return;
 
 				/* Switch to the next application. */
-				currentApplication.reset(creators[appIndex++ % creators.size()]());
+				currentApplication = creators[appIndex++ % creators.size()]();
 
 				/* If not initialized, then destroy and try to do our business next delay. */
 				if (!currentApplication->init()) 
-					currentApplication.reset();
+					currentApplication.reset(nullptr);
 			}
 
 			/*
