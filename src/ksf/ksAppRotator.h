@@ -39,8 +39,12 @@ namespace ksf
 				if (currentApplication && currentApplication->loop())
 					return;
 
-				/* Switch to the next application. */
-				currentApplication = appSwpawners[appIndex++ % appSwpawners.size()]();
+				/* Set next index. */
+				if (++appIndex >= appSwpawners.size())
+					appIndex = 0;
+
+				/* Switch to next application. */
+				currentApplication = appSwpawners[appIndex]();
 
 				/* If not initialized, then destroy and try to do our business next delay. */
 				if (!currentApplication->init()) 
