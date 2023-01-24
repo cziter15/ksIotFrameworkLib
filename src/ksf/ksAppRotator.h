@@ -15,7 +15,7 @@ namespace ksf
 	{
 		private:
 			uint8_t appIndex{0};												// Index of the current application.
-			std::shared_ptr<ksApplication> currentApplication{nullptr};	// Pointer to the current application.
+			std::shared_ptr<ksApplication> currentApplication{nullptr};			// Pointer to the current application.
 
 			/*
 				Helper function template to create an application object.
