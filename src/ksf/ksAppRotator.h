@@ -10,23 +10,24 @@
 
 namespace ksf
 {
-	template <class... Types>
+	template <class... AppTypes>
 	class ksAppRotator
 	{
 		private:
 			uint8_t appIndex{0};												// Index of the current application.
 			std::unique_ptr<ksApplication> currentApplication{nullptr};			// Pointer to the current application.
+			typedef std::unique_ptr<ksApplication> (*TSpawnerFunc)(); 			// Spawner fn type.
 
 			/*
 				Helper function template to create an application object.
 			*/
 			template <class T>
-			static std::unique_ptr<ksApplication> create() 
+			static std::unique_ptr<ksApplication> spawnApp() 
 			{
 				return std::make_unique<T>();
 			}
 
-			static constexpr std::array<std::unique_ptr<ksApplication>(*)(), sizeof...(Types)> creators{create<Types>...};		// Array of application creators.
+			static constexpr std::array<TSpawnerFunc, sizeof...(AppTypes)> appSwpawners{spawnApp<AppTypes>...};		// Array of application creators.
 
 		public:
 			/*
@@ -39,7 +40,7 @@ namespace ksf
 					return;
 
 				/* Switch to the next application. */
-				currentApplication = creators[appIndex++ % creators.size()]();
+				currentApplication = appSwpawners[appIndex++ % appSwpawners.size()]();
 
 				/* If not initialized, then destroy and try to do our business next delay. */
 				if (!currentApplication->init()) 
