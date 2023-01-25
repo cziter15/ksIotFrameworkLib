@@ -1,6 +1,18 @@
+/*
+ *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *
+ *	This file is part of the ksIotFramework library.
+ *	All licensing information can be found inside LICENSE.md file.
+ *
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ */
+
 #pragma once
+
 #include <memory>
+#include <stdint.h>
 #include <Arduino.h>
+#include "ksApplication.h"
 
 /* Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait). */
 #define KSF_IMPLEMENT_APP_ROTATOR(...)								\
@@ -53,11 +65,12 @@ namespace ksf
 
 			/*
 				Runs the application loop with a delay.
+				@param milliseconds Delay time in milliseconds.
 			*/
-			void loop(unsigned int ms = 1)
+			void loop(unsigned long milliseconds = 1)
 			{
 				loopNoDelay();
-				delay(ms);
+				delay(milliseconds);
 			}
 	};
 }
