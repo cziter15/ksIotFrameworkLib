@@ -24,6 +24,7 @@ try:
 		e.ProcessFlags("-std=c++17")
 		e.ProcessFlags("-std=gnu++17")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINOOTA")
+		e.ProcessFlags("-DWM_NODEBUG")
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully added flags for [" + str(flagCounter) + "] environments.")
 
