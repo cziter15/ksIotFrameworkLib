@@ -116,7 +116,7 @@ namespace ksf::comps
 		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
 		std::string_view topicStr{topic};
 
-		if (topicStr.find(prefix) != std::string::npos)
+		if (topicStr.find(prefix) != std::string_view::npos)
 			topicStr = topicStr.substr(prefix.length());
 
 		onMesssage->broadcast(topicStr, payloadStr);
