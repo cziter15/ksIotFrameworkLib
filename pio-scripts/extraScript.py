@@ -23,7 +23,7 @@ try:
 	for e in (env, DefaultEnvironment(), projenv):
 		e.ProcessFlags("-std=gnu++17")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINOOTA")
-		e.ProcessFlags("-UWM_DEBUG_LEVEL")
+		e.ProcessFlags("-DWM_NODEBUG")
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully added flags for [" + str(flagCounter) + "] environments.")
 
