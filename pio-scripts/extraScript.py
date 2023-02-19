@@ -12,19 +12,22 @@ try:
 
 	ksPrintLog(Colors.Green, "Running extra script for library.")
 
+	environments = [env, DefaultEnvironment(), projenv]
+	for lb in env.GetLibBuilders():
+		 environments.append(lb.env)
+
 	flagCounter = 0
-	for e in (env, DefaultEnvironment(), projenv):
+	for e in environments:
 		#e.ProcessUnFlags("-fno-rtti")
 		e.ProcessUnFlags("-std=gnu++11")
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully processed unflags for [" + str(flagCounter) + "] environments.")
 
 	flagCounter = 0
-	for e in (env, DefaultEnvironment(), projenv):
+	for e in environments:
+		e.ProcessFlags("-std=c++17")
 		e.ProcessFlags("-std=gnu++17")
-		e.ProcessFlags("-DNO_GLOBAL_ARDUINOOTA")
-		e.ProcessFlags("-DWM_NODEBUG")
-		e.ProcessFlags("-DCORE_DEBUG_LEVEL=0")
+		e.Append(CPPDEFINES=[("NO_GLOBAL_ARDUINOOTA", ), ("WM_NODEBUG",)])
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully added flags for [" + str(flagCounter) + "] environments.")
 
