@@ -21,7 +21,6 @@ try:
 
 	flagCounter = 0
 	for e in (env, DefaultEnvironment(), projenv):
-		e.ProcessFlags("-std=c++17")
 		e.ProcessFlags("-std=gnu++17")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINOOTA")
 		e.ProcessFlags("-DWM_NODEBUG")
