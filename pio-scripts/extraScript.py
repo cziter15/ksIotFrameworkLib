@@ -9,27 +9,23 @@ from logger import *
 
 try:
 	Import("projenv", "env")
-
 	ksPrintLog(Colors.Green, "Running extra script for library.")
 
+	ksPrintLog(Colors.Magenta, "Building library environment list.")
 	environments = [env, DefaultEnvironment(), projenv]
 	for lb in env.GetLibBuilders():
-		 environments.append(lb.env)
+		environments.append(lb.env)
 
-	flagCounter = 0
 	for e in environments:
-		#e.ProcessUnFlags("-fno-rtti")
+		# remove unused flags
 		e.ProcessUnFlags("-std=gnu++11")
-		flagCounter += 1
-	ksPrintLog(Colors.Magenta, "Successfully processed unflags for [" + str(flagCounter) + "] environments.")
-
-	flagCounter = 0
-	for e in environments:
-		e.ProcessFlags("-std=c++17")
+		# add flags to environment
 		e.ProcessFlags("-std=gnu++17")
-		e.Append(CPPDEFINES=[("NO_GLOBAL_ARDUINOOTA", ), ("WM_NODEBUG",)])
-		flagCounter += 1
-	ksPrintLog(Colors.Magenta, "Successfully added flags for [" + str(flagCounter) + "] environments.")
+		e.ProcessFlags("-fno-exceptions")
+		e.ProcessFlags("-DCORE_DEBUG_LEVEL=0")
+		e.ProcessFlags("-DWM_NODEBUG=1")
+
+	ksPrintLog(Colors.Magenta, "Successfully manipulated flags on [" + str(len(environments)) + "] environments.")
 
 	ksPrintLog(Colors.Green, "Extra script finished.")
 except BaseException as err:
