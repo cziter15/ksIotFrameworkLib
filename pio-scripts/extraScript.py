@@ -25,7 +25,7 @@ try:
 		e.Append(
 			CPPDEFINES=[
 				("NO_GLOBAL_ARDUINOOTA",),
-				("DWM_NODEBUG",)
+				("WM_NODEBUG",)
 			]
 		)
 		flagCounter += 1
