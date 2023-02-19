@@ -16,7 +16,6 @@ try:
 	for e in (env, DefaultEnvironment(), projenv):
 		#e.ProcessUnFlags("-fno-rtti")
 		e.ProcessUnFlags("-std=gnu++11")
-		e.ProcessUnFlags("-DWM_DEBUG_LEVEL")
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully processed unflags for [" + str(flagCounter) + "] environments.")
 
@@ -24,7 +23,7 @@ try:
 	for e in (env, DefaultEnvironment(), projenv):
 		e.ProcessFlags("-std=gnu++17")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINOOTA")
-		e.ProcessFlags("-DWM_NODEBUG")
+		e.ProcessFlags("-UWM_DEBUG_LEVEL")
 		flagCounter += 1
 	ksPrintLog(Colors.Magenta, "Successfully added flags for [" + str(flagCounter) + "] environments.")
 
