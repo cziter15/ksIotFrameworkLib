@@ -66,7 +66,7 @@ namespace ksf
 		return to_string(static_cast<double>(value), base);
 	}
 
-	std::string string_from_progmem(const char* pgm_str_ptr, ssize_t pgm_str_len)
+	std::string string_from_progmem(const char* pgm_str_ptr, size_t pgm_str_len)
 	{
 		#if ESP8266
 			std::string result;

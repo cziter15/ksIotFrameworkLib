@@ -126,5 +126,5 @@ namespace ksf
 		@param pgm_str_len Length of string in program memory.
 		@return String in a form of std::string.
 	*/
-	extern std::string string_from_progmem(const char* pgm_str_ptr, ssize_t pgm_str_len);
+	extern std::string string_from_progmem(const char* pgm_str_ptr, size_t pgm_str_len);
 }
