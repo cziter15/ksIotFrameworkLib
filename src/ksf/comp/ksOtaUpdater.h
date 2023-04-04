@@ -20,7 +20,7 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksOtaUpdater, ksComponent)
 
 		protected:
-			ArduinoOTAClass ArduinoOTA;											// Arduino OTA object.
+			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.

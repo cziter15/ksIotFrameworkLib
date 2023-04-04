@@ -32,7 +32,7 @@ namespace ksf
 			std::weak_ptr<TComponentType> addComponent(TParams... arg)
 			{
 				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
-					"You're calling addComponent, but provided type lacks RTTI implementation. . Did you miss KSF_RTTI_DECLARATIONS?"
+					"You're calling addComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
 				auto componentSp{std::make_shared<TComponentType>(arg...)};
