@@ -49,12 +49,8 @@ namespace ksf::comps
 				/* MQTT topic delimeter (slash). */
 				const char topicDelimeter{'/'};
 
-				/* Apply prefix correction. */
-				if (prefix.front() != topicDelimeter)
-					prefix = topicDelimeter + prefix;
-
 				/* Apply suffix correction. */
-				if (prefix.back() != topicDelimeter)
+				if (prefix.back() != '/')
 					prefix += topicDelimeter;
 			}
 

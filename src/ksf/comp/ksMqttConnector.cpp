@@ -78,9 +78,6 @@ namespace ksf::comps
 		*	-	https://github.com/espressif/arduino-esp32/issues/7350
 		*	-	https://github.com/espressif/arduino-esp32/issues/7356
 		*	-	https://github.com/espressif/arduino-esp32/issues/7355
-		*
-		*	In my projects I'm using my own fork of esp32:
-		*	-	https://github.com/cziter15/arduino-esp32
 		*/
 	
 		#if ESP32
