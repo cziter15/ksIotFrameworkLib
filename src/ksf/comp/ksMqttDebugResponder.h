@@ -53,18 +53,12 @@ namespace ksf::comps
 			DECLARE_KS_EVENT(customDebugHandler, ksMqttDebugResponder*, const std::string_view&, bool&) //< Event that provides custom message handler.
 
 			/*
-				Initializes MQTT debug responder component.
-
-				@param owner Pointer to ksApplication object that owns this component.
-				@return True on success, false on fail.
-			*/
-			bool init(ksApplication* owner) override;
-
-			/*
 				Method called after component initialization.
 				Used to setup message callbacks.
+
+				@param owner Pointer to ksApplication object that owns this component.
 			*/
-			void postInit() override;
+			void postInit(ksApplication* owner) override;
 
 			/*
 				Handles MQTT debug connector component loop logic.

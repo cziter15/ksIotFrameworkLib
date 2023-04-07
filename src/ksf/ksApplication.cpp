@@ -26,8 +26,8 @@ namespace ksf
 			return false;
 
 		/* Run post-init event for components. */
-		return forEachComponent([](const std::shared_ptr<ksComponent>& comp) {
-			comp->postInit(); 
+		return forEachComponent([&](const std::shared_ptr<ksComponent>& comp) {
+			comp->postInit(this); 
 			return true;
 		});
 

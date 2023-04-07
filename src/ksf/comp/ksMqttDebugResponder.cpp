@@ -26,14 +26,10 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	bool ksMqttDebugResponder::init(ksApplication* owner)
+	void ksMqttDebugResponder::postInit(ksApplication* owner)
 	{
 		this->owner = owner;
-		return true;
-	}
 
-	void ksMqttDebugResponder::postInit()
-	{
 		mqttConnWp = owner->findComponent<ksMqttConnector>();
 
 		if (auto mqttConnSp{mqttConnWp.lock()})

@@ -100,6 +100,14 @@ namespace ksf
 					@return True on success, false on fail.
 				*/
 				bool init(ksApplication* owner) override;
+					
+				/*
+					Method called after component initialization.
+					Used to setup message callbacks.
+
+					@param owner Pointer to ksApplication object that owns this component.
+				*/
+				void postInit(ksApplication* owner) override;
 
 				/*
 					Called from application loop. Handles MqttConnector logic.

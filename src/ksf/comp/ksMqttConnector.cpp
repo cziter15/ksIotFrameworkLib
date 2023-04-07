@@ -33,13 +33,16 @@ namespace ksf::comps
 		cfgProvider.init(owner);
 		cfgProvider.setupMqttConnector(*this);
 
-		wifiConnWp = owner->findComponent<ksWifiConnector>();
-
 		/*
 			Object mqttClientSp is created by setupConnection method.
 			That means init will return false when no MQTT config file found.
 		*/
 		return mqttClientSp != nullptr;
+	}
+
+	void ksMqttConnector::postInit(ksApplication* owner)
+	{
+		wifiConnWp = owner->findComponent<ksWifiConnector>();
 	}
 
 	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)

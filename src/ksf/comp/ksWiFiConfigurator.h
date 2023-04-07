@@ -38,14 +38,6 @@ namespace ksf::comps
 			ksWiFiConfigurator(std::string devicePrefixName);
 
 			/*
-				Initializes ksWiFiConfigurator component.
-
-				@param owner Pointer to ksApplication object that owns this component.
-				@return True if init succedeed, otherwise false.
-			*/
-			bool init(ksApplication* owner) override;
-
-			/*
 				ksWiFiConfigurator component loop. Keep in mind that this function is blocking and returns false at the end.
 				WiFiManager captive portal is blocking this loop and will unblock on timeout or after setup causing config
 				application to break and jump into next one. This usually means it will jump from configuration application
@@ -58,7 +50,9 @@ namespace ksf::comps
 			/*
 				ksWiFiConfigurator postInit function.
 				Turns on all registered LEDs in config mode.
+
+				@param owner Pointer to ksApplication object that owns this component.
 			*/
-			void postInit() override;
+			void postInit(ksApplication* owner) override;
 	};
 }
