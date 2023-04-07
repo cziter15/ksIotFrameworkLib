@@ -38,6 +38,8 @@ namespace ksf::comps
 
 	void ksWiFiConfigurator::postInit(ksApplication* owner)
 	{
+		this->owner = owner;
+
 		std::vector<std::weak_ptr<ksLed>> ledCompsWp;
 		owner->findComponents<ksLed>(ledCompsWp);
 

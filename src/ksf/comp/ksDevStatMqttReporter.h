@@ -21,7 +21,6 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksDevStatMqttReporter, ksComponent)
 
 		protected:
-			ksApplication* owner{nullptr};							// Pointer to application that owns this component.
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
 			std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
 			
@@ -36,18 +35,12 @@ namespace ksf::comps
 			ksDevStatMqttReporter(uint8_t intervalInSeconds = 15);
 
 			/*
-				Initializes MQTT debug responder component.
-
-				@param owner Pointer to ksApplication object that owns this component.
-				@return True on success, false on fail.
-			*/
-			bool init(ksApplication* owner) override;
-
-			/*
 				Method called after component initialization.
 				Used to setup message callbacks.
+
+				@param owner Pointer to ksApplication object that owns this component.
 			*/
-			void postInit() override;
+			void postInit(ksApplication* owner) override;
 
 			/*
 				Handles MQTT debug connector component loop logic.

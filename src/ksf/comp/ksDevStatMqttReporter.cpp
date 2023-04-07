@@ -18,13 +18,7 @@ namespace ksf::comps
 		: reporterTimer(intervalInSeconds * KSF_ONE_SECOND_MS)
 	{}
 
-	bool ksDevStatMqttReporter::init(ksApplication* owner)
-	{
-		this->owner = owner;
-		return true;
-	}
-
-	void ksDevStatMqttReporter::postInit()
+	void ksDevStatMqttReporter::postInit(ksApplication* owner)
 	{
 		mqttConnWp = owner->findComponent<ksMqttConnector>();
 
