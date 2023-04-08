@@ -81,7 +81,9 @@ namespace ksf
 					QOS_EXACTLY_ONCE
 				};
 
-				DECLARE_KS_EVENT(onMesssage, const std::string_view&, const std::string_view&)	// onMessage event that user can bind to.
+				DECLARE_KS_EVENT(onDeviceMesssage, const std::string_view&, const std::string_view&)	// onDeviceMessage event that user can bind to.
+				DECLARE_KS_EVENT(onAnyMesssage, const std::string_view&, const std::string_view&)		// onAnyMessage event that user can bind to.
+
 				DECLARE_KS_EVENT(onConnected)													// onConnected event that user can bind to.
 				DECLARE_KS_EVENT(onDisconnected)												// onDisconnected event that user can bind to.
 
