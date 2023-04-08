@@ -110,10 +110,10 @@ namespace ksf::comps
 
 	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
-		bool handlesDevMessage{onDevMessage->isBound()};
+		bool handlesDeviceMessage{onDeviceMessage->isBound()};
 		bool handlesAnyMessage{onAnyMessage->isBound()};
 
-		if (!handlesDevMessage && !handlesAnyMessage)
+		if (!handlesDeviceMessage && !handlesAnyMessage)
 			return;
 
 		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
@@ -121,11 +121,11 @@ namespace ksf::comps
 
 		if (topicStr.find(prefix) == 0)
 		{
-			if (!handlesDevMessage)
+			if (!handlesDeviceMessage)
 				return;
 
 			topicStr = topicStr.substr(prefix.length());
-			onDevMessage->broadcast(topicStr, payloadStr)
+			onDeviceMessage->broadcast(topicStr, payloadStr)
 		}
 		else
 		{
