@@ -35,7 +35,7 @@ namespace ksf::comps
 		if (auto mqttConnSp{mqttConnWp.lock()})
 		{
 			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
-			mqttConnSp->onMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
+			mqttConnSp->onDeviceMesssage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
 		}
 	}
 
