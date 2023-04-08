@@ -125,7 +125,7 @@ namespace ksf::comps
 				return;
 
 			topicStr = topicStr.substr(prefix.length());
-			onDeviceMessage->broadcast(topicStr, payloadStr)
+			onDeviceMessage->broadcast(topicStr, payloadStr);
 		}
 		else
 		{
