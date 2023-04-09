@@ -134,8 +134,8 @@ namespace ksf
 		@param input Input string.
 		@param match Matching string.
 	*/
-	template<class _Type>
-	inline bool starts_with(const _Type& input, const _Type& match)
+	template<class _Type1, class _Type2>
+	inline bool starts_with(const _Type1& input, const _Type2& match)
 	{
 		return input.size() >= match.size()
 			&& equal(match.begin(), match.end(), input.begin());
