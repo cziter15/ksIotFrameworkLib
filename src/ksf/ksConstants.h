@@ -127,4 +127,17 @@ namespace ksf
 		@return String in a form of std::string.
 	*/
 	extern std::string string_from_progmem(const char* pgm_str_ptr, size_t pgm_str_len);
+
+	/*
+		Helper function to check if a string or string view starts with.
+
+		@param input Input string.
+		@param match Matching string.
+	*/
+	template<class _Type>
+	inline bool starts_with(const _Type& input, const _Type& match)
+	{
+		return input.size() >= match.size()
+			&& equal(match.begin(), match.end(), input.begin());
+	}
 }

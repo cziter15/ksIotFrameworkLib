@@ -119,7 +119,7 @@ namespace ksf::comps
 		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
 		std::string_view topicStr{topic};
 
-		if (topicStr.find(prefix) == 0)
+		if (ksf::starts_with(topicStr, prefix))
 		{
 			if (!handlesDeviceMessage)
 				return;
