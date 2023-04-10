@@ -31,8 +31,14 @@ namespace ksf::comps
 			*/
 			void onConnected();
 
+			/*
+				Function called periodically when MQTT is connected to
+				report device stats to the broker.
+			*/		
+			void reportDevStats() const;
+
 		public:
-			ksDevStatMqttReporter(uint8_t intervalInSeconds = 15);
+			ksDevStatMqttReporter(uint8_t intervalInSeconds = 60);
 
 			/*
 				Method called after component initialization.
