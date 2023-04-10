@@ -119,19 +119,14 @@ namespace ksf::comps
 		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
 		std::string_view topicStr{topic};
 
-		if (ksf::starts_with(topicStr, prefix))
+		if (handlesDeviceMessage && ksf::starts_with(topicStr, prefix))
 		{
-			if (!handlesDeviceMessage)
-				return;
-
 			topicStr = topicStr.substr(prefix.length());
 			onDeviceMessage->broadcast(topicStr, payloadStr);
 		}
-		else
-		{
-			if (handlesAnyMessage)
-				onAnyMessage->broadcast(topicStr, payloadStr);
-		}
+		
+		if (handlesAnyMessage)
+			onAnyMessage->broadcast(topicStr, payloadStr);
 	}
 
 	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, ksMqttConnector::QosLevel qos)
