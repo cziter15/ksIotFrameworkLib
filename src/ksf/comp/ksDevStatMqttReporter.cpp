@@ -46,7 +46,7 @@ namespace ksf::comps
 			mqttConnSp->publish(PGM_("devstat/rssi"), ksf::to_string(WiFi.RSSI()));
 			mqttConnSp->publish(PGM_("devstat/ipAddress"), WiFi.localIP().toString().c_str());
 			mqttConnSp->publish(PGM_("devstat/uptimeSec"), ksf::to_string(millis64()/1000));
-			mqttConnSp->publish(PGM_("devstat/connTimeMs"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
+			mqttConnSp->publish(PGM_("devstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
 			mqttConnSp->publish(PGM_("devstat/reconnCounter"), ksf::to_string(mqttConnSp->getReconnectCounter()));
 		}
 	}
