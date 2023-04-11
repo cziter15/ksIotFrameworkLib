@@ -26,7 +26,7 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	void ksMqttDebugResponder::postInit(ksApplication* owner)
+	bool ksMqttDebugResponder::postInit(ksApplication* owner)
 	{
 		this->owner = owner;
 
@@ -37,6 +37,8 @@ namespace ksf::comps
 			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&ksMqttDebugResponder::onConnected, this));
 			mqttConnSp->onDeviceMessage->registerEvent(msgEventHandle, std::bind(&ksMqttDebugResponder::onMessage, this, _1, _2));
 		}
+
+		return true;
 	}
 
 	bool ksMqttDebugResponder::loop()

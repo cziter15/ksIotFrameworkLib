@@ -36,7 +36,7 @@ namespace ksf::comps
 		#endif
 	}
 
-	void ksWiFiConfigurator::postInit(ksApplication* owner)
+	bool ksWiFiConfigurator::postInit(ksApplication* owner)
 	{
 		this->owner = owner;
 
@@ -46,6 +46,8 @@ namespace ksf::comps
 		for (auto& ledCompWp : ledCompsWp)
 			if (auto ledCompSp{ledCompWp.lock()})
 				ledCompSp->setEnabled(true);
+
+		return true;
 	}
 
 	bool ksWiFiConfigurator::loop()

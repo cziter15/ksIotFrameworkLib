@@ -26,12 +26,14 @@ namespace ksf::comps
 		: reporterTimer(intervalInSeconds * KSF_ONE_SECOND_MS)
 	{}
 
-	void ksDevStatMqttReporter::postInit(ksApplication* owner)
+	bool ksDevStatMqttReporter::postInit(ksApplication* owner)
 	{
 		mqttConnWp = owner->findComponent<ksMqttConnector>();
 
 		if (auto mqttConnSp{mqttConnWp.lock()})
 			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&ksDevStatMqttReporter::onConnected, this));
+
+		return true;
 	}
 	
 	void ksDevStatMqttReporter::onConnected()

@@ -108,8 +108,9 @@ namespace ksf
 					Used to setup message callbacks.
 
 					@param owner Pointer to ksApplication object that owns this component.
+					@return True on success, false on fail.
 				*/
-				void postInit(ksApplication* owner) override;
+				bool postInit(ksApplication* owner) override;
 
 				/*
 					Called from application loop. Handles MqttConnector logic.

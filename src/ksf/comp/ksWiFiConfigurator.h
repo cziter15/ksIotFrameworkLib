@@ -52,7 +52,8 @@ namespace ksf::comps
 				Turns on all registered LEDs in config mode.
 
 				@param owner Pointer to ksApplication object that owns this component.
+				@return True on success, false on fail.
 			*/
-			void postInit(ksApplication* owner) override;
+			bool postInit(ksApplication* owner) override;
 	};
 }

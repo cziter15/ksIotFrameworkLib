@@ -21,6 +21,8 @@ namespace ksf
 		return true;
 	}
 
-	void ksComponent::postInit(ksApplication* owner) 
-	{}
+	bool ksComponent::postInit(ksApplication* owner) 
+	{
+		return true;
+	}
 }

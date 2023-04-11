@@ -41,7 +41,8 @@ namespace ksf
 				Method called after component initialization. 
 
 				@param owner Pointer to owning composable interface (application).
+				@return True on success, false on fail.
 			*/
-			virtual void postInit(ksApplication* owner);
+			virtual bool postInit(ksApplication* owner);
 	};
 }

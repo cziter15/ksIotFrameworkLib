@@ -40,9 +40,10 @@ namespace ksf::comps
 		return mqttClientSp != nullptr;
 	}
 
-	void ksMqttConnector::postInit(ksApplication* owner)
+	bool ksMqttConnector::postInit(ksApplication* owner)
 	{
 		wifiConnWp = owner->findComponent<ksWifiConnector>();
+		return true;
 	}
 
 	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
