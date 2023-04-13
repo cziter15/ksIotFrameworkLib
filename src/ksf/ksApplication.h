@@ -31,7 +31,7 @@ namespace ksf
 			template <class TComponentType, class... TParams>
 			std::weak_ptr<TComponentType> addComponent(TParams... arg)
 			{
-				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
+				static_assert(!std::is_same_v<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>, 
 					"You're calling addComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
@@ -49,7 +49,7 @@ namespace ksf
 			template <class TComponentType>
 			void findComponents(std::vector<std::weak_ptr<TComponentType>>& outComponents)
 			{
-				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
+				static_assert(!std::is_same_v<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>, 
 					"You're calling findComponents, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
@@ -74,7 +74,7 @@ namespace ksf
 			template <class TComponentType>
 			std::weak_ptr<TComponentType> findComponent()
 			{
-				static_assert(!std::is_same<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>::value, 
+				static_assert(!std::is_same_v<decltype(&ksComponent::getInstanceType), decltype(&TComponentType::getInstanceType)>, 
 					"You're calling findComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
