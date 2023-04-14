@@ -35,13 +35,12 @@ namespace ksf
 
 				std::weak_ptr<ksWifiConnector> wifiConnWp;						// Weak pointer to WiFi connector.
 
-				uint32_t connectionTimeSeconds{0};								// Time of connection to MQTT broker in seconds.
+				uint64_t lastSuccessConnectionTime{0};							// Time of connection to MQTT broker in seconds.
 				uint32_t reconnectCounter{0};									// MQTT reconnection counter.
 
 				bool sendConnectionStatus{true};								// Send connection status to MQTT or not.
 				bool usePersistentSession{false};								// Use persistent session or not.
 
-				ksSimpleTimer oneSecTimer{KSF_ONE_SECOND_MS};					// Timer that counts seconds.
 				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		// Timer that counts time between reconnection attempts.
 
 				bool wasConnected{false};										// True if connected in previous loop.
@@ -131,7 +130,7 @@ namespace ksf
 
 					@return MQTT connection time in seconds.
 				*/
-				uint32_t getConnectionTimeSeconds() const { return connectionTimeSeconds; }
+				uint32_t getConnectionTimeSeconds() const;
 
 				/*
 					Retrieves MQTT reconnect counter.

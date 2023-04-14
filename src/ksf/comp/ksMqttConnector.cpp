@@ -105,6 +105,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::mqttConnectedInternal()
 	{
+		lastSuccessConnectionTime = millis64();
 		mqttClientSp->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 		onConnected->broadcast();
 	}
@@ -174,40 +175,41 @@ namespace ksf::comps
 
 	bool ksMqttConnector::loop()
 	{
-		if (mqttClientSp->loop())
+		if (!mqttClientSp->loop())
 		{
-			if (oneSecTimer.triggered())
-				++connectionTimeSeconds;
-		}
-		else if (wasConnected)
-		{
-			connectionTimeSeconds = 0;
-			wasConnected = false;
-			reconnectTimer.restart();
-			onDisconnected->broadcast();
-		}
-		else if (reconnectTimer.hasTimePassed())
-		{
-			if (auto wifiConnSp{wifiConnWp.lock()})
+			if (wasConnected)
 			{
-				if (wifiConnSp->isConnected() && connectToBroker())
-				{
-					oneSecTimer.restart();
-					++reconnectCounter;
-					wasConnected = true;
-					mqttConnectedInternal();
-				}
-
-				/* This must be done after connectToBroker, because connect can block for few seconds. */
+				wasConnected = false;
 				reconnectTimer.restart();
+				onDisconnected->broadcast();
+			}
+			else if (reconnectTimer.hasTimePassed())
+			{
+				if (auto wifiConnSp{wifiConnWp.lock()})
+				{
+					if (wifiConnSp->isConnected() && connectToBroker())
+					{
+						++reconnectCounter;
+						wasConnected = true;
+						mqttConnectedInternal();
+					}
+
+					/* This must be done after connectToBroker, because connect can block for few seconds. */
+					reconnectTimer.restart();
+				}
 			}
 		}
-
+		
 		return true;
 	}
 
 	bool ksMqttConnector::isConnected() const
 	{
 		return mqttClientSp ? mqttClientSp->connected() : false;
+	}
+
+	uint32_t ksMqttConnector::getConnectionTimeSeconds() const
+	{
+		return isConnected() ? ((millis64() - lastSuccessConnectionTime) / KSF_ONE_SECOND_MS) : 0;
 	}
 }
