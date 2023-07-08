@@ -63,7 +63,6 @@ namespace ksf::comps
 
 		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
 
-		// TODO : This could be optimized to save memory.
 		this->login = std::move(login);
 		this->password = std::move(password);
 		this->prefix = std::move(prefix);

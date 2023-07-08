@@ -50,7 +50,7 @@ namespace ksf::comps
 				const char topicDelimeter{'/'};
 
 				/* Apply suffix correction. */
-				if (prefix.back() != '/')
+				if (prefix.back() != topicDelimeter)
 					prefix += topicDelimeter;
 			}
 

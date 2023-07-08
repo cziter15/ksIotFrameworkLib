@@ -126,7 +126,6 @@ namespace ksf::comps
 				#if ESP32
 					"Free PSRAM: ") + std::to_string(ESP.getFreePsram()) + PGM_(" b, "
 					"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_(" [C], "
-
 				#endif
 				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
 				"Reset reason: ") + getResetReason()

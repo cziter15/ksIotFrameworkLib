@@ -24,7 +24,6 @@ namespace ksf::comps
 		 // As the device name is our field, we are able to move, it's better to do so than using const ref
 		: deviceName(std::move(devicePrefixName))
 	{
-		// TODO: Try PGM macro in all instances.
 		deviceName += '-';
 
 		#if ESP32
