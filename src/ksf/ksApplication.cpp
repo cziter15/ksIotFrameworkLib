@@ -9,6 +9,7 @@
 
 #include "ksApplication.h"
 #include "ksComponent.h"
+
 namespace ksf
 {
 	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent> component)
