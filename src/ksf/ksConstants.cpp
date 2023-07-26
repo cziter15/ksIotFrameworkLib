@@ -19,15 +19,15 @@ namespace ksf
 
 	void initializeFramework()
 	{
-		#ifdef ESP32
-			/* Initialize filesystem. */
-			LittleFS.begin(true);
-		#endif
+#ifdef ESP32
+		/* Initialize filesystem. */
+		LittleFS.begin(true);
+#endif
 
-		#if ESP8266
-			/* Initialize filesystem. */
-			LittleFS.begin();
-		#endif
+#if ESP8266
+		/* Initialize filesystem. */
+		LittleFS.begin();
+#endif
 
 		bootedFromOta = LittleFS.remove(OTA_FILENAME_TEXT_PGM.c_str());
 	}
@@ -68,15 +68,15 @@ namespace ksf
 
 	std::string string_from_progmem(const char* pgm_str_ptr, size_t pgm_str_len)
 	{
-		#if ESP8266
-			std::string result;
-			// Resize the string to the correct length.
-			result.resize(pgm_str_len);
-			// Copy the content from PROGMEM to the string.
-			memcpy_P(result.data(), pgm_str_ptr, pgm_str_len);
-			return result;
-		#else
-			return {pgm_str_ptr};
-		#endif
+#if ESP8266
+		std::string result;
+		// Resize the string to the correct length.
+		result.resize(pgm_str_len);
+		// Copy the content from PROGMEM to the string.
+		memcpy_P(result.data(), pgm_str_ptr, pgm_str_len);
+		return result;
+#else
+		return {pgm_str_ptr};
+#endif
 	}
 }

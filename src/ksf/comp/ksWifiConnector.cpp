@@ -27,10 +27,10 @@ namespace ksf::comps
 	{
 		WiFi.mode(WIFI_OFF);
 
-		#if ESP32
-			/* On ESP32 hostname must be set when not in STA mode. */
-			WiFi.setHostname(hostname);
-		#endif
+#if ESP32
+		/* On ESP32 hostname must be set when not in STA mode. */
+		WiFi.setHostname(hostname);
+#endif
 
 		WiFi.mode(WIFI_STA);
 
@@ -38,41 +38,41 @@ namespace ksf::comps
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 
-		#if ESP8266
-			/* On ESP8266 hostname must be set when in STA mode. */
-			WiFi.setHostname(hostname);
-		#endif
+#if ESP8266
+		/* On ESP8266 hostname must be set when in STA mode. */
+		WiFi.setHostname(hostname);
+#endif
 	}
 
 	void ksWifiConnector::setupMacAddress()
 	{
-		#if ESP32
-			uint32_t chipId{static_cast<uint32_t>(ESP.getEfuseMac())};
-		#elif ESP8266
-			uint32_t chipId{ESP.getChipId()};
-		#else
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		uint32_t chipId{static_cast<uint32_t>(ESP.getEfuseMac())};
+#elif ESP8266
+		uint32_t chipId{ESP.getChipId()};
+#else
+		#error Platform not implemented.
+#endif
 
 		auto chipIdBytes{reinterpret_cast<uint8_t*>(&chipId)};
 		uint8_t mac_sta[6] { 0xfa, 0xf1, chipIdBytes[2], chipIdBytes[1], chipIdBytes[3], chipIdBytes[0] };
 
-		#if ESP32
-			esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
-		#elif ESP8266
-			wifi_set_macaddr(STATION_IF, mac_sta);
-		#else
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
+#elif ESP8266
+		wifi_set_macaddr(STATION_IF, mac_sta);
+#else
+		#error Platform not implemented.
+#endif
 	}
 
 	bool ksWifiConnector::init(ksApplication* owner)
 	{
 		WiFi.begin();
 
-		#if ESP32
-			WiFi.setSleep(true);
-		#endif
+#if ESP32
+		WiFi.setSleep(true);
+#endif
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 		
@@ -81,24 +81,24 @@ namespace ksf::comps
 
 	bool ksWifiConnector::connectStation()
 	{
-		#if ESP32
-			return esp_wifi_connect() == ESP_OK;
-		#elif ESP8266
-			return wifi_station_connect();
-		#else
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		return esp_wifi_connect() == ESP_OK;
+#elif ESP8266
+		return wifi_station_connect();
+#else
+		#error Platform not implemented.
+#endif
 	}
 
 	bool ksWifiConnector::disconnectStation()
 	{
-		#if ESP32
-			return esp_wifi_disconnect() == ESP_OK;
-		#elif ESP8266
-			return wifi_station_disconnect();
-		#else
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		return esp_wifi_disconnect() == ESP_OK;
+#elif ESP8266
+		return wifi_station_disconnect();
+#else
+		#error Platform not implemented.
+#endif
 
 		return false;
 	}

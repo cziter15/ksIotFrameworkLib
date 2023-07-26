@@ -26,13 +26,13 @@ namespace ksf::comps
 	{
 		deviceName += '-';
 
-		#if ESP32
-			deviceName += std::to_string(ESP.getEfuseMac());
-		#elif ESP8266
-			deviceName += std::to_string(ESP.getChipId());
-		#else			
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		deviceName += std::to_string(ESP.getEfuseMac());
+#elif ESP8266
+		deviceName += std::to_string(ESP.getChipId());
+#else			
+		#error Platform not implemented.
+#endif
 	}
 
 	bool ksWiFiConfigurator::postInit(ksApplication* owner)

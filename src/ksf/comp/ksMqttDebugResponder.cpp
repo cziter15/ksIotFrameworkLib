@@ -9,12 +9,12 @@
 
 #include <LittleFS.h>
 #if ESP32
-	#include <WiFi.h>
-	#include <esp_phy_init.h>
+#include <WiFi.h>
+#include <esp_phy_init.h>
 #elif ESP8266
-	#include <ESP8266WiFi.h>
+#include <ESP8266WiFi.h>
 #else			
-	#error Platform not implemented.
+#error Platform not implemented.
 #endif
 
 #include "../ksApplication.h"
@@ -61,39 +61,39 @@ namespace ksf::comps
 	std::string ksMqttDebugResponder::getResetReason()
 	{
 		bool otaBoot{ksf::isFirstOtaBoot()};
-		#if ESP32
-			switch (esp_reset_reason())
-			{
-				case ESP_RST_POWERON:
-					return PGM_("Power On");
-				case ESP_RST_SW:
-					if (otaBoot)
-						return PGM_("OTA Update");
-					return PGM_("Software/System restart");
-				case ESP_RST_PANIC:
-					return PGM_("Exception");
-				case ESP_RST_INT_WDT:
-					return PGM_("Watchdog (interrupt)");
-				case ESP_RST_TASK_WDT:
-					return PGM_("Watchdog (task)");
-				case ESP_RST_WDT:
-					return PGM_("Watchdog (other)");
-				case ESP_RST_DEEPSLEEP:
-					return PGM_("Deep-Sleep Wake");
-				case ESP_RST_BROWNOUT:
-					return PGM_("Brownout");
-				case ESP_RST_SDIO:
-					return PGM_("SDIO");
-				default:
-					return PGM_("Unknown");
-			}
-		#elif ESP8266
-			if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
-				return PGM_("OTA Update");
-			return {ESP.getResetReason().c_str()};
-		#else			
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		switch (esp_reset_reason())
+		{
+			case ESP_RST_POWERON:
+				return PGM_("Power On");
+			case ESP_RST_SW:
+				if (otaBoot)
+					return PGM_("OTA Update");
+				return PGM_("Software/System restart");
+			case ESP_RST_PANIC:
+				return PGM_("Exception");
+			case ESP_RST_INT_WDT:
+				return PGM_("Watchdog (interrupt)");
+			case ESP_RST_TASK_WDT:
+				return PGM_("Watchdog (task)");
+			case ESP_RST_WDT:
+				return PGM_("Watchdog (other)");
+			case ESP_RST_DEEPSLEEP:
+				return PGM_("Deep-Sleep Wake");
+			case ESP_RST_BROWNOUT:
+				return PGM_("Brownout");
+			case ESP_RST_SDIO:
+				return PGM_("SDIO");
+			default:
+				return PGM_("Unknown");
+		}
+#elif ESP8266
+		if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
+			return PGM_("OTA Update");
+		return {ESP.getResetReason().c_str()};
+#else			
+		#error Platform not implemented.
+#endif
 	}
 
 	void ksMqttDebugResponder::onMessage(const std::string_view& topic, const std::string_view& message)
@@ -123,10 +123,10 @@ namespace ksf::comps
 				"Device uptime: ") + std::to_string(uptimeSec) + PGM_(" sec, "
 				"Free fw space: ") + std::to_string(ESP.getFreeSketchSpace()) + PGM_(" b, "
 				"Free heap: ") + std::to_string(ESP.getFreeHeap()) + PGM_(" b, "
-				#if ESP32
-					"Free PSRAM: ") + std::to_string(ESP.getFreePsram()) + PGM_(" b, "
-					"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_(" [C], "
-				#endif
+#if ESP32
+				"Free PSRAM: ") + std::to_string(ESP.getFreePsram()) + PGM_(" b, "
+				"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_(" [C], "
+#endif
 				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
 				"Reset reason: ") + getResetReason()
 			);
@@ -147,29 +147,29 @@ namespace ksf::comps
 			respond(PGM_("Erasing RF CAL data, please wait..."));
 			delay(500);
 			
-			#if ESP32
-				esp_phy_erase_cal_data_in_nvs();
-			#elif ESP8266
-				flash_size_map size_map{system_get_flash_size_map()};
-				uint32 rf_cal_sec{0};
+#if ESP32
+			esp_phy_erase_cal_data_in_nvs();
+#elif ESP8266
+			flash_size_map size_map{system_get_flash_size_map()};
+			uint32 rf_cal_sec{0};
 
-				switch (size_map) 
-				{
-					case FLASH_SIZE_4M_MAP_256_256: 	rf_cal_sec = 128 - 5;	break;
-					case FLASH_SIZE_8M_MAP_512_512: 	rf_cal_sec = 256 - 5; 	break;
-					case FLASH_SIZE_16M_MAP_512_512: 	rf_cal_sec = 512 - 5;	break;
-					case FLASH_SIZE_16M_MAP_1024_1024:	rf_cal_sec = 512 - 5;	break;
-					case FLASH_SIZE_32M_MAP_512_512:	rf_cal_sec = 1024 - 5;	break;
-					case FLASH_SIZE_32M_MAP_1024_1024:	rf_cal_sec = 1024 - 5;	break;
-					case FLASH_SIZE_64M_MAP_1024_1024:	rf_cal_sec = 2048 - 5;	break;
-					case FLASH_SIZE_128M_MAP_1024_1024:	rf_cal_sec = 4096 - 5;	break;
-					default: break;
-				}
-			
-				ESP.flashEraseSector(rf_cal_sec);
-			#else			
-				#error Platform not implemented.
-			#endif
+			switch (size_map) 
+			{
+				case FLASH_SIZE_4M_MAP_256_256: 	rf_cal_sec = 128 - 5;	break;
+				case FLASH_SIZE_8M_MAP_512_512: 	rf_cal_sec = 256 - 5; 	break;
+				case FLASH_SIZE_16M_MAP_512_512: 	rf_cal_sec = 512 - 5;	break;
+				case FLASH_SIZE_16M_MAP_1024_1024:	rf_cal_sec = 512 - 5;	break;
+				case FLASH_SIZE_32M_MAP_512_512:	rf_cal_sec = 1024 - 5;	break;
+				case FLASH_SIZE_32M_MAP_1024_1024:	rf_cal_sec = 1024 - 5;	break;
+				case FLASH_SIZE_64M_MAP_1024_1024:	rf_cal_sec = 2048 - 5;	break;
+				case FLASH_SIZE_128M_MAP_1024_1024:	rf_cal_sec = 4096 - 5;	break;
+				default: break;
+			}
+		
+			ESP.flashEraseSector(rf_cal_sec);
+#else			
+			#error Platform not implemented.
+#endif
 
 			respond(PGM_("Erasing RF CAL done, restarting. It may take few seconds."));
 			delay(500);

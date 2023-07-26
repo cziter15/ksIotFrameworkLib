@@ -83,13 +83,13 @@ namespace ksf::comps
 		*	-	https://github.com/espressif/arduino-esp32/issues/7355
 		*/
 	
-		#if ESP32
-			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
-		#elif ESP8266
-			wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
-		#else			
-			#error Platform not implemented.
-		#endif
+#if ESP32
+		wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
+#elif ESP8266
+		wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
+#else			
+		#error Platform not implemented.
+#endif
 
 		uint16_t portNumber;
 		if (ksf::from_chars(port, portNumber))
