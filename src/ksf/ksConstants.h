@@ -22,7 +22,7 @@
 #define KSF_MQTT_RECONNECT_DELAY_MS 5000UL
 
 /* MQTT socket timeout in seconds. On ESP32 is also used as connect (blocking) timeout. */
-#define KSF_MQTT_TIMEOUT_SEC 5UL
+#define KSF_MQTT_TIMEOUT_SEC 4UL
 
 /* Time in seconds for how much configuration portal should be available. Device will reset after that time. */
 #define KSF_CAP_PORTAL_TIMEOUT_SEC 120UL
