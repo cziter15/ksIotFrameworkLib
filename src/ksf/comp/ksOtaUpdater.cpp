@@ -22,11 +22,11 @@ namespace ksf::comps
 	{
 		ArduinoOTA.setPassword(password.c_str());
 
-		ArduinoOTA.onStart([&]() {
+		ArduinoOTA.onStart([this]() {
 			onUpdateStart->broadcast();
 		});
 
-		ArduinoOTA.onEnd([&]() {
+		ArduinoOTA.onEnd([this]() {
 			ksf::saveOtaBootIndicator();
 			onUpdateEnd->broadcast();
 		});

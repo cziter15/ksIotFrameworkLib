@@ -23,11 +23,11 @@ namespace ksf
 		components.applyPendingOperations();
 
 		/* Run initialization */
-		if (!forEachComponent([&](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); }))
+		if (!forEachComponent([this](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); }))
 			return false;
 
 		/* Run post-init event for components. */
-		if (!forEachComponent([&](const std::shared_ptr<ksComponent>& comp) { return comp->postInit(this); }))
+		if (!forEachComponent([this](const std::shared_ptr<ksComponent>& comp) { return comp->postInit(this); }))
 			return false;
 
 		return true;
