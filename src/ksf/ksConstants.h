@@ -138,6 +138,6 @@ namespace ksf
 	inline bool starts_with(const _Type1& input, const _Type2& match)
 	{
 		return input.size() >= match.size()
-			&& equal(match.begin(), match.end(), input.begin());
+			&& std::equal(match.begin(), match.end(), input.begin());
 	}
 }
