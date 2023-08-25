@@ -19,15 +19,12 @@ namespace ksf
 
 	bool ksApplication::init()
 	{
-		/* Synchronize components added before ksApplication base init. */
 		components.applyPendingOperations();
 
-		/* Run initialization */
-		if (!forEachComponent([this](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); }))
-			return false;
+		auto initFunc = [this](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); };
+		auto postInitFunc = [this](const std::shared_ptr<ksComponent>& comp) { return comp->postInit(this); };
 
-		/* Run post-init event for components. */
-		if (!forEachComponent([this](const std::shared_ptr<ksComponent>& comp) { return comp->postInit(this); }))
+		if (!forEachComponent(initFunc) || !forEachComponent(postInitFunc))
 			return false;
 
 		return true;

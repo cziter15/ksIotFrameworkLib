@@ -46,23 +46,26 @@ namespace ksf::comps
 
 	void ksWifiConnector::setupMacAddress()
 	{
-#if ESP32
-		uint32_t chipId{static_cast<uint32_t>(ESP.getEfuseMac())};
-#elif ESP8266
-		uint32_t chipId{ESP.getChipId()};
+#if defined(ESP32)
+		uint32_t chipId = static_cast<uint32_t>(ESP.getEfuseMac());
+#elif defined(ESP8266)
+		uint32_t chipId = ESP.getChipId();
 #else
-		#error Platform not implemented.
+#error Platform not implemented.
 #endif
-
-		auto chipIdBytes{reinterpret_cast<uint8_t*>(&chipId)};
-		uint8_t mac_sta[6] { 0xfa, 0xf1, chipIdBytes[2], chipIdBytes[1], chipIdBytes[3], chipIdBytes[0] };
-
-#if ESP32
+		uint8_t mac_sta[6] = {
+			0xfa, 0xf1, 
+			static_cast<uint8_t>(chipId >> 8),
+			static_cast<uint8_t>(chipId), 
+			static_cast<uint8_t>(chipId >> 16), 
+			static_cast<uint8_t>(chipId >> 24)
+		};
+#if defined(ESP32)
 		esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
-#elif ESP8266
+#elif defined(ESP8266)
 		wifi_set_macaddr(STATION_IF, mac_sta);
 #else
-		#error Platform not implemented.
+#error Platform not implemented.
 #endif
 	}
 
