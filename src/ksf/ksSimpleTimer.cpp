@@ -30,12 +30,13 @@ namespace ksf
 
 	bool ksSimpleTimer::triggered()
 	{
-		auto shouldTrigger{hasTimePassed()};
-
-		if (shouldTrigger)
+		if (hasTimePassed()) 
+		{
 			restart();
+			return true;
+		}
 
-		return shouldTrigger;
+		return false;
 	}
 
 	void ksSimpleTimer::restart()

@@ -137,7 +137,6 @@ namespace ksf
 	template<class _Type1, class _Type2>
 	inline bool starts_with(const _Type1& input, const _Type2& match)
 	{
-		return input.size() >= match.size()
-			&& std::equal(match.begin(), match.end(), input.begin());
+		return input.size() >= match.size()	&& std::equal(match.begin(), match.end(), input.begin());
 	}
 }

@@ -42,7 +42,7 @@ namespace ksf
 	void ksConfig::setParam(const std::string& paramName, std::string paramValue)
 	{
 		isDirty = true;
-		configParams[paramName] = std::move(paramValue);
+		configParams.insert_or_assign(paramName, std::move(paramValue));
 	}
 
 	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
