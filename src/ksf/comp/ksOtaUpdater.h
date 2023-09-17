@@ -27,12 +27,6 @@ namespace ksf::comps
 			*/
 			void updateFinished();
 
-			/*
-				Returns root content.
-				@return Root content for OTA update page.
-			*/
-			const std::string getRootContent() const;
-
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
 			DECLARE_KS_EVENT(onUpdateEnd)					// onUpdateEnd event that user can bind to.

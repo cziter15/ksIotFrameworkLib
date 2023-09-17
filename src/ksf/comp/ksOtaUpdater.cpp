@@ -73,28 +73,12 @@ namespace ksf::comps
 		});
 
 		server.on("/", [this]() {
-			server.send(200, "text/html", getRootContent().c_str());
+			server.sendHeader("Location", "/update");
+			server.send(302);
 		});
 #endif
 
 		return true;
-	}
-
-	const std::string ksOtaUpdater::getRootContent() const
-	{
-		std::string html = "<html><body>";
-		html += "<h1>" + std::string(WiFi.getHostname()) + "</h1>";
-		html += "<h2>Device Info</h2>";
-		html += "<ul>";
-		html += "<li>Chip ID: " + std::to_string(ESP.getChipId()) + "</li>";
-		html += "<li>Flash Chip ID: " + std::to_string(ESP.getFlashChipId()) + "</li>";
-		html += "<li>Flash Chip Size: " + std::to_string(ESP.getFlashChipSize()) + " bytes</li>";
-		html += "<li>Free Heap: " + std::to_string(ESP.getFreeHeap()) + " bytes</li>";
-		html += "</ul>";
-		html += "<h2>Update</h2>";
-		html += "<a href='/update'>Go to OTA update page</a>";
-		html += "</body></html>";
-		return html;
 	}
 
 	bool ksOtaUpdater::loop()
