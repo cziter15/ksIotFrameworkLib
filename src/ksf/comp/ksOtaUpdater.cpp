@@ -73,7 +73,7 @@ namespace ksf::comps
 		});
 
 		server.on("/", [this]() {
-			server.send(200, "text/plain", getRootContent().c_str());
+			server.send(200, "text/html", getRootContent().c_str());
 		});
 #endif
 
