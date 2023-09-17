@@ -22,6 +22,17 @@ namespace ksf::comps
 		protected:
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 
+			/*
+				This function is called when OTA update is finished.
+			*/
+			void updateFinished();
+
+			/*
+				Returns root content.
+				@return Root content for OTA update page.
+			*/
+			const std::string getRootContent() const;
+
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
 			DECLARE_KS_EVENT(onUpdateEnd)					// onUpdateEnd event that user can bind to.
