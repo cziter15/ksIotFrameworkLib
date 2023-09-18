@@ -13,7 +13,6 @@
 #include "ksOtaUpdater.h"
 
 #if USE_ELEGANT_OTA
-#include "../res/ksWebOtaPage.h"
 #if defined(ESP8266)
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>

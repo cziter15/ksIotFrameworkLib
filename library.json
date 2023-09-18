@@ -17,7 +17,7 @@
 	"dependencies": {
 		"tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
 		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient",
-		"ayushsharma82/ElegantOTA": "https://github.com/ayushsharma82/ElegantOTA"
+		"cziter15/ElegantOTA": "https://github.com/cziter15/ElegantOTA"
 	},
 	"frameworks": "arduino",
 	"platforms": "esp32,esp8266"
