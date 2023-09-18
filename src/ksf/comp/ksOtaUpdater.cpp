@@ -53,7 +53,7 @@ namespace ksf::comps
 		});
 
 		ArduinoOTA.onEnd([this]() {
-			this->updateFinished();
+			updateFinished();
 		});
 	}
 
