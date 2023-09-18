@@ -101,7 +101,6 @@ namespace ksf::comps
 
 			server.sendHeader("Connection", "close");
 			server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
-			updateFinished();
 
 			delay(100);
 			yield();
@@ -129,6 +128,10 @@ namespace ksf::comps
 			}
 		});
 #endif
+		Update.onEnd([this]() {
+			updateFinished();
+		});
+
 		server.begin();
 	}
 #endif
