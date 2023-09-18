@@ -22,7 +22,7 @@ namespace ksf::comps
 		protected:
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 
-#if USE_ELEGANT_OTA
+#if SUPPORT_HTTP_OTA
 			std::string webOtaPassword;						// OTA password.
 
 			/*

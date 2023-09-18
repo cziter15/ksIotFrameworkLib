@@ -12,27 +12,28 @@
 #include "ksWifiConnector.h"
 #include "ksOtaUpdater.h"
 
-#if USE_ELEGANT_OTA
+#if SUPPORT_HTTP_OTA
 #if defined(ESP8266)
-    #define HARDWARE "ESP8266"
-    #include "ESP8266WiFi.h"
-    #include "WiFiClient.h"
-    #include "ESP8266WebServer.h"
-    #include "ESP8266HTTPUpdateServer.h"
+	#define HARDWARE "ESP8266"
+	#include "ESP8266WiFi.h"
+	#include "WiFiClient.h"
+	#include "ESP8266WebServer.h"
+	#include "ESP8266HTTPUpdateServer.h"
 
 	ESP8266WebServer server(80);
 	ESP8266HTTPUpdateServer httpUpdater;
 #elif defined(ESP32)
-    #define HARDWARE "ESP32"
-    #include "WiFi.h"
-    #include "WiFiClient.h"
-    #include "WebServer.h"
-    #include "Update.h"
+	#define HARDWARE "ESP32"
+	#include "WiFi.h"
+	#include "WiFiClient.h"
+	#include "WebServer.h"
+	#include "Update.h"
 
 	WebServer server(80);
 #endif
 #include "../res/otaWebpage.h"
 #endif
+
 namespace ksf::comps
 {
 	ksOtaUpdater::ksOtaUpdater()
@@ -43,7 +44,7 @@ namespace ksf::comps
 	{
 		ArduinoOTA.setPassword(password.c_str());
 
-#if USE_ELEGANT_OTA
+#if SUPPORT_HTTP_OTA
 		webOtaPassword = password;
 #endif
 
@@ -61,7 +62,7 @@ namespace ksf::comps
 		ksf::saveOtaBootIndicator();
 		onUpdateEnd->broadcast();
 	}
-#if USE_ELEGANT_OTA
+#if SUPPORT_HTTP_OTA
 	void ksOtaUpdater::setupUpdateWebServer()
 	{
 		static const char* username{"admin"};
@@ -135,7 +136,7 @@ namespace ksf::comps
 		ArduinoOTA.setHostname(WiFi.getHostname());
 		ArduinoOTA.begin();
 
-#if USE_ELEGANT_OTA
+#if SUPPORT_HTTP_OTA
 		setupUpdateWebServer();
 #endif
 
@@ -147,7 +148,7 @@ namespace ksf::comps
 		/* Handle OTA stuff. */
 		ArduinoOTA.handle();
 
-#if USE_ELEGANT_OTA
+#if SUPPORT_HTTP_OTA
 		/* Handle HTTP stuff. */
 		server.handleClient();
 #endif
