@@ -61,64 +61,75 @@ namespace ksf::comps
 		ksf::saveOtaBootIndicator();
 		onUpdateEnd->broadcast();
 	}
-
+#if USE_ELEGANT_OTA
 	void ksOtaUpdater::setupUpdateWebServer()
 	{
-		const char* username = "admin";
+		static const char* username = "admin";
 		const char* password = webOtaPassword.c_str();
 
+		server.on("/", HTTP_GET, [&]() {
+			server.sendHeader("Location", "/update", true);
+			server.send(302, "text/plain", "");
+		});
+
 		server.on("/update", HTTP_GET, [&]() {
-			if (!server.authenticate(username, password)) 
+			if (!server.authenticate(username, password))
 				return server.requestAuthentication();
 
 			server.sendHeader("Content-Encoding", "gzip");
 			server.send_P(200, "text/html", (const char*)RES_OTA_WEBPAGE_HTML, RES_OTA_WEBPAGE_HTML_SIZE);
 		});
-		
-		webOtaIdentity = "{ \"id\": \"" + std::string(WiFi.getHostname()) + "\", \"hardware\": \"" HARDWARE "\" }";
 
 		server.on("/update/identity", HTTP_GET, [&]() {
 			if (!server.authenticate(username, password))
 				return server.requestAuthentication();
-			server.send(200, "application/json", WiFi.getHostname());
+
+			std::string json;
+			json.reserve(64);
+			json += "{ \"id\": \"";
+			json += WiFi.getHostname();
+			json += "\", \"hardware\": \"" HARDWARE "\" }";
+			server.send(200, "application/json", json.c_str());
 		});
 
 #if defined(ESP8266)
-			httpUpdater.setup(&server, "/update", username, password);
+		httpUpdater.setup(&server, "/update", username, password);
 #elif defined(ESP32)
-		_server->on("/update", HTTP_POST, [&]() {
-			if (authenticate && !_server->authenticate(username, password))
+		server.on("/update", HTTP_POST, [&]() {
+			if (authenticate && !server.authenticate(username, password))
 				return;
 
-			_server->sendHeader("Connection", "close");
-			_server->send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
-			#if defined(ESP32)
-			// Needs some time for Core 0 to send response
+			server.sendHeader("Connection", "close");
+			server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
 			delay(100);
 			yield();
 			delay(100);
-			#endif
 			ESP.restart();
 		}, [&]() {
-			// Actual OTA Download
-			if (authenticate && !_server->authenticate(username, password)) {
-			return;
-			}
+			if (authenticate && !server.authenticate(username, password))
+				return;
 
-			HTTPUpload& upload = _server->upload();
+			HTTPUpload& upload = server.upload();
 			if (upload.status == UPLOAD_FILE_START)
 			{
-				if (upload.name != "filesystem")
-					Update.begin(UPDATE_SIZE_UNKNOWN, U_FLASH));
-			} 
+				if (upload.name == "filesystem")
+					Update.begin(UPDATE_SIZE_UNKNOWN, U_SPIFFS);
+				else
+					Update.begin(UPDATE_SIZE_UNKNOWN, U_FLASH);
+			}
 			else if (upload.status == UPLOAD_FILE_WRITE)
 			{
-			Update.write(upload.buf, upload.currentSize);
-			} else if (upload.status == UPLOAD_FILE_END) {
-			Update.end(true)
+				Update.write(upload.buf, upload.currentSize);
+			}
+			else if (upload.status == UPLOAD_FILE_END) 
+			{
+				Update.end(true)
+			}
 		});
 #endif
+		server.begin();
 	}
+#endif
 	
 	bool ksOtaUpdater::init(ksApplication* owner)
 	{

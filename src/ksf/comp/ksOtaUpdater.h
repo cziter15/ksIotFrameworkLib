@@ -24,7 +24,6 @@ namespace ksf::comps
 
 #if USE_ELEGANT_OTA
 			std::string webOtaPassword;						// OTA password.
-			std::string webOtaIdentity;						// OTA id.
 
 			/*
 				This function starts OTA update server.
