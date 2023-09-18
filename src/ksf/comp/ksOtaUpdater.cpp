@@ -101,6 +101,8 @@ namespace ksf::comps
 
 			server.sendHeader("Connection", "close");
 			server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
+			updateFinished();
+
 			delay(100);
 			yield();
 			delay(100);
@@ -123,7 +125,7 @@ namespace ksf::comps
 			}
 			else if (upload.status == UPLOAD_FILE_END) 
 			{
-				Update.end(true)
+				Update.end(true);
 			}
 		});
 #endif
