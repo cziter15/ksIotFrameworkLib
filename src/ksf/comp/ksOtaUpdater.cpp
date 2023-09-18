@@ -94,6 +94,10 @@ namespace ksf::comps
 
 #if defined(ESP8266)
 		httpUpdater.setup(&server, "/update", username, webOtaPassword.c_str());
+
+		Update.onEnd([this]() {
+			updateFinished();
+		});
 #elif defined(ESP32)
 		server.on("/update", HTTP_POST, [&]() {
 			if (!server.authenticate(username, webOtaPassword.c_str()))
@@ -102,6 +106,7 @@ namespace ksf::comps
 			server.sendHeader("Connection", "close");
 			server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
 
+			updateFinished();
 			delay(100);
 			yield();
 			delay(100);
@@ -128,10 +133,6 @@ namespace ksf::comps
 			}
 		});
 #endif
-		Update.onEnd([this]() {
-			updateFinished();
-		});
-
 		server.begin();
 	}
 #endif
