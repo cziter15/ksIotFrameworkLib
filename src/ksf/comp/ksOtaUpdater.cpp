@@ -95,6 +95,10 @@ namespace ksf::comps
 #if defined(ESP8266)
 		httpUpdater.setup(&server, "/update", username, webOtaPassword.c_str());
 
+		Update.onStart([this]() {
+			onUpdateStart->broadcast();
+		});
+
 		Update.onEnd([this]() {
 			updateFinished();
 		});
@@ -105,8 +109,9 @@ namespace ksf::comps
 
 			server.sendHeader("Connection", "close");
 			server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
-
+			
 			updateFinished();
+
 			delay(100);
 			yield();
 			delay(100);
@@ -122,6 +127,8 @@ namespace ksf::comps
 					Update.begin(UPDATE_SIZE_UNKNOWN, U_SPIFFS);
 				else
 					Update.begin(UPDATE_SIZE_UNKNOWN, U_FLASH);
+
+				onUpdateStart->broadcast();
 			}
 			else if (upload.status == UPLOAD_FILE_WRITE)
 			{
