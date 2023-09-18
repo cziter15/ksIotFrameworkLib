@@ -64,8 +64,7 @@ namespace ksf::comps
 #if USE_ELEGANT_OTA
 	void ksOtaUpdater::setupUpdateWebServer()
 	{
-		static const char* username = "admin";
-		const char* password = webOtaPassword.c_str();
+		static const char* username{"admin"};
 
 		server.on("/", HTTP_GET, [&]() {
 			server.sendHeader("Location", "/update", true);
@@ -73,7 +72,7 @@ namespace ksf::comps
 		});
 
 		server.on("/update", HTTP_GET, [&]() {
-			if (!server.authenticate(username, password))
+			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return server.requestAuthentication();
 
 			server.sendHeader("Content-Encoding", "gzip");
@@ -81,7 +80,7 @@ namespace ksf::comps
 		});
 
 		server.on("/update/identity", HTTP_GET, [&]() {
-			if (!server.authenticate(username, password))
+			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return server.requestAuthentication();
 
 			std::string json;
@@ -93,10 +92,10 @@ namespace ksf::comps
 		});
 
 #if defined(ESP8266)
-		httpUpdater.setup(&server, "/update", username, password);
+		httpUpdater.setup(&server, "/update", username, webOtaPassword.c_str());
 #elif defined(ESP32)
 		server.on("/update", HTTP_POST, [&]() {
-			if (authenticate && !server.authenticate(username, password))
+			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return;
 
 			server.sendHeader("Connection", "close");
@@ -106,7 +105,7 @@ namespace ksf::comps
 			delay(100);
 			ESP.restart();
 		}, [&]() {
-			if (authenticate && !server.authenticate(username, password))
+			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return;
 
 			HTTPUpload& upload = server.upload();
