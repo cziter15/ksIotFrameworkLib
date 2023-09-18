@@ -19,7 +19,6 @@
 	#include "WiFiClient.h"
 	#include "ESP8266WebServer.h"
 	#include "ESP8266HTTPUpdateServer.h"
-
 	ESP8266WebServer server(80);
 	ESP8266HTTPUpdateServer httpUpdater;
 #elif defined(ESP32)
@@ -28,7 +27,6 @@
 	#include "WiFiClient.h"
 	#include "WebServer.h"
 	#include "Update.h"
-
 	WebServer server(80);
 #endif
 #include "../res/otaWebpage.h"
