@@ -16,8 +16,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
-		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient",
-		"cziter15/ElegantOTA": "https://github.com/cziter15/ElegantOTA"
+		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient"
 	},
 	"frameworks": "arduino",
 	"platforms": "esp32,esp8266"

@@ -22,6 +22,16 @@ namespace ksf::comps
 		protected:
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 
+#if USE_ELEGANT_OTA
+			std::string webOtaPassword;						// OTA password.
+			std::string webOtaIdentity;						// OTA id.
+
+			/*
+				This function starts OTA update server.
+			*/
+			void setupUpdateWebServer();
+#endif
+
 			/*
 				This function is called when OTA update is finished.
 			*/
