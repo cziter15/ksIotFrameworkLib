@@ -66,16 +66,11 @@ namespace ksf::comps
 		static const char* username{"admin"};
 
 		server.on("/", HTTP_GET, [&]() {
-			server.sendHeader("Location", "/update", true);
-			server.send(302, "text/plain", "");
-		});
-
-		server.on("/update", HTTP_GET, [&]() {
 			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return server.requestAuthentication();
 
 			server.sendHeader("Content-Encoding", "gzip");
-			server.send_P(200, "text/html", (const char*)RES_OTA_WEBPAGE_HTML, RES_OTA_WEBPAGE_HTML_SIZE);
+			server.send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 		});
 
 		server.on("/update/identity", HTTP_GET, [&]() {
