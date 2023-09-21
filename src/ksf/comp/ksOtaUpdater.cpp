@@ -78,7 +78,7 @@ namespace ksf::comps
 			server.send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 		});
 
-		server.on("/update/identity", HTTP_GET, [&]() {
+		server.on("/api/identity", HTTP_GET, [&]() {
 			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return server.requestAuthentication();
 
@@ -124,8 +124,15 @@ namespace ksf::comps
 			server.send(200, "application/json", json.c_str());
 		});
 
+		server.on("/api/goToConfigMode", HTTP_GET, [&](){
+			if (!server.authenticate(username, webOtaPassword.c_str()))
+				return server.requestAuthentication();
+
+			breakApp = true;
+		});
+
 #if defined(ESP8266)
-		httpUpdater.setup(&server, "/update", username, webOtaPassword.c_str());
+		httpUpdater.setup(&server, "/api/flash", username, webOtaPassword.c_str());
 
 		Update.onStart([this]() {
 			onUpdateStart->broadcast();
@@ -135,7 +142,7 @@ namespace ksf::comps
 			updateFinished();
 		});
 #elif defined(ESP32)
-		server.on("/update", HTTP_POST, [&]() {
+		server.on("/api/flash", HTTP_POST, [&]() {
 			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return;
 
@@ -196,6 +203,9 @@ namespace ksf::comps
 #if SUPPORT_HTTP_OTA
 		/* Handle HTTP stuff. */
 		server.handleClient();
+
+		if (breakApp)
+			return false;
 #endif
 
 		return true;
