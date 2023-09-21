@@ -65,6 +65,11 @@ namespace ksf::comps
 	{
 		static const char* username{"admin"};
 
+		server.onNotFound([&]() {
+			server.sendHeader("Location", "/", true);
+			server.send(302, "text/plain", "");
+		});
+
 		server.on("/", HTTP_GET, [&]() {
 			if (!server.authenticate(username, webOtaPassword.c_str()))
 				return server.requestAuthentication();
