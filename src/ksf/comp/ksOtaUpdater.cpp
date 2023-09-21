@@ -90,6 +90,40 @@ namespace ksf::comps
 			server.send(200, "application/json", json.c_str());
 		});
 
+		server.on("/api/scanNetworks", HTTP_GET, [&](){
+			std::string json;
+			json.reserve(64);
+			json += "[";
+			int scanResult{WiFi.scanComplete()};
+			if(scanResult == -2)
+			{
+				WiFi.scanNetworks(true);
+			} 
+			else if (scanResult)
+			{
+				for (int i = 0; i < scanResult; ++i)
+				{
+					if(i) 
+						json += ",";
+
+					json += "{";
+					json += "\"rssi\":"+ksf::to_string(WiFi.RSSI(i));
+					json += ",\"ssid\":\""+std::string(WiFi.SSID(i).c_str())+"\"";
+					json += ",\"bssid\":\""+std::string(WiFi.BSSIDstr(i).c_str())+"\"";
+					json += ",\"channel\":"+ksf::to_string(WiFi.channel(i));
+					json += ",\"secure\":"+ksf::to_string(WiFi.encryptionType(i));
+					json += ",\"hidden\":"+ksf::to_string(WiFi.isHidden(i));
+					json += "}";
+				}
+				WiFi.scanDelete();
+
+				if(WiFi.scanComplete() == -2)
+					WiFi.scanNetworks(true);
+			}
+			json += "]";
+			server.send(200, "application/json", json.c_str());
+		});
+
 #if defined(ESP8266)
 		httpUpdater.setup(&server, "/update", username, webOtaPassword.c_str());
 
