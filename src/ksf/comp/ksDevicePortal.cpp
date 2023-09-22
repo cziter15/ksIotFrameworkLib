@@ -104,6 +104,11 @@ namespace ksf::comps
 			request->send(200, "application/json", json.c_str());
 		});
 
+		server.on("/api/goToConfigMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
+			breakApp = true;
+			request->send(200, "application/json", "{}");
+		});
+
 		server.on("/api/setDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
