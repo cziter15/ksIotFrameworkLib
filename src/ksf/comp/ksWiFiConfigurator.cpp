@@ -43,18 +43,7 @@ namespace ksf::comps
 		#error Platform not implemented.
 #endif
 		WiFi.mode(WIFI_OFF);
-
-#if ESP32
-		/* On ESP32 hostname must be set when not in STA mode. */
-		WiFi.setHostname(deviceName.c_str());
-#endif
-
-		WiFi.mode(WIFI_AP);
-
-#if ESP8266
-		/* On ESP8266 hostname must be set when in STA mode. */
-		WiFi.setHostname(deviceName.c_str());
-#endif
+		WiFi.softAP(deviceName.c_str());
 	}
 
 	bool ksWiFiConfigurator::init(ksApplication* owner)

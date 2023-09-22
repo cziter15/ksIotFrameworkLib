@@ -19,9 +19,9 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksWiFiConfigurator, ksComponent)
 
 		protected:
-			ksApplication* owner{nullptr};			//  Pointer to ksApplication object that owns this component.
-			std::string deviceName;					// Device name (prefix).
-			ksf::ksSimpleTimer configTimeout{120};
+			ksApplication* owner{nullptr};					//  Pointer to ksApplication object that owns this component.
+			std::string deviceName;							// Device name (prefix).
+			ksf::ksSimpleTimer configTimeout{120 * 1000};	// Timeout for captive portal in ms.
 
 		public:
 			/*

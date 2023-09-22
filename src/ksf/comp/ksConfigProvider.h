@@ -58,7 +58,14 @@ namespace ksf::comps
 			*/
 			std::list<ksConfigParameter>& getParameters();
 
-			virtual void readParams();
-			virtual void saveParams();
+			/*
+				Reads params from config file.
+			*/
+			virtual void readParams() = 0;
+
+			/*
+				Saves params to config file.
+			*/
+			virtual void saveParams() = 0;
 	};
 }
