@@ -10,7 +10,8 @@
 #include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "ksWifiConnector.h"
-#include "ksOtaUpdater.h"
+#include "ksDevicePortal.h"
+#include "ksConfigProvider.h"
 
 #if SUPPORT_HTTP_OTA
 #if defined(ESP8266)
@@ -34,16 +35,16 @@
 
 namespace ksf::comps
 {
-	ksOtaUpdater::ksOtaUpdater()
-		: ksOtaUpdater(PGM_("ota_ksiotframework"))
+	ksDevicePortal::ksDevicePortal()
+		: ksDevicePortal(PGM_("ota_ksiotframework"))
 	{}
 
-	ksOtaUpdater::ksOtaUpdater(const std::string& password)
+	ksDevicePortal::ksDevicePortal(const std::string& password)
 	{
 		ArduinoOTA.setPassword(password.c_str());
 
 #if SUPPORT_HTTP_OTA
-		webOtaPassword = password;
+		this->password = password;
 #endif
 
 		ArduinoOTA.onStart([this]() {
@@ -54,14 +55,27 @@ namespace ksf::comps
 			updateFinished();
 		});
 	}
+	
+	bool ksDevicePortal::init(ksApplication* owner)
+	{
+		this->owner = owner;
+		ArduinoOTA.setHostname(WiFi.getHostname());
+		ArduinoOTA.begin();
 
-	void ksOtaUpdater::updateFinished()
+#if SUPPORT_HTTP_OTA
+		setupUpdateWebServer();
+#endif
+
+		return true;
+	}
+
+	void ksDevicePortal::updateFinished()
 	{
 		ksf::saveOtaBootIndicator();
 		onUpdateEnd->broadcast();
 	}
 #if SUPPORT_HTTP_OTA
-	void ksOtaUpdater::setupUpdateWebServer()
+	void ksDevicePortal::setupUpdateWebServer()
 	{
 		static const char* username{"admin"};
 
@@ -71,7 +85,7 @@ namespace ksf::comps
 		});
 
 		server.on("/", HTTP_GET, [&]() {
-			if (!server.authenticate(username, webOtaPassword.c_str()))
+			if (!server.authenticate(username, password.c_str()))
 				return server.requestAuthentication();
 
 			server.sendHeader("Content-Encoding", "gzip");
@@ -79,7 +93,7 @@ namespace ksf::comps
 		});
 
 		server.on("/api/identity", HTTP_GET, [&]() {
-			if (!server.authenticate(username, webOtaPassword.c_str()))
+			if (!server.authenticate(username, password.c_str()))
 				return server.requestAuthentication();
 
 			std::string json;
@@ -88,6 +102,56 @@ namespace ksf::comps
 			json += WiFi.getHostname();
 			json += "\", \"hardware\": \"" HARDWARE "\" }";
 			server.send(200, "application/json", json.c_str());
+		});
+
+		server.on("/api/getDeviceParams", HTTP_GET, [&]() {
+			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+			owner->findComponents<ksConfigProvider>(configCompsWp);
+
+			std::string response;
+			response.reserve(64);
+			response += "[";
+			
+			for (auto& configCompWp : configCompsWp) 
+			{
+				auto configCompSp{configCompWp.lock()};
+				if (!configCompSp)
+					continue;
+
+				for (auto& parameter : configCompSp->getParameters()) 
+				{
+					response += "{";
+					response += "\"id\":\"" + parameter.id + "\",";
+					response += "\"value\":\"" + parameter.defaultValue + "\",";
+					response += "\"maxLen\":\"" + std::to_string(parameter.maxLength) + "\"";
+					response += "},";
+				}
+			}
+
+			if (response.back() == ',')
+				response.pop_back();
+
+			response += "]";
+
+			server.send(200, "application/json", response.c_str());
+		});
+
+		server.on("/api/setDeviceParams", HTTP_POST, [&]() {
+			if (!server.authenticate(username, password.c_str()))
+				return;
+			
+			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+			owner->findComponents<ksConfigProvider>(configCompsWp);
+		
+			for (auto& configCompWp : configCompsWp)
+			{
+				auto configCompSp{configCompWp.lock()};
+				if (!configCompSp)
+					continue;
+
+				for (auto& parameter : configCompSp->getParameters())
+					parameter.value = std::string(server.arg(parameter.id.c_str()).c_str());
+			}
 		});
 
 		server.on("/api/scanNetworks", HTTP_GET, [&](){
@@ -125,14 +189,14 @@ namespace ksf::comps
 		});
 
 		server.on("/api/goToConfigMode", HTTP_GET, [&](){
-			if (!server.authenticate(username, webOtaPassword.c_str()))
+			if (!server.authenticate(username, password.c_str()))
 				return server.requestAuthentication();
 
 			breakApp = true;
 		});
 
 #if defined(ESP8266)
-		httpUpdater.setup(&server, "/api/flash", username, webOtaPassword.c_str());
+		httpUpdater.setup(&server, "/api/flash", username, password.c_str());
 
 		Update.onStart([this]() {
 			onUpdateStart->broadcast();
@@ -143,7 +207,7 @@ namespace ksf::comps
 		});
 #elif defined(ESP32)
 		server.on("/api/flash", HTTP_POST, [&]() {
-			if (!server.authenticate(username, webOtaPassword.c_str()))
+			if (!server.authenticate(username, password.c_str()))
 				return;
 
 			server.sendHeader("Connection", "close");
@@ -156,7 +220,7 @@ namespace ksf::comps
 			delay(100);
 			ESP.restart();
 		}, [&]() {
-			if (!server.authenticate(username, webOtaPassword.c_str()))
+			if (!server.authenticate(username, password.c_str()))
 				return;
 
 			HTTPUpload& upload = server.upload();
@@ -182,20 +246,8 @@ namespace ksf::comps
 		server.begin();
 	}
 #endif
-	
-	bool ksOtaUpdater::init(ksApplication* owner)
-	{
-		ArduinoOTA.setHostname(WiFi.getHostname());
-		ArduinoOTA.begin();
 
-#if SUPPORT_HTTP_OTA
-		setupUpdateWebServer();
-#endif
-
-		return true;
-	}
-
-	bool ksOtaUpdater::loop()
+	bool ksDevicePortal::loop()
 	{
 		/* Handle OTA stuff. */
 		ArduinoOTA.handle();

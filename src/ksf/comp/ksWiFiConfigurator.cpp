@@ -11,8 +11,17 @@
 #include "../ksConstants.h"
 #include "ksWiFiConfigurator.h"
 #include "ksConfigProvider.h"
+#include "ksDevicePortal.h"
 #include "ksLed.h"
-
+#if ESP32
+	#include <WiFi.h>
+	#include <esp_wifi.h>
+#elif ESP8266
+	#include <user_interface.h>
+	#include <ESP8266WiFi.h>
+#else 			
+	#error Platform not implemented.
+#endif
 namespace ksf::comps
 {
 	ksWiFiConfigurator::ksWiFiConfigurator()
@@ -33,12 +42,30 @@ namespace ksf::comps
 #else			
 		#error Platform not implemented.
 #endif
+		WiFi.mode(WIFI_OFF);
+
+#if ESP32
+		/* On ESP32 hostname must be set when not in STA mode. */
+		WiFi.setHostname(deviceName.c_str());
+#endif
+
+		WiFi.mode(WIFI_AP);
+
+#if ESP8266
+		/* On ESP8266 hostname must be set when in STA mode. */
+		WiFi.setHostname(deviceName.c_str());
+#endif
+	}
+
+	bool ksWiFiConfigurator::init(ksApplication* owner)
+	{
+		this->owner = owner;
+		owner->addComponent<ksf::comps::ksDevicePortal>("");
+		return true;
 	}
 
 	bool ksWiFiConfigurator::postInit(ksApplication* owner)
 	{
-		this->owner = owner;
-
 		std::vector<std::weak_ptr<ksLed>> ledCompsWp;
 		owner->findComponents<ksLed>(ledCompsWp);
 
@@ -51,22 +78,6 @@ namespace ksf::comps
 
 	bool ksWiFiConfigurator::loop()
 	{
-		manager.setConfigPortalTimeout(KSF_CAP_PORTAL_TIMEOUT_SEC);
-		manager.setConnectTimeout(KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC);
-
-		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-		owner->findComponents<ksConfigProvider>(configCompsWp);
-
-		for (auto& configCompWp : configCompsWp)
-			if (auto configCompSp{configCompWp.lock()})
-				configCompSp->injectManagerParameters(manager);
-
-		manager.startConfigPortal(deviceName.c_str());
-
-		for (auto& configCompWp : configCompsWp)
-			if (auto configCompSp{configCompWp.lock()})
-				configCompSp->captureManagerParameters(manager);
-
-		return false;
+		return !configTimeout.triggered();
 	}
 }

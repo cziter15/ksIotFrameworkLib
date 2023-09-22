@@ -7,22 +7,31 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "WiFiManager.h"
 #include "../ksConfig.h"
 #include "ksConfigProvider.h"
 
 namespace ksf::comps
 {
-	void ksConfigProvider::addNewParam(WiFiManager& manager, std::string label, std::string defaultValue, int maxLength)
+	void ksConfigProvider::addNewParam(std::string id, std::string defaultValue, int maxLength)
 	{
-		auto& par{params.emplace_back(std::move(label), nullptr)};
-		par.second = std::make_unique<WiFiManagerParameter>(par.first.c_str(), par.first.c_str(), defaultValue.c_str(), maxLength);
-		manager.addParameter(par.second.get());
+		ksConfigParameter param
+		{
+			.id = std::move(id),
+			.defaultValue = std::move(defaultValue),
+			.maxLength = maxLength
+		};
+
+		params.push_back(std::move(param));
 	}
 
-	void ksConfigProvider::addNewParamWithConfigDefault(WiFiManager& manager, ksConfig& config, std::string label, int maxLength)
+	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength)
 	{
-		auto& defaultValue{config.getParam(label)};
-		return addNewParam(manager, std::move(label), std::move(defaultValue), maxLength);
+		auto& defaultValue{config.getParam(id)};
+		return addNewParam(std::move(id), std::move(defaultValue), maxLength);
+	}
+
+	std::list<ksConfigParameter>& ksConfigProvider::getParameters()
+	{
+		return params;
 	}
 }

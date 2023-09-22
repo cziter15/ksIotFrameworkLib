@@ -23,49 +23,42 @@ namespace ksf
 
 namespace ksf::comps
 {
+	struct ksConfigParameter
+	{
+		std::string id;
+		std::string defaultValue;
+		std::string value;
+		int maxLength{0};
+	};
 
 	class ksConfigProvider : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksConfigProvider, ksComponent)
 
 		protected:
-			std::list<std::pair<std::string, std::unique_ptr<WiFiManagerParameter>>> params;	// WiFiManager parameters.
+			std::list<ksConfigParameter> params;
 			
 			/*
-				Adds a new param to the WiFiManager configuration process.
-				This method must be called only inside injectManagerParameters function.
-
-				@param manager WiFiManager reference.
-				@param label Shared ID/Label to identify parameter.
+				@param id Shared ID/Label to identify parameter.
 				@param defaultValue Default value of parameter.
 				@param maxLength Maximum length of parameter value.
 			*/
-			void addNewParam(WiFiManager& manager, std::string label, std::string defaultValue, int maxLength = 50);
+			void addNewParam(std::string id, std::string defaultValue, int maxLength = 50);
 
 			/*
-				Adds a new param to the WiFiManager configuration process. Default value is taken from ksConfig object.
-				This method must be called only inside injectManagerParameters function.
-
-				@param manager WiFiManager reference.
-				@param label Shared ID/Label to identify parameter.
+				@param id Shared ID/Label to identify parameter.
 				@param config ksConfig reference.
 				@param maxLength Maximum length of parameter value.
 			*/
-			void addNewParamWithConfigDefault(WiFiManager& manager, ksConfig& config, std::string label, int maxLength = 50);
+			void addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength = 50);
 
 		public:
 			/*
-				Overridable method to inject WiFiManager parameters.
-
-				@param manager WiFiManager reference.
+				Returns list of parameters.
 			*/
-			virtual void injectManagerParameters(WiFiManager& manager) = 0;
+			std::list<ksConfigParameter>& getParameters();
 
-			/*
-				Overridable method to capture WiFiManager parameters.
-
-				@param manager WiFiManager reference.
-			*/
-			virtual void captureManagerParameters(WiFiManager& manager) = 0;
+			virtual void readParams();
+			virtual void saveParams();
 	};
 }

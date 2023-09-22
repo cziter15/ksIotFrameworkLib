@@ -27,14 +27,14 @@ namespace ksf::comps
 
 				@param manager WiFiManager reference.
 			*/
-			void injectManagerParameters(WiFiManager& manager) override;
+			void readParams() override;
 
 			/*
 				Captures MQTT config provider's WiFiManager parameters.
 
 				@param manager WiFiManager reference.
 			*/
-			void captureManagerParameters(WiFiManager& manager) override;
+			void saveParams() override;
 
 			/*
 				Setup MQTT connector with captured parameters.

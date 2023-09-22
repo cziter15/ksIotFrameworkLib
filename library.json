@@ -15,7 +15,6 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"tzapu/WiFiManager": "https://github.com/tzapu/WiFiManager",
 		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient"
 	},
 	"frameworks": "arduino",

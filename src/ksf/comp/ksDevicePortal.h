@@ -15,16 +15,16 @@
 
 namespace ksf::comps
 {
-	class ksOtaUpdater : public ksComponent
+	class ksDevicePortal : public ksComponent
 	{
-		KSF_RTTI_DECLARATIONS(ksOtaUpdater, ksComponent)
+		KSF_RTTI_DECLARATIONS(ksDevicePortal, ksComponent)
 
 		protected:
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
-
+			ksApplication*	owner{nullptr};					// Pointer to ksApplication.
 #if SUPPORT_HTTP_OTA
 			bool breakApp{false};
-			std::string webOtaPassword;						// OTA password.
+			std::string password;							// OTA password.
 
 			/*
 				This function starts OTA update server.
@@ -46,13 +46,13 @@ namespace ksf::comps
 				
 				@param password Password required to flash.
 			*/
-			ksOtaUpdater(const std::string& password);
+			ksDevicePortal(const std::string& password);
 
 			/*
 				Constructor, used to construct OTA updater component.
 				Uses the default password "ota_ksiotframework"
 			*/
-			ksOtaUpdater();
+			ksDevicePortal();
 
 			/*
 				Initializes OTA component.

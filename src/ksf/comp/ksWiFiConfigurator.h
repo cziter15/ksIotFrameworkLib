@@ -9,10 +9,9 @@
 
 #pragma once
 
-#include <WiFiManager.h>
 #include <string>
 #include "../ksComponent.h"
-
+#include "../ksSimpleTimer.h"
 namespace ksf::comps
 {
 	class ksWiFiConfigurator : public ksComponent
@@ -20,9 +19,9 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksWiFiConfigurator, ksComponent)
 
 		protected:
-			ksApplication* owner{nullptr};		//  Pointer to ksApplication object that owns this component.
-			WiFiManager manager;				// WiFiManager object.
-			std::string deviceName;				// Device name (prefix).
+			ksApplication* owner{nullptr};			//  Pointer to ksApplication object that owns this component.
+			std::string deviceName;					// Device name (prefix).
+			ksf::ksSimpleTimer configTimeout{120};
 
 		public:
 			/*
@@ -46,6 +45,13 @@ namespace ksf::comps
 				@return True if loop succedeed, otherwise false.
 			*/
 			bool loop() override;
+
+			/*
+				ksWiFiConfigurator init function.
+				@param owner Pointer to the application object.
+				@return True on success, false on fail.
+			*/
+			bool init(ksApplication* owner) override;
 
 			/*
 				ksWiFiConfigurator postInit function.

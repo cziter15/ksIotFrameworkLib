@@ -60,25 +60,25 @@ namespace ksf::comps
 		}
 	}
 
-	void ksMqttConfigProvider::injectManagerParameters(WiFiManager& manager)
+	void ksMqttConfigProvider::readParams()
 	{		
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			addNewParamWithConfigDefault(manager, config_file, BROKER_TEXT_PGM);
-			addNewParamWithConfigDefault(manager, config_file, PORT_TEXT_PGM, 5);
-			addNewParamWithConfigDefault(manager, config_file, USER_TEXT_PGM);
-			addNewParamWithConfigDefault(manager, config_file, FINGERPRINT_TEXT_PGM, 110);
-			addNewParamWithConfigDefault(manager, config_file, PASSWORD_TEXT_PGM);
-			addNewParamWithConfigDefault(manager, config_file, PREFIX_TEXT_PGM);
+			addNewParamWithConfigDefault(config_file, BROKER_TEXT_PGM);
+			addNewParamWithConfigDefault(config_file, PORT_TEXT_PGM, 5);
+			addNewParamWithConfigDefault(config_file, USER_TEXT_PGM);
+			addNewParamWithConfigDefault(config_file, FINGERPRINT_TEXT_PGM, 110);
+			addNewParamWithConfigDefault(config_file, PASSWORD_TEXT_PGM);
+			addNewParamWithConfigDefault(config_file, PREFIX_TEXT_PGM);
 		}
 	}
 
-	void ksMqttConfigProvider::captureManagerParameters(WiFiManager& manager)
+	void ksMqttConfigProvider::saveParams()
 	{
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			for (auto& param : params)
-				config_file.setParam(param.second->getID(), param.second->getValue());
+				config_file.setParam(param.id, param.value);
 		}
 
 		params.clear();

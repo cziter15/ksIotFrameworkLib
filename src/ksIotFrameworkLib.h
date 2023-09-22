@@ -24,7 +24,7 @@
 #include "ksf/comp/ksMqttDebugResponder.h"
 #include "ksf/comp/ksWiFiConfigurator.h"
 #include "ksf/comp/ksWifiConnector.h"
-#include "ksf/comp/ksOtaUpdater.h"
+#include "ksf/comp/ksDevicePortal.h"
 #include "ksf/comp/ksDevStatMqttReporter.h"
 
 #include "ksf/ksAppRotator.h"
