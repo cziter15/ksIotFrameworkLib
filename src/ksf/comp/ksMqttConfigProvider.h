@@ -9,7 +9,6 @@
 
 #pragma once
 
-#include <WiFiManager.h>
 #include "ksConfigProvider.h"
 
 class WiFiManager;
