@@ -60,6 +60,7 @@ namespace ksf::comps
 	bool ksDevicePortal::init(ksApplication* owner)
 	{
 		this->owner = owner;
+
 		ArduinoOTA.setHostname(WiFi.getHostname());
 		ArduinoOTA.begin();
 
@@ -107,6 +108,7 @@ namespace ksf::comps
 		server.on("/api/getMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			bool isAPMode = WiFi.getMode() == WIFI_AP;
 			std::string json;
+			json.reserve(64);
 			json += "{ \"isAPMode\": ";
 			json += isAPMode ? "true" : "false";
 			json += " }";
@@ -118,7 +120,7 @@ namespace ksf::comps
 			request->send(200, "application/json", "{}");
 		});
 
-		server.on("/api/setDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server.on("/api/getDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
 
@@ -129,10 +131,12 @@ namespace ksf::comps
 			for (auto& configCompWp : configCompsWp) 
 			{
 				auto configCompSp{configCompWp.lock()};
-				if (!configCompSp)
+				if (configCompSp == nullptr)
 					continue;
 
-				for (auto& parameter : configCompSp->getParameters()) 
+				configCompSp->readParams();
+
+				for (const auto& parameter : configCompSp->getParameters()) 
 				{
 					response += "{";
 					response += "\"id\":\"" + parameter.id + "\",";
@@ -150,7 +154,7 @@ namespace ksf::comps
 			request->send(200, "application/json", response.c_str());
 		});
 
-		server.on("/api/getDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server.on("/api/setDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
 		

@@ -21,7 +21,7 @@ namespace ksf::comps
 
 		protected:
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
-			ksApplication*	owner{nullptr};					// Pointer to ksApplication.
+			ksApplication* owner{nullptr};					// Pointer to ksApplication.
 #if SUPPORT_HTTP_OTA
 			bool breakApp{false};
 			std::string password;							// OTA password.
