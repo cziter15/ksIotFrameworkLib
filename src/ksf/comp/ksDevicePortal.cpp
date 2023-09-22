@@ -15,21 +15,22 @@
 
 #if SUPPORT_HTTP_OTA
 #if defined(ESP8266)
+    #include "ESP8266WiFi.h"
+    #include "ESPAsyncTCP.h"
+    #include "flash_hal.h"
+    #include "FS.h"
 	#define HARDWARE "ESP8266"
-	#include "ESP8266WiFi.h"
-	#include "WiFiClient.h"
-	#include "ESP8266WebServer.h"
-	#include "ESP8266HTTPUpdateServer.h"
-	ESP8266WebServer server(80);
-	ESP8266HTTPUpdateServer httpUpdater;
 #elif defined(ESP32)
+    #include "WiFi.h"
+    #include "AsyncTCP.h"
+    #include "Update.h"
+    #include "esp_int_wdt.h"
+    #include "esp_task_wdt.h"
 	#define HARDWARE "ESP32"
-	#include "WiFi.h"
-	#include "WiFiClient.h"
-	#include "WebServer.h"
-	#include "Update.h"
-	WebServer server(80);
 #endif
+#include "ESPAsyncWebServer.h"
+
+AsyncWebServer server(80);
 #include "../res/otaWebpage.h"
 #endif
 
@@ -77,34 +78,33 @@ namespace ksf::comps
 #if SUPPORT_HTTP_OTA
 	void ksDevicePortal::setupUpdateWebServer()
 	{
-		static const char* username{"admin"};
-
-		server.onNotFound([&]() {
-			server.sendHeader("Location", "/", true);
-			server.send(302, "text/plain", "");
+		//static const char* username{"admin"};
+		server.onNotFound([&](AsyncWebServerRequest *request) {
+			AsyncWebServerResponse *response = request->beginResponse(302, "text/plain", "");
+			response->addHeader("Location", "/");
+			request->send(response);
 		});
 
-		server.on("/", HTTP_GET, [&]() {
-			if (!server.authenticate(username, password.c_str()))
-				return server.requestAuthentication();
+		server.on("/", HTTP_GET, [&](AsyncWebServerRequest *request) {
+			AsyncWebServerResponse *response 
+			{ 
+				request->beginResponse_P(200, "text/html", DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE)
+			};
 
-			server.sendHeader("Content-Encoding", "gzip");
-			server.send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
+			response->addHeader("Content-Encoding", "gzip");
+			request->send(response);
 		});
 
-		server.on("/api/identity", HTTP_GET, [&]() {
-			if (!server.authenticate(username, password.c_str()))
-				return server.requestAuthentication();
-
+		server.on("/api/identity", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::string json;
 			json.reserve(64);
 			json += "{ \"id\": \"";
 			json += WiFi.getHostname();
 			json += "\", \"hardware\": \"" HARDWARE "\" }";
-			server.send(200, "application/json", json.c_str());
+			request->send(200, "application/json", json.c_str());
 		});
 
-		server.on("/api/getDeviceParams", HTTP_GET, [&]() {
+		server.on("/api/setDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
 
@@ -133,13 +133,10 @@ namespace ksf::comps
 
 			response += "]";
 
-			server.send(200, "application/json", response.c_str());
+			request->send(200, "application/json", response.c_str());
 		});
 
-		server.on("/api/setDeviceParams", HTTP_POST, [&]() {
-			if (!server.authenticate(username, password.c_str()))
-				return;
-			
+		server.on("/api/getDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
 		
@@ -150,11 +147,11 @@ namespace ksf::comps
 					continue;
 
 				for (auto& parameter : configCompSp->getParameters())
-					parameter.value = std::string(server.arg(parameter.id.c_str()).c_str());
+					parameter.value = std::string(request->arg(parameter.id.c_str()).c_str());
 			}
 		});
 
-		server.on("/api/scanNetworks", HTTP_GET, [&](){
+		server.on("/api/scanNetworks", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::string json;
 			json.reserve(64);
 			json += "[";
@@ -185,64 +182,53 @@ namespace ksf::comps
 					WiFi.scanNetworks(true);
 			}
 			json += "]";
-			server.send(200, "application/json", json.c_str());
+			request->send(200, "application/json", json.c_str());
 		});
 
-		server.on("/api/goToConfigMode", HTTP_GET, [&](){
-			if (!server.authenticate(username, password.c_str()))
-				return server.requestAuthentication();
+		server.on("/update", HTTP_POST, [&](AsyncWebServerRequest *request) {
+			AsyncWebServerResponse *response = 
+				request->beginResponse((Update.hasError())?500:200, "text/plain", (Update.hasError())?"FAIL":"OK");
 
-			breakApp = true;
-		});
-
-#if defined(ESP8266)
-		httpUpdater.setup(&server, "/api/flash", username, password.c_str());
-
-		Update.onStart([this]() {
-			onUpdateStart->broadcast();
-		});
-
-		Update.onEnd([this]() {
-			updateFinished();
-		});
-#elif defined(ESP32)
-		server.on("/api/flash", HTTP_POST, [&]() {
-			if (!server.authenticate(username, password.c_str()))
-				return;
-
-			server.sendHeader("Connection", "close");
-			server.send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
-			
-			updateFinished();
-
-			delay(100);
-			yield();
-			delay(100);
-			ESP.restart();
-		}, [&]() {
-			if (!server.authenticate(username, password.c_str()))
-				return;
-
-			HTTPUpload& upload = server.upload();
-			if (upload.status == UPLOAD_FILE_START)
+			response->addHeader("Connection", "close");
+			response->addHeader("Access-Control-Allow-Origin", "*");
+			request->send(response);
+		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
+			if (!index) 
 			{
-				if (upload.name == "filesystem")
-					Update.begin(UPDATE_SIZE_UNKNOWN, U_SPIFFS);
-				else
-					Update.begin(UPDATE_SIZE_UNKNOWN, U_FLASH);
+				if(!request->hasParam("MD5", true)) 
+					return request->send(400, "text/plain", "MD5 parameter missing");
 
-				onUpdateStart->broadcast();
+				if(!Update.setMD5(request->getParam("MD5", true)->value().c_str())) 
+					return request->send(400, "text/plain", "MD5 parameter invalid");
+
+				#if defined(ESP8266)
+					int cmd = (filename == "filesystem") ? U_FS : U_FLASH;
+					Update.runAsync(true);
+					size_t fsSize = ((size_t) &_FS_end - (size_t) &_FS_start);
+					uint32_t maxSketchSpace = (ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000;
+					if (!Update.begin((cmd == U_FS)?fsSize:maxSketchSpace, cmd)){ // Start with max available size
+				#elif defined(ESP32)
+					int cmd = (filename == "filesystem") ? U_SPIFFS : U_FLASH;
+					if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) { // Start with max available size
+				#endif
+					return request->send(400, "text/plain", "OTA could not begin");
+				}
 			}
-			else if (upload.status == UPLOAD_FILE_WRITE)
-			{
-				Update.write(upload.buf, upload.currentSize);
+
+			// Write chunked data to the free sketch space
+			if(len)
+				if (Update.write(data, len) != len)
+					return request->send(400, "text/plain", "OTA could not begin");
+				
+			if (final) 
+			{ 
+				if (!Update.end(true)) 
+				{
+					return request->send(400, "text/plain", "Could not end OTA");
+				}
 			}
-			else if (upload.status == UPLOAD_FILE_END) 
-			{
-				Update.end(true);
-			}
+			else return;
 		});
-#endif
 		server.begin();
 	}
 #endif
@@ -253,9 +239,6 @@ namespace ksf::comps
 		ArduinoOTA.handle();
 
 #if SUPPORT_HTTP_OTA
-		/* Handle HTTP stuff. */
-		server.handleClient();
-
 		if (breakApp)
 			return false;
 #endif
