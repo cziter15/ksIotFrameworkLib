@@ -109,7 +109,6 @@ namespace ksf::comps
 			std::string json;
 			json += "{ \"isAPMode\": ";
 			json += isAPMode ? "true" : "false";
-			json += "\" }";
 			request->send(200, "application/json", json.c_str());
 		});
 
