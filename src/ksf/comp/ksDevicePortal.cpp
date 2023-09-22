@@ -104,6 +104,15 @@ namespace ksf::comps
 			request->send(200, "application/json", json.c_str());
 		});
 
+		server.on("/api/getMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
+			bool isAPMode = WiFi.getMode() == WIFI_AP;
+			std::string json;
+			json += "{ \"isAPMode\": ";
+			json += isAPMode ? "true" : "false";
+			json += "\" }";
+			request->send(200, "application/json", json.c_str());
+		});
+
 		server.on("/api/goToConfigMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			breakApp = true;
 			request->send(200, "application/json", "{}");
