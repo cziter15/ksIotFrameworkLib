@@ -91,5 +91,10 @@ namespace ksf::comps
 				@return True if connected. False otherwise.
 			*/
 			bool isConnected() const;
+
+			/*
+				Destroys WiFi connector component.
+			*/
+			virtual ~ksWifiConnector();
 	};
 }

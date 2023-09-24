@@ -13,7 +13,7 @@
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
 
-#if SUPPORT_HTTP_OTA
+
 #if defined(ESP8266)
     #include "ESP8266WiFi.h"
     #include "ESPAsyncTCP.h"
@@ -29,10 +29,7 @@
 	#define HARDWARE "ESP32"
 #endif
 #include "ESPAsyncWebServer.h"
-
-AsyncWebServer server(80);
 #include "../res/otaWebpage.h"
-#endif
 
 namespace ksf::comps
 {
@@ -55,6 +52,8 @@ namespace ksf::comps
 		ArduinoOTA.onEnd([this]() {
 			updateFinished();
 		});
+
+		Serial.begin(9600);
 	}
 	
 	bool ksDevicePortal::init(ksApplication* owner)
@@ -64,10 +63,12 @@ namespace ksf::comps
 		ArduinoOTA.setHostname(WiFi.getHostname());
 		ArduinoOTA.begin();
 
-#if SUPPORT_HTTP_OTA
-		setupUpdateWebServer();
-#endif
+		return true;
+	}
 
+	bool ksDevicePortal::postInit(ksApplication* owner)
+	{
+		setupUpdateWebServer();
 		return true;
 	}
 
@@ -76,17 +77,19 @@ namespace ksf::comps
 		ksf::saveOtaBootIndicator();
 		onUpdateEnd->broadcast();
 	}
-#if SUPPORT_HTTP_OTA
+
 	void ksDevicePortal::setupUpdateWebServer()
 	{
+		server = std::make_shared<AsyncWebServer>(80);
+
 		//static const char* username{"admin"};
-		server.onNotFound([&](AsyncWebServerRequest *request) {
+		server->onNotFound([&](AsyncWebServerRequest *request) {
 			AsyncWebServerResponse *response = request->beginResponse(302, "text/plain", "");
 			response->addHeader("Location", "/");
 			request->send(response);
 		});
 
-		server.on("/", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on("/", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			AsyncWebServerResponse *response 
 			{ 
 				request->beginResponse_P(200, "text/html", DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE)
@@ -96,83 +99,69 @@ namespace ksf::comps
 			request->send(response);
 		});
 
-		server.on("/api/identity", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			std::string json;
-			json.reserve(64);
+		server->on("/api/identity", HTTP_GET, [&](AsyncWebServerRequest *request) {
+			String json;
 			json += "{ \"id\": \"";
 			json += WiFi.getHostname();
 			json += "\", \"hardware\": \"" HARDWARE "\" }";
-			request->send(200, "application/json", json.c_str());
+			request->send(200, "application/json", json);
 		});
 
-		server.on("/api/getMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on("/api/getMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			bool isAPMode = WiFi.getMode() == WIFI_AP;
-			std::string json;
-			json.reserve(64);
+			String json;
 			json += "{ \"isAPMode\": ";
 			json += isAPMode ? "true" : "false";
 			json += " }";
-			request->send(200, "application/json", json.c_str());
+			request->send(200, "application/json", json);
 		});
 
-		server.on("/api/goToConfigMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on("/api/goToConfigMode", HTTP_GET, [&](AsyncWebServerRequest *request) {
 			breakApp = true;
 			request->send(200, "application/json", "{}");
 		});
 
-		server.on("/api/getDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on("/api/getDeviceParams", HTTP_GET, [this](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
-
-			std::string response;
-			response.reserve(64);
-			response += "[";
 			
-			for (auto& configCompWp : configCompsWp) 
-			{
-				auto configCompSp{configCompWp.lock()};
-				if (configCompSp == nullptr)
-					continue;
+			String json{"["};
 
-				configCompSp->readParams();
-
-				for (const auto& parameter : configCompSp->getParameters()) 
-				{
-					response += "{";
-					response += "\"id\":\"" + parameter.id + "\",";
-					response += "\"value\":\"" + parameter.defaultValue + "\",";
-					response += "\"maxLen\":\"" + std::to_string(parameter.maxLength) + "\"";
-					response += "},";
-				}
-			}
-
-			if (response.back() == ',')
-				response.pop_back();
-
-			response += "]";
-
-			request->send(200, "application/json", response.c_str());
-		});
-
-		server.on("/api/setDeviceParams", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-			owner->findComponents<ksConfigProvider>(configCompsWp);
-		
 			for (auto& configCompWp : configCompsWp)
 			{
 				auto configCompSp{configCompWp.lock()};
 				if (!configCompSp)
 					continue;
+				
+				configCompSp->getParameters().clear();
+				configCompSp->readParams();
 
 				for (auto& parameter : configCompSp->getParameters())
-					parameter.value = std::string(request->arg(parameter.id.c_str()).c_str());
+				{
+					json += "{";
+					json += "\"id\": \"";
+					json += String(parameter.id.c_str());
+					json += "\", \"value\": \"";
+					json += String(parameter.value.c_str());
+					json += "\"},";
+				}
 			}
+
+			if (json.endsWith(","))
+				json.remove(json.length() - 1, 1);
+
+			json += "]";
+
+			request->send(200, "text/plain", json);
 		});
 
-		server.on("/api/scanNetworks", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			std::string json;
-			json.reserve(64);
-			json += "[";
+		server->on("/api/setDeviceParams", HTTP_GET, [this](AsyncWebServerRequest *request) {
+			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+			owner->findComponents<ksConfigProvider>(configCompsWp);
+		});
+
+		server->on("/api/scanNetworks", HTTP_GET, [&](AsyncWebServerRequest *request) {
+			String json{"["};
 			int scanResult{WiFi.scanComplete()};
 			if(scanResult == -2)
 			{
@@ -186,12 +175,12 @@ namespace ksf::comps
 						json += ",";
 
 					json += "{";
-					json += "\"rssi\":"+ksf::to_string(WiFi.RSSI(i));
-					json += ",\"ssid\":\""+std::string(WiFi.SSID(i).c_str())+"\"";
-					json += ",\"bssid\":\""+std::string(WiFi.BSSIDstr(i).c_str())+"\"";
-					json += ",\"channel\":"+ksf::to_string(WiFi.channel(i));
-					json += ",\"secure\":"+ksf::to_string(WiFi.encryptionType(i));
-					json += ",\"hidden\":"+ksf::to_string(WiFi.isHidden(i));
+					json += "\"rssi\":"+String(WiFi.RSSI(i));
+					json += ",\"ssid\":\""+WiFi.SSID(i)+"\"";
+					json += ",\"bssid\":\""+WiFi.BSSIDstr(i)+"\"";
+					json += ",\"channel\":"+String(WiFi.channel(i));
+					json += ",\"secure\":"+String(WiFi.encryptionType(i));
+					json += ",\"hidden\":"+String(WiFi.isHidden(i));
 					json += "}";
 				}
 				WiFi.scanDelete();
@@ -199,11 +188,12 @@ namespace ksf::comps
 				if(WiFi.scanComplete() == -2)
 					WiFi.scanNetworks(true);
 			}
+
 			json += "]";
 			request->send(200, "application/json", json.c_str());
 		});
 
-		server.on("/update", HTTP_POST, [&](AsyncWebServerRequest *request) {
+		server->on("/update", HTTP_POST, [&](AsyncWebServerRequest *request) {
 			AsyncWebServerResponse *response = 
 				request->beginResponse((Update.hasError())?500:200, "text/plain", (Update.hasError())?"FAIL":"OK");
 
@@ -247,19 +237,18 @@ namespace ksf::comps
 			}
 			else return;
 		});
-		server.begin();
+
+		server->begin();
 	}
-#endif
+
 
 	bool ksDevicePortal::loop()
 	{
 		/* Handle OTA stuff. */
 		ArduinoOTA.handle();
 
-#if SUPPORT_HTTP_OTA
 		if (breakApp)
 			return false;
-#endif
 
 		return true;
 	}

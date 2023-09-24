@@ -25,8 +25,6 @@ namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
-		WiFi.mode(WIFI_OFF);
-
 #if ESP32
 		/* On ESP32 hostname must be set when not in STA mode. */
 		WiFi.setHostname(hostname);
@@ -166,5 +164,11 @@ namespace ksf::comps
 	bool ksWifiConnector::isConnected() const
 	{
 		return WiFi.isConnected() && gotIpAddress;
+	}
+
+	ksWifiConnector::~ksWifiConnector()
+	{
+		disconnectStation();
+		WiFi.mode(WIFI_OFF);
 	}
 }

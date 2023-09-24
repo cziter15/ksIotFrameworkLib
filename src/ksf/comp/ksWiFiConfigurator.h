@@ -61,5 +61,10 @@ namespace ksf::comps
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* owner) override;
+
+			/*
+				Destroys WiFi configurator object.
+			*/
+			virtual ~ksWiFiConfigurator();
 	};
 }

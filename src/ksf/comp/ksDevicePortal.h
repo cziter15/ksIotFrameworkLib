@@ -13,6 +13,7 @@
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 
+class AsyncWebServer;
 namespace ksf::comps
 {
 	class ksDevicePortal : public ksComponent
@@ -22,15 +23,16 @@ namespace ksf::comps
 		protected:
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 			ksApplication* owner{nullptr};					// Pointer to ksApplication.
-#if SUPPORT_HTTP_OTA
-			bool breakApp{false};
+
+			bool breakApp{false};							// Flag to break app loop.
 			std::string password;							// OTA password.
+
+			std::shared_ptr<AsyncWebServer> server;
 
 			/*
 				This function starts OTA update server.
 			*/
 			void setupUpdateWebServer();
-#endif
 
 			/*
 				This function is called when OTA update is finished.
@@ -55,14 +57,20 @@ namespace ksf::comps
 			ksDevicePortal();
 
 			/*
-				Initializes OTA component.
+				Initializes device portal component.
+
 				@param owner Pointer to the application object.
 				@return True on success, false on fail.
 			*/
 			bool init(ksApplication* owner) override;
 
 			/*
-				Handles OTA component loop logic.
+				Post initialization method for device portal with integrated OTA.
+			*/
+			bool postInit(ksApplication* owner) override;
+
+			/*
+				Handles device portal component loop logic.
 
 				@return True on success, false on fail.
 			*/
