@@ -185,27 +185,24 @@ namespace ksf::comps
 					continue;
 				
 				auto& paramListRef{configCompSp->getParameters()};
-
 				paramListRef.clear();
 				configCompSp->readParams();
 
-				for (auto it{paramListRef.begin()}; it != paramListRef.end();)
+				for (auto paramRef : paramListRef)
 				{
 					json += FPSTR("{\"id\": \"");
-					json += String(it->id.c_str());
+					json += String(paramRef.id.c_str());
 					json += FPSTR("\", \"value\": \"");
-					json += String(it->value.c_str());
+					json += String(paramRef.value.c_str());
 					json += FPSTR("\", \"default\": \"");
-					json += String(it->defaultValue.c_str());
-					json += "\"}";
-
-					if (it != paramListRef.end())
-						json += ',';
-
-					++it;
+					json += String(paramRef.defaultValue.c_str());
+					json += FPSTR("\"},");
 				}
 			}
 
+			if (json.endsWith(","))
+				json = json.substring(0, json.length() - 1);
+	
 			json += "]}";
 
 			request->send(200, FPSTR("application/json"), json);
