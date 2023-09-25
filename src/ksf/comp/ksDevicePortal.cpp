@@ -88,6 +88,15 @@ namespace ksf::comps
 		server = std::make_shared<AsyncWebServer>(80);
 
 		server->onNotFound([&](AsyncWebServerRequest *request) {
+
+			String acceptHeader{request->header(FPSTR("Accept"))};
+
+			if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
+			{
+				request->send(404, FPSTR("text/html"), FPSTR("Not found"));
+				return;
+			}
+
 			AsyncWebServerResponse *response = request->beginResponse(302, FPSTR("text/plain"), "");
 			response->addHeader(FPSTR("Location"), "/");
 			request->send(response);
