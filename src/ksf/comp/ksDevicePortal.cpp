@@ -156,7 +156,7 @@ namespace ksf::comps
 			json += FPSTR(",\"ssid\":\"");
 			json += ssid;
 			json += FPSTR("\", \"password\":\"");
-			json += WiFi.psk();
+			json += pass;
 			json += FPSTR("\",\"params\": [");
 
 			for (auto& configCompWp : configCompsWp)
