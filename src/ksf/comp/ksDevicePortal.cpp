@@ -124,8 +124,13 @@ namespace ksf::comps
 		server->on("/api/getDeviceParams", HTTP_GET, [this](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
-			
-			String json{"["};
+
+			String json;
+			json += "{\"ssid\":\"";
+			json += WiFi.SSID();
+			json += "\", \"password\":\"";
+			json += WiFi.psk();
+			json += "\",\"params\": [";
 
 			for (auto& configCompWp : configCompsWp)
 			{
@@ -141,8 +146,13 @@ namespace ksf::comps
 					json += "{";
 					json += "\"id\": \"";
 					json += String(parameter.id.c_str());
-					json += "\", \"value\": \"";
-					json += String(parameter.value.c_str());
+					json += "\", \"value\": \"";\
+
+					if (parameter.value.empty())
+						json += String(parameter.defaultValue.c_str());
+					else
+						json += String(parameter.value.c_str());
+
 					json += "\"},";
 				}
 			}
@@ -150,30 +160,58 @@ namespace ksf::comps
 			if (json.endsWith(","))
 				json.remove(json.length() - 1, 1);
 
-			json += "]";
+			json += "]}";
 
-			request->send(200, "text/plain", json);
+			request->send(200, "application/plain", json);
 		});
 
-		server->on("/api/setDeviceParams", HTTP_GET, [this](AsyncWebServerRequest *request) {
+		server->on("/api/saveConfig", HTTP_POST, [this](AsyncWebServerRequest *request) {
+			String ssid = request->arg("ssid");
+			String password = request->arg("password");
+
+			if (ssid.isEmpty())
+			{
+				request->send(200, "application/plain", "{ \"result\" : \"Empty SSID\" }");
+				return;
+			}
+				
+			WiFi.persistent(true);
+			WiFi.begin(ssid.c_str(), password.c_str(), 0, nullptr, false);
+			
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
+
+			for (auto& configCompWp : configCompsWp)
+			{
+				auto configCompSp{configCompWp.lock()};
+				if (!configCompSp)
+					continue;
+
+				for (auto& parameter : configCompSp->getParameters())
+				{
+					String value{request->arg(String("param_") + parameter.id.c_str())};
+					if (value.isEmpty())
+						continue;
+
+					parameter.value = value.c_str();
+				}
+
+				configCompSp->saveParams();
+			}
+
+			request->send(200, "application/plain", "{ \"result\": \"OK\" }");
+
+			ESP.restart();
 		});
 
 		server->on("/api/scanNetworks", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			String json{"["};
-			int scanResult{WiFi.scanComplete()};
-			if(scanResult == -2)
+			WiFi.scanNetworksAsync([=](int n) 
 			{
-				WiFi.scanNetworks(true);
-			} 
-			else if (scanResult)
-			{
-				for (int i = 0; i < scanResult; ++i)
+				String json{"["};
+				for (int i{0}; i < n; ++i)
 				{
-					if(i) 
+					if (i > 0)
 						json += ",";
-
 					json += "{";
 					json += "\"rssi\":"+String(WiFi.RSSI(i));
 					json += ",\"ssid\":\""+WiFi.SSID(i)+"\"";
@@ -183,17 +221,14 @@ namespace ksf::comps
 					json += ",\"hidden\":"+String(WiFi.isHidden(i));
 					json += "}";
 				}
+				json += "]";
 				WiFi.scanDelete();
-
-				if(WiFi.scanComplete() == -2)
-					WiFi.scanNetworks(true);
-			}
-
-			json += "]";
-			request->send(200, "application/json", json.c_str());
+				request->send(200, "text/plain", json);
+			});
 		});
 
-		server->on("/update", HTTP_POST, [&](AsyncWebServerRequest *request) {
+		server->on("/flash", HTTP_POST, [&](AsyncWebServerRequest *request) 
+		{
 			AsyncWebServerResponse *response = 
 				request->beginResponse((Update.hasError())?500:200, "text/plain", (Update.hasError())?"FAIL":"OK");
 
