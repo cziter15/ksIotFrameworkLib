@@ -21,6 +21,7 @@
     #include "FS.h"
 	#define HARDWARE "ESP8266"
 #elif defined(ESP32)
+	#include "esp_wifi.h"
     #include "WiFi.h"
     #include "AsyncTCP.h"
     #include "Update.h"
@@ -140,8 +141,20 @@ namespace ksf::comps
 				return;
 			}
 
+			#ifdef ESP8266
+				struct station_config conf;
+				wifi_station_get_config_default(&conf);
+				char* ssid = reinterpret_cast<char*>(conf.ssid);
+				char* pass = reinterpret_cast<char*>(conf.password);
+			#elif defined(ESP32)
+				wifi_config_t conf;
+				esp_wifi_get_config(WIFI_IF_STA, &conf);
+				char* ssid = reinterpret_cast<char*>(conf.sta.ssid);
+				char* pass = reinterpret_cast<char*>(conf.sta.password);
+			#endif
+
 			json += FPSTR(",\"ssid\":\"");
-			json += WiFi.SSID();
+			json += ssid;
 			json += FPSTR("\", \"password\":\"");
 			json += WiFi.psk();
 			json += FPSTR("\",\"params\": [");
