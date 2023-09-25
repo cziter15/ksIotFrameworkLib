@@ -140,23 +140,28 @@ namespace ksf::comps
 				request->send(200, FPSTR("application/json"), json);
 				return;
 			}
-
 			#ifdef ESP8266
 				struct station_config conf;
 				wifi_station_get_config_default(&conf);
-				char* ssid = reinterpret_cast<char*>(conf.ssid);
-				char* pass = reinterpret_cast<char*>(conf.password);
+				auto ssid = reinterpret_cast<const char*>(conf.ssid);
+				auto pass = reinterpret_cast<const char*>(conf.password);
 			#elif defined(ESP32)
 				wifi_config_t conf;
 				esp_wifi_get_config(WIFI_IF_STA, &conf);
-				char* ssid = reinterpret_cast<char*>(conf.sta.ssid);
-				char* pass = reinterpret_cast<char*>(conf.sta.password);
+				auto ssid = reinterpret_cast<const char*>(conf.sta.ssid);
+				auto pass = reinterpret_cast<const char*>(conf.sta.password);
 			#endif
 
+			String ssidString;
+			ssidString.concat(ssid, 64);
+
+			String passString;
+			passString.concat(pass, 64);
+
 			json += FPSTR(",\"ssid\":\"");
-			json += ssid;
+			json += ssidString;
 			json += FPSTR("\", \"password\":\"");
-			json += pass;
+			json += passString;
 			json += FPSTR("\",\"params\": [");
 
 			for (auto& configCompWp : configCompsWp)
