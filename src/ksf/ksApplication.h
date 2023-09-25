@@ -123,5 +123,10 @@ namespace ksf
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();
+			
+			/*
+				Destructor.
+			*/
+			virtual ~ksApplication();
 	};
 }

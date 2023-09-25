@@ -45,20 +45,6 @@ namespace ksf::comps
 			*/
 			void wifiDisconnectedInternal();
 
-			/*
-				Internal method to connect to AP.
-
-				@return True if connect succedeed, otherwise false.
-			*/
-			bool connectStation();
-
-			/*
-				Internal method to disconnect from AP.
-
-				@return True if disconnect succedeed, otherwise false.
-			*/
-			bool disconnectStation();
-
 		public:
 			DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 			DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
@@ -91,10 +77,5 @@ namespace ksf::comps
 				@return True if connected. False otherwise.
 			*/
 			bool isConnected() const;
-
-			/*
-				Destroys WiFi connector component.
-			*/
-			virtual ~ksWifiConnector();
 	};
 }

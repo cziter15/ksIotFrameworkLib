@@ -78,30 +78,6 @@ namespace ksf::comps
 		return true;
 	}
 
-	bool ksWifiConnector::connectStation()
-	{
-#if ESP32
-		return esp_wifi_connect() == ESP_OK;
-#elif ESP8266
-		return wifi_station_connect();
-#else
-		#error Platform not implemented.
-#endif
-	}
-
-	bool ksWifiConnector::disconnectStation()
-	{
-#if ESP32
-		return esp_wifi_disconnect() == ESP_OK;
-#elif ESP8266
-		return wifi_station_disconnect();
-#else
-		#error Platform not implemented.
-#endif
-
-		return false;
-	}
-
 	void ksWifiConnector::wifiConnectedInternal()
 	{
 		onConnected->broadcast();
@@ -124,12 +100,7 @@ namespace ksf::comps
 
 			if (wasConnected)
 			{
-				/*
-					Enforce WiFi disconnect when IP lost. 
-					Unable to call WiFi.disconnect() here due to issue on arduino-esp8266
-					See https://github.com/esp8266/Arduino/issues/8689 for reference.
-				*/
-				disconnectStation();
+				WiFi.disconnect(true, false);
 
 				wasConnected = false;
 				wifiDisconnectedInternal();
@@ -138,9 +109,7 @@ namespace ksf::comps
 			if (wifiReconnectTimer.hasTimePassed())
 			{
 				/* Enforce WiFi full reconnect flow here. */
-				disconnectStation();
-				connectStation();
-
+				WiFi.reconnect();
 				wifiReconnectTimer.restart();
 			}
 		}
@@ -162,11 +131,5 @@ namespace ksf::comps
 	bool ksWifiConnector::isConnected() const
 	{
 		return WiFi.isConnected() && gotIpAddress;
-	}
-
-	ksWifiConnector::~ksWifiConnector()
-	{
-		disconnectStation();
-		WiFi.mode(WIFI_OFF);
 	}
 }

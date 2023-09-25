@@ -10,6 +10,13 @@
 #include "ksApplication.h"
 #include "ksComponent.h"
 
+#if ESP32
+	#include <WiFi.h>
+#elif ESP8266
+	#include <ESP8266WiFi.h>
+#else 			
+	#error Platform not implemented.
+#endif
 namespace ksf
 {
 	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent> component)
@@ -48,5 +55,12 @@ namespace ksf
 		updateDeviceUptime();
 
 		return true;
+	}
+	
+	ksApplication::~ksApplication()
+	{
+		WiFi.softAPdisconnect();
+		WiFi.disconnect(true, false);
+		WiFi.mode(WIFI_OFF);
 	}
 }
