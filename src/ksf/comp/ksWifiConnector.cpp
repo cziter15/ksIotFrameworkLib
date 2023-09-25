@@ -29,9 +29,6 @@ namespace ksf::comps
 		/* On ESP32 hostname must be set when not in STA mode. */
 		WiFi.setHostname(hostname);
 #endif
-
-		WiFi.mode(WIFI_STA);
-
 		setupMacAddress();
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);

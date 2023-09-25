@@ -240,8 +240,7 @@ namespace ksf::comps
 
 			request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
 
-			delay(500);
-			ESP.restart();
+			breakApp = true;
 		});
 
 		server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -288,6 +287,7 @@ namespace ksf::comps
 			request->send(response);
 			updateFinished();
 			delay(500);
+			server->end();
 			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			if (!index) 

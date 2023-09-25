@@ -48,7 +48,7 @@ namespace ksf::comps
 	{
 		this->owner = owner;
 
-		owner->addComponent<ksDevicePortal>().lock()->init(owner);
+		owner->addComponent<ksDevicePortal>("").lock()->init(owner);
 
 		WiFi.softAP(deviceName.c_str());
 	
@@ -74,6 +74,7 @@ namespace ksf::comps
 
 	ksWiFiConfigurator::~ksWiFiConfigurator()
 	{
+		WiFi.softAPdisconnect();
 		WiFi.mode(WIFI_OFF);
 	}
 }
