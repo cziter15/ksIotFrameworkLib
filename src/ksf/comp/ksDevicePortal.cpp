@@ -28,6 +28,7 @@
     #include "esp_task_wdt.h"
 	#define HARDWARE "ESP32"
 #endif
+#include <DNSServer.h>
 #include "ESPAsyncWebServer.h"
 #include "../res/otaWebpage.h"
 
@@ -67,6 +68,14 @@ namespace ksf::comps
 	bool ksDevicePortal::postInit(ksApplication* owner)
 	{
 		setupUpdateWebServer();
+
+		if (WiFi.getMode() == WIFI_AP) 
+		{
+			dnsServer = std::make_shared<DNSServer>();
+			dnsServer->setErrorReplyCode(DNSReplyCode::NoError);
+			dnsServer->start(53, "*", WiFi.softAPIP());
+		}
+
 		return true;
 	}
 
@@ -197,8 +206,9 @@ namespace ksf::comps
 				configCompSp->saveParams();
 			}
 
-			request->send(200, "application/plain", "{ \"result\": \"OK\" }");
+			request->send(200, "application/plain", "{ \"result\": \"OK\" }");\
 
+			delay(500);
 			ESP.restart();
 		});
 
@@ -225,7 +235,7 @@ namespace ksf::comps
 			});
 		});
 
-		server->on("/flash", HTTP_POST, [&](AsyncWebServerRequest *request) 
+		server->on("/api/flash", HTTP_POST, [&](AsyncWebServerRequest *request) 
 		{
 			AsyncWebServerResponse *response = 
 				request->beginResponse((Update.hasError())?500:200, "text/plain", (Update.hasError())?"FAIL":"OK");
@@ -233,6 +243,7 @@ namespace ksf::comps
 			response->addHeader("Connection", "close");
 			response->addHeader("Access-Control-Allow-Origin", "*");
 			request->send(response);
+			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			if (!index) 
 			{
@@ -243,13 +254,13 @@ namespace ksf::comps
 					return request->send(400, "text/plain", "MD5 parameter invalid");
 
 				#if defined(ESP8266)
-					int cmd = (filename == "filesystem") ? U_FS : U_FLASH;
+					int cmd = U_FLASH;
 					Update.runAsync(true);
 					size_t fsSize = ((size_t) &_FS_end - (size_t) &_FS_start);
 					uint32_t maxSketchSpace = (ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000;
 					if (!Update.begin((cmd == U_FS)?fsSize:maxSketchSpace, cmd)){ // Start with max available size
 				#elif defined(ESP32)
-					int cmd = (filename == "filesystem") ? U_SPIFFS : U_FLASH;
+					int cmd = U_FLASH;
 					if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) { // Start with max available size
 				#endif
 					return request->send(400, "text/plain", "OTA could not begin");
@@ -279,6 +290,9 @@ namespace ksf::comps
 	{
 		/* Handle OTA stuff. */
 		ArduinoOTA.handle();
+
+		if (dnsServer)
+			dnsServer->processNextRequest();
 
 		if (breakApp)
 			return false;

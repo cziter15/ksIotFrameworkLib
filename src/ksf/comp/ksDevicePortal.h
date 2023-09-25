@@ -14,6 +14,7 @@
 #include "../ksComponent.h"
 
 class AsyncWebServer;
+class DNSServer;
 namespace ksf::comps
 {
 	class ksDevicePortal : public ksComponent
@@ -28,6 +29,7 @@ namespace ksf::comps
 			std::string password;							// OTA password.
 
 			std::shared_ptr<AsyncWebServer> server;
+			std::shared_ptr<DNSServer> dnsServer;
 
 			/*
 				This function starts OTA update server.

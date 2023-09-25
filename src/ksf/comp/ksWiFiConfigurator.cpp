@@ -69,7 +69,7 @@ namespace ksf::comps
 
 	bool ksWiFiConfigurator::loop()
 	{
-		return true;
+		return !configTimeout.triggered();
 	}
 
 	ksWiFiConfigurator::~ksWiFiConfigurator()
