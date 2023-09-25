@@ -88,7 +88,6 @@ namespace ksf::comps
 		server = std::make_shared<AsyncWebServer>(80);
 
 		server->onNotFound([&](AsyncWebServerRequest *request) {
-
 			String acceptHeader{request->header(FPSTR("Accept"))};
 
 			if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
@@ -120,15 +119,6 @@ namespace ksf::comps
 			request->send(200, "application/json", json);
 		});
 
-		server->on(DP_PSTR("/api/getMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			bool isAPMode = WiFi.getMode() == WIFI_AP;
-			String json;
-			json += FPSTR("{ \"isAPMode\": ");
-			json += isAPMode ? FPSTR("true") : FPSTR("false");
-			json += FPSTR(" }");
-			request->send(200, FPSTR("application/json"), json);
-		});
-
 		server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 			breakApp = true;
 			request->send(200, FPSTR("application/json"), "{}");
@@ -143,7 +133,9 @@ namespace ksf::comps
 			json += WiFi.SSID();
 			json += FPSTR("\", \"password\":\"");
 			json += WiFi.psk();
-			json += FPSTR("\",\"params\": [");
+			json += FPSTR("\", \"isConfigMode\": ");
+			json += configCompsWp.size() > 0 ? FPSTR("true") : FPSTR("false");
+			json += FPSTR(",\"params\": [");
 
 			for (auto& configCompWp : configCompsWp)
 			{
