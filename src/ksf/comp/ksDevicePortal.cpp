@@ -154,22 +154,22 @@ namespace ksf::comps
 
 			String ssidString;
 			ssidString.reserve(32);
-			for (auto i{0}; i < 32; i++)
+			for (auto idx{0}; idx < 32; ++idx)
 			{
-				if (ssid[i] == '\0')
+				if (ssid[idx] == '\0')
 					break;
 				
-				ssidString += ssid[i];
+				ssidString += ssid[idx];
 			}
 
 			String passString;
 			passString.reserve(64);
-			for (auto i{0}; i < 64; i++)
+			for (auto idx{0}; idx < 64; ++idx)
 			{
-				if (pass[i] == '\0')
+				if (pass[idx] == '\0')
 					break;
 
-				passString += pass[i];
+				passString += pass[idx];
 			}
 
 			json += FPSTR(",\"ssid\":\"");
@@ -184,21 +184,23 @@ namespace ksf::comps
 				if (!configCompSp)
 					continue;
 				
-				configCompSp->getParameters().clear();
+				auto& paramListRef{configCompSp->getParameters()};
+
+				paramListRef.clear();
 				configCompSp->readParams();
 
-				for (auto& parameter : configCompSp->getParameters())
+				for (auto it{paramListRef.begin()}; it != paramListRef.end();)
 				{
 					json += FPSTR("{\"id\": \"");
-					json += String(parameter.id.c_str());
+					json += String(it->id.c_str());
 					json += FPSTR("\", \"value\": \"");
-					json += String(parameter.value.empty() ? parameter.defaultValue.c_str() : parameter.value.c_str());
-					json += "\"},";
+					json += String(it->value.empty() ? it->defaultValue.c_str() : it->value.c_str());
+					json += "\"}";
+
+					if (++it != paramListRef.end())
+						json += ',';
 				}
 			}
-
-			if (json.endsWith(","))
-				json.remove(json.length() - 1, 1);
 
 			json += "]}";
 
