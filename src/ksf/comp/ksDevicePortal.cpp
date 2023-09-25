@@ -127,15 +127,24 @@ namespace ksf::comps
 		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
+			bool isInConfigMode{!configCompsWp.empty()};
 
 			String json;
-			json += FPSTR("{\"ssid\":\"");
+			json += FPSTR("{\"isConfigMode\": ");
+			json += isInConfigMode ? FPSTR("true") : FPSTR("false");
+
+			if (!isInConfigMode)
+			{
+				json += '}';
+				request->send(200, FPSTR("application/json"), json);
+				return;
+			}
+
+			json += FPSTR(",\"ssid\":\"");
 			json += WiFi.SSID();
 			json += FPSTR("\", \"password\":\"");
 			json += WiFi.psk();
-			json += FPSTR("\", \"isConfigMode\": ");
-			json += configCompsWp.size() > 0 ? FPSTR("true") : FPSTR("false");
-			json += FPSTR(",\"params\": [");
+			json += FPSTR("\",\"params\": [");
 
 			for (auto& configCompWp : configCompsWp)
 			{
@@ -151,12 +160,7 @@ namespace ksf::comps
 					json += FPSTR("{\"id\": \"");
 					json += String(parameter.id.c_str());
 					json += FPSTR("\", \"value\": \"");
-
-					if (parameter.value.empty())
-						json += String(parameter.defaultValue.c_str());
-					else
-						json += String(parameter.value.c_str());
-
+					json += String(parameter.value.empty() ? parameter.defaultValue.c_str() : parameter.value.c_str());
 					json += "\"},";
 				}
 			}
@@ -178,7 +182,7 @@ namespace ksf::comps
 				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
 				return;
 			}
-				
+
 			WiFi.persistent(true);
 			WiFi.begin(ssid.c_str(), password.c_str(), 0, nullptr, false);
 			
