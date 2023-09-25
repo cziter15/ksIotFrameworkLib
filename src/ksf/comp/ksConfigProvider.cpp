@@ -12,12 +12,12 @@
 
 namespace ksf::comps
 {
-	void ksConfigProvider::addNewParam(std::string id, std::string defaultValue, int maxLength)
+	void ksConfigProvider::addNewParam(std::string id, std::string value, int maxLength)
 	{
 		ksConfigParameter param
 		{
 			.id = std::move(id),
-			.defaultValue = std::move(defaultValue),
+			.value = std::move(value),
 			.maxLength = maxLength
 		};
 
@@ -26,8 +26,8 @@ namespace ksf::comps
 
 	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength)
 	{
-		auto& defaultValue{config.getParam(id)};
-		return addNewParam(std::move(id), std::move(defaultValue), maxLength);
+		auto& value{config.getParam(id)};
+		return addNewParam(std::move(id), std::move(value), maxLength);
 	}
 
 	std::list<ksConfigParameter>& ksConfigProvider::getParameters()

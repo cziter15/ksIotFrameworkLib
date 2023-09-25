@@ -40,10 +40,10 @@ namespace ksf::comps
 			
 			/*
 				@param id Shared ID/Label to identify parameter.
-				@param defaultValue Default value of parameter.
+				@param value Parameter value.
 				@param maxLength Maximum length of parameter value.
 			*/
-			void addNewParam(std::string id, std::string defaultValue, int maxLength = 50);
+			void addNewParam(std::string id, std::string value, int maxLength = 50);
 
 			/*
 				@param id Shared ID/Label to identify parameter.

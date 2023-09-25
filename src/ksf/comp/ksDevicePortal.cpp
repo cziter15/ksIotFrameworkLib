@@ -90,24 +90,18 @@ namespace ksf::comps
 
 		server->onNotFound([&](AsyncWebServerRequest *request) {
 			String acceptHeader{request->header(FPSTR("Accept"))};
-
 			if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
 			{
 				request->send(404, FPSTR("text/html"), FPSTR("Not found"));
 				return;
 			}
-
-			AsyncWebServerResponse *response = request->beginResponse(302, FPSTR("text/plain"), "");
+			auto response{request->beginResponse(302, FPSTR("text/plain"), "")};
 			response->addHeader(FPSTR("Location"), "/");
 			request->send(response);
 		});
 
 		server->on("/", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			AsyncWebServerResponse *response 
-			{ 
-				request->beginResponse_P(200, FPSTR("text/html"), DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE)
-			};
-
+			auto response{request->beginResponse_P(200, FPSTR("text/html"), DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE)};
 			response->addHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
 			request->send(response);
 		});
@@ -202,15 +196,15 @@ namespace ksf::comps
 
 			if (json.endsWith(","))
 				json = json.substring(0, json.length() - 1);
-	
+				
 			json += "]}";
 
 			request->send(200, FPSTR("application/json"), json);
 		});
 
 		server->on(DP_PSTR("/api/saveConfig"), HTTP_POST, [&](AsyncWebServerRequest *request) {
-			String ssid = request->arg(FPSTR("ssid"));
-			String password = request->arg(FPSTR("password"));
+			auto& ssid{request->getParam(FPSTR("ssid"), true)->value()};
+			auto& password{request->getParam(FPSTR("password"), true)->value()};
 
 			if (ssid.isEmpty())
 			{
@@ -234,7 +228,7 @@ namespace ksf::comps
 
 				for (auto& parameter : configCompSp->getParameters())
 				{
-					String value{request->arg(paramPrefix + parameter.id.c_str())};
+					auto value{request->getParam(paramPrefix + parameter.id.c_str(), true)->value()};
 					if (value.isEmpty())
 						continue;
 
@@ -287,12 +281,13 @@ namespace ksf::comps
 		});
 
 		server->on(DP_PSTR("/api/flash"), HTTP_POST, [&](AsyncWebServerRequest *request) {
-			AsyncWebServerResponse *response = 
-				request->beginResponse((Update.hasError())?500:200, FPSTR("text/plain"), (Update.hasError())?"FAIL":"OK");
-
+			auto statusCode{(Update.hasError())?500:200};
+			auto response{request->beginResponse(statusCode, FPSTR("text/plain"), (Update.hasError())?"FAIL":"OK")};
 			response->addHeader(FPSTR("Connection"), FPSTR("close"));
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 			request->send(response);
+			updateFinished();
+			delay(500);
 			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			if (!index) 
