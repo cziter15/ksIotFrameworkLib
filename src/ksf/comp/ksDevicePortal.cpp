@@ -116,7 +116,6 @@ namespace ksf::comps
 
 		server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 			breakApp = true;
-			request->send(200, FPSTR("application/json"), "{}");
 		});
 
 		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -213,7 +212,8 @@ namespace ksf::comps
 			}
 
 			WiFi.persistent(true);
-			WiFi.begin(ssid.c_str(), password.c_str(), 0, nullptr, false);
+			WiFi.begin(ssid.c_str(), password.c_str(), 0, 0, false);
+			WiFi.persistent(false);
 			
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
@@ -239,8 +239,8 @@ namespace ksf::comps
 			}
 
 			request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
-
-			breakApp = true;
+			delay(1000);
+			ESP.restart();
 		});
 
 		server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -286,8 +286,7 @@ namespace ksf::comps
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 			request->send(response);
 			updateFinished();
-			delay(500);
-			server->end();
+			delay(1000);
 			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			if (!index) 
@@ -338,7 +337,17 @@ namespace ksf::comps
 			dnsServer->processNextRequest();
 
 		if (breakApp)
+		{
+			/*
+				Well it looks like that component destroy order has critical
+				impact on underlying services so we need to cleanup dnsServer
+				and web server earlier than in destructor.
+			*/
+			dnsServer = nullptr;
+			server = nullptr;
+
 			return false;
+		}
 
 		return true;
 	}

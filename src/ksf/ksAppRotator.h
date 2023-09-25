@@ -43,13 +43,13 @@ namespace ksf
 
 		public:
 			/*
-				Runs the processApps loop.
+				Runs the application loop.
 			*/
-			bool processApps()
+			void loopNoDelay()
 			{
 				/* If current application is valid and we looped, then we're done. */
 				if (currentApplication && currentApplication->loop())
-					return true;
+					return;
 
 				/* Spawn application. */
 				currentApplication = appSpawners[appIndex]();
@@ -61,8 +61,6 @@ namespace ksf
 				/* Set next app index. */
 				if (++appIndex >= appSpawners.size())
 					appIndex = 0;
-
-				return false;
 			}
 
 			/*
@@ -71,10 +69,8 @@ namespace ksf
 			*/
 			void loop(unsigned long milliseconds = 1)
 			{
-				if (processApps())
-					delay(milliseconds);
-				else
-					delay(1000); // bigger delay between apps to handle WiFi events.
+				loopNoDelay();
+				delay(milliseconds);
 			}
 	};
 }

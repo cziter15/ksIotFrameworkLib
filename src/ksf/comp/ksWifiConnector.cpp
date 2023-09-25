@@ -66,6 +66,7 @@ namespace ksf::comps
 
 	bool ksWifiConnector::init(ksApplication* owner)
 	{
+		WiFi.mode(WIFI_STA);
 		WiFi.begin();
 
 #if ESP32
