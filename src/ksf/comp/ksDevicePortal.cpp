@@ -194,11 +194,15 @@ namespace ksf::comps
 					json += FPSTR("{\"id\": \"");
 					json += String(it->id.c_str());
 					json += FPSTR("\", \"value\": \"");
-					json += String(it->value.empty() ? it->defaultValue.c_str() : it->value.c_str());
+					json += String(it->value.c_str());
+					json += FPSTR("\", \"default\": \"");
+					json += String(it->defaultValue.c_str());
 					json += "\"}";
 
-					if (++it != paramListRef.end())
+					if (it != paramListRef.end())
 						json += ',';
+
+					++it;
 				}
 			}
 
