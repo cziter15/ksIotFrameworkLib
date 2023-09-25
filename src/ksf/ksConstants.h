@@ -15,6 +15,8 @@
 #include <charconv>
 #include "stdlib_noniso.h"
 
+#include "Arduino.h"
+
 /* Simply ONE second in milliseconds. */
 #define KSF_ONE_SECOND_MS 1000UL
 

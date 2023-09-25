@@ -41,10 +41,7 @@ namespace ksf::comps
 	ksDevicePortal::ksDevicePortal(const std::string& password)
 	{
 		ArduinoOTA.setPassword(password.c_str());
-
-#if SUPPORT_HTTP_OTA
 		this->password = password;
-#endif
 
 		ArduinoOTA.onStart([this]() {
 			onUpdateStart->broadcast();
@@ -213,26 +210,30 @@ namespace ksf::comps
 		});
 
 		server->on("/api/scanNetworks", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			WiFi.scanNetworksAsync([=](int n) 
+			WiFi.scanNetworks(true);
+
+			while (WiFi.scanComplete() == WIFI_SCAN_RUNNING)
+				delay(100);
+
+			if (WiFi.scanComplete() == WIFI_SCAN_FAILED)
+				request->send(500, "text/plain", "FAIL");
+
+			String json{"["};
+			for (int i{0}; i < WiFi.scanComplete(); ++i)
 			{
-				String json{"["};
-				for (int i{0}; i < n; ++i)
-				{
-					if (i > 0)
-						json += ",";
-					json += "{";
-					json += "\"rssi\":"+String(WiFi.RSSI(i));
-					json += ",\"ssid\":\""+WiFi.SSID(i)+"\"";
-					json += ",\"bssid\":\""+WiFi.BSSIDstr(i)+"\"";
-					json += ",\"channel\":"+String(WiFi.channel(i));
-					json += ",\"secure\":"+String(WiFi.encryptionType(i));
-					json += ",\"hidden\":"+String(WiFi.isHidden(i));
-					json += "}";
-				}
-				json += "]";
-				WiFi.scanDelete();
-				request->send(200, "text/plain", json);
-			});
+				if (i > 0)
+					json += ",";
+				json += "{";
+				json += "\"rssi\":"+String(WiFi.RSSI(i));
+				json += ",\"ssid\":\""+WiFi.SSID(i)+"\"";
+				json += ",\"bssid\":\""+WiFi.BSSIDstr(i)+"\"";
+				json += ",\"channel\":"+String(WiFi.channel(i));
+				json += ",\"secure\":"+String(WiFi.encryptionType(i));
+				json += "}";
+			}
+			json += "]";
+			WiFi.scanDelete();
+			request->send(200, "text/plain", json);
 		});
 
 		server->on("/api/flash", HTTP_POST, [&](AsyncWebServerRequest *request) 
