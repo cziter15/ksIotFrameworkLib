@@ -153,10 +153,24 @@ namespace ksf::comps
 			#endif
 
 			String ssidString;
-			ssidString.concat(ssid, 32);
+			ssidString.reserve(32);
+			for (auto i{0}; i < 32; i++)
+			{
+				if (ssid[i] == '\0')
+					break;
+				
+				ssidString += ssid[i];
+			}
 
 			String passString;
-			passString.concat(pass, 64);
+			passString.reserve(64);
+			for (auto i{0}; i < 64; i++)
+			{
+				if (pass[i] == '\0')
+					break;
+
+				passString += pass[i];
+			}
 
 			json += FPSTR(",\"ssid\":\"");
 			json += ssidString;
