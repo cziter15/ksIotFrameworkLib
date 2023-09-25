@@ -52,8 +52,6 @@ namespace ksf::comps
 		ArduinoOTA.onEnd([this]() {
 			updateFinished();
 		});
-
-		Serial.begin(9600);
 	}
 	
 	bool ksDevicePortal::init(ksApplication* owner)
