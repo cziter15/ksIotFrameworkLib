@@ -14,6 +14,7 @@
 #include "../ksComponent.h"
 
 class AsyncWebServer;
+class AsyncWebServerRequest;
 class DNSServer;
 namespace ksf::comps
 {

@@ -166,7 +166,7 @@ namespace ksf::comps
 
 			json += "]}";
 
-			request->send(200, "application/plain", json);
+			request->send(200, "application/json", json);
 		});
 
 		server->on("/api/saveConfig", HTTP_POST, [this](AsyncWebServerRequest *request) {
@@ -175,7 +175,7 @@ namespace ksf::comps
 
 			if (ssid.isEmpty())
 			{
-				request->send(200, "application/plain", "{ \"result\" : \"Empty SSID\" }");
+				request->send(200, "application/json", "{ \"result\" : \"Empty SSID\" }");
 				return;
 			}
 				
@@ -203,41 +203,44 @@ namespace ksf::comps
 				configCompSp->saveParams();
 			}
 
-			request->send(200, "application/plain", "{ \"result\": \"OK\" }");\
+			request->send(200, "application/json", "{ \"result\": \"OK\" }");\
 
 			delay(500);
 			ESP.restart();
 		});
 
 		server->on("/api/scanNetworks", HTTP_GET, [&](AsyncWebServerRequest *request) {
-			WiFi.scanNetworks(true);
-
-			while (WiFi.scanComplete() == WIFI_SCAN_RUNNING)
-				delay(100);
-
-			if (WiFi.scanComplete() == WIFI_SCAN_FAILED)
-				request->send(500, "text/plain", "FAIL");
-
-			String json{"["};
-			for (int i{0}; i < WiFi.scanComplete(); ++i)
+			switch (WiFi.scanComplete())
 			{
-				if (i > 0)
-					json += ",";
-				json += "{";
-				json += "\"rssi\":"+String(WiFi.RSSI(i));
-				json += ",\"ssid\":\""+WiFi.SSID(i)+"\"";
-				json += ",\"bssid\":\""+WiFi.BSSIDstr(i)+"\"";
-				json += ",\"channel\":"+String(WiFi.channel(i));
-				json += ",\"secure\":"+String(WiFi.encryptionType(i));
-				json += "}";
+				case WIFI_SCAN_FAILED:
+					WiFi.scanNetworks(true);
+				case WIFI_SCAN_RUNNING:
+					request->send(200, "text/plain", "");
+				return;
+
+				default:
+				{
+					String json{"["};
+					for (int i{0}; i < WiFi.scanComplete(); ++i)
+					{
+						if (i > 0)
+							json += ",";
+						json += "{";
+						json += "\"rssi\":"+String(WiFi.RSSI(i));
+						json += ",\"ssid\":\""+WiFi.SSID(i)+"\"";
+						json += ",\"bssid\":\""+WiFi.BSSIDstr(i)+"\"";
+						json += ",\"channel\":"+String(WiFi.channel(i));
+						json += ",\"secure\":"+String(WiFi.encryptionType(i));
+						json += "}";
+					}
+					json += "]";
+					WiFi.scanDelete();
+					request->send(200, "application/json", json);
+				}
 			}
-			json += "]";
-			WiFi.scanDelete();
-			request->send(200, "text/plain", json);
 		});
 
-		server->on("/api/flash", HTTP_POST, [&](AsyncWebServerRequest *request) 
-		{
+		server->on("/api/flash", HTTP_POST, [&](AsyncWebServerRequest *request) {
 			AsyncWebServerResponse *response = 
 				request->beginResponse((Update.hasError())?500:200, "text/plain", (Update.hasError())?"FAIL":"OK");
 
