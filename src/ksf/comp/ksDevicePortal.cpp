@@ -232,11 +232,16 @@ namespace ksf::comps
 					{
 						if (i > 0)
 							json += ',';
-						json += FPSTR("{\"rssi\":")+String(WiFi.RSSI(i));
-						json += FPSTR(",\"ssid\":\"")+WiFi.SSID(i)+"\"";
-						json += FPSTR(",\"bssid\":\"")+WiFi.BSSIDstr(i)+"\"";
-						json += FPSTR(",\"channel\":")+String(WiFi.channel(i));
-						json += FPSTR(",\"secure\":")+String(WiFi.encryptionType(i));
+						json += FPSTR("{\"rssi\":");
+						json += String(WiFi.RSSI(i));
+						json += FPSTR(",\"ssid\":\"");
+						json += WiFi.SSID(i)+"\"";
+						json += FPSTR(",\"bssid\":\"");
+						json += WiFi.BSSIDstr(i)+"\"";
+						json += FPSTR(",\"channel\":");
+						json += String(WiFi.channel(i));
+						json += FPSTR(",\"secure\":");
+						json += String(WiFi.encryptionType(i));
 						json += '}';
 					}
 					json +=	']';
