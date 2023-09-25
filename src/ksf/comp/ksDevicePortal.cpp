@@ -153,7 +153,7 @@ namespace ksf::comps
 			#endif
 
 			String ssidString;
-			ssidString.concat(ssid, 64);
+			ssidString.concat(ssid, 32);
 
 			String passString;
 			passString.concat(pass, 64);
