@@ -189,6 +189,7 @@ namespace ksf::comps
 			server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 				REQUIRE_AUTH()
 				breakRequestMillis = millis();
+				request->send(200);
 			});
 		}
 
