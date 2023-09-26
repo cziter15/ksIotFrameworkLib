@@ -192,6 +192,10 @@ namespace ksf::comps
 			});
 		}
 
+		server->on(DP_PSTR("/api/online"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+			request->send(200);
+		});
+
 		server->onNotFound([&](AsyncWebServerRequest *request) {
 			REQUIRE_AUTH()
 
@@ -307,8 +311,6 @@ namespace ksf::comps
 			request->send(200, FPSTR("application/json"), json);
 		});
 
-		
-
 		server->on(DP_PSTR("/api/flash"), HTTP_POST, [&](AsyncWebServerRequest *request) {
 			REQUIRE_AUTH()
 
@@ -318,7 +320,7 @@ namespace ksf::comps
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 			request->send(response);
 			updateFinished();
-			delay(1000);
+			delay(5000);
 			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			REQUIRE_AUTH()
