@@ -321,9 +321,7 @@ namespace ksf::comps
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 			request->send(response);
 
-			delay(5000);
-			updateFinished();
-			ESP.restart();
+			rebootRequestMillis = millis();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			REQUIRE_AUTH()
 
@@ -374,19 +372,9 @@ namespace ksf::comps
 		if (dnsServer)
 			dnsServer->processNextRequest();
 
-		if (breakApp)
-		{
-			/*
-				Well it looks like that component destroy order has critical
-				impact on underlying services so we need to cleanup dnsServer
-				and web server earlier than in destructor.
-			*/
-			dnsServer = nullptr;
-			server = nullptr;
+		if (rebootRequestMillis != 0 && millis() - rebootRequestMillis > 2000)
+			ESP.restart();
 
-			return false;
-		}
-
-		return true;
+		return !breakApp;
 	}
 }

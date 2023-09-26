@@ -28,6 +28,8 @@ namespace ksf::comps
 
 			bool breakApp{false};							// Flag to break app loop.
 			std::string password;							// OTA password.
+			
+			unsigned long rebootRequestMillis{0};			// Last reboot request time.
 
 			std::shared_ptr<AsyncWebServer> server;			// Web server.
 			std::shared_ptr<DNSServer> dnsServer;			// DNS server.
