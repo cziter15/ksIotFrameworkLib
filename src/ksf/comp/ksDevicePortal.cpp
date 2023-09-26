@@ -188,12 +188,13 @@ namespace ksf::comps
 		{
 			server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 				REQUIRE_AUTH()
-				breakApp = true;
+				breakRequestMillis = millis();
 			});
 		}
 
 		server->on(DP_PSTR("/api/online"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			request->send(rebootRequestMillis != 0 ? 503 : 200);
+			bool busy{breakRequestMillis != 0 || rebootRequestMillis != 0};
+			request->send(busy ? 503 : 200);
 		});
 
 		server->onNotFound([&](AsyncWebServerRequest *request) {

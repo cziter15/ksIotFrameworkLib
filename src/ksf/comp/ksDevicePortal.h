@@ -26,7 +26,6 @@ namespace ksf::comps
 			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
 			ksApplication* owner{nullptr};					// Pointer to ksApplication.
 
-			bool breakApp{false};							// Flag to break app loop.
 			std::string password;							// OTA password.
 			
 			unsigned long rebootRequestMillis{0};			// Last reboot request time.
