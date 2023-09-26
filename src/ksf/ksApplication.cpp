@@ -62,9 +62,6 @@ namespace ksf
 		/* Ensure all components are removed. */
 		components.clearAll();
 
-		/* Add small delay. */
-		delay(1000);
-
 		/* Reset WiFi. */
 		WiFi.disconnect(false, false);
 		WiFi.mode(WIFI_OFF);

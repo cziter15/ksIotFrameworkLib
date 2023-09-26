@@ -372,10 +372,10 @@ namespace ksf::comps
 		if (dnsServer)
 			dnsServer->processNextRequest();
 
-		if (rebootRequestMillis != 0 && millis() - rebootRequestMillis > 2000)
+		if (rebootRequestMillis != 0 && millis() - rebootRequestMillis > 1000)
 			ESP.restart();
 
-		if (breakRequestMillis != 0 && millis() - breakRequestMillis > 2000)
+		if (breakRequestMillis != 0 && millis() - breakRequestMillis > 1000)
 			return false;
 
 		return true;
