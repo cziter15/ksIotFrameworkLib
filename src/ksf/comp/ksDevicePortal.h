@@ -30,6 +30,7 @@ namespace ksf::comps
 			std::string password;							// OTA password.
 			
 			unsigned long rebootRequestMillis{0};			// Last reboot request time.
+			unsigned long breakRequestMillis{0};				// Last reboot time.
 
 			std::shared_ptr<AsyncWebServer> server;			// Web server.
 			std::shared_ptr<DNSServer> dnsServer;			// DNS server.

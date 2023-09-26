@@ -142,8 +142,7 @@ namespace ksf::comps
 
 				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
 				
-				delay(1000);
-				breakApp = true;
+				breakRequestMillis = millis();
 			});
 
 			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -375,6 +374,9 @@ namespace ksf::comps
 		if (rebootRequestMillis != 0 && millis() - rebootRequestMillis > 2000)
 			ESP.restart();
 
-		return !breakApp;
+		if (breakRequestMillis != 0 && millis() - breakRequestMillis > 2000)
+			return false;
+
+		return true;
 	}
 }
