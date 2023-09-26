@@ -61,11 +61,5 @@ namespace ksf::comps
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* owner) override;
-
-			/*
-				Handles cleanup of WiFiConfigurator's low level resources or state.
-				This method will turn off AP and clean TCP/IP stack.
-			*/
-			virtual ~ksWiFiConfigurator();
 	};
 }

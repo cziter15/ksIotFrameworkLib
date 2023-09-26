@@ -70,10 +70,4 @@ namespace ksf::comps
 	{
 		return !configTimeout.triggered();
 	}
-
-	ksWiFiConfigurator::~ksWiFiConfigurator()
-	{
-		WiFi.softAPdisconnect(true);
-		WiFi.mode(WIFI_OFF);
-	}
 }

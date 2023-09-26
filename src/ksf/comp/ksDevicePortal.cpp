@@ -141,8 +141,9 @@ namespace ksf::comps
 				}
 
 				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
+				
 				delay(1000);
-				ESP.restart();
+				breakApp = true;
 			});
 
 			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -319,8 +320,9 @@ namespace ksf::comps
 			response->addHeader(FPSTR("Connection"), FPSTR("close"));
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 			request->send(response);
-			updateFinished();
+
 			delay(5000);
+			updateFinished();
 			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			REQUIRE_AUTH()
