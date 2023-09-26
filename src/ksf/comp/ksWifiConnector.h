@@ -77,5 +77,11 @@ namespace ksf::comps
 				@return True if connected. False otherwise.
 			*/
 			bool isConnected() const;
+
+			/*
+				Handles cleanup of WiFiFiConnector's low level resources or state.
+				This method will disconnect from WiFi and clean TCP/IP stack.
+			*/
+			virtual ~ksWifiConnector();
 	};
 }

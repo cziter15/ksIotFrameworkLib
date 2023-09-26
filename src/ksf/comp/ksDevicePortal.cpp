@@ -88,7 +88,112 @@ namespace ksf::comps
 	{
 		server = std::make_shared<AsyncWebServer>(80);
 
+		auto isAuthorized = [&] (AsyncWebServerRequest *request) {
+			if (WiFi.getMode() == WIFI_AP)
+				return true;
+			if (request->authenticate("admin", password.c_str()))
+				return true;
+			request->requestAuthentication();
+			return false;
+		};
+
+		#define REQUIRE_AUTH() if (!isAuthorized(request)) return;
+
+		if (WiFi.getMode() & WIFI_AP)
+		{
+			server->on(DP_PSTR("/api/saveConfig"), HTTP_POST, [&](AsyncWebServerRequest *request) {
+				REQUIRE_AUTH()
+
+				auto& ssid{request->getParam(FPSTR("ssid"), true)->value()};
+				auto& password{request->getParam(FPSTR("password"), true)->value()};
+
+				if (ssid.isEmpty())
+				{
+					request->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
+					return;
+				}
+
+				WiFi.persistent(true);
+				WiFi.begin(ssid.c_str(), password.c_str(), 0, 0, false);
+				WiFi.persistent(false);
+				
+				std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+				owner->findComponents<ksConfigProvider>(configCompsWp);
+
+				String paramPrefix{FPSTR("param_")};
+
+				for (auto& configCompWp : configCompsWp)
+				{
+					auto configCompSp{configCompWp.lock()};
+					if (!configCompSp)
+						continue;
+
+					for (auto& parameter : configCompSp->getParameters())
+					{
+						auto value{request->getParam(paramPrefix + parameter.id.c_str(), true)->value()};
+						if (value.isEmpty())
+							continue;
+
+						parameter.value = value.c_str();
+					}
+
+					configCompSp->saveParams();
+				}
+
+				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
+				delay(1000);
+				ESP.restart();
+			});
+			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+				REQUIRE_AUTH()
+
+				switch (WiFi.scanComplete())
+				{
+					case WIFI_SCAN_FAILED:
+						WiFi.scanNetworks(true);
+					case WIFI_SCAN_RUNNING:
+						request->send(500, FPSTR("text/plain"), "");
+					return;
+
+					default:
+					{
+						String json;
+						json += '[';
+						for (int i{0}; i < WiFi.scanComplete(); ++i)
+						{
+							if (i > 0)
+								json += ',';
+							json += FPSTR("{\"rssi\":");
+							json += String(WiFi.RSSI(i));
+							json += FPSTR(",\"ssid\":\"");
+							json += WiFi.SSID(i)+"\"";
+							json += FPSTR(",\"bssid\":\"");
+							json += WiFi.BSSIDstr(i)+"\"";
+							json += FPSTR(",\"channel\":");
+							json += String(WiFi.channel(i));
+							json += FPSTR(",\"secure\":");
+							json += String(WiFi.encryptionType(i));
+							json += '}';
+						}
+						json +=	']';
+						WiFi.scanDelete();
+						request->send(200, FPSTR("application/json"), json);
+					}
+				}
+			});
+		}
+
+		if (WiFi.getMode() & WIFI_STA)
+		{
+			server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+				REQUIRE_AUTH()
+				breakApp = true;
+			});
+		}
+
 		server->onNotFound([&](AsyncWebServerRequest *request) {
+			REQUIRE_AUTH()
+
 			String acceptHeader{request->header(FPSTR("Accept"))};
 			if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
 			{
@@ -101,6 +206,8 @@ namespace ksf::comps
 		});
 
 		server->on("/", HTTP_GET, [&](AsyncWebServerRequest *request) {
+			REQUIRE_AUTH()
+
 			auto response{request->beginResponse_P(200, FPSTR("text/html"), DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE)};
 			response->addHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
 			request->send(response);
@@ -114,11 +221,9 @@ namespace ksf::comps
 			request->send(200, "application/json", json);
 		});
 
-		server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			breakApp = true;
-		});
-
 		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+			REQUIRE_AUTH()
+
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			owner->findComponents<ksConfigProvider>(configCompsWp);
 			bool isInConfigMode{!configCompsWp.empty()};
@@ -201,85 +306,11 @@ namespace ksf::comps
 			request->send(200, FPSTR("application/json"), json);
 		});
 
-		server->on(DP_PSTR("/api/saveConfig"), HTTP_POST, [&](AsyncWebServerRequest *request) {
-			auto& ssid{request->getParam(FPSTR("ssid"), true)->value()};
-			auto& password{request->getParam(FPSTR("password"), true)->value()};
-
-			if (ssid.isEmpty())
-			{
-				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
-				return;
-			}
-
-			WiFi.persistent(true);
-			WiFi.begin(ssid.c_str(), password.c_str(), 0, 0, false);
-			WiFi.persistent(false);
-			
-			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-			owner->findComponents<ksConfigProvider>(configCompsWp);
-
-			String paramPrefix{FPSTR("param_")};
-
-			for (auto& configCompWp : configCompsWp)
-			{
-				auto configCompSp{configCompWp.lock()};
-				if (!configCompSp)
-					continue;
-
-				for (auto& parameter : configCompSp->getParameters())
-				{
-					auto value{request->getParam(paramPrefix + parameter.id.c_str(), true)->value()};
-					if (value.isEmpty())
-						continue;
-
-					parameter.value = value.c_str();
-				}
-
-				configCompSp->saveParams();
-			}
-
-			request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
-			delay(1000);
-			ESP.restart();
-		});
-
-		server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			switch (WiFi.scanComplete())
-			{
-				case WIFI_SCAN_FAILED:
-					WiFi.scanNetworks(true);
-				case WIFI_SCAN_RUNNING:
-					request->send(500, FPSTR("text/plain"), "");
-				return;
-
-				default:
-				{
-					String json;
-					json += '[';
-					for (int i{0}; i < WiFi.scanComplete(); ++i)
-					{
-						if (i > 0)
-							json += ',';
-						json += FPSTR("{\"rssi\":");
-						json += String(WiFi.RSSI(i));
-						json += FPSTR(",\"ssid\":\"");
-						json += WiFi.SSID(i)+"\"";
-						json += FPSTR(",\"bssid\":\"");
-						json += WiFi.BSSIDstr(i)+"\"";
-						json += FPSTR(",\"channel\":");
-						json += String(WiFi.channel(i));
-						json += FPSTR(",\"secure\":");
-						json += String(WiFi.encryptionType(i));
-						json += '}';
-					}
-					json +=	']';
-					WiFi.scanDelete();
-					request->send(200, FPSTR("application/json"), json);
-				}
-			}
-		});
+		
 
 		server->on(DP_PSTR("/api/flash"), HTTP_POST, [&](AsyncWebServerRequest *request) {
+			REQUIRE_AUTH()
+
 			auto statusCode{(Update.hasError())?500:200};
 			auto response{request->beginResponse(statusCode, FPSTR("text/plain"), (Update.hasError())?"FAIL":"OK")};
 			response->addHeader(FPSTR("Connection"), FPSTR("close"));
@@ -289,6 +320,8 @@ namespace ksf::comps
 			delay(1000);
 			ESP.restart();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
+			REQUIRE_AUTH()
+
 			if (!index) 
 			{
 				if(!request->hasParam("MD5", true)) 

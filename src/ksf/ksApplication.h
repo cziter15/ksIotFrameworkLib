@@ -20,7 +20,7 @@ namespace ksf
 	{
 		protected:
 			ksSafeList<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
-
+			void cleanupComponentsInProperOrder();
 		public:
 			/*
 				Instantiates a component of passed type, handing over all template parameters as constructor parameters to the component. 
@@ -123,10 +123,5 @@ namespace ksf
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();
-			
-			/*
-				Destructor.
-			*/
-			virtual ~ksApplication();
 	};
 }

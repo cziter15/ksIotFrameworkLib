@@ -29,8 +29,8 @@ namespace ksf::comps
 			bool breakApp{false};							// Flag to break app loop.
 			std::string password;							// OTA password.
 
-			std::shared_ptr<AsyncWebServer> server;
-			std::shared_ptr<DNSServer> dnsServer;
+			std::shared_ptr<AsyncWebServer> server;			// Web server.
+			std::shared_ptr<DNSServer> dnsServer;			// DNS server.
 
 			/*
 				This function starts OTA update server.
@@ -48,16 +48,16 @@ namespace ksf::comps
 
 			/*
 				Constructor, used to construct OTA updater component.
+				Uses the default password "ota_ksiotframework"
+			*/
+			ksDevicePortal();
+
+			/*
+				Constructor, used to construct OTA updater component.
 				
 				@param password Password required to flash.
 			*/
 			ksDevicePortal(const std::string& password);
-
-			/*
-				Constructor, used to construct OTA updater component.
-				Uses the default password "ota_ksiotframework"
-			*/
-			ksDevicePortal();
 
 			/*
 				Initializes device portal component.

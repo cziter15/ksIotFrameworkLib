@@ -10,6 +10,9 @@
 #include "ksApplication.h"
 #include "ksComponent.h"
 
+#include "comp/ksWiFiConfigurator.h"
+#include "comp/ksWifiConnector.h"
+
 #if ESP32
 	#include <WiFi.h>
 #elif ESP8266
@@ -24,43 +27,62 @@ namespace ksf
 		components.remove(std::move(component));
 	}
 
+	void ksApplication::cleanupComponentsInProperOrder()
+	{
+		std::vector<std::shared_ptr<ksComponent>> componentsToDeleteAtTheEnd;
+
+		for (const auto& comp : components.getRef())
+		{
+			bool shouldRemoveAtTheEnd {
+				comp->isA(comps::ksWiFiConfigurator::getClassType() ||
+				comp->isA(comps::ksWifiConnector::getClassType()))
+			};
+
+			if (shouldRemoveAtTheEnd)
+				componentsToDeleteAtTheEnd.emplace_back(std::move(comp));
+		}
+
+		components.clearAll();
+	}
+
 	bool ksApplication::init()
 	{
 		auto initFunc = [this](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); };
 		auto postInitFunc = [this](const std::shared_ptr<ksComponent>& comp) { return comp->postInit(this); };
+		auto cleanupComponentsAndReturnFalse = [this]() { cleanupComponentsInProperOrder(); return false; };
 
 		components.applyPendingOperations();
 
 		if (!forEachComponent(initFunc))
-			return false;
+			return cleanupComponentsAndReturnFalse();
 
 		components.applyPendingOperations();
 
 		if (!forEachComponent(postInitFunc))
-			return false;
+			return cleanupComponentsAndReturnFalse();
 
 		return true;
 	}
 
 	bool ksApplication::loop()
 	{
+		/* A bool indicating if we should continue loop. */
+		bool continueLoop{true};
+
 		/* Loop through all components and synchronize list at end of scope. */
 		{
 			ksf::ksSafeListScopedSync{components};
 			if (!forEachComponent([](const std::shared_ptr<ksComponent>& comp) { return comp->loop(); } ))
-				return false;
+				continueLoop = false;
 		}
 
 		/* This call will keep millis64 on track (handles rollover). */
 		updateDeviceUptime();
 
-		return true;
-	}
-	
-	ksApplication::~ksApplication()
-	{
-		WiFi.softAPdisconnect();
-		WiFi.disconnect(true, false);
-		WiFi.mode(WIFI_OFF);
+		/* If app has been marked to stop, exit loop. */
+		if (!continueLoop)
+			cleanupComponentsInProperOrder();
+
+		return continueLoop;
 	}
 }
