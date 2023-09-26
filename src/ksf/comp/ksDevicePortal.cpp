@@ -194,7 +194,7 @@ namespace ksf::comps
 		}
 
 		server->on(DP_PSTR("/api/online"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			request->send(200);
+			request->send(rebootRequestMillis != 0 ? 503 : 200);
 		});
 
 		server->onNotFound([&](AsyncWebServerRequest *request) {
