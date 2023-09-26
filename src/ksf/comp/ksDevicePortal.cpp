@@ -42,8 +42,8 @@ namespace ksf::comps
 
 	ksDevicePortal::ksDevicePortal(const std::string& password)
 	{
-		ArduinoOTA.setPassword(password.c_str());
 		this->password = password;
+		ArduinoOTA.setPassword(password.c_str());
 
 		ArduinoOTA.onStart([this]() {
 			onUpdateStart->broadcast();
@@ -88,16 +88,16 @@ namespace ksf::comps
 	{
 		server = std::make_shared<AsyncWebServer>(80);
 
-		auto isAuthorized = [&] (AsyncWebServerRequest *request) {
+		auto isAuthorized = [](ksDevicePortal* portal, AsyncWebServerRequest *request) {
 			if (WiFi.getMode() == WIFI_AP)
 				return true;
-			if (request->authenticate("admin", password.c_str()))
+			if (portal->password.empty() || request->authenticate("admin", portal->password.c_str()))
 				return true;
 			request->requestAuthentication();
 			return false;
 		};
 
-		#define REQUIRE_AUTH() if (!isAuthorized(request)) return;
+		#define REQUIRE_AUTH() if (!isAuthorized(this, request)) return;
 
 		if (WiFi.getMode() & WIFI_AP)
 		{
@@ -144,6 +144,7 @@ namespace ksf::comps
 				delay(1000);
 				ESP.restart();
 			});
+
 			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 				REQUIRE_AUTH()
 
