@@ -59,6 +59,10 @@ namespace ksf
 
 	ksApplication::~ksApplication()
 	{
+		/* Ensure all components are removed. */
+		components.clearAll();
+
+		/* Reset WiFi. */
 		WiFi.disconnect(true, false);
 		WiFi.softAPdisconnect(true);
 		WiFi.mode(WIFI_OFF);
