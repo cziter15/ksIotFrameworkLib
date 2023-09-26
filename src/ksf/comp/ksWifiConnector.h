@@ -77,5 +77,7 @@ namespace ksf::comps
 				@return True if connected. False otherwise.
 			*/
 			bool isConnected() const;
+
+			virtual ~ksWifiConnector();
 	};
 }

@@ -132,4 +132,10 @@ namespace ksf::comps
 	{
 		return WiFi.isConnected() && gotIpAddress;
 	}
+
+	ksWifiConnector::~ksWifiConnector()
+	{
+		WiFi.disconnect(false, false);
+		WiFi.mode(WIFI_OFF);
+	}
 }

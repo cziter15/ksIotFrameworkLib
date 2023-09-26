@@ -56,14 +56,4 @@ namespace ksf
 
 		return true;
 	}
-
-	ksApplication::~ksApplication()
-	{
-		/* Ensure all components are removed. */
-		components.clearAll();
-
-		/* Reset WiFi. */
-		WiFi.disconnect(false, false);
-		WiFi.mode(WIFI_OFF);
-	}
 }
