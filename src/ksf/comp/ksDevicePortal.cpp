@@ -242,10 +242,12 @@ namespace ksf::comps
 
 		server->on(DP_PSTR("/api/getIdentity"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 			std::string json;
-			json += PGM_("[{\"name\":\"Hostname\",\"value\":\"");
-			json += WiFi.getHostname();
-			json += PGM_("\"},{\"name\":\"Hardware\",\"value\":\"");
+			json += PGM_("[{\"name\":\"Hardware\",\"value\":\"");
 			json += HARDWARE;
+			json += PGM_("\"},{\"name\":\"Hostname\",\"value\":\"");
+			json += WiFi.getHostname();
+			json += PGM_("\"},{\"name\":\"Device uptime\",\"value\":\"");
+			json += ksf::getUptimeString();
 			json += PGM_("\"},{\"name\":\"Reset reason\",\"value\":\"");
 			json += ksf::getResetReason();
 			json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");

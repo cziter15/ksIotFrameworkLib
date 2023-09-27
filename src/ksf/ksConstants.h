@@ -146,4 +146,9 @@ namespace ksf
 		Helper function to get last reset reason.
 	*/
 	const std::string getResetReason();
+
+	/*
+		Helper function to get uptime in a form of string.
+	*/
+	const std::string getUptimeString();
 }

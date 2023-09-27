@@ -126,4 +126,13 @@ namespace ksf
 		#error Platform not implemented.
 #endif
 	}
+
+	const std::string getUptimeString()
+	{
+		auto uptime{millis64()};
+		return 	to_string(uptime / 1000 / 60 / 60 / 24) + " d " + 
+				to_string(uptime / 1000 / 60 / 60 % 24) + " h " + 
+				to_string(uptime / 1000 / 60 % 60) + " m " + 
+				to_string(uptime / 1000 % 60) + " s";
+	}
 }
