@@ -175,7 +175,7 @@ namespace ksf::comps
 					case WIFI_SCAN_FAILED:
 						WiFi.scanNetworks(true);
 					case WIFI_SCAN_RUNNING:
-						request->send(500, FPSTR("text/plain"), "");
+						request->send(304);
 					return;
 
 					default:
@@ -253,7 +253,7 @@ namespace ksf::comps
 			json += PGM_("\"},{\"name\":\"Reset reason\",\"value\":\"");
 			json += ksf::getResetReason();
 			json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");
-			json += WiFi.localIP().toString().c_str();
+			json += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
 			json += PGM_("\"}]");
 			request->send(*StdStrWebResponse(std::move(json)));
 		});
