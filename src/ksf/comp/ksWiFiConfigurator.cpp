@@ -48,7 +48,10 @@ namespace ksf::comps
 	{
 		this->owner = owner;
 
+		WiFi.persistent(true);
 		WiFi.softAP(deviceName.c_str());
+		WiFi.persistent(false);
+		
 		owner->addComponent<ksDevicePortal>().lock()->init(owner);
 
 		return true;
@@ -73,7 +76,10 @@ namespace ksf::comps
 
 	ksWiFiConfigurator::~ksWiFiConfigurator()
 	{
+		WiFi.persistent(true);
 		WiFi.softAPdisconnect();
+		WiFi.persistent(false);
+
 		WiFi.mode(WIFI_OFF);
 	}
 }

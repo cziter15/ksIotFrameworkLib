@@ -69,7 +69,9 @@ namespace ksf::comps
 
 	bool ksWifiConnector::init(ksApplication* owner)
 	{
+		WiFi.persistent(true);
 		WiFi.begin();
+		WiFi.persistent(false);
 
 #if ESP32
 		WiFi.setSleep(true);
@@ -137,7 +139,10 @@ namespace ksf::comps
 
 	ksWifiConnector::~ksWifiConnector()
 	{
+		WiFi.persistent(true);
 		WiFi.disconnect(false, false);
+		WiFi.persistent(false);
+
 		WiFi.mode(WIFI_OFF);
 	}
 }
