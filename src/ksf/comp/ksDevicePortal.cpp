@@ -330,7 +330,7 @@ namespace ksf::comps
 			response->addHeader(FPSTR("Connection"), FPSTR("close"));
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 			request->send(response);
-
+			updateFinished();
 			rebootRequestMillis = millis();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			REQUIRE_AUTH()
