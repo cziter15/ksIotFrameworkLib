@@ -140,9 +140,7 @@ namespace ksf::comps
 	ksWifiConnector::~ksWifiConnector()
 	{
 		WiFi.persistent(true);
-		WiFi.disconnect(false, false);
+		WiFi.disconnect(true, false);
 		WiFi.persistent(false);
-
-		WiFi.mode(WIFI_OFF);
 	}
 }

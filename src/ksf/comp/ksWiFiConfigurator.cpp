@@ -77,9 +77,7 @@ namespace ksf::comps
 	ksWiFiConfigurator::~ksWiFiConfigurator()
 	{
 		WiFi.persistent(true);
-		WiFi.softAPdisconnect();
+		WiFi.softAPdisconnect(true);
 		WiFi.persistent(false);
-
-		WiFi.mode(WIFI_OFF);
 	}
 }
