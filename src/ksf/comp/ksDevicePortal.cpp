@@ -13,22 +13,24 @@
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
 
+#include <string_view>
 
 #if defined(ESP8266)
-    #include "ESP8266WiFi.h"
-    #include "ESPAsyncTCP.h"
-    #include "flash_hal.h"
-    #include "FS.h"
+	#include "ESP8266WiFi.h"
+	#include "ESPAsyncTCP.h"
+	#include "flash_hal.h"
+	#include "FS.h"
 	#define HARDWARE "ESP8266"
 #elif defined(ESP32)
 	#include "esp_wifi.h"
-    #include "WiFi.h"
-    #include "AsyncTCP.h"
-    #include "Update.h"
-    #include "esp_int_wdt.h"
-    #include "esp_task_wdt.h"
+	#include "WiFi.h"
+	#include "AsyncTCP.h"
+	#include "Update.h"
+	#include "esp_int_wdt.h"
+	#include "esp_task_wdt.h"
 	#define HARDWARE "ESP32"
 #endif
+
 #include <DNSServer.h>
 #include "ESPAsyncWebServer.h"
 #include "../res/otaWebpage.h"
