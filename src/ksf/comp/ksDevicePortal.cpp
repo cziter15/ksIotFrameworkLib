@@ -36,6 +36,25 @@
 #define DP_PSTR(x) (String(FPSTR(x)).c_str())
 namespace ksf::comps
 {
+	class StdStrWebResponse
+	{
+		private:
+			std::string content;
+		public:
+			StdStrWebResponse(std::string&& content) {
+				this->content = std::move(content);
+			}
+			
+			AsyncCallbackResponse* operator*() const
+			{
+				auto type{FPSTR("text/plain")};
+				auto cs{content.length()};
+				return new AsyncCallbackResponse(type, cs, [&, cs](uint8_t *buf, size_t maxl, size_t idx) {
+					return content.copy((char *)buf, std::min(maxl, cs - idx), idx);
+				});
+			}
+	};
+
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PGM_("ota_ksiotframework"))
 	{}
@@ -130,7 +149,8 @@ namespace ksf::comps
 
 					for (auto& parameter : configCompSp->getParameters())
 					{
-						auto value{request->getParam(paramPrefix + parameter.id.c_str(), true)->value()};
+						String param_id{paramPrefix + parameter.id.c_str()};
+						auto value{request->getParam(param_id, true)->value()};
 						if (value.isEmpty())
 							continue;
 
@@ -158,27 +178,27 @@ namespace ksf::comps
 
 					default:
 					{
-						String json;
+						std::string json;
 						json += '[';
 						for (int i{0}; i < WiFi.scanComplete(); ++i)
 						{
 							if (i > 0)
 								json += ',';
-							json += FPSTR("{\"rssi\":");
-							json += String(WiFi.RSSI(i));
-							json += FPSTR(",\"ssid\":\"");
-							json += WiFi.SSID(i)+"\"";
-							json += FPSTR(",\"bssid\":\"");
-							json += WiFi.BSSIDstr(i)+"\"";
-							json += FPSTR(",\"channel\":");
-							json += String(WiFi.channel(i));
-							json += FPSTR(",\"secure\":");
-							json += String(WiFi.encryptionType(i));
+							json += PGM_("{\"rssi\":");
+							json += ksf::to_string(WiFi.RSSI(i));
+							json += PGM_(",\"ssid\":\"");
+							json += WiFi.SSID(i).c_str();
+							json += PGM_("\",\"bssid\":\"");
+							json += WiFi.BSSIDstr(i).c_str();
+							json += PGM_("\",\"channel\":");
+							json += ksf::to_string(WiFi.channel(i));
+							json += PGM_(",\"secure\":");
+							json += ksf::to_string(WiFi.encryptionType(i));
 							json += '}';
 						}
 						json +=	']';
 						WiFi.scanDelete();
-						request->send(200, FPSTR("application/json"), json);
+						request->send(*StdStrWebResponse(std::move(json)));
 					}
 				}
 			});
@@ -201,7 +221,7 @@ namespace ksf::comps
 		server->onNotFound([&](AsyncWebServerRequest *request) {
 			REQUIRE_AUTH()
 
-			String acceptHeader{request->header(FPSTR("Accept"))};
+			auto acceptHeader{request->header(FPSTR("Accept"))};
 			if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
 			{
 				request->send(404, FPSTR("text/html"), FPSTR("Not found"));
@@ -220,12 +240,18 @@ namespace ksf::comps
 			request->send(response);
 		});
 
-		server->on(DP_PSTR("/api/identity"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			String json;
-			json += FPSTR("{ \"id\": \"");
+		server->on(DP_PSTR("/api/getIdentity"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+			std::string json;
+			json += PGM_("[{\"name\":\"Hostname\",\"value\":\"");
 			json += WiFi.getHostname();
-			json += FPSTR("\", \"hardware\": \"" HARDWARE "\" }");
-			request->send(200, "application/json", json);
+			json += PGM_("\"},{\"name\":\"Hardware\",\"value\":\"");
+			json += HARDWARE;
+			json += PGM_("\"},{\"name\":\"Reset reason\",\"value\":\"");
+			json += ksf::getResetReason();
+			json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");
+			json += WiFi.localIP().toString().c_str();
+			json += PGM_("\"}]");
+			request->send(*StdStrWebResponse(std::move(json)));
 		});
 
 		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -235,14 +261,14 @@ namespace ksf::comps
 			owner->findComponents<ksConfigProvider>(configCompsWp);
 			bool isInConfigMode{!configCompsWp.empty()};
 
-			String json;
-			json += FPSTR("{\"isConfigMode\": ");
-			json += isInConfigMode ? FPSTR("true") : FPSTR("false");
+			std::string json;
+			json += PGM_("{\"isConfigMode\": ");
+			json += isInConfigMode ? PGM_("true") : PGM_("false");
 
 			if (!isInConfigMode)
 			{
 				json += '}';
-				request->send(200, FPSTR("application/json"), json);
+				request->send(*StdStrWebResponse(std::move(json)));
 				return;
 			}
 			#ifdef ESP8266
@@ -257,31 +283,14 @@ namespace ksf::comps
 				auto pass = reinterpret_cast<const char*>(conf.sta.password);
 			#endif
 
-			String ssidString;
-			ssidString.reserve(32);
-			for (auto idx{0}; idx < 32; ++idx)
-			{
-				if (ssid[idx] == '\0')
-					break;
-				
-				ssidString += ssid[idx];
-			}
-
-			String passString;
-			passString.reserve(64);
-			for (auto idx{0}; idx < 64; ++idx)
-			{
-				if (pass[idx] == '\0')
-					break;
-
-				passString += pass[idx];
-			}
-
-			json += FPSTR(",\"ssid\":\"");
-			json += ssidString;
-			json += FPSTR("\", \"password\":\"");
-			json += passString;
-			json += FPSTR("\",\"params\": [");
+			std::string_view ssid_sv{ssid, 32};
+			std::string_view pass_sv{pass, 64};
+		
+			json += PGM_(",\"ssid\":\"");
+			json += ssid_sv;
+			json += PGM_("\", \"password\":\"");
+			json += pass_sv;
+			json += PGM_("\",\"params\": [");
 
 			for (auto& configCompWp : configCompsWp)
 			{
@@ -295,22 +304,22 @@ namespace ksf::comps
 
 				for (auto paramRef : paramListRef)
 				{
-					json += FPSTR("{\"id\": \"");
-					json += String(paramRef.id.c_str());
-					json += FPSTR("\", \"value\": \"");
-					json += String(paramRef.value.c_str());
-					json += FPSTR("\", \"default\": \"");
-					json += String(paramRef.defaultValue.c_str());
-					json += FPSTR("\"},");
+					json += PGM_("{\"id\": \"");
+					json += paramRef.id;
+					json += PGM_("\", \"value\": \"");
+					json += paramRef.value;
+					json += PGM_("\", \"default\": \"");
+					json += paramRef.defaultValue;
+					json += PGM_("\"},");
 				}
 			}
 
-			if (json.endsWith(","))
-				json = json.substring(0, json.length() - 1);
-				
+			if (json.back() == ',')
+				json.pop_back();
+			
 			json += "]}";
 
-			request->send(200, FPSTR("application/json"), json);
+			request->send(*StdStrWebResponse(std::move(json)));
 		});
 
 		server->on(DP_PSTR("/api/flash"), HTTP_POST, [&](AsyncWebServerRequest *request) {

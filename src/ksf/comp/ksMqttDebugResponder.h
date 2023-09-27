@@ -42,13 +42,6 @@ namespace ksf::comps
 			*/
 			void onMessage(const std::string_view& topic, const std::string_view& message);
 
-			/*
-				Returns last known reset reason.
-
-				@return std::string with reset reason description.
-			*/
-			std::string getResetReason();
-
 		public:
 			DECLARE_KS_EVENT(customDebugHandler, ksMqttDebugResponder*, const std::string_view&, bool&) //< Event that provides custom message handler.
 

@@ -10,6 +10,15 @@
 #include "ksConstants.h"
 #include "LittleFS.h"
 
+#if ESP32
+#include <WiFi.h>
+#include <esp_phy_init.h>
+#elif ESP8266
+#include <ESP8266WiFi.h>
+#else			
+#error Platform not implemented.
+#endif
+
 namespace ksf
 {
 	#define OTA_FILENAME_TEXT_PGM PGM_("/ksf.otabooted")	// Name of the file that indicates that the device was just flashed with OTA.
@@ -77,6 +86,44 @@ namespace ksf
 		return result;
 #else
 		return {pgm_str_ptr};
+#endif
+	}
+
+	const std::string getResetReason()
+	{
+		bool otaBoot{ksf::isFirstOtaBoot()};
+#if ESP32
+		switch (esp_reset_reason())
+		{
+			case ESP_RST_POWERON:
+				return PGM_("Power On");
+			case ESP_RST_SW:
+				if (otaBoot)
+					return PGM_("OTA Update");
+				return PGM_("Software/System restart");
+			case ESP_RST_PANIC:
+				return PGM_("Exception");
+			case ESP_RST_INT_WDT:
+				return PGM_("Watchdog (interrupt)");
+			case ESP_RST_TASK_WDT:
+				return PGM_("Watchdog (task)");
+			case ESP_RST_WDT:
+				return PGM_("Watchdog (other)");
+			case ESP_RST_DEEPSLEEP:
+				return PGM_("Deep-Sleep Wake");
+			case ESP_RST_BROWNOUT:
+				return PGM_("Brownout");
+			case ESP_RST_SDIO:
+				return PGM_("SDIO");
+			default:
+				return PGM_("Unknown");
+		}
+#elif ESP8266
+		if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
+			return PGM_("OTA Update");
+		return {ESP.getResetReason().c_str()};
+#else			
+		#error Platform not implemented.
 #endif
 	}
 }

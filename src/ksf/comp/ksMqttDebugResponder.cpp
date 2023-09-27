@@ -58,44 +58,6 @@ namespace ksf::comps
 			mqttConnSp->publish(PGM_("log"), message, false);
 	}
 
-	std::string ksMqttDebugResponder::getResetReason()
-	{
-		bool otaBoot{ksf::isFirstOtaBoot()};
-#if ESP32
-		switch (esp_reset_reason())
-		{
-			case ESP_RST_POWERON:
-				return PGM_("Power On");
-			case ESP_RST_SW:
-				if (otaBoot)
-					return PGM_("OTA Update");
-				return PGM_("Software/System restart");
-			case ESP_RST_PANIC:
-				return PGM_("Exception");
-			case ESP_RST_INT_WDT:
-				return PGM_("Watchdog (interrupt)");
-			case ESP_RST_TASK_WDT:
-				return PGM_("Watchdog (task)");
-			case ESP_RST_WDT:
-				return PGM_("Watchdog (other)");
-			case ESP_RST_DEEPSLEEP:
-				return PGM_("Deep-Sleep Wake");
-			case ESP_RST_BROWNOUT:
-				return PGM_("Brownout");
-			case ESP_RST_SDIO:
-				return PGM_("SDIO");
-			default:
-				return PGM_("Unknown");
-		}
-#elif ESP8266
-		if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
-			return PGM_("OTA Update");
-		return {ESP.getResetReason().c_str()};
-#else			
-		#error Platform not implemented.
-#endif
-	}
-
 	void ksMqttDebugResponder::onMessage(const std::string_view& topic, const std::string_view& message)
 	{
 		/* If topic is not equal to cmd, break here. */
@@ -128,7 +90,7 @@ namespace ksf::comps
 				"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_(" [C], "
 #endif
 				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
-				"Reset reason: ") + getResetReason()
+				"Reset reason: ") + ksf::getResetReason()
 			);
 		}
 		else if (message == PGM_("remove_dbg"))

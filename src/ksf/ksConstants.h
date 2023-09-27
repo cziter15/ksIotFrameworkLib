@@ -141,4 +141,9 @@ namespace ksf
 	{
 		return input.size() >= match.size()	&& std::equal(match.begin(), match.end(), input.begin());
 	}
+
+	/*
+		Helper function to get last reset reason.
+	*/
+	const std::string getResetReason();
 }
