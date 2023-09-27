@@ -163,7 +163,8 @@ namespace ksf::comps
 				}
 
 				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
-				
+
+				server->reset();
 				breakRequestMillis = millis();
 			});
 
@@ -200,6 +201,7 @@ namespace ksf::comps
 						}
 						json +=	']';
 						WiFi.scanDelete();
+
 						request->send(*StdStrWebResponse(std::move(json)));
 					}
 				}
@@ -389,7 +391,7 @@ namespace ksf::comps
 		if (rebootRequestMillis != 0 && millis() - rebootRequestMillis > 1000)
 			ESP.restart();
 
-		if (breakRequestMillis != 0 && millis() - breakRequestMillis > 1000)
+		if (breakRequestMillis != 0 && millis() - breakRequestMillis > 2000)
 			return false;
 
 		return true;

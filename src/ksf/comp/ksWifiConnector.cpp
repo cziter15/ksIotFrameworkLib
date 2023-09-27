@@ -25,10 +25,13 @@ namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
+		WiFi.mode(WIFI_OFF);
 #if ESP32
 		/* On ESP32 hostname must be set when not in STA mode. */
 		WiFi.setHostname(hostname);
 #endif
+		WiFi.mode(WIFI_STA);
+
 		setupMacAddress();
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
@@ -66,7 +69,6 @@ namespace ksf::comps
 
 	bool ksWifiConnector::init(ksApplication* owner)
 	{
-		WiFi.mode(WIFI_STA);
 		WiFi.begin();
 
 #if ESP32

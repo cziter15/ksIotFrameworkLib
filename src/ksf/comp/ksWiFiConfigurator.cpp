@@ -34,7 +34,6 @@ namespace ksf::comps
 		: deviceName(std::move(devicePrefixName))
 	{
 		deviceName += '-';
-
 #if ESP32
 		deviceName += std::to_string(ESP.getEfuseMac());
 #elif ESP8266
@@ -42,6 +41,7 @@ namespace ksf::comps
 #else			
 		#error Platform not implemented.
 #endif
+		WiFi.mode(WIFI_OFF);
 	}
 
 	bool ksWiFiConfigurator::init(ksApplication* owner)
