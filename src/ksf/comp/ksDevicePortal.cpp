@@ -285,8 +285,8 @@ namespace ksf::comps
 				auto pass = reinterpret_cast<const char*>(conf.sta.password);
 			#endif
 
-			std::string_view ssid_sv{ssid, 32};
-			std::string_view pass_sv{pass, 64};
+			std::string_view ssid_sv{ssid, strnlen(ssid, 32)};
+			std::string_view pass_sv{pass, strnlen(pass, 64)};
 		
 			json += PGM_(",\"ssid\":\"");
 			json += ssid_sv;
