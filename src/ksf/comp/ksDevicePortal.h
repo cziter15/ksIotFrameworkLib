@@ -14,6 +14,7 @@
 #include "../ksComponent.h"
 
 class DNSServer;
+
 namespace ksf::comps
 {
 	class ksDevicePortal : public ksComponent
@@ -21,15 +22,20 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksDevicePortal, ksComponent)
 
 		protected:
-			ArduinoOTAClass ArduinoOTA;						// Arduino OTA object.
-			ksApplication* owner{nullptr};					// Pointer to ksApplication.
+			ArduinoOTAClass ArduinoOTA;							// Arduino OTA object.
+			ksApplication* owner{nullptr};						// Pointer to ksApplication.
 
-			std::string password;							// OTA password.
-			
-			bool breakApp{false};							// Flag to restart chip.
+			std::string password;								// OTA password.
+			bool breakApp{false};								// Flag to restart chip.
 
-			DNSServer* dnsServer{nullptr};
-			void* serverRawPtr{nullptr};
+			DNSServer* dnsServer{nullptr};						// DNS server.
+			void* _webServer{nullptr};							// Web server.
+
+			template <typename ServerType>
+			ServerType* serverAs() const
+			{
+				return static_cast<ServerType*>(_webServer);
+			}
 
 			/*
 				This function starts OTA update server.
@@ -39,7 +45,70 @@ namespace ksf::comps
 			/*
 				This function is called when OTA update is finished.
 			*/
-			void updateFinished();
+			void updateFinished(); 
+
+			/*
+				This function handles authentication error.
+			*/
+			bool inRequest_NeedAuthentication() const;
+
+			/*
+				This function handles "not found" error.
+			*/
+			void onRequest_notFound() const;
+
+			/*
+				This function serves main page to the client.
+			*/
+			void onRequest_index() const;
+
+			/*
+				This function handles endpoint "/api/online".
+				It is called by webpage to check if device is online.
+			*/
+			void onRequest_online() const;
+
+			/*
+				This function handles endpoint "/api/getIdentity"
+				It returns device identity to the client.
+			*/
+			void onRequest_getIdentity() const;
+
+			/*
+				This function handles endpoint "/api/getDeviceParams"
+				It returns device parameters to the client.
+			*/
+			void onRequest_getDeviceParams() const;
+
+			/*
+				This function handles endpoint "/api/saveConfig"
+				It is called when user wants to save configuration.
+			*/
+			void onRequest_saveConfig();
+
+			/*
+				This function handles endpoint "/api/flash".
+				It is called when OTA update is started.
+			*/
+			void onRequest_otaChunk();
+
+			/*
+				This function handles endpoint "/api/flash".
+				It is called when OTA update is finished.
+			*/
+			void onRequest_otaFinish();
+
+			/*
+				This function handles endpoint "/api/scanNetworks"
+				It returns a list of  wireless networks to the client.
+			*/
+			void onRequest_scanNetworks();
+
+			/*
+				This function handles endpoint "/api/goToConfigMode"
+				It is called when user wants to go to configuration mode (AP).
+			*/
+			void onRequest_goToConfigMode();
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
@@ -78,6 +147,9 @@ namespace ksf::comps
 			*/
 			bool loop() override;
 
+			/*
+				Destructor used to cleanup resources.
+			*/
 			virtual ~ksDevicePortal();
 	};
 }
