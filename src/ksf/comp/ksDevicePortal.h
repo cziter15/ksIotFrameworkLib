@@ -36,7 +36,7 @@ namespace ksf::comps
 			std::shared_ptr<AsyncWebServer> server;			// Web server.
 			std::shared_ptr<DNSServer> dnsServer;			// DNS server.
 
-			std::deque<std::function<void()>> tasks;		// Tasks to execute.
+			std::deque<std::function<void()>> taskQueue;	// Tasks to execute.
 
 			/*
 				This function starts OTA update server.

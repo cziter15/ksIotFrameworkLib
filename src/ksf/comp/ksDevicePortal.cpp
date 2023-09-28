@@ -156,7 +156,7 @@ namespace ksf::comps
 					}
 				}
 
-				tasks.emplace_back([&, ssid, password]() {
+				taskQueue.emplace_back([&, ssid, password]() {
 					std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 					owner->findComponents<ksConfigProvider>(configCompsWp);
 
@@ -177,7 +177,7 @@ namespace ksf::comps
 				switch (WiFi.scanComplete())
 				{
 					case WIFI_SCAN_FAILED:
-						tasks.emplace_back([]() {
+						taskQueue.emplace_back([]() {
 							WiFi.scanNetworks(true);
 						});
 					case WIFI_SCAN_RUNNING:
@@ -207,7 +207,7 @@ namespace ksf::comps
 						json +=	']';
 						WiFi.scanDelete();
 
-						tasks.emplace_back([]() {
+						taskQueue.emplace_back([]() {
 							WiFi.enableSTA(false);
 						});
 
@@ -345,7 +345,7 @@ namespace ksf::comps
 			response->addHeader(FPSTR("Connection"), FPSTR("close"));
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
 
-			tasks.emplace_back([&]() {
+			taskQueue.emplace_back([&]() {
 				updateFinished();
 				delay(500);
 				ESP.restart();
@@ -403,10 +403,10 @@ namespace ksf::comps
 		if (dnsServer)
 			dnsServer->processNextRequest();
 
-		while (!tasks.empty()) 
+		while (!taskQueue.empty()) 
 		{
-			tasks.front()();
-			tasks.pop_front();
+			taskQueue.front()();
+			taskQueue.pop_front();
 		}
 
 		if (breakApp)
