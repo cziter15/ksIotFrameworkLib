@@ -97,14 +97,14 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		auto& ssid{serverAs<WebServerClass>()->arg(FPSTR("ssid"))};
+		auto ssid{serverAs<WebServerClass>()->arg(FPSTR("ssid"))};
 		if (ssid.isEmpty())
 		{
 			serverAs<WebServerClass>()->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
 			return;
 		}
 
-		auto& password{serverAs<WebServerClass>()->arg(FPSTR("password"))};
+		auto password{serverAs<WebServerClass>()->arg(FPSTR("password"))};
 
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 		owner->findComponents<ksConfigProvider>(configCompsWp);
