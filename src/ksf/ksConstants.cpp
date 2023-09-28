@@ -38,6 +38,12 @@ namespace ksf
 		LittleFS.begin();
 #endif
 
+		WiFi.persistent(true);
+		WiFi.setAutoConnect(false);
+		WiFi.setAutoReconnect(false);
+
+		WiFi.mode(WIFI_OFF);
+
 		bootedFromOta = LittleFS.remove(OTA_FILENAME_TEXT_PGM.c_str());
 	}
 
