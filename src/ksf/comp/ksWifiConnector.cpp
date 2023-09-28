@@ -69,7 +69,13 @@ namespace ksf::comps
 
 	bool ksWifiConnector::init(ksApplication* owner)
 	{
-		WiFi.begin();
+		std::string ssid, pass;
+		ksf::loadCredentials(ssid, pass);
+
+		if (ssid.empty())
+			return false;
+
+		WiFi.begin(ssid.c_str(), pass.c_str());
 
 #if ESP32
 		WiFi.setSleep(true);
@@ -110,7 +116,7 @@ namespace ksf::comps
 
 			if (wifiReconnectTimer.hasTimePassed())
 			{
-				WiFi.reconnect();
+				WiFi.begin();
 				wifiReconnectTimer.restart();
 			}
 		}

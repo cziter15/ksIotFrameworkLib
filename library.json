@@ -15,8 +15,7 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient",
-		"me-no-dev/ESPAsyncWebServer": "https://github.com/me-no-dev/ESPAsyncWebServer"
+		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient"
 	},
 	"frameworks": "arduino",
 	"platforms": "esp32,esp8266"

@@ -8,6 +8,7 @@
  */
 
 #include "ksConstants.h"
+#include "ksConfig.h"
 #include "LittleFS.h"
 
 #if ESP32
@@ -21,7 +22,11 @@
 
 namespace ksf
 {
-	#define OTA_FILENAME_TEXT_PGM PGM_("/ksf.otabooted")	// Name of the file that indicates that the device was just flashed with OTA.
+	#define OTA_FILENAME_TEXT PGM_("/ksf.otabooted")		// File name for OTA boot indicator.
+	#define WIFI_CRED_FILENAME_TEXT PGM_("/ksf.wificred")	// File name for WiFi credentials.
+
+	#define SSID_PARAM_NAME PGM_("ssid")					// Param name from progmem - ssid
+	#define PASSWORD_PARAM_NAME PGM_("password")			// Param name from progmem - password
 
 	static bool bootedFromOta{false};						// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;			// Variables for assembling 64-bit version of millis.
@@ -38,18 +43,17 @@ namespace ksf
 		LittleFS.begin();
 #endif
 
-		WiFi.persistent(true);
+		WiFi.persistent(false);
+		WiFi.mode(WIFI_OFF);
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
-
-		WiFi.mode(WIFI_OFF);
-
-		bootedFromOta = LittleFS.remove(OTA_FILENAME_TEXT_PGM.c_str());
+		
+		bootedFromOta = LittleFS.remove(OTA_FILENAME_TEXT.c_str());
 	}
 
 	void saveOtaBootIndicator()
 	{
-		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT_PGM.c_str(), "w")};
+		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT.c_str(), "w")};
 		indicatorFile.close();
 	}
 
@@ -140,5 +144,23 @@ namespace ksf
 				to_string(uptime / 1000 / 60 / 60 % 24) + "h " + 
 				to_string(uptime / 1000 / 60 % 60) + "m " + 
 				to_string(uptime / 1000 % 60) + "s";
+	}
+
+	void loadCredentials(std::string& ssid, std::string& password)
+	{
+		USING_CONFIG_FILE(WIFI_CRED_FILENAME_TEXT)
+		{
+			ssid = config_file.getParam(SSID_PARAM_NAME);
+			password = config_file.getParam(PASSWORD_PARAM_NAME);
+		}
+	}
+
+	void saveCredentials(const std::string& ssid, const std::string& password)
+	{
+		USING_CONFIG_FILE(WIFI_CRED_FILENAME_TEXT)
+		{
+			config_file.setParam(SSID_PARAM_NAME, ssid);
+			config_file.setParam(PASSWORD_PARAM_NAME, password);
+		}
 	}
 }

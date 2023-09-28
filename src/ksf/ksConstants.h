@@ -145,10 +145,26 @@ namespace ksf
 	/*
 		Helper function to get last reset reason.
 	*/
-	const std::string getResetReason();
+	extern const std::string getResetReason();
 
 	/*
 		Helper function to get uptime in a form of string.
 	*/
-	const std::string getUptimeString();
+	extern const std::string getUptimeString();
+
+	/*
+		This function loads credentials from EEPROM.
+
+		@param ssid SSID ref to be loaded.
+		@param password Password ref to be loaded.
+	*/
+	extern void loadCredentials(std::string& ssid, std::string& password);
+
+	/*
+		This function saves credentials to EEPROM.
+
+		@param ssid SSID to be saved.
+		@param password Password to be saved.
+	*/
+	extern void saveCredentials(const std::string& ssid, const std::string& password);
 }

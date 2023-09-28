@@ -13,11 +13,6 @@
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 
-#include <deque>
-#include <functional>
-
-class AsyncWebServer;
-class AsyncWebServerRequest;
 class DNSServer;
 namespace ksf::comps
 {
@@ -33,10 +28,8 @@ namespace ksf::comps
 			
 			bool breakApp{false};							// Flag to restart chip.
 
-			std::shared_ptr<AsyncWebServer> server;			// Web server.
-			std::shared_ptr<DNSServer> dnsServer;			// DNS server.
-
-			std::deque<std::function<void()>> taskQueue;	// Tasks to execute.
+			DNSServer* dnsServer{nullptr};
+			void* serverRawPtr{nullptr};
 
 			/*
 				This function starts OTA update server.
@@ -84,5 +77,7 @@ namespace ksf::comps
 				@return True on success, false on fail.
 			*/
 			bool loop() override;
+
+			virtual ~ksDevicePortal();
 	};
 }

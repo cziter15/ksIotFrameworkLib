@@ -13,6 +13,7 @@
 #include "ksConfigProvider.h"
 #include "ksDevicePortal.h"
 #include "ksLed.h"
+
 #if ESP32
 	#include <WiFi.h>
 	#include <esp_wifi.h>
@@ -72,6 +73,6 @@ namespace ksf::comps
 
 	ksWiFiConfigurator::~ksWiFiConfigurator()
 	{
-		WiFi.softAPdisconnect(true);
+		WiFi.enableAP(false);
 	}
 }

@@ -14,48 +14,27 @@
 #include "ksConfigProvider.h"
 
 #if defined(ESP8266)
-	#include "ESP8266WiFi.h"
-	#include "ESPAsyncTCP.h"
 	#include "flash_hal.h"
-	#include "FS.h"
+    #include "ESP8266WiFi.h"
+    #include "WiFiClient.h"
+    #include "ESP8266WebServer.h"
+    #define WebServerClass ESP8266WebServer
 	#define HARDWARE "ESP8266"
 #elif defined(ESP32)
-	#include "esp_wifi.h"
-	#include "WiFi.h"
-	#include "AsyncTCP.h"
-	#include "Update.h"
-	#include "esp_int_wdt.h"
-	#include "esp_task_wdt.h"
+    #include "WiFi.h"
+    #include "WiFiClient.h"
+    #include "WebServer.h"
+    #define WebServerClass WebServer
 	#define HARDWARE "ESP32"
 #endif
 
 #include <DNSServer.h>
-#include "ESPAsyncWebServer.h"
 
 #include "../res/otaWebpage.h"
 
 #define DP_PSTR(x) (String(FPSTR(x)).c_str())
 namespace ksf::comps
 {
-	class StdStrWebResponse
-	{
-		private:
-			std::string content;
-		public:
-			StdStrWebResponse(std::string&& content) {
-				this->content = std::move(content);
-			}
-			
-			AsyncCallbackResponse* operator*() const
-			{
-				auto type{FPSTR("text/plain")};
-				auto cs{content.length()};
-				return new AsyncCallbackResponse(type, cs, [&, cs](uint8_t *buf, size_t maxl, size_t idx) {
-					return content.copy((char *)buf, std::min(maxl, cs - idx), idx);
-				});
-			}
-	};
-
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PGM_("ota_ksiotframework"))
 	{}
@@ -90,7 +69,7 @@ namespace ksf::comps
 
 		if (WiFi.getMode() == WIFI_AP) 
 		{
-			dnsServer = std::make_shared<DNSServer>();
+			dnsServer = new DNSServer();
 			dnsServer->setErrorReplyCode(DNSReplyCode::NoError);
 			dnsServer->start(53, "*", WiFi.softAPIP());
 		}
@@ -106,33 +85,34 @@ namespace ksf::comps
 
 	void ksDevicePortal::setupUpdateWebServer()
 	{
-		server = std::make_shared<AsyncWebServer>(80);
-
-		auto isAuthorized = [](ksDevicePortal* portal, AsyncWebServerRequest *request) {
+		serverRawPtr = new WebServerClass(80);
+		auto server{static_cast<WebServerClass*>(serverRawPtr)};
+		
+		auto isAuthorized = [](ksDevicePortal* portal, WebServerClass *server) {
 			if (WiFi.getMode() == WIFI_AP)
 				return true;
-			if (portal->password.empty() || request->authenticate("admin", portal->password.c_str()))
+			if (portal->password.empty() || server->authenticate("admin", portal->password.c_str()))
 				return true;
-			request->requestAuthentication();
+			server->requestAuthentication();
 			return false;
 		};
 
-		#define REQUIRE_AUTH() if (!isAuthorized(this, request)) return;
+		#define REQUIRE_AUTH() if (!isAuthorized(this, server)) return;
 
 		if (WiFi.getMode() & WIFI_AP)
 		{
-			server->on(DP_PSTR("/api/saveConfig"), HTTP_POST, [&](AsyncWebServerRequest *request) {
+			server->on(DP_PSTR("/api/saveConfig"), HTTP_POST, [&, server]() {
 				REQUIRE_AUTH()
 
-				auto& ssid{request->getParam(FPSTR("ssid"), true)->value()};
+				auto& ssid{server->arg(FPSTR("ssid"))};
 
 				if (ssid.isEmpty())
 				{
-					request->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
+					server->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
 					return;
 				}
 				
-				auto& password{request->getParam(FPSTR("password"), true)->value()};
+				auto& password{server->arg(FPSTR("password"))};
 
 				std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 				owner->findComponents<ksConfigProvider>(configCompsWp);
@@ -148,40 +128,32 @@ namespace ksf::comps
 					for (auto& parameter : configCompSp->getParameters())
 					{
 						String param_id{paramPrefix + parameter.id.c_str()};
-						auto value{request->getParam(param_id, true)->value()};
+						auto value{server->arg(param_id)};
 						if (value.isEmpty())
 							continue;
 
 						parameter.value = value.c_str();
 					}
+
+					configCompSp->saveParams();
 				}
 
-				taskQueue.emplace_back([&, ssid, password]() {
-					std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-					owner->findComponents<ksConfigProvider>(configCompsWp);
+				ksf::saveCredentials(ssid.c_str(), password.c_str());
 
-					for (auto& configCompWp : configCompsWp)
-						if (auto configCompSp{configCompWp.lock()})
-							configCompSp->saveParams();
+				server->send(200);
 
-					WiFi.begin(ssid.c_str(), password.c_str(), 0, 0, false);
-					breakApp = true;
-				});
-
-				request->send(200);
+				breakApp = true;
 			});
 
-			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&, server]() {
 				REQUIRE_AUTH()
 
 				switch (WiFi.scanComplete())
 				{
 					case WIFI_SCAN_FAILED:
-						taskQueue.emplace_back([]() {
-							WiFi.scanNetworks(true);
-						});
+						WiFi.scanNetworks(true);
 					case WIFI_SCAN_RUNNING:
-						request->send(304);
+						server->send(304);
 					return;
 
 					default:
@@ -206,12 +178,9 @@ namespace ksf::comps
 						}
 						json +=	']';
 						WiFi.scanDelete();
-
-						taskQueue.emplace_back([]() {
-							WiFi.enableSTA(false);
-						});
-
-						request->send(*StdStrWebResponse(std::move(json)));
+					
+						WiFi.enableSTA(false);
+						server->send(200, FPSTR("application/json"), json.c_str());
 					}
 				}
 			});
@@ -219,40 +188,38 @@ namespace ksf::comps
 
 		if (WiFi.getMode() & WIFI_STA)
 		{
-			server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+			server->on(DP_PSTR("/api/goToConfigMode"),HTTP_GET, [&, server]() {
 				REQUIRE_AUTH()
-				request->send(200);
+				server->send(200);
 				breakApp = true;
 			});
 		}
 
-		server->on(DP_PSTR("/api/online"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			request->send(200);
+		server->on(DP_PSTR("/api/online"), HTTP_GET, [&, server]() {
+			server->send(200);
 		});
 
-		server->onNotFound([&](AsyncWebServerRequest *request) {
+		server->onNotFound([&, server]() {
 			REQUIRE_AUTH()
 
-			auto acceptHeader{request->header(FPSTR("Accept"))};
+			auto acceptHeader{server->header(FPSTR("Accept"))};
 			if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
 			{
-				request->send(404, FPSTR("text/html"), FPSTR("Not found"));
+				server->send(404, FPSTR("text/html"), FPSTR("Not found"));
 				return;
 			}
-			auto response{request->beginResponse(302, FPSTR("text/plain"), "")};
-			response->addHeader(FPSTR("Location"), "/");
-			request->send(response);
+
+			server->sendHeader(FPSTR("Location"), "/");
+			server->send(302);
 		});
 
-		server->on("/", HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on("/", HTTP_GET, [&, server]() {
 			REQUIRE_AUTH()
-
-			auto response{request->beginResponse_P(200, FPSTR("text/html"), DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE)};
-			response->addHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
-			request->send(response);
+			server->sendHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
+			server->send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 		});
 
-		server->on(DP_PSTR("/api/getIdentity"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on(DP_PSTR("/api/getIdentity"), HTTP_GET, [&, server]() {
 			std::string json;
 			json += PGM_("[{\"name\":\"Hardware\",\"value\":\"");
 			json += HARDWARE;
@@ -265,10 +232,10 @@ namespace ksf::comps
 			json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");
 			json += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
 			json += PGM_("\"}]");
-			request->send(*StdStrWebResponse(std::move(json)));
+			server->send(200, "application/json", json.c_str());
 		});
 
-		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, [&](AsyncWebServerRequest *request) {
+		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, [&, server]() {
 			REQUIRE_AUTH()
 
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
@@ -282,29 +249,17 @@ namespace ksf::comps
 			if (!isInConfigMode)
 			{
 				json += '}';
-				request->send(*StdStrWebResponse(std::move(json)));
+				server->send(200, "application/json", json.c_str());
 				return;
 			}
 
-			#ifdef ESP8266
-				struct station_config conf;
-				wifi_station_get_config_default(&conf);
-				auto ssid = reinterpret_cast<const char*>(conf.ssid);
-				auto pass = reinterpret_cast<const char*>(conf.password);
-			#elif defined(ESP32)
-				wifi_config_t conf;
-				esp_wifi_get_config(WIFI_IF_STA, &conf);
-				auto ssid = reinterpret_cast<const char*>(conf.sta.ssid);
-				auto pass = reinterpret_cast<const char*>(conf.sta.password);
-			#endif
-
-			std::string_view ssid_sv{ssid, strnlen(ssid, 32)};
-			std::string_view pass_sv{pass, strnlen(pass, 64)};
+			std::string ssid, pass;
+			ksf::loadCredentials(ssid, pass);
 
 			json += PGM_(",\"ssid\":\"");
-			json += ssid_sv;
+			json += ssid;
 			json += PGM_("\", \"password\":\"");
-			json += pass_sv;
+			json += pass;
 			json += PGM_("\",\"params\": [");
 
 			for (auto& configCompWp : configCompsWp)
@@ -334,84 +289,80 @@ namespace ksf::comps
 			
 			json += "]}";
 
-			request->send(*StdStrWebResponse(std::move(json)));
+			server->send(200, FPSTR("application/json"), json.c_str());
 		});
 
-		server->on(DP_PSTR("/api/flash"), HTTP_POST, [&](AsyncWebServerRequest *request) {
+		server->on("/api/flash", HTTP_POST, [&, server]() {
 			REQUIRE_AUTH()
 
-			auto statusCode{(Update.hasError())?500:200};
-			auto response{request->beginResponse(statusCode, FPSTR("text/plain"), (Update.hasError())?"FAIL":"OK")};
-			response->addHeader(FPSTR("Connection"), FPSTR("close"));
-			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
+			server->sendHeader("Connection", "close");
+			server->send(200, "text/plain", (Update.hasError()) ? "FAIL" : "OK");
+			
+			updateFinished();
 
-			taskQueue.emplace_back([&]() {
-				updateFinished();
-				delay(500);
-				ESP.restart();
-				breakApp = true;
-			});
-
-			request->send(response);
-		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
+			delay(100);
+			yield();
+			delay(100);
+			ESP.restart();
+		}, [&]() {
 			REQUIRE_AUTH()
 
-			if (!index) 
+			HTTPUpload& upload = server->upload();
+			if (upload.status == UPLOAD_FILE_START)
 			{
-				if(!request->hasParam("MD5", true)) 
-					return request->send(400, FPSTR("text/plain"), FPSTR("MD5 parameter missing"));
-
-				if(!Update.setMD5(request->getParam("MD5", true)->value().c_str())) 
-					return request->send(400, FPSTR("text/plain"),  FPSTR("MD5 parameter invalid"));
-
 				#if defined(ESP8266)
-					int cmd = U_FLASH;
 					Update.runAsync(true);
-					size_t fsSize = ((size_t) &_FS_end - (size_t) &_FS_start);
 					uint32_t maxSketchSpace = (ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000;
-					if (!Update.begin((cmd == U_FS)?fsSize:maxSketchSpace, cmd)){ // Start with max available size
+					if (!Update.begin(maxSketchSpace, U_FLASH)) {
 				#elif defined(ESP32)
-					int cmd = U_FLASH;
-					if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) { // Start with max available size
+					if (!Update.begin(UPDATE_SIZE_UNKNOWN, U_FLASH)) { // Start with max available size
 				#endif
-					return request->send(400,  FPSTR("text/plain"), FPSTR("OTA failed to start"));
+					return server->send(400, "text/plain", "OTA could not begin");
 				}
+				onUpdateStart->broadcast();
 			}
-
-			// Write chunked data to the free sketch space
-			if(len)
-				if (Update.write(data, len) != len)
-						return request->send(400,  FPSTR("text/plain"), FPSTR("OTA failed to start"));
-				
-			if (final) 
+			else if (upload.status == UPLOAD_FILE_WRITE)
 			{
-				if (!Update.end(true)) 
-					return request->send(400,  FPSTR("text/plain"), FPSTR("OTA failed to start"));
+				Update.write(upload.buf, upload.currentSize);
 			}
-			else return;
+			else if (upload.status == UPLOAD_FILE_END) 
+			{
+				Update.end(true);
+			}
 		});
 
 		server->begin();
 	}
-
 
 	bool ksDevicePortal::loop()
 	{
 		/* Handle OTA stuff. */
 		ArduinoOTA.handle();
 
-		if (dnsServer)
-			dnsServer->processNextRequest();
-
-		while (!taskQueue.empty()) 
-		{
-			taskQueue.front()();
-			taskQueue.pop_front();
-		}
-
 		if (breakApp)
 			return false;
 
+		if (dnsServer)
+			dnsServer->processNextRequest();
+
+		if (serverRawPtr)
+			static_cast<WebServerClass*>(serverRawPtr)->handleClient();
+
 		return true;
+	}
+
+	ksDevicePortal::~ksDevicePortal()
+	{
+		if (dnsServer)
+		{
+			delete dnsServer;
+			dnsServer = nullptr;
+		}
+
+		if (serverRawPtr)
+		{
+			delete static_cast<WebServerClass*>(serverRawPtr);
+			serverRawPtr = nullptr;
+		}
 	}
 }
