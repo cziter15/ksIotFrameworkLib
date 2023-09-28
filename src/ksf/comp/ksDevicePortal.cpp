@@ -30,8 +30,6 @@
 
 #include <DNSServer.h>
 #include "../res/otaWebpage.h"
-
-#define DP_PSTR(x) (String(FPSTR(x)).c_str())
 namespace ksf::comps
 {
 	ksDevicePortal::ksDevicePortal()
@@ -274,17 +272,18 @@ namespace ksf::comps
 
 	void ksDevicePortal::onRequest_notFound() const
 	{
-		auto acceptHeader{serverAs<WebServerClass>()->header(FPSTR("Accept"))};
+		auto server{serverAs<WebServerClass>()};
 
-		/* Someone is looking for non-html files. */
-		if (acceptHeader.indexOf(FPSTR("text/html")) == -1) 
+		/* For files always return 404. */
+		if (server->uri().lastIndexOf('.') != -1)
 		{
-			serverAs<WebServerClass>()->send(404, FPSTR("text/html"), FPSTR("Not found"));
+			server->send(404);
 			return;
 		}
 
-		serverAs<WebServerClass>()->sendHeader(FPSTR("Location"), "/");
-		serverAs<WebServerClass>()->send(302);
+		/* Otherwise... redirect. */
+		server->sendHeader(FPSTR("Location"), "/");
+		server->send(302);
 	}
 
 	void ksDevicePortal::onRequest_otaChunk()
@@ -350,19 +349,19 @@ namespace ksf::comps
 
 		server->onNotFound(std::bind(&ksDevicePortal::onRequest_notFound, this));
 
-		server->on(DP_PSTR("/"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_index, this));
-		server->on(DP_PSTR("/api/online"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_online, this));
-		server->on(DP_PSTR("/api/getIdentity"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getIdentity, this));
-		server->on(DP_PSTR("/api/getDeviceParams"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getDeviceParams, this));
+		server->on(FPSTR("/"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_index, this));
+		server->on(FPSTR("/api/online"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_online, this));
+		server->on(FPSTR("/api/getIdentity"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getIdentity, this));
+		server->on(FPSTR("/api/getDeviceParams"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getDeviceParams, this));
 
 		if (WiFi.getMode() & WIFI_AP)
 		{
-			server->on(DP_PSTR("/api/saveConfig"), HTTP_POST, std::bind(&ksDevicePortal::onRequest_saveConfig, this));
-			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_scanNetworks, this));
+			server->on(FPSTR("/api/saveConfig"), HTTP_POST, std::bind(&ksDevicePortal::onRequest_saveConfig, this));
+			server->on(FPSTR("/api/scanNetworks"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_scanNetworks, this));
 		}
 		else
 		{
-			server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_goToConfigMode, this));
+			server->on(FPSTR("/api/goToConfigMode"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_goToConfigMode, this));
 		}
 
 		server->on("/api/flash", HTTP_POST, 
