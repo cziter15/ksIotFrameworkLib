@@ -13,8 +13,6 @@
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
 
-#include <string_view>
-
 #if defined(ESP8266)
 	#include "ESP8266WiFi.h"
 	#include "ESPAsyncTCP.h"
@@ -33,6 +31,7 @@
 
 #include <DNSServer.h>
 #include "ESPAsyncWebServer.h"
+
 #include "../res/otaWebpage.h"
 
 #define DP_PSTR(x) (String(FPSTR(x)).c_str())
@@ -126,18 +125,15 @@ namespace ksf::comps
 				REQUIRE_AUTH()
 
 				auto& ssid{request->getParam(FPSTR("ssid"), true)->value()};
-				auto& password{request->getParam(FPSTR("password"), true)->value()};
 
 				if (ssid.isEmpty())
 				{
 					request->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
 					return;
 				}
-
-				WiFi.persistent(true);
-				WiFi.begin(ssid.c_str(), password.c_str(), 0, 0, false);
-				WiFi.persistent(false);
 				
+				auto& password{request->getParam(FPSTR("password"), true)->value()};
+
 				std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 				owner->findComponents<ksConfigProvider>(configCompsWp);
 
@@ -158,14 +154,21 @@ namespace ksf::comps
 
 						parameter.value = value.c_str();
 					}
-
-					configCompSp->saveParams();
 				}
 
-				request->send(200, FPSTR("application/json"), FPSTR("{ \"result\": \"OK\" }"));
+				tasks.emplace_back([&, ssid, password]() {
+					std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+					owner->findComponents<ksConfigProvider>(configCompsWp);
 
-				server->reset();
-				breakRequestMillis = millis();
+					for (auto& configCompWp : configCompsWp)
+						if (auto configCompSp{configCompWp.lock()})
+							configCompSp->saveParams();
+
+					WiFi.begin(ssid.c_str(), password.c_str(), 0, 0, false);
+					breakApp = true;
+				});
+
+				request->send(200);
 			});
 
 			server->on(DP_PSTR("/api/scanNetworks"), HTTP_GET, [&](AsyncWebServerRequest *request) {
@@ -174,7 +177,9 @@ namespace ksf::comps
 				switch (WiFi.scanComplete())
 				{
 					case WIFI_SCAN_FAILED:
-						WiFi.scanNetworks(true);
+						tasks.emplace_back([]() {
+							WiFi.scanNetworks(true);
+						});
 					case WIFI_SCAN_RUNNING:
 						request->send(304);
 					return;
@@ -202,6 +207,10 @@ namespace ksf::comps
 						json +=	']';
 						WiFi.scanDelete();
 
+						tasks.emplace_back([]() {
+							WiFi.enableSTA(false);
+						});
+
 						request->send(*StdStrWebResponse(std::move(json)));
 					}
 				}
@@ -212,14 +221,13 @@ namespace ksf::comps
 		{
 			server->on(DP_PSTR("/api/goToConfigMode"), HTTP_GET, [&](AsyncWebServerRequest *request) {
 				REQUIRE_AUTH()
-				breakRequestMillis = millis();
 				request->send(200);
+				breakApp = true;
 			});
 		}
 
 		server->on(DP_PSTR("/api/online"), HTTP_GET, [&](AsyncWebServerRequest *request) {
-			bool busy{breakRequestMillis != 0 || rebootRequestMillis != 0};
-			request->send(busy ? 503 : 200);
+			request->send(200);
 		});
 
 		server->onNotFound([&](AsyncWebServerRequest *request) {
@@ -277,6 +285,7 @@ namespace ksf::comps
 				request->send(*StdStrWebResponse(std::move(json)));
 				return;
 			}
+
 			#ifdef ESP8266
 				struct station_config conf;
 				wifi_station_get_config_default(&conf);
@@ -291,7 +300,7 @@ namespace ksf::comps
 
 			std::string_view ssid_sv{ssid, strnlen(ssid, 32)};
 			std::string_view pass_sv{pass, strnlen(pass, 64)};
-		
+
 			json += PGM_(",\"ssid\":\"");
 			json += ssid_sv;
 			json += PGM_("\", \"password\":\"");
@@ -335,9 +344,15 @@ namespace ksf::comps
 			auto response{request->beginResponse(statusCode, FPSTR("text/plain"), (Update.hasError())?"FAIL":"OK")};
 			response->addHeader(FPSTR("Connection"), FPSTR("close"));
 			response->addHeader(FPSTR("Access-Control-Allow-Origin"), "*");
+
+			tasks.emplace_back([&]() {
+				updateFinished();
+				delay(500);
+				ESP.restart();
+				breakApp = true;
+			});
+
 			request->send(response);
-			updateFinished();
-			rebootRequestMillis = millis();
 		}, [&](AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final) {
 			REQUIRE_AUTH()
 
@@ -388,10 +403,13 @@ namespace ksf::comps
 		if (dnsServer)
 			dnsServer->processNextRequest();
 
-		if (rebootRequestMillis != 0 && millis() - rebootRequestMillis > 1000)
-			ESP.restart();
+		while (!tasks.empty()) 
+		{
+			tasks.front()();
+			tasks.pop_front();
+		}
 
-		if (breakRequestMillis != 0 && millis() - breakRequestMillis > 1000)
+		if (breakApp)
 			return false;
 
 		return true;

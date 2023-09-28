@@ -41,17 +41,13 @@ namespace ksf::comps
 #else			
 		#error Platform not implemented.
 #endif
-		WiFi.mode(WIFI_OFF);
 	}
 
 	bool ksWiFiConfigurator::init(ksApplication* owner)
 	{
 		this->owner = owner;
 
-		WiFi.persistent(true);
 		WiFi.softAP(deviceName.c_str());
-		WiFi.persistent(false);
-		
 		owner->addComponent<ksDevicePortal>().lock()->init(owner);
 
 		return true;
@@ -76,8 +72,6 @@ namespace ksf::comps
 
 	ksWiFiConfigurator::~ksWiFiConfigurator()
 	{
-		WiFi.persistent(true);
 		WiFi.softAPdisconnect(true);
-		WiFi.persistent(false);
 	}
 }

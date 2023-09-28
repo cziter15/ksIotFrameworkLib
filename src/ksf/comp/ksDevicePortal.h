@@ -13,6 +13,9 @@
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 
+#include <deque>
+#include <functional>
+
 class AsyncWebServer;
 class AsyncWebServerRequest;
 class DNSServer;
@@ -28,11 +31,12 @@ namespace ksf::comps
 
 			std::string password;							// OTA password.
 			
-			unsigned long rebootRequestMillis{0};			// Last reboot request time.
-			unsigned long breakRequestMillis{0};				// Last reboot time.
+			bool breakApp{false};							// Flag to restart chip.
 
 			std::shared_ptr<AsyncWebServer> server;			// Web server.
 			std::shared_ptr<DNSServer> dnsServer;			// DNS server.
+
+			std::deque<std::function<void()>> tasks;		// Tasks to execute.
 
 			/*
 				This function starts OTA update server.

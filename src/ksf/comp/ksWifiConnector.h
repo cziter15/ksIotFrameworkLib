@@ -78,6 +78,9 @@ namespace ksf::comps
 			*/
 			bool isConnected() const;
 
+			/*
+				Destructor for WiFi connector component.
+			*/
 			virtual ~ksWifiConnector();
 	};
 }

@@ -62,6 +62,9 @@ namespace ksf::comps
 			*/
 			bool postInit(ksApplication* owner) override;
 
+			/*
+				Destructor for WiFi configurator component.
+			*/
 			virtual ~ksWiFiConfigurator();
 	};
 }

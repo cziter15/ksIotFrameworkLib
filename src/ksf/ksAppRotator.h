@@ -29,7 +29,7 @@ namespace ksf
 			uint8_t appIndex{0};												// Index of the current application.
 			std::unique_ptr<ksApplication> currentApplication{nullptr};			// Pointer to the current application.
 			typedef std::unique_ptr<ksApplication> (*TSpawnerFunc)(); 			// Spawner fn type.
-			uint8_t cooldownTicks{0};
+
 			/*
 				Helper function template to create an application object.
 			*/
@@ -58,9 +58,6 @@ namespace ksf
 				if (!currentApplication->init()) 
 					currentApplication.reset(nullptr);
 
-				/* Run empty ticks. */
-				cooldownTicks = 100;
-
 				/* Set next app index. */
 				if (++appIndex >= appSpawners.size())
 					appIndex = 0;
@@ -72,11 +69,7 @@ namespace ksf
 			*/
 			void loop(unsigned long milliseconds = 1)
 			{
-				if (cooldownTicks == 0)
-					loopNoDelay();
-				else
-					cooldownTicks--;
-
+				loopNoDelay();
 				delay(milliseconds);
 			}
 	};

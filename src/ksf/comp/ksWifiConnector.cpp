@@ -25,16 +25,16 @@ namespace ksf::comps
 {
 	ksWifiConnector::ksWifiConnector(const char* hostname)
 	{
-		WiFi.mode(WIFI_OFF);
 #if ESP32
+		/* Disable STA mode. */
+		WiFi.enableSTA(false);
 		/* On ESP32 hostname must be set when not in STA mode. */
 		WiFi.setHostname(hostname);
 #endif
-		WiFi.mode(WIFI_STA);
+		WiFi.enableSTA(true);
 
 		setupMacAddress();
-		WiFi.setAutoConnect(false);
-		WiFi.setAutoReconnect(false);
+
 
 #if ESP8266
 		/* On ESP8266 hostname must be set when in STA mode. */
@@ -69,9 +69,7 @@ namespace ksf::comps
 
 	bool ksWifiConnector::init(ksApplication* owner)
 	{
-		WiFi.persistent(true);
 		WiFi.begin();
-		WiFi.persistent(false);
 
 #if ESP32
 		WiFi.setSleep(true);
@@ -104,7 +102,7 @@ namespace ksf::comps
 
 			if (wasConnected)
 			{
-				WiFi.disconnect(true, false);
+				WiFi.disconnect(false, false);
 
 				wasConnected = false;
 				wifiDisconnectedInternal();
@@ -112,7 +110,6 @@ namespace ksf::comps
 
 			if (wifiReconnectTimer.hasTimePassed())
 			{
-				/* Enforce WiFi full reconnect flow here. */
 				WiFi.reconnect();
 				wifiReconnectTimer.restart();
 			}
@@ -139,8 +136,6 @@ namespace ksf::comps
 
 	ksWifiConnector::~ksWifiConnector()
 	{
-		WiFi.persistent(true);
 		WiFi.disconnect(true, false);
-		WiFi.persistent(false);
 	}
 }
