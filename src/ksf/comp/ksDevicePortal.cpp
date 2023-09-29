@@ -28,7 +28,9 @@
 	#define HARDWARE "ESP32"
 #endif
 
+#include <LittleFS.h>
 #include <DNSServer.h>
+
 #include "../res/otaWebpage.h"
 namespace ksf::comps
 {
@@ -72,6 +74,12 @@ namespace ksf::comps
 		}
 		
 		return true;
+	}
+
+	void ksDevicePortal::rebootDevice()
+	{
+		delay(100);
+		ESP.restart();
 	}
 
 	void ksDevicePortal::updateFinished()
@@ -329,8 +337,7 @@ namespace ksf::comps
 			return;
 
 		updateFinished();
-		delay(100);
-		ESP.restart();
+		rebootDevice();
 	}
 	
 	void ksDevicePortal::onRequest_index() const
@@ -340,6 +347,26 @@ namespace ksf::comps
 
 		serverAs<WebServerClass>()->sendHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
 		serverAs<WebServerClass>()->send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
+	}
+
+	void ksDevicePortal::onRequest_formatFS()
+	{
+		if (inRequest_NeedAuthentication())
+			return;
+
+		LittleFS.format();
+
+#if defined(ESP8266)
+		ESP.eraseConfig();
+#elif defined(ESP32)
+		WiFi.enableSTA(true);
+		WiFi.persistent(true);
+		ret = WiFi.disconnect(true,true);
+		delay(500);
+		WiFi.persistent(false);
+#endif
+
+		rebootDevice();
 	}
 
 	void ksDevicePortal::setupUpdateWebServer()

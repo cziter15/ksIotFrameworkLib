@@ -48,6 +48,11 @@ namespace ksf::comps
 			void updateFinished(); 
 
 			/*
+				This function handles device reboot.
+			*/
+			void rebootDevice();
+
+			/*
 				This function handles authentication error.
 			*/
 			bool inRequest_NeedAuthentication() const;
@@ -109,6 +114,12 @@ namespace ksf::comps
 				It is called when user wants to go to configuration mode (AP).
 			*/
 			void onRequest_goToConfigMode();
+
+			/*
+				This function handles endpoint "/api/formatFS"
+				It is called when user wants to format flash.
+			*/
+			void onRequest_formatFS();
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
