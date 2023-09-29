@@ -66,8 +66,17 @@ namespace ksf::comps
 		return true;
 	}
 
+	void ksWiFiConfigurator::handlePeriodicTasks()
+	{
+		if (WiFi.softAPgetStationNum() > 0)
+			configTimeout.restart();
+	}
+
 	bool ksWiFiConfigurator::loop()
 	{
+		if (periodicTasksTimeout.triggered())
+			handlePeriodicTasks();
+
 		return !configTimeout.triggered();
 	}
 
