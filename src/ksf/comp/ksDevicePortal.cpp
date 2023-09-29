@@ -361,7 +361,7 @@ namespace ksf::comps
 #elif defined(ESP32)
 		WiFi.enableSTA(true);
 		WiFi.persistent(true);
-		ret = WiFi.disconnect(true,true);
+		WiFi.disconnect(true,true);
 		delay(500);
 		WiFi.persistent(false);
 #endif
