@@ -18,7 +18,6 @@
     #include "ESP8266WiFi.h"
     #include "WiFiClient.h"
     #include "ESP8266WebServer.h"
-    #define WebServerClass ESP8266WebServer
 	#define HARDWARE "ESP8266"
 #elif defined(ESP32)
     #include "WiFi.h"
@@ -68,7 +67,7 @@ namespace ksf::comps
 
 		if (WiFi.getMode() == WIFI_AP) 
 		{
-			dnsServer = new DNSServer();
+			dnsServer = std::make_unique<DNSServer>();
 			dnsServer->setErrorReplyCode(DNSReplyCode::NoError);
 			dnsServer->start(53, "*", WiFi.softAPIP());
 		}
@@ -93,10 +92,10 @@ namespace ksf::comps
 		if (WiFi.getMode() == WIFI_AP)
 			return false;
 
-		if (password.empty() || serverAs<WebServerClass>()->authenticate("admin", password.c_str()))
+		if (password.empty() || webServer->authenticate("admin", password.c_str()))
 			return false;
 
-		serverAs<WebServerClass>()->requestAuthentication();
+		webServer->requestAuthentication();
 		return true;
 	}
 
@@ -105,14 +104,14 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		auto ssid{serverAs<WebServerClass>()->arg(FPSTR("ssid"))};
+		auto ssid{webServer->arg(FPSTR("ssid"))};
 		if (ssid.isEmpty())
 		{
-			serverAs<WebServerClass>()->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
+			webServer->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
 			return;
 		}
 
-		auto password{serverAs<WebServerClass>()->arg(FPSTR("password"))};
+		auto password{webServer->arg(FPSTR("password"))};
 
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 		owner->findComponents<ksConfigProvider>(configCompsWp);
@@ -126,7 +125,7 @@ namespace ksf::comps
 			for (auto& parameter : configCompSp->getParameters())
 			{
 				String param_id{paramPrefix + parameter.id.c_str()};
-				auto value{serverAs<WebServerClass>()->arg(param_id)};
+				auto value{webServer->arg(param_id)};
 				if (value.isEmpty())
 					continue;
 
@@ -136,7 +135,7 @@ namespace ksf::comps
 		}
 		ksf::saveCredentials(ssid.c_str(), password.c_str());
 
-		serverAs<WebServerClass>()->send(200);
+		webServer->send(200);
 		breakApp = true;
 	}
 
@@ -150,7 +149,7 @@ namespace ksf::comps
 			case WIFI_SCAN_FAILED:
 				WiFi.scanNetworks(true);
 			case WIFI_SCAN_RUNNING:
-				serverAs<WebServerClass>()->send(304);
+				webServer->send(304);
 			return;
 
 			default:
@@ -177,7 +176,7 @@ namespace ksf::comps
 				WiFi.scanDelete();
 			
 				WiFi.enableSTA(false);
-				serverAs<WebServerClass>()->send(200, FPSTR("application/json"), json.c_str());
+				webServer->send(200, FPSTR("application/json"), json.c_str());
 			}
 		}
 	}
@@ -199,7 +198,7 @@ namespace ksf::comps
 		json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");
 		json += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
 		json += PGM_("\"}]");
-		serverAs<WebServerClass>()->send(200, "application/json", json.c_str());
+		webServer->send(200, "application/json", json.c_str());
 	}
 
 	void ksDevicePortal::onRequest_getDeviceParams() const
@@ -218,7 +217,7 @@ namespace ksf::comps
 		if (!isInConfigMode)
 		{
 			json += '}';
-			serverAs<WebServerClass>()->send(200, "application/json", json.c_str());
+			webServer->send(200, "application/json", json.c_str());
 			return;
 		}
 
@@ -258,7 +257,7 @@ namespace ksf::comps
 		
 		json += "]}";
 
-		serverAs<WebServerClass>()->send(200, FPSTR("application/json"), json.c_str());
+		webServer->send(200, FPSTR("application/json"), json.c_str());
 	}
 
 	void ksDevicePortal::onRequest_goToConfigMode()
@@ -266,7 +265,7 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 	
-		serverAs<WebServerClass>()->send(200);
+		webServer->send(200);
 		breakApp = true;
 	}
 
@@ -275,23 +274,21 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		serverAs<WebServerClass>()->send(200);
+		webServer->send(200);
 	}
 
 	void ksDevicePortal::onRequest_notFound() const
 	{
-		auto server{serverAs<WebServerClass>()};
-
 		/* For files always return 404. */
-		if (server->uri().lastIndexOf('.') != -1)
+		if (webServer->uri().lastIndexOf('.') != -1)
 		{
-			server->send(404);
+			webServer->send(404);
 			return;
 		}
 
 		/* Otherwise... redirect. */
-		server->sendHeader(FPSTR("Location"), "/");
-		server->send(302);
+		webServer->sendHeader(FPSTR("Location"), "/");
+		webServer->send(302);
 	}
 
 	void ksDevicePortal::onRequest_otaChunk()
@@ -299,7 +296,7 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 	
-		HTTPUpload& upload = serverAs<WebServerClass>()->upload();
+		HTTPUpload& upload = webServer->upload();
 		if (upload.status == UPLOAD_FILE_START)
 		{
 #if defined(ESP8266)
@@ -309,7 +306,7 @@ namespace ksf::comps
 			uint32_t maxSketchSpace = UPDATE_SIZE_UNKNOWN;
 #endif
 			if (!Update.begin(maxSketchSpace, U_FLASH)) 
-				return serverAs<WebServerClass>()->send(400, "text/plain", "OTA could not begin");
+				return webServer->send(400, "text/plain", "OTA could not begin");
 
 			onUpdateStart->broadcast();
 		}
@@ -330,8 +327,8 @@ namespace ksf::comps
 
 		bool hasError{Update.hasError()};
 
-		serverAs<WebServerClass>()->sendHeader("Connection", "close");
-		serverAs<WebServerClass>()->send(200, "text/plain", hasError? "FAIL" : "OK");
+		webServer->sendHeader("Connection", "close");
+		webServer->send(200, "text/plain", hasError? "FAIL" : "OK");
 		
 		if (hasError)
 			return;
@@ -345,8 +342,8 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		serverAs<WebServerClass>()->sendHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
-		serverAs<WebServerClass>()->send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
+		webServer->sendHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
+		webServer->send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 	}
 
 	void ksDevicePortal::onRequest_formatFS()
@@ -371,32 +368,31 @@ namespace ksf::comps
 
 	void ksDevicePortal::setupUpdateWebServer()
 	{
-		_webServer = new WebServerClass(80);
-		auto server{serverAs<WebServerClass>()};
+		webServer = std::make_unique<WebServerClass>(80);
 
-		server->onNotFound(std::bind(&ksDevicePortal::onRequest_notFound, this));
+		webServer->onNotFound(std::bind(&ksDevicePortal::onRequest_notFound, this));
 
-		server->on(FPSTR("/"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_index, this));
-		server->on(FPSTR("/api/online"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_online, this));
-		server->on(FPSTR("/api/getIdentity"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getIdentity, this));
-		server->on(FPSTR("/api/getDeviceParams"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getDeviceParams, this));
+		webServer->on(FPSTR("/"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_index, this));
+		webServer->on(FPSTR("/api/online"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_online, this));
+		webServer->on(FPSTR("/api/getIdentity"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getIdentity, this));
+		webServer->on(FPSTR("/api/getDeviceParams"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getDeviceParams, this));
 
 		if (WiFi.getMode() & WIFI_AP)
 		{
-			server->on(FPSTR("/api/saveConfig"), HTTP_POST, std::bind(&ksDevicePortal::onRequest_saveConfig, this));
-			server->on(FPSTR("/api/scanNetworks"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_scanNetworks, this));
+			webServer->on(FPSTR("/api/saveConfig"), HTTP_POST, std::bind(&ksDevicePortal::onRequest_saveConfig, this));
+			webServer->on(FPSTR("/api/scanNetworks"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_scanNetworks, this));
 		}
 		else
 		{
-			server->on(FPSTR("/api/goToConfigMode"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_goToConfigMode, this));
+			webServer->on(FPSTR("/api/goToConfigMode"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_goToConfigMode, this));
 		}
 
-		server->on("/api/flash", HTTP_POST, 
+		webServer->on("/api/flash", HTTP_POST, 
 			std::bind(&ksDevicePortal::onRequest_otaFinish, this),	// Upload file part
 			std::bind(&ksDevicePortal::onRequest_otaChunk, this)	// Upload file end
 		);
 
-		server->begin();
+		webServer->begin();
 	}
 
 	bool ksDevicePortal::loop()
@@ -410,18 +406,11 @@ namespace ksf::comps
 		if (dnsServer)
 			dnsServer->processNextRequest();
 
-		if (auto server{serverAs<WebServerClass>()})
-			server->handleClient();
+		if (webServer)
+			webServer->handleClient();
 
 		return true;
 	}
 
-	ksDevicePortal::~ksDevicePortal()
-	{
-		if (dnsServer)
-			delete dnsServer;
-
-		if (auto webServer{serverAs<WebServerClass>()})
-			delete webServer;
-	}
+	ksDevicePortal::~ksDevicePortal() = default;
 }

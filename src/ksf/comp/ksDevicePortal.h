@@ -15,6 +15,17 @@
 
 class DNSServer;
 
+#if defined(ESP32)
+	class WebServer;
+	#define WebServerClass WebServer
+#elif defined(ESP8266)
+	class WiFiServer;
+	namespace esp8266webserver
+	{
+		template<typename ServerType = WiFiServer> class ESP8266WebServerTemplate;
+	}
+	#define WebServerClass esp8266webserver::ESP8266WebServerTemplate<WiFiServer>
+#endif
 namespace ksf::comps
 {
 	class ksDevicePortal : public ksComponent
@@ -28,14 +39,8 @@ namespace ksf::comps
 			std::string password;								// OTA password.
 			bool breakApp{false};								// Flag to restart chip.
 
-			DNSServer* dnsServer{nullptr};						// DNS server.
-			void* _webServer{nullptr};							// Web server.
-
-			template <typename ServerType>
-			ServerType* serverAs() const
-			{
-				return static_cast<ServerType*>(_webServer);
-			}
+			std::unique_ptr<WebServerClass> webServer;
+			std::unique_ptr<DNSServer> dnsServer;
 
 			/*
 				This function starts OTA update server.
