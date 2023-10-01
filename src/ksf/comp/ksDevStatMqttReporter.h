@@ -22,7 +22,7 @@ namespace ksf::comps
 
 		protected:
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
-			std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
+			std::unique_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
 			
 			ksSimpleTimer reporterTimer;
 

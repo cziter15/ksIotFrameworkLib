@@ -24,8 +24,8 @@ namespace ksf::comps
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
 			ksApplication* owner{nullptr};							// Pointer to application that owns this component.
 
-			std::shared_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
-			std::shared_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
+			std::unique_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
+			std::unique_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
 
 			bool breakloop{false};									// Boolean (set by command) to break from app loop.
 

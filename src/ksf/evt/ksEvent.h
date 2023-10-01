@@ -50,10 +50,10 @@ namespace ksf::evt
 				@param outHandle Reference to outHandle shared ptr (destruction of ksEventHandle object will unbind the event).
 				@param function R-value reference to callback function.
 			*/
-			void registerEvent(std::shared_ptr<ksf::evt::ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
+			void registerEvent(std::unique_ptr<ksf::evt::ksEventHandle>& outHandle, std::function<void(Params...)>&& function)
 			{
 				++lastCallbackUID;
-				outHandle = std::make_shared<ksf::evt::ksEventHandle>(weak_from_this(), lastCallbackUID);
+				outHandle = std::make_unique<ksf::evt::ksEventHandle>(weak_from_this(), lastCallbackUID);
 				callbacks.emplace_back(lastCallbackUID, std::move(function));
 			}
 
