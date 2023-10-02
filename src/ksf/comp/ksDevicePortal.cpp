@@ -88,7 +88,7 @@ namespace ksf::comps
 
 	void ksDevicePortal::updateFinished(bool fromPortal)
 	{
-		ksf::saveOtaBootIndicator(fromPortal ? EOTAType::OTA_PORTAL : EOTAType::OTA_PORTAL);
+		ksf::saveOtaBootIndicator(fromPortal ? EOTAType::OTA_GENERIC : EOTAType::OTA_PORTAL);
 		onUpdateEnd->broadcast();
 	}
 
