@@ -16,15 +16,15 @@
 namespace ksf::comps
 {
 	/* Assign PGM returned strings to a set of macros. */
-	const char MQTT_FILENAME_TEXT[] PROGMEM {"mqtt.conf"};
+	const char MQTT_FILENAME_TEXT[] 	PROGMEM {"mqtt.conf"};
 	
-	const char DEFPORT_AS_TEXT_PGM[] 		PROGMEM {"1883"};
-	const char BROKER_TEXT_PGM[]			PROGMEM {"broker"};
-	const char USER_TEXT_PGM[] 				PROGMEM {"user"};
-	const char FINGERPRINT_TEXT_PGM[] 		PROGMEM {"SSLFingerprint"};
-	const char PASSWORD_TEXT_PGM[] 			PROGMEM {"password"};
-	const char PREFIX_TEXT_PGM[] 			PROGMEM {"prefix"};
-	const char PORT_TEXT_PGM[]	 			PROGMEM {"port"};
+	const char DEFPORT_AS_TEXT_PGM[] 	PROGMEM {"1883"};
+	const char BROKER_TEXT_PGM[]		PROGMEM {"broker"};
+	const char USER_TEXT_PGM[] 			PROGMEM {"user"};
+	const char FINGERPRINT_TEXT_PGM[] 	PROGMEM {"SSLFingerprint"};
+	const char PASSWORD_TEXT_PGM[] 		PROGMEM {"password"};
+	const char PREFIX_TEXT_PGM[] 		PROGMEM {"prefix"};
+	const char PORT_TEXT_PGM[]	 		PROGMEM {"port"};
 
 	void ksMqttConfigProvider::setupMqttConnector(ksMqttConnector& connector)
 	{

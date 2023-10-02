@@ -117,27 +117,27 @@ namespace ksf
 		switch (esp_reset_reason())
 		{
 			case ESP_RST_POWERON:
-				return PGM_("Power On");
+				return PSTR("Power On");
 			case ESP_RST_SW:
 				if (otaBootType != EOTAType::NO_OTA)
 					return otaTypeToString(otaBootType);
-				return PGM_("Software/System restart");
+				return PSTR("Software/System restart");
 			case ESP_RST_PANIC:
-				return PGM_("Exception");
+				return PSTR("Exception");
 			case ESP_RST_INT_WDT:
-				return PGM_("Watchdog (interrupt)");
+				return PSTR("Watchdog (interrupt)");
 			case ESP_RST_TASK_WDT:
-				return PGM_("Watchdog (task)");
+				return PSTR("Watchdog (task)");
 			case ESP_RST_WDT:
-				return PGM_("Watchdog (other)");
+				return PSTR("Watchdog (other)");
 			case ESP_RST_DEEPSLEEP:
-				return PGM_("Deep-Sleep Wake");
+				return PSTR("Deep-Sleep Wake");
 			case ESP_RST_BROWNOUT:
-				return PGM_("Brownout");
+				return PSTR("Brownout");
 			case ESP_RST_SDIO:
-				return PGM_("SDIO");
+				return PSTR("SDIO");
 			default:
-				return PGM_("Unknown");
+				return PSTR("Unknown");
 		}
 #elif ESP8266
 		if (otaBootType != EOTAType::NO_OTA && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
