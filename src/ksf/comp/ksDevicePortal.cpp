@@ -36,10 +36,14 @@
 
 namespace ksf::comps
 {
+	const char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
+	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
+	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
+
 	ksDevicePortal::~ksDevicePortal() = default;
 	
 	ksDevicePortal::ksDevicePortal()
-		: ksDevicePortal(PGM_("ota_ksiotframework"))
+		: ksDevicePortal(PSTR("ota_ksiotframework"))
 	{}
 
 	ksDevicePortal::ksDevicePortal(const std::string& password)
@@ -97,7 +101,7 @@ namespace ksf::comps
 		if (WiFi.getMode() == WIFI_AP)
 			return false;
 
-		if (password.empty() || webServer->authenticate(PGM_("admin").c_str(), password.c_str()))
+		if (password.empty() || webServer->authenticate(PSTR("admin"), password.c_str()))
 			return false;
 
 		webServer->requestAuthentication();
@@ -112,7 +116,7 @@ namespace ksf::comps
 		auto ssid{webServer->arg(FPSTR("ssid"))};
 		if (ssid.isEmpty())
 		{
-			webServer->send(200, FPSTR("application/json"), FPSTR("{ \"result\" : \"Empty SSID\" }"));
+			webServer->send_P(200, PROGMEM_APPLICATION_JSON, PSTR("{ \"result\" : \"Empty SSID\" }"));
 			return;
 		}
 
@@ -165,15 +169,15 @@ namespace ksf::comps
 				{
 					if (i > 0)
 						json += ',';
-					json += PGM_("{\"rssi\":");
+					json += PSTR("{\"rssi\":");
 					json += ksf::to_string(WiFi.RSSI(i));
-					json += PGM_(",\"ssid\":\"");
+					json += PSTR(",\"ssid\":\"");
 					json += WiFi.SSID(i).c_str();
-					json += PGM_("\",\"bssid\":\"");
+					json += PSTR("\",\"bssid\":\"");
 					json += WiFi.BSSIDstr(i).c_str();
-					json += PGM_("\",\"channel\":");
+					json += PSTR("\",\"channel\":");
 					json += ksf::to_string(WiFi.channel(i));
-					json += PGM_(",\"secure\":");
+					json += PSTR(",\"secure\":");
 					json += ksf::to_string(WiFi.encryptionType(i));
 					json += '}';
 				}
@@ -181,7 +185,7 @@ namespace ksf::comps
 				WiFi.scanDelete();
 			
 				WiFi.enableSTA(false);
-				webServer->send(200, FPSTR("application/json"), json.c_str());
+				webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
 			}
 		}
 	}
@@ -192,18 +196,18 @@ namespace ksf::comps
 			return;
 
 		std::string json;
-		json += PGM_("[{\"name\":\"Hardware\",\"value\":\"");
+		json += PSTR("[{\"name\":\"Hardware\",\"value\":\"");
 		json += HARDWARE;
-		json += PGM_("\"},{\"name\":\"Hostname\",\"value\":\"");
+		json += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
 		json += WiFi.getHostname();
-		json += PGM_("\"},{\"name\":\"Device uptime\",\"value\":\"");
+		json += PSTR("\"},{\"name\":\"Device uptime\",\"value\":\"");
 		json += ksf::getUptimeString();
-		json += PGM_("\"},{\"name\":\"Reset reason\",\"value\":\"");
+		json += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
 		json += ksf::getResetReason();
-		json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");
+		json += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
 		json += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
-		json += PGM_("\"}]");
-		webServer->send(200, FPSTR("application/json"), json.c_str());
+		json += PSTR("\"}]");
+		webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
 	}
 
 	void ksDevicePortal::onRequest_getDeviceParams() const
@@ -216,24 +220,24 @@ namespace ksf::comps
 		bool isInConfigMode{!configCompsWp.empty()};
 
 		std::string json;
-		json += PGM_("{\"isConfigMode\": ");
-		json += isInConfigMode ? PGM_("true") : PGM_("false");
+		json += PSTR("{\"isConfigMode\": ");
+		json += isInConfigMode ? PSTR("true") : PSTR("false");
 
 		if (!isInConfigMode)
 		{
 			json += '}';
-			webServer->send(200, FPSTR("application/json"), json.c_str());
+			webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
 			return;
 		}
 
 		std::string ssid, pass;
 		ksf::loadCredentials(ssid, pass);
 
-		json += PGM_(",\"ssid\":\"");
+		json += PSTR(",\"ssid\":\"");
 		json += ssid;
-		json += PGM_("\", \"password\":\"");
+		json += PSTR("\", \"password\":\"");
 		json += pass;
-		json += PGM_("\",\"params\": [");
+		json += PSTR("\",\"params\": [");
 
 		for (auto& configCompWp : configCompsWp)
 		{
@@ -247,13 +251,13 @@ namespace ksf::comps
 
 			for (auto paramRef : paramListRef)
 			{
-				json += PGM_("{\"id\": \"");
+				json += PSTR("{\"id\": \"");
 				json += paramRef.id;
-				json += PGM_("\", \"value\": \"");
+				json += PSTR("\", \"value\": \"");
 				json += paramRef.value;
-				json += PGM_("\", \"default\": \"");
+				json += PSTR("\", \"default\": \"");
 				json += paramRef.defaultValue;
-				json += PGM_("\"},");
+				json += PSTR("\"},");
 			}
 		}
 
@@ -262,7 +266,7 @@ namespace ksf::comps
 		
 		json += "]}";
 
-		webServer->send(200, FPSTR("application/json"), json.c_str());
+		webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
 	}
 
 	void ksDevicePortal::onRequest_goToConfigMode()
@@ -292,7 +296,7 @@ namespace ksf::comps
 		}
 
 		/* Otherwise... redirect. */
-		webServer->sendHeader(FPSTR("Location"), "/");
+		webServer->sendHeader(PSTR("Location"), PSTR("/"));
 		webServer->send(302);
 	}
 
@@ -311,7 +315,7 @@ namespace ksf::comps
 			uint32_t maxSketchSpace = UPDATE_SIZE_UNKNOWN;
 #endif
 			if (!Update.begin(maxSketchSpace, U_FLASH)) 
-				return webServer->send(400, FPSTR("text/plain"), FPSTR("OTA could not begin"));
+				return webServer->send_P(400, PROGMEM_TEXT_PLAIN, PSTR("OTA could not begin"));
 
 			onUpdateStart->broadcast();
 		}
@@ -332,8 +336,8 @@ namespace ksf::comps
 
 		bool hasError{Update.hasError()};
 
-		webServer->sendHeader(FPSTR("Connection"), FPSTR("close"));
-		webServer->send(200, FPSTR("text/plain"), hasError ? PGM_("FAIL").c_str() : PGM_("OK").c_str());
+		webServer->sendHeader(PSTR("Connection"), PSTR("close"));
+		webServer->send(200, PROGMEM_TEXT_PLAIN, hasError ? PSTR("FAIL") : PSTR("OK"));
 
 		if (hasError)
 			return;
@@ -347,8 +351,16 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		webServer->sendHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
-		webServer->send_P(200, PGM_("text/html").c_str(), (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
+		auto fileMD5{FPSTR(DEVICE_FRONTEND_HTML_MD5)};
+		if (webServer->header(PSTR("If-None-Match")) == fileMD5)
+		{
+			webServer->send(304);
+			return;
+		}
+
+		webServer->sendHeader(PSTR("ETag"), fileMD5);
+		webServer->sendHeader(PSTR("Content-Encoding"), PSTR("gzip"));
+		webServer->send_P(200, PROGMEM_TEXT_HTML, (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 	}
 
 	void ksDevicePortal::onRequest_formatFS()

@@ -46,10 +46,10 @@ namespace ksf::comps
 	{
 		if (auto mqttConnSp{mqttConnWp.lock()})
 		{
-			mqttConnSp->publish(PGM_("dstat/rssi"), ksf::to_string(WiFi.RSSI()));
-			mqttConnSp->publish(PGM_("dstat/uptimeSec"), ksf::to_string(millis64()/1000));
-			mqttConnSp->publish(PGM_("dstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
-			mqttConnSp->publish(PGM_("dstat/reconnCnt"), ksf::to_string(mqttConnSp->getReconnectCounter()));
+			mqttConnSp->publish(PSTR("dstat/rssi"), ksf::to_string(WiFi.RSSI()));
+			mqttConnSp->publish(PSTR("dstat/uptimeSec"), ksf::to_string(millis64()/1000));
+			mqttConnSp->publish(PSTR("dstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
+			mqttConnSp->publish(PSTR("dstat/reconnCnt"), ksf::to_string(mqttConnSp->getReconnectCounter()));
 		}
 	}
 	

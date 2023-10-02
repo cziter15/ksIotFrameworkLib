@@ -28,7 +28,7 @@ namespace ksf::comps
 {
 	ksWiFiConfigurator::ksWiFiConfigurator()
 	{
-		ksWiFiConfigurator(PGM_("KSFDevice"));
+		ksWiFiConfigurator(PSTR("KSFDevice"));
 	}
 	
 	ksWiFiConfigurator::ksWiFiConfigurator(std::string devicePrefixName)

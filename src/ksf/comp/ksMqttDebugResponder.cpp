@@ -50,13 +50,13 @@ namespace ksf::comps
 	void ksMqttDebugResponder::onConnected()
 	{
 		if (auto mqttConnSp{mqttConnWp.lock()})
-			mqttConnSp->subscribe(PGM_("cmd"));
+			mqttConnSp->subscribe(PSTR("cmd"));
 	}
 
 	void ksMqttDebugResponder::respond(const std::string& message) const
 	{
 		if (auto mqttConnSp{mqttConnWp.lock()})
-			mqttConnSp->publish(PGM_("log"), message, false);
+			mqttConnSp->publish(PSTR("log"), message, false);
 	}
 
 	void ksMqttDebugResponder::onMessage(const std::string_view& topic, const std::string_view& message)
@@ -65,49 +65,66 @@ namespace ksf::comps
 		if (topic != "cmd")
 			return;
 
-		if (message == PGM_("netinfo"))
+		if (message == PSTR("netinfo"))
 		{
 			if (auto mqttConnSp{mqttConnWp.lock()})
 			{
-				respond(
-					PGM_("HN: ") + WiFi.getHostname() + 
-					PGM_(", IP: ") + WiFi.localIP().toString().c_str() + 
-					PGM_(", CT: ") + std::to_string(mqttConnSp->getConnectionTimeSeconds()) + 
-					PGM_(" s, RC: ") + std::to_string(mqttConnSp->getReconnectCounter()) + 
-					PGM_(", RSSI ") + std::to_string(WiFi.RSSI()) + PGM_(" dBm")
-				);
+				std::string response;
+				response += PSTR("HN: ");
+				response += WiFi.getHostname();
+				response += PSTR(", IP: ");
+				response += WiFi.localIP().toString().c_str();
+				response += PSTR(", CT: ");
+				response += std::to_string(mqttConnSp->getConnectionTimeSeconds());
+				response += PSTR(" s, RC: ");
+				response += std::to_string(mqttConnSp->getReconnectCounter());
+				response += PSTR(", RSSI ") + std::to_string(WiFi.RSSI()) + PSTR(" dBm");
+				respond(response);
 			}
 		}
-		else if (message == PGM_("sysinfo"))
+		else if (message == PSTR("sysinfo"))
 		{
 			uint32_t uptimeSec{(uint32_t)(millis64() / 1000)};
-			respond(
-				PGM_("Build hash: ") + ESP.getSketchMD5().c_str() + PGM_(", "
-				"Device uptime: ") + std::to_string(uptimeSec) + PGM_(" sec, "
-				"Free fw space: ") + std::to_string(ESP.getFreeSketchSpace()) + PGM_(" b, "
-				"Free heap: ") + std::to_string(ESP.getFreeHeap()) + PGM_(" b, "
+
+			std::string response;
+			response += PSTR("Build hash:");
+			response += ESP.getSketchMD5().c_str();
+			response += PSTR(", Device uptime: ");
+			response += std::to_string(uptimeSec);
+			response += PSTR(" sec, Free fw space: ");
+			response += std::to_string(ESP.getFreeSketchSpace());
+			response += PSTR(" b, Free heap: ");
+			response += std::to_string(ESP.getFreeHeap());
+			response += PSTR(" b");
+
 #if ESP32
-				"Free PSRAM: ") + std::to_string(ESP.getFreePsram()) + PGM_(" b, "
-				"Chip temperature: ") + ksf::to_string(temperatureRead(), 1) + PGM_(" [C], "
+			response += PSTR(", Free PSRAM: ");
+			response += std::to_string(ESP.getFreePsram());
+			response += PSTR(" b, Chip temperature: ");
+			response += ksf::to_string(temperatureRead(), 1);
+			response += PSTR(" [C] ");
 #endif
-				"CPU clock: ") + std::to_string(ESP.getCpuFreqMHz()) + PGM_(" MHz, "
-				"Reset reason: ") + ksf::getResetReason()
-			);
+			response += PSTR(", CPU clock: ");
+			response += std::to_string(ESP.getCpuFreqMHz());
+			response += PSTR(" MHz, Reset reason: ");
+			response += ksf::getResetReason();
+			respond(response);
+			
 		}
-		else if (message == PGM_("remove_dbg"))
+		else if (message == PSTR("remove_dbg"))
 		{
-			respond(PGM_("Removing ksMqttDebugResponder. Commands will not be available."));
+			respond(PSTR("Removing ksMqttDebugResponder. Commands will not be available."));
 			owner->markComponentToRemove(shared_from_this());
 		}
-		else if (message == PGM_("restart"))
+		else if (message == PSTR("restart"))
 		{
-			respond(PGM_("Restarting system. It may take few seconds."));
+			respond(PSTR("Restarting system. It may take few seconds."));
 			delay(500);
 			ESP.restart();
 		}
-		else if (message == PGM_("rfcalib"))
+		else if (message == PSTR("rfcalib"))
 		{
-			respond(PGM_("Erasing RF CAL data, please wait..."));
+			respond(PSTR("Erasing RF CAL data, please wait..."));
 			delay(500);
 			
 #if ESP32
@@ -134,19 +151,19 @@ namespace ksf::comps
 			#error Platform not implemented.
 #endif
 
-			respond(PGM_("Erasing RF CAL done, restarting. It may take few seconds."));
+			respond(PSTR("Erasing RF CAL done, restarting. It may take few seconds."));
 			delay(500);
 
 			ESP.restart();
 		}
-		else if (message == PGM_("format"))
+		else if (message == PSTR("format"))
 		{
 			LittleFS.format();
-			respond(PGM_("Erasing flash done, restarting. It may take few seconds."));
+			respond(PSTR("Erasing flash done, restarting. It may take few seconds."));
 			delay(500);
 			ESP.restart();
 		}
-		else if (message == PGM_("break_app"))
+		else if (message == PSTR("break_app"))
 		{
 			breakloop = true;
 		}
@@ -156,7 +173,7 @@ namespace ksf::comps
 			customDebugHandler->broadcast(this, message, dbgMsgHandled);
 				
 			if (!dbgMsgHandled)
-				respond(PGM_("command not supported: ") + std::string{message});
+				respond(PSTR("command not supported: ") + std::string{message});
 		}
 	}
 }

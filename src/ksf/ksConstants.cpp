@@ -24,14 +24,14 @@
 
 namespace ksf
 {
-	#define OTA_FILENAME_TEXT PGM_("/ksf.otabooted")		// File name for OTA boot indicator.
-	#define WIFI_CRED_FILENAME_TEXT PGM_("/ksf.wificred")	// File name for WiFi credentials.
+	const char OTA_FILENAME_TEXT[] PROGMEM {"/ksf.otabooted"};		// File name for OTA boot indicator.
+	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"/ksf.wificred"};	// File name for WiFi credentials.
 
-	#define SSID_PARAM_NAME PGM_("ssid")					// Param name from progmem - ssid
-	#define PASSWORD_PARAM_NAME PGM_("password")			// Param name from progmem - password
+	const char SSID_PARAM_NAME[] PROGMEM {"ssid"};					// Param name from progmem - ssid
+	const char PASSWORD_PARAM_NAME[] PROGMEM {"password"};			// Param name from progmem - password
 
-	static EOTAType::Type otaBootType{EOTAType::NO_OTA};	// Will be true if this launch is just after OTA flash.
-	static uint32_t uptime_low32, uptime_high32;			// Variables for assembling 64-bit version of millis.
+	static EOTAType::Type otaBootType{EOTAType::NO_OTA};			// Will be true if this launch is just after OTA flash.
+	static uint32_t uptime_low32, uptime_high32;					// Variables for assembling 64-bit version of millis.
 
 	void initializeFramework()
 	{
@@ -50,18 +50,18 @@ namespace ksf
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 		
-		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT.c_str(), "r")};
+		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")};
 		if (indicatorFile)
 		{
 			otaBootType = indicatorFile.size() ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
 			indicatorFile.close();
-			LittleFS.remove(OTA_FILENAME_TEXT.c_str());
+			LittleFS.remove(OTA_FILENAME_TEXT);
 		}
 	}
 
 	void saveOtaBootIndicator(EOTAType::Type type)
 	{
-		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT.c_str(), "w")};
+		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "w")};
 		if (indicatorFile)
 		{
 			indicatorFile.write(static_cast<uint8_t>(type));
@@ -97,30 +97,16 @@ namespace ksf
 		return to_string(static_cast<double>(value), base);
 	}
 
-	std::string string_from_progmem(const char* pgm_str_ptr, size_t pgm_str_len)
-	{
-#if ESP8266
-		std::string result;
-		// Resize the string to the correct length.
-		result.resize(pgm_str_len);
-		// Copy the content from PROGMEM to the string.
-		memcpy_P(result.data(), pgm_str_ptr, pgm_str_len);
-		return result;
-#else
-		return {pgm_str_ptr};
-#endif
-	}
-
 	inline const std::string otaTypeToString(EOTAType::Type type)
 	{
 		switch (type)
 		{
 			case EOTAType::OTA_GENERIC:
-				return PGM_("OTA Update (generic)");
+				return PSTR("OTA Update (generic)");
 			case EOTAType::OTA_PORTAL:
-				return PGM_("OTA Update (via Portal)");
+				return PSTR("OTA Update (via Portal)");
 			default:
-				return PGM_("OTA Update");
+				return PSTR("OTA Update");
 		}
 	}
 

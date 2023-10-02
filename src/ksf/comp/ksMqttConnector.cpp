@@ -159,7 +159,7 @@ namespace ksf::comps
 	{
 		if (sendConnectionStatus)
 		{
-			std::string willTopic{prefix + PGM_("connected")};
+			std::string willTopic{prefix + PSTR("connected")};
 
 			// TODO: Here we can use saved credentials instead of memory ones.
 			
