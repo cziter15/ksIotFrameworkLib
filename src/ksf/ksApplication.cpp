@@ -7,9 +7,6 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "ksApplication.h"
-#include "ksComponent.h"
-
 #if ESP32
 	#include <WiFi.h>
 #elif ESP8266
@@ -17,6 +14,10 @@
 #else 			
 	#error Platform not implemented.
 #endif
+
+#include "ksApplication.h"
+#include "ksComponent.h"
+
 namespace ksf
 {
 	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent> component)

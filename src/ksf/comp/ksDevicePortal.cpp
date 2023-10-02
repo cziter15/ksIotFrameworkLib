@@ -7,11 +7,8 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksApplication.h"
-#include "../ksConstants.h"
-#include "ksWifiConnector.h"
-#include "ksDevicePortal.h"
-#include "ksConfigProvider.h"
+#include <LittleFS.h>
+#include <DNSServer.h>
 
 #if ESP8266
 	#include "flash_hal.h"
@@ -29,10 +26,14 @@
 	#error Platform not implemented.
 #endif
 
-#include <LittleFS.h>
-#include <DNSServer.h>
+#include "../ksApplication.h"
+#include "../ksConstants.h"
+#include "ksWifiConnector.h"
+#include "ksDevicePortal.h"
+#include "ksConfigProvider.h"
 
 #include "../res/otaWebpage.h"
+
 namespace ksf::comps
 {
 	ksDevicePortal::~ksDevicePortal() = default;

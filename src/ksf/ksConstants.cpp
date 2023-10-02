@@ -7,18 +7,20 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "ksConstants.h"
-#include "ksConfig.h"
-#include "LittleFS.h"
 
 #if ESP32
-#include <WiFi.h>
-#include <esp_phy_init.h>
+	#include <WiFi.h>
+	#include <esp_phy_init.h>
 #elif ESP8266
-#include <ESP8266WiFi.h>
+	#include <ESP8266WiFi.h>
 #else			
-#error Platform not implemented.
+	#error Platform not implemented.
 #endif
+
+#include "LittleFS.h"
+
+#include "ksConstants.h"
+#include "ksConfig.h"
 
 namespace ksf
 {

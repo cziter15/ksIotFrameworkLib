@@ -20,6 +20,7 @@
 #else			
 	#error Platform not implemented.
 #endif
+
 namespace ksf::comps
 {
 	ksDevStatMqttReporter::ksDevStatMqttReporter(uint8_t intervalInSeconds) 

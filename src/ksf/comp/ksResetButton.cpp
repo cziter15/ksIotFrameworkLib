@@ -6,11 +6,6 @@
  *
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
-
-#include "../ksApplication.h"
-#include "ksResetButton.h"
-#include "Arduino.h"
-
 #if ESP32
 #include <WiFi.h>
 #elif ESP8266
@@ -21,6 +16,10 @@
 
 #include <LittleFS.h>
 #include <Esp.h>
+
+#include "../ksApplication.h"
+#include "ksResetButton.h"
+#include "Arduino.h"
 
 namespace ksf::comps
 {

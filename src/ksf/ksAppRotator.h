@@ -12,6 +12,7 @@
 #include <memory>
 #include <stdint.h>
 #include <Arduino.h>
+
 #include "ksApplication.h"
 
 /* Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait). */

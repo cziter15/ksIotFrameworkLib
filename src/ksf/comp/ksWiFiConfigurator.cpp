@@ -7,13 +7,6 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksApplication.h"
-#include "../ksConstants.h"
-#include "ksWiFiConfigurator.h"
-#include "ksConfigProvider.h"
-#include "ksDevicePortal.h"
-#include "ksLed.h"
-
 #if ESP32
 	#include <WiFi.h>
 	#include <esp_wifi.h>
@@ -23,6 +16,14 @@
 #else 			
 	#error Platform not implemented.
 #endif
+
+#include "../ksApplication.h"
+#include "../ksConstants.h"
+#include "ksWiFiConfigurator.h"
+#include "ksConfigProvider.h"
+#include "ksDevicePortal.h"
+#include "ksLed.h"
+
 namespace ksf::comps
 {
 	ksWiFiConfigurator::ksWiFiConfigurator()
