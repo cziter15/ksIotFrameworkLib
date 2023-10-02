@@ -92,7 +92,7 @@ namespace ksf::comps
 		if (WiFi.getMode() == WIFI_AP)
 			return false;
 
-		if (password.empty() || webServer->authenticate("admin", password.c_str()))
+		if (password.empty() || webServer->authenticate(PGM_("admin").c_str(), password.c_str()))
 			return false;
 
 		webServer->requestAuthentication();
@@ -198,7 +198,7 @@ namespace ksf::comps
 		json += PGM_("\"},{\"name\":\"IP address\",\"value\":\"");
 		json += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
 		json += PGM_("\"}]");
-		webServer->send(200, "application/json", json.c_str());
+		webServer->send(200, FPSTR("application/json"), json.c_str());
 	}
 
 	void ksDevicePortal::onRequest_getDeviceParams() const
@@ -217,7 +217,7 @@ namespace ksf::comps
 		if (!isInConfigMode)
 		{
 			json += '}';
-			webServer->send(200, "application/json", json.c_str());
+			webServer->send(200, FPSTR("application/json"), json.c_str());
 			return;
 		}
 
@@ -306,7 +306,7 @@ namespace ksf::comps
 			uint32_t maxSketchSpace = UPDATE_SIZE_UNKNOWN;
 #endif
 			if (!Update.begin(maxSketchSpace, U_FLASH)) 
-				return webServer->send(400, "text/plain", "OTA could not begin");
+				return webServer->send(400, FPSTR("text/plain"), FPSTR("OTA could not begin"));
 
 			onUpdateStart->broadcast();
 		}
@@ -327,9 +327,9 @@ namespace ksf::comps
 
 		bool hasError{Update.hasError()};
 
-		webServer->sendHeader("Connection", "close");
-		webServer->send(200, "text/plain", hasError? "FAIL" : "OK");
-		
+		webServer->sendHeader(FPSTR("Connection"), FPSTR("close"));
+		webServer->send(200, FPSTR("text/plain"), hasError ? PGM_("FAIL").c_str() : PGM_("OK").c_str());
+
 		if (hasError)
 			return;
 
@@ -343,7 +343,7 @@ namespace ksf::comps
 			return;
 
 		webServer->sendHeader(FPSTR("Content-Encoding"), FPSTR("gzip"));
-		webServer->send_P(200, "text/html", (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
+		webServer->send_P(200, PGM_("text/html").c_str(), (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 	}
 
 	void ksDevicePortal::onRequest_formatFS()
