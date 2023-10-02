@@ -13,18 +13,20 @@
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
 
-#if defined(ESP8266)
+#if ESP8266
 	#include "flash_hal.h"
-    #include "ESP8266WiFi.h"
-    #include "WiFiClient.h"
-    #include "ESP8266WebServer.h"
+	#include "ESP8266WiFi.h"
+	#include "WiFiClient.h"
+	#include "ESP8266WebServer.h"
 	#define HARDWARE "ESP8266"
-#elif defined(ESP32)
-    #include "WiFi.h"
-    #include "WiFiClient.h"
-    #include "WebServer.h"
-    #define WebServerClass WebServer
+#elif ESP32
+	#include "WiFi.h"
+	#include "WiFiClient.h"
+	#include "WebServer.h"
+	#define WebServerClass WebServer
 	#define HARDWARE "ESP32"
+#else
+	#error Platform not implemented.
 #endif
 
 #include <LittleFS.h>
@@ -33,6 +35,8 @@
 #include "../res/otaWebpage.h"
 namespace ksf::comps
 {
+	ksDevicePortal::~ksDevicePortal() = default;
+	
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PGM_("ota_ksiotframework"))
 	{}
@@ -397,20 +401,20 @@ namespace ksf::comps
 
 	bool ksDevicePortal::loop()
 	{
-		/* Handle OTA stuff. */
-		ArduinoOTA.handle();
-
 		if (breakApp)
 			return false;
 
+		/* Handle OTA stuff. */
+		ArduinoOTA.handle();
+
+		/* Handle requests. */
 		if (dnsServer)
 			dnsServer->processNextRequest();
 
+		/* Handle web server. */
 		if (webServer)
 			webServer->handleClient();
 
 		return true;
 	}
-
-	ksDevicePortal::~ksDevicePortal() = default;
 }
