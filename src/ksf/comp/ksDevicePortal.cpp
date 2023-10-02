@@ -52,7 +52,7 @@ namespace ksf::comps
 		});
 
 		ArduinoOTA.onEnd([this]() {
-			updateFinished();
+			updateFinished(false);
 		});
 	}
 	
@@ -86,9 +86,9 @@ namespace ksf::comps
 		ESP.restart();
 	}
 
-	void ksDevicePortal::updateFinished()
+	void ksDevicePortal::updateFinished(bool fromPortal)
 	{
-		ksf::saveOtaBootIndicator(EOTAType::OTA_PORTAL);
+		ksf::saveOtaBootIndicator(fromPortal ? EOTAType::OTA_PORTAL : EOTAType::OTA_PORTAL);
 		onUpdateEnd->broadcast();
 	}
 
@@ -338,7 +338,7 @@ namespace ksf::comps
 		if (hasError)
 			return;
 
-		updateFinished();
+		updateFinished(true);
 		rebootDevice();
 	}
 	

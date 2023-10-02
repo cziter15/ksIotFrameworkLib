@@ -50,7 +50,7 @@ namespace ksf::comps
 			/*
 				This function is called when OTA update is finished.
 			*/
-			void updateFinished(); 
+			void updateFinished(bool fromPortal); 
 
 			/*
 				This function handles device reboot.
