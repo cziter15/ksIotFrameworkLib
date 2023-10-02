@@ -30,7 +30,7 @@ namespace ksf
 	#define SSID_PARAM_NAME PGM_("ssid")					// Param name from progmem - ssid
 	#define PASSWORD_PARAM_NAME PGM_("password")			// Param name from progmem - password
 
-	static bool bootedFromOta{false};						// Will be true if this launch is just after OTA flash.
+	static EOTAType::Type otaBootType{EOTAType::NO_OTA};	// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;			// Variables for assembling 64-bit version of millis.
 
 	void initializeFramework()
@@ -50,18 +50,28 @@ namespace ksf
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 		
-		bootedFromOta = LittleFS.remove(OTA_FILENAME_TEXT.c_str());
+		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT.c_str(), "r")};
+		if (indicatorFile)
+		{
+			otaBootType = indicatorFile.available() ? static_cast<EOTAType::Type>(indicatorFile.read()) : EOTAType::OTA_GENERIC;
+			indicatorFile.close();
+			LittleFS.remove(OTA_FILENAME_TEXT.c_str());
+		}
 	}
 
-	void saveOtaBootIndicator()
+	void saveOtaBootIndicator(EOTAType::Type type)
 	{
 		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT.c_str(), "w")};
-		indicatorFile.close();
+		if (indicatorFile)
+		{
+			indicatorFile.write((uint8_t)type);
+			indicatorFile.close();
+		}
 	}
 
-	bool isFirstOtaBoot()
+	EOTAType::Type getOtaBootType()
 	{
-		return bootedFromOta;
+		return otaBootType;
 	}
 
 	void updateDeviceUptime()
@@ -101,17 +111,30 @@ namespace ksf
 #endif
 	}
 
+	inline const std::string otaTypeToString(EOTAType::Type type)
+	{
+		switch (type)
+		{
+			case EOTAType::OTA_GENERIC:
+				return PGM_("OTA Update (generic)");
+			case EOTAType::OTA_PORTAL:
+				return PGM_("OTA Update (via Portal)");
+			default:
+				return PGM_("OTA Update");
+		}
+	}
+
 	const std::string getResetReason()
 	{
-		bool otaBoot{ksf::isFirstOtaBoot()};
+		auto otaBootType{getOtaBootType()};
 #if ESP32
 		switch (esp_reset_reason())
 		{
 			case ESP_RST_POWERON:
 				return PGM_("Power On");
 			case ESP_RST_SW:
-				if (otaBoot)
-					return PGM_("OTA Update");
+				if (otaBootType != EOTAType::NO_OTA)
+					return otaTypeToString(otaBootType);
 				return PGM_("Software/System restart");
 			case ESP_RST_PANIC:
 				return PGM_("Exception");
@@ -131,8 +154,9 @@ namespace ksf
 				return PGM_("Unknown");
 		}
 #elif ESP8266
-		if (otaBoot && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
-			return PGM_("OTA Update");
+		if (otaBootType != EOTAType::NO_OTA && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
+			return otaTypeToString(otaBootType);
+
 		return {ESP.getResetReason().c_str()};
 #else			
 		#error Platform not implemented.

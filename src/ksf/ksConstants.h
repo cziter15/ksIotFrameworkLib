@@ -46,6 +46,16 @@
 
 namespace ksf
 {
+	namespace EOTAType
+	{
+		enum Type
+		{
+			NO_OTA,
+			OTA_GENERIC,
+			OTA_PORTAL,
+		};
+	}
+
 	/*
 		Initializes ksIotFramework.
 	*/
@@ -114,12 +124,12 @@ namespace ksf
 		
 		@return True if OTA caused reboot, otherwise false.
 	*/
-	extern bool isFirstOtaBoot();
+	extern EOTAType::Type getOtaBootType();
 
 	/*
 		Saves OTA boot indicator to EEPROM.
 	*/
-	extern void saveOtaBootIndicator();
+	extern void saveOtaBootIndicator(EOTAType::Type type = EOTAType::OTA_GENERIC);
 
 	/*
 		Helper function to load char array from program memory into std::string.
