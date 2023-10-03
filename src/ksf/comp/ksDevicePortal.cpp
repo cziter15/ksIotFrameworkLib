@@ -414,8 +414,8 @@ namespace ksf::comps
 		/* Setup headers we want to collect. */
 		const char* headerkeys[] = 
 		{
-			PSTR(PROGMEM_ACCEPT), 
-			PSTR(PROGMEM_IF_NONE_MATCH)
+			PROGMEM_ACCEPT, 
+			PROGMEM_IF_NONE_MATCH
 		};
 
 		webServer->collectHeaders(headerkeys, sizeof(headerkeys)/sizeof(char*));
