@@ -39,6 +39,8 @@ namespace ksf::comps
 	const char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
 	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
 	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
+	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
+	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
 
 	ksDevicePortal::~ksDevicePortal() = default;
 	
@@ -289,7 +291,7 @@ namespace ksf::comps
 	void ksDevicePortal::onRequest_notFound() const
 	{
 		/* For files always return 404. */
-		if (webServer->uri().lastIndexOf('.') != -1)
+		if (webServer->header(PROGMEM_ACCEPT).indexOf(PROGMEM_TEXT_HTML) != -1)
 		{
 			webServer->send(404);
 			return;
@@ -351,8 +353,8 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		auto fileMD5{FPSTR(DEVICE_FRONTEND_HTML_MD5)};
-		if (webServer->header(PSTR("If-None-Match")) == fileMD5)
+		const auto& fileMD5{FPSTR(DEVICE_FRONTEND_HTML_MD5)};
+		if (webServer->header(PROGMEM_IF_NONE_MATCH) == fileMD5)
 		{
 			webServer->send(304);
 			return;
@@ -409,6 +411,14 @@ namespace ksf::comps
 			std::bind(&ksDevicePortal::onRequest_otaChunk, this)	// Upload file end
 		);
 
+		/* Setup headers we want to collect. */
+		const char* headerkeys[] = 
+		{
+			PSTR(PROGMEM_ACCEPT), 
+			PSTR(PROGMEM_IF_NONE_MATCH)
+		};
+
+		webServer->collectHeaders(headerkeys, sizeof(headerkeys)/sizeof(char*));
 		webServer->begin();
 	}
 
