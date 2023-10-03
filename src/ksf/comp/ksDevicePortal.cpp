@@ -291,13 +291,13 @@ namespace ksf::comps
 	void ksDevicePortal::onRequest_notFound() const
 	{
 		/* For files always return 404. */
-		if (webServer->header(PROGMEM_ACCEPT).indexOf(PROGMEM_TEXT_HTML) != -1)
+		if (webServer->header(PROGMEM_ACCEPT).indexOf(PROGMEM_TEXT_HTML) == -1)
 		{
 			webServer->send(404);
 			return;
 		}
 
-		/* Otherwise... redirect. */
+		/* Redirect all html requests to the main page. */
 		webServer->sendHeader(PSTR("Location"), PSTR("/"));
 		webServer->send(302);
 	}
