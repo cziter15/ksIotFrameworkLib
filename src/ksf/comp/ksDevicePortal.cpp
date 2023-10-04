@@ -28,7 +28,7 @@
 	#define HARDWARE "ESP32"
 
 	extern uint32_t ESP_getFlashChipId(void);
-	uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() >> 16; }
+	uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() & 0xFF; }
 	uint32_t ESP_getFlashSizeKB() { return ESP.magicFlashChipSize(ESP.getFlashChipSize())/1024; }
 #else
 	#error Platform not implemented.
