@@ -9,6 +9,8 @@
 
 #include <LittleFS.h>
 #include <DNSServer.h>
+#include <WebSockets4WebServer.h>
+#include <map>
 
 #if ESP8266
 	#include "flash_hal.h"
@@ -50,7 +52,11 @@ namespace ksf::comps
 	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
 	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
 
-	ksDevicePortal::~ksDevicePortal() = default;
+	ksDevicePortal::~ksDevicePortal()
+	{
+		if (webSocket)
+			webSocket->close();
+	}
 	
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PSTR("ota_ksiotframework"))
@@ -118,146 +124,177 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksDevicePortal::onRequest_saveConfig()
+	void ksDevicePortal::onWebsocketTextMessage(uint8_t clientNum, std::string_view message)
 	{
-		if (inRequest_NeedAuthentication())
+		auto idEnd{message.find('|', 0)};
+		if (idEnd == std::string_view::npos)
 			return;
 
-		auto ssid{webServer->arg(FPSTR("ssid"))};
-		if (ssid.isEmpty())
+		auto commandStart{idEnd + 1};
+		auto commandEnd{message.find('|', commandStart + 1)};
+
+		if (commandEnd == std::string_view::npos)
+			return;
+
+		auto id{message.substr(0, idEnd)};
+		auto command{message.substr(commandStart, commandEnd - commandStart)};
+		auto body{message.substr(commandEnd + 1)};
+
+		std::string response{id};
+		response += '|';
+		
+		if (command == PSTR("getIdentity"))
 		{
-			webServer->send_P(200, PROGMEM_APPLICATION_JSON, PSTR("{ \"result\" : \"Empty SSID\" }"));
+			handle_getIdentity(response);
+		}
+		else if (command == PSTR("scanNetworks"))
+		{
+			handle_scanNetworks(response);
+		}
+		else if (command == PSTR("getDeviceParams"))
+		{
+			handle_getDeviceParams(response);
+		}
+		else if (command == PSTR("goToConfigMode"))
+		{
+			requestAppBreak();
 			return;
 		}
-
-		auto password{webServer->arg(FPSTR("password"))};
-
-		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-		owner->findComponents<ksConfigProvider>(configCompsWp);
-		String paramPrefix{FPSTR("param_")};
-
-		for (auto& configCompWp : configCompsWp)
+		else if (command == PSTR("saveConfig"))
 		{
-			auto configCompSp{configCompWp.lock()};
-			if (!configCompSp)
-				continue;
-			for (auto& parameter : configCompSp->getParameters())
+			// Split the input into lines
+			std::map<std::string_view, std::string_view> paramMap;
+
+			size_t startPos = 0;
+			size_t endPos = body.find('\n');
+
+			while (endPos != std::string_view::npos) 
 			{
-				String param_id{paramPrefix + parameter.id.c_str()};
-				auto value{webServer->arg(param_id)};
-				if (value.isEmpty())
-					continue;
+				std::string_view line{body.substr(startPos, endPos - startPos)};
+				size_t equalPos{line.find('=')};
 
-				parameter.value = value.c_str();
+				if (equalPos != std::string_view::npos) 
+					paramMap[line.substr(0, equalPos)] = line.substr(equalPos + 1);
+
+				startPos = endPos + 1;
+				endPos = body.find('\n', startPos);
 			}
-			configCompSp->saveParams();
-		}
-		ksf::saveCredentials(ssid.c_str(), password.c_str());
 
-		webServer->send(200);
-		breakApp = true;
+			std::string ssid{paramMap[PSTR("ssid")]};
+			std::string password{paramMap[PSTR("password")]};
+
+			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+			owner->findComponents<ksConfigProvider>(configCompsWp);
+			std::string paramPrefix{};
+
+			for (auto& configCompWp : configCompsWp)
+			{
+				auto configCompSp{configCompWp.lock()};
+				if (!configCompSp)
+					continue;
+				for (auto& parameter : configCompSp->getParameters())
+				{
+					std::string param_id{PSTR("param_") + parameter.id};
+					auto param_it{paramMap.find(param_id)};
+					if (param_it != paramMap.end())
+						parameter.value = param_it->second;
+				}
+				configCompSp->saveParams();
+			}
+
+			ksf::saveCredentials(ssid, password);
+			requestAppBreak();
+			return;
+		}
+
+		webSocket->sendTXT(clientNum, response.c_str(), response.size());
 	}
 
-	void ksDevicePortal::onRequest_scanNetworks()
+	void ksDevicePortal::handle_getIdentity(std::string& response)
 	{
-		if (inRequest_NeedAuthentication())
-			return;
+		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
+		response += HARDWARE " (";
+		response += ksf::to_string(ESP.getCpuFreqMHz());
+		response += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"");
+		response += "VID:";
+		response += ksf::to_string(ESP_getFlashVendor());
+		response += PSTR(" (");
+		response += ksf::to_string(ESP_getFlashSizeKB());
+		response += PSTR(" KB, ");
+		response += ksf::to_string(ESP.getFlashChipSpeed()/1000000);
+		response += PSTR(" MHz)\"},{\"name\":\"Hostname\",\"value\":\"");
+		response += WiFi.getHostname();
+		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
+		response += ksf::to_string(ESP.getFreeHeap());
+		response += PSTR(" bytes\"},{\"name\":\"Device uptime\",\"value\":\"");
+		response += ksf::getUptimeString();
+		response += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
+		response += ksf::getResetReason();
+		response += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
+		response += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
+		response += PSTR("\"}]");
+	}
 
+	void ksDevicePortal::handle_scanNetworks(std::string& response)
+	{
 		switch (WiFi.scanComplete())
 		{
 			case WIFI_SCAN_FAILED:
 				WiFi.scanNetworks(true);
 			case WIFI_SCAN_RUNNING:
-				webServer->send(304);
+				response += PSTR("{}");
 			return;
 
 			default:
 			{
-				std::string json;
-				json += '[';
+				response += '[';
 				for (int i{0}; i < WiFi.scanComplete(); ++i)
 				{
 					if (i > 0)
-						json += ',';
-					json += PSTR("{\"rssi\":");
-					json += ksf::to_string(WiFi.RSSI(i));
-					json += PSTR(",\"ssid\":\"");
-					json += WiFi.SSID(i).c_str();
-					json += PSTR("\",\"bssid\":\"");
-					json += WiFi.BSSIDstr(i).c_str();
-					json += PSTR("\",\"channel\":");
-					json += ksf::to_string(WiFi.channel(i));
-					json += PSTR(",\"secure\":");
-					json += ksf::to_string(WiFi.encryptionType(i));
-					json += '}';
+						response += ',';
+					response += PSTR("{\"rssi\":");
+					response += ksf::to_string(WiFi.RSSI(i));
+					response += PSTR(",\"ssid\":\"");
+					response += WiFi.SSID(i).c_str();
+					response += PSTR("\",\"bssid\":\"");
+					response += WiFi.BSSIDstr(i).c_str();
+					response += PSTR("\",\"channel\":");
+					response += ksf::to_string(WiFi.channel(i));
+					response += PSTR(",\"secure\":");
+					response += ksf::to_string(WiFi.encryptionType(i));
+					response += '}';
 				}
-				json +=	']';
+				response +=	']';
 				WiFi.scanDelete();
 			
 				WiFi.enableSTA(false);
-				webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
 			}
 		}
 	}
 
-	void ksDevicePortal::onRequest_getIdentity() const
+	void ksDevicePortal::handle_getDeviceParams(std::string& response)
 	{
-		if (inRequest_NeedAuthentication())
-			return;
-
-		std::string json;
-		json += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
-		json += HARDWARE " (";
-		json += ksf::to_string(ESP.getCpuFreqMHz());
-		json += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"");
-		json += "VID:";
-		json += ksf::to_string(ESP_getFlashVendor());
-		json += PSTR(" (");
-		json += ksf::to_string(ESP_getFlashSizeKB());
-		json += PSTR(" KB, ");
-		json += ksf::to_string(ESP.getFlashChipSpeed()/1000000);
-		json += PSTR(" MHz)\"},{\"name\":\"Hostname\",\"value\":\"");
-		json += WiFi.getHostname();
-		json += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
-		json += ksf::to_string(ESP.getFreeHeap());
-		json += PSTR(" bytes\"},{\"name\":\"Device uptime\",\"value\":\"");
-		json += ksf::getUptimeString();
-		json += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
-		json += ksf::getResetReason();
-		json += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
-		json += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
-		json += PSTR("\"}]");
-		webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
-	}
-
-	void ksDevicePortal::onRequest_getDeviceParams() const
-	{
-		if (inRequest_NeedAuthentication())
-			return;
-
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 		owner->findComponents<ksConfigProvider>(configCompsWp);
 		bool isInConfigMode{!configCompsWp.empty()};
 
-		std::string json;
-		json += PSTR("{\"isConfigMode\": ");
-		json += isInConfigMode ? PSTR("true") : PSTR("false");
+		response += PSTR("{\"isConfigMode\": ");
+		response += isInConfigMode ? PSTR("true") : PSTR("false");
 
 		if (!isInConfigMode)
 		{
-			json += '}';
-			webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
+			response += '}';
 			return;
 		}
 
 		std::string ssid, pass;
 		ksf::loadCredentials(ssid, pass);
 
-		json += PSTR(",\"ssid\":\"");
-		json += ssid;
-		json += PSTR("\", \"password\":\"");
-		json += pass;
-		json += PSTR("\",\"params\": [");
+		response += PSTR(",\"ssid\":\"");
+		response += ssid;
+		response += PSTR("\", \"password\":\"");
+		response += pass;
+		response += PSTR("\",\"params\": [");
 
 		for (auto& configCompWp : configCompsWp)
 		{
@@ -271,39 +308,20 @@ namespace ksf::comps
 
 			for (auto paramRef : paramListRef)
 			{
-				json += PSTR("{\"id\": \"");
-				json += paramRef.id;
-				json += PSTR("\", \"value\": \"");
-				json += paramRef.value;
-				json += PSTR("\", \"default\": \"");
-				json += paramRef.defaultValue;
-				json += PSTR("\"},");
+				response += PSTR("{\"id\": \"");
+				response += paramRef.id;
+				response += PSTR("\", \"value\": \"");
+				response += paramRef.value;
+				response += PSTR("\", \"default\": \"");
+				response += paramRef.defaultValue;
+				response += PSTR("\"},");
 			}
 		}
 
-		if (json.back() == ',')
-			json.pop_back();
+		if (response.back() == ',')
+			response.pop_back();
 		
-		json += "]}";
-
-		webServer->send(200, PROGMEM_APPLICATION_JSON, json.c_str());
-	}
-
-	void ksDevicePortal::onRequest_goToConfigMode()
-	{
-		if (inRequest_NeedAuthentication())
-			return;
-	
-		webServer->send(200);
-		breakApp = true;
-	}
-
-	void ksDevicePortal::onRequest_online() const
-	{
-		if (inRequest_NeedAuthentication())
-			return;
-
-		webServer->send(200);
+		response += "]}";
 	}
 
 	void ksDevicePortal::onRequest_notFound() const
@@ -406,23 +424,9 @@ namespace ksf::comps
 	void ksDevicePortal::setupUpdateWebServer()
 	{
 		webServer = std::make_unique<WebServerClass>(80);
-
 		webServer->onNotFound(std::bind(&ksDevicePortal::onRequest_notFound, this));
 
 		webServer->on(FPSTR("/"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_index, this));
-		webServer->on(FPSTR("/api/online"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_online, this));
-		webServer->on(FPSTR("/api/getIdentity"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getIdentity, this));
-		webServer->on(FPSTR("/api/getDeviceParams"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_getDeviceParams, this));
-
-		if (WiFi.getMode() & WIFI_AP)
-		{
-			webServer->on(FPSTR("/api/saveConfig"), HTTP_POST, std::bind(&ksDevicePortal::onRequest_saveConfig, this));
-			webServer->on(FPSTR("/api/scanNetworks"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_scanNetworks, this));
-		}
-		else
-		{
-			webServer->on(FPSTR("/api/goToConfigMode"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_goToConfigMode, this));
-		}
 
 		webServer->on("/api/flash", HTTP_POST, 
 			std::bind(&ksDevicePortal::onRequest_otaFinish, this),	// Upload file part
@@ -438,6 +442,16 @@ namespace ksf::comps
 
 		webServer->collectHeaders(headerkeys, sizeof(headerkeys)/sizeof(char*));
 		webServer->begin();
+
+		webSocket = std::make_unique<WebSockets4WebServer>();
+		webSocket->enableHeartbeat(2000, 5000, 2);
+		webSocket->setAuthorization(PSTR("admin"), password.c_str());
+		webServer->addHook(webSocket->hookForWebserver("/ws", [this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+			if (type == WStype_TEXT)
+				this->onWebsocketTextMessage(num, std::string_view((const char*)payload, length));
+		}));
+
+		webSocket->begin();
 	}
 
 	bool ksDevicePortal::loop()
@@ -455,6 +469,9 @@ namespace ksf::comps
 		/* Handle web server. */
 		if (webServer)
 			webServer->handleClient();
+
+		if (webSocket)
+			webSocket->loop();
 
 		return true;
 	}

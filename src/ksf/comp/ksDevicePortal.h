@@ -13,7 +13,10 @@
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 
+#include <string_view>
+
 class DNSServer;
+class WebSockets4WebServer;
 
 #if defined(ESP32)
 	class WebServer;
@@ -40,7 +43,10 @@ namespace ksf::comps
 			bool breakApp{false};								// Flag to restart chip.
 
 			std::unique_ptr<WebServerClass> webServer;
+			std::unique_ptr<WebSockets4WebServer> webSocket;
 			std::unique_ptr<DNSServer> dnsServer;
+
+			void requestAppBreak() { breakApp = true; }
 
 			/*
 				This function starts OTA update server.
@@ -73,30 +79,6 @@ namespace ksf::comps
 			void onRequest_index() const;
 
 			/*
-				This function handles endpoint "/api/online".
-				It is called by webpage to check if device is online.
-			*/
-			void onRequest_online() const;
-
-			/*
-				This function handles endpoint "/api/getIdentity"
-				It returns device identity to the client.
-			*/
-			void onRequest_getIdentity() const;
-
-			/*
-				This function handles endpoint "/api/getDeviceParams"
-				It returns device parameters to the client.
-			*/
-			void onRequest_getDeviceParams() const;
-
-			/*
-				This function handles endpoint "/api/saveConfig"
-				It is called when user wants to save configuration.
-			*/
-			void onRequest_saveConfig();
-
-			/*
 				This function handles endpoint "/api/flash".
 				It is called when OTA update is started.
 			*/
@@ -108,23 +90,14 @@ namespace ksf::comps
 			*/
 			void onRequest_otaFinish();
 
-			/*
-				This function handles endpoint "/api/scanNetworks"
-				It returns a list of  wireless networks to the client.
-			*/
-			void onRequest_scanNetworks();
 
-			/*
-				This function handles endpoint "/api/goToConfigMode"
-				It is called when user wants to go to configuration mode (AP).
-			*/
-			void onRequest_goToConfigMode();
-
-			/*
-				This function handles endpoint "/api/formatFS"
-				It is called when user wants to format flash.
-			*/
 			void onRequest_formatFS();
+
+			void onWebsocketTextMessage(uint8_t clientNum, std::string_view message);
+
+			void handle_scanNetworks(std::string& response);
+			void handle_getIdentity(std::string& response);
+			void handle_getDeviceParams(std::string& response);
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.

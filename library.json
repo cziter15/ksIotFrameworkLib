@@ -15,7 +15,8 @@
 	},
 	"license": "MIT",
 	"dependencies": {
-		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient"
+		"knolleary/PubSubClient": "https://github.com/knolleary/pubsubclient",
+		"Links2004/arduinoWebSockets": "https://github.com/Links2004/arduinoWebSockets"
 	},
 	"frameworks": "arduino",
 	"platforms": "esp32,esp8266"
