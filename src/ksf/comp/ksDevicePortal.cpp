@@ -16,12 +16,20 @@
 	#include "WiFiClient.h"
 	#include "ESP8266WebServer.h"
 	#define HARDWARE "ESP8266"
+
+	uint8_t ESP_getFlashVendor() { return ESP.getFlashChipVendorId(); }
+	uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipRealSize()/1024; }
+	
 #elif ESP32
 	#include "WiFi.h"
 	#include "WiFiClient.h"
 	#include "WebServer.h"
 	#define WebServerClass WebServer
 	#define HARDWARE "ESP32"
+
+	extern uint32_t ESP_getFlashChipId(void);
+	uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() >> 16; }
+	uint32_t ESP_getFlashSizeKB() { return ESP.magicFlashChipSize(ESP.getFlashChipSize())/1024; }
 #else
 	#error Platform not implemented.
 #endif
@@ -203,9 +211,9 @@ namespace ksf::comps
 		json += ksf::to_string(ESP.getCpuFreqMHz());
 		json += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"");
 		json += "VID:";
-		json += ksf::to_string(ESP.getFlashChipVendorId());
+		json += ksf::to_string(ESP_getFlashVendor());
 		json += PSTR(" (");
-		json += ksf::to_string(ESP.getFlashChipRealSize()/1024);
+		json += ksf::to_string(ESP_getFlashSizeKB());
 		json += PSTR(" KB, ");
 		json += ksf::to_string(ESP.getFlashChipSpeed()/1000000);
 		json += PSTR(" MHz)\"},{\"name\":\"Hostname\",\"value\":\"");
