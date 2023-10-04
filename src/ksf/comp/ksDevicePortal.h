@@ -16,7 +16,7 @@
 #include <string_view>
 
 class DNSServer;
-class WebSockets4WebServer;
+class WebSocketsServer;
 
 #if defined(ESP32)
 	class WebServer;
@@ -43,7 +43,7 @@ namespace ksf::comps
 			bool breakApp{false};								// Flag to restart chip.
 
 			std::unique_ptr<WebServerClass> webServer;
-			std::unique_ptr<WebSockets4WebServer> webSocket;
+			std::unique_ptr<WebSocketsServer> webSocket;
 			std::unique_ptr<DNSServer> dnsServer;
 
 			void requestAppBreak() { breakApp = true; }

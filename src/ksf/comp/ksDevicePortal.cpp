@@ -9,7 +9,7 @@
 
 #include <LittleFS.h>
 #include <DNSServer.h>
-#include <WebSockets4WebServer.h>
+#include <WebSocketsServer.h>
 #include <map>
 
 #if ESP8266
@@ -21,7 +21,6 @@
 
 	uint8_t ESP_getFlashVendor() { return ESP.getFlashChipVendorId(); }
 	uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipRealSize()/1024; }
-	
 #elif ESP32
 	#include "WiFi.h"
 	#include "WiFiClient.h"
@@ -443,13 +442,17 @@ namespace ksf::comps
 		webServer->collectHeaders(headerkeys, sizeof(headerkeys)/sizeof(char*));
 		webServer->begin();
 
-		webSocket = std::make_unique<WebSockets4WebServer>();
+		webSocket = std::make_unique<WebSocketsServer>(81);
+
 		webSocket->enableHeartbeat(2000, 5000, 2);
-		webSocket->setAuthorization(PSTR("admin"), password.c_str());
-		webServer->addHook(webSocket->hookForWebserver("/ws", [this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+
+		// TODO: Add auth
+		//webSocket->setAuthorization(PSTR("admin"), password.c_str());
+
+		webSocket->onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 			if (type == WStype_TEXT)
 				this->onWebsocketTextMessage(num, std::string_view((const char*)payload, length));
-		}));
+		});
 
 		webSocket->begin();
 	}
