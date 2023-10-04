@@ -419,6 +419,7 @@ namespace ksf::comps
 		};
 
 		webServer->collectHeaders(headerkeys, sizeof(headerkeys)/sizeof(char*));
+		webServer->keepAlive(false);
 		webServer->begin();
 	}
 
