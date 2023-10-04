@@ -198,9 +198,16 @@ namespace ksf::comps
 			return;
 
 		std::string json;
-		json += PSTR("[{\"name\":\"Hardware\",\"value\":\"");
-		json += HARDWARE;
-		json += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
+		json += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
+		json += HARDWARE "(";
+		json += ESP.getCpuFreqMHz();
+		json += PSTR(" MHz)\"},{\"name\":\"Free heap\",\"value\":\"");
+		json += ksf::to_string(ESP.getFreeHeap());
+		json += PSTR(" b)\"},{\"name\":\"Flash speed\",\"value\":\"");
+		json += ksf::to_string(ESP.getFlashChipSpeed()/1000000);
+		json += PSTR(" MHz\"},{\"name\":\"Flash size\",\"value\":\"");
+		json += ksf::to_string(ESP.getFlashChipRealSize()/1024);
+		json += PSTR(" KB\"},{\"name\":\"Hostname\",\"value\":\"");
 		json += WiFi.getHostname();
 		json += PSTR("\"},{\"name\":\"Device uptime\",\"value\":\"");
 		json += ksf::getUptimeString();
