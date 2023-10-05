@@ -7,12 +7,11 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include <LittleFS.h>
-#include <DNSServer.h>
-#include <WebSocketsServer.h>
 #include <map>
+#include <LittleFS.h>
 
-#include <MD5Builder.h>
+#include <DNSServer.h>
+#include "../misc/ksWSServer.h"
 
 #if ESP8266
 	#include "flash_hal.h"
@@ -42,7 +41,6 @@
 #include "ksWifiConnector.h"
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
-
 #include "../res/otaWebpage.h"
 
 namespace ksf::comps
@@ -54,11 +52,7 @@ namespace ksf::comps
 	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
 	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
 
-	ksDevicePortal::~ksDevicePortal()
-	{
-		if (webSocket)
-			webSocket->close();
-	}
+	ksDevicePortal::~ksDevicePortal() = default;
 	
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PSTR("ota_ksiotframework"))
@@ -474,7 +468,7 @@ namespace ksf::comps
 
 	void ksDevicePortal::setupWsServer()
 	{
-		webSocket = std::make_unique<WebSocketsServer>(81);
+		webSocket = std::make_unique<ksf::misc::ksWSServer>();
 
 		/* Setup headers we want to validate. */
 		const char* headerkeys[] 
@@ -504,7 +498,7 @@ namespace ksf::comps
 
 		/* Startup. */
 		webSocket->enableHeartbeat(2000, 5000, 2);
-		webSocket->begin();
+		webSocket->begin(81);
 	}
 
 	bool ksDevicePortal::loop()

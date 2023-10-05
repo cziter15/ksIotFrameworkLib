@@ -16,7 +16,6 @@
 #include <string_view>
 
 class DNSServer;
-class WebSocketsServer;
 
 #if defined(ESP32)
 	class WebServer;
@@ -29,6 +28,12 @@ class WebSocketsServer;
 	}
 	#define WebServerClass esp8266webserver::ESP8266WebServerTemplate<WiFiServer>
 #endif
+
+namespace ksf::misc
+{
+	class ksWSServer;
+}
+
 namespace ksf::comps
 {
 	class ksDevicePortal : public ksComponent
@@ -45,7 +50,7 @@ namespace ksf::comps
 			bool breakApp{false};								// Flag to restart chip.
 
 			std::unique_ptr<WebServerClass> webServer;
-			std::unique_ptr<WebSocketsServer> webSocket;
+			std::unique_ptr<ksf::misc::ksWSServer> webSocket;
 			std::unique_ptr<DNSServer> dnsServer;
 
 			void requestAppBreak() { breakApp = true; }
@@ -55,6 +60,9 @@ namespace ksf::comps
 			*/
 			void setupHttpServer();
 
+			/*
+				This function starts WebSocket server.
+			*/
 			void setupWsServer();
 
 			/*
