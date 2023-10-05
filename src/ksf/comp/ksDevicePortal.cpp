@@ -469,8 +469,12 @@ namespace ksf::comps
 #endif
 		std::hash<std::string> hasher;
 		uint64_t webSocketToken{chipId ^ hasher(password)};
-
 		webSocket->setRequiredAuthToken(webSocketToken);
+
+		webSocket->onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+			if (type == WStype_TEXT)
+				onWebsocketTextMessage(num, std::string_view((const char*)payload, length));
+		});
 
 		/* Startup. */
 		webSocket->enableHeartbeat(2000, 5000, 2);
