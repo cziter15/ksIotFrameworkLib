@@ -12,6 +12,8 @@
 #include <WebSocketsServer.h>
 #include <map>
 
+#include <MD5Builder.h>
+
 #if ESP8266
 	#include "flash_hal.h"
 	#include "ESP8266WiFi.h"
@@ -49,6 +51,7 @@ namespace ksf::comps
 	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
 	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
 	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
+	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
 	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
 
 	ksDevicePortal::~ksDevicePortal()
@@ -73,6 +76,10 @@ namespace ksf::comps
 		ArduinoOTA.onEnd([this]() {
 			updateFinished(false);
 		});
+
+	
+		std::hash<std::string> hasher;
+		authHash = ESP.getChipId() * hasher(password);
 	}
 	
 	bool ksDevicePortal::init(ksApplication* owner)
@@ -87,15 +94,16 @@ namespace ksf::comps
 
 	bool ksDevicePortal::postInit(ksApplication* owner)
 	{
-		setupUpdateWebServer();
-
 		if (WiFi.getMode() == WIFI_AP) 
 		{
 			dnsServer = std::make_unique<DNSServer>();
 			dnsServer->setErrorReplyCode(DNSReplyCode::NoError);
 			dnsServer->start(53, "*", WiFi.softAPIP());
 		}
-		
+
+		setupHttpServer();
+		setupWsServer();
+
 		return true;
 	}
 
@@ -111,7 +119,7 @@ namespace ksf::comps
 		onUpdateEnd->broadcast();
 	}
 
-	bool ksDevicePortal::inRequest_NeedAuthentication() const
+	bool ksDevicePortal::inRequest_NeedAuthentication()
 	{
 		if (WiFi.getMode() == WIFI_AP)
 			return false;
@@ -383,10 +391,12 @@ namespace ksf::comps
 		rebootDevice();
 	}
 	
-	void ksDevicePortal::onRequest_index() const
+	void ksDevicePortal::onRequest_index()
 	{
 		if (inRequest_NeedAuthentication())
 			return;
+
+		webServer->sendHeader(PSTR("Set-Cookie"), PSTR("WSA=") + String(authHash));
 
 		const auto& fileMD5{FPSTR(DEVICE_FRONTEND_HTML_MD5)};
 		if (webServer->header(PROGMEM_IF_NONE_MATCH) == fileMD5)
@@ -395,8 +405,8 @@ namespace ksf::comps
 			return;
 		}
 
-		webServer->sendHeader(PSTR("ETag"), fileMD5);
 		webServer->sendHeader(PSTR("Content-Encoding"), PSTR("gzip"));
+		webServer->sendHeader(PSTR("ETag"), fileMD5);
 		webServer->send_P(200, PROGMEM_TEXT_HTML, (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 	}
 
@@ -420,40 +430,65 @@ namespace ksf::comps
 		rebootDevice();
 	}
 
-	void ksDevicePortal::setupUpdateWebServer()
+	void ksDevicePortal::setupHttpServer()
 	{
 		webServer = std::make_unique<WebServerClass>(80);
+		
+		/* Setup 404 handler. */
 		webServer->onNotFound(std::bind(&ksDevicePortal::onRequest_notFound, this));
 
-		webServer->on(FPSTR("/"), HTTP_GET, std::bind(&ksDevicePortal::onRequest_index, this));
+		/* Setup index page handler. */
+		webServer->on(FPSTR("/"), HTTP_GET, 
+			std::bind(&ksDevicePortal::onRequest_index, this)
+		);
 
+		/* Setup OTA update request handler. */
 		webServer->on("/api/flash", HTTP_POST, 
 			std::bind(&ksDevicePortal::onRequest_otaFinish, this),	// Upload file part
 			std::bind(&ksDevicePortal::onRequest_otaChunk, this)	// Upload file end
 		);
 
 		/* Setup headers we want to collect. */
-		const char* headerkeys[] = 
+		const char* headerkeys[]
 		{
 			PROGMEM_ACCEPT, 
 			PROGMEM_IF_NONE_MATCH
 		};
-
 		webServer->collectHeaders(headerkeys, sizeof(headerkeys)/sizeof(char*));
-		webServer->begin();
 
+		/* Startup. */
+		webServer->begin();
+	}
+
+	void ksDevicePortal::setupWsServer()
+	{
 		webSocket = std::make_unique<WebSocketsServer>(81);
 
-		webSocket->enableHeartbeat(2000, 5000, 2);
+		/* Setup headers we want to validate. */
+		const char* headerkeys[] 
+		{ 
+			PROGMEM_COOKIE
+		};
 
-		// TODO: Add auth
-		//webSocket->setAuthorization(PSTR("admin"), password.c_str());
+		/* Validate cookie set by main index page. */
+		webSocket->onValidateHttpHeader([this](String headerName, String headerValue) {
+			if (headerName.equalsIgnoreCase(PROGMEM_COOKIE)) 
+			{
+				String WSACookie(FPSTR("WSA="));
+				WSACookie += String(authHash);
+				return headerValue.indexOf(WSACookie) != -1;
+			}
+			return true;
+		}, headerkeys, sizeof(headerkeys)/sizeof(char*));
 
+		/* Setup message callback. */
 		webSocket->onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 			if (type == WStype_TEXT)
 				this->onWebsocketTextMessage(num, std::string_view((const char*)payload, length));
 		});
 
+		/* Startup. */
+		webSocket->enableHeartbeat(2000, 5000, 2);
 		webSocket->begin();
 	}
 

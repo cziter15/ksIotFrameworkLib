@@ -40,6 +40,8 @@ namespace ksf::comps
 			ksApplication* owner{nullptr};						// Pointer to ksApplication.
 
 			std::string password;								// OTA password.
+			uint64_t authHash{0};								// Auth hash for WS.
+
 			bool breakApp{false};								// Flag to restart chip.
 
 			std::unique_ptr<WebServerClass> webServer;
@@ -51,7 +53,9 @@ namespace ksf::comps
 			/*
 				This function starts OTA update server.
 			*/
-			void setupUpdateWebServer();
+			void setupHttpServer();
+
+			void setupWsServer();
 
 			/*
 				This function is called when OTA update is finished.
@@ -66,7 +70,7 @@ namespace ksf::comps
 			/*
 				This function handles authentication error.
 			*/
-			bool inRequest_NeedAuthentication() const;
+			bool inRequest_NeedAuthentication();
 
 			/*
 				This function handles "not found" error.
@@ -76,7 +80,7 @@ namespace ksf::comps
 			/*
 				This function serves main page to the client.
 			*/
-			void onRequest_index() const;
+			void onRequest_index();
 
 			/*
 				This function handles endpoint "/api/flash".
