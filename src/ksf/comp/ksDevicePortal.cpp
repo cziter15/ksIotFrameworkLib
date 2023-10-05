@@ -136,25 +136,30 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksDevicePortal::onWebsocketTextMessage(uint8_t clientNum, std::string_view message)
+	void ksDevicePortal::onWebsocketTextMessage(uint8_t clientNum, const std::string_view& message)
 	{
 		auto idEnd{message.find('|', 0)};
 		if (idEnd == std::string_view::npos)
 			return;
 
 		auto commandStart{idEnd + 1};
-		auto commandEnd{message.find('|', commandStart + 1)};
-
-		if (commandEnd == std::string_view::npos)
+		if (commandStart >= message.size())
 			return;
+
+		auto commandEnd{message.find('\n', commandStart + 1)};
+		if (commandEnd == std::string_view::npos)
+			commandEnd = message.size();
 
 		auto id{message.substr(0, idEnd)};
 		auto command{message.substr(commandStart, commandEnd - commandStart)};
-		auto body{message.substr(commandEnd + 1)};
+		
+		std::string_view body;
+		if (commandEnd + 1 < message.size())
+			body = message.substr(commandEnd + 1);
 
 		std::string response{id};
-		response += '|';
-		
+		response += '\n';
+
 		if (command == PSTR("getIdentity"))
 		{
 			handle_getIdentity(response);
@@ -170,6 +175,11 @@ namespace ksf::comps
 		else if (command == PSTR("goToConfigMode"))
 		{
 			requestAppBreak();
+			return;
+		}
+		else if (command == PSTR("formatFilesystem"))
+		{
+			handle_formatFS();
 			return;
 		}
 		else if (command == PSTR("saveConfig"))
@@ -415,11 +425,8 @@ namespace ksf::comps
 		webServer->send_P(200, PROGMEM_TEXT_HTML, (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
 	}
 
-	void ksDevicePortal::onRequest_formatFS()
+	void ksDevicePortal::handle_formatFS()
 	{
-		if (inRequest_NeedAuthentication())
-			return;
-
 		LittleFS.format();
 
 #if defined(ESP8266)
@@ -489,7 +496,10 @@ namespace ksf::comps
 		/* Setup message callback. */
 		webSocket->onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 			if (type == WStype_TEXT)
-				this->onWebsocketTextMessage(num, std::string_view((const char*)payload, length));
+			{
+				std::string_view sv(reinterpret_cast<const char*>(payload), length);
+				this->onWebsocketTextMessage(num, sv);
+			}
 		});
 
 		/* Startup. */

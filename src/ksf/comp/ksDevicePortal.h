@@ -94,13 +94,35 @@ namespace ksf::comps
 			*/
 			void onRequest_otaFinish();
 
+			/*
+				This function will format flash.
+			*/
+			void handle_formatFS();
 
-			void onRequest_formatFS();
+			/*
+				This function handles websocket messages.
+				
+				@param clientNum Client number.
+				@param message Message string view.
+			*/
+			void onWebsocketTextMessage(uint8_t clientNum, const std::string_view& message);
 
-			void onWebsocketTextMessage(uint8_t clientNum, std::string_view message);
-
+			/*
+				This function handles scanning networks.
+				@param response Response reference, where the response should be appended.
+			*/
 			void handle_scanNetworks(std::string& response);
+
+			/*
+				This function handles identity request.
+				@param response Response reference, where the response should be appended.
+			*/
 			void handle_getIdentity(std::string& response);
+
+			/*
+				This function handles device params request.
+				@param response Response reference, where the response should be appended.
+			*/
 			void handle_getDeviceParams(std::string& response);
 
 		public:
