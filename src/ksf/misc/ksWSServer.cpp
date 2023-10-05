@@ -8,33 +8,51 @@
  */
 
 #include "ksWSServer.h"
-
 namespace ksf::misc
 {
-	ksWSServer::ksWSServer() = default;
-	ksWSServer::~ksWSServer() = default;
+	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
 
-	void ksWSServer::begin(uint16_t port) 
+	ksWSServer::ksWSServer(uint16_t port)
+	{
+		wsListener = std::make_unique<WiFiServer>(port);
+	}
+
+	ksWSServer::~ksWSServer()
+	{
+		wsListener->close();
+	}
+
+	void ksWSServer::begin() 
 	{
 		WebSocketsServerCore::begin();
-		wsListener = std::make_unique<WiFiServer>(port);
 		wsListener->begin();
+
+		/* Setup headers we want to validate. */
+		const char* headerkeys[] 
+		{ 
+			PROGMEM_COOKIE
+		};
+
+		/* Validate cookie set by main index page. */
+		onValidateHttpHeader([this](String headerName, String headerValue) {
+			if (requriedAuthToken != 0 && headerName.equalsIgnoreCase(PROGMEM_COOKIE))
+			{
+				String WSACookie(FPSTR("WSA="));
+				WSACookie += String(requriedAuthToken);
+				return headerValue.indexOf(WSACookie) != -1;
+			}
+			return true;
+		}, headerkeys, sizeof(headerkeys)/sizeof(char*));
 	}
 
-	void ksWSServer::close() 
-	{
-		WebSocketsServerCore::close();
-		wsListener.reset();
-	}
-
-	void ksWSServer::loop(void) 
+	void ksWSServer::loop() 
 	{
 		if(!_runnning)
 			return;
 
-		while(wsListener->hasClient()) 
+		while (wsListener->hasClient()) 
 		{
-			if(auto client{new WiFiClient(wsListener->available())})
+			if(auto client{new WiFiClient(wsListener->accept())})
 				handleNewClient(client);
 			else break;
 		}

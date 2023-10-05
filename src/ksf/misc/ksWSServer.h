@@ -17,14 +17,38 @@ namespace ksf::misc
 	class ksWSServer : public WebSocketsServerCore 
 	{
 		protected:
-			std::unique_ptr<WiFiServer> wsListener;
+			std::unique_ptr<WiFiServer> wsListener;								// WS listener.
+			uint64_t requriedAuthToken{0};
+
+			/*
+				Handles a situation wher the socket is not authorized
+
+				@param client WSclient_t *  ptr to the client struct
+			*/
 			void handleNonWebsocketConnection(WSclient_t * client) override;
 
 		public:
-			ksWSServer();
-			void begin(uint16_t port);
-			void close();
+			/*
+				Creates WS server object, but does not start the server.
+			*/
+			ksWSServer(uint16_t port);
+
+			uint64_t getRequiredAuthToken() const { return requriedAuthToken; }
+			void setRequiredAuthToken(uint64_t authToken) { requriedAuthToken = authToken; }
+
+			/*
+				Starts the server listening on the specified port.
+			*/
+			void begin();
+
+			/*
+				Handles all WS server logic.
+			*/
 			void loop();
+
+			/*
+				Destructor. Should release all resources.
+			*/
 			virtual ~ksWSServer();
 	};
 }

@@ -45,8 +45,6 @@ namespace ksf::comps
 			ksApplication* owner{nullptr};						// Pointer to ksApplication.
 
 			std::string password;								// OTA password.
-			uint64_t authHash{0};								// Auth hash for WS.
-
 			bool breakApp{false};								// Flag to restart chip.
 
 			std::unique_ptr<WebServerClass> webServer;

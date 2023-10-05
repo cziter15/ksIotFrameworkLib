@@ -49,7 +49,6 @@ namespace ksf::comps
 	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
 	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
 	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
-	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
 	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
 
 	ksDevicePortal::~ksDevicePortal() = default;
@@ -70,15 +69,6 @@ namespace ksf::comps
 		ArduinoOTA.onEnd([this]() {
 			updateFinished(false);
 		});
-
-#if ESP32
-		uint64_t chipId{ESP.getEfuseMac()};
-#elif ESP8266
-		uint32_t chipId32{ESP.getChipId()};
-		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
-#endif
-		std::hash<std::string> hasher;
-		authHash = chipId ^ hasher(password);
 	}
 	
 	bool ksDevicePortal::init(ksApplication* owner)
@@ -405,7 +395,8 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		webServer->sendHeader(PSTR("Set-Cookie"), PSTR("WSA=") + String(authHash));
+		if (webSocket)
+			webServer->sendHeader(PSTR("Set-Cookie"), PSTR("WSA=") + String(webSocket->getRequiredAuthToken()));
 
 		const auto& fileMD5{FPSTR(DEVICE_FRONTEND_HTML_MD5)};
 		if (webServer->header(PROGMEM_IF_NONE_MATCH) == fileMD5)
@@ -468,37 +459,22 @@ namespace ksf::comps
 
 	void ksDevicePortal::setupWsServer()
 	{
-		webSocket = std::make_unique<ksf::misc::ksWSServer>();
+		webSocket = std::make_unique<ksf::misc::ksWSServer>(81);
 
-		/* Setup headers we want to validate. */
-		const char* headerkeys[] 
-		{ 
-			PROGMEM_COOKIE
-		};
+#if ESP32
+		uint64_t chipId{ESP.getEfuseMac()};
+#elif ESP8266
+		uint32_t chipId32{ESP.getChipId()};
+		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
+#endif
+		std::hash<std::string> hasher;
+		uint64_t webSocketToken{chipId ^ hasher(password)};
 
-		/* Validate cookie set by main index page. */
-		webSocket->onValidateHttpHeader([this](String headerName, String headerValue) {
-			if (headerName.equalsIgnoreCase(PROGMEM_COOKIE)) 
-			{
-				String WSACookie(FPSTR("WSA="));
-				WSACookie += String(authHash);
-				return headerValue.indexOf(WSACookie) != -1;
-			}
-			return true;
-		}, headerkeys, sizeof(headerkeys)/sizeof(char*));
-
-		/* Setup message callback. */
-		webSocket->onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
-			if (type == WStype_TEXT)
-			{
-				std::string_view sv(reinterpret_cast<const char*>(payload), length);
-				this->onWebsocketTextMessage(num, sv);
-			}
-		});
+		webSocket->setRequiredAuthToken(webSocketToken);
 
 		/* Startup. */
 		webSocket->enableHeartbeat(2000, 5000, 2);
-		webSocket->begin(81);
+		webSocket->begin();
 	}
 
 	bool ksDevicePortal::loop()
