@@ -77,9 +77,14 @@ namespace ksf::comps
 			updateFinished(false);
 		});
 
-	
+#if ESP32
+		uint64_t chipId{ESP.getEfuseMac()};
+#elif ESP8266
+		uint32_t chipId32{ESP.getChipId()};
+		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
+#endif
 		std::hash<std::string> hasher;
-		authHash = ESP.getChipId() * hasher(password);
+		authHash = chipId ^ hasher(password);
 	}
 	
 	bool ksDevicePortal::init(ksApplication* owner)
