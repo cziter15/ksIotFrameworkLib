@@ -25,8 +25,7 @@ namespace ksf::misc
 	void ksWSServer::begin() 
 	{
 		WebSocketsServerCore::begin();
-		wsListener->begin();
-
+	
 		/* Setup headers we want to validate. */
 		const char* headerkeys[] 
 		{ 
@@ -43,6 +42,17 @@ namespace ksf::misc
 			}
 			return true;
 		}, headerkeys, sizeof(headerkeys)/sizeof(char*));
+
+		
+		onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
+			if (type == WStype_TEXT && onWebsocketTextMessage) {
+				auto sv{std::string_view(reinterpret_cast<char*>(payload), length)};
+				onWebsocketTextMessage(num, std::move(sv));
+			}
+		});
+
+		/* Start WS server that listens for incoming clients. */
+		wsListener->begin();
 	}
 
 	void ksWSServer::loop() 
@@ -50,6 +60,7 @@ namespace ksf::misc
 		if(!_runnning)
 			return;
 
+		/* Listen for new clients. */
 		while (wsListener->hasClient()) 
 		{
 			if(auto client{new WiFiClient(wsListener->accept())})
@@ -58,6 +69,21 @@ namespace ksf::misc
 		}
 
 		WebSocketsServerCore::loop();
+	}
+
+	void ksWSServer::setMessageHandler(ksWsServerMessageFunc_t func)
+	{ 
+		onWebsocketTextMessage = func;
+	}
+
+	uint64_t ksWSServer::getRequiredAuthToken() const 
+	{ 
+		return requriedAuthToken; 
+	}
+
+	void ksWSServer::setRequiredAuthToken(uint64_t authToken) 
+	{ 
+		requriedAuthToken = authToken; 
 	}
 
 	void ksWSServer::handleNonWebsocketConnection(WSclient_t * client) 

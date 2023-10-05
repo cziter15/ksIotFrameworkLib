@@ -43,6 +43,8 @@
 #include "ksConfigProvider.h"
 #include "../res/otaWebpage.h"
 
+using namespace std::placeholders;
+
 namespace ksf::comps
 {
 	const char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
@@ -51,21 +53,33 @@ namespace ksf::comps
 	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
 	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
 
+	inline uint64_t generateAuthToken(std::string& password)
+	{
+#if ESP32
+		uint64_t chipId{ESP.getEfuseMac()};
+#elif ESP8266
+		uint32_t chipId32{ESP.getChipId()};
+		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
+#endif
+		std::hash<std::string> hasher;
+		uint64_t webSocketToken{chipId ^ hasher(password)};
+		return webSocketToken;
+	}
+
 	ksDevicePortal::~ksDevicePortal() = default;
 	
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PSTR("ota_ksiotframework"))
 	{}
 
-	ksDevicePortal::ksDevicePortal(const std::string& password)
+	ksDevicePortal::ksDevicePortal(const std::string& portalPassword)
 	{
-		this->password = password;
-		ArduinoOTA.setPassword(password.c_str());
+		this->portalPassword = portalPassword;
 
+		ArduinoOTA.setPassword(portalPassword.c_str());
 		ArduinoOTA.onStart([this]() {
 			onUpdateStart->broadcast();
 		});
-
 		ArduinoOTA.onEnd([this]() {
 			updateFinished(false);
 		});
@@ -113,7 +127,7 @@ namespace ksf::comps
 		if (WiFi.getMode() == WIFI_AP)
 			return false;
 
-		if (password.empty() || webServer->authenticate(PSTR("admin"), password.c_str()))
+		if (portalPassword.empty() || webServer->authenticate(PSTR("admin"), portalPassword.c_str()))
 			return false;
 
 		webServer->requestAuthentication();
@@ -460,23 +474,8 @@ namespace ksf::comps
 	void ksDevicePortal::setupWsServer()
 	{
 		webSocket = std::make_unique<ksf::misc::ksWSServer>(81);
-
-#if ESP32
-		uint64_t chipId{ESP.getEfuseMac()};
-#elif ESP8266
-		uint32_t chipId32{ESP.getChipId()};
-		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
-#endif
-		std::hash<std::string> hasher;
-		uint64_t webSocketToken{chipId ^ hasher(password)};
-		webSocket->setRequiredAuthToken(webSocketToken);
-
-		webSocket->onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
-			if (type == WStype_TEXT)
-				onWebsocketTextMessage(num, std::string_view((const char*)payload, length));
-		});
-
-		/* Startup. */
+		webSocket->setRequiredAuthToken(generateAuthToken(portalPassword));
+		webSocket->setMessageHandler(std::bind(&ksDevicePortal::onWebsocketTextMessage, this, _1, _2));
 		webSocket->enableHeartbeat(2000, 5000, 2);
 		webSocket->begin();
 	}

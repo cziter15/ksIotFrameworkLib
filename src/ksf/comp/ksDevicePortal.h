@@ -44,13 +44,16 @@ namespace ksf::comps
 			ArduinoOTAClass ArduinoOTA;							// Arduino OTA object.
 			ksApplication* owner{nullptr};						// Pointer to ksApplication.
 
-			std::string password;								// OTA password.
+			std::string portalPassword;							// Portal password.
 			bool breakApp{false};								// Flag to restart chip.
 
-			std::unique_ptr<WebServerClass> webServer;
-			std::unique_ptr<ksf::misc::ksWSServer> webSocket;
-			std::unique_ptr<DNSServer> dnsServer;
+			std::unique_ptr<WebServerClass> webServer;			// HTTP server.
+			std::unique_ptr<ksf::misc::ksWSServer> webSocket;	// Web socket server.
+			std::unique_ptr<DNSServer> dnsServer;				// DNS server.
 
+			/*
+				Causes the app to break from loop with false status.
+			*/
 			void requestAppBreak() { breakApp = true; }
 
 			/*
@@ -146,7 +149,7 @@ namespace ksf::comps
 				
 				@param password Password required to flash.
 			*/
-			ksDevicePortal(const std::string& password);
+			ksDevicePortal(const std::string& portalPassword);
 
 			/*
 				Initializes device portal component.
