@@ -9,9 +9,7 @@
 
 #include <map>
 #include <LittleFS.h>
-
 #include <DNSServer.h>
-#include "../misc/ksWSServer.h"
 
 #if ESP8266
 	#include "flash_hal.h"
@@ -41,12 +39,15 @@
 #include "ksWifiConnector.h"
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
+#include "../misc/ksWSServer.h"
 #include "../res/otaWebpage.h"
 
 using namespace std::placeholders;
 
 namespace ksf::comps
 {
+	constexpr auto WIFI_SCAN_TIMEOUT{15000UL};
+
 	const char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
 	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
 	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
@@ -60,6 +61,8 @@ namespace ksf::comps
 #elif ESP8266
 		uint32_t chipId32{ESP.getChipId()};
 		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
+#else
+		#error Platform not implemented.
 #endif
 		std::hash<std::string> hasher;
 		uint64_t webSocketToken{chipId ^ hasher(password)};
@@ -124,7 +127,7 @@ namespace ksf::comps
 
 	bool ksDevicePortal::inRequest_NeedAuthentication()
 	{
-		if (WiFi.getMode() == WIFI_AP)
+		if (WiFi.localIP() != webServer->client().localIP())
 			return false;
 
 		if (portalPassword.empty() || webServer->authenticate(PSTR("admin"), portalPassword.c_str()))
@@ -260,9 +263,20 @@ namespace ksf::comps
 		switch (WiFi.scanComplete())
 		{
 			case WIFI_SCAN_FAILED:
-				WiFi.scanNetworks(true);
+			{
+#if ESP32
+				WiFi.scanNetworks(true, false, true);
+#elif ESP8266
+				WiFi.scanNetworks(true, true);
+#else
+				#error Platform not implemented.
+#endif
+				scanNetworkTimestamp = std::max(1UL, millis());
+			}
 			case WIFI_SCAN_RUNNING:
+			{
 				response += PSTR("{}");
+			}
 			return;
 
 			default:
@@ -270,14 +284,14 @@ namespace ksf::comps
 				response += '[';
 				for (int i{0}; i < WiFi.scanComplete(); ++i)
 				{
+					String ssid{WiFi.SSID(i)};
+
 					if (i > 0)
 						response += ',';
 					response += PSTR("{\"rssi\":");
 					response += ksf::to_string(WiFi.RSSI(i));
 					response += PSTR(",\"ssid\":\"");
-					response += WiFi.SSID(i).c_str();
-					response += PSTR("\",\"bssid\":\"");
-					response += WiFi.BSSIDstr(i).c_str();
+					response += ssid.isEmpty() ? WiFi.BSSIDstr(i).c_str() : ssid.c_str();
 					response += PSTR("\",\"channel\":");
 					response += ksf::to_string(WiFi.channel(i));
 					response += PSTR(",\"secure\":");
@@ -285,9 +299,10 @@ namespace ksf::comps
 					response += '}';
 				}
 				response +=	']';
+
 				WiFi.scanDelete();
-			
 				WiFi.enableSTA(false);
+				scanNetworkTimestamp = 0;
 			}
 		}
 	}
@@ -366,11 +381,13 @@ namespace ksf::comps
 		HTTPUpload& upload = webServer->upload();
 		if (upload.status == UPLOAD_FILE_START)
 		{
-#if defined(ESP8266)
+#if ESP8266
 			Update.runAsync(true);
 			uint32_t maxSketchSpace = (ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000;
-#elif defined(ESP32)
+#elif ESP32
 			uint32_t maxSketchSpace = UPDATE_SIZE_UNKNOWN;
+#else
+			#error Platform not implemented.
 #endif
 			if (!Update.begin(maxSketchSpace, U_FLASH)) 
 				return webServer->send_P(400, PROGMEM_TEXT_PLAIN, PSTR("OTA could not begin"));
@@ -428,14 +445,16 @@ namespace ksf::comps
 	{
 		LittleFS.format();
 
-#if defined(ESP8266)
+#if ESP8266
 		ESP.eraseConfig();
-#elif defined(ESP32)
+#elif ESP32
 		WiFi.enableSTA(true);
 		WiFi.persistent(true);
 		WiFi.disconnect(true,true);
 		delay(500);
 		WiFi.persistent(false);
+#else
+		#error Platform not implemented.
 #endif
 
 		rebootDevice();
@@ -482,6 +501,7 @@ namespace ksf::comps
 
 	bool ksDevicePortal::loop()
 	{
+		/* Return from the app on request. */
 		if (breakApp)
 			return false;
 
@@ -496,8 +516,17 @@ namespace ksf::comps
 		if (webServer)
 			webServer->handleClient();
 
+		/* Handle WebSocket. */
 		if (webSocket)
 			webSocket->loop();
+
+		/* Cleanup scan results if not received by the client. */
+		if (millis() - scanNetworkTimestamp > WIFI_SCAN_TIMEOUT)
+		{
+			scanNetworkTimestamp = 0;
+			WiFi.scanDelete();
+			WiFi.enableSTA(false);
+		}
 
 		return true;
 	}

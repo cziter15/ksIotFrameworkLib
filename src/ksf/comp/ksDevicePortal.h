@@ -44,6 +44,8 @@ namespace ksf::comps
 			ArduinoOTAClass ArduinoOTA;							// Arduino OTA object.
 			ksApplication* owner{nullptr};						// Pointer to ksApplication.
 
+			uint32_t scanNetworkTimestamp{0};					// Timestamp of last scan.
+
 			std::string portalPassword;							// Portal password.
 			bool breakApp{false};								// Flag to restart chip.
 
