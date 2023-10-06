@@ -14,9 +14,15 @@
 #include <functional>
 #include <string_view>
 
-typedef std::function<void(uint8_t client, std::string_view message)> ksWsServerMessageFunc_t;
 namespace ksf::misc
 {
+	/*
+		@brief Callback function type for Websocket messsages.
+		@param client Websocket client ID
+		@param message Incomming websocket message (text / string view).
+	*/
+	typedef std::function<void(uint8_t client, std::string_view message)> ksWsServerMessageFunc_t;
+
 	class ksWSServer : public WebSocketsServerCore 
 	{
 		protected:
@@ -25,29 +31,37 @@ namespace ksf::misc
 			ksWsServerMessageFunc_t onWebsocketTextMessage;						// Callback function to receive messages.
 
 			/*
-				Handles a situation wher the socket is not authorized
-
+				@brief Handles a situation wher the socket is not authorized
 				@param client WSclient_t *  ptr to the client struct
 			*/
 			void handleNonWebsocketConnection(WSclient_t * client) override;
 
 		public:
 			/*
-				Creates WS server object, but does not start the server.
+				@brief Prepares ksWebServer on specified port but does not start it (call begin).
+				@param port WebSocket listening port.
 			*/
 			ksWSServer(uint16_t port);
 
 			/*
-				Returns auth token used for WebSocket authentication.
-				The value 0 is considered to be invalid (no auth token).
+				@brief Returns simple authtoken for WebSocket authentication.
+
+				The value 0 is considered to be invalid (no auth token). Auth token is set via setRequiredAuthToken().
+				Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to
+				the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).
+
+				@return Auth token for WebSocket
 			*/
 			uint64_t getRequiredAuthToken() const;
 
 			/*
-				Sets auth token used for WebSocket authentication.
-				The value 0 is considered to be invalid (no auth token).
+				@brief Sets simple authtoken for WebSocket authentication.
 
-				@param authToken Token to use for authentication
+				The value 0 is considered to be invalid (no auth token). Auth token is set via setRequiredAuthToken().
+				Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to
+				the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).
+
+				@param authToken The token to set
 			*/
 			void setRequiredAuthToken(uint64_t authToken);
 
@@ -57,19 +71,18 @@ namespace ksf::misc
 			void begin();
 
 			/*
-				Handles all WS server logic.
+				@brief Handles server logic.
 			*/
 			void loop();
 
 			/*
-				Sets message callback for WS.
-
-				@param func Callback function to receive messages.
+				@brief Installs a message handler callback to WebSocket text receive messages.
+				@param func Callback function to receive messages
 			*/
 			void setMessageHandler(ksWsServerMessageFunc_t func);
 
 			/*
-				Destructor. Should release all resources.
+				@brief Releases server resources.
 			*/
 			virtual ~ksWSServer();
 	};

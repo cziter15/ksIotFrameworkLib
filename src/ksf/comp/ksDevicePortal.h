@@ -52,127 +52,126 @@ namespace ksf::comps
 			std::unique_ptr<DNSServer> dnsServer;				// DNS server.
 
 			/*
-				Causes the app to break from loop with false status.
+				@brief Causes the app to break from loop with false status.
 			*/
 			void requestAppBreak() { breakApp = true; }
 
 			/*
-				This function starts OTA update server.
+				@brief This function starts OTA update server.
 			*/
 			void setupHttpServer();
 
 			/*
-				This function starts WebSocket server.
+				@brief This function starts WebSocket server.
 			*/
 			void setupWsServer();
 
 			/*
-				This function is called when OTA update is finished.
+				@brief This function is called when OTA update is finished.
 			*/
 			void updateFinished(bool fromPortal); 
 
 			/*
-				This function handles device reboot.
+				@brief This function handles device reboot.
 			*/
 			void rebootDevice();
 
 			/*
-				This function handles authentication error.
+				@brief This function handles authentication error.
 			*/
 			bool inRequest_NeedAuthentication();
 
 			/*
-				This function handles "not found" error.
+				@brief This function handles "not found" error.
 			*/
 			void onRequest_notFound() const;
 
 			/*
-				This function serves main page to the client.
+				@brief This function serves main page to the client.
 			*/
 			void onRequest_index();
 
 			/*
-				This function handles endpoint "/api/flash".
-				It is called when OTA update is started.
+				@brief This function is called for each OTA chunk.
+
+				Handles endpoint "/api/flash".
 			*/
 			void onRequest_otaChunk();
 
 			/*
-				This function handles endpoint "/api/flash".
-				It is called when OTA update is finished.
+				@brief This function is called when OTA update is finished.
+
+				Handles endpoint "/api/flash".
 			*/
 			void onRequest_otaFinish();
 
 			/*
-				This function will format flash.
+				@brief This function will format flash.
 			*/
 			void handle_formatFS();
 
 			/*
-				This function handles websocket messages.
-				
-				@param clientNum Client number.
-				@param message Message string view.
+				@brief This function handles incomming websocket messages.
+				@param clientNum Client number
+				@param message Message string view
 			*/
 			void onWebsocketTextMessage(uint8_t clientNum, const std::string_view& message);
 
 			/*
-				This function handles scanning networks.
-				@param response Response reference, where the response should be appended.
+				@brief This function handles scanning networks.
+				@param response Response reference, where the response should be appended
 			*/
 			void handle_scanNetworks(std::string& response);
 
 			/*
-				This function handles identity request.
-				@param response Response reference, where the response should be appended.
+				@brief This function handles identity request.
+				@param response Response reference, where the response should be appended
 			*/
 			void handle_getIdentity(std::string& response);
 
 			/*
-				This function handles device params request.
-				@param response Response reference, where the response should be appended.
+				@brief This function handles device params request.
+				@param response Response reference, where the response should be appended
 			*/
 			void handle_getDeviceParams(std::string& response);
 
 		public:
-			DECLARE_KS_EVENT(onUpdateStart)					// onUpdateStart event that user can bind to.
-			DECLARE_KS_EVENT(onUpdateEnd)					// onUpdateEnd event that user can bind to.
+			DECLARE_KS_EVENT(onUpdateStart)		// onUpdateStart event that user can bind to.
+			DECLARE_KS_EVENT(onUpdateEnd)		// onUpdateEnd event that user can bind to.
 
 			/*
-				Constructor, used to construct OTA updater component.
+				@brief Constructor, used to construct Device Portal component.
+
 				Uses the default password "ota_ksiotframework"
 			*/
 			ksDevicePortal();
 
 			/*
-				Constructor, used to construct OTA updater component.
-				
-				@param password Password required to flash.
+				@brief Constructor, used to construct Device Portal component.
+				@param password Password used to authenticate the user.
 			*/
 			ksDevicePortal(const std::string& portalPassword);
 
 			/*
-				Initializes device portal component.
-
-				@param owner Pointer to the application object.
+				@brief Initializes device portal component.
+				@param owner Pointer to the application object
 				@return True on success, false on fail.
 			*/
 			bool init(ksApplication* owner) override;
 
 			/*
-				Post initialization method for device portal with integrated OTA.
+				@brief Post initialization method for device portal with integrated OTA.
 			*/
 			bool postInit(ksApplication* owner) override;
 
 			/*
-				Handles device portal component loop logic.
-
+				@brief Handles device portal component loop logic.
 				@return True on success, false on fail.
 			*/
 			bool loop() override;
 
 			/*
-				Destructor used to cleanup resources.
+				@brief Destructor used to cleanup resources.
 			*/
 			virtual ~ksDevicePortal();
 	};

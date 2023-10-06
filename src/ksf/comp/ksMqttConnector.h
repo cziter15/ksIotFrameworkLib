@@ -52,24 +52,23 @@ namespace ksf
 				std::shared_ptr<ksCertFingerprint> certFingerprint;				// Shared pointer to fingerprint validator.
 
 				/*
-					Connects to MQTT broker.
-
+					@brief Connects to MQTT broker.
 					@return True on success, false on fail.
 				*/
 				bool connectToBroker();
 
 				/*
-					Called on MQTT connection (internal function).
+					@brief Called on MQTT connection (internal function).
+
 					Binds onMessage callback, calls bound onConnected callbacks, configures some parameters.
 				*/
 				void mqttConnectedInternal();
 
 				/*
-					Called on MQTT message arrival (internal function).
-
-					@param topic Message topic.
-					@param payload Message payload.
-					@param length Payload length.
+					@brief Called on MQTT message arrival (internal function).
+					@param topic Message topic
+					@param payload Message payload
+					@param length Payload length
 				*/
 				void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
 
@@ -80,100 +79,91 @@ namespace ksf
 					QOS_EXACTLY_ONCE
 				};
 
-				DECLARE_KS_EVENT(onDeviceMessage, const std::string_view&, const std::string_view&)	// onDeviceMessage event that user can bind to.
+				DECLARE_KS_EVENT(onDeviceMessage, const std::string_view&, const std::string_view&)		// onDeviceMessage event that user can bind to.
 				DECLARE_KS_EVENT(onAnyMessage, const std::string_view&, const std::string_view&)		// onAnyMessage event that user can bind to.
 
-				DECLARE_KS_EVENT(onConnected)													// onConnected event that user can bind to.
-				DECLARE_KS_EVENT(onDisconnected)												// onDisconnected event that user can bind to.
+				DECLARE_KS_EVENT(onConnected)															// onConnected event that user can bind to.
+				DECLARE_KS_EVENT(onDisconnected)														// onDisconnected event that user can bind to.
 
 				/*
-					Constructs ksMqttConnector object.
-
-					@param sendConnectionStatus If true, sends connection status to MQTT broker.
-					@param usePersistentSession If true, uses persistent session.
+					@brief Constructs ksMqttConnector object.
+					@param sendConnectionStatus If true, sends connection status to MQTT broker
+					@param usePersistentSession If true, it will use persistent session
 				*/
 				ksMqttConnector(bool sendConnectionStatus = true, bool usePersistentSession = false);
 
 				/*
-					Initializes MQTT connector component.
-
-					@param owner Pointer to ksApplication object that owns this component.
+					@brief Initializes MQTT connector component.
+					@param owner Pointer to ksApplication object that owns this component
 					@return True on success, false on fail.
 				*/
 				bool init(ksApplication* owner) override;
 					
 				/*
-					Method called after component initialization.
+					@brief Method called after component initialization.
+					
 					Used to setup message callbacks.
 
-					@param owner Pointer to ksApplication object that owns this component.
+					@param owner Pointer to ksApplication object that owns this component
 					@return True on success, false on fail.
 				*/
 				bool postInit(ksApplication* owner) override;
 
 				/*
-					Called from application loop. Handles MqttConnector logic.
-
+					@brief Called from application loop. Handles MqttConnector logic.
 					@return True on success, false on fail.
 				*/
 				bool loop() override;
 
 				/*
-					Retrieves connection state.
-
+					@brief Retrieves connection state.
 					@return True if connected, otherwise false.
 				*/
 				bool isConnected() const;
 
 				/*
-					Retrieves connection time in seconds.
-
+					@brief Retrieves connection time in seconds.
 					@return MQTT connection time in seconds.
 				*/
 				uint32_t getConnectionTimeSeconds() const;
 
 				/*
-					Retrieves MQTT reconnect counter.
-
+					@brief Retrieves MQTT reconnect counter.
 					@return Number of MQTT reconnects.
 				*/
 				uint32_t getReconnectCounter() const { return reconnectCounter; }
 
 				/*
-					Subscribes to MQTT topic.
-
-					@param topic Topic to subscribe.
-					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
-					@param qos Quality of service level.
+					@brief Subscribes to MQTT topic.
+					@param topic Topic to subscribe
+					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false
+					@param qos Quality of service level
 				*/
 				void subscribe(const std::string& topic, bool skipDevicePrefix = false, ksMqttConnector::QosLevel = ksMqttConnector::QosLevel::QOS_AT_LEAST_ONCE);
 
 				/*
-					Unsubscribes from MQTT topic.
-
-					@param topic Topic to unsubscribe.
-					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
+					@brief Unsubscribes from MQTT topic.
+					@param topic Topic to unsubscribe
+					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false
 				*/
 				void unsubscribe(const std::string& topic, bool skipDevicePrefix = false);
 
 				/*
-					Publishes to MQTT topic.
-
-					@param topic Topic to publish to.
-					@param payload Payload to be published.
-					@param retain True if this publish should be retained, otherwise false.
-					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false.
+					@brief Publishes to MQTT topic.
+					@param topic Topic to publish to
+					@param payload Payload to be published
+					@param retain True if this publish should be retained, otherwise false
+					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false
 				*/
 				void publish(const std::string& topic, const std::string& payload, bool retain = false, bool skipDevicePrefix = false);
 
 				/*
-					Sets up MQTT connection.
-
+					@brief Sets up MQTT connection.
 					@param broker MQTT broker address. Can be IP or hostname
-					@param port MQTT broker port.
-					@param login MQTT user login.
-					@param password MQTT user password.
-					@param fingerprint MQTT broker certificate fingerprint. If empty, secure connection won't be used.
+					@param port MQTT broker port
+					@param login MQTT user login
+					@param password MQTT user password
+					@param fingerprint MQTT broker certificate fingerprint - if empty, secure connection won't be used
 				*/
 				void setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint);
 		};

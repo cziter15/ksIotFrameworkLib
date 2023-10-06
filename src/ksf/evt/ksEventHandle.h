@@ -23,15 +23,14 @@ namespace ksf::evt
 
 		public:
 			/*
-				Constructs event handle.
-
+				@brief Constructs event handle.
 				@param eventBaseWp R-value reference to weak pointer to event object.
 				@param callbackUID Unique callback ID.
 			*/
 			ksEventHandle(std::weak_ptr<ksEventInterface>&& eventBaseWp, std::size_t callbackUID);
 
 			/*
-				Destructs event handle. Unbinds assigned callback from the list.
+				@brief Destructs event handle. Unbinds assigned callback from the list.
 			*/
 			virtual ~ksEventHandle();
 	};

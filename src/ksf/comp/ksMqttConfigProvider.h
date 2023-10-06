@@ -22,23 +22,20 @@ namespace ksf::comps
 
 		public:
 			/*
-				Injects MQTT config provider's WiFiManager parameters.
-
-				@param manager WiFiManager reference.
+				@brief Injects MQTT config provider's WiFiManager parameters.
+				@param manager WiFiManager reference
 			*/
 			void readParams() override;
 
 			/*
-				Captures MQTT config provider's WiFiManager parameters.
-
-				@param manager WiFiManager reference.
+				@brief Captures MQTT config provider's WiFiManager parameters.
+				@param manager WiFiManager reference
 			*/
 			void saveParams() override;
 
 			/*
-				Setup MQTT connector with captured parameters.
-
-				@param connector MQTT connector reference.
+				@brief Setup MQTT connector with captured parameters.
+				@param connector MQTT connector reference
 			*/
 			void setupMqttConnector(ksMqttConnector& connector);
 	};

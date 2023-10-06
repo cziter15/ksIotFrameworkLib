@@ -25,8 +25,7 @@ namespace ksf
 
 		public:
 			/*
-				Retrieves const underlting list reference.
-
+				@brief Retrieves const underlting list reference.
 				@return Reference to vector of items (underlying list).
 			*/
 			const std::list<TEntryType>& getRef() const
@@ -35,10 +34,11 @@ namespace ksf
 			}
 
 			/*
-				Adds an item to the list of pending additions.
+				@brief Adds an item to the list of pending additions.
+
 				The item will be added to the list by applyPendingOperations method.
 
-				@param item Item r-value reference.
+				@param item Item r-value reference
 			*/
 			template <typename TRefType>
 			void add(TRefType&& item)
@@ -47,10 +47,11 @@ namespace ksf
 			}
 
 			/*
-				Adds an item to the list of pending removals.
+				@brief Adds an item to the list of pending removals.
+
 				The item will be removed from the list by applyPendingOperations method.
 
-				@param item Item r-value reference.
+				@param item Item r-value reference
 			*/
 			template <typename TRefType>
 			void remove(TRefType&& item)
@@ -59,7 +60,8 @@ namespace ksf
 			}
 
 			/*
-				Removes all items from the list.
+				@brief Removes all items from the list.
+
 				Please don't call while iterating or accessing elements on the list.
 			*/
 			void clearAll()
@@ -70,7 +72,8 @@ namespace ksf
 			}
 			
 			/*
-				Applies pending operations (additions and removals).
+				@brief Applies pending operations (additions and removals).
+
 				Please don't call while iterating or accessing elements on the list.
 			*/
 			void applyPendingOperations()
@@ -96,16 +99,17 @@ namespace ksf
 			TListType& listReference;	// Reference to ksSafeList instance.
 		
 		public:
-			/* 
-				ksSafeListScopedSync constructor.
-				@param listRef Reference to ksSafeList instance.
+			/*
+				@brief ksSafeListScopedSync constructor.
+				@param listRef Reference to ksSafeList instance
 			*/
 			ksSafeListScopedSync(TListType& listRef)
 				: listReference(listRef)
 			{}
 
-			/* 
-				ksSafeListScopedSync destructor.
+			/*
+				@brief ksSafeListScopedSync destructor.
+
 				Applies pending operations on the list.
 			*/
 			~ksSafeListScopedSync()

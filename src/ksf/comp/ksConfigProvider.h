@@ -39,32 +39,34 @@ namespace ksf::comps
 			std::list<ksConfigParameter> params;
 			
 			/*
-				@param id Shared ID/Label to identify parameter.
-				@param value Parameter value.
-				@param maxLength Maximum length of parameter value.
+				@brief Defines new parameter.
+				@param id Shared ID/Label to identify parameter
+				@param value Parameter value
+				@param maxLength Maximum length of parameter value
 			*/
 			void addNewParam(std::string id, std::string value, int maxLength = 50);
 
 			/*
-				@param id Shared ID/Label to identify parameter.
-				@param config ksConfig reference.
-				@param maxLength Maximum length of parameter value.
+				@brief Defines new parameter (with default value).
+				@param id Shared ID/Label to identify parameter
+				@param config ksConfig reference
+				@param maxLength Maximum length of parameter value
 			*/
 			void addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength = 50);
 
 		public:
 			/*
-				Returns list of parameters.
+				@brief Retrieves const list of parameters.
 			*/
 			std::list<ksConfigParameter>& getParameters();
 
 			/*
-				Reads params from config file.
+				@brief Loads parameters from the config file.
 			*/
 			virtual void readParams() = 0;
 
 			/*
-				Saves params to config file.
+				@brief Moves parameters to the config file.
 			*/
 			virtual void saveParams() = 0;
 	};

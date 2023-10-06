@@ -8,6 +8,7 @@
  */
 
 #include "ksWSServer.h"
+
 namespace ksf::misc
 {
 	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};

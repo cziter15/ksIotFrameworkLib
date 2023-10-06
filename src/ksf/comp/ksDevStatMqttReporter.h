@@ -23,35 +23,33 @@ namespace ksf::comps
 		protected:
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
 			std::unique_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
-			
-			ksSimpleTimer reporterTimer;
+			ksSimpleTimer reporterTimer;							// Timer to report device stats.
 
 			/*
-				Function called on MQTT connection.
+				@brief Function called on MQTT connection.
 			*/
 			void onConnected();
 
 			/*
-				Function called periodically when MQTT is connected to
-				report device stats to the broker.
-			*/		
+				@brief Function called periodically when MQTT is connected to report device stats to the broker.
+			*/
 			void reportDevStats() const;
 
 		public:
 			ksDevStatMqttReporter(uint8_t intervalInSeconds = 60);
 
 			/*
-				Method called after component initialization.
+				@brief Method called after component initialization.
+
 				Used to setup message callbacks.
 
-				@param owner Pointer to ksApplication object that owns this component.
+				@param owner Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* owner) override;
 
 			/*
-				Handles MQTT debug connector component loop logic.
-
+				@brief Handles MQTT debug connector component loop logic.
 				@return True on success, false on fail.
 			*/
 			bool loop() override;

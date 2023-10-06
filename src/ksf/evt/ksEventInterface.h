@@ -19,9 +19,8 @@ namespace ksf::evt
 
 		protected:
 			/*
-				Unbinds callback from the list.
-
-				@param callbackUID Unique callback ID.
+				@brief Unbinds callback from the list.
+				@param callbackUID Unique callback ID
 			*/
 			virtual void unbind(std::size_t callbackUID) = 0;
 	};

@@ -15,10 +15,12 @@
 
 #include "ksApplication.h"
 
-/* Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait). */
-#define KSF_IMPLEMENT_APP_ROTATOR(...)								\
-	ksf::ksAppRotator<__VA_ARGS__> appRotator;						\
-	void setup() { KSF_FRAMEWORK_INIT() }							\
+/* 
+	Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait). 
+*/
+#define KSF_IMPLEMENT_APP_ROTATOR(...)				\
+	ksf::ksAppRotator<__VA_ARGS__> appRotator;		\
+	void setup() { KSF_FRAMEWORK_INIT() }			\
 	void loop() { appRotator.loop(); }
 
 namespace ksf
@@ -32,7 +34,8 @@ namespace ksf
 			typedef std::unique_ptr<ksApplication> (*TSpawnerFunc)(); 			// Spawner fn type.
 
 			/*
-				Helper function template to create an application object.
+				@brief Helper function template to create an application object.
+				@return Unique pointer to the created application object.
 			*/
 			template <class T>
 			static std::unique_ptr<ksApplication> spawnApp() 
@@ -44,7 +47,7 @@ namespace ksf
 
 		public:
 			/*
-				Runs the application loop.
+				@brief Runs the application loop.
 			*/
 			void loopNoDelay()
 			{
@@ -65,8 +68,8 @@ namespace ksf
 			}
 
 			/*
-				Runs the application loop with a delay.
-				@param milliseconds Delay time in milliseconds.
+				@brief Runs the application loop with a delay.
+				@param milliseconds Delay time in milliseconds
 			*/
 			void loop(unsigned long milliseconds = 1)
 			{

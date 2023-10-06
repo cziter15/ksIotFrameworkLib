@@ -25,51 +25,51 @@ namespace ksf::comps
 			ksf::ksSimpleTimer periodicTasksTimeout{1000};			// Timeout for loop in ms.
 
 			/*
-				Handle periodic tasks like WiFi management.
+				@brief Handles periodic tasks like WiFi management.
 			*/
 			void handlePeriodicTasks();
 
 		public:
 			/*
-				Constructs WiFi configurator object.
+				@brief Constructs WiFi configurator object.
 			*/
 			ksWiFiConfigurator();
 
 			/*
-				Constructs WiFi configurator object.
-
-				@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname.
+				@brief Constructs WiFi configurator object.
+				@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname
 			*/
 			ksWiFiConfigurator(std::string devicePrefixName);
 
 			/*
-				ksWiFiConfigurator component loop. Keep in mind that this function is blocking and returns false at the end.
-				WiFiManager captive portal is blocking this loop and will unblock on timeout or after setup causing config
-				application to break and jump into next one. This usually means it will jump from configuration application
-				into target application that provides real device functionality.
+				@brief Handles ksWiFiConfigurator logic.
+
+				It starts and handles Device Portal, where the user can configure the device (that means WiFi or
+				MQTT credential as well as custom defined device parameters).
 
 				@return True if loop succedeed, otherwise false.
 			*/
 			bool loop() override;
 
 			/*
-				ksWiFiConfigurator init function.
-				@param owner Pointer to the application object.
+				@brief ksWiFiConfigurator init function.
+				@param owner Pointer to the application object
 				@return True on success, false on fail.
 			*/
 			bool init(ksApplication* owner) override;
 
 			/*
-				ksWiFiConfigurator postInit function.
+				@brief ksWiFiConfigurator postInit function.
+
 				Turns on all registered LEDs in config mode.
 
-				@param owner Pointer to ksApplication object that owns this component.
+				@param owner Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* owner) override;
 
 			/*
-				Destructor for WiFi configurator component.
+				@brief Destructor for WiFi configurator component.
 			*/
 			virtual ~ksWiFiConfigurator();
 	};

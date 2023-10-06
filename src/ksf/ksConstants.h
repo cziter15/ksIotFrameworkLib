@@ -54,45 +54,45 @@ namespace ksf
 	}
 
 	/*
-		Initializes ksIotFramework.
+		@brief Initializes ksIotFramework.
 	*/
 	extern void initializeFramework();
 
 	/*
-		Updates device uptime, handling millis() function rollover.
+		@brief Updates device uptime, handling millis() function rollover.
 	*/
 	extern void updateDeviceUptime();
 
 	/*
-		Retrieves device uptime in milliseconds (64 bit wide).
-		
+		@brief Retrieves device uptime in milliseconds (64 bit wide).
 		@return Milliseconds that have passed since device boot/restart.
 	*/
 	extern uint64_t millis64();
 
 	/*
-		Helper functionn double values into stirng.
+		@brief Helper functionn double values into stirng.
+
 		GCC is missing double support in std::to_string.
 
-		@param value Double value to be converted.
-		@param base Requested decimal points.
+		@param value Double value to be converted
+		@param base Requested decimal points
 	*/
 	extern std::string to_string(double value, const int base);
 
 	/*
-		Helper functionn float values into stirng.
+		@brief Helper functionn float values into stirng.
+
 		GCC is missing float support in std::to_string.
 
-		@param value Float value to be converted.
-		@param base Requested decimal points.
+		@param value Float value to be converted
+		@param base Requested decimal points
 		@return Converted value in a form of string.
 	*/
 	extern std::string to_string(float value, const int base);
 
 	/*
-		Helper function template to convert a string into another type.
-
-		@param input Value to be converted.
+		@brief Helper function template to convert a string into another type.
+		@param input Value to be converted
 		@return Converted value in a form of string.
 	*/
 	template <typename _Type>
@@ -102,9 +102,8 @@ namespace ksf
 	}
 
 	/*
-		Helper function to convert from string to another type.
-
-		@param input Input - string, string_view etc.
+		@brief Helper function to convert from string to another type.
+		@param input Input - string, string_view etc
 		@param out Output reference - can be int, double (anything that  std::from_chars support)
 		@return True if conversion succeded, otherwise false.
 	*/
@@ -115,33 +114,25 @@ namespace ksf
 		return result.ec == std::errc();
 	}
 
-	
 	/*
-		Checks whether recent device restart was caused by OTA update.
-		
-		@return True if OTA caused reboot, otherwise false.
+		@brief Retrieves OTA boot type.
+		@return OTA boot type.
 	*/
 	extern EOTAType::Type getOtaBootType();
 
 	/*
-		Saves OTA boot indicator to EEPROM.
+		@brief Saves OTA boot type.
+
+		The value will be used in next boot to determine what type of OTA has been started.
+
+		@param type OTA boot type to be saved
 	*/
 	extern void saveOtaBootIndicator(EOTAType::Type type = EOTAType::OTA_GENERIC);
 
 	/*
-		Helper function to load char array from program memory into std::string.
-
-		@param pgm_str_ptr Pointer to string in program memory.
-		@param pgm_str_len Length of string in program memory.
-		@return String in a form of std::string.
-	*/
-	extern std::string string_from_progmem(const char* pgm_str_ptr, size_t pgm_str_len);
-
-	/*
-		Helper function to check if a string or string view starts with.
-
-		@param input Input string.
-		@param match Matching string.
+		@brief Helper function to check if a string or string view starts with.
+		@param input Input string
+		@param match Matching string
 	*/
 	template<class _Type1, class _Type2>
 	inline bool starts_with(const _Type1& input, const _Type2& match)
@@ -150,28 +141,26 @@ namespace ksf
 	}
 
 	/*
-		Helper function to get last reset reason.
+		@brief Helper function to get latest reset reason.
 	*/
 	extern const std::string getResetReason();
 
 	/*
-		Helper function to get uptime in a form of string.
+		@brief Helper function to get uptime in a form of string.
 	*/
 	extern const std::string getUptimeString();
 
 	/*
-		This function loads credentials from EEPROM.
-
-		@param ssid SSID ref to be loaded.
-		@param password Password ref to be loaded.
+		@brief This function loads WiFi credentials from flash.
+		@param ssid SSID ref to be loaded
+		@param password Password ref to be loaded
 	*/
 	extern void loadCredentials(std::string& ssid, std::string& password);
 
 	/*
-		This function saves credentials to EEPROM.
-
-		@param ssid SSID to be saved.
-		@param password Password to be saved.
+		@brief This function saves WiFi credentials to flash.
+		@param ssid SSID to be saved
+		@param password Password to be saved
 	*/
 	extern void saveCredentials(const std::string& ssid, const std::string& password);
 }

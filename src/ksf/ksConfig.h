@@ -12,7 +12,9 @@
 #include <string>
 #include <map>
 
-/* Wrapper macro that allows to create nice file-manipulating sections. */
+/*
+	Wrapper macro that allows to create nice file-manipulating sections. 
+*/
 #define USING_CONFIG_FILE(fileName) \
 	if (ksf::ksConfig config_file{ksf::ksConfig(fileName)})
 
@@ -26,41 +28,45 @@ namespace ksf
 			std::string configFile;									// Config filename.
 
 		public:
-			/* 
-				Constructor that opens (or creates) specified config file and loads its contents into memory.
-
-				@param configFile Config file name.
+			/*
+				@brief Constructor that opens (or creates) specified config file and loads its contents into memory.
+				@param configFile Config file name
 			*/
 			ksConfig(const std::string& configFile);
 
 			/*
-				Sets specified parameter's value. If parameter does not exist, it will be created.
+				@brief Sets parameter value.
+				
+				If parameter does not exist, it will be created.
 
-				@param paramName Parameter name.
-				@param paramValue Parameter value (use std::move when possible).
+				@param paramName Parameter name
+				@param paramValue Parameter value (use std::move when possible)
 			*/
 			void setParam(const std::string& paramName, const std::string paramValue);
 
 
 			/*
-				Gets specified parameter's value. If parameter does not exist, defaultValue will be returned.
+				@brief Retrieves parameter value. 
+				
+				If parameter does not exist, defaultValue will be returned.
 
-				@param paramName Parameter name.
-				@param defaultValue Default value to return if parameter does not exist.
+				@param paramName Parameter name
+				@param defaultValue Default value to return if parameter does not exist
 				@return Parameter value or defaultValue if parameter does not exist.
 			*/
 			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
 
 			/*
-				Operator bool override. Returns true if configFilename is not empty.
-
+				@brief Operator bool override. Returns true if configFilename is not empty.
 				@return True if configFilename is not empty, otherwise false.
 			*/
 			operator bool() const;
 
 
 			/*
-				Saves config content to flash. If config contents has not been modified, nothing will be saved.
+				@brief Saves config content to flash. 
+
+				If config contents has not been modified, nothing will be saved.
 			*/
 			virtual ~ksConfig();
 	};

@@ -22,8 +22,12 @@ namespace ksf
 			ksSafeList<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
 		public:
 			/*
-				Instantiates a component of passed type, handing over all template parameters as constructor parameters to the component. 
+				@brief Instantiates a component of passed type.
+
+				This function will pass all template-defined parameters as constructor parameters to the component. 
 				Keep in mind that passed parameters must match target component constructor parameters.
+
+				@param ... - user (template) defined parameters
 
 				@return Weak pointer to the newly created component.
 			*/
@@ -41,8 +45,7 @@ namespace ksf
 			}
 
 			/*
-				Looks for all components of passed type and puts them into passed vector.
-
+				@brief Looks for all components of passed type and puts them into passed vector.
 				@param outComponents Vector of weak pointers to components of passed type.
 			*/
 			template <class TComponentType>
@@ -66,8 +69,7 @@ namespace ksf
 			}
 
 			/*
-				Looks for a component of passed type and returns a weak pointer to it.
-
+				@brief Looks for a component of passed type and returns a weak pointer to it.
 				@return Weak pointer to the component of passed type.
 			*/
 			template <class TComponentType>
@@ -85,9 +87,8 @@ namespace ksf
 			}
 
 			/*
-				Iterates through all components and calls passed function for each of them.
-				
-				@param function Function to be called for each component. It must return bool and accept a shared_ptr to ksComponent as a parameter.
+				@brief Iterates through all components and calls passed function for each of them.
+				@param function Function to be called for each component, must return bool and accept a shared_ptr to ksComponent as a parameter
 				@return True if all components were iterated, false if function returned false for any of them.
 			*/
 			template <typename TPredicate>
@@ -102,23 +103,20 @@ namespace ksf
 			}
 
 			/*
-				Mark a component to be removed. It will be removed on next update cycle.
-				This is a safe way to remove a component from a composable object.
-
+				@brief Marks a component to be removed. 
+				It will be removed on next update cycle. This is a safe way to remove a component from a composable object.
 				@param component Component to be removed.
 			*/
 			void markComponentToRemove(const std::shared_ptr<ksComponent> component);
 
-			/* 
-				Initializes application.
-
+			/*
+				@brief Initializes application.
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool init();
 
-			/* 
-				Executes application loop.
-
+			/*
+				@brief Executes application loop.
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();

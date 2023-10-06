@@ -23,24 +23,22 @@ namespace ksf
 
 		public:
 			/*
-				Initializes component.
-
-				@param owner Pointer to owning composable interface (application).
+				@brief Initializes component.
+				@param owner Pointer to the owning application
 				@return True on success, false on fail.
 			*/
 			virtual bool init(ksApplication* owner);
 
-			/* 
+			/*
 				Called from application loop.
 
 				@return True on success, false on fail.
 			*/
 			virtual bool loop();
 
-			/* 
-				Method called after component initialization. 
-
-				@param owner Pointer to owning composable interface (application).
+			/*
+				@brief Method called after component initialization.
+				@param owner Pointer to the owning application
 				@return True on success, false on fail.
 			*/
 			virtual bool postInit(ksApplication* owner);

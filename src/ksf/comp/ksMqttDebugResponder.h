@@ -30,15 +30,14 @@ namespace ksf::comps
 			bool breakloop{false};									// Boolean (set by command) to break from app loop.
 
 			/*
-				Function called on MQTT connection.
+				@brief Function called on MQTT connection.
 			*/
 			void onConnected();
 
 			/*
-				Function called on MQTT message arrival.
-
-				@param topic Topic of arrived message.
-				@param message Message/payload.
+				@brief Function called on MQTT message arrival.
+				@param topic Topic of arrived message
+				@param message Message/payload
 			*/
 			void onMessage(const std::string_view& topic, const std::string_view& message);
 
@@ -46,25 +45,24 @@ namespace ksf::comps
 			DECLARE_KS_EVENT(customDebugHandler, ksMqttDebugResponder*, const std::string_view&, bool&) //< Event that provides custom message handler.
 
 			/*
-				Method called after component initialization.
+				@brief Method called after component initialization.
+				
 				Used to setup message callbacks.
 
-				@param owner Pointer to ksApplication object that owns this component.
+				@param owner Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* owner) override;
 
 			/*
-				Handles MQTT debug connector component loop logic.
-
+				@brief Handles MQTT debug connector component loop logic.
 				@return True on success, false on fail.
 			*/
 			bool loop() override;
 
 			/*
-				Responds to MQTT debug message. Publishes response message to MQTT debug topic.
-
-				@param message Message string reference.
+				@brief Responds to MQTT debug message. Publishes response message to MQTT debug topic.
+				@param message Message string reference
 			*/
 			void respond(const std::string& message) const;
 	};
