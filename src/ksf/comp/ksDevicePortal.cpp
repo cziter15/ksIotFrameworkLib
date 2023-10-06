@@ -284,14 +284,12 @@ namespace ksf::comps
 				response += '[';
 				for (int i{0}; i < WiFi.scanComplete(); ++i)
 				{
-					String ssid{WiFi.SSID(i)};
-
 					if (i > 0)
 						response += ',';
 					response += PSTR("{\"rssi\":");
 					response += ksf::to_string(WiFi.RSSI(i));
 					response += PSTR(",\"ssid\":\"");
-					response += ssid.isEmpty() ? WiFi.BSSIDstr(i).c_str() : ssid.c_str();
+					response += WiFi.SSID(i).c_str();
 					response += PSTR("\",\"channel\":");
 					response += ksf::to_string(WiFi.channel(i));
 					response += PSTR(",\"secure\":");
