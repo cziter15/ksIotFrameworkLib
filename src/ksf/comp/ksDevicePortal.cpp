@@ -519,7 +519,7 @@ namespace ksf::comps
 			webSocket->loop();
 
 		/* Cleanup scan results if not received by the client. */
-		if (millis() - scanNetworkTimestamp > WIFI_SCAN_TIMEOUT)
+		if (scanNetworkTimestamp != 0 && millis() - scanNetworkTimestamp > WIFI_SCAN_TIMEOUT)
 		{
 			scanNetworkTimestamp = 0;
 			WiFi.scanDelete();
