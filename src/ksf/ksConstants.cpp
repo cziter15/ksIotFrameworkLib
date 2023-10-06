@@ -53,7 +53,7 @@ namespace ksf
 		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")};
 		if (indicatorFile)
 		{
-			otaBootType = indicatorFile.size() ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
+			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
 			indicatorFile.close();
 			LittleFS.remove(OTA_FILENAME_TEXT);
 		}
