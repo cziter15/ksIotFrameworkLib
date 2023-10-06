@@ -167,12 +167,12 @@ namespace ksf
 		}
 	}
 
-	void saveCredentials(const std::string& ssid, const std::string& password)
+	void saveCredentials(std::string ssid, std::string password)
 	{
 		USING_CONFIG_FILE(WIFI_CRED_FILENAME_TEXT)
 		{
-			config_file.setParam(SSID_PARAM_NAME, ssid);
-			config_file.setParam(PASSWORD_PARAM_NAME, password);
+			config_file.setParam(SSID_PARAM_NAME, std::move(ssid));
+			config_file.setParam(PASSWORD_PARAM_NAME, std::move(ssid));
 		}
 	}
 }

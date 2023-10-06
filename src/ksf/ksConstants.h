@@ -162,5 +162,5 @@ namespace ksf
 		@param ssid SSID to be saved
 		@param password Password to be saved
 	*/
-	extern void saveCredentials(const std::string& ssid, const std::string& password);
+	extern void saveCredentials(std::string ssid, std::string password);
 }
