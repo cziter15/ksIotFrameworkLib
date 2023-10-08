@@ -156,21 +156,24 @@ namespace ksf::comps
 
 			/*
 				@brief Initializes device portal component.
-				@param owner Pointer to the application object
+				@param app Pointer to ksApplication
 				@return True on success, false on fail.
 			*/
-			bool init(ksApplication* owner) override;
+			bool init(ksApplication* app) override;
 
 			/*
 				@brief Post initialization method for device portal with integrated OTA.
+				@param app Pointer to ksApplication
+				@return True on success, false on fail.
 			*/
-			bool postInit(ksApplication* owner) override;
+			bool postInit(ksApplication* app) override;
 
 			/*
 				@brief Handles device portal component loop logic.
+				@param app Pointer to ksApplication.
 				@return True on success, false on fail.
 			*/
-			bool loop() override;
+			bool loop(ksApplication* app) override;
 
 			/*
 				@brief Destructor used to cleanup resources.

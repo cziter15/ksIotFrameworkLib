@@ -30,14 +30,14 @@ namespace ksf::comps
 		: pin(pin), triggerState(triggerState), mode(mode)
 	{}
 
-	bool ksResetButton::init(ksApplication* owner)
+	bool ksResetButton::init(ksApplication* app)
 	{
 		pinMode(pin, mode);
 		lastState = static_cast<uint8_t>(digitalRead(pin));
 		return true;
 	}
 
-	bool ksResetButton::loop()
+	bool ksResetButton::loop(ksApplication* app)
 	{
 		uint8_t currentState{static_cast<uint8_t>(digitalRead(pin))};
 

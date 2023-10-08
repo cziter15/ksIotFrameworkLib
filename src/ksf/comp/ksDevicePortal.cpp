@@ -497,7 +497,7 @@ namespace ksf::comps
 		webSocket->begin();
 	}
 
-	bool ksDevicePortal::loop()
+	bool ksDevicePortal::loop(ksApplication* app)
 	{
 		/* Return from the app on request. */
 		if (breakApp)

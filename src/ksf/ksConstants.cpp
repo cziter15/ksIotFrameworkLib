@@ -35,6 +35,7 @@ namespace ksf
 
 	void initializeFramework()
 	{
+		Serial.begin(115200);
 #ifdef ESP32
 		/* Initialize filesystem. */
 		LittleFS.begin(true);

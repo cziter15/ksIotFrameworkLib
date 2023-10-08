@@ -44,7 +44,7 @@ namespace ksf::comps
 				@brief Executes LED component logic.
 				@return True if everything is okay, otherwise false to break application logic.
 			*/
-			bool loop() override;
+			bool loop(ksApplication* app) override;
 
 			/*
 				@brief Sets LED blinking state.

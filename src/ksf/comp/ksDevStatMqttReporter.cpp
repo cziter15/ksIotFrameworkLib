@@ -27,9 +27,9 @@ namespace ksf::comps
 		: reporterTimer(intervalInSeconds * KSF_ONE_SECOND_MS)
 	{}
 
-	bool ksDevStatMqttReporter::postInit(ksApplication* owner)
+	bool ksDevStatMqttReporter::postInit(ksApplication* app)
 	{
-		mqttConnWp = owner->findComponent<ksMqttConnector>();
+		mqttConnWp = app->findComponent<ksMqttConnector>();
 
 		if (auto mqttConnSp{mqttConnWp.lock()})
 			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&ksDevStatMqttReporter::onConnected, this));
@@ -53,7 +53,7 @@ namespace ksf::comps
 		}
 	}
 	
-	bool ksDevStatMqttReporter::loop()
+	bool ksDevStatMqttReporter::loop(ksApplication* app)
 	{
 		if (reporterTimer.triggered())
 			reportDevStats();

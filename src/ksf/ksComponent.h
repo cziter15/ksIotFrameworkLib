@@ -15,11 +15,26 @@
 namespace ksf 
 {
 	class ksApplication;
+
+	namespace ksComponentState 
+	{
+		enum TYPE 
+		{
+			NotInitialized,
+			Initialized,
+			Looping,
+			ToBeRemoved
+		};
+	}
+
 	class ksComponent : public ksRtti
 	{
 		KSF_RTTI_DECLARATIONS(ksComponent, ksRtti)
 
 		friend class ksApplication;
+
+		protected:
+			ksComponentState::TYPE componentState { ksComponentState::NotInitialized };
 
 		public:
 			/*
@@ -27,20 +42,20 @@ namespace ksf
 				@param owner Pointer to the owning application
 				@return True on success, false on fail.
 			*/
-			virtual bool init(ksApplication* owner);
+			virtual bool init(ksApplication* app);
 
 			/*
 				Called from application loop.
 
 				@return True on success, false on fail.
 			*/
-			virtual bool loop();
+			virtual bool loop(ksApplication* app);
 
 			/*
 				@brief Method called after component initialization.
 				@param owner Pointer to the owning application
 				@return True on success, false on fail.
 			*/
-			virtual bool postInit(ksApplication* owner);
+			virtual bool postInit(ksApplication* app);
 	};
 }

@@ -16,13 +16,12 @@
 namespace ksf::comps
 {
 	class ksMqttConnector;
-	class ksMqttDebugResponder : public ksComponent, public std::enable_shared_from_this<ksMqttDebugResponder>
+	class ksMqttDebugResponder : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksMqttDebugResponder, ksComponent)
 
 		protected:
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
-			ksApplication* owner{nullptr};							// Pointer to application that owns this component.
 
 			std::unique_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
 			std::unique_ptr<evt::ksEventHandle> msgEventHandle;		// Event handle for message delegate.
@@ -58,7 +57,7 @@ namespace ksf::comps
 				@brief Handles MQTT debug connector component loop logic.
 				@return True on success, false on fail.
 			*/
-			bool loop() override;
+			bool loop(ksApplication* app) override;
 
 			/*
 				@brief Responds to MQTT debug message. Publishes response message to MQTT debug topic.

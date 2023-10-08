@@ -67,7 +67,7 @@ namespace ksf::comps
 #endif
 	}
 
-	bool ksWifiConnector::init(ksApplication* owner)
+	bool ksWifiConnector::init(ksApplication* app)
 	{
 		std::string ssid, pass;
 		ksf::loadCredentials(ssid, pass);
@@ -96,7 +96,7 @@ namespace ksf::comps
 		onDisconnected->broadcast();
 	}
 
-	bool ksWifiConnector::loop()
+	bool ksWifiConnector::loop(ksApplication* app)
 	{
 		if (wifiIpCheckTimer.triggered())
 			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;

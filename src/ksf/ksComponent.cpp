@@ -11,17 +11,17 @@
 
 namespace ksf 
 {
-	bool ksComponent::init(ksApplication* owner)
+	bool ksComponent::init(ksApplication* app)
 	{
 		return true;
 	}
 
-	bool ksComponent::loop()
+	bool ksComponent::loop(ksApplication* app)
 	{
 		return true;
 	}
 
-	bool ksComponent::postInit(ksApplication* owner) 
+	bool ksComponent::postInit(ksApplication* app) 
 	{
 		return true;
 	}

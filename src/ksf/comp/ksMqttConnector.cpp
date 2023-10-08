@@ -35,11 +35,11 @@ namespace ksf::comps
 		: sendConnectionStatus(sendConnectionStatus), usePersistentSession(usePersistentSession)
 	{}
 
-	bool ksMqttConnector::init(ksApplication* owner)
+	bool ksMqttConnector::init(ksApplication* app)
 	{
 		ksMqttConfigProvider cfgProvider;
 
-		cfgProvider.init(owner);
+		cfgProvider.init(app);
 		cfgProvider.setupMqttConnector(*this);
 
 		/*
@@ -49,9 +49,9 @@ namespace ksf::comps
 		return mqttClientSp != nullptr;
 	}
 
-	bool ksMqttConnector::postInit(ksApplication* owner)
+	bool ksMqttConnector::postInit(ksApplication* app)
 	{
-		wifiConnWp = owner->findComponent<ksWifiConnector>();
+		wifiConnWp = app->findComponent<ksWifiConnector>();
 		return true;
 	}
 
@@ -181,7 +181,7 @@ namespace ksf::comps
 		return mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !usePersistentSession);
 	}
 
-	bool ksMqttConnector::loop()
+	bool ksMqttConnector::loop(ksApplication* app)
 	{
 		if (!mqttClientSp->loop())
 		{

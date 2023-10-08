@@ -45,20 +45,18 @@ namespace ksf::comps
 #endif
 	}
 
-	bool ksWiFiConfigurator::init(ksApplication* owner)
+	bool ksWiFiConfigurator::init(ksApplication* app)
 	{
-		this->owner = owner;
-
 		WiFi.softAP(deviceName.c_str());
-		owner->addComponent<ksDevicePortal>().lock()->init(owner);
+		app->addComponent<ksDevicePortal>();
 
 		return true;
 	}
 
-	bool ksWiFiConfigurator::postInit(ksApplication* owner)
+	bool ksWiFiConfigurator::postInit(ksApplication* app)
 	{
 		std::vector<std::weak_ptr<ksLed>> ledCompsWp;
-		owner->findComponents<ksLed>(ledCompsWp);
+		app->findComponents<ksLed>(ledCompsWp);
 
 		for (auto& ledCompWp : ledCompsWp)
 			if (auto ledCompSp{ledCompWp.lock()})
@@ -73,7 +71,7 @@ namespace ksf::comps
 			configTimeout.restart();
 	}
 
-	bool ksWiFiConfigurator::loop()
+	bool ksWiFiConfigurator::loop(ksApplication* app)
 	{
 		if (periodicTasksTimeout.triggered())
 			handlePeriodicTasks();

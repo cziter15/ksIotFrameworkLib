@@ -20,36 +20,57 @@
 
 namespace ksf
 {
-	void ksApplication::markComponentToRemove(const std::shared_ptr<ksComponent> component)
-	{
-		components.remove(std::move(component));
-	}
-
-	bool ksApplication::init()
-	{
-		auto initFunc = [this](const std::shared_ptr<ksComponent>& comp) { return comp->init(this); };
-		auto postInitFunc = [this](const std::shared_ptr<ksComponent>& comp) { return comp->postInit(this); };
-
-		components.applyPendingOperations();
-
-		if (!forEachComponent(initFunc))
-			return false;
-
-		components.applyPendingOperations();
-
-		if (!forEachComponent(postInitFunc))
-			return false;
-
-		return true;
-	}
-
 	bool ksApplication::loop()
-	{
-		/* Loop through all components and synchronize list at end of scope. */
+	{	
+		auto it{components.begin()};
+
+		while (it != components.end()) 
 		{
-			ksf::ksSafeListScopedSync{components};
-			if (!forEachComponent([](const std::shared_ptr<ksComponent>& comp) { return comp->loop(); } ))
-				return false;
+			auto& component{*it};
+
+			switch (component->componentState)
+			{
+				case ksComponentState::Looping:
+				{
+					if (!component->loop(this))
+					{
+						Serial.println("Component loop failed.");
+						return false;
+					}
+				}
+				break;
+
+				case ksComponentState::ToBeRemoved:
+				{
+					 Serial.println("Removing component...");
+					 it = components.erase(it);
+					 continue;
+				}
+				break;
+
+				case ksComponentState::NotInitialized:
+				{
+					Serial.println("Initializing component...");
+					if (!component->init(this))
+						return false;
+					Serial.println("Component initialized.");
+					component->componentState = ksComponentState::Initialized;
+				}
+				break;
+				
+				case ksComponentState::Initialized:
+				{
+					Serial.println("Post-Initializing component...");
+					if (!component->postInit(this))
+						return false;
+					Serial.println("Component post initialized.");
+					component->componentState = ksComponentState::Looping;
+				}
+				break;
+
+				default: break;
+			}
+			++it;
 		}
 
 		/* This call will keep millis64 on track (handles rollover). */

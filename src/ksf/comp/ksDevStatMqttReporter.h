@@ -43,15 +43,16 @@ namespace ksf::comps
 
 				Used to setup message callbacks.
 
-				@param owner Pointer to ksApplication object that owns this component
+				@param app Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
-			bool postInit(ksApplication* owner) override;
+			bool postInit(ksApplication* app) override;
 
 			/*
 				@brief Handles MQTT debug connector component loop logic.
+				@param app Pointer to ksApplication
 				@return True on success, false on fail.
 			*/
-			bool loop() override;
+			bool loop(ksApplication* app) override;
 	};
 }

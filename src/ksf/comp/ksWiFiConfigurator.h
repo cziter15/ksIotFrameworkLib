@@ -49,7 +49,7 @@ namespace ksf::comps
 
 				@return True if loop succedeed, otherwise false.
 			*/
-			bool loop() override;
+			bool loop(ksApplication* app) override;
 
 			/*
 				@brief ksWiFiConfigurator init function.

@@ -24,7 +24,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	bool ksLed::loop()
+	bool ksLed::loop(ksApplication* app)
 	{
 		/* If interval is set, check if time interval passed and we should toggle LED state. */
 		if (blinkIntervalMs > 0 && (millis() - lastBlinkTimeMs > blinkIntervalMs))

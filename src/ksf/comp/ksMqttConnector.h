@@ -113,7 +113,7 @@ namespace ksf
 					@brief Called from application loop. Handles MqttConnector logic.
 					@return True on success, false on fail.
 				*/
-				bool loop() override;
+				bool loop(ksApplication* app) override;
 
 				/*
 					@brief Retrieves connection state.

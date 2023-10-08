@@ -37,16 +37,16 @@ namespace ksf::comps
 
 			/*
 				@brief Initializes reset button component.
-				@param owner Pointer to ksApplication object that owns this component
+				@param app Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
-			bool init(ksApplication* owner) override;
+			bool init(ksApplication* app) override;
 
 			/*
 				@brief Handles reset button component loop logic.
 				@return True on success, false on fail.
 			*/
-			bool loop() override;
+			bool loop(ksApplication* app) override;
 
 			/*
 				@brief Retrieves assigned pin number.

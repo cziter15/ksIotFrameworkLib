@@ -10,7 +10,7 @@
 #pragma once
 
 #include <memory>
-#include "ksSafeList.h"
+#include <list>
 #include "ksComponent.h"
 
 namespace ksf 
@@ -19,7 +19,7 @@ namespace ksf
 	class ksApplication
 	{
 		protected:
-			ksSafeList<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
+			std::list<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
 		public:
 			/*
 				@brief Instantiates a component of passed type.
@@ -40,7 +40,7 @@ namespace ksf
 
 				auto componentSp{std::make_shared<TComponentType>(arg...)};
 				auto componentWp{std::weak_ptr<TComponentType>(componentSp)};
-				components.add(std::move(componentSp));
+				components.push_front(std::move(componentSp));
 				return componentWp;
 			}
 
@@ -57,13 +57,13 @@ namespace ksf
 
 				outComponents.clear();
 
-				for (const auto& comp : components.getRef())
+				for (const auto& comp : components)
 				{
 					if (comp->isA(TComponentType::getClassType()))
 					{
 						std::weak_ptr<TComponentType> castedCompWp{std::static_pointer_cast<TComponentType>(comp)};
 						if (!castedCompWp.expired())
-							outComponents.emplace_back(std::move(castedCompWp));
+							outComponents.push_back(std::move(castedCompWp));
 					}
 				}
 			}
@@ -79,7 +79,7 @@ namespace ksf
 					"You're calling findComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?"
 				);
 
-				for (const auto& comp : components.getRef())
+				for (const auto& comp : components)
 					if (comp->isA(TComponentType::getClassType()))
 						return std::static_pointer_cast<TComponentType>(comp);
 
@@ -87,33 +87,10 @@ namespace ksf
 			}
 
 			/*
-				@brief Iterates through all components and calls passed function for each of them.
-				@param function Function to be called for each component, must return bool and accept a shared_ptr to ksComponent as a parameter
-				@return True if all components were iterated, false if function returned false for any of them.
-			*/
-			template <typename TPredicate>
-			bool forEachComponent(TPredicate function)
-			{
-				/* Simply iterate and call passed function for each component. */
-				for (auto it{components.getRef().cbegin()}; it != components.getRef().cend(); ++it)
-					if (!function(*it)) // If predicate returned false, stop iterating.
-						return false;
-
-				return true;
-			}
-
-			/*
-				@brief Marks a component to be removed. 
-				It will be removed on next update cycle. This is a safe way to remove a component from a composable object.
-				@param component Component to be removed.
-			*/
-			void markComponentToRemove(const std::shared_ptr<ksComponent> component);
-
-			/*
 				@brief Initializes application.
 				@return True on success, false on fail (will break application execution).
 			*/
-			virtual bool init();
+			virtual bool init() = 0;
 
 			/*
 				@brief Executes application loop.

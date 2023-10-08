@@ -27,11 +27,9 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	bool ksMqttDebugResponder::postInit(ksApplication* owner)
+	bool ksMqttDebugResponder::postInit(ksApplication* app)
 	{
-		this->owner = owner;
-
-		mqttConnWp = owner->findComponent<ksMqttConnector>();
+		mqttConnWp = app->findComponent<ksMqttConnector>();
 
 		if (auto mqttConnSp{mqttConnWp.lock()})
 		{
@@ -42,7 +40,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	bool ksMqttDebugResponder::loop()
+	bool ksMqttDebugResponder::loop(ksApplication* app)
 	{
 		return breakloop == false;
 	}
@@ -114,7 +112,8 @@ namespace ksf::comps
 		else if (message == PSTR("remove_dbg"))
 		{
 			respond(PSTR("Removing ksMqttDebugResponder. Commands will not be available."));
-			owner->markComponentToRemove(shared_from_this());
+			componentState = ksComponentState::ToBeRemoved;
+			return;
 		}
 		else if (message == PSTR("restart"))
 		{
