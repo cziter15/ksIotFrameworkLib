@@ -42,7 +42,10 @@ namespace ksf::comps
 
 		protected:
 			ArduinoOTAClass ArduinoOTA;							// Arduino OTA object.
-			ksApplication* owner{nullptr};						// Pointer to ksApplication.
+			ksf::ksApplication* app{nullptr};					// Application pointer.
+
+			unsigned long lastLoopExecutionTimestamp{0};		// Time of last loop execution (us)/
+			unsigned long loopExecutionTime{0};					// Diff (loop exec time).
 
 			uint32_t scanNetworkTimestamp{0};					// Timestamp of last scan.
 

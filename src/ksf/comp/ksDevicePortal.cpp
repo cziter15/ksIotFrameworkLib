@@ -88,9 +88,9 @@ namespace ksf::comps
 		});
 	}
 	
-	bool ksDevicePortal::init(ksApplication* owner)
+	bool ksDevicePortal::init(ksApplication* app)
 	{
-		this->owner = owner;
+		this->app = app;
 
 		ArduinoOTA.setHostname(WiFi.getHostname());
 		ArduinoOTA.begin();
@@ -98,7 +98,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	bool ksDevicePortal::postInit(ksApplication* owner)
+	bool ksDevicePortal::postInit(ksApplication* app)
 	{
 		if (WiFi.getMode() == WIFI_AP) 
 		{
@@ -207,7 +207,7 @@ namespace ksf::comps
 			std::string password{paramMap[PSTR("password")]};
 
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-			owner->findComponents<ksConfigProvider>(configCompsWp);
+			app->findComponents<ksConfigProvider>(configCompsWp);
 			std::string paramPrefix{};
 
 			for (auto& configCompWp : configCompsWp)
@@ -249,7 +249,9 @@ namespace ksf::comps
 		response += WiFi.getHostname();
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
-		response += PSTR(" bytes\"},{\"name\":\"Device uptime\",\"value\":\"");
+		response += PSTR("bytes\"},{\"name\":\"Loop time\",\"value\":\"");
+		response += ksf::to_string(loopExecutionTime);
+		response += PSTR(" microseconds\"},{\"name\":\"Device uptime\",\"value\":\"");
 		response += ksf::getUptimeString();
 		response += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
 		response += ksf::getResetReason();
@@ -308,7 +310,7 @@ namespace ksf::comps
 	void ksDevicePortal::handle_getDeviceParams(std::string& response)
 	{
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-		owner->findComponents<ksConfigProvider>(configCompsWp);
+		app->findComponents<ksConfigProvider>(configCompsWp);
 		bool isInConfigMode{!configCompsWp.empty()};
 
 		response += PSTR("{\"isConfigMode\": ");
@@ -499,6 +501,8 @@ namespace ksf::comps
 
 	bool ksDevicePortal::loop(ksApplication* app)
 	{
+		loopExecutionTime = micros() - lastLoopExecutionTimestamp;
+
 		/* Return from the app on request. */
 		if (breakApp)
 			return false;
@@ -526,6 +530,7 @@ namespace ksf::comps
 			WiFi.enableSTA(false);
 		}
 
+		lastLoopExecutionTimestamp = micros();
 		return true;
 	}
 }
