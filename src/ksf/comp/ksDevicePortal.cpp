@@ -251,7 +251,7 @@ namespace ksf::comps
 		response += ksf::to_string(ESP.getFreeHeap());
 		response += PSTR("bytes\"},{\"name\":\"Loop time\",\"value\":\"");
 		response += ksf::to_string(loopExecutionTime);
-		response += PSTR(" microseconds\"},{\"name\":\"Device uptime\",\"value\":\"");
+		response += PSTR(" μs\"},{\"name\":\"Device uptime\",\"value\":\"");
 		response += ksf::getUptimeString();
 		response += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
 		response += ksf::getResetReason();
