@@ -172,7 +172,7 @@ namespace ksf
 		USING_CONFIG_FILE(WIFI_CRED_FILENAME_TEXT)
 		{
 			config_file.setParam(SSID_PARAM_NAME, std::move(ssid));
-			config_file.setParam(PASSWORD_PARAM_NAME, std::move(ssid));
+			config_file.setParam(PASSWORD_PARAM_NAME, std::move(password));
 		}
 	}
 }
