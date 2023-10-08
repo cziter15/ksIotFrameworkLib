@@ -21,20 +21,21 @@
 namespace ksf
 {
 	bool ksApplication::loop()
-	{	
-		auto it{components.begin()};
+	{
+		/* This call will keep millis64 on track (handles rollover). */
+		updateDeviceUptime();
 
-		while (it != components.end()) 
+		/* Process all components. */
+		for (auto it{components.begin()}; it != components.end();)
 		{
-			auto& component{*it};
+			auto& comp{*it};
 
-			switch (component->componentState)
+			switch (comp->componentState)
 			{
 				case ksComponentState::Looping:
 				{
-					if (!component->loop(this))
+					if (!comp->loop(this))
 					{
-						Serial.println("Component loop failed.");
 						return false;
 					}
 				}
@@ -42,7 +43,6 @@ namespace ksf
 
 				case ksComponentState::ToBeRemoved:
 				{
-					 Serial.println("Removing component...");
 					 it = components.erase(it);
 					 continue;
 				}
@@ -50,21 +50,17 @@ namespace ksf
 
 				case ksComponentState::NotInitialized:
 				{
-					Serial.println("Initializing component...");
-					if (!component->init(this))
+					if (!comp->init(this))
 						return false;
-					Serial.println("Component initialized.");
-					component->componentState = ksComponentState::Initialized;
+					comp->componentState = ksComponentState::Initialized;
 				}
 				break;
 				
 				case ksComponentState::Initialized:
 				{
-					Serial.println("Post-Initializing component...");
-					if (!component->postInit(this))
+					if (!comp->postInit(this))
 						return false;
-					Serial.println("Component post initialized.");
-					component->componentState = ksComponentState::Looping;
+					comp->componentState = ksComponentState::Looping;
 				}
 				break;
 
@@ -72,9 +68,6 @@ namespace ksf
 			}
 			++it;
 		}
-
-		/* This call will keep millis64 on track (handles rollover). */
-		updateDeviceUptime();
 
 		return true;
 	}
