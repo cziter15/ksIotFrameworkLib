@@ -27,9 +27,7 @@ namespace ksf
 				case ksComponentState::Looping:
 				{
 					if (!comp->loop(this))
-					{
 						return false;
-					}
 				}
 				break;
 
