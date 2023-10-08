@@ -22,20 +22,17 @@ The goal of this project is to create a simple template or starting point for de
   <img src="doc/app_diagram.png">
 </p>
 
-- The user can define and execute one application at a time.
-- Each application consists of components.
-- Each application has three methods that iterate over the components: init, postInit, and loop.
-- The init method is called during component initialization (after construction).
-- The postInit method is called after component initialization. It is typically used to obtain a weak pointer to another component.
-- The loop method is called during each iteration of the application loop.
-- The init and loop methods can cause the application to exit prematurely. If either method returns false, it will cause the main application loop to terminate and the next application to be executed (e.g. the config application).
+- Only one application can be executed simultaneously.
+- Each application has its own components. Components are a key part of the framework.
+- Components have different states. State change logic is handled in the application's loop.
+- Each component has init, postInit, and loop methods.
+- Components can be marked for removal, and they will be safely released in the next tick.
 
 ## Utilities
 | Utility  | Function |
 | ------------- | ------------- |
 | ksEvent  | Provides a simple event broadcasting system. Used for MQTT events, etc. |
 | ksSimpleTimer  | A very simple "timer" mechanism. In the triggered() method, it calculates and checks if the specified interval has just passed. |
-| ksSafeList  | A safe list for manipulating items while iterating over them. Contains three underlying lists: pending to add, pending to remove, and the actual item list. Call **add** or **remove** while iterating and then call **applyPendingOperations**. The component system relies on this mechanism. |
 
 ## Components
 | Component  | Function |
@@ -44,59 +41,50 @@ The goal of this project is to create a simple template or starting point for de
 | ksLed  | Used to control diodes, including blinking, turning off, and turning on. |
 | ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix, etc.). |
 | ksMqttConnector  | Used to maintain a connection with MQTT. The user can bind to the onMessage and onConnected events. |
+| ksDevStatMqttReporter | Reports device state periodically to the MQTT broker to the 'dstat' sub-topic. |
 | ksMqttDebugResponder  | Provides debug commands for apps using the ksMqttConnector component. |
-| ksOtaUpdater  | Configures and handles over-the-air (OTA) update functionality. |
+| ksDevicePortal  | Handles all-in-one things like configuration, debug and OTA updates. |
 | ksResetButton  | Used to exit the app loop or reset the entire device (to trigger the config portal). |
 | ksWiFiConfigurator | The base WiFi configurator component, providing WiFi management portal and allowing config providers to inject and capture parameters. |
 | ksWiFiConnector | Manages WiFi connection (triggers events, handles reconnection etc.). |
 
 ### Rules:
-- Components can only be added in the app's **init** method, before calling the **base init** method.
+- Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
 - The **findComponent** method **must not** be called from component **init** methods.
 - The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**.
-- Currently, dynamic component creation (from outside the **init** method) is not supported.
 
 ## Building application
-To build an application, simply create a new class inherited from ksApplication. Inside the init method, add and set up components, then call the base ksApplication's init method. You can also optionally override the loop method, but remember that the base class method (ksApplication's loop) iterates over the list of registered components and executes the loop call on each of them.
+To build an application, simply create a new class inherited from ksApplication. Inside the init method, add and set up components. You can also optionally override the loop method, but remember that the base class method (ksApplication's loop) iterates over the list of registered components and executes the loop call on each of them.
 
-## A word of warning
-The idea was to prevent launching the application if any component initialization fails. This will cause the ksApplication::init (base class) method to return false, but due to inheritance, the user can override this behavior. The application will then try to launch and, after initialization, it will tick every component, even if one of them failed to initialize. This can result in crashes, especially in the loop method.
-
-**Do not add components inside loop() method. To destroy component, please use _markComponentToRemove_ method.**
-
-### The flow is as follows:
-- Add components (addComponent simply constructs a class and adds its pointer to the app component list).
-- Run ksApplication::init (it will iterate through the component list and initialize them, returning false if any initialization fails).
-- If ksApplication::init() does not return true, simply return false in your app's init method.
+### The sequence of operations unfolds as follows:
+- The application is created, followed by the invocation of its init() method. If false is returned from the init method, the subsequent execution of the loop will be skipped, resulting in no iteration over the components.
+- In case the init() method returns true, the application proceeds to execute its loop() function. This function traverses through the components, initializing each of them.
+- In the subsequent iteration, the application triggers the postInitialize() method for each component.
+- Following this, the application is fully initialized and enters a looping state where it iterates over the components, invoking their respective loop methods.
+- If any component returns false during its loop method execution, the application will halt, and typically, the App Rotator will select the next application for execution.
 
 ```c++
-bool EnergyMonitor::init()
+bool PelletInfo::init()
 {
-	/* Add WiFi connector component. */
-	addComponent<ksf::comps::ksWifiConnector>(apps::config::EnergyMonitorConfig::emonDeviceName);
-
-	/* Add MQTT components. */
+	/* Create required components (Wifi and Mqtt debug). */
+	addComponent<ksf::comps::ksWifiConnector>(PelletInfoConfig::pelletInfoDeviceName);
 	addComponent<ksf::comps::ksMqttDebugResponder>();
-	mqttWp = addComponent<ksf::comps::ksMqttConnector>();
+	addComponent<ksf::comps::ksDevStatMqttReporter>();
 
-	/* Add LED indicator components. */
-	statusLedWp = addComponent<ksf::comps::ksLed>(STATUS_LED_PIN);
-	eventLedWp = addComponent<ksf::comps::ksLed>(EVENT_LED_PIN);
+	/* Create OTA updater component. */
+	addComponent<ksf::comps::ksDevicePortal>();
 
-	/* Create OTA component. */
-	addComponent<ksf::comps::ksOtaUpdater>();
+	/* Create state display and receiver components. */
+	addComponent<comps::StateDisplay>();
+	addComponent<comps::StateReceiver>();
 
-	/* Add sensor component. */
-	auto sensorCompWp{addComponent<components::EnergySensor>(ANA_PIN)};
-
-	/* Setup reset button. */
+	/* Create reset button component. */
 	addComponent<ksf::comps::ksResetButton>(CFG_PUSH_PIN, LOW);
 
-	if (!ksApplication::init())
-		return false;
+	/* Create mqttConnector and statusLed components. */
+	addComponent<ksf::comps::ksMqttConnector>();
 
-	/* [ Rest of application initialization code ] */
-
+	/* Application finished initialization, return true as it succedeed. */
 	return true;
 }
 ```
@@ -120,8 +108,8 @@ The best value for me is 3. It allows the ESP32 to go down from around 100mA to 
 - Arduino for ESP8266 [ https://github.com/esp8266/Arduino ]
 
 ### Libraries
-- WiFiManager [ https://github.com/tzapu/WiFiManager ]
 - PubSubClient [ https://github.com/knolleary/pubsubclient ]
+- arduinoWebSockets [ https://github.com/Links2004/arduinoWebSockets ]
 
 ## Donate
 Feel free to support development (of course optionally) :)
