@@ -50,8 +50,8 @@ The goal of this project is to create a simple template or starting point for de
 
 ### Rules:
 - Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
-- The **findComponent** method **must not** be called from component **init** methods.
-- The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**.
+- The **init** method is the best place to add dependent components, setup initial pin values etc.
+- The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**. This will handle cases when other components were added via init method.
 
 ## Building application
 To build an application, simply create a new class inherited from ksApplication. Inside the init method, add and set up components. You can also optionally override the loop method, but remember that the base class method (ksApplication's loop) iterates over the list of registered components and executes the loop call on each of them.
