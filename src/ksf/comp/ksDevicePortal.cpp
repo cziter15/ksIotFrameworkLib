@@ -249,7 +249,7 @@ namespace ksf::comps
 		response += WiFi.getHostname();
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
-		response += PSTR("bytes\"},{\"name\":\"Loop time\",\"value\":\"");
+		response += PSTR(" bytes\"},{\"name\":\"Loop time\",\"value\":\"");
 		response += ksf::to_string(loopExecutionTime);
 		response += PSTR(" μs\"},{\"name\":\"Device uptime\",\"value\":\"");
 		response += ksf::getUptimeString();
