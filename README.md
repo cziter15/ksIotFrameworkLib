@@ -49,7 +49,7 @@ The goal of this project is to create a simple template or starting point for de
 | ksWiFiConnector | Manages WiFi connection (triggers events, handles reconnection etc.). |
 
 ### Rules:
-- Components should be added in the app's **init** method, so they will be available for **postInit** methods
+- Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
 - The **findComponent** method **must not** be called from component **init** methods.
 - The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**.
 
