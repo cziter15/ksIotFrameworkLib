@@ -17,26 +17,41 @@
 
 #include "Arduino.h"
 
-/* Simply ONE second in milliseconds. */
-#define KSF_ONE_SECOND_MS 1000UL
+/* One second in milliseconds. */
+#define KSF_ONE_SEC_MS 1000UL
 
+/* 
+	Macro used to convert seconds to milliseconds.
+	@param seconds Seconds
+	@return Milliseconds
+ */
+#define KSF_SEC_TO_MS(seconds) (seconds*1000UL)
+
+#ifndef KSF_MQTT_RECONNECT_DELAY_MS
 /* MQTT reconnect delay in milliseconds. How much time in ms need to pass to retry connection. */
 #define KSF_MQTT_RECONNECT_DELAY_MS 5000UL
+#endif
 
+#ifndef KSF_MQTT_TIMEOUT_SEC
 /* MQTT socket timeout in seconds. On ESP32 is also used as connect (blocking) timeout. */
+
 #define KSF_MQTT_TIMEOUT_SEC 4UL
+#endif
 
-/* Time in seconds for how much configuration portal should be available. Device will reset after that time. */
-#define KSF_CAP_PORTAL_TIMEOUT_SEC 120UL
-
+#ifndef KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC
 /* Configuration portal maximum time limit for test connection to AP. */
 #define KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC 10UL
+#endif
 
+#ifndef KSF_WIFI_TIMEOUT_MS
 /* Time in milliseconds that must pass without WiFi connection to trigger device restart. */
 #define KSF_WIFI_TIMEOUT_MS 120000UL
+#endif
 
+#ifndef KSF_WIFI_RECONNECT_TIME_MS
 /* Time in milliseconds that must pass without WiFi connection to retry connection. */
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
+#endif
 
 /* Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();

@@ -22,7 +22,7 @@ namespace ksf::comps
 		protected:
 			ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				// Wifi timer - timeout.
 			ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		// Wifi timer - reconnect.
-			ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SECOND_MS};					// Wifi timer - IP check.
+			ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						// Wifi timer - IP check.
 
 			bool wasConnected{false};											// True if connected in previous loop.
 			bool gotIpAddress{false};											// True if IP address is set.

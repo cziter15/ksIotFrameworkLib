@@ -95,7 +95,7 @@ namespace ksf::comps
 #if ESP32
 		wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
 #elif ESP8266
-		wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC * KSF_ONE_SECOND_MS);
+		wifiClientSp->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 #else			
 		#error Platform not implemented.
 #endif
@@ -218,6 +218,6 @@ namespace ksf::comps
 
 	uint32_t ksMqttConnector::getConnectionTimeSeconds() const
 	{
-		return isConnected() ? ((millis64() - lastSuccessConnectionTime) / KSF_ONE_SECOND_MS) : 0;
+		return isConnected() ? ((millis64() - lastSuccessConnectionTime) / KSF_ONE_SEC_MS) : 0;
 	}
 }

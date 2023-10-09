@@ -24,7 +24,7 @@
 namespace ksf::comps
 {
 	ksDevStatMqttReporter::ksDevStatMqttReporter(uint8_t intervalInSeconds) 
-		: reporterTimer(intervalInSeconds * KSF_ONE_SECOND_MS)
+		: reporterTimer(KSF_SEC_TO_MS(intervalInSeconds))
 	{}
 
 	bool ksDevStatMqttReporter::postInit(ksApplication* app)
