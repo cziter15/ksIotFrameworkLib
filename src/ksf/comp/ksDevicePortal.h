@@ -43,17 +43,16 @@ namespace ksf::comps
 		protected:
 			ArduinoOTAClass ArduinoOTA;							// Arduino OTA object.
 			ksf::ksApplication* app{nullptr};					// Application pointer.
+			bool breakApp{false};								// Flag to restart chip.
 
-			unsigned long lastLoopExecutionTimestamp{0};		// Time of last loop execution (us)/
-			unsigned long loopExecutionTime{0};					// Diff (loop exec time).
-
+			uint32_t lastLoopExecutionTimestamp{0};				// Time of last loop execution (us)/
+			uint32_t loopExecutionTime{0};						// Diff (loop exec time).
 			uint32_t scanNetworkTimestamp{0};					// Timestamp of last scan.
 
 			std::string portalPassword;							// Portal password.
-			bool breakApp{false};								// Flag to restart chip.
 
 			std::unique_ptr<WebServerClass> webServer;			// HTTP server.
-			std::unique_ptr<ksf::misc::ksWSServer> webSocket;	// Web socket server.
+			std::unique_ptr<misc::ksWSServer> webSocket;		// Web socket server.
 			std::unique_ptr<DNSServer> dnsServer;				// DNS server.
 
 			/*

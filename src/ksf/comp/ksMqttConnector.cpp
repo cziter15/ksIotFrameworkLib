@@ -31,6 +31,8 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
+	ksMqttConnector::~ksMqttConnector() = default;
+
 	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus, bool usePersistentSession)
 		: sendConnectionStatus(sendConnectionStatus), usePersistentSession(usePersistentSession)
 	{}
@@ -59,18 +61,18 @@ namespace ksf::comps
 	{
 		if (!fingerprint.empty())
 		{
-			auto secureClient{std::make_shared<WiFiClientSecure>()};
-			certFingerprint = std::make_shared<ksCertFingerprintHolder>();
+			auto secureClient{std::make_unique<WiFiClientSecure>()};
+			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
 				wifiClientSp = std::move(secureClient);
 		}
 		else
 		{
-			wifiClientSp = std::make_shared<WiFiClient>();
+			wifiClientSp = std::make_unique<WiFiClient>();
 		}
 
-		mqttClientSp = std::make_shared<PubSubClient>(*wifiClientSp.get());
+		mqttClientSp = std::make_unique<PubSubClient>(*wifiClientSp.get());
 
 		this->login = std::move(login);
 		this->password = std::move(password);

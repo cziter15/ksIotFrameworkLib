@@ -30,8 +30,8 @@ namespace ksf
 			KSF_RTTI_DECLARATIONS(ksMqttConnector, ksComponent)
 
 			protected:
-				std::shared_ptr<WiFiClient> wifiClientSp;						// Shared pointer to WiFiClient used to connect to MQTT.
-				std::shared_ptr<PubSubClient> mqttClientSp;						// Shared pointer to PubSubClient used to connect to MQTT.
+				std::unique_ptr<WiFiClient> wifiClientSp;						// Shared pointer to WiFiClient used to connect to MQTT.
+				std::unique_ptr<PubSubClient> mqttClientSp;						// Shared pointer to PubSubClient used to connect to MQTT.
 
 				std::weak_ptr<ksWifiConnector> wifiConnWp;						// Weak pointer to WiFi connector.
 
@@ -49,7 +49,7 @@ namespace ksf
 				std::string password;											// Saved MQTT password.
 				std::string prefix;												// Saved MQTT prefix.
 
-				std::shared_ptr<ksCertFingerprint> certFingerprint;				// Shared pointer to fingerprint validator.
+				std::unique_ptr<ksCertFingerprint> certFingerprint;				// Shared pointer to fingerprint validator.
 
 				/*
 					@brief Connects to MQTT broker.
@@ -166,6 +166,11 @@ namespace ksf
 					@param fingerprint MQTT broker certificate fingerprint - if empty, secure connection won't be used
 				*/
 				void setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint);
+		
+				/*
+					@brief Destructor (for uniqueptr purposes).
+				*/
+				virtual ~ksMqttConnector();
 		};
 	}
 }
