@@ -260,7 +260,13 @@ namespace ksf::comps
 
 			return;
 		}
-
+		else if (command == PSTR("executeCommand"))
+		{
+			std::string appLog{PSTR("Command not supported: ")};
+			appLog += body;
+			onAppLog(appLog);
+			return;
+		}
 		webSocket->sendTXT(clientNum, response.c_str(), response.size());
 	}
 
