@@ -145,10 +145,19 @@ namespace ksf::comps
 			void handle_getDeviceParams(std::string& response);
 
 			/*
+				@brief This function handles command execution.
+				@param body Command body
+				@return Command response.
+			*/
+			std::string handle_executeCommand(const std::string_view& body);
+
+			/*
 				@brief This function handles logging.
 				@param msgRef Log message
 			*/
 			void onAppLog(std::string& msgRef);
+
+
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)		// onUpdateStart event that user can bind to.

@@ -132,6 +132,39 @@ namespace ksf::comps
 		ESP.restart();
 	}
 
+	std::string ksDevicePortal::handle_executeCommand(const std::string_view& body)
+	{
+		if (body.empty())
+			return PSTR("No command received. Don't be shy. Try 'help'.");
+
+		if (body == PSTR("help"))
+			return PSTR("Available commands: force-device-reboot, force-device-format");
+
+		if (body == PSTR("force-device-reboot"))
+		{
+			rebootDevice();
+		}
+		else if (body == PSTR("force-device-format"))
+		{
+			LittleFS.format();
+
+	#if ESP8266
+			ESP.eraseConfig();
+	#elif ESP32
+			WiFi.enableSTA(true);
+			WiFi.persistent(true);
+			WiFi.disconnect(true,true);
+			delay(500);
+			WiFi.persistent(false);
+	#else
+			#error Platform not implemented.
+	#endif
+			ESP.restart();
+		}
+
+		return PSTR("Command not recognized: ") + std::string(body);
+	}
+
 	void ksDevicePortal::updateFinished(bool fromPortal)
 	{
 		ksf::saveOtaBootIndicator(fromPortal ? EOTAType::OTA_PORTAL : EOTAType::OTA_GENERIC);
@@ -171,6 +204,13 @@ namespace ksf::comps
 		if (commandEnd + 1 < message.size())
 			body = message.substr(commandEnd + 1);
 
+		if (command == PSTR("executeCommand"))
+		{
+			std::string commandResponse = handle_executeCommand(body);
+			webSocket->sendTXT(clientNum, commandResponse.c_str(), commandResponse.size());
+			return;
+		}
+
 		std::string response{id};
 		response += '\n';
 
@@ -189,11 +229,6 @@ namespace ksf::comps
 		else if (command == PSTR("goToConfigMode"))
 		{
 			requestAppBreak();
-			return;
-		}
-		else if (command == PSTR("formatFilesystem"))
-		{
-			handle_formatFS();
 			return;
 		}
 		else if (command == PSTR("saveConfig"))
@@ -260,13 +295,7 @@ namespace ksf::comps
 
 			return;
 		}
-		else if (command == PSTR("executeCommand"))
-		{
-			std::string appLog{PSTR("Command not supported: ")};
-			appLog += body;
-			onAppLog(appLog);
-			return;
-		}
+
 		webSocket->sendTXT(clientNum, response.c_str(), response.size());
 	}
 
@@ -276,7 +305,7 @@ namespace ksf::comps
 		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
 		response += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"");
-		response += "VID:";
+		response += PSTR("VID:");
 		response += ksf::to_string(ESP_getFlashVendor());
 		response += PSTR(" (");
 		response += ksf::to_string(ESP_getFlashSizeKB());
@@ -302,18 +331,12 @@ namespace ksf::comps
 				response += ksf::getUptimeFromSeconds(mqttConnSp->getConnectionTimeSeconds());
 				response += PSTR(", ");
 			}
-			else
-			{
-				response += PSTR("down, ");
-			}
+			else response += PSTR("down, ");
 
 			response += std::to_string(mqttConnSp->getReconnectCounter());
 			response += PSTR(" attempts");
 		}
-		else
-		{
-			response += PSTR("not present");
-		}
+		else response += PSTR("not present");
 
 		response += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
 		response += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
@@ -499,25 +522,6 @@ namespace ksf::comps
 		webServer->sendHeader(PSTR("Content-Encoding"), PSTR("gzip"));
 		webServer->sendHeader(PSTR("ETag"), fileMD5);
 		webServer->send_P(200, PROGMEM_TEXT_HTML, (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
-	}
-
-	void ksDevicePortal::handle_formatFS()
-	{
-		LittleFS.format();
-
-#if ESP8266
-		ESP.eraseConfig();
-#elif ESP32
-		WiFi.enableSTA(true);
-		WiFi.persistent(true);
-		WiFi.disconnect(true,true);
-		delay(500);
-		WiFi.persistent(false);
-#else
-		#error Platform not implemented.
-#endif
-
-		rebootDevice();
 	}
 
 	void ksDevicePortal::setupHttpServer()
