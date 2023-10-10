@@ -12,25 +12,26 @@
 #include <memory>
 #include <list>
 #include <string>
+#include <functional>
 #include "ksComponent.h"
-#include "ksf/evt/ksEvent.h"
 
 #if APP_LOG_ENABLED
-	#define APP_LOG(app,msg) if (app && app->isLogEnabled()) app->log(msg);
-#else
-	#define APP_LOG(app,msg) //
+typedef std::function<void(std::string&)> AppLogProviderFunc_t;
+typedef std::function<void(std::string&)> AppLogCallbackFunc_t;
 #endif
+
 namespace ksf 
 {
 	class ksComponent;
 	class ksApplication
 	{
 		protected:
-			std::list<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
+			std::list<std::shared_ptr<ksComponent>> components;		// An array with shared_ptr of components (holding main reference).
 
+#if APP_LOG_ENABLED
+			std::function<void(std::string&)> appLogCallback;		// Callback function for logging
+#endif
 		public:
-			DECLARE_KS_EVENT(onAppLog, std::string);			// App log notification.
-
 			/*
 				@brief Instantiates a component of passed type.
 
@@ -110,16 +111,16 @@ namespace ksf
 
 #if APP_LOG_ENABLED
 			/*
-				@brief Checks if log is enabled.
-				@return True if log is enabled, false otherwise
+				@brief Logs application messages.
+				@param logProviderFunction - function that returns string to be logged
 			*/
-			bool isLogEnabled() const;
+			void log(AppLogProviderFunc_t provideLogFn) const;
 
 			/*
-				@brief Send log message.
-				@param message Log message.
+				@brief Sets callback function for logging.
+				@param logProviderFunction - function that returns string to be logged
 			*/
-			void log(std::string message);
+			void setLogCallback(std::function<void(std::string&)> logCallback);
 #endif
 	};
 }

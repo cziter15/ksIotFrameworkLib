@@ -9,11 +9,11 @@
 
 #pragma once
 
+#include <string>
+#include <string_view>
 #include "ArduinoOTA.h"
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
-
-#include <string_view>
 
 class DNSServer;
 
@@ -59,8 +59,6 @@ namespace ksf::comps
 			std::unique_ptr<WebServerClass> webServer;					// HTTP server.
 			std::unique_ptr<misc::ksWSServer> webSocket;				// Web socket server.
 			std::unique_ptr<DNSServer> dnsServer;							// DNS server.
-
-			std::unique_ptr<ksf::evt::ksEventHandle> appLogEventHandle;	// Application log event.
 
 			/*
 				@brief Causes the app to break from loop with false status.
@@ -148,9 +146,9 @@ namespace ksf::comps
 
 			/*
 				@brief This function handles logging.
-				@param message Log message
+				@param msgRef Log message
 			*/
-			void onAppLog(std::string message);
+			void onAppLog(std::string& msgRef);
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)		// onUpdateStart event that user can bind to.

@@ -134,8 +134,15 @@ namespace ksf::comps
 
 		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
 		std::string_view topicStr{topic};
-
-		APP_LOG(app, PSTR("[MQTT] Received T: ") + std::string(topicStr) + ", V: " + std::string(payloadStr));
+		
+#ifdef APP_LOG_ENABLED
+		app->log([&](std::string& out) {
+			out += PSTR("[MQTT] Reveived from: ");
+			out += topicStr;
+			out += PSTR(", value: ");
+			out += payloadStr;
+		});
+#endif
 
 		if (handlesDeviceMessage && ksf::starts_with(topicStr, prefix))
 		{
@@ -160,7 +167,18 @@ namespace ksf::comps
 
 	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
 	{
-		APP_LOG(app, PSTR("[MQTT] Publish T: ") + topic + ", V: " + payload + ", retain: " + std::to_string(retain));
+#ifdef APP_LOG_ENABLED
+		app->log([&](std::string& out) {
+			out += PSTR("[MQTT] ");
+			if (retain)
+				out += PSTR("(Retained)");
+			out += PSTR("Publish to: ");
+			out += prefix;
+			out += topic;
+			out += PSTR(", value: ");
+			out += payload;
+		});
+#endif
 		mqttClientSp->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
 	}
 

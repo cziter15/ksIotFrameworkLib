@@ -63,14 +63,19 @@ namespace ksf
 	}
 
 #if APP_LOG_ENABLED
-	void ksApplication::log(std::string msg)
+	void ksApplication::log(AppLogProviderFunc_t provideLogFn) const
 	{
-		onAppLog->broadcast(std::move(msg));
+		if (appLogCallback && provideLogFn)
+		{
+			std::string theLog;
+			provideLogFn(theLog);
+			appLogCallback(theLog);
+		}
 	}
 
-	bool ksApplication::isLogEnabled() const
+	void ksApplication::setLogCallback(AppLogCallbackFunc_t logCallback)
 	{
-		return onAppLog->isBound();
+		appLogCallback = std::move(logCallback);
 	}
 #endif
 }

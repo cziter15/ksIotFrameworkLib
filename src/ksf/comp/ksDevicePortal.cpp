@@ -117,13 +117,12 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksDevicePortal::onAppLog(std::string msg)
+	void ksDevicePortal::onAppLog(std::string& msgRef)
 	{
 		if (logKeepAliveTimestamp > 0 && webSocket)
 		{
-			std::string outMsg{"null\n"};
-			outMsg += msg;
-			webSocket->broadcastTXT(outMsg.c_str(), outMsg.size());
+			msgRef.insert(0, "null\n");
+			webSocket->broadcastTXT(msgRef.c_str(), msgRef.size());
 		}
 	}
 
@@ -245,13 +244,16 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("logKeepAlive"))
 		{
+			bool justEabledLogs{logKeepAliveTimestamp==0};
 			logKeepAliveTimestamp = std::max(0UL, millis());
 
-			if (!appLogEventHandle)
+			if (justEabledLogs)
 			{
-				app->onAppLog->registerEvent(appLogEventHandle, std::bind(&ksDevicePortal::onAppLog, this, _1));
-#if !(APP_LOG_ENABLED)
-				onAppLog("Detailed logs are disabled (no APP_LOG_ENABLED set). Only command responses will be printed.");
+#if APP_LOG_ENABLED
+				app->setLogCallback(std::bind(&ksDevicePortal::onAppLog, this, _1));
+#else
+				std::string log{"Detailed logs are disabled (no APP_LOG_ENABLED set). Only command responses will be printed."};
+				onAppLog(log);
 #endif
 			}
 
@@ -583,7 +585,7 @@ namespace ksf::comps
 
 		if (logKeepAliveTimestamp != 0 && millis() - logKeepAliveTimestamp > LOG_KEEPALIVE_INTERVAL)
 		{
-			appLogEventHandle.reset();
+			app->setLogCallback(nullptr);
 			logKeepAliveTimestamp = 0;
 		}
 
