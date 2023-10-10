@@ -169,10 +169,10 @@ namespace ksf::comps
 	{
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
-			out += PSTR("[MQTT] ");
+			out += PSTR("[MQTT]");
 			if (retain)
 				out += PSTR("(Retained)");
-			out += PSTR("Publish to: ");
+			out += PSTR(" Publish to: ");
 			out += prefix;
 			out += topic;
 			out += PSTR(", value: ");
@@ -187,9 +187,12 @@ namespace ksf::comps
 		if (sendConnectionStatus)
 		{
 			std::string willTopic{prefix + PSTR("connected")};
-
+#ifdef APP_LOG_ENABLED
+			app->log([&](std::string& out) {
+				out += PSTR("[MQTT] Trying to connect to MQTT broker...");
+			});
+#endif
 			// TODO: Here we can use saved credentials instead of memory ones.
-			
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
 			{
 				if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
@@ -197,6 +200,15 @@ namespace ksf::comps
 					mqttClientSp->disconnect();
 					return false;
 				}
+
+#ifdef APP_LOG_ENABLED
+				app->log([&](std::string& out) {
+					out += PSTR("[MQTT] Connected successfully to ");
+					out += wifiClientSp->remoteIP().toString().c_str();
+					out += PSTR(" on port ");
+					out += ksf::to_string(wifiClientSp->remotePort());
+				});
+#endif
 
 				mqttClientSp->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
 				return true;
