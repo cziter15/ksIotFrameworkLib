@@ -39,6 +39,7 @@
 #include "ksWifiConnector.h"
 #include "ksDevicePortal.h"
 #include "ksConfigProvider.h"
+#include "ksMqttConnector.h"
 #include "../misc/ksWSServer.h"
 #include "../res/otaWebpage.h"
 
@@ -106,6 +107,8 @@ namespace ksf::comps
 			dnsServer->setErrorReplyCode(DNSReplyCode::NoError);
 			dnsServer->start(53, "*", WiFi.softAPIP());
 		}
+		
+		mqttConnectorWp = app->findComponent<ksMqttConnector>();
 
 		setupHttpServer();
 		setupWsServer();
@@ -235,8 +238,10 @@ namespace ksf::comps
 
 	void ksDevicePortal::handle_getIdentity(std::string& response)
 	{
+		
+
 		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
-		response += HARDWARE " (";
+		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
 		response += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"");
 		response += "VID:";
@@ -255,6 +260,29 @@ namespace ksf::comps
 		response += ksf::getUptimeString();
 		response += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
 		response += ksf::getResetReason();
+		response += PSTR("\"},{\"name\":\"MQTT status\",\"value\":\" ");
+
+		if (auto mqttConnSp{mqttConnectorWp.lock()})
+		{
+			if (mqttConnSp->isConnected())
+			{
+				response += PSTR("online for ");
+				response += std::to_string(mqttConnSp->getConnectionTimeSeconds());
+				response += PSTR(" s, ");
+			}
+			else
+			{
+				response += PSTR("offline, ");
+			}
+
+			response += std::to_string(mqttConnSp->getReconnectCounter());
+			response += PSTR(" reconnects");
+		}
+		else
+		{
+			response += PSTR("not present");
+		}
+
 		response += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
 		response += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
 		response += PSTR("\"}]");

@@ -36,6 +36,7 @@ namespace ksf::misc
 
 namespace ksf::comps
 {
+	class ksMqttConnector;
 	class ksDevicePortal : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksDevicePortal, ksComponent)
@@ -50,6 +51,8 @@ namespace ksf::comps
 			uint32_t scanNetworkTimestamp{0};					// Timestamp of last scan.
 
 			std::string portalPassword;							// Portal password.
+
+			std::weak_ptr<ksMqttConnector> mqttConnectorWp;		// MQTT connector.
 
 			std::unique_ptr<WebServerClass> webServer;			// HTTP server.
 			std::unique_ptr<misc::ksWSServer> webSocket;		// Web socket server.

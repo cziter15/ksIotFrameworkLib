@@ -37,7 +37,6 @@ The goal of this project is to create a simple template or starting point for de
 | ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix, etc.). |
 | ksMqttConnector  | Used to maintain a connection with MQTT. The user can bind to the onMessage and onConnected events. |
 | ksDevStatMqttReporter | Reports device state periodically to the MQTT broker to the 'dstat' sub-topic. |
-| ksMqttDebugResponder  | Provides debug commands for apps using the ksMqttConnector component. |
 | ksDevicePortal  | Handles all-in-one things like configuration, debug and OTA updates. |
 | ksResetButton  | Used to exit the app loop or reset the entire device (to trigger the config portal). |
 | ksWiFiConfigurator | The base WiFi configurator component, providing WiFi management portal and allowing config providers to inject and capture parameters. |
