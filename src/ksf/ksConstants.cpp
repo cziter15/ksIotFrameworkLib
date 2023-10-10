@@ -149,13 +149,18 @@ namespace ksf
 #endif
 	}
 
+	const std::string getUptimeFromSeconds(uint32_t sec)
+	{
+		return 	to_string(sec / 60 / 60 / 24) + "d " +
+				to_string(sec / 60 / 60 % 24) + "h " +
+				to_string(sec / 60 % 60) + "m " +
+				to_string(sec % 60) + "s";
+	}
+
 	const std::string getUptimeString()
 	{
-		auto uptime{millis64()};
-		return 	to_string(uptime / 1000 / 60 / 60 / 24) + "d " + 
-				to_string(uptime / 1000 / 60 / 60 % 24) + "h " + 
-				to_string(uptime / 1000 / 60 % 60) + "m " + 
-				to_string(uptime / 1000 % 60) + "s";
+		auto uptime{millis64()/1000};
+		return getUptimeFromSeconds(uptime);
 	}
 
 	void loadCredentials(std::string& ssid, std::string& password)

@@ -161,7 +161,15 @@ namespace ksf
 	extern const std::string getResetReason();
 
 	/*
+		@brief Helper function to get uptime from seconds.
+		@param seconds Seconds to be converted
+		@return Converted value in a form of string.
+	*/
+	extern const std::string getUptimeFromSeconds(uint32_t seconds);
+
+	/*
 		@brief Helper function to get uptime in a form of string.
+		@return Uptime in a form of string.
 	*/
 	extern const std::string getUptimeString();
 

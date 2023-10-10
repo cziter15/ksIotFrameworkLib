@@ -299,8 +299,8 @@ namespace ksf::comps
 			if (mqttConnSp->isConnected())
 			{
 				response += PSTR("up for ");
-				response += std::to_string(mqttConnSp->getConnectionTimeSeconds());
-				response += PSTR(" s, ");
+				response += ksf::getUptimeFromSeconds(mqttConnSp->getConnectionTimeSeconds());
+				response += PSTR(", ");
 			}
 			else
 			{
@@ -308,7 +308,7 @@ namespace ksf::comps
 			}
 
 			response += std::to_string(mqttConnSp->getReconnectCounter());
-			response += PSTR(" success connections");
+			response += PSTR(" attempts");
 		}
 		else
 		{
