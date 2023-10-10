@@ -596,7 +596,9 @@ namespace ksf::comps
 
 		if (logKeepAliveTimestamp != 0 && millis() - logKeepAliveTimestamp > LOG_KEEPALIVE_INTERVAL)
 		{
+#if APP_LOG_ENABLED
 			app->setLogCallback(nullptr);
+#endif
 			logKeepAliveTimestamp = 0;
 		}
 
