@@ -244,10 +244,10 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("logKeepAlive"))
 		{
-			bool justEabledLogs{logKeepAliveTimestamp==0};
-			logKeepAliveTimestamp = std::max(0UL, millis());
+			bool enabledLogsRightNow{logKeepAliveTimestamp==0};
+			logKeepAliveTimestamp = std::max(1UL, millis());
 
-			if (justEabledLogs)
+			if (enabledLogsRightNow)
 			{
 #if APP_LOG_ENABLED
 				app->setLogCallback(std::bind(&ksDevicePortal::onAppLog, this, _1));
