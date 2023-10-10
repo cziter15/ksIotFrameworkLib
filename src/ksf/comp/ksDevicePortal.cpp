@@ -55,6 +55,7 @@ namespace ksf::comps
 	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
 	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
 	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
+	const char PROGMEM_NO_ID_RESPONSE [] PROGMEM {"null\n"};
 
 	inline uint64_t generateAuthToken(std::string& password)
 	{
@@ -121,7 +122,7 @@ namespace ksf::comps
 	{
 		if (logKeepAliveTimestamp > 0 && webSocket)
 		{
-			msgRef.insert(0, "null\n");
+			msgRef.insert(0, PROGMEM_NO_ID_RESPONSE);
 			webSocket->broadcastTXT(msgRef.c_str(), msgRef.size());
 		}
 	}
@@ -207,6 +208,7 @@ namespace ksf::comps
 		if (command == PSTR("executeCommand"))
 		{
 			std::string commandResponse = handle_executeCommand(body);
+			commandResponse.insert(0, PROGMEM_NO_ID_RESPONSE);
 			webSocket->sendTXT(clientNum, commandResponse.c_str(), commandResponse.size());
 			return;
 		}
