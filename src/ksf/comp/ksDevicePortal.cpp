@@ -298,17 +298,17 @@ namespace ksf::comps
 		{
 			if (mqttConnSp->isConnected())
 			{
-				response += PSTR("online for ");
+				response += PSTR("up for ");
 				response += std::to_string(mqttConnSp->getConnectionTimeSeconds());
 				response += PSTR(" s, ");
 			}
 			else
 			{
-				response += PSTR("offline, ");
+				response += PSTR("down, ");
 			}
 
 			response += std::to_string(mqttConnSp->getReconnectCounter());
-			response += PSTR(" reconnects");
+			response += PSTR(" success connections");
 		}
 		else
 		{

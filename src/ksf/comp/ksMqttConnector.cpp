@@ -169,10 +169,10 @@ namespace ksf::comps
 	{
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
-			out += PSTR("[MQTT]");
+			out += PSTR("[MQTT] ");
 			if (retain)
-				out += PSTR("(Retained)");
-			out += PSTR(" Publish to: ");
+				out += PSTR("(Retained) ");
+			out += PSTR("Publish to: ");
 			out += prefix;
 			out += topic;
 			out += PSTR(", value: ");
