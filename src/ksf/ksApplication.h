@@ -11,8 +11,15 @@
 
 #include <memory>
 #include <list>
+#include <string>
 #include "ksComponent.h"
+#include "ksf/evt/ksEvent.h"
 
+#if APP_LOG_ENABLED
+	#define APP_LOG(app,msg) if (app && app->isLogEnabled()) app->log(msg);
+#else
+	#define APP_LOG(app,msg) //
+#endif
 namespace ksf 
 {
 	class ksComponent;
@@ -20,7 +27,10 @@ namespace ksf
 	{
 		protected:
 			std::list<std::shared_ptr<ksComponent>> components;	// An array with shared_ptr of components (holding main reference).
+
 		public:
+			DECLARE_KS_EVENT(onAppLog, std::string);			// App log notification.
+
 			/*
 				@brief Instantiates a component of passed type.
 
@@ -97,5 +107,19 @@ namespace ksf
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();
+
+#if APP_LOG_ENABLED
+			/*
+				@brief Checks if log is enabled.
+				@return True if log is enabled, false otherwise
+			*/
+			bool isLogEnabled() const;
+
+			/*
+				@brief Send log message.
+				@param message Log message.
+			*/
+			void log(std::string message);
+#endif
 	};
 }

@@ -30,6 +30,11 @@ namespace ksf
 			KSF_RTTI_DECLARATIONS(ksMqttConnector, ksComponent)
 
 			protected:
+
+#if APP_LOG_ENABLED
+				ksApplication* app{nullptr};									// Application pointer.
+#endif
+
 				std::unique_ptr<WiFiClient> wifiClientSp;						// Shared pointer to WiFiClient used to connect to MQTT.
 				std::unique_ptr<PubSubClient> mqttClientSp;						// Shared pointer to PubSubClient used to connect to MQTT.
 

@@ -41,6 +41,10 @@ namespace ksf::comps
 	{
 		ksMqttConfigProvider cfgProvider;
 
+#if APP_LOG_ENABLED
+		this->app = app;
+#endif
+
 		cfgProvider.init(app);
 		cfgProvider.setupMqttConnector(*this);
 
@@ -131,6 +135,8 @@ namespace ksf::comps
 		std::string_view payloadStr{reinterpret_cast<const char*>(payload), length};
 		std::string_view topicStr{topic};
 
+		APP_LOG(app, PSTR("[MQTT] Received T: ") + std::string(topicStr) + ", V: " + std::string(payloadStr));
+
 		if (handlesDeviceMessage && ksf::starts_with(topicStr, prefix))
 		{
 			topicStr = topicStr.substr(prefix.length());
@@ -154,6 +160,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
 	{
+		APP_LOG(app, PSTR("[MQTT] Publish T: ") + topic + ", V: " + payload + ", retain: " + std::to_string(retain));
 		mqttClientSp->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
 	}
 

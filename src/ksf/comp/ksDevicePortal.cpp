@@ -48,6 +48,7 @@ using namespace std::placeholders;
 namespace ksf::comps
 {
 	constexpr auto WIFI_SCAN_TIMEOUT{15000UL};
+	constexpr auto LOG_KEEPALIVE_INTERVAL{8000UL};
 
 	const char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
 	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
@@ -114,6 +115,16 @@ namespace ksf::comps
 		setupWsServer();
 
 		return true;
+	}
+
+	void ksDevicePortal::onAppLog(std::string msg)
+	{
+		if (logKeepAliveTimestamp > 0 && webSocket)
+		{
+			std::string outMsg{"null\n"};
+			outMsg += msg;
+			webSocket->broadcastTXT(outMsg.c_str(), outMsg.size());
+		}
 	}
 
 	void ksDevicePortal::rebootDevice()
@@ -232,14 +243,26 @@ namespace ksf::comps
 			requestAppBreak();
 			return;
 		}
+		else if (command == PSTR("logKeepAlive"))
+		{
+			logKeepAliveTimestamp = std::max(0UL, millis());
+
+			if (!appLogEventHandle)
+			{
+				app->onAppLog->registerEvent(appLogEventHandle, std::bind(&ksDevicePortal::onAppLog, this, _1));
+#if !(APP_LOG_ENABLED)
+				onAppLog("Detailed logs are disabled (no APP_LOG_ENABLED set). Only command responses will be printed.");
+#endif
+			}
+
+			return;
+		}
 
 		webSocket->sendTXT(clientNum, response.c_str(), response.size());
 	}
 
 	void ksDevicePortal::handle_getIdentity(std::string& response)
 	{
-		
-
 		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
 		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
@@ -556,6 +579,12 @@ namespace ksf::comps
 			scanNetworkTimestamp = 0;
 			WiFi.scanDelete();
 			WiFi.enableSTA(false);
+		}
+
+		if (logKeepAliveTimestamp != 0 && millis() - logKeepAliveTimestamp > LOG_KEEPALIVE_INTERVAL)
+		{
+			appLogEventHandle.reset();
+			logKeepAliveTimestamp = 0;
 		}
 
 		lastLoopExecutionTimestamp = micros();

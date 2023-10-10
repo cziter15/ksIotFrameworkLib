@@ -42,21 +42,25 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksDevicePortal, ksComponent)
 
 		protected:
-			ArduinoOTAClass ArduinoOTA;							// Arduino OTA object.
-			ksf::ksApplication* app{nullptr};					// Application pointer.
-			bool breakApp{false};								// Flag to restart chip.
+			ArduinoOTAClass ArduinoOTA;									// Arduino OTA object.
+			ksf::ksApplication* app{nullptr};							// Application pointer.
+			bool breakApp{false};										// Flag to restart chip.
 
-			uint32_t lastLoopExecutionTimestamp{0};				// Time of last loop execution (us)/
-			uint32_t loopExecutionTime{0};						// Diff (loop exec time).
-			uint32_t scanNetworkTimestamp{0};					// Timestamp of last scan.
+			uint32_t lastLoopExecutionTimestamp{0};						// Time of last loop execution (us)/
+			uint32_t loopExecutionTime{0};								// Diff (loop exec time).
+			uint32_t scanNetworkTimestamp{0};							// Timestamp of last scan.
 
-			std::string portalPassword;							// Portal password.
+			uint32_t logKeepAliveTimestamp{0};							// Keep alive timestamp.
 
-			std::weak_ptr<ksMqttConnector> mqttConnectorWp;		// MQTT connector.
+			std::string portalPassword;									// Portal password.
 
-			std::unique_ptr<WebServerClass> webServer;			// HTTP server.
-			std::unique_ptr<misc::ksWSServer> webSocket;		// Web socket server.
-			std::unique_ptr<DNSServer> dnsServer;				// DNS server.
+			std::weak_ptr<ksMqttConnector> mqttConnectorWp;				// MQTT connector.
+
+			std::unique_ptr<WebServerClass> webServer;					// HTTP server.
+			std::unique_ptr<misc::ksWSServer> webSocket;				// Web socket server.
+			std::unique_ptr<DNSServer> dnsServer;							// DNS server.
+
+			std::unique_ptr<ksf::evt::ksEventHandle> appLogEventHandle;	// Application log event.
 
 			/*
 				@brief Causes the app to break from loop with false status.
@@ -141,6 +145,12 @@ namespace ksf::comps
 				@param response Response reference, where the response should be appended
 			*/
 			void handle_getDeviceParams(std::string& response);
+
+			/*
+				@brief This function handles logging.
+				@param message Log message
+			*/
+			void onAppLog(std::string message);
 
 		public:
 			DECLARE_KS_EVENT(onUpdateStart)		// onUpdateStart event that user can bind to.

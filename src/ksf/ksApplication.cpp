@@ -61,4 +61,16 @@ namespace ksf
 
 		return true;
 	}
+
+#if APP_LOG_ENABLED
+	void ksApplication::log(std::string msg)
+	{
+		onAppLog->broadcast(std::move(msg));
+	}
+
+	bool ksApplication::isLogEnabled() const
+	{
+		return onAppLog->isBound();
+	}
+#endif
 }
