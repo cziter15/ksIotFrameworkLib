@@ -13,11 +13,14 @@ namespace ksf::misc
 {
 	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
 
-	ksWSServer::~ksWSServer() = default;
-
 	ksWSServer::ksWSServer(uint16_t port)
 	{
 		wsListener = std::make_unique<WiFiServer>(port);
+	}
+
+	ksWSServer::~ksWSServer()
+	{
+		wsListener->close();
 	}
 
 	void ksWSServer::begin() 
