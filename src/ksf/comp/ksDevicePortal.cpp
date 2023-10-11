@@ -124,11 +124,11 @@ namespace ksf::comps
 
 	void ksDevicePortal::onAppLog(std::string& msgRef)
 	{
-		if (logsEnabled && webSocket)
-		{
-			msgRef.insert(0, PROGMEM_NO_ID_RESPONSE);
-			webSocket->broadcastTXT(msgRef.c_str(), msgRef.size());
-		}
+		if (!webSocket)
+			return;
+
+		msgRef.insert(0, PROGMEM_NO_ID_RESPONSE);
+		webSocket->broadcastTXT(msgRef.c_str(), msgRef.size());
 	}
 
 	void ksDevicePortal::rebootDevice()
@@ -285,9 +285,11 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("logKeepAlive"))
 		{
-			if (!logsEnabled)
+			bool enabledLogsRightNow{logKeepAliveTimestamp==0};
+			logKeepAliveTimestamp = std::max(1UL, millis());
+
+			if (enabledLogsRightNow)
 			{
-				logsEnabled = true;
 #if APP_LOG_ENABLED
 				app->setLogCallback(std::bind(&ksDevicePortal::onAppLog, this, _1));
 				std::string log{PSTR("Logs enabled. You will see both command responses and detailed logs")};
@@ -599,12 +601,12 @@ namespace ksf::comps
 			WiFi.enableSTA(false);
 		}
 
-		if (logsEnabled && webSocket->connectedClients())
+		if (logKeepAliveTimestamp != 0 && millis() - logKeepAliveTimestamp > LOG_KEEPALIVE_INTERVAL)
 		{
 #if APP_LOG_ENABLED
 			app->setLogCallback(nullptr);
 #endif
-			logsEnabled = false;
+			logKeepAliveTimestamp = 0;
 		}
 
 		lastLoopExecutionTimestamp = micros();
