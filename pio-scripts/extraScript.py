@@ -23,7 +23,7 @@ try:
 		e.ProcessFlags("-std=gnu++17")
 		e.ProcessFlags("-fno-exceptions")
 		e.ProcessFlags("-DCORE_DEBUG_LEVEL=0")
-		e.ProcessFlags("-DWM_NODEBUG=1")
+		e.ProcessFlags("-DWEBSOCKETS_SAVE_RAM=1")
 
 	ksPrintLog(Colors.Magenta, "Successfully manipulated flags on [" + str(len(environments)) + "] environments.")
 
