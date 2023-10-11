@@ -11,11 +11,11 @@
 
 #include <string>
 #include <string_view>
-#include "ArduinoOTA.h"
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 
 class DNSServer;
+class ArduinoOTAClass;
 
 #if defined(ESP32)
 	class WebServer;
@@ -42,23 +42,22 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksDevicePortal, ksComponent)
 
 		protected:
-			ArduinoOTAClass ArduinoOTA;									// Arduino OTA object.
-			ksf::ksApplication* app{nullptr};							// Application pointer.
-			bool breakApp{false};										// Flag to restart chip.
 
+			ksf::ksApplication* app{nullptr};							// Application pointer.
+
+			bool breakApp{false};										// Flag to restart chip.
+			bool logsEnabled{false};									// Flag indicating whether logs are enabled.
 			uint32_t lastLoopExecutionTimestamp{0};						// Time of last loop execution (us)/
 			uint32_t loopExecutionTime{0};								// Diff (loop exec time).
 			uint32_t scanNetworkTimestamp{0};							// Timestamp of last scan.
 
-			uint32_t logKeepAliveTimestamp{0};							// Keep alive timestamp.
-
 			std::string portalPassword;									// Portal password.
-
 			std::weak_ptr<ksMqttConnector> mqttConnectorWp;				// MQTT connector.
 
 			std::unique_ptr<WebServerClass> webServer;					// HTTP server.
 			std::unique_ptr<misc::ksWSServer> webSocket;				// Web socket server.
-			std::unique_ptr<DNSServer> dnsServer;							// DNS server.
+			std::unique_ptr<DNSServer> dnsServer;						// DNS server.
+			std::unique_ptr<ArduinoOTAClass> arduinoOTA;				// Arduino OTA object.
 
 			/*
 				@brief Causes the app to break from loop with false status.

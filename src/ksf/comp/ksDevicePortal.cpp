@@ -10,6 +10,7 @@
 #include <map>
 #include <LittleFS.h>
 #include <DNSServer.h>
+#include <ArduinoOTA.h>
 
 #if ESP8266
 	#include "flash_hal.h"
@@ -82,11 +83,14 @@ namespace ksf::comps
 	{
 		this->portalPassword = portalPassword;
 
-		ArduinoOTA.setPassword(portalPassword.c_str());
-		ArduinoOTA.onStart([this]() {
+		arduinoOTA = std::make_unique<ArduinoOTAClass>();
+
+		arduinoOTA->setPassword(portalPassword.c_str());
+		arduinoOTA->onStart([this]() {
 			onUpdateStart->broadcast();
 		});
-		ArduinoOTA.onEnd([this]() {
+
+		arduinoOTA->onEnd([this]() {
 			updateFinished(false);
 		});
 	}
@@ -95,8 +99,8 @@ namespace ksf::comps
 	{
 		this->app = app;
 
-		ArduinoOTA.setHostname(WiFi.getHostname());
-		ArduinoOTA.begin();
+		arduinoOTA->setHostname(WiFi.getHostname());
+		arduinoOTA->begin();
 
 		return true;
 	}
@@ -120,7 +124,7 @@ namespace ksf::comps
 
 	void ksDevicePortal::onAppLog(std::string& msgRef)
 	{
-		if (logKeepAliveTimestamp > 0 && webSocket)
+		if (logsEnabled && webSocket)
 		{
 			msgRef.insert(0, PROGMEM_NO_ID_RESPONSE);
 			webSocket->broadcastTXT(msgRef.c_str(), msgRef.size());
@@ -281,11 +285,9 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("logKeepAlive"))
 		{
-			bool enabledLogsRightNow{logKeepAliveTimestamp==0};
-			logKeepAliveTimestamp = std::max(1UL, millis());
-
-			if (enabledLogsRightNow)
+			if (!logsEnabled)
 			{
+				logsEnabled = true;
 #if APP_LOG_ENABLED
 				app->setLogCallback(std::bind(&ksDevicePortal::onAppLog, this, _1));
 				std::string log{PSTR("Logs enabled. You will see both command responses and detailed logs")};
@@ -574,7 +576,8 @@ namespace ksf::comps
 			return false;
 
 		/* Handle OTA stuff. */
-		ArduinoOTA.handle();
+		if (arduinoOTA)
+			arduinoOTA->handle();
 
 		/* Handle requests. */
 		if (dnsServer)
@@ -596,12 +599,12 @@ namespace ksf::comps
 			WiFi.enableSTA(false);
 		}
 
-		if (logKeepAliveTimestamp != 0 && millis() - logKeepAliveTimestamp > LOG_KEEPALIVE_INTERVAL)
+		if (logsEnabled && webSocket->connectedClients())
 		{
 #if APP_LOG_ENABLED
 			app->setLogCallback(nullptr);
 #endif
-			logKeepAliveTimestamp = 0;
+			logsEnabled = false;
 		}
 
 		lastLoopExecutionTimestamp = micros();
