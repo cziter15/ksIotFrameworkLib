@@ -20,22 +20,27 @@ flowchart TD
     AppState --> |Initialized| Application::Loop
 
     subgraph Application::Init
-        A(Add initial components)
+        A(Add initial components) -->
+	B(Mark app state as initialized)
     end
    
     subgraph Application::Loop
-        A0(Update device uptime) -->  CCS{ComponentState}
+        Loop{{For each component}} --> CCS{State?}
 
-        CCS --> |Not Initialized|SS1(Set State: Initialized) --> CIT
-        CCS --> |Initialized|SS2(Set State: Looping) --> CIT
+        CCS --> |Looping|LP1(Call component's loop)
+        CCS --> |NotInitialized|LP2(Call component's init)
+        CCS --> |Initialized|LP3(Call component's postInit)
+        CCS --> |ToBeRemoved|LP4(Remove component)
 
-        CCS --> |Looping|LP(Call component's loop)
+	LP2 --> SCS2(State -> Initialized) --> DF
+	LP3 --> SCS3(State -> Looping) --> DF
+	LP1 --> DF
 
-        LP --> DF{Success?}
-        DF --> |True|CIT
-        DF --> |False|X{{Break application}}
+        DF{Success?}
+        DF --> |True|X0{{Continue}}
+        DF --> |False|X1{{Break}}
 
-        CIT(Select next component) --> A0
+	LP4 --> Continue
     end
 ```
 
