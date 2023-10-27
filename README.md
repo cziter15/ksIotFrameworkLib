@@ -13,9 +13,31 @@
 The goal of this project is to create a simple template or starting point for developing Internet of Things (IoT) applications using the ESP 8266/32 microcontroller. I noticed that I was frequently copying and modifying existing applications when creating new ones for different devices, and I wanted to streamline this process. This project aims to do just that by providing a more organized approach to starting new IoT projects with the ESP 8266/32.
 
 ## Architecture
-<p align="center">
-  <img src="doc/app_diagram.png">
-</p>
+```mermaid
+flowchart TD
+    AppState{AppState}
+    AppState --> |NotInitialized| Application::Init
+    AppState --> |Initialized| Application::Loop
+
+    subgraph Application::Init
+        A(Add initial components)
+    end
+   
+    subgraph Application::Loop
+        A0(Update device uptime) -->  CCS{ComponentState}
+
+        CCS --> |Not Initialized|SS1(Set State: Initialized) --> CIT
+        CCS --> |Initialized|SS2(Set State: Looping) --> CIT
+
+        CCS --> |Looping|LP(Call component's loop)
+
+        LP --> DF{Success?}
+        DF --> |True|CIT
+        DF --> |False|X{{Break application}}
+
+        CIT(Select next component) --> A0
+    end
+```
 
 - Only one application can be executed simultaneously.
 - Each application has its own components. Components are a key part of the framework.
