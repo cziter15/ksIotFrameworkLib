@@ -29,7 +29,7 @@ namespace ksf
 			std::list<std::shared_ptr<ksComponent>> components;		// An array with shared_ptr of components (holding main reference).
 
 #if APP_LOG_ENABLED
-			std::function<void(std::string&)> appLogCallback;		// Callback function for logging
+			 AppLogCallbackFunc_t appLogCallback;		// Callback function for logging
 #endif
 		public:
 			/*
@@ -120,7 +120,7 @@ namespace ksf
 				@brief Sets callback function for logging.
 				@param logProviderFunction - function that returns string to be logged
 			*/
-			void setLogCallback(std::function<void(std::string&)> logCallback);
+			void setLogCallback(AppLogCallbackFunc_t logCallback);
 #endif
 	};
 }
