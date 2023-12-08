@@ -157,9 +157,13 @@ namespace ksf::comps
 			void onAppLog(std::string& msgRef);
 
 		public:
-			DECLARE_KS_EVENT(onUpdateStart)												// onUpdateStart event that user can bind to.
-			DECLARE_KS_EVENT(onUpdateEnd)												// onUpdateEnd event that user can bind to.
-			DECLARE_KS_EVENT(onHandlePortalCommand, const std::string_view&, bool&)		// onHandleCommand event that user can bind to.
+			/* Update start (OTA) event. */
+			DECLARE_KS_EVENT(onUpdateStart)
+			/* Update end (OTA) event. */
+			DECLARE_KS_EVENT(onUpdateEnd)
+			/* Evnet for portal console commands. */
+			DECLARE_KS_EVENT(onHandlePortalCommand, const std::string_view&, bool&, std::string&)
+
 			/*
 				@brief Constructor, used to construct Device Portal component.
 

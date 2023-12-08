@@ -169,9 +169,12 @@ namespace ksf::comps
 		else
 		{
 			bool handled {false};
-			onHandlePortalCommand->broadcast(body, handled);
+			
+			std::string response;
+			onHandlePortalCommand->broadcast(body, handled, response);
+			
 			if (handled)
-				return;
+				return std::move(response);
 		}
 
 		return PSTR("Command not recognized: ") + std::string(body);
