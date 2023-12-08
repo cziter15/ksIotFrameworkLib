@@ -166,6 +166,13 @@ namespace ksf::comps
 	#endif
 			ESP.restart();
 		}
+		else
+		{
+			bool handled {false};
+			onHandlePortalCommand->broadcast(body, handled);
+			if (handled)
+				return;
+		}
 
 		return PSTR("Command not recognized: ") + std::string(body);
 	}
