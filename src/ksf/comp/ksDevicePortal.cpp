@@ -79,18 +79,17 @@ namespace ksf::comps
 		: ksDevicePortal(PSTR("ota_ksiotframework"))
 	{}
 
-	ksDevicePortal::ksDevicePortal(const std::string& portalPassword)
+	ksDevicePortal::ksDevicePortal(std::string portalPassword)
+		: portalPassword(std::move(portalPassword))
 	{
-		this->portalPassword = portalPassword;
-
 		arduinoOTA = std::make_unique<ArduinoOTAClass>();
-
-		arduinoOTA->setPassword(portalPassword.c_str());
-		arduinoOTA->onStart([this]() {
+		arduinoOTA->setPassword(this->portalPassword.c_str());
+		
+		arduinoOTA->onStart([&]() {
 			onUpdateStart->broadcast();
 		});
 
-		arduinoOTA->onEnd([this]() {
+		arduinoOTA->onEnd([&]() {
 			updateFinished(false);
 		});
 	}

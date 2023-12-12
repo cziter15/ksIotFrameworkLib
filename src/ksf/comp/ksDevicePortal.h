@@ -175,7 +175,7 @@ namespace ksf::comps
 				@brief Constructor, used to construct Device Portal component.
 				@param password Password used to authenticate the user.
 			*/
-			ksDevicePortal(const std::string& portalPassword);
+			ksDevicePortal(std::string portalPassword);
 
 			/*
 				@brief Initializes device portal component.
