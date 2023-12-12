@@ -301,7 +301,7 @@ namespace ksf::comps
 			{
 #if APP_LOG_ENABLED
 				app->setLogCallback(std::bind(&ksDevicePortal::onAppLog, this, _1));
-				std::string log{PSTR("Logs enabled- both command responses and detailed logs will be printed.")};
+				std::string log{PSTR("Logs enabled - both command responses and detailed logs will be printed.")};
 #else
 				std::string log{PSTR("Detailed logs are disabled (no APP_LOG_ENABLED set). Only command responses will be printed.")};
 #endif
