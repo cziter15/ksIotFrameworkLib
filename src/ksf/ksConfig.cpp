@@ -64,10 +64,10 @@ namespace ksf
 
 		/* If marked dirty, save changes to FS. */
 		auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
-		for (const auto& entry : configParams)
+		for (const auto& [name, value] : configParams)
 		{
-			fileWriter.println(entry.first.c_str());
-			fileWriter.println(entry.second.c_str());
+			fileWriter.println(name.c_str());
+			fileWriter.println(value.c_str());
 		}
 		fileWriter.close();
 	}
