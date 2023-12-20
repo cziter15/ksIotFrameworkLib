@@ -106,8 +106,7 @@ namespace ksf::comps
 		#error Platform not implemented.
 #endif
 
-		uint16_t portNumber;
-		if (ksf::from_chars(port, portNumber))
+		if (uint16_t portNumber; ksf::from_chars(port, portNumber))
 		{
 			IPAddress serverIP;
 			if (serverIP.fromString(broker.c_str()))
