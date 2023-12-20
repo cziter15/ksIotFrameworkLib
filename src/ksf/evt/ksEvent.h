@@ -65,14 +65,12 @@ namespace ksf::evt
 			*/
 			void unbind(std::size_t callbackUID) override
 			{
-				for (auto cb{callbacks.begin()}; cb != callbacks.end(); ++cb)
-				{
-					if (cb->first == callbackUID)
-					{
-						callbacks.erase(cb);
-						break;
-					}
-				}
+				auto predicate = [callbackUID](const auto& cb) {
+					auto& [uid, function] = cb;
+					return uid == callbackUID; 
+				};
+
+				callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(), predicate), callbacks.end());
 			}
 
 			/*
@@ -81,8 +79,8 @@ namespace ksf::evt
 			*/
 			void broadcast(Params... params)
 			{
-				for (auto cb{callbacks.cbegin()}; cb != callbacks.cend(); ++cb)
-					cb->second(params...);
+				for (const auto& [uid, function] : callbacks)
+					function(params...);
 			}
 	};
 }

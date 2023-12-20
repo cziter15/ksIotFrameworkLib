@@ -44,13 +44,14 @@ namespace ksf::comps
 
 	void ksDevStatMqttReporter::reportDevStats() const
 	{
-		if (auto mqttConnSp{mqttConnWp.lock()})
-		{
-			mqttConnSp->publish(PSTR("dstat/rssi"), ksf::to_string(WiFi.RSSI()));
-			mqttConnSp->publish(PSTR("dstat/uptimeSec"), ksf::to_string(millis64()/1000));
-			mqttConnSp->publish(PSTR("dstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
-			mqttConnSp->publish(PSTR("dstat/reconnCnt"), ksf::to_string(mqttConnSp->getReconnectCounter()));
-		}
+		auto mqttConnSp{mqttConnWp.lock()};
+		if (!mqttConnSp)
+			return;
+
+		mqttConnSp->publish(PSTR("dstat/rssi"), ksf::to_string(WiFi.RSSI()));
+		mqttConnSp->publish(PSTR("dstat/uptimeSec"), ksf::to_string(millis64()/1000));
+		mqttConnSp->publish(PSTR("dstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
+		mqttConnSp->publish(PSTR("dstat/reconnCnt"), ksf::to_string(mqttConnSp->getReconnectCounter()));
 	}
 	
 	bool ksDevStatMqttReporter::loop(ksApplication* app)

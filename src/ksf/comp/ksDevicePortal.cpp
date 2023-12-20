@@ -173,7 +173,7 @@ namespace ksf::comps
 			onHandlePortalCommand->broadcast(body, handled, response);
 			
 			if (handled)
-				return std::move(response);
+				return response;
 		}
 
 		return PSTR("Command not recognized: ") + std::string(body);
@@ -278,13 +278,17 @@ namespace ksf::comps
 				auto configCompSp{configCompWp.lock()};
 				if (!configCompSp)
 					continue;
+
 				for (auto& parameter : configCompSp->getParameters())
 				{
 					std::string param_id{PSTR("param_") + parameter.id};
-					auto param_it{paramMap.find(param_id)};
-					if (param_it != paramMap.end())
-						parameter.value = param_it->second;
+					if (auto param_it{paramMap.find(param_id)}; param_it != paramMap.end())
+					{
+						auto& [paramName, paramValue] = *param_it;
+						parameter.value = paramValue;
+					}
 				}
+
 				configCompSp->saveParams();
 			}
 

@@ -39,9 +39,7 @@ namespace ksf::comps
 
 	bool ksResetButton::loop(ksApplication* app)
 	{
-		uint8_t currentState{static_cast<uint8_t>(digitalRead(pin))};
-
-		if (currentState != lastState)
+		if (uint8_t currentState{static_cast<uint8_t>(digitalRead(pin))}; currentState != lastState)
 		{
 			if (currentState == triggerState)
 			{
@@ -51,9 +49,7 @@ namespace ksf::comps
 			{
 				releasedTime = millis();
 
-				uint32_t pressDuration{releasedTime - pressedTime};
-
-				if (pressDuration > LONG_TRIGGER)
+				if (auto pressDuration{releasedTime - pressedTime}; pressDuration > LONG_TRIGGER)
 				{
 					WiFi.mode(WIFI_OFF);
 					LittleFS.format();

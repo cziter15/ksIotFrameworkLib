@@ -26,6 +26,8 @@ namespace ksf::comps
 	const char PREFIX_TEXT_PGM[] 		PROGMEM {"prefix"};
 	const char PORT_TEXT_PGM[]	 		PROGMEM {"port"};
 
+	constexpr const char TOPIC_DELIMETER{'/'};
+
 	void ksMqttConfigProvider::setupMqttConnector(ksMqttConnector& connector)
 	{
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
@@ -47,14 +49,10 @@ namespace ksf::comps
 
 			if (prefix.length() > 0)
 			{
-				/* MQTT topic delimeter (slash). */
-				const char topicDelimeter{'/'};
-
 				/* Apply suffix correction. */
-				if (prefix.back() != topicDelimeter)
-					prefix += topicDelimeter;
+				if (prefix.back() != TOPIC_DELIMETER)
+					prefix += TOPIC_DELIMETER;
 			}
-
 
 			if (savedBroker.length() > 0)
 				connector.setupConnection(savedBroker, port, std::move(login), std::move(password), std::move(prefix), fingerprint);
