@@ -32,10 +32,7 @@ namespace ksf::comps
 		WiFi.setHostname(hostname);
 #endif
 		WiFi.enableSTA(true);
-
 		setupMacAddress();
-
-
 #if ESP8266
 		/* On ESP8266 hostname must be set when in STA mode. */
 		WiFi.setHostname(hostname);
@@ -45,9 +42,9 @@ namespace ksf::comps
 	void ksWifiConnector::setupMacAddress()
 	{
 #if defined(ESP32)
-		uint32_t chipId = static_cast<uint32_t>(ESP.getEfuseMac());
+		uint32_t chipId {static_cast<uint32_t>(ESP.getEfuseMac())};
 #elif defined(ESP8266)
-		uint32_t chipId = ESP.getChipId();
+		uint32_t chipId {ESP.getChipId()};
 #else
 #error Platform not implemented.
 #endif
