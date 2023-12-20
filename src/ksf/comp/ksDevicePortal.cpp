@@ -220,7 +220,7 @@ namespace ksf::comps
 
 		if (command == PSTR("executeCommand"))
 		{
-			std::string commandResponse = handle_executeCommand(body);
+			auto commandResponse{handle_executeCommand(body)};
 			commandResponse.insert(0, PROGMEM_NO_ID_RESPONSE);
 			webSocket->sendTXT(clientNum, commandResponse.c_str(), commandResponse.size());
 			return;
@@ -480,7 +480,7 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 	
-		HTTPUpload& upload = webServer->upload();
+		HTTPUpload& upload{webServer->upload()};
 		if (upload.status == UPLOAD_FILE_START)
 		{
 #if ESP8266
@@ -511,7 +511,7 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 
-		bool hasError{Update.hasError()};
+		auto hasError{Update.hasError()};
 
 		webServer->sendHeader(PSTR("Connection"), PSTR("close"));
 		webServer->send(200, PROGMEM_TEXT_PLAIN, hasError ? PSTR("FAIL") : PSTR("OK"));
