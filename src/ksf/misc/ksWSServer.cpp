@@ -64,7 +64,7 @@ namespace ksf::misc
 		/* Listen for new clients. */
 		while (wsListener->hasClient()) 
 		{
-			auto client{new WiFiClient(wsListener->accept())});
+			auto client{new WiFiClient(wsListener->accept())};
 			if (!client)
 				break;
 			
