@@ -64,9 +64,11 @@ namespace ksf::misc
 		/* Listen for new clients. */
 		while (wsListener->hasClient()) 
 		{
-			if(auto client{new WiFiClient(wsListener->accept())})
-				handleNewClient(client);
-			else break;
+			auto client{new WiFiClient(wsListener->accept())});
+			if (!client)
+				break;
+			
+			handleNewClient(client);
 		}
 
 		WebSocketsServerCore::loop();
