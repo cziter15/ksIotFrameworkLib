@@ -50,8 +50,7 @@ namespace ksf
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 		
-		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")};
-		if (indicatorFile)
+		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
 		{
 			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
 			indicatorFile.close();
@@ -61,8 +60,7 @@ namespace ksf
 
 	void saveOtaBootIndicator(EOTAType::Type type)
 	{
-		auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "w")};
-		if (indicatorFile)
+		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "w")})
 		{
 			indicatorFile.write(static_cast<uint8_t>(type));
 			indicatorFile.close();
@@ -77,7 +75,10 @@ namespace ksf
 	void updateDeviceUptime()
 	{
 		uint32_t new_low32{millis()};
-		if (new_low32 < uptime_low32) uptime_high32++;
+		
+		if (new_low32 < uptime_low32) 
+			uptime_high32++;
+
 		uptime_low32 = new_low32;
 	}
 

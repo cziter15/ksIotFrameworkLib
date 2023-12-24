@@ -53,7 +53,7 @@ namespace ksf
 					comp->componentState = ksComponentState::Looping;
 				}
 				break;
-
+				
 				default: break;
 			}
 			++it;

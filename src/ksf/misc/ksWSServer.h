@@ -18,7 +18,7 @@ namespace ksf::misc
 {
 	/*
 		@brief Callback function type for Websocket messsages.
-		@param client Websocket client ID
+		@param client Websocket client ID.
 		@param message Incomming websocket message (text / string view).
 	*/
 	typedef std::function<void(uint8_t client, std::string_view message)> ksWsServerMessageFunc_t;

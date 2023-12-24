@@ -22,13 +22,13 @@ namespace ksf
 		public:
 			/*
 				@brief Constructs timer with interval (milliseconds).
-				@param intervalMs Initial timer interval in milliseconds
+				@param intervalMs Initial timer interval in milliseconds.
 			*/
 			ksSimpleTimer(uint32_t intervalMs);
 
 			/*
 				@brief Sets timer interval (milliseconds).
-				@param intervalMs Initial timer interval in milliseconds
+				@param intervalMs Initial timer interval in milliseconds.
 			*/
 			void setInterval(uint32_t intervalMs);
 

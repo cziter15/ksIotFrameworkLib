@@ -69,7 +69,7 @@ namespace ksf
 
 			/*
 				@brief Runs the application loop with a delay.
-				@param milliseconds Delay time in milliseconds
+				@param milliseconds Delay time in milliseconds.
 			*/
 			void loop(unsigned long milliseconds = 1)
 			{

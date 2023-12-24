@@ -25,7 +25,7 @@ namespace ksf
 
 			/*
 				@brief This function is used to check if object is of given type.
-				@param id Type ID
+				@param id Type ID.
 				@return True if object is of given type, otherwise false.
 			*/ 
 			virtual bool isA(const size_t id) const
