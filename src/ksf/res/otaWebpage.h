@@ -1,3 +1,13 @@
+/*
+ *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *
+ *	This file is a part of the ksIotFramework library.
+ *	All licensing information can be found inside LICENSE.md file.
+ *
+ *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+ */
+
+
 #ifndef devicefrontend_webpage_h
 #define devicefrontend_webpage_h
 
