@@ -7,7 +7,6 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-
 #ifndef devicefrontend_webpage_h
 #define devicefrontend_webpage_h
 
