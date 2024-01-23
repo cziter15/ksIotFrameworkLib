@@ -248,12 +248,16 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("saveConfig"))
 		{
-			// Split the input into lines
-			std::map<std::string_view, std::string_view> paramMap;
+			/* Grab all config components. */
+			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
+			app->findComponents<ksConfigProvider>(configCompsWp);
+			if (configCompsWp.empty())
+				return;
 
+			/* Parse body. */
+			std::map<std::string_view, std::string_view> paramMap;
 			size_t startPos = 0;
 			size_t endPos = body.find('\n');
-
 			while (endPos != std::string_view::npos) 
 			{
 				std::string_view line{body.substr(startPos, endPos - startPos)};
@@ -266,13 +270,13 @@ namespace ksf::comps
 				endPos = body.find('\n', startPos);
 			}
 
+			/* Save WiFi credentials. */
 			std::string ssid{paramMap[PSTR("ssid")]};
 			std::string password{paramMap[PSTR("password")]};
-
-			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
-			app->findComponents<ksConfigProvider>(configCompsWp);
 			std::string paramPrefix{};
+			ksf::saveCredentials(ssid, password);
 
+			/* Save user parameters. */
 			for (auto& configCompWp : configCompsWp)
 			{
 				auto configCompSp{configCompWp.lock()};
@@ -292,7 +296,6 @@ namespace ksf::comps
 				configCompSp->saveParams();
 			}
 
-			ksf::saveCredentials(ssid, password);
 			requestAppBreak();
 			return;
 		}
