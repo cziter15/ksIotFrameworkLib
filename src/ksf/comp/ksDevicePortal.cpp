@@ -251,8 +251,6 @@ namespace ksf::comps
 			/* Grab all config components. */
 			std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 			app->findComponents<ksConfigProvider>(configCompsWp);
-			if (configCompsWp.empty())
-				return;
 
 			/* Parse body. */
 			std::map<std::string_view, std::string_view> paramMap;
@@ -416,8 +414,8 @@ namespace ksf::comps
 	{
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 		app->findComponents<ksConfigProvider>(configCompsWp);
-		bool isInConfigMode{!configCompsWp.empty()};
 
+		bool isInConfigMode{WiFi.getMode() & WIFI_MODE_AP};
 		response += PSTR("{\"isConfigMode\": ");
 		response += isInConfigMode ? PSTR("true") : PSTR("false");
 
