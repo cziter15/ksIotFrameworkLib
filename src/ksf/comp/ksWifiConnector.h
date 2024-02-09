@@ -26,6 +26,7 @@ namespace ksf::comps
 
 			bool wasConnected{false};											// True if connected in previous loop.
 			bool gotIpAddress{false};											// True if IP address is set.
+			bool savePower{true};												// True to save power.
 
 			/*
 				@brief Internal method to setup MAC address.
@@ -52,8 +53,9 @@ namespace ksf::comps
 			/*
 				@brief Constructor for WiFi connector component.
 				@param hostname Hostname to be used by WiFi class
+				@param savePower True to save power
 			*/
-			ksWifiConnector(const char* hostname);
+			ksWifiConnector(const char* hostname, bool savePower = true);
 
 			/*
 				@brief Initializes WiFi connector component.

@@ -23,7 +23,8 @@
 
 namespace ksf::comps
 {
-	ksWifiConnector::ksWifiConnector(const char* hostname)
+	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower) 
+		: savePower(savePower)
 	{
 #if ESP32
 		/* Disable STA mode. */
@@ -73,10 +74,7 @@ namespace ksf::comps
 			return false;
 
 		WiFi.begin(ssid.c_str(), pass.c_str());
-
-#if ESP32
-		WiFi.setSleep(true);
-#endif
+		WiFi.setSleep(savePower);
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 		
