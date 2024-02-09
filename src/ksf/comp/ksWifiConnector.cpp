@@ -83,13 +83,6 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksWifiConnector::setPowerSave(bool enable)
-	{
-#if ESP32
-		WiFi.setSleep(enable);
-#endif
-	}
-
 	void ksWifiConnector::wifiConnectedInternal()
 	{
 		onConnected->broadcast();

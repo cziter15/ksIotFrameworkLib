@@ -75,12 +75,6 @@ namespace ksf::comps
 			bool isConnected() const;
 
 			/*
-				@brief Sets power save mode.
-				@param enable True to enable, false to disable.
-			*/
-			void setPowerSave(bool enable);
-
-			/*
 				@brief Destructor for WiFi connector component.
 			*/
 			virtual ~ksWifiConnector();
