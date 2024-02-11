@@ -72,7 +72,7 @@ namespace ksf::comps
 	void ksLed::setEnabled(bool enabled)
 	{
 		if (driveAsPushPull)
-			pinMode(pin, (driveAsActiveLow ? !enabled : enabled) ? INPUT_PULLUP : INPUT_PULLDOWN);
+			pinMode(pin, (driveAsActiveLow ? !enabled : enabled) ? INPUT_PULLUP : INPUT);
 		else
 			digitalWrite(pin, (driveAsActiveLow ? !enabled : enabled) ? HIGH : LOW);
 	}
