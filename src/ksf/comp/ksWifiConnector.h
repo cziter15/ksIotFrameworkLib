@@ -24,9 +24,9 @@ namespace ksf::comps
 			ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		// Wifi timer - reconnect.
 			ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						// Wifi timer - IP check.
 
-			bool wasConnected{false};											// True if connected in previous loop.
-			bool gotIpAddress{false};											// True if IP address is set.
-			bool savePower{true};												// True to save power.
+			bool wasConnected : 1 {false};										// True if connected in previous loop.
+			bool gotIpAddress : 1{false};										// True if IP address is set.
+			bool savePower : 1 {true};											// True to save power.
 
 			/*
 				@brief Internal method to setup MAC address.

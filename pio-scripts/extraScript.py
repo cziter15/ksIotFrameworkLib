@@ -20,7 +20,7 @@ try:
 		# remove unused flags
 		e.ProcessUnFlags("-std=gnu++11")
 		# add flags to environment
-		e.ProcessFlags("-std=gnu++17")
+		e.ProcessFlags("-std=gnu++2a")
 		e.ProcessFlags("-fno-exceptions")
 		e.ProcessFlags("-DCORE_DEBUG_LEVEL=0")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINO_OTA=1")

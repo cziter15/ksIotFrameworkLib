@@ -42,10 +42,9 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksDevicePortal, ksComponent)
 
 		protected:
-
 			ksf::ksApplication* app{nullptr};							// Application pointer.
 
-			bool breakApp{false};										// Flag to restart chip.
+			bool breakApp : 1 {false};									// Flag to restart chip.
 			uint32_t logKeepAliveTimestamp{0};							// Flag indicating whether logs are enabled.
 			uint32_t lastLoopExecutionTimestamp{0};						// Time of last loop execution (us)/
 			uint32_t loopExecutionTime{0};								// Diff (loop exec time).

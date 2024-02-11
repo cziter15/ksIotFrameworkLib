@@ -19,19 +19,22 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksLed, ksComponent)
 
 		protected:
-			uint8_t pin{0};						// Pin number assigned to LED.
-			bool activeLow{false};				// True if pin should be driven LOW to enable LED. Otherwise false.
-			uint32_t lastBlinkTimeMs{0};		// Last time LED state was toggled (milliseconds).
-			uint32_t blinkIntervalMs{0};		// Time in ms between LED state toggle (0 to disable blinking).
-			uint32_t blinkLoops{0};				// Number of loops (0 for infinite loop).
+			uint8_t pin{0};								// Pin number assigned to LED.
+			uint32_t lastBlinkTimeMs{0};				// Last time LED state was toggled (milliseconds).
+			uint32_t blinkIntervalMs{0};				// Time in ms between LED state toggle (0 to disable blinking).
+			uint32_t blinkLoops{0};						// Number of loops (0 for infinite loop).
+
+			bool driveAsActiveLow : 1 { false };		// True if LED should be active low, otherwise false.
+			bool driveAsPushPull : 1 { false };			// True if LED should be driven as push-pull, otherwise false.
 
 		public:
 			/*
 				@brief Constructs LED object, assigning passed pin number.
 				@param pin Pin number assigned to LED
-				@param activeLow True if pin should be driven LOW to enable LED, otherwise false
+				@param activeLow True if LED should be active low, otherwise false
+				@param driveAsPushPull True if LED should be driven as push-pull, otherwise false
 			*/
-			ksLed(uint8_t pin, bool activeLow = false);
+			ksLed(uint8_t pin, bool activeLow = false, bool driveAsPushPull = false);
 
 			/*
 				@brief Initializes LED component.
@@ -67,10 +70,15 @@ namespace ksf::comps
 
 			/*
 				@brief Enables or disables LED.
-			
 				@param enabled True to enable LED, false to disable.
 			*/
 			void setEnabled(bool enabled);
+
+			/*
+				@brief Enables or disables push/pull driving mode.
+				@param driveAsPushPull True if LED should be driven as push-pull, otherwise false
+			*/
+			void setDriveAsPushPull(bool driveAsPushPull);
 
 			/*
 				@brief Returns pin number assigned to LED.

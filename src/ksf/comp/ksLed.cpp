@@ -13,13 +13,15 @@
 
 namespace ksf::comps
 {
-	ksLed::ksLed(uint8_t pin, bool activeLow) 
-		: pin(pin), activeLow(activeLow)
+	ksLed::ksLed(uint8_t pin, bool driveAsActiveLow, bool driveAsPushPull) 
+		: pin(pin), driveAsActiveLow(driveAsActiveLow), driveAsPushPull(driveAsPushPull)
 	{}
 
 	bool ksLed::init(ksApplication* owner)
 	{
-		pinMode(pin, OUTPUT);
+		if (!driveAsPushPull)
+			pinMode(pin, OUTPUT);
+
 		setEnabled(false);
 		return true;
 	}
@@ -42,7 +44,7 @@ namespace ksf::comps
 
 	bool ksLed::isEnabled() const
 	{
-		return digitalRead(pin) == (activeLow ? LOW : HIGH);
+		return digitalRead(pin) == (driveAsActiveLow ? LOW : HIGH);
 	}
 
 	void ksLed::setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops)
@@ -58,9 +60,21 @@ namespace ksf::comps
 		return blinkIntervalMs > 0;
 	}
 
+	void ksLed::setDriveAsPushPull(bool driveAsPushPull)
+	{
+		bool wasEnabled{isEnabled()};
+		this->driveAsPushPull = driveAsPushPull;
+		if (!driveAsPushPull)
+			pinMode(pin, OUTPUT);
+		setEnabled(wasEnabled);
+	}
+
 	void ksLed::setEnabled(bool enabled)
 	{
-		digitalWrite(pin, (activeLow ? !enabled : enabled) ? HIGH : LOW);
+		if (driveAsPushPull)
+			pinMode(pin, (driveAsActiveLow ? !enabled : enabled) ? INPUT_PULLUP : INPUT_PULLDOWN);
+		else
+			digitalWrite(pin, (driveAsActiveLow ? !enabled : enabled) ? HIGH : LOW);
 	}
 
 	ksLed::~ksLed()
