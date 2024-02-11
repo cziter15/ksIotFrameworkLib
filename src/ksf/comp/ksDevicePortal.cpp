@@ -415,7 +415,7 @@ namespace ksf::comps
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 		app->findComponents<ksConfigProvider>(configCompsWp);
 
-		bool isInConfigMode{WiFi.getMode() & WIFI_MODE_AP};
+		bool isInConfigMode{WiFi.getMode() & WIFI_AP};
 		response += PSTR("{\"isConfigMode\": ");
 		response += isInConfigMode ? PSTR("true") : PSTR("false");
 
