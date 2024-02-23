@@ -12,25 +12,43 @@
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
 
-#if ESP8266
-	#include "flash_hal.h"
-	#include "ESP8266WiFi.h"
-	#include "WiFiClient.h"
-	#include "ESP8266WebServer.h"
-	#define HARDWARE "ESP8266"
+#if defined(ESP32) || defined(ESP8266)
+	#if ESP8266
+		#include "flash_hal.h"
+		#include "ESP8266WiFi.h"
+		#include "WiFiClient.h"
+		#include "ESP8266WebServer.h"
+		#define HARDWARE "ESP8266"
 
-	uint8_t ESP_getFlashVendor() { return ESP.getFlashChipVendorId(); }
-	uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipRealSize()/1024; }
-#elif ESP32
-	#include "WiFi.h"
-	#include "WiFiClient.h"
-	#include "WebServer.h"
-	#define WebServerClass WebServer
-	#define HARDWARE "ESP32"
+		uint8_t ESP_getFlashVendor() { return ESP.getFlashChipVendorId(); }
+		uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipRealSize()/1024; }
+	#elif ESP32
+		#include "WiFi.h"
+		#include "WiFiClient.h"
+		#include "WebServer.h"
+		#define WebServerClass WebServer
+		#define HARDWARE "ESP32"
 
-	extern uint32_t ESP_getFlashChipId(void);
-	uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() & 0xFF; }
-	uint32_t ESP_getFlashSizeKB() { return ESP.magicFlashChipSize(ESP.getFlashChipSize())/1024; }
+		extern uint32_t ESP_getFlashChipId(void);
+		uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() & 0xFF; }
+		uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipSize()/1024; }
+	#endif
+	const char* ESP_getFlashMode(void) 
+	{
+		switch (ESP.getFlashChipMode()) 
+		{
+			case FM_QIO: return PSTR("FM_QIO");
+			case FM_QOUT: return PSTR("FM_QOUT");
+			case FM_DIO: return PSTR("FM_DIO");
+			case FM_DOUT: return PSTR("FM_DOUT");
+			#if defined(ESP32)
+				case FM_FAST_READ: return PSTR("FM_FAST_READ");
+				case FM_SLOW_READ: return PSTR("FM_SLOW_READ");
+			#endif
+			case FM_UNKNOWN: return PSTR("FM_UNKNOWN");
+			default: return PSTR("FM_INVALID");
+		}
+	}
 #else
 	#error Platform not implemented.
 #endif
@@ -331,7 +349,9 @@ namespace ksf::comps
 		response += ksf::to_string(ESP_getFlashSizeKB());
 		response += PSTR(" KB, ");
 		response += ksf::to_string(ESP.getFlashChipSpeed()/1000000);
-		response += PSTR(" MHz)\"},{\"name\":\"Hostname\",\"value\":\"");
+		response += PSTR(" MHz, ");
+		response += ESP_getFlashMode();
+		response += PSTR(")\"},{\"name\":\"Hostname\",\"value\":\"");
 		response += WiFi.getHostname();
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
