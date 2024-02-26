@@ -56,6 +56,11 @@
 /* Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
+namespace fs
+{
+	class LittleFSFS;
+}
+
 namespace ksf
 {
 	namespace EOTAType
@@ -67,6 +72,8 @@ namespace ksf
 			OTA_PORTAL,
 		};
 	}
+
+	extern fs::LittleFSFS nvsLittleFS;
 
 	/*
 		@brief Initializes ksIotFramework.

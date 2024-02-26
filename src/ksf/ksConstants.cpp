@@ -32,16 +32,20 @@ namespace ksf
 	static EOTAType::Type otaBootType{EOTAType::NO_OTA};				// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;						// Variables for assembling 64-bit version of millis.
 
+	fs::LittleFSFS nvsLittleFS;
+
 	void initializeFramework()
 	{
 #ifdef ESP32
 		/* Initialize filesystem. */
 		LittleFS.begin(true);
+		nvsLittleFS.begin(true, "/nvs", 10U, "nvs");
 #endif
 
 #if ESP8266
 		/* Initialize filesystem. */
 		LittleFS.begin();
+		nvsLittleFS.begin(true, "/nvs", 10U, "nvs");
 #endif
 
 		WiFi.persistent(false);
@@ -49,17 +53,17 @@ namespace ksf
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 		
-		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
+		if (auto indicatorFile{nvsLittleFS.open(OTA_FILENAME_TEXT, "r")})
 		{
 			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
 			indicatorFile.close();
-			LittleFS.remove(OTA_FILENAME_TEXT);
+			nvsLittleFS.remove(OTA_FILENAME_TEXT);
 		}
 	}
 
 	void saveOtaBootIndicator(EOTAType::Type type)
 	{
-		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "w")})
+		if (auto indicatorFile{nvsLittleFS.open(OTA_FILENAME_TEXT, "w")})
 		{
 			indicatorFile.write(static_cast<uint8_t>(type));
 			indicatorFile.close();

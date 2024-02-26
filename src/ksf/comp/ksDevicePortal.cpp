@@ -11,6 +11,7 @@
 #include <LittleFS.h>
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
+#include "../ksConstants.h"
 
 #if defined(ESP32) || defined(ESP8266)
 	#if ESP8266
@@ -168,7 +169,7 @@ namespace ksf::comps
 		}
 		else if (body == PSTR("force-device-format"))
 		{
-			LittleFS.format();
+			nvsLittleFS.format();
 
 	#if ESP8266
 			ESP.eraseConfig();

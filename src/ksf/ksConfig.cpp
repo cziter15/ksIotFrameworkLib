@@ -8,7 +8,7 @@
  */
 
 #include "LittleFS.h"
-
+#include "ksConstants.h"
 #include "ksConfig.h"
 
 namespace ksf
@@ -22,7 +22,7 @@ namespace ksf
 		this->configFile = configFile[0] != '/' ? '/' + configFile : configFile;
 
 		/* Construct reader. */
-		auto fileReader{LittleFS.open(this->configFile.c_str(), "r")};
+		auto fileReader{nvsLittleFS.open(this->configFile.c_str(), "r")};
 
 		/* Read until EOF. */
 		while (fileReader.available())
@@ -63,7 +63,7 @@ namespace ksf
 			return;
 
 		/* If marked dirty, save changes to FS. */
-		auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
+		auto fileWriter{nvsLittleFS.open(configFile.c_str(), "w")};
 		for (const auto& [name, value] : configParams)
 		{
 			fileWriter.println(name.c_str());
