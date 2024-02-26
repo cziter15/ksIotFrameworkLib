@@ -16,21 +16,26 @@
 	#error Platform not implemented.
 #endif
 
-#include "LittleFS.h"
+#include <LittleFS.h>
+#include <Preferences.h>
 
 #include "ksConstants.h"
 #include "ksConfig.h"
 
 namespace ksf
 {
-	const char OTA_FILENAME_TEXT[] PROGMEM {"/ksf.otabooted"};			// File name for OTA boot indicator.
-	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"/ksf.wificred"};		// File name for WiFi credentials.
+	const char OTA_FILENAME_TEXT[] PROGMEM {"otabooted"};				// File name for OTA boot indicator.
+	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"wificred"};			// File name for WiFi credentials.
 
 	const char SSID_PARAM_NAME[] PROGMEM {"ssid"};						// Param name from progmem - ssid
 	const char PASSWORD_PARAM_NAME[] PROGMEM {"password"};				// Param name from progmem - password
 
+	const char KS_PREF_NAMESPACE[] PROGMEM {"ksfpref"};					// Preferences namespace.
+
 	static EOTAType::Type otaBootType{EOTAType::NO_OTA};				// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;						// Variables for assembling 64-bit version of millis.
+
+	Preferences preferences;
 
 	void initializeFramework()
 	{
@@ -44,26 +49,20 @@ namespace ksf
 		LittleFS.begin();
 #endif
 
+		preferences.begin(KS_PREF_NAMESPACE, false);
+
 		WiFi.persistent(false);
 		WiFi.mode(WIFI_OFF);
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
-		
-		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
-		{
-			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
-			indicatorFile.close();
-			LittleFS.remove(OTA_FILENAME_TEXT);
-		}
+
+		otaBootType = static_cast<EOTAType::Type>(preferences.getUChar(OTA_FILENAME_TEXT, EOTAType::NO_OTA));
+		preferences.remove(OTA_FILENAME_TEXT);
 	}
 
 	void saveOtaBootIndicator(EOTAType::Type type)
 	{
-		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "w")})
-		{
-			indicatorFile.write(static_cast<uint8_t>(type));
-			indicatorFile.close();
-		}
+		preferences.putUChar(OTA_FILENAME_TEXT, static_cast<uint8_t>(type));
 	}
 
 	EOTAType::Type getOtaBootType()
@@ -172,12 +171,12 @@ namespace ksf
 		}
 	}
 
-	void saveCredentials(std::string ssid, std::string password)
+	void saveCredentials(const std::string_view& ssid, const std::string_view& password)
 	{
 		USING_CONFIG_FILE(WIFI_CRED_FILENAME_TEXT)
 		{
-			config_file.setParam(SSID_PARAM_NAME, std::move(ssid));
-			config_file.setParam(PASSWORD_PARAM_NAME, std::move(password));
+			config_file.setParam(SSID_PARAM_NAME, ssid);
+			config_file.setParam(PASSWORD_PARAM_NAME, password);
 		}
 	}
 }

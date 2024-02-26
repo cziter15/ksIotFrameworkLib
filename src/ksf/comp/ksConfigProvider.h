@@ -44,7 +44,7 @@ namespace ksf::comps
 				@param value Parameter value
 				@param maxLength Maximum length of parameter value
 			*/
-			void addNewParam(std::string id, std::string value, int maxLength = 50);
+			void addNewParam(const char* id, const char* value, int maxLength = 50);
 
 			/*
 				@brief Defines new parameter (with default value).
@@ -52,7 +52,7 @@ namespace ksf::comps
 				@param config ksConfig reference
 				@param maxLength Maximum length of parameter value
 			*/
-			void addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength = 50);
+			void addNewParamWithConfigDefault(ksConfig& config, const char* id, int maxLength = 50);
 
 		public:
 			/*
