@@ -12,21 +12,22 @@
 
 namespace ksf::comps
 {
-	void ksConfigProvider::addNewParam(const char* id, const char* value, int maxLength)
+	void ksConfigProvider::addNewParam(std::string id, std::string value, int maxLength)
 	{
 		ksConfigParameter param
 		{
-			.id = id,
-			.value = value,
+			.id = std::move(id),
+			.value = std::move(value),
 			.maxLength = maxLength
 		};
 
 		params.push_back(std::move(param));
 	}
 
-	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, const char* id, int maxLength)
+	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength)
 	{
-		return addNewParam(id, config.getParam(id).c_str(), maxLength);
+		auto& value{config.getParam(id)};
+		return addNewParam(std::move(id), std::move(value), maxLength);
 	}
 
 	std::list<ksConfigParameter>& ksConfigProvider::getParameters()
