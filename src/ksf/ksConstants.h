@@ -56,11 +56,6 @@
 /* Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
-namespace fs
-{
-	class LittleFSFS;
-}
-
 namespace ksf
 {
 	namespace EOTAType
@@ -72,8 +67,6 @@ namespace ksf
 			OTA_PORTAL,
 		};
 	}
-
-	extern fs::LittleFSFS nvsLittleFS;
 
 	/*
 		@brief Initializes ksIotFramework.
@@ -192,5 +185,5 @@ namespace ksf
 		@param ssid SSID to be saved
 		@param password Password to be saved
 	*/
-	extern void saveCredentials(std::string ssid, std::string password);
+	extern void saveCredentials(const std::string_view& ssid, const std::string_view& password);
 }

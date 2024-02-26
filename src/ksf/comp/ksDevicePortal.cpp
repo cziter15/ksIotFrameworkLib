@@ -11,7 +11,6 @@
 #include <LittleFS.h>
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
-#include "../ksConstants.h"
 
 #if defined(ESP32) || defined(ESP8266)
 	#if ESP8266
@@ -169,7 +168,7 @@ namespace ksf::comps
 		}
 		else if (body == PSTR("force-device-format"))
 		{
-			nvsLittleFS.format();
+			LittleFS.format();
 
 	#if ESP8266
 			ESP.eraseConfig();
@@ -288,10 +287,7 @@ namespace ksf::comps
 			}
 
 			/* Save WiFi credentials. */
-			std::string ssid{paramMap[PSTR("ssid")]};
-			std::string password{paramMap[PSTR("password")]};
-			std::string paramPrefix{};
-			ksf::saveCredentials(ssid, password);
+			ksf::saveCredentials(paramMap[PSTR("ssid")], paramMap[PSTR("ssid")]);
 
 			/* Save user parameters. */
 			for (auto& configCompWp : configCompsWp)
