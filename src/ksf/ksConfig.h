@@ -10,7 +10,10 @@
 #pragma once
 
 #include <string>
-#include <map>
+#include <string_view>
+#include <memory>
+
+class Preferences;
 
 /*
 	Wrapper macro that allows to create nice file-manipulating sections. 
@@ -23,16 +26,16 @@ namespace ksf
 	class ksConfig
 	{
 		protected:
-			bool isDirty{false};									// True if config contents has been modified (and should be saved).
-			std::map<std::string, std::string> configParams;		// Config parameters.
+			bool touched{false};									// True if config contents has been modified (and should be saved).
 			std::string configFile;									// Config filename.
+			std::unique_ptr<Preferences> config;					// Config object.
 
 		public:
 			/*
 				@brief Constructor that opens (or creates) specified config file and loads its contents into memory.
 				@param configFile Config file name
 			*/
-			ksConfig(const std::string& configFile);
+			ksConfig(const char* configFile);
 
 			/*
 				@brief Sets parameter value.
@@ -42,8 +45,7 @@ namespace ksf
 				@param paramName Parameter name
 				@param paramValue Parameter value (use std::move when possible)
 			*/
-			void setParam(const std::string& paramName, const std::string paramValue);
-
+			void setParam(const char* paramName, const std::string_view& value);
 
 			/*
 				@brief Retrieves parameter value. 
@@ -54,14 +56,13 @@ namespace ksf
 				@param defaultValue Default value to return if parameter does not exist
 				@return Parameter value or defaultValue if parameter does not exist.
 			*/
-			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
+			std::string getParam(const char* paramName, const std::string_view& defaultValue = std::string_view()) const;
 
 			/*
 				@brief Operator bool override. Returns true if configFilename is not empty.
 				@return True if configFilename is not empty, otherwise false.
 			*/
 			operator bool() const;
-
 
 			/*
 				@brief Saves config content to flash. 
