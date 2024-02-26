@@ -30,17 +30,15 @@ namespace ksf
 
 	std::string ksConfig::getParam(const char* paramName, const std::string_view& defaultValue) const
 	{
-		auto bytesLength{config->getBytesLength(paramName)};
-		
-		if (bytesLength > 0)
+		std::string outVal;
+		if (auto bytesLength{config->getBytesLength(paramName)}; bytesLength > 0)
 		{
-			std::string outVal;
 			outVal.resize(bytesLength);
 			config->getBytes(paramName, outVal.data(), bytesLength);
-			return outVal;
 		}
-
-		return std::string(defaultValue);
+		else outVal = defaultValue;
+		
+		return std::move(outVal);
 	}
 
 	ksConfig::operator bool() const
