@@ -16,7 +16,6 @@ namespace ksf
 	ksConfig::ksConfig(const std::string& fileName)
 		: configPath(getNvsDirectory())
 	{
-		ets_printf("ksConfig::ksConfig(%s)\n", fileName.c_str());
 		/* If no file specified, clear internal path. */
 		if (fileName.empty())
 		{
@@ -30,8 +29,6 @@ namespace ksf
 
 		/* Assemble file path. */
 		configPath += fileName;
-
-		ets_printf("ksConfig::ksConfig - Full path is: %s\n", configPath.c_str());
 
 		/* Construct reader. */
 		auto fileReader{LittleFS.open(configPath.c_str(), "r")};
@@ -74,15 +71,10 @@ namespace ksf
 		if (!isDirty)
 			return;
 
-		ets_printf("ksConfig::ksConfig - Saving properties to: %s\n", configPath.c_str());
-
 		/* If marked dirty, save changes to FS. */
 		auto fileWriter{LittleFS.open(configPath.c_str(), "w")};
 		if (!fileWriter)
-		{
-			ets_printf("ksConfig::ksConfig - Failed to save properties to: %s\n", configPath.c_str());
 			return;
-		}
 
 		for (const auto& [name, value] : configParams)
 		{
