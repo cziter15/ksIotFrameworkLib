@@ -73,12 +73,17 @@ namespace ksf
 
 	bool removeDirectory(const char* path)
 	{
-		auto dir{LittleFS.open(path)};
+		auto dir{LittleFS.open(path, PSTR("r"))};
 		if (!dir || !dir.isDirectory())
 			return false;
 		for (auto entry{dir.openNextFile()}; entry; entry = dir.openNextFile())
 		{
-			std::string path{entry.path()};
+			#if ESP8266
+				std::string path{entry.fullName()};
+			#else
+				std::string path{entry.path()};
+			#endif
+
 			bool isDirectory{entry.isDirectory()};
 			entry.close();
 
