@@ -30,23 +30,27 @@ namespace ksf
 		/* Assemble file path. */
 		configPath += fileName;
 
-		/* Construct reader. */
-		auto fileReader{LittleFS.open(configPath.c_str(), "r")};
-
-		/* Read until EOF. */
-		while (fileReader.available())
+		/* Read config file. */
+		if (auto fileReader{LittleFS.open(configPath.c_str(), "r")})
 		{
-			std::string name{fileReader.readStringUntil('\n').c_str()};
-			name = name.substr(0, name.length() - 1);
+			/* Read until EOF. */
+			while (fileReader.available())
+			{
+				/* Read key. */
+				std::string name{fileReader.readStringUntil('\n').c_str()};
+				name = name.substr(0, name.length() - 1);
 
-			std::string val{fileReader.readStringUntil('\n').c_str()};
-			val = val.substr(0, val.length() - 1);
+				/* Read value. */
+				std::string val{fileReader.readStringUntil('\n').c_str()};
+				val = val.substr(0, val.length() - 1);
 
-			setParam(name, std::move(val));
-		}
+				/* Set param. */
+				setParam(name, std::move(val));
+			}
 
-		if (fileReader)
+			/* Close file. */
 			fileReader.close();
+		}
 	}
 
 	void ksConfig::setParam(const std::string& paramName, std::string paramValue)
