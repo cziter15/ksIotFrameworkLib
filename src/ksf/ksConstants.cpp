@@ -58,7 +58,7 @@ namespace ksf
 			LittleFS.mkdir(nvsDir);
 
 		/* Handle OTA boot indicator. */
-		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
+		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, PSTR("r"))})
 		{
 			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
 			indicatorFile.close();
@@ -118,7 +118,7 @@ namespace ksf
 
 	void saveOtaBootIndicator(EOTAType::Type type)
 	{
-		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "w")})
+		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, PSTR("w"))})
 		{
 			indicatorFile.write(static_cast<uint8_t>(type));
 			indicatorFile.close();
