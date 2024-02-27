@@ -10,6 +10,7 @@
 #if ESP32
 	#include <WiFi.h>
 	#include <esp_phy_init.h>
+	#include <nvs_flash.h>
 #elif ESP8266
 	#include <ESP8266WiFi.h>
 #else			
