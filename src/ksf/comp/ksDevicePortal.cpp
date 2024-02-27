@@ -8,7 +8,6 @@
  */
 
 #include <map>
-#include <LittleFS.h>
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
 
@@ -26,6 +25,7 @@
 		#include "WiFi.h"
 		#include "WiFiClient.h"
 		#include "WebServer.h"
+		#include "nvs_flash.h"
 		#define WebServerClass WebServer
 		#define HARDWARE "ESP32"
 
@@ -160,27 +160,16 @@ namespace ksf::comps
 			return PSTR("No command received. Don't be shy. Try 'help'.");
 
 		if (body == PSTR("help"))
-			return PSTR("Available commands: force-device-reboot, force-device-format");
+			return PSTR("Available commands: force-device-reboot, erase-config");
 
 		if (body == PSTR("force-device-reboot"))
 		{
 			rebootDevice();
 		}
-		else if (body == PSTR("force-device-format"))
+		else if (body == PSTR("erase-config"))
 		{
-			LittleFS.format();
-
-	#if ESP8266
-			ESP.eraseConfig();
-	#elif ESP32
-			WiFi.enableSTA(true);
-			WiFi.persistent(true);
-			WiFi.disconnect(true,true);
-			delay(500);
-			WiFi.persistent(false);
-	#else
-			#error Platform not implemented.
-	#endif
+			WiFi.mode(WIFI_OFF);
+			eraseConfigData();
 			ESP.restart();
 		}
 		else
@@ -289,7 +278,6 @@ namespace ksf::comps
 			/* Save WiFi credentials. */
 			std::string ssid{paramMap[PSTR("ssid")]};
 			std::string password{paramMap[PSTR("password")]};
-			std::string paramPrefix{};
 			ksf::saveCredentials(ssid, password);
 
 			/* Save user parameters. */

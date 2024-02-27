@@ -74,6 +74,11 @@ namespace ksf
 	extern void initializeFramework();
 
 	/*
+		@brief Erases configuration data.
+	*/
+	extern void eraseConfigData();
+
+	/*
 		@brief Updates device uptime, handling millis() function rollover.
 	*/
 	extern void updateDeviceUptime();

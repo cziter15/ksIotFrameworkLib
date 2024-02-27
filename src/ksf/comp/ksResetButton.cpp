@@ -15,10 +15,10 @@
 #error Platform not implemented.
 #endif
 
-#include <LittleFS.h>
 #include <Esp.h>
 
 #include "../ksApplication.h"
+#include "../ksConstants.h"
 #include "ksResetButton.h"
 #include "Arduino.h"
 
@@ -53,7 +53,7 @@ namespace ksf::comps
 				if (auto pressDuration{releasedTime - pressedTime}; pressDuration > LONG_TRIGGER)
 				{
 					WiFi.mode(WIFI_OFF);
-					LittleFS.format();
+					eraseConfigData();
 					ESP.restart();
 					return false;
 				}

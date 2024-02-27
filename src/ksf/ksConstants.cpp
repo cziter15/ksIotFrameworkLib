@@ -23,8 +23,8 @@
 
 namespace ksf
 {
-	const char OTA_FILENAME_TEXT[] PROGMEM {"/ksf.otabooted"};			// File name for OTA boot indicator.
-	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"/ksf.wificred"};		// File name for WiFi credentials.
+	const char OTA_FILENAME_TEXT[] PROGMEM {"/nvs/ksf.otabooted"};			// File name for OTA boot indicator.
+	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"/nvs/ksf.wificred"};		// File name for WiFi credentials.
 
 	const char SSID_PARAM_NAME[] PROGMEM {"ssid"};						// Param name from progmem - ssid
 	const char PASSWORD_PARAM_NAME[] PROGMEM {"password"};				// Param name from progmem - password
@@ -48,6 +48,9 @@ namespace ksf
 		WiFi.mode(WIFI_OFF);
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
+
+		if (!LittleFS.exists("/nvs"))
+			LittleFS.mkdir("/nvs");
 		
 		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
 		{
@@ -55,6 +58,19 @@ namespace ksf
 			indicatorFile.close();
 			LittleFS.remove(OTA_FILENAME_TEXT);
 		}
+	}
+
+	void eraseConfigData()
+	{
+		LittleFS.rmdir(PSTR("/nvs"));
+		
+		#if ESP8266
+			ESP.eraseConfig();
+		#elif ESP32
+			nvs_flash_erase();
+		#else
+			#error Platform not implemented.
+		#endif
 	}
 
 	void saveOtaBootIndicator(EOTAType::Type type)
