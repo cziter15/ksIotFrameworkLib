@@ -25,14 +25,14 @@ namespace ksf
 		protected:
 			bool isDirty{false};									// True if config contents has been modified (and should be saved).
 			std::map<std::string, std::string> configParams;		// Config parameters.
-			std::string configFile;									// Config filename.
+			std::string configPath;									// Config filename.
 
 		public:
 			/*
 				@brief Constructor that opens (or creates) specified config file and loads its contents into memory.
 				@param configFile Config file name
 			*/
-			ksConfig(const std::string& configFile);
+			ksConfig(const std::string& fileName);
 
 			/*
 				@brief Sets parameter value.

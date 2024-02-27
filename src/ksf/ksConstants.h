@@ -69,6 +69,12 @@ namespace ksf
 	}
 
 	/*
+		@brief Retrieves NVS directory name.
+		@return NVS directory name.
+	*/
+	extern const char* getNvsDirectory();
+
+	/*
 		@brief Initializes ksIotFramework.
 	*/
 	extern void initializeFramework();

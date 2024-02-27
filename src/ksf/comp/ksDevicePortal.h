@@ -81,7 +81,7 @@ namespace ksf::comps
 			/*
 				@brief This function handles device reboot.
 			*/
-			[[noreturn]] void rebootDevice();
+			void rebootDevice();
 
 			/*
 				@brief This function handles authentication error.

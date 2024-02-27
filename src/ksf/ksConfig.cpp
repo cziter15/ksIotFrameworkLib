@@ -9,24 +9,32 @@
 
 #include "LittleFS.h"
 #include "ksConfig.h"
+#include "ksConstants.h"
 
 namespace ksf
 {
-	ksConfig::ksConfig(const std::string& configFile) 
-		: configFile(PSTR("/nvs/"))
+	ksConfig::ksConfig(const std::string& fileName)
+		: configPath(getNvsDirectory())
 	{
+		ets_printf("ksConfig::ksConfig(%s)\n", fileName.c_str());
 		/* If no file specified, clear internal path. */
-		if (configFile.empty())
+		if (fileName.empty())
 		{
-			this->configFile.clear();
+			configPath.clear();
 			return;
 		}
 
+		/* Add leading slash. */
+		if (fileName[0] != '/')
+			configPath += '/';
+
 		/* Assemble file path. */
-		this->configFile += configFile;
+		configPath += fileName;
+
+		ets_printf("ksConfig::ksConfig - Full path is: %s\n", configPath.c_str());
 
 		/* Construct reader. */
-		auto fileReader{LittleFS.open(this->configFile.c_str(), "r")};
+		auto fileReader{LittleFS.open(configPath.c_str(), "r")};
 
 		/* Read until EOF. */
 		while (fileReader.available())
@@ -58,7 +66,7 @@ namespace ksf
 
 	ksConfig::operator bool() const
 	{
-		return configFile.length() > 0;
+		return !configPath.empty();
 	}
 
 	ksConfig::~ksConfig()
@@ -66,8 +74,16 @@ namespace ksf
 		if (!isDirty)
 			return;
 
+		ets_printf("ksConfig::ksConfig - Saving properties to: %s\n", configPath.c_str());
+
 		/* If marked dirty, save changes to FS. */
-		auto fileWriter{LittleFS.open(configFile.c_str(), "w")};
+		auto fileWriter{LittleFS.open(configPath.c_str(), "w")};
+		if (!fileWriter)
+		{
+			ets_printf("ksConfig::ksConfig - Failed to save properties to: %s\n", configPath.c_str());
+			return;
+		}
+
 		for (const auto& [name, value] : configParams)
 		{
 			fileWriter.println(name.c_str());

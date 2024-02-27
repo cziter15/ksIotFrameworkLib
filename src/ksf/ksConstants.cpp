@@ -24,6 +24,8 @@
 
 namespace ksf
 {
+	const char NVS_DIRECTORY[] PROGMEM {"/nvs"};						// NVS directory name.
+
 	const char OTA_FILENAME_TEXT[] PROGMEM {"ksf.otabooted"};			// File name for OTA boot indicator.
 	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"ksf.wificred"};		// File name for WiFi credentials.
 
@@ -45,17 +47,28 @@ namespace ksf
 		LittleFS.begin();
 #endif
 
+		/* Initialize WiFi defaults. */
 		WiFi.persistent(false);
 		WiFi.mode(WIFI_OFF);
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 
+		/* Create NVS directory. */
+		if (auto nvsDir{getNvsDirectory()}; !LittleFS.exists(nvsDir))
+			LittleFS.mkdir(nvsDir);
+
+		/* Handle OTA boot indicator. */
 		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
 		{
 			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
 			indicatorFile.close();
 			LittleFS.remove(OTA_FILENAME_TEXT);
 		}
+	}
+
+	const char* getNvsDirectory()
+	{
+		return NVS_DIRECTORY;
 	}
 
 	bool removeDirectory(const char* path)
@@ -85,7 +98,7 @@ namespace ksf
 	bool eraseConfigData()
 	{
 		bool success{true};
-		success |= removeDirectory(PSTR("/nvs/"));
+		success |= removeDirectory(getNvsDirectory());
 
 		#if ESP8266
 			success &= !ESP.eraseConfig();
