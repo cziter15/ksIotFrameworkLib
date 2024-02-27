@@ -44,7 +44,6 @@ namespace ksf
 			*/
 			void setParam(const std::string& paramName, const std::string paramValue);
 
-
 			/*
 				@brief Retrieves parameter value. 
 				
@@ -61,7 +60,6 @@ namespace ksf
 				@return True if configFilename is not empty, otherwise false.
 			*/
 			operator bool() const;
-
 
 			/*
 				@brief Saves config content to flash. 

@@ -10,6 +10,7 @@
 #include <map>
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
+#include <LittleFS.h>
 
 #if defined(ESP32) || defined(ESP8266)
 	#if ESP8266
@@ -158,11 +159,9 @@ namespace ksf::comps
 	{
 		if (body.empty())
 			return PSTR("No command received. Don't be shy. Try 'help'.");
-
-		if (body == PSTR("help"))
-			return PSTR("Available commands: force-device-reboot, erase-config");
-
-		if (body == PSTR("force-device-reboot"))
+		else if (body == PSTR("help"))
+			return PSTR("Available commands: reboot-device, erase-config, erase-all-data, help");
+		else if (body == PSTR("reboot-device"))
 		{
 			rebootDevice();
 		}
@@ -170,7 +169,18 @@ namespace ksf::comps
 		{
 			WiFi.mode(WIFI_OFF);
 			eraseConfigData();
-			ESP.restart();
+			rebootDevice();
+		}
+		else if (body == PSTR("erase-all-data"))
+		{
+			WiFi.mode(WIFI_OFF);
+			#if ESP32
+				nvs_flash_erase();
+			#elif ESP8266
+				ESP.eraseConfig();
+			#endif
+			LittleFS.format();
+			rebootDevice();
 		}
 		else
 		{

@@ -24,8 +24,8 @@
 
 namespace ksf
 {
-	const char OTA_FILENAME_TEXT[] PROGMEM {"/nvs/ksf.otabooted"};			// File name for OTA boot indicator.
-	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"/nvs/ksf.wificred"};		// File name for WiFi credentials.
+	const char OTA_FILENAME_TEXT[] PROGMEM {"ksf.otabooted"};			// File name for OTA boot indicator.
+	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"ksf.wificred"};		// File name for WiFi credentials.
 
 	const char SSID_PARAM_NAME[] PROGMEM {"ssid"};						// Param name from progmem - ssid
 	const char PASSWORD_PARAM_NAME[] PROGMEM {"password"};				// Param name from progmem - password
@@ -50,9 +50,6 @@ namespace ksf
 		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 
-		if (!LittleFS.exists("/nvs"))
-			LittleFS.mkdir("/nvs");
-		
 		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, "r")})
 		{
 			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
@@ -61,17 +58,42 @@ namespace ksf
 		}
 	}
 
-	void eraseConfigData()
+	bool removeDirectory(const char* path)
 	{
-		LittleFS.rmdir(PSTR("/nvs"));
-		
+		auto dir{LittleFS.open(path)};
+		if (!dir || !dir.isDirectory())
+			return false;
+		for (auto entry{dir.openNextFile()}; entry; entry = dir.openNextFile())
+		{
+			std::string path{entry.path()};
+			bool isDirectory{entry.isDirectory()};
+			entry.close();
+
+			if (!path.empty() && path[0] != '.' && path[0] != 0)
+			{
+				if (isDirectory)
+					if (!removeDirectory(path.c_str())) 
+						return false;
+				else if (!LittleFS.remove(path.c_str()))
+					return false;
+			}
+		}
+		dir.close();
+		return LittleFS.rmdir(path);
+	}
+
+	bool eraseConfigData()
+	{
+		bool success{true};
+		success |= removeDirectory(PSTR("/nvs/"));
+
 		#if ESP8266
-			ESP.eraseConfig();
+			success &= !ESP.eraseConfig();
 		#elif ESP32
-			nvs_flash_erase();
-		#else
-			#error Platform not implemented.
+			success &= nvs_flash_erase() != ESP_OK;
 		#endif
+
+		return success;
 	}
 
 	void saveOtaBootIndicator(EOTAType::Type type)

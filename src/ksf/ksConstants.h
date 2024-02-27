@@ -74,9 +74,17 @@ namespace ksf
 	extern void initializeFramework();
 
 	/*
-		@brief Erases configuration data.
+		@brief Removes directory with all its content.
+		@param path Path to be removed.
+		@return True if removal was successful.
 	*/
-	extern void eraseConfigData();
+	extern bool removeDirectory(const char* path);
+
+	/*
+		@brief Erases configuration data (config file and NVS data).
+		@return True if erase was successful.
+	*/
+	extern bool eraseConfigData();
 
 	/*
 		@brief Updates device uptime, handling millis() function rollover.

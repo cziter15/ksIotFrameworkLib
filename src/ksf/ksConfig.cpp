@@ -8,20 +8,21 @@
  */
 
 #include "LittleFS.h"
-
 #include "ksConfig.h"
 
 namespace ksf
 {
-	ksConfig::ksConfig(const std::string& configFile)
+	ksConfig::ksConfig(const std::string& configFile) 
+		: configFile(PSTR("/nvs/"))
 	{
-		if (configFile.length() == 0)
+		/* If no file specified, clear internal path. */
+		if (configFile.empty())
+		{
+			this->configFile.clear();
 			return;
+		}
 
 		/* Assemble file path. */
-		this->configFile += "/nvs/";
-		if (configFile[0] != '/')
-			this->configFile += '/';
 		this->configFile += configFile;
 
 		/* Construct reader. */
