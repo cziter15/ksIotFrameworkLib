@@ -77,7 +77,7 @@ namespace ksf::comps
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			for (auto& param : params)
-				config_file.setParam(param.id.c_str(), {param.value});
+				config_file.setParam(param.id, std::move(param.value));
 		}
 
 		params.clear();

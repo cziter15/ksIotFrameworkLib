@@ -287,7 +287,10 @@ namespace ksf::comps
 			}
 
 			/* Save WiFi credentials. */
-			ksf::saveCredentials(paramMap[PSTR("ssid")], paramMap[PSTR("ssid")]);
+			std::string ssid{paramMap[PSTR("ssid")]};
+			std::string password{paramMap[PSTR("password")]};
+			std::string paramPrefix{};
+			ksf::saveCredentials(ssid, password);
 
 			/* Save user parameters. */
 			for (auto& configCompWp : configCompsWp)
