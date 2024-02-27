@@ -90,8 +90,10 @@ namespace ksf
 			if (!path.empty() && path[0] != '.' && path[0] != 0)
 			{
 				if (isDirectory)
+				{
 					if (!removeDirectory(path.c_str())) 
 						return false;
+				}
 				else if (!LittleFS.remove(path.c_str()))
 					return false;
 			}
