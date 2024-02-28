@@ -104,8 +104,7 @@ namespace ksf
 
 	bool eraseConfigData()
 	{
-		bool success{true};
-		success |= removeDirectory(getNvsDirectory());
+		bool success{removeDirectory(getNvsDirectory())};
 
 		#if ESP8266
 			success &= !ESP.eraseConfig();

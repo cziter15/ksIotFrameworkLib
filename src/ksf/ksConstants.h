@@ -88,7 +88,7 @@ namespace ksf
 
 	/*
 		@brief Erases configuration data (config file and NVS data).
-		@return True if erase was successful.
+		@return True if erase was successful. False if one or more of the steps failed.
 	*/
 	extern bool eraseConfigData();
 
