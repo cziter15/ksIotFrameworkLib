@@ -23,12 +23,23 @@ namespace ksf
 
 namespace ksf::comps
 {
+	namespace EConfigParamType
+	{
+		enum Type
+		{
+			Text,
+			Password,
+			Number
+		};
+	};
+
 	struct ksConfigParameter
 	{
 		std::string id;
 		std::string defaultValue;
 		std::string value;
-		int maxLength{0};
+		EConfigParamType::Type type{};
+		int maxLength{};
 	};
 
 	class ksConfigProvider : public ksComponent
@@ -40,19 +51,23 @@ namespace ksf::comps
 			
 			/*
 				@brief Defines new parameter.
+
 				@param id Shared ID/Label to identify parameter
-				@param value Parameter value
+				@param value Default value
 				@param maxLength Maximum length of parameter value
+				@param type Type of parameter
 			*/
-			void addNewParam(std::string id, std::string value, int maxLength = 50);
+			void addNewParam(std::string id, std::string value, int maxLength = 50, EConfigParamType::Type type = {});
 
 			/*
 				@brief Defines new parameter (with default value).
+
+				@param config Reference to config
 				@param id Shared ID/Label to identify parameter
-				@param config ksConfig reference
 				@param maxLength Maximum length of parameter value
+				@param type Type of parameter
 			*/
-			void addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength = 50);
+			void addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength = 50, EConfigParamType::Type type = {});
 
 		public:
 			/*

@@ -470,6 +470,21 @@ namespace ksf::comps
 				response += paramRef.value;
 				response += PSTR("\", \"default\": \"");
 				response += paramRef.defaultValue;
+				response += PSTR("\", \"type\": \"");
+				
+				switch (paramRef.type)
+				{
+					case EConfigParamType::Text:
+						response += PSTR("text");
+					break;
+					case EConfigParamType::Password:
+						response += PSTR("password");
+					break;
+					case EConfigParamType::Number:
+						response += PSTR("number");
+					break;
+				}
+
 				response += PSTR("\"},");
 			}
 		}

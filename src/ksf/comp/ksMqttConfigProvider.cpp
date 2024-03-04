@@ -64,10 +64,10 @@ namespace ksf::comps
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			addNewParamWithConfigDefault(config_file, BROKER_TEXT_PGM);
-			addNewParamWithConfigDefault(config_file, PORT_TEXT_PGM, 5);
+			addNewParamWithConfigDefault(config_file, PORT_TEXT_PGM, 5, EConfigParamType::Number);
 			addNewParamWithConfigDefault(config_file, USER_TEXT_PGM);
 			addNewParamWithConfigDefault(config_file, FINGERPRINT_TEXT_PGM, 110);
-			addNewParamWithConfigDefault(config_file, PASSWORD_TEXT_PGM);
+			addNewParamWithConfigDefault(config_file, PASSWORD_TEXT_PGM, 50, EConfigParamType::Password);
 			addNewParamWithConfigDefault(config_file, PREFIX_TEXT_PGM);
 		}
 	}
