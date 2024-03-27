@@ -85,31 +85,175 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae29595441a2aff5b0d0b43a3e9f55c8c" id="r_ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="memItemLeft" align="right" valign="top"><a id="ae29595441a2aff5b0d0b43a3e9f55c8c" name="ae29595441a2aff5b0d0b43a3e9f55c8c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ksConfig</b> (const std::string &amp;fileName)</td></tr>
+<tr class="memitem:ae29595441a2aff5b0d0b43a3e9f55c8c" id="r_ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae29595441a2aff5b0d0b43a3e9f55c8c">ksConfig</a> (const std::string &amp;fileName)</td></tr>
+<tr class="memdesc:ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that opens (or creates) specified config file and loads its contents into memory.  <br /></td></tr>
 <tr class="separator:ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a714a7fe8087ccc2bd386bbadb467ce3e" id="r_a714a7fe8087ccc2bd386bbadb467ce3e"><td class="memItemLeft" align="right" valign="top"><a id="a714a7fe8087ccc2bd386bbadb467ce3e" name="a714a7fe8087ccc2bd386bbadb467ce3e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setParam</b> (const std::string &amp;paramName, const std::string paramValue)</td></tr>
+<tr class="memitem:a714a7fe8087ccc2bd386bbadb467ce3e" id="r_a714a7fe8087ccc2bd386bbadb467ce3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a714a7fe8087ccc2bd386bbadb467ce3e">setParam</a> (const std::string &amp;paramName, const std::string paramValue)</td></tr>
+<tr class="memdesc:a714a7fe8087ccc2bd386bbadb467ce3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets parameter value.  <br /></td></tr>
 <tr class="separator:a714a7fe8087ccc2bd386bbadb467ce3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32af4b832d708c039351dea37fa7fcb3" id="r_a32af4b832d708c039351dea37fa7fcb3"><td class="memItemLeft" align="right" valign="top"><a id="a32af4b832d708c039351dea37fa7fcb3" name="a32af4b832d708c039351dea37fa7fcb3"></a>
-const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getParam</b> (const std::string &amp;paramName, const std::string &amp;defaultValue=std::string()) const</td></tr>
+<tr class="memitem:a32af4b832d708c039351dea37fa7fcb3" id="r_a32af4b832d708c039351dea37fa7fcb3"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32af4b832d708c039351dea37fa7fcb3">getParam</a> (const std::string &amp;paramName, const std::string &amp;defaultValue=std::string()) const</td></tr>
+<tr class="memdesc:a32af4b832d708c039351dea37fa7fcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves parameter value.  <br /></td></tr>
 <tr class="separator:a32af4b832d708c039351dea37fa7fcb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af05e375f48e5ce57902a587393a95134" id="r_af05e375f48e5ce57902a587393a95134"><td class="memItemLeft" align="right" valign="top"><a id="af05e375f48e5ce57902a587393a95134" name="af05e375f48e5ce57902a587393a95134"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>operator bool</b> () const</td></tr>
+<tr class="memitem:af05e375f48e5ce57902a587393a95134" id="r_af05e375f48e5ce57902a587393a95134"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af05e375f48e5ce57902a587393a95134">operator bool</a> () const</td></tr>
+<tr class="memdesc:af05e375f48e5ce57902a587393a95134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator bool override. Returns true if configFilename is not empty.  <br /></td></tr>
 <tr class="separator:af05e375f48e5ce57902a587393a95134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304947df2a72b5297cbca0bba3c8136f" id="r_a304947df2a72b5297cbca0bba3c8136f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a304947df2a72b5297cbca0bba3c8136f">~ksConfig</a> ()</td></tr>
+<tr class="memdesc:a304947df2a72b5297cbca0bba3c8136f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves config content to flash.  <br /></td></tr>
+<tr class="separator:a304947df2a72b5297cbca0bba3c8136f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aea9a5bc2306e3582498f027b210af4eb" id="r_aea9a5bc2306e3582498f027b210af4eb"><td class="memItemLeft" align="right" valign="top"><a id="aea9a5bc2306e3582498f027b210af4eb" name="aea9a5bc2306e3582498f027b210af4eb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDirty</b> {false}</td></tr>
+<tr class="memdesc:aea9a5bc2306e3582498f027b210af4eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if config contents has been modified (and should be saved). <br /></td></tr>
 <tr class="separator:aea9a5bc2306e3582498f027b210af4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e448b2e918a7738ab03622a8c89ae0f" id="r_a2e448b2e918a7738ab03622a8c89ae0f"><td class="memItemLeft" align="right" valign="top"><a id="a2e448b2e918a7738ab03622a8c89ae0f" name="a2e448b2e918a7738ab03622a8c89ae0f"></a>
 std::map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>configParams</b></td></tr>
+<tr class="memdesc:a2e448b2e918a7738ab03622a8c89ae0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config parameters. <br /></td></tr>
 <tr class="separator:a2e448b2e918a7738ab03622a8c89ae0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a57cb81bcf46a95a2973124c32cbf2c" id="r_a3a57cb81bcf46a95a2973124c32cbf2c"><td class="memItemLeft" align="right" valign="top"><a id="a3a57cb81bcf46a95a2973124c32cbf2c" name="a3a57cb81bcf46a95a2973124c32cbf2c"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b></td></tr>
+<tr class="memdesc:a3a57cb81bcf46a95a2973124c32cbf2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config filename. <br /></td></tr>
 <tr class="separator:a3a57cb81bcf46a95a2973124c32cbf2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae29595441a2aff5b0d0b43a3e9f55c8c" name="ae29595441a2aff5b0d0b43a3e9f55c8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae29595441a2aff5b0d0b43a3e9f55c8c">&#9670;&#160;</a></span>ksConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ksf::ksConfig::ksConfig </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>fileName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor that opens (or creates) specified config file and loads its contents into memory. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">configFile</td><td>Config file name </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a304947df2a72b5297cbca0bba3c8136f" name="a304947df2a72b5297cbca0bba3c8136f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a304947df2a72b5297cbca0bba3c8136f">&#9670;&#160;</a></span>~ksConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ksf::ksConfig::~ksConfig </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Saves config content to flash. </p>
+<p>If config contents has not been modified, nothing will be saved. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a32af4b832d708c039351dea37fa7fcb3" name="a32af4b832d708c039351dea37fa7fcb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32af4b832d708c039351dea37fa7fcb3">&#9670;&#160;</a></span>getParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string &amp; ksf::ksConfig::getParam </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>paramName</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>defaultValue</em><span class="paramdefsep"> = </span><span class="paramdefval">std::string()</span></span>&#160;) const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrieves parameter value. </p>
+<p>If parameter does not exist, defaultValue will be returned.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paramName</td><td>Parameter name </td></tr>
+    <tr><td class="paramname">defaultValue</td><td>Default value to return if parameter does not exist </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Parameter value or defaultValue if parameter does not exist. </dd></dl>
+
+</div>
+</div>
+<a id="af05e375f48e5ce57902a587393a95134" name="af05e375f48e5ce57902a587393a95134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af05e375f48e5ce57902a587393a95134">&#9670;&#160;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ksf::ksConfig::operator bool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Operator bool override. Returns true if configFilename is not empty. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if configFilename is not empty, otherwise false. </dd></dl>
+
+</div>
+</div>
+<a id="a714a7fe8087ccc2bd386bbadb467ce3e" name="a714a7fe8087ccc2bd386bbadb467ce3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a714a7fe8087ccc2bd386bbadb467ce3e">&#9670;&#160;</a></span>setParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ksf::ksConfig::setParam </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>paramName</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string</td>          <td class="paramname"><span class="paramname"><em>paramValue</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets parameter value. </p>
+<p>If parameter does not exist, it will be created.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paramName</td><td>Parameter name </td></tr>
+    <tr><td class="paramname">paramValue</td><td>Parameter value (use std::move when possible) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/ksf/<a class="el" href="ks_config_8h_source.html">ksConfig.h</a></li>
 <li>src/ksf/<b>ksConfig.cpp</b></li>

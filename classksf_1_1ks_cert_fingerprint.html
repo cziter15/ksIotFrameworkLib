@@ -85,19 +85,138 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af4672963f80f351ab4cfd9ee9c5adcf7" id="r_af4672963f80f351ab4cfd9ee9c5adcf7"><td class="memItemLeft" align="right" valign="top"><a id="af4672963f80f351ab4cfd9ee9c5adcf7" name="af4672963f80f351ab4cfd9ee9c5adcf7"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> (WiFiClientSecure *client, const std::string &amp;fingerprint)</td></tr>
+<tr class="memitem:af4672963f80f351ab4cfd9ee9c5adcf7" id="r_af4672963f80f351ab4cfd9ee9c5adcf7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4672963f80f351ab4cfd9ee9c5adcf7">setup</a> (WiFiClientSecure *client, const std::string &amp;fingerprint)</td></tr>
+<tr class="memdesc:af4672963f80f351ab4cfd9ee9c5adcf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs certificate fingerprint setup (platform dependent).  <br /></td></tr>
 <tr class="separator:af4672963f80f351ab4cfd9ee9c5adcf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaef4a1680808fd8212cb62ad757355e7" id="r_aaef4a1680808fd8212cb62ad757355e7"><td class="memItemLeft" align="right" valign="top"><a id="aaef4a1680808fd8212cb62ad757355e7" name="aaef4a1680808fd8212cb62ad757355e7"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>verify</b> (WiFiClientSecure *client) const</td></tr>
+<tr class="memitem:aaef4a1680808fd8212cb62ad757355e7" id="r_aaef4a1680808fd8212cb62ad757355e7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaef4a1680808fd8212cb62ad757355e7">verify</a> (WiFiClientSecure *client) const</td></tr>
+<tr class="memdesc:aaef4a1680808fd8212cb62ad757355e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs certificate fingerprint validation (platform dependent).  <br /></td></tr>
 <tr class="separator:aaef4a1680808fd8212cb62ad757355e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a35a398b6dbe77cb2c4a9a35bf7b38c84" id="r_a35a398b6dbe77cb2c4a9a35bf7b38c84"><td class="memItemLeft" align="right" valign="top"><a id="a35a398b6dbe77cb2c4a9a35bf7b38c84" name="a35a398b6dbe77cb2c4a9a35bf7b38c84"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>fingerprintToBytes</b> (const std::string &amp;fingerprint, uint8_t *bytes, uint8_t bytesLen) const</td></tr>
+<tr class="memitem:a35a398b6dbe77cb2c4a9a35bf7b38c84" id="r_a35a398b6dbe77cb2c4a9a35bf7b38c84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a35a398b6dbe77cb2c4a9a35bf7b38c84">fingerprintToBytes</a> (const std::string &amp;fingerprint, uint8_t *bytes, uint8_t bytesLen) const</td></tr>
+<tr class="memdesc:a35a398b6dbe77cb2c4a9a35bf7b38c84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts fingerprint string into array of bytes.  <br /></td></tr>
 <tr class="separator:a35a398b6dbe77cb2c4a9a35bf7b38c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a35a398b6dbe77cb2c4a9a35bf7b38c84" name="a35a398b6dbe77cb2c4a9a35bf7b38c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35a398b6dbe77cb2c4a9a35bf7b38c84">&#9670;&#160;</a></span>fingerprintToBytes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ksf::ksCertFingerprint::fingerprintToBytes </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>fingerprint</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>bytes</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>bytesLen</em></span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts fingerprint string into array of bytes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fingerprint</td><td>Fingerprint string </td></tr>
+    <tr><td class="paramname">bytes</td><td>Output buffer pointer </td></tr>
+    <tr><td class="paramname">bytesLen</td><td>Output buffer size </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if fingerprint seems to be OK, otherwise false. </dd></dl>
+
+</div>
+</div>
+<a id="af4672963f80f351ab4cfd9ee9c5adcf7" name="af4672963f80f351ab4cfd9ee9c5adcf7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4672963f80f351ab4cfd9ee9c5adcf7">&#9670;&#160;</a></span>setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ksf::ksCertFingerprint::setup </td>
+          <td>(</td>
+          <td class="paramtype">WiFiClientSecure *</td>          <td class="paramname"><span class="paramname"><em>client</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>fingerprint</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Performs certificate fingerprint setup (platform dependent). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>Pointer of WiFiClientSecure </td></tr>
+    <tr><td class="paramname">fingerprint</td><td>Fingerprint string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if setup has been successfull, otherwise false. </dd></dl>
+
+</div>
+</div>
+<a id="aaef4a1680808fd8212cb62ad757355e7" name="aaef4a1680808fd8212cb62ad757355e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaef4a1680808fd8212cb62ad757355e7">&#9670;&#160;</a></span>verify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ksf::ksCertFingerprint::verify </td>
+          <td>(</td>
+          <td class="paramtype">WiFiClientSecure *</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Performs certificate fingerprint validation (platform dependent). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>Pointer of WiFiClientSecure </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on verification pass, otherwise false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/ksf/<a class="el" href="ks_cert_utils_8h_source.html">ksCertUtils.h</a></li>
 <li>src/ksf/<b>ksCertUtils.cpp</b></li>

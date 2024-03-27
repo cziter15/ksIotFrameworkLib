@@ -101,21 +101,144 @@ Inheritance diagram for ksf::ksRtti:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab835f07a17adfa5d44313544df204025" id="r_ab835f07a17adfa5d44313544df204025"><td class="memItemLeft" align="right" valign="top"><a id="ab835f07a17adfa5d44313544df204025" name="ab835f07a17adfa5d44313544df204025"></a>
-virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getInstanceType</b> () const =0</td></tr>
+<tr class="memitem:ab835f07a17adfa5d44313544df204025" id="r_ab835f07a17adfa5d44313544df204025"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab835f07a17adfa5d44313544df204025">getInstanceType</a> () const =0</td></tr>
+<tr class="memdesc:ab835f07a17adfa5d44313544df204025"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
 <tr class="separator:ab835f07a17adfa5d44313544df204025"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84c5ab0cd0a529fd085e68de557ab4f4" id="r_a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memItemLeft" align="right" valign="top"><a id="a84c5ab0cd0a529fd085e68de557ab4f4" name="a84c5ab0cd0a529fd085e68de557ab4f4"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>isA</b> (const size_t id) const</td></tr>
+<tr class="memitem:a84c5ab0cd0a529fd085e68de557ab4f4" id="r_a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84c5ab0cd0a529fd085e68de557ab4f4">isA</a> (const size_t id) const</td></tr>
+<tr class="memdesc:a84c5ab0cd0a529fd085e68de557ab4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
 <tr class="separator:a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33f1522c53fd457d441f9203ed04a628" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2"><a id="a33f1522c53fd457d441f9203ed04a628" name="a33f1522c53fd457d441f9203ed04a628"></a>
-template&lt;typename TType &gt; </td></tr>
-<tr class="memitem:a33f1522c53fd457d441f9203ed04a628"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>as</b> ()</td></tr>
+<tr class="memitem:a33f1522c53fd457d441f9203ed04a628" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
+<tr class="memitem:a33f1522c53fd457d441f9203ed04a628"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
+<tr class="memdesc:a33f1522c53fd457d441f9203ed04a628"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to cast object to given type.  <br /></td></tr>
 <tr class="separator:a33f1522c53fd457d441f9203ed04a628"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9" id="r_a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplParams" colspan="2"><a id="a3256fe5f274ed29149d64dd575ff37f9" name="a3256fe5f274ed29149d64dd575ff37f9"></a>
-template&lt;typename TType &gt; </td></tr>
-<tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplItemLeft" align="right" valign="top">const TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><b>as</b> () const</td></tr>
+<tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9" id="r_a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
+<tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplItemLeft" align="right" valign="top">const TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3256fe5f274ed29149d64dd575ff37f9">as</a> () const</td></tr>
+<tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to const cast object to given type.  <br /></td></tr>
 <tr class="separator:a3256fe5f274ed29149d64dd575ff37f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a33f1522c53fd457d441f9203ed04a628" name="a33f1522c53fd457d441f9203ed04a628"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33f1522c53fd457d441f9203ed04a628">&#9670;&#160;</a></span>as() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TType * ksf::ksRtti::as </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to cast object to given type. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to object of given type or nullptr if object is not of given type. </dd></dl>
+
+</div>
+</div>
+<a id="a3256fe5f274ed29149d64dd575ff37f9" name="a3256fe5f274ed29149d64dd575ff37f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3256fe5f274ed29149d64dd575ff37f9">&#9670;&#160;</a></span>as() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename TType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const TType * ksf::ksRtti::as </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to const cast object to given type. </p>
+<dl class="section return"><dt>Returns</dt><dd>Const pointer to object of given type or nullptr if object is not of given type. </dd></dl>
+
+</div>
+</div>
+<a id="ab835f07a17adfa5d44313544df204025" name="ab835f07a17adfa5d44313544df204025"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab835f07a17adfa5d44313544df204025">&#9670;&#160;</a></span>getInstanceType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const size_t ksf::ksRtti::getInstanceType </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to get type ID of object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Type ID. </dd></dl>
+
+</div>
+</div>
+<a id="a84c5ab0cd0a529fd085e68de557ab4f4" name="a84c5ab0cd0a529fd085e68de557ab4f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84c5ab0cd0a529fd085e68de557ab4f4">&#9670;&#160;</a></span>isA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ksf::ksRtti::isA </td>
+          <td>(</td>
+          <td class="paramtype">const size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to check if object is of given type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Type ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if object is of given type, otherwise false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>src/ksf/<a class="el" href="ks_rtti_8h_source.html">ksRtti.h</a></li>
 </ul>

@@ -85,19 +85,56 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2ba584af638b4d972ecac8ed0660db14" id="r_a2ba584af638b4d972ecac8ed0660db14"><td class="memItemLeft" align="right" valign="top"><a id="a2ba584af638b4d972ecac8ed0660db14" name="a2ba584af638b4d972ecac8ed0660db14"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ksEventHandle</b> (std::weak_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_interface.html">ksEventInterface</a> &gt; &amp;&amp;eventBaseWp, std::size_t callbackUID)</td></tr>
+<tr class="memitem:a2ba584af638b4d972ecac8ed0660db14" id="r_a2ba584af638b4d972ecac8ed0660db14"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ba584af638b4d972ecac8ed0660db14">ksEventHandle</a> (std::weak_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_interface.html">ksEventInterface</a> &gt; &amp;&amp;<a class="el" href="#a21faf24eac17f0bdbe702459ef8d7c31">eventBaseWp</a>, std::size_t <a class="el" href="#a275a07831b53b56d77b3b579cb6f7117">callbackUID</a>)</td></tr>
+<tr class="memdesc:a2ba584af638b4d972ecac8ed0660db14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs event handle.  <br /></td></tr>
 <tr class="separator:a2ba584af638b4d972ecac8ed0660db14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad296ef8c5a77a0404666fc93123267ce" id="r_ad296ef8c5a77a0404666fc93123267ce"><td class="memItemLeft" align="right" valign="top"><a id="ad296ef8c5a77a0404666fc93123267ce" name="ad296ef8c5a77a0404666fc93123267ce"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksEventHandle</b> ()</td></tr>
+<tr class="memdesc:ad296ef8c5a77a0404666fc93123267ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs event handle. Unbinds assigned callback from the list. <br /></td></tr>
+<tr class="separator:ad296ef8c5a77a0404666fc93123267ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a21faf24eac17f0bdbe702459ef8d7c31" id="r_a21faf24eac17f0bdbe702459ef8d7c31"><td class="memItemLeft" align="right" valign="top"><a id="a21faf24eac17f0bdbe702459ef8d7c31" name="a21faf24eac17f0bdbe702459ef8d7c31"></a>
 std::weak_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_interface.html">ksEventInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>eventBaseWp</b></td></tr>
+<tr class="memdesc:a21faf24eac17f0bdbe702459ef8d7c31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak pointer to event object. <br /></td></tr>
 <tr class="separator:a21faf24eac17f0bdbe702459ef8d7c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a275a07831b53b56d77b3b579cb6f7117" id="r_a275a07831b53b56d77b3b579cb6f7117"><td class="memItemLeft" align="right" valign="top"><a id="a275a07831b53b56d77b3b579cb6f7117" name="a275a07831b53b56d77b3b579cb6f7117"></a>
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>callbackUID</b> {0}</td></tr>
+<tr class="memdesc:a275a07831b53b56d77b3b579cb6f7117"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unique callback ID. <br /></td></tr>
 <tr class="separator:a275a07831b53b56d77b3b579cb6f7117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2ba584af638b4d972ecac8ed0660db14" name="a2ba584af638b4d972ecac8ed0660db14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ba584af638b4d972ecac8ed0660db14">&#9670;&#160;</a></span>ksEventHandle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ksf::evt::ksEventHandle::ksEventHandle </td>
+          <td>(</td>
+          <td class="paramtype">std::weak_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_interface.html">ksEventInterface</a> &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>eventBaseWp</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::size_t</td>          <td class="paramname"><span class="paramname"><em>callbackUID</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs event handle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eventBaseWp</td><td>R-value reference to weak pointer to event object. </td></tr>
+    <tr><td class="paramname">callbackUID</td><td>Unique callback ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/ksf/evt/<a class="el" href="ks_event_handle_8h_source.html">ksEventHandle.h</a></li>
 <li>src/ksf/evt/<b>ksEventHandle.cpp</b></li>

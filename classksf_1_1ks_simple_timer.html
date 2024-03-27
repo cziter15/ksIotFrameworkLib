@@ -85,31 +85,126 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a76af38376cf65d3062352ebcaca1c12f" id="r_a76af38376cf65d3062352ebcaca1c12f"><td class="memItemLeft" align="right" valign="top"><a id="a76af38376cf65d3062352ebcaca1c12f" name="a76af38376cf65d3062352ebcaca1c12f"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ksSimpleTimer</b> (uint32_t intervalMs)</td></tr>
+<tr class="memitem:a76af38376cf65d3062352ebcaca1c12f" id="r_a76af38376cf65d3062352ebcaca1c12f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a76af38376cf65d3062352ebcaca1c12f">ksSimpleTimer</a> (uint32_t <a class="el" href="#a0e71a98ffe9b0bef207203f950da8e80">intervalMs</a>)</td></tr>
+<tr class="memdesc:a76af38376cf65d3062352ebcaca1c12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs timer with interval (milliseconds).  <br /></td></tr>
 <tr class="separator:a76af38376cf65d3062352ebcaca1c12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15d32e956c02488bea6a50eddcdecc6a" id="r_a15d32e956c02488bea6a50eddcdecc6a"><td class="memItemLeft" align="right" valign="top"><a id="a15d32e956c02488bea6a50eddcdecc6a" name="a15d32e956c02488bea6a50eddcdecc6a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setInterval</b> (uint32_t intervalMs)</td></tr>
+<tr class="memitem:a15d32e956c02488bea6a50eddcdecc6a" id="r_a15d32e956c02488bea6a50eddcdecc6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15d32e956c02488bea6a50eddcdecc6a">setInterval</a> (uint32_t <a class="el" href="#a0e71a98ffe9b0bef207203f950da8e80">intervalMs</a>)</td></tr>
+<tr class="memdesc:a15d32e956c02488bea6a50eddcdecc6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets timer interval (milliseconds) and restarts the timer.  <br /></td></tr>
 <tr class="separator:a15d32e956c02488bea6a50eddcdecc6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7115f8d5cbd0be313e002f569e518879" id="r_a7115f8d5cbd0be313e002f569e518879"><td class="memItemLeft" align="right" valign="top"><a id="a7115f8d5cbd0be313e002f569e518879" name="a7115f8d5cbd0be313e002f569e518879"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>restart</b> ()</td></tr>
+<tr class="memdesc:a7115f8d5cbd0be313e002f569e518879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restarts timer. Will set last trigger time to current time w/o triggering the timer). <br /></td></tr>
 <tr class="separator:a7115f8d5cbd0be313e002f569e518879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d12020dc37e1836c9c98ec92eade407" id="r_a5d12020dc37e1836c9c98ec92eade407"><td class="memItemLeft" align="right" valign="top"><a id="a5d12020dc37e1836c9c98ec92eade407" name="a5d12020dc37e1836c9c98ec92eade407"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>triggered</b> ()</td></tr>
+<tr class="memitem:a5d12020dc37e1836c9c98ec92eade407" id="r_a5d12020dc37e1836c9c98ec92eade407"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d12020dc37e1836c9c98ec92eade407">triggered</a> ()</td></tr>
+<tr class="memdesc:a5d12020dc37e1836c9c98ec92eade407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if timer interval just passed. Restarting timer is automatic. If interval is 0 then always returns false.  <br /></td></tr>
 <tr class="separator:a5d12020dc37e1836c9c98ec92eade407"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83285ce55d3a83397c2f72dd05d45dc6" id="r_a83285ce55d3a83397c2f72dd05d45dc6"><td class="memItemLeft" align="right" valign="top"><a id="a83285ce55d3a83397c2f72dd05d45dc6" name="a83285ce55d3a83397c2f72dd05d45dc6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasTimePassed</b> () const</td></tr>
+<tr class="memitem:a83285ce55d3a83397c2f72dd05d45dc6" id="r_a83285ce55d3a83397c2f72dd05d45dc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83285ce55d3a83397c2f72dd05d45dc6">hasTimePassed</a> () const</td></tr>
+<tr class="memdesc:a83285ce55d3a83397c2f72dd05d45dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if timer interval just passed. Restarting timer relies on user. If interval is 0 then always returns false.  <br /></td></tr>
 <tr class="separator:a83285ce55d3a83397c2f72dd05d45dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a0e71a98ffe9b0bef207203f950da8e80" id="r_a0e71a98ffe9b0bef207203f950da8e80"><td class="memItemLeft" align="right" valign="top"><a id="a0e71a98ffe9b0bef207203f950da8e80" name="a0e71a98ffe9b0bef207203f950da8e80"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>intervalMs</b> {0}</td></tr>
+<tr class="memdesc:a0e71a98ffe9b0bef207203f950da8e80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer interval (milliseconds). <br /></td></tr>
 <tr class="separator:a0e71a98ffe9b0bef207203f950da8e80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9edd4228fe6272082c33002044c348f3" id="r_a9edd4228fe6272082c33002044c348f3"><td class="memItemLeft" align="right" valign="top"><a id="a9edd4228fe6272082c33002044c348f3" name="a9edd4228fe6272082c33002044c348f3"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastTriggerTimeMs</b> {0}</td></tr>
+<tr class="memdesc:a9edd4228fe6272082c33002044c348f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last trigger time (milliseconds). <br /></td></tr>
 <tr class="separator:a9edd4228fe6272082c33002044c348f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a76af38376cf65d3062352ebcaca1c12f" name="a76af38376cf65d3062352ebcaca1c12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76af38376cf65d3062352ebcaca1c12f">&#9670;&#160;</a></span>ksSimpleTimer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ksf::ksSimpleTimer::ksSimpleTimer </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>intervalMs</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs timer with interval (milliseconds). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">intervalMs</td><td>Initial timer interval in milliseconds. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a83285ce55d3a83397c2f72dd05d45dc6" name="a83285ce55d3a83397c2f72dd05d45dc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83285ce55d3a83397c2f72dd05d45dc6">&#9670;&#160;</a></span>hasTimePassed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ksf::ksSimpleTimer::hasTimePassed </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if timer interval just passed. Restarting timer relies on user. If interval is 0 then always returns false. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if timer interval just passed, otherwise false. </dd></dl>
+
+</div>
+</div>
+<a id="a15d32e956c02488bea6a50eddcdecc6a" name="a15d32e956c02488bea6a50eddcdecc6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15d32e956c02488bea6a50eddcdecc6a">&#9670;&#160;</a></span>setInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ksf::ksSimpleTimer::setInterval </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>intervalMs</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets timer interval (milliseconds) and restarts the timer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">intervalMs</td><td>Timer interval in milliseconds. If 0 then timer is disabled. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5d12020dc37e1836c9c98ec92eade407" name="a5d12020dc37e1836c9c98ec92eade407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d12020dc37e1836c9c98ec92eade407">&#9670;&#160;</a></span>triggered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ksf::ksSimpleTimer::triggered </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if timer interval just passed. Restarting timer is automatic. If interval is 0 then always returns false. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if timer just triggered, otherwise false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/ksf/<a class="el" href="ks_simple_timer_8h_source.html">ksSimpleTimer.h</a></li>
 <li>src/ksf/<b>ksSimpleTimer.cpp</b></li>

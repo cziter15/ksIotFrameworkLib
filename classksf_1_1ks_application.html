@@ -85,31 +85,191 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac418c7eb9b021d7b52e20cf7e870bc91" id="r_ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memTemplParams" colspan="2"><a id="ac418c7eb9b021d7b52e20cf7e870bc91" name="ac418c7eb9b021d7b52e20cf7e870bc91"></a>
-template&lt;class TComponentType , class... TParams&gt; </td></tr>
-<tr class="memitem:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memTemplItemLeft" align="right" valign="top">std::weak_ptr&lt; TComponentType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>addComponent</b> (TParams... arg)</td></tr>
+<tr class="memitem:ac418c7eb9b021d7b52e20cf7e870bc91" id="r_ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memTemplParams" colspan="2">template&lt;class TComponentType , class... TParams&gt; </td></tr>
+<tr class="memitem:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memTemplItemLeft" align="right" valign="top">std::weak_ptr&lt; TComponentType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac418c7eb9b021d7b52e20cf7e870bc91">addComponent</a> (TParams... arg)</td></tr>
+<tr class="memdesc:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a component of passed type.  <br /></td></tr>
 <tr class="separator:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa37ddabda1c13f2e1ab3e94babcfcc43" id="r_aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memTemplParams" colspan="2"><a id="aa37ddabda1c13f2e1ab3e94babcfcc43" name="aa37ddabda1c13f2e1ab3e94babcfcc43"></a>
-template&lt;class TComponentType &gt; </td></tr>
-<tr class="memitem:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>findComponents</b> (std::vector&lt; std::weak_ptr&lt; TComponentType &gt; &gt; &amp;outComponents)</td></tr>
+<tr class="memitem:aa37ddabda1c13f2e1ab3e94babcfcc43" id="r_aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memTemplParams" colspan="2">template&lt;class TComponentType &gt; </td></tr>
+<tr class="memitem:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa37ddabda1c13f2e1ab3e94babcfcc43">findComponents</a> (std::vector&lt; std::weak_ptr&lt; TComponentType &gt; &gt; &amp;outComponents)</td></tr>
+<tr class="memdesc:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks for all components of passed type and puts them into passed vector.  <br /></td></tr>
 <tr class="separator:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a944269df1630cce9506ee228c12e1ebb" id="r_a944269df1630cce9506ee228c12e1ebb"><td class="memTemplParams" colspan="2"><a id="a944269df1630cce9506ee228c12e1ebb" name="a944269df1630cce9506ee228c12e1ebb"></a>
-template&lt;class TComponentType &gt; </td></tr>
-<tr class="memitem:a944269df1630cce9506ee228c12e1ebb"><td class="memTemplItemLeft" align="right" valign="top">std::weak_ptr&lt; TComponentType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>findComponent</b> ()</td></tr>
+<tr class="memitem:a944269df1630cce9506ee228c12e1ebb" id="r_a944269df1630cce9506ee228c12e1ebb"><td class="memTemplParams" colspan="2">template&lt;class TComponentType &gt; </td></tr>
+<tr class="memitem:a944269df1630cce9506ee228c12e1ebb"><td class="memTemplItemLeft" align="right" valign="top">std::weak_ptr&lt; TComponentType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a944269df1630cce9506ee228c12e1ebb">findComponent</a> ()</td></tr>
+<tr class="memdesc:a944269df1630cce9506ee228c12e1ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks for a component of passed type and returns a weak pointer to it.  <br /></td></tr>
 <tr class="separator:a944269df1630cce9506ee228c12e1ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0df7f797abc4f477f17448aa89613ce" id="r_ae0df7f797abc4f477f17448aa89613ce"><td class="memItemLeft" align="right" valign="top"><a id="ae0df7f797abc4f477f17448aa89613ce" name="ae0df7f797abc4f477f17448aa89613ce"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()=0</td></tr>
+<tr class="memitem:ae0df7f797abc4f477f17448aa89613ce" id="r_ae0df7f797abc4f477f17448aa89613ce"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0df7f797abc4f477f17448aa89613ce">init</a> ()=0</td></tr>
+<tr class="memdesc:ae0df7f797abc4f477f17448aa89613ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes application.  <br /></td></tr>
 <tr class="separator:ae0df7f797abc4f477f17448aa89613ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f4246bf46d16e6469b3967d399c7cd3" id="r_a5f4246bf46d16e6469b3967d399c7cd3"><td class="memItemLeft" align="right" valign="top"><a id="a5f4246bf46d16e6469b3967d399c7cd3" name="a5f4246bf46d16e6469b3967d399c7cd3"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>loop</b> ()</td></tr>
+<tr class="memitem:a5f4246bf46d16e6469b3967d399c7cd3" id="r_a5f4246bf46d16e6469b3967d399c7cd3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f4246bf46d16e6469b3967d399c7cd3">loop</a> ()</td></tr>
+<tr class="memdesc:a5f4246bf46d16e6469b3967d399c7cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes application loop.  <br /></td></tr>
 <tr class="separator:a5f4246bf46d16e6469b3967d399c7cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a06c3c117592fa39614d331dd5bc89660" id="r_a06c3c117592fa39614d331dd5bc89660"><td class="memItemLeft" align="right" valign="top"><a id="a06c3c117592fa39614d331dd5bc89660" name="a06c3c117592fa39614d331dd5bc89660"></a>
 std::list&lt; std::shared_ptr&lt; <a class="el" href="classksf_1_1ks_component.html">ksComponent</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>components</b></td></tr>
+<tr class="memdesc:a06c3c117592fa39614d331dd5bc89660"><td class="mdescLeft">&#160;</td><td class="mdescRight">An array with shared_ptr of components (holding main reference). <br /></td></tr>
 <tr class="separator:a06c3c117592fa39614d331dd5bc89660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac418c7eb9b021d7b52e20cf7e870bc91" name="ac418c7eb9b021d7b52e20cf7e870bc91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac418c7eb9b021d7b52e20cf7e870bc91">&#9670;&#160;</a></span>addComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TComponentType , class... TParams&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt; TComponentType &gt; ksf::ksApplication::addComponent </td>
+          <td>(</td>
+          <td class="paramtype">TParams...</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Instantiates a component of passed type. </p>
+<p>This function will pass all template-defined parameters as constructor parameters to the component. Keep in mind that passed parameters must match target component constructor parameters.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">...</td><td>- user (template) defined parameters</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Weak pointer to the newly created component. </dd></dl>
+
+</div>
+</div>
+<a id="a944269df1630cce9506ee228c12e1ebb" name="a944269df1630cce9506ee228c12e1ebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a944269df1630cce9506ee228c12e1ebb">&#9670;&#160;</a></span>findComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TComponentType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::weak_ptr&lt; TComponentType &gt; ksf::ksApplication::findComponent </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Looks for a component of passed type and returns a weak pointer to it. </p>
+<dl class="section return"><dt>Returns</dt><dd>Weak pointer to the component of passed type. </dd></dl>
+
+</div>
+</div>
+<a id="aa37ddabda1c13f2e1ab3e94babcfcc43" name="aa37ddabda1c13f2e1ab3e94babcfcc43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa37ddabda1c13f2e1ab3e94babcfcc43">&#9670;&#160;</a></span>findComponents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TComponentType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ksf::ksApplication::findComponents </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::weak_ptr&lt; TComponentType &gt; &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>outComponents</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Looks for all components of passed type and puts them into passed vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outComponents</td><td>Vector of weak pointers to components of passed type. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae0df7f797abc4f477f17448aa89613ce" name="ae0df7f797abc4f477f17448aa89613ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0df7f797abc4f477f17448aa89613ce">&#9670;&#160;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ksf::ksApplication::init </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes application. </p>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false on fail (will break application execution). </dd></dl>
+
+</div>
+</div>
+<a id="a5f4246bf46d16e6469b3967d399c7cd3" name="a5f4246bf46d16e6469b3967d399c7cd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f4246bf46d16e6469b3967d399c7cd3">&#9670;&#160;</a></span>loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ksf::ksApplication::loop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Executes application loop. </p>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false on fail (will break application execution). </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/ksf/<a class="el" href="ks_application_8h_source.html">ksApplication.h</a></li>
 <li>src/ksf/<b>ksApplication.cpp</b></li>

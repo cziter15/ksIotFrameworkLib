@@ -94,31 +94,139 @@ Inheritance diagram for ksf::evt::ksEvent&lt; Params &gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab85a2d7e4b758a99bae5f2696668ddf0" id="r_ab85a2d7e4b758a99bae5f2696668ddf0"><td class="memItemLeft" align="right" valign="top"><a id="ab85a2d7e4b758a99bae5f2696668ddf0" name="ab85a2d7e4b758a99bae5f2696668ddf0"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isBound</b> () const</td></tr>
+<tr class="memitem:ab85a2d7e4b758a99bae5f2696668ddf0" id="r_ab85a2d7e4b758a99bae5f2696668ddf0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab85a2d7e4b758a99bae5f2696668ddf0">isBound</a> () const</td></tr>
+<tr class="memdesc:ab85a2d7e4b758a99bae5f2696668ddf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns whether any callback is bound to this event.  <br /></td></tr>
 <tr class="separator:ab85a2d7e4b758a99bae5f2696668ddf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a172f69d818c73df76abc833fdda016a7" id="r_a172f69d818c73df76abc833fdda016a7"><td class="memItemLeft" align="right" valign="top"><a id="a172f69d818c73df76abc833fdda016a7" name="a172f69d818c73df76abc833fdda016a7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>registerEvent</b> (std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksf::evt::ksEventHandle</a> &gt; &amp;outHandle, std::function&lt; void(Params...)&gt; &amp;&amp;function)</td></tr>
+<tr class="memitem:a172f69d818c73df76abc833fdda016a7" id="r_a172f69d818c73df76abc833fdda016a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a172f69d818c73df76abc833fdda016a7">registerEvent</a> (std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksf::evt::ksEventHandle</a> &gt; &amp;outHandle, std::function&lt; void(Params...)&gt; &amp;&amp;function)</td></tr>
+<tr class="memdesc:a172f69d818c73df76abc833fdda016a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers event (binds to callback list).  <br /></td></tr>
 <tr class="separator:a172f69d818c73df76abc833fdda016a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28b95e555a1da1bf15b72467f6c133bc" id="r_a28b95e555a1da1bf15b72467f6c133bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28b95e555a1da1bf15b72467f6c133bc">unbind</a> (std::size_t callbackUID) override</td></tr>
+<tr class="memdesc:a28b95e555a1da1bf15b72467f6c133bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unbinds event callback by specified unique ID.  <br /></td></tr>
 <tr class="separator:a28b95e555a1da1bf15b72467f6c133bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac672facd2bd8e5084f8251b228d2cf4f" id="r_ac672facd2bd8e5084f8251b228d2cf4f"><td class="memItemLeft" align="right" valign="top"><a id="ac672facd2bd8e5084f8251b228d2cf4f" name="ac672facd2bd8e5084f8251b228d2cf4f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>broadcast</b> (Params... params)</td></tr>
+<tr class="memitem:ac672facd2bd8e5084f8251b228d2cf4f" id="r_ac672facd2bd8e5084f8251b228d2cf4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac672facd2bd8e5084f8251b228d2cf4f">broadcast</a> (Params... params)</td></tr>
+<tr class="memdesc:ac672facd2bd8e5084f8251b228d2cf4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts event to all bound callbacks.  <br /></td></tr>
 <tr class="separator:ac672facd2bd8e5084f8251b228d2cf4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a17a698a1e1f7be8ac6213e6e145850e5" id="r_a17a698a1e1f7be8ac6213e6e145850e5"><td class="memItemLeft" align="right" valign="top"><a id="a17a698a1e1f7be8ac6213e6e145850e5" name="a17a698a1e1f7be8ac6213e6e145850e5"></a>
 std::vector&lt; std::pair&lt; std::size_t, std::function&lt; void(Params...)&gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>callbacks</b></td></tr>
+<tr class="memdesc:a17a698a1e1f7be8ac6213e6e145850e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of bond callbacks. <br /></td></tr>
 <tr class="separator:a17a698a1e1f7be8ac6213e6e145850e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69ba02fa7fdebec6e0d9219e9ec2da40" id="r_a69ba02fa7fdebec6e0d9219e9ec2da40"><td class="memItemLeft" align="right" valign="top"><a id="a69ba02fa7fdebec6e0d9219e9ec2da40" name="a69ba02fa7fdebec6e0d9219e9ec2da40"></a>
 std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastCallbackUID</b> {0}</td></tr>
+<tr class="memdesc:a69ba02fa7fdebec6e0d9219e9ec2da40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last unique callback ID for this event (used as counter). <br /></td></tr>
 <tr class="separator:a69ba02fa7fdebec6e0d9219e9ec2da40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac672facd2bd8e5084f8251b228d2cf4f" name="ac672facd2bd8e5084f8251b228d2cf4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac672facd2bd8e5084f8251b228d2cf4f">&#9670;&#160;</a></span>broadcast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; Params &gt;::broadcast </td>
+          <td>(</td>
+          <td class="paramtype">Params...</td>          <td class="paramname"><span class="paramname"><em>params</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Broadcasts event to all bound callbacks. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>Event parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab85a2d7e4b758a99bae5f2696668ddf0" name="ab85a2d7e4b758a99bae5f2696668ddf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85a2d7e4b758a99bae5f2696668ddf0">&#9670;&#160;</a></span>isBound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; Params &gt;::isBound </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns whether any callback is bound to this event. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if any callback is bound to this event. False otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a172f69d818c73df76abc833fdda016a7" name="a172f69d818c73df76abc833fdda016a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a172f69d818c73df76abc833fdda016a7">&#9670;&#160;</a></span>registerEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Params&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; Params &gt;::registerEvent </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksf::evt::ksEventHandle</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>outHandle</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(Params...)&gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>function</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Registers event (binds to callback list). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outHandle</td><td>Reference to outHandle shared ptr (destruction of <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksEventHandle</a> object will unbind the event) </td></tr>
+    <tr><td class="paramname">function</td><td>R-value reference to callback function </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a28b95e555a1da1bf15b72467f6c133bc" name="a28b95e555a1da1bf15b72467f6c133bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a28b95e555a1da1bf15b72467f6c133bc">&#9670;&#160;</a></span>unbind()</h2>
 
@@ -144,7 +252,16 @@ template&lt;typename... Params&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classksf_1_1evt_1_1ks_event_interface.html">ksf::evt::ksEventInterface</a>.</p>
+<p>Unbinds event callback by specified unique ID. </p>
+<p>This ID is automatically assigned by registerEvent function and <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksEventHandle</a> uses it to unbind automatically upon destruction.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callbackUID</td><td>Unique id of the callback to unbind. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classksf_1_1evt_1_1ks_event_interface.html#a9da6e0357176b359db6f5004f66caf7a">ksf::evt::ksEventInterface</a>.</p>
 
 </div>
 </div>
