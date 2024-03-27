@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
 
 <p align="center">
-  <img src="doc/header.jpg">
+  <img src="https://github.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg">
 </p>
 
 ## What and why?
@@ -131,8 +131,3 @@ The best value for me is 3. It allows the ESP32 to go down from around 100mA to 
 ### Libraries
 - PubSubClient [ https://github.com/knolleary/pubsubclient ]
 - arduinoWebSockets [ https://github.com/Links2004/arduinoWebSockets ]
-
-## Donate
-Feel free to support development (of course optionally) :)
-
-[<img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif">](https://www.paypal.com/donate/?hosted_button_id=A3QTXX6MN9LN8)
