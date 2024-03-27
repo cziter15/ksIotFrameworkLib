@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
 
 <p align="center">
-  <img src="https://github.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg">
+  <img src="https://raw.githubusercontent.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg">
 </p>
 
 ## What and why?
