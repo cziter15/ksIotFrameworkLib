@@ -49,7 +49,7 @@ namespace ksf::comps
 		protected:
 			std::list<ksConfigParameter> params;
 			
-			/*
+			/*!
 				@brief Defines new parameter.
 
 				@param id Shared ID/Label to identify parameter
@@ -59,7 +59,7 @@ namespace ksf::comps
 			*/
 			void addNewParam(std::string id, std::string value, int maxLength = 50, EConfigParamType::Type type = {});
 
-			/*
+			/*!
 				@brief Defines new parameter (with default value).
 
 				@param config Reference to config
@@ -70,17 +70,17 @@ namespace ksf::comps
 			void addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength = 50, EConfigParamType::Type type = {});
 
 		public:
-			/*
+			/*!
 				@brief Retrieves const list of parameters.
 			*/
 			std::list<ksConfigParameter>& getParameters();
 
-			/*
+			/*!
 				@brief Loads parameters from the config file.
 			*/
 			virtual void readParams() = 0;
 
-			/*
+			/*!
 				@brief Moves parameters to the config file.
 			*/
 			virtual void saveParams() = 0;

@@ -15,7 +15,7 @@
 
 #include "ksApplication.h"
 
-/* 
+/*!
 	Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait).
 	@param ... List of application classes.
 */
@@ -24,7 +24,7 @@
 	void setup() { KSF_FRAMEWORK_INIT() }			\
 	void loop() { appRotator.loop(1); }
 
-/* 
+/*!
 	Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait).
 	@param delayBetweenLoops Delay time in milliseconds.
 	@param ... List of application classes.
@@ -40,11 +40,11 @@ namespace ksf
 	class ksAppRotator
 	{
 		private:
-			uint8_t appIndex{0};												// Index of the current application.
-			std::unique_ptr<ksApplication> currentApplication{nullptr};			// Pointer to the current application.
-			typedef std::unique_ptr<ksApplication> (*TSpawnerFunc)(); 			// Spawner fn type.
+			uint8_t appIndex{0};												//!< Index of the current application.
+			std::unique_ptr<ksApplication> currentApplication{nullptr};			//!< Pointer to the current application.
+			typedef std::unique_ptr<ksApplication> (*TSpawnerFunc)(); 			//!< Spawner fn type.
 
-			/*
+			/*!
 				@brief Helper function template to create an application object.
 				@return Unique pointer to the created application object.
 			*/
@@ -54,10 +54,10 @@ namespace ksf
 				return std::make_unique<T>();
 			}
 
-			static constexpr std::array<TSpawnerFunc, sizeof...(AppTypes)> appSpawners{spawnApp<AppTypes>...};		// Array of application creators.
+			static constexpr std::array<TSpawnerFunc, sizeof...(AppTypes)> appSpawners{spawnApp<AppTypes>...};		//!< Array of application creators.
 
 		public:
-			/*
+			/*!
 				@brief Runs the application loop.
 			*/
 			void loopNoDelay()
@@ -78,7 +78,7 @@ namespace ksf
 					appIndex = 0;
 			}
 
-			/*
+			/*!
 				@brief Runs the application loop with a delay.
 				@param milliseconds Delay time in milliseconds.
 			*/

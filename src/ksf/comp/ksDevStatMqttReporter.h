@@ -21,16 +21,16 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksDevStatMqttReporter, ksComponent)
 
 		protected:
-			std::weak_ptr<ksMqttConnector> mqttConnWp;				// Weak pointer to MQTT connector.
-			std::unique_ptr<evt::ksEventHandle> connEventHandle;	// Event handle for connection delegate.
-			ksSimpleTimer reporterTimer;							// Timer to report device stats.
+			std::weak_ptr<ksMqttConnector> mqttConnWp;				//!< Weak pointer to MQTT connector.
+			std::unique_ptr<evt::ksEventHandle> connEventHandle;	//!< Event handle for connection delegate.
+			ksSimpleTimer reporterTimer;							//!< Timer to report device stats.
 
-			/*
+			/*!
 				@brief Function called on MQTT connection.
 			*/
 			void onConnected();
 
-			/*
+			/*!
 				@brief Function called periodically when MQTT is connected to report device stats to the broker.
 			*/
 			void reportDevStats() const;
@@ -38,7 +38,7 @@ namespace ksf::comps
 		public:
 			ksDevStatMqttReporter(uint8_t intervalInSeconds = 60);
 
-			/*
+			/*!
 				@brief Method called after component initialization.
 
 				Used to setup message callbacks.
@@ -48,7 +48,7 @@ namespace ksf::comps
 			*/
 			bool postInit(ksApplication* app) override;
 
-			/*
+			/*!
 				@brief Handles MQTT debug connector component loop logic.
 				@param app Pointer to ksApplication
 				@return True on success, false on fail.

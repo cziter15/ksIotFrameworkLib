@@ -21,19 +21,19 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
 
 		public:
-			/*
+			/*!
 				@brief Injects MQTT config provider's WiFiManager parameters.
 				@param manager WiFiManager reference
 			*/
 			void readParams() override;
 
-			/*
+			/*!
 				@brief Captures MQTT config provider's WiFiManager parameters.
 				@param manager WiFiManager reference
 			*/
 			void saveParams() override;
 
-			/*
+			/*!
 				@brief Setup MQTT connector with captured parameters.
 				@param connector MQTT connector reference
 			*/

@@ -18,7 +18,7 @@ namespace ksf::evt
 		friend class ksEventHandle;
 
 		protected:
-			/*
+			/*!
 				@brief Unbinds callback from the list.
 				@param callbackUID Unique callback ID
 			*/

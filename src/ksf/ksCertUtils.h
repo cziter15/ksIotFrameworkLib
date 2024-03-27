@@ -19,7 +19,7 @@ namespace ksf
 	class ksCertFingerprint
 	{
 		protected:
-			/*
+			/*!
 				@brief Converts fingerprint string into array of bytes.
 				@param fingerprint Fingerprint string
 				@param bytes Output buffer pointer
@@ -29,7 +29,7 @@ namespace ksf
 			bool fingerprintToBytes(const std::string& fingerprint, uint8_t* bytes, uint8_t bytesLen) const;
 
 		public:
-			/*
+			/*!
 				@brief Performs certificate fingerprint setup (platform dependent).
 				@param client Pointer of WiFiClientSecure
 				@param fingerprint Fingerprint string
@@ -37,7 +37,7 @@ namespace ksf
 			*/
 			virtual bool setup(WiFiClientSecure* client, const std::string& fingerprint);
 
-			/*
+			/*!
 				@brief Performs certificate fingerprint validation (platform dependent).
 				@param client Pointer of WiFiClientSecure
 				@return True on verification pass, otherwise false.
@@ -49,10 +49,10 @@ namespace ksf
 	class ksCertFingerprintESP32 : public ksCertFingerprint
 	{
 		private:
-			uint8_t fingerprintBytes[32];	// Fingerprint string transformed into array of bytes.
+			uint8_t fingerprintBytes[32];	//!< Fingerprint string transformed into array of bytes.
 
 		public:
-			/*
+			/*!
 				@brief Performs fingerprint setup (platform dependent).
 				
 				On ESP32 it will copy fingerprint into fingerprintBytes.
@@ -63,7 +63,7 @@ namespace ksf
 			*/
 			bool setup(WiFiClientSecure* client, const std::string& fingerprint) override;
 
-			/*
+			/*!
 				@brief Converts bytes into a string and performs fingerprint validation.
 				@param client Pointer to WiFiClientSecure
 				@return True if verification passed, otherwise false.
@@ -78,7 +78,7 @@ namespace ksf
 	class ksCertFingerprintESP8266 : public ksCertFingerprint
 	{
 		public:
-			/*
+			/*!
 				@brief Performs fingerprint setup (platform dependent).
 				@param client Pointer of WiFiClientSecure.
 				@param fingerprint Fingerprint string.
@@ -86,7 +86,7 @@ namespace ksf
 			*/
 			bool setup(WiFiClientSecure* client, const std::string& fingerprint) override;
 
-			/*
+			/*!
 				@brief Converts bytes into a string and performs fingerprint validation.
 
 				Always returns true on ESP8266 as this functionality is handled under the hood.

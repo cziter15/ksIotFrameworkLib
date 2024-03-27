@@ -16,35 +16,37 @@ namespace ksf
 	class ksSimpleTimer
 	{
 		protected:
-			uint32_t intervalMs{0};				// Timer interval (milliseconds).
-			uint32_t lastTriggerTimeMs{0};		// Last trigger time (milliseconds).
+			uint32_t intervalMs{0};				//!< Timer interval (milliseconds).
+			uint32_t lastTriggerTimeMs{0};		//!< Last trigger time (milliseconds).
 
 		public:
-			/*
+			/*!
 				@brief Constructs timer with interval (milliseconds).
 				@param intervalMs Initial timer interval in milliseconds.
 			*/
 			ksSimpleTimer(uint32_t intervalMs);
 
-			/*
-				@brief Sets timer interval (milliseconds).
-				@param intervalMs Initial timer interval in milliseconds.
+			/*!
+				@brief Sets timer interval (milliseconds) and restarts the timer.
+				@param intervalMs Timer interval in milliseconds. If 0 then timer is disabled.
 			*/
 			void setInterval(uint32_t intervalMs);
 
-			/*
+			/*!
 				@brief Restarts timer. Will set last trigger time to current time w/o triggering the timer).
 			*/
 			void restart();
 
-			/*
+			/*!
 				@brief Checks if timer interval just passed. Restarting timer is automatic.
+				If interval is 0 then always returns false.
 				@return True if timer just triggered, otherwise false.
 			*/
 			bool triggered();
 			
-			/*
+			/*!
 				@brief Checks if timer interval just passed. Restarting timer relies on user.
+				If interval is 0 then always returns false.
 				@return	True if timer interval just passed, otherwise false.
 			*/
 			bool hasTimePassed() const;

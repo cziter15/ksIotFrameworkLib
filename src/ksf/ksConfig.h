@@ -12,8 +12,8 @@
 #include <string>
 #include <map>
 
-/*
-	Wrapper macro that allows to create nice file-manipulating sections. 
+/*!
+	@brief Wrapper macro that allows to create nice file-manipulating sections. 
 */
 #define USING_CONFIG_FILE(fileName) \
 	if (ksf::ksConfig config_file{ksf::ksConfig(fileName)})
@@ -23,18 +23,18 @@ namespace ksf
 	class ksConfig
 	{
 		protected:
-			bool isDirty{false};									// True if config contents has been modified (and should be saved).
-			std::map<std::string, std::string> configParams;		// Config parameters.
-			std::string configPath;									// Config filename.
+			bool isDirty{false};									//!< True if config contents has been modified (and should be saved).
+			std::map<std::string, std::string> configParams;		//!< Config parameters.
+			std::string configPath;									//!< Config filename.
 
 		public:
-			/*
+			/*!
 				@brief Constructor that opens (or creates) specified config file and loads its contents into memory.
 				@param configFile Config file name
 			*/
 			ksConfig(const std::string& fileName);
 
-			/*
+			/*!
 				@brief Sets parameter value.
 				
 				If parameter does not exist, it will be created.
@@ -44,7 +44,7 @@ namespace ksf
 			*/
 			void setParam(const std::string& paramName, const std::string paramValue);
 
-			/*
+			/*!
 				@brief Retrieves parameter value. 
 				
 				If parameter does not exist, defaultValue will be returned.
@@ -55,13 +55,13 @@ namespace ksf
 			*/
 			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
 
-			/*
+			/*!
 				@brief Operator bool override. Returns true if configFilename is not empty.
 				@return True if configFilename is not empty, otherwise false.
 			*/
 			operator bool() const;
 
-			/*
+			/*!
 				@brief Saves config content to flash. 
 
 				If config contents has not been modified, nothing will be saved.

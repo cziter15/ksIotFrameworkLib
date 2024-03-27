@@ -16,7 +16,7 @@
 #include "ksEventInterface.h"
 #include "ksEventHandle.h"
 
- /*
+ /*!
 	 @brief Defines user event. Usage: DECLARE_KS_EVENT( your_event_name, event parameters... ).
 	 @param evtName Name of the event field that will be generated inside class.
 	 @param params... Event parameters.
@@ -30,11 +30,11 @@ namespace ksf::evt
 	class ksEvent : public evt::ksEventInterface
 	{
 		protected:
-			std::vector<std::pair<std::size_t, std::function<void(Params...)>>> callbacks;		// List of bond callbacks.
-			std::size_t lastCallbackUID{0};														// Last unique callback ID for this event (used as counter).
+			std::vector<std::pair<std::size_t, std::function<void(Params...)>>> callbacks;	//!< List of bond callbacks.
+			std::size_t lastCallbackUID{0};													//!< Last unique callback ID for this event (used as counter).
 
 		public:
-			/*
+			/*!
 				@brief Returns whether any callback is bound to this event.
 				@return True if any callback is bound to this event. False otherwise.
 			*/
@@ -43,7 +43,7 @@ namespace ksf::evt
 				return !callbacks.empty();
 			}
 
-			/*
+			/*!
 				@brief Registers event (binds to callback list).
 				@param outHandle Reference to outHandle shared ptr (destruction of ksEventHandle object will unbind the event)
 				@param function R-value reference to callback function
@@ -55,7 +55,7 @@ namespace ksf::evt
 				callbacks.emplace_back(lastCallbackUID, std::move(function));
 			}
 
-			/*
+			/*!
 				@brief Unbinds event callback by specified unique ID. 
 				
 				This ID is automatically assigned by registerEvent function and
@@ -73,7 +73,7 @@ namespace ksf::evt
 				callbacks.erase(std::remove_if(callbacks.begin(), callbacks.end(), predicate), callbacks.end());
 			}
 
-			/*
+			/*!
 				@brief Broadcasts event to all bound callbacks.
 				@param args Event parameters.
 			*/

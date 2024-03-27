@@ -19,29 +19,29 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksWiFiConfigurator, ksComponent)
 
 		protected:
-			ksApplication* owner{nullptr};							//  Pointer to ksApplication object that owns this component.
-			std::string deviceName;									// Device name (prefix).
-			ksf::ksSimpleTimer configTimeout{120 * 1000};			// Timeout for captive portal in ms.
-			ksf::ksSimpleTimer periodicTasksTimeout{1000};			// Timeout for loop in ms.
+			ksApplication* owner{nullptr};							//!< Pointer to ksApplication object that owns this component.
+			std::string deviceName;									//!< Device name (prefix).
+			ksf::ksSimpleTimer configTimeout{120 * 1000};			//!< Timeout for captive portal in ms.
+			ksf::ksSimpleTimer periodicTasksTimeout{1000};			//!< Timeout for loop in ms.
 
-			/*
+			/*!
 				@brief Handles periodic tasks like WiFi management.
 			*/
 			void handlePeriodicTasks();
 
 		public:
-			/*
+			/*!
 				@brief Constructs WiFi configurator object.
 			*/
 			ksWiFiConfigurator();
 
-			/*
+			/*!
 				@brief Constructs WiFi configurator object.
 				@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname
 			*/
 			ksWiFiConfigurator(std::string devicePrefixName);
 
-			/*
+			/*!
 				@brief Handles ksWiFiConfigurator logic.
 
 				It starts and handles Device Portal, where the user can configure the device (that means WiFi or
@@ -51,14 +51,14 @@ namespace ksf::comps
 			*/
 			bool loop(ksApplication* app) override;
 
-			/*
+			/*!
 				@brief ksWiFiConfigurator init function.
 				@param owner Pointer to the application object
 				@return True on success, false on fail.
 			*/
 			bool init(ksApplication* owner) override;
 
-			/*
+			/*!
 				@brief ksWiFiConfigurator postInit function.
 
 				Turns on all registered LEDs in config mode.
@@ -68,7 +68,7 @@ namespace ksf::comps
 			*/
 			bool postInit(ksApplication* owner) override;
 
-			/*
+			/*!
 				@brief Destructor for WiFi configurator component.
 			*/
 			virtual ~ksWiFiConfigurator();

@@ -17,13 +17,13 @@ namespace ksf
 	class ksRtti
 	{
 		public:
-			/*
+			/*!
 				@brief This function is used to get type ID of object.
 				@return Type ID.
 			*/
 			virtual const size_t getInstanceType() const = 0;
 
-			/*
+			/*!
 				@brief This function is used to check if object is of given type.
 				@param id Type ID.
 				@return True if object is of given type, otherwise false.
@@ -33,7 +33,7 @@ namespace ksf
 				return false;
 			}
 
-			/*
+			/*!
 				@brief This function is used to cast object to given type.
 				@return Pointer to object of given type or nullptr if object is not of given type.
 			*/
@@ -46,7 +46,7 @@ namespace ksf
 				return nullptr;
 			}
 
-			/*
+			/*!
 				@brief This function is used to const cast object to given type.
 				@return Const pointer to object of given type or nullptr if object is not of given type.
 			*/

@@ -26,13 +26,13 @@ namespace ksf
 	class ksApplication
 	{
 		protected:
-			std::list<std::shared_ptr<ksComponent>> components;		// An array with shared_ptr of components (holding main reference).
+			std::list<std::shared_ptr<ksComponent>> components;		//!< An array with shared_ptr of components (holding main reference).
 
 #if APP_LOG_ENABLED
-			 AppLogCallbackFunc_t appLogCallback;		// Callback function for logging
+			 AppLogCallbackFunc_t appLogCallback;					//!< Callback function for logging
 #endif
 		public:
-			/*
+			/*!
 				@brief Instantiates a component of passed type.
 
 				This function will pass all template-defined parameters as constructor parameters to the component. 
@@ -55,7 +55,7 @@ namespace ksf
 				return componentWp;
 			}
 
-			/*
+			/*!
 				@brief Looks for all components of passed type and puts them into passed vector.
 				@param outComponents Vector of weak pointers to components of passed type.
 			*/
@@ -79,7 +79,7 @@ namespace ksf
 				}
 			}
 
-			/*
+			/*!
 				@brief Looks for a component of passed type and returns a weak pointer to it.
 				@return Weak pointer to the component of passed type.
 			*/
@@ -97,26 +97,26 @@ namespace ksf
 				return std::weak_ptr<TComponentType>();
 			}
 
-			/*
+			/*!
 				@brief Initializes application.
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool init() = 0;
 
-			/*
+			/*!
 				@brief Executes application loop.
 				@return True on success, false on fail (will break application execution).
 			*/
 			virtual bool loop();
 
 #if APP_LOG_ENABLED
-			/*
+			/*!
 				@brief Logs application messages.
 				@param logProviderFunction - function that returns string to be logged
 			*/
 			void log(AppLogProviderFunc_t provideLogFn) const;
 
-			/*
+			/*!
 				@brief Sets callback function for logging.
 				@param logProviderFunction - function that returns string to be logged
 			*/
