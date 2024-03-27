@@ -78,15 +78,19 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classksf_1_1comps_1_1ks_mqtt_connector-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ksf::comps::ksMqttConnector Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for ksf::comps::ksMqttConnector:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::comps::ksMqttConnector:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
  <div class="center">
   <img src="classksf_1_1comps_1_1ks_mqtt_connector.png" usemap="#ksf::comps::ksMqttConnector_map" alt=""/>
   <map id="ksf::comps::ksMqttConnector_map" name="ksf::comps::ksMqttConnector_map">
@@ -104,6 +108,12 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a7dbb790f4566011f629c50af9bb83152" id="r_a7dbb790f4566011f629c50af9bb83152"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7dbb790f4566011f629c50af9bb83152">getInstanceType</a> () const</td></tr>
+<tr class="memdesc:a7dbb790f4566011f629c50af9bb83152"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
+<tr class="separator:a7dbb790f4566011f629c50af9bb83152"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2515a6080975c49fa5f8fddda90dcda" id="r_ae2515a6080975c49fa5f8fddda90dcda"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae2515a6080975c49fa5f8fddda90dcda">isA</a> (const size_t id) const</td></tr>
+<tr class="memdesc:ae2515a6080975c49fa5f8fddda90dcda"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
+<tr class="separator:ae2515a6080975c49fa5f8fddda90dcda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97dd66cd5cb6dbb6819ff73376c048ed" id="r_a97dd66cd5cb6dbb6819ff73376c048ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97dd66cd5cb6dbb6819ff73376c048ed">ksMqttConnector</a> (bool <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>=true, bool <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>=false)</td></tr>
 <tr class="memdesc:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html">ksMqttConnector</a> object.  <br /></td></tr>
 <tr class="separator:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,12 +152,6 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksMqttConnector</
 <tr class="memdesc:a6a2c69fad3a041cf706ff66b88afb663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (for uniqueptr purposes). <br /></td></tr>
 <tr class="separator:a6a2c69fad3a041cf706ff66b88afb663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classksf_1_1ks_rtti"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classksf_1_1ks_rtti')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classksf_1_1ks_rtti.html">ksf::ksRtti</a></td></tr>
-<tr class="memitem:ab835f07a17adfa5d44313544df204025 inherit pub_methods_classksf_1_1ks_rtti" id="r_ab835f07a17adfa5d44313544df204025"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#ab835f07a17adfa5d44313544df204025">getInstanceType</a> () const =0</td></tr>
-<tr class="memdesc:ab835f07a17adfa5d44313544df204025 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
-<tr class="separator:ab835f07a17adfa5d44313544df204025 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84c5ab0cd0a529fd085e68de557ab4f4 inherit pub_methods_classksf_1_1ks_rtti" id="r_a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a84c5ab0cd0a529fd085e68de557ab4f4">isA</a> (const size_t id) const</td></tr>
-<tr class="memdesc:a84c5ab0cd0a529fd085e68de557ab4f4 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
-<tr class="separator:a84c5ab0cd0a529fd085e68de557ab4f4 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
 <tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to cast object to given type.  <br /></td></tr>
@@ -156,6 +160,35 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksMqttConnector</
 <tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">const TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a3256fe5f274ed29149d64dd575ff37f9">as</a> () const</td></tr>
 <tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to const cast object to given type.  <br /></td></tr>
 <tr class="separator:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ac256991b41523f64dba0d27f16ad53d7" id="r_ac256991b41523f64dba0d27f16ad53d7"><td class="memItemLeft" align="right" valign="top"><a id="ac256991b41523f64dba0d27f16ad53d7" name="ac256991b41523f64dba0d27f16ad53d7"></a>
+static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
+<tr class="separator:ac256991b41523f64dba0d27f16ad53d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
+<tr class="memitem:a1259b871ed5c2cd8cc06605be884700c inherit pub_static_methods_classksf_1_1ks_component" id="r_a1259b871ed5c2cd8cc06605be884700c"><td class="memItemLeft" align="right" valign="top">
+static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
+<tr class="separator:a1259b871ed5c2cd8cc06605be884700c inherit pub_static_methods_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a068e0ad483a487bf6e643355799b2fc1" id="r_a068e0ad483a487bf6e643355799b2fc1"><td class="memItemLeft" align="right" valign="top"><a id="a068e0ad483a487bf6e643355799b2fc1" name="a068e0ad483a487bf6e643355799b2fc1"></a>
+std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; const std::string_view &amp;, const std::string_view &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onDeviceMessage</b> {std::make_shared&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; const std::string_view&amp;, const std::string_view&amp; &gt;&gt;()}</td></tr>
+<tr class="memdesc:a068e0ad483a487bf6e643355799b2fc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">onDeviceMessage event that user can bind to. <br /></td></tr>
+<tr class="separator:a068e0ad483a487bf6e643355799b2fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8b5761c616a2107091f97d54600003c" id="r_ad8b5761c616a2107091f97d54600003c"><td class="memItemLeft" align="right" valign="top"><a id="ad8b5761c616a2107091f97d54600003c" name="ad8b5761c616a2107091f97d54600003c"></a>
+std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; const std::string_view &amp;, const std::string_view &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onAnyMessage</b> {std::make_shared&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; const std::string_view&amp;, const std::string_view&amp; &gt;&gt;()}</td></tr>
+<tr class="memdesc:ad8b5761c616a2107091f97d54600003c"><td class="mdescLeft">&#160;</td><td class="mdescRight">onAnyMessage event that user can bind to. <br /></td></tr>
+<tr class="separator:ad8b5761c616a2107091f97d54600003c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb2e99942201a89db129abe571115db6" id="r_aeb2e99942201a89db129abe571115db6"><td class="memItemLeft" align="right" valign="top"><a id="aeb2e99942201a89db129abe571115db6" name="aeb2e99942201a89db129abe571115db6"></a>
+std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onConnected</b> {std::make_shared&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;&gt;&gt;()}</td></tr>
+<tr class="memdesc:aeb2e99942201a89db129abe571115db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">onConnected event that user can bind to. <br /></td></tr>
+<tr class="separator:aeb2e99942201a89db129abe571115db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacb8a4b214c5ea6d71c74469fec167ce" id="r_aacb8a4b214c5ea6d71c74469fec167ce"><td class="memItemLeft" align="right" valign="top"><a id="aacb8a4b214c5ea6d71c74469fec167ce" name="aacb8a4b214c5ea6d71c74469fec167ce"></a>
+std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;&gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>onDisconnected</b> {std::make_shared&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;&gt;&gt;()}</td></tr>
+<tr class="memdesc:aacb8a4b214c5ea6d71c74469fec167ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">onDisconnected event that user can bind to. <br /></td></tr>
+<tr class="separator:aacb8a4b214c5ea6d71c74469fec167ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -204,7 +237,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>wasConnected</b>: 1 {
 <tr class="memdesc:afc9123d68f055d4709f9f455cfb655f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if connected in previous loop. <br /></td></tr>
 <tr class="separator:afc9123d68f055d4709f9f455cfb655f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac57d480a69d329fa59cf5ec897978b" id="r_adac57d480a69d329fa59cf5ec897978b"><td class="memItemLeft" align="right" valign="top"><a id="adac57d480a69d329fa59cf5ec897978b" name="adac57d480a69d329fa59cf5ec897978b"></a>
-<a class="el" href="classksf_1_1ks_simple_timer.html">ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>reconnectTimer</b> {KSF_MQTT_RECONNECT_DELAY_MS}</td></tr>
+<a class="el" href="classksf_1_1ks_simple_timer.html">ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>reconnectTimer</b> { 5000UL }</td></tr>
 <tr class="memdesc:adac57d480a69d329fa59cf5ec897978b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer that counts time between reconnection attempts. <br /></td></tr>
 <tr class="separator:adac57d480a69d329fa59cf5ec897978b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79283a0a011bab07f8010c02b33b1a63" id="r_a79283a0a011bab07f8010c02b33b1a63"><td class="memItemLeft" align="right" valign="top"><a id="a79283a0a011bab07f8010c02b33b1a63" name="a79283a0a011bab07f8010c02b33b1a63"></a>
@@ -285,6 +318,10 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 <p>Connects to MQTT broker. </p>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
 
+<p class="reference">References <a class="el" href="#a72c01e2f4d6d2115d5b11f7330f75971">certFingerprint</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>, <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>, and <a class="el" href="#a437a9bcc82d47c0bc27f25c155d35ff3">wifiClientSp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a728a903955e41f665a71722eaf16a492">loop()</a>.</p>
+
 </div>
 </div>
 <a id="a90dbb9c15993dd07c37385274bd54f49" name="a90dbb9c15993dd07c37385274bd54f49"></a>
@@ -304,6 +341,38 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Retrieves connection time in seconds. </p>
 <dl class="section return"><dt>Returns</dt><dd>MQTT connection time in seconds. </dd></dl>
+
+<p class="reference">References <a class="el" href="#aa273e290cb18e2ea76db22a7c059b48e">isConnected()</a>, and <a class="el" href="#a5b3892df535c4e3d814f49682a6dd3ed">lastSuccessConnectionTime</a>.</p>
+
+</div>
+</div>
+<a id="a7dbb790f4566011f629c50af9bb83152" name="a7dbb790f4566011f629c50af9bb83152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7dbb790f4566011f629c50af9bb83152">&#9670;&#160;</a></span>getInstanceType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const size_t ksf::comps::ksMqttConnector::getInstanceType </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to get type ID of object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Type ID. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent</a>.</p>
 
 </div>
 </div>
@@ -332,6 +401,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Retrieves MQTT reconnect counter. </p>
 <dl class="section return"><dt>Returns</dt><dd>Number of MQTT reconnects. </dd></dl>
+
+<p class="reference">References <a class="el" href="#af7928b7e420a6e8b98b17e5b43127d27">reconnectCounter</a>.</p>
 
 </div>
 </div>
@@ -369,6 +440,44 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a684f870e77ac3795b3cf789a8a81cdde">ksf::ksComponent</a>.</p>
 
+<p class="reference">References <a class="el" href="classksf_1_1ks_component.html#a684f870e77ac3795b3cf789a8a81cdde">ksf::ksComponent::init()</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, and <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e">ksf::comps::ksMqttConfigProvider::setupMqttConnector()</a>.</p>
+
+</div>
+</div>
+<a id="ae2515a6080975c49fa5f8fddda90dcda" name="ae2515a6080975c49fa5f8fddda90dcda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2515a6080975c49fa5f8fddda90dcda">&#9670;&#160;</a></span>isA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ksf::comps::ksMqttConnector::isA </td>
+          <td>(</td>
+          <td class="paramtype">const size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to check if object is of given type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Type ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if object is of given type, otherwise false. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a286b01d0faa7e74983efb15cdc80c748">ksf::ksComponent</a>.</p>
+
 </div>
 </div>
 <a id="aa273e290cb18e2ea76db22a7c059b48e" name="aa273e290cb18e2ea76db22a7c059b48e"></a>
@@ -388,6 +497,10 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Retrieves connection state. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if connected, otherwise false. </dd></dl>
+
+<p class="reference">References <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a90dbb9c15993dd07c37385274bd54f49">getConnectionTimeSeconds()</a>.</p>
 
 </div>
 </div>
@@ -419,6 +532,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
 
+<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="#ad3410bf2428ffe086fad10bbffb5384c">connectToBroker()</a>, <a class="el" href="classksf_1_1ks_simple_timer.html#a83285ce55d3a83397c2f72dd05d45dc6">ksf::ksSimpleTimer::hasTimePassed()</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, <a class="el" href="#ac9219e05b7ebd1c2614a36bb8155efe7">mqttConnectedInternal()</a>, <a class="el" href="#aacb8a4b214c5ea6d71c74469fec167ce">onDisconnected</a>, <a class="el" href="#af7928b7e420a6e8b98b17e5b43127d27">reconnectCounter</a>, <a class="el" href="#adac57d480a69d329fa59cf5ec897978b">reconnectTimer</a>, <a class="el" href="classksf_1_1ks_simple_timer.html#a7115f8d5cbd0be313e002f569e518879">ksf::ksSimpleTimer::restart()</a>, <a class="el" href="#afc9123d68f055d4709f9f455cfb655f9">wasConnected</a>, and <a class="el" href="#a00194e36edb73cbc7db830d42490fff4">wifiConnWp</a>.</p>
+
 </div>
 </div>
 <a id="ac9219e05b7ebd1c2614a36bb8155efe7" name="ac9219e05b7ebd1c2614a36bb8155efe7"></a>
@@ -446,6 +561,10 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Called on MQTT connection (internal function). </p>
 <p>Binds onMessage callback, calls bound onConnected callbacks, configures some parameters. </p>
+
+<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="#a5b3892df535c4e3d814f49682a6dd3ed">lastSuccessConnectionTime</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, <a class="el" href="#af3130af3aa3b1591a42e42896bf62eb1">mqttMessageInternal()</a>, and <a class="el" href="#aeb2e99942201a89db129abe571115db6">onConnected</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a728a903955e41f665a71722eaf16a492">loop()</a>.</p>
 
 </div>
 </div>
@@ -491,6 +610,10 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="classksf_1_1evt_1_1ks_event.html#ab85a2d7e4b758a99bae5f2696668ddf0">ksf::evt::ksEvent&lt; Params &gt;::isBound()</a>, <a class="el" href="#ad8b5761c616a2107091f97d54600003c">onAnyMessage</a>, <a class="el" href="#a068e0ad483a487bf6e643355799b2fc1">onDeviceMessage</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#ac9219e05b7ebd1c2614a36bb8155efe7">mqttConnectedInternal()</a>.</p>
+
 </div>
 </div>
 <a id="a21a416188683a4005560288cf71a7d4f" name="a21a416188683a4005560288cf71a7d4f"></a>
@@ -527,6 +650,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 <dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb">ksf::ksComponent</a>.</p>
+
+<p class="reference">References <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, and <a class="el" href="#a00194e36edb73cbc7db830d42490fff4">wifiConnWp</a>.</p>
 
 </div>
 </div>
@@ -569,6 +694,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </table>
   </dd>
 </dl>
+
+<p class="reference">References <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
 
 </div>
 </div>
@@ -623,6 +750,10 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#a72c01e2f4d6d2115d5b11f7330f75971">certFingerprint</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, and <a class="el" href="#a437a9bcc82d47c0bc27f25c155d35ff3">wifiClientSp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e">ksf::comps::ksMqttConfigProvider::setupMqttConnector()</a>.</p>
+
 </div>
 </div>
 <a id="a327f16a26deb354be7374bdb0e26cdbd" name="a327f16a26deb354be7374bdb0e26cdbd"></a>
@@ -659,6 +790,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
+
 </div>
 </div>
 <a id="aa0371f700a74e710804fc4e7c99e75e4" name="aa0371f700a74e710804fc4e7c99e75e4"></a>
@@ -688,6 +821,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </table>
   </dd>
 </dl>
+
+<p class="reference">References <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
 
 </div>
 </div>

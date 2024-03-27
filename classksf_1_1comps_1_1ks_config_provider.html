@@ -77,15 +77,18 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classksf_1_1comps_1_1ks_config_provider-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ksf::comps::ksConfigProvider Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for ksf::comps::ksConfigProvider:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::comps::ksConfigProvider:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
  <div class="center">
   <img src="classksf_1_1comps_1_1ks_config_provider.png" usemap="#ksf::comps::ksConfigProvider_map" alt=""/>
   <map id="ksf::comps::ksConfigProvider_map" name="ksf::comps::ksConfigProvider_map">
@@ -97,6 +100,12 @@ Inheritance diagram for ksf::comps::ksConfigProvider:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:acc6673a2b5a231587c568fcafc9fa42d" id="r_acc6673a2b5a231587c568fcafc9fa42d"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc6673a2b5a231587c568fcafc9fa42d">getInstanceType</a> () const</td></tr>
+<tr class="memdesc:acc6673a2b5a231587c568fcafc9fa42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
+<tr class="separator:acc6673a2b5a231587c568fcafc9fa42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd847581f934d5e67b0deafdf2884d27" id="r_abd847581f934d5e67b0deafdf2884d27"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd847581f934d5e67b0deafdf2884d27">isA</a> (const size_t id) const</td></tr>
+<tr class="memdesc:abd847581f934d5e67b0deafdf2884d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
+<tr class="separator:abd847581f934d5e67b0deafdf2884d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15e1288f8c0f9ea8b83885ab500ba20d" id="r_a15e1288f8c0f9ea8b83885ab500ba20d"><td class="memItemLeft" align="right" valign="top"><a id="a15e1288f8c0f9ea8b83885ab500ba20d" name="a15e1288f8c0f9ea8b83885ab500ba20d"></a>
 std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html">ksConfigParameter</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getParameters</b> ()</td></tr>
 <tr class="memdesc:a15e1288f8c0f9ea8b83885ab500ba20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves const list of parameters. <br /></td></tr>
@@ -118,12 +127,6 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <tr class="memdesc:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method called after component initialization.  <br /></td></tr>
 <tr class="separator:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classksf_1_1ks_rtti"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classksf_1_1ks_rtti')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classksf_1_1ks_rtti.html">ksf::ksRtti</a></td></tr>
-<tr class="memitem:ab835f07a17adfa5d44313544df204025 inherit pub_methods_classksf_1_1ks_rtti" id="r_ab835f07a17adfa5d44313544df204025"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#ab835f07a17adfa5d44313544df204025">getInstanceType</a> () const =0</td></tr>
-<tr class="memdesc:ab835f07a17adfa5d44313544df204025 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
-<tr class="separator:ab835f07a17adfa5d44313544df204025 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84c5ab0cd0a529fd085e68de557ab4f4 inherit pub_methods_classksf_1_1ks_rtti" id="r_a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a84c5ab0cd0a529fd085e68de557ab4f4">isA</a> (const size_t id) const</td></tr>
-<tr class="memdesc:a84c5ab0cd0a529fd085e68de557ab4f4 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
-<tr class="separator:a84c5ab0cd0a529fd085e68de557ab4f4 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
 <tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to cast object to given type.  <br /></td></tr>
@@ -132,6 +135,16 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">const TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a3256fe5f274ed29149d64dd575ff37f9">as</a> () const</td></tr>
 <tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to const cast object to given type.  <br /></td></tr>
 <tr class="separator:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a955f23e7c64ee26f7e596995b3093329" id="r_a955f23e7c64ee26f7e596995b3093329"><td class="memItemLeft" align="right" valign="top"><a id="a955f23e7c64ee26f7e596995b3093329" name="a955f23e7c64ee26f7e596995b3093329"></a>
+static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
+<tr class="separator:a955f23e7c64ee26f7e596995b3093329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
+<tr class="memitem:a1259b871ed5c2cd8cc06605be884700c inherit pub_static_methods_classksf_1_1ks_component" id="r_a1259b871ed5c2cd8cc06605be884700c"><td class="memItemLeft" align="right" valign="top">
+static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
+<tr class="separator:a1259b871ed5c2cd8cc06605be884700c inherit pub_static_methods_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -200,6 +213,8 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   </dd>
 </dl>
 
+<p class="reference">Referenced by <a class="el" href="#af0c39ab3c54f26fd79d55b2c6ec86e92">addNewParamWithConfigDefault()</a>.</p>
+
 </div>
 </div>
 <a id="af0c39ab3c54f26fd79d55b2c6ec86e92" name="af0c39ab3c54f26fd79d55b2c6ec86e92"></a>
@@ -249,6 +264,80 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   </table>
   </dd>
 </dl>
+
+<p class="reference">References <a class="el" href="#a6e72aedea03159b059f197ebf21a95ef">addNewParam()</a>, and <a class="el" href="classksf_1_1ks_config.html#a32af4b832d708c039351dea37fa7fcb3">ksf::ksConfig::getParam()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ad41f00507bd0d2ec465cb4dd68884199">ksf::comps::ksMqttConfigProvider::readParams()</a>.</p>
+
+</div>
+</div>
+<a id="acc6673a2b5a231587c568fcafc9fa42d" name="acc6673a2b5a231587c568fcafc9fa42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc6673a2b5a231587c568fcafc9fa42d">&#9670;&#160;</a></span>getInstanceType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const size_t ksf::comps::ksConfigProvider::getInstanceType </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to get type ID of object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Type ID. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a7bfa5bbf18c8fe767d95ad2412c15c2e">ksf::comps::ksMqttConfigProvider</a>.</p>
+
+</div>
+</div>
+<a id="abd847581f934d5e67b0deafdf2884d27" name="abd847581f934d5e67b0deafdf2884d27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd847581f934d5e67b0deafdf2884d27">&#9670;&#160;</a></span>isA()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ksf::comps::ksConfigProvider::isA </td>
+          <td>(</td>
+          <td class="paramtype">const size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to check if object is of given type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>Type ID. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if object is of given type, otherwise false. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a286b01d0faa7e74983efb15cdc80c748">ksf::ksComponent</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a1b5e47d42f23e33853ac1b0d4275c540">ksf::comps::ksMqttConfigProvider</a>.</p>
 
 </div>
 </div>

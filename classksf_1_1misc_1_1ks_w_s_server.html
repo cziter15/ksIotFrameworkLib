@@ -83,9 +83,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::misc::ksWSServer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Inheritance diagram for ksf::misc::ksWSServer:</div>
-<div class="dyncontent">
+<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::misc::ksWSServer:</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
  <div class="center">
   <img src="classksf_1_1misc_1_1ks_w_s_server.png" alt=""/>
  </div></div>
@@ -162,6 +164,8 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#aa70db8c4e6820c660c1654807276b9c6">wsListener</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -183,6 +187,8 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
 <p>Returns simple authtoken for WebSocket authentication. </p>
 <p>The value 0 is considered to be invalid (no auth token). Auth token is set via <a class="el" href="#ad7c5303434271a77957a113dad7a2c37" title="Sets simple authtoken for WebSocket authentication.">setRequiredAuthToken()</a>. Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).</p>
 <dl class="section return"><dt>Returns</dt><dd>Auth token for WebSocket </dd></dl>
+
+<p class="reference">References <a class="el" href="#af459c67b491ce00347a590de9dcee044">requriedAuthToken</a>.</p>
 
 </div>
 </div>
@@ -242,6 +248,8 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#a507b6d18fbe0c211bec2bb593173d885">onWebsocketTextMessage</a>.</p>
+
 </div>
 </div>
 <a id="ad7c5303434271a77957a113dad7a2c37" name="ad7c5303434271a77957a113dad7a2c37"></a>
@@ -267,6 +275,8 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
   </table>
   </dd>
 </dl>
+
+<p class="reference">References <a class="el" href="#af459c67b491ce00347a590de9dcee044">requriedAuthToken</a>.</p>
 
 </div>
 </div>
