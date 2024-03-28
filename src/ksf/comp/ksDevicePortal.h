@@ -113,11 +113,6 @@ namespace ksf::comps
 			void onRequest_otaFinish();
 
 			/*!
-				@brief This function will format flash.
-			*/
-			void handle_formatFS();
-
-			/*!
 				@brief This function handles incomming websocket messages.
 				@param clientNum Client number
 				@param message Message string view
