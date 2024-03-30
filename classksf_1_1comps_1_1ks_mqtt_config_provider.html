@@ -82,6 +82,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::comps::ksMqttConfigProvider Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages MQTT-related configuration.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_mqtt_config_provider_8h_source.html">ksMqttConfigProvider.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::comps::ksMqttConfigProvider:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -105,10 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1b5e47d42f23e33853ac1b0d4275c540"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
 <tr class="separator:a1b5e47d42f23e33853ac1b0d4275c540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad41f00507bd0d2ec465cb4dd68884199" id="r_ad41f00507bd0d2ec465cb4dd68884199"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad41f00507bd0d2ec465cb4dd68884199">readParams</a> () override</td></tr>
-<tr class="memdesc:ad41f00507bd0d2ec465cb4dd68884199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Injects MQTT config provider's WiFiManager parameters.  <br /></td></tr>
+<tr class="memdesc:ad41f00507bd0d2ec465cb4dd68884199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves MQTT parameters.  <br /></td></tr>
 <tr class="separator:ad41f00507bd0d2ec465cb4dd68884199"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d316f6e72e43ee5d121b48d2aee50fc" id="r_a4d316f6e72e43ee5d121b48d2aee50fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d316f6e72e43ee5d121b48d2aee50fc">saveParams</a> () override</td></tr>
-<tr class="memdesc:a4d316f6e72e43ee5d121b48d2aee50fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures MQTT config provider's WiFiManager parameters.  <br /></td></tr>
+<tr class="memdesc:a4d316f6e72e43ee5d121b48d2aee50fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves MQTT aprameters into the configuration file.  <br /></td></tr>
 <tr class="separator:a4d316f6e72e43ee5d121b48d2aee50fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7ed416913dd45cd2f2ef3dd3f85bb2e" id="r_ab7ed416913dd45cd2f2ef3dd3f85bb2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7ed416913dd45cd2f2ef3dd3f85bb2e">setupMqttConnector</a> (<a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html">ksMqttConnector</a> &amp;connector)</td></tr>
 <tr class="memdesc:ab7ed416913dd45cd2f2ef3dd3f85bb2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup MQTT connector with captured parameters.  <br /></td></tr>
@@ -169,7 +174,10 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d">componentState</a> { ksComponentState::NotInitialized }</td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages MQTT-related configuration. </p>
+<p>This configuration provider handles MQTT properties . Detailed documentation on the provider's behavior can be fond on <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html" title="ksConfigProvider is a component that provides a set of parameters to the ksWiFiConfigurator and is al...">ksConfigProvider</a> sub-page. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7bfa5bbf18c8fe767d95ad2412c15c2e" name="a7bfa5bbf18c8fe767d95ad2412c15c2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7bfa5bbf18c8fe767d95ad2412c15c2e">&#9670;&#160;</a></span>getInstanceType()</h2>
 
@@ -259,13 +267,9 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 </table>
 </div><div class="memdoc">
 
-<p>Injects MQTT config provider's WiFiManager parameters. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">manager</td><td>WiFiManager reference </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Retrieves MQTT parameters. </p>
+<p>This method reads the configuation file to retrieve MQTT broker information from file. The config contains data like MQTT address, device prefix, optional: credentials and expected SSL fingerprint. <br  />
+ </p>
 
 <p>Implements <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a0d115049edd41092f31cb49a0eac2988">ksf::comps::ksConfigProvider</a>.</p>
 
@@ -296,14 +300,9 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 </table>
 </div><div class="memdoc">
 
-<p>Captures MQTT config provider's WiFiManager parameters. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">manager</td><td>WiFiManager reference </td></tr>
-  </table>
-  </dd>
-</dl>
-
+<p>Saves MQTT aprameters into the configuration file. </p>
+<pre class="fragment">This method saves current (in-memory) MQTT properties into the configuration file.
+</pre> 
 <p>Implements <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a137995e9f92a86526a6feec85d7721b5">ksf::comps::ksConfigProvider</a>.</p>
 
 </div>
