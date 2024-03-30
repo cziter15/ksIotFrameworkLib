@@ -45,7 +45,7 @@ namespace ksf::comps
 	void ksDevStatMqttReporter::reportDevStats() const
 	{
 		auto mqttConnSp{mqttConnWp.lock()};
-		if (!mqttConnSp)
+		if (!mqttConnSp || !mqttConnSp->isConnected())
 			return;
 
 		mqttConnSp->publish(PSTR("dstat/rssi"), ksf::to_string(WiFi.RSSI()));
