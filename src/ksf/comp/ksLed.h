@@ -14,80 +14,87 @@
 
 namespace ksf::comps
 {
+	/*!
+		@brief The ksLed is a component that simplifies driving the LED.
+
+		It was designed to help the device to signal it's state using blink pattern.
+		This component has also some extra features like state inversion (driveAsActiveLow) and low-power pin driving mode
+ 		knowm as driveAsPushPull, which uses pull resistors and significantly reduces the amout of emitted light.
+	*/
 	class ksLed : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksLed, ksComponent)
 
 		protected:
 			uint8_t pin{0};								//!< Pin number assigned to LED.
-			uint32_t lastBlinkTimeMs{0};				//!< Last time LED state was toggled (milliseconds).
-			uint32_t blinkIntervalMs{0};				//!< Time in ms between LED state toggle (0 to disable blinking).
-			uint32_t blinkLoops{0};						//!< Number of loops (0 for infinite loop).
+			uint32_t lastBlinkTimeMs{0};				//!< Timestamp of previous state change (milliseconds).
+			uint32_t blinkIntervalMs{0};				//!< Intervals between state change (0 to disable blinking).
+			uint32_t blinkLoops{0};						//!< Number of state change cycles (0 for infinite loop).
 
-			bool driveAsActiveLow : 1 { false };		//!< True if LED should be active low, otherwise false.
-			bool driveAsPushPull : 1 { false };			//!< True if LED should be driven as push-pull, otherwise false.
+			bool driveAsActiveLow : 1 { false };		//!< True if the LED should be active low, otherwise false.
+			bool driveAsPushPull : 1 { false };			//!< True if the LED should be driven as push-pull, otherwise false.
 
 		public:
 			/*!
-				@brief Constructs LED object, assigning passed pin number.
-				@param pin Pin number assigned to LED
-				@param activeLow True if LED should be active low, otherwise false
-				@param driveAsPushPull True if LED should be driven as push-pull, otherwise false
+				@brief Constructs the LED object.
+				@param pin Pin number assigned to LED.
+				@param activeLow True if the LED should be active low, otherwise false
+				@param driveAsPushPull True if the LED should be driven as push-pull, otherwise false
 			*/
 			ksLed(uint8_t pin, bool activeLow = false, bool driveAsPushPull = false);
 
 			/*!
-				@brief Initializes LED component.
-				@param owner Pointer to ksApplication object that owns this component
+				@brief Initializes the LED component.
+				@param owner Pointer to parent ksApplication object.
 				@return True if init succedeed, otherwise false.
 			*/
 			bool init(ksApplication* owner) override;
 
 			/*!
-				@brief Executes LED component logic.
+				@brief Executes core of the LED component logic.
 				@return True if everything is okay, otherwise false to break application logic.
 			*/
 			bool loop(ksApplication* app) override;
 
 			/*!
-				@brief Sets LED blinking state.
-				@param blinkIntervalMs Time in ms between LED state toggle (0 to disable blinking)
-				@param blinkLoops Number of loops (0 for infinite loop)
+				@brief Sets LED blinking pattern.
+				@param blinkIntervalMs Interval in milliseconds between toggle action (0 to disable blinking)
+				@param blinkLoops Number of state toggle loops/cycles (0 for infinite loop).
 			*/
 			void setBlinking(uint32_t blinkIntervalMs, uint32_t blinkLoops = 0);
 
 			/*!
 				@brief Returns whether LED is currently blinking.
-				@return True if LED is currently blinking, otherwise false.
+				@return True if the LED is currently blinking, otherwise false.
 			*/
 			bool isBlinking() const;
 
 			/*!
-				@brief Returns whether LED is enabled.
-				@return True if LED is enabled, otherwise false.
+				@brief Returns whether the LED is actually enabled.
+				@return True if the LED is enabled, otherwise false.
 			*/
 			bool isEnabled() const;
 
 			/*!
-				@brief Enables or disables LED.
+				@brief Enables or disables the LED.
 				@param enabled True to enable LED, false to disable.
 			*/
 			void setEnabled(bool enabled);
 
 			/*!
-				@brief Enables or disables push/pull driving mode.
-				@param driveAsPushPull True if LED should be driven as push-pull, otherwise false
+				@brief Enables or disables the push/pull driving mode.
+				@param driveAsPushPull True if LED should is driven as push-pull, false otherwise.
 			*/
 			void setDriveAsPushPull(bool driveAsPushPull);
 
 			/*!
-				@brief Returns pin number assigned to LED.
+				@brief Returns a pin number assigned to the LED.
 				@return Pin number assigned to LED.
 			*/
 			uint8_t getPin() const { return pin; }
 
 			/*!
-				@brief Destructor, disables LED and restores INPUT pin state.
+				@brief Destructs the component and restores INPUT mode on the assigned pin.
 			*/
 			virtual ~ksLed();
 	};
