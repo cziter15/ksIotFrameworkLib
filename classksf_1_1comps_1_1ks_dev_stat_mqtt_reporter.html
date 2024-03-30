@@ -84,6 +84,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::comps::ksDevStatMqttReporter Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="ksDevStatMqttReporter is a component that periodocally reports device state to the broker.">ksDevStatMqttReporter</a> is a component that periodocally reports device state to the broker.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_dev_stat_mqtt_reporter_8h_source.html">ksDevStatMqttReporter.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::comps::ksDevStatMqttReporter:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -109,7 +114,7 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ksDevStatMqttReporter</b> (uint8_t intervalInSeconds=60)</td></tr>
 <tr class="separator:aeba778fa1e37f1b71e24e9e6a3659067"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a762ce8b72ef72aa6142a318ad5752c7a" id="r_a762ce8b72ef72aa6142a318ad5752c7a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a762ce8b72ef72aa6142a318ad5752c7a">postInit</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
-<tr class="memdesc:a762ce8b72ef72aa6142a318ad5752c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method called after component initialization.  <br /></td></tr>
+<tr class="memdesc:a762ce8b72ef72aa6142a318ad5752c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles component post-initialization.  <br /></td></tr>
 <tr class="separator:a762ce8b72ef72aa6142a318ad5752c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7336a2878a69f0f9452ae39fcfbc1412" id="r_a7336a2878a69f0f9452ae39fcfbc1412"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7336a2878a69f0f9452ae39fcfbc1412">loop</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
 <tr class="memdesc:a7336a2878a69f0f9452ae39fcfbc1412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles MQTT debug connector component loop logic.  <br /></td></tr>
@@ -140,13 +145,12 @@ static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a50a8b87a541070e20616a0815ce881d8" id="r_a50a8b87a541070e20616a0815ce881d8"><td class="memItemLeft" align="right" valign="top"><a id="a50a8b87a541070e20616a0815ce881d8" name="a50a8b87a541070e20616a0815ce881d8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>onConnected</b> ()</td></tr>
-<tr class="memdesc:a50a8b87a541070e20616a0815ce881d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function called on MQTT connection. <br /></td></tr>
+<tr class="memitem:a50a8b87a541070e20616a0815ce881d8" id="r_a50a8b87a541070e20616a0815ce881d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a50a8b87a541070e20616a0815ce881d8">onConnected</a> ()</td></tr>
+<tr class="memdesc:a50a8b87a541070e20616a0815ce881d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calback executed on MQTT connection.  <br /></td></tr>
 <tr class="separator:a50a8b87a541070e20616a0815ce881d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c5d0897b01f93c21dace3130746bdc5" id="r_a4c5d0897b01f93c21dace3130746bdc5"><td class="memItemLeft" align="right" valign="top"><a id="a4c5d0897b01f93c21dace3130746bdc5" name="a4c5d0897b01f93c21dace3130746bdc5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reportDevStats</b> () const</td></tr>
-<tr class="memdesc:a4c5d0897b01f93c21dace3130746bdc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function called periodically when MQTT is connected to report device stats to the broker. <br /></td></tr>
+<tr class="memdesc:a4c5d0897b01f93c21dace3130746bdc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports device statistics to the broker. <br /></td></tr>
 <tr class="separator:a4c5d0897b01f93c21dace3130746bdc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -167,7 +171,11 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d">componentState</a> { ksComponentState::NotInitialized }</td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="ksDevStatMqttReporter is a component that periodocally reports device state to the broker.">ksDevStatMqttReporter</a> is a component that periodocally reports device state to the broker. </p>
+<p>Upon instantiated, the component will look for ksMqrrConnector component. The interval between each update is defined by the construction parameter.</p>
+<p>Each update contain values like RSSI, device uptime, connection time and IP address. The subtopic used is "dstat", so for example RSSI will be sent to the topic named "deviceprefix/dstat/rssi". </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e354f7ea9757ca345769b2e0815fcbf" name="a4e354f7ea9757ca345769b2e0815fcbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e354f7ea9757ca345769b2e0815fcbf">&#9670;&#160;</a></span>getInstanceType()</h2>
 
@@ -260,13 +268,42 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <p>Handles MQTT debug connector component loop logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html">ksApplication</a> </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent, which is <a class="el" href="classksf_1_1ks_application.html">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
+
+</div>
+</div>
+<a id="a50a8b87a541070e20616a0815ce881d8" name="a50a8b87a541070e20616a0815ce881d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50a8b87a541070e20616a0815ce881d8">&#9670;&#160;</a></span>onConnected()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ksf::comps::ksDevStatMqttReporter::onConnected </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calback executed on MQTT connection. </p>
+<pre class="fragment">This callback is used to restart reporter timer to match
+</pre><p> the intervals between individual reports. The timer will be processed even if the MQTT is not connected, but reportDevStats will quickly return. </p>
 
 </div>
 </div>
@@ -293,11 +330,11 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 </table>
 </div><div class="memdoc">
 
-<p>Method called after component initialization. </p>
-<p>Used to setup message callbacks.</p>
+<p>Handles component post-initialization. </p>
+<p>This method is responsible for reference gathering (component lookup) as well as binding to the events.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html">ksApplication</a> object that owns this component </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent, which is <a class="el" href="classksf_1_1ks_application.html">ksApplication</a> object. </td></tr>
   </table>
   </dd>
 </dl>
