@@ -16,20 +16,29 @@ class WiFiManager;
 namespace ksf::comps
 {
 	class ksMqttConnector;
+	/*!
+		@brief Manages MQTT-related configuration.
+    
+		This configuration provider handles MQTT properties .
+ 		Detailed documentation on the provider's behavior can be fond on ksConfigProvider sub-page.
+	*/
 	class ksMqttConfigProvider : public ksConfigProvider
 	{
 		KSF_RTTI_DECLARATIONS(ksMqttConfigProvider, ksConfigProvider)
 
 		public:
 			/*!
-				@brief Injects MQTT config provider's WiFiManager parameters.
-				@param manager WiFiManager reference
+				@brief Retrieves MQTT parameters.
+    
+				This method reads the configuation file to retrieve MQTT broker information from file.
+ 				The config contains data like MQTT address, device prefix, optional: credentials and expected SSL fingerprint.  
 			*/
 			void readParams() override;
 
 			/*!
-				@brief Captures MQTT config provider's WiFiManager parameters.
-				@param manager WiFiManager reference
+				@brief Saves MQTT aprameters into the configuration file.
+
+    				This method saves current (in-memory) MQTT properties into the configuration file.
 			*/
 			void saveParams() override;
 
