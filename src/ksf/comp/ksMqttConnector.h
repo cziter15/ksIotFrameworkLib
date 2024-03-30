@@ -25,6 +25,14 @@ namespace ksf
 	namespace comps
 	{
 		class ksWifiConnector;
+		/*!
+			@brief ksMqttConnector is responsible for MQTT connection management.
+		
+			The component is responsible for MQTT prefix handling, connection time counting as well as
+			connection status reporting. This component provides public methods that can be used to publish a message.
+		
+			The user can register event handlers to receive connection state events as well as message arrival event.
+		*/
 		class ksMqttConnector : public ksComponent
 		{
 			KSF_RTTI_DECLARATIONS(ksMqttConnector, ksComponent)
@@ -56,23 +64,24 @@ namespace ksf
 				std::unique_ptr<ksCertFingerprint> certFingerprint;				//!< Shared pointer to fingerprint validator.
 
 				/*!
-					@brief Connects to MQTT broker.
+					@brief Connects to the MQTT broker.
+     
 					@return True on success, false on fail.
 				*/
 				bool connectToBroker();
 
 				/*!
-					@brief Called on MQTT connection (internal function).
-
-					Binds onMessage callback, calls bound onConnected callbacks, configures some parameters.
+					@brief Connects to the MQTT broker (internal function).
+     
+					Binds onMessage callback, calls bound onConnected callbacks and is used to configures parameters.
 				*/
 				void mqttConnectedInternal();
 
 				/*!
-					@brief Called on MQTT message arrival (internal function).
-					@param topic Message topic
-					@param payload Message payload
-					@param length Payload length
+					@brief Called when MQTT message arrives (internal function).
+					@param topic Topic that received the message.
+					@param payload Payload of the message.
+					@param length Length of the payload.
 				*/
 				void mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length);
 
@@ -91,30 +100,32 @@ namespace ksf
 
 				/*!
 					@brief Constructs ksMqttConnector object.
-					@param sendConnectionStatus If true, sends connection status to MQTT broker
-					@param usePersistentSession If true, it will use persistent session
+     
+					@param sendConnectionStatus Indicates whether last will message should be used to signal device state.
+					@param usePersistentSession Indicates whether the session should be persistent.
 				*/
 				ksMqttConnector(bool sendConnectionStatus = true, bool usePersistentSession = false);
 
 				/*!
-					@brief Initializes MQTT connector component.
-					@param owner Pointer to ksApplication object that owns this component
+					@brief Instantiates the MQTT connector component.
+     
+					@param owner Pointer to the ksApplication object (parent).
 					@return True on success, false on fail.
 				*/
 				bool init(ksApplication* owner) override;
 					
 				/*!
-					@brief Method called after component initialization.
+					@brief Method that handles component post-initialization.
 					
-					Used to setup message callbacks.
+					Used to setup callbacks.
 
-					@param owner Pointer to ksApplication object that owns this component
+					@param owner Pointer to the parent ksApplication.
 					@return True on success, false on fail.
 				*/
 				bool postInit(ksApplication* owner) override;
 
 				/*!
-					@brief Called from application loop. Handles MqttConnector logic.
+					@brief Executes MQTT connection logic.
 					@return True on success, false on fail.
 				*/
 				bool loop(ksApplication* app) override;
@@ -140,24 +151,24 @@ namespace ksf
 				/*!
 					@brief Subscribes to MQTT topic.
 					@param topic Topic to subscribe
-					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false
-					@param qos Quality of service level
+					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, false otherwise.
+					@param qos Quality of service level (QOS).
 				*/
 				void subscribe(const std::string& topic, bool skipDevicePrefix = false, ksMqttConnector::QosLevel = ksMqttConnector::QosLevel::QOS_AT_LEAST_ONCE);
 
 				/*!
-					@brief Unsubscribes from MQTT topic.
-					@param topic Topic to unsubscribe
-					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false
+					@brief Unsubscribes the MQTT topic.
+					@param topic Topic to be unsubscribed.
+					@param skipDevicePrefix True if the device prefix shouldn't be inserted to the topic, false othereide.
 				*/
 				void unsubscribe(const std::string& topic, bool skipDevicePrefix = false);
 
 				/*!
-					@brief Publishes to MQTT topic.
-					@param topic Topic to publish to
-					@param payload Payload to be published
-					@param retain True if this publish should be retained, otherwise false
-					@param skipDevicePrefix True if device prefix shouldn't be inserted before passed topic, otherwise false
+					@brief Publishes a message to the MQTT topic.
+					@param topic Target message`s topic name.
+					@param payload Payload to be transmitted.
+					@param retain True if this publish should be retained, otherwise false.
+					@param skipDevicePrefix True if device prefix shouldn't be inserted to the topic, false otherwise.
 				*/
 				void publish(const std::string& topic, const std::string& payload, bool retain = false, bool skipDevicePrefix = false);
 
