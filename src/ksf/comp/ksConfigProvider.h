@@ -44,7 +44,7 @@ namespace ksf::comps
 	};
 
 	/*!
-		ksConfigProvider is a component that provides a set of parameters to the ksWifiConfigurator 
+		ksConfigProvider is a component that provides a set of parameters to the ksWiFiConfigurator 
 		and is also responsible for handling its storage.
 		
 		In the configurator application, it should be instantiated like a typical component, and ksWifiConfigurator must be added to the component stack. 
@@ -54,7 +54,7 @@ namespace ksf::comps
 		init method, to read the data and return the required value.
 		Refer to the EnergySensor init method for an example. Note that the component will be destroyed upon reaching the function return. 
 		Also, note that the setupRotations method can return false in case of a problem with the value retrieval (for example, no config present yet), thus 
-		causing the application to break and triggering the app rotator to move to the next defined application, usually AP-based configurator."
+		causing the application to break and triggering the app rotator to move to the next defined application, usually AP-based configurator.
 	*/
 	class ksConfigProvider : public ksComponent
 	{
