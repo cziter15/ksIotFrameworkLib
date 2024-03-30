@@ -44,10 +44,9 @@ namespace ksf::comps
 	};
 
 	/*!
-		ksConfigProvider is a component that provides a set of parameters to the ksWiFiConfigurator 
-		and is also responsible for handling its storage.
+		@brief ksConfigProvider is a component that provides a set of parameters to the ksWiFiConfigurator and is also responsible for handling its storage.
 		
-		In the configurator application, it should be instantiated like a typical component, and ksWifiConfigurator must be added to the component stack. 
+		In the configurator application, it should be instantiated like a typical component, and ksWiFiConfigurator must be added to the component stack. 
 		In this case, it will manage the correct flow of data reading and saving.
 		
 		In contrast, in a normal application, it can be created for a short period of time, usually inside the application's 
