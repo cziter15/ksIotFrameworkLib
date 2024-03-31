@@ -36,29 +36,30 @@ namespace ksf::comps
 
 		public:
 			/*!
-				@brief Constructs  reset button component.
-				@param pin PIN number to use
-				@param triggerState State that triggers reset logic (LOW or HIGH)
-				@param mode Pin mode to set (INPUT / INPUT_PULLUP etc)
+				@brief Constructs the reset button component.
+				@param pin Pin number assigned to the button.
+				@param triggerState Pin state that triggers the reset logic (LOW or HIGH).
+				@param mode Pin mode (INPUT / INPUT_PULLUP etc).
 			*/
 			ksResetButton(uint8_t pin, uint8_t triggerState, uint8_t mode = INPUT);
 
 			/*!
-				@brief Initializes reset button component.
-				@param app Pointer to ksApplication object that owns this component
-				@return True on success, false on fail.
+				@brief Initializes the reset button component.
+				@param app Pointer to the parent ksApplication.
+				@return True on success, false otherwise.
 			*/
 			bool init(ksApplication* app) override;
 
 			/*!
-				@brief Handles reset button component loop logic.
-				@return True on success, false on fail.
+				@brief Handles the reset button component logic.
+    				@param app Pointer to the parent ksApplication.
+				@return True on success, false otherwise.
 			*/
 			bool loop(ksApplication* app) override;
 
 			/*!
-				@brief Retrieves assigned pin number.
-				@return PIN number assigned to the reset button.
+				@brief Retrieves pin number assigned to the button.
+				@return Pin number assigned to the reset button.
 			*/
 			uint8_t getPin() const { return pin; }
 
