@@ -110,16 +110,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6ea1bf709aee9cca8796b8739a68d57c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
 <tr class="separator:a6ea1bf709aee9cca8796b8739a68d57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb9e9f21f6eccae844dd0c77cede2dc5" id="r_afb9e9f21f6eccae844dd0c77cede2dc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb9e9f21f6eccae844dd0c77cede2dc5">ksResetButton</a> (uint8_t <a class="el" href="#a29879006a4ff502303a11eb534d3d8b3">pin</a>, uint8_t <a class="el" href="#a19333b9f885a6e61c27e04f206b75cb7">triggerState</a>, uint8_t <a class="el" href="#a801b0826bec2cbcef312909b6b9806f3">mode</a>=INPUT)</td></tr>
-<tr class="memdesc:afb9e9f21f6eccae844dd0c77cede2dc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs reset button component.  <br /></td></tr>
+<tr class="memdesc:afb9e9f21f6eccae844dd0c77cede2dc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the reset button component.  <br /></td></tr>
 <tr class="separator:afb9e9f21f6eccae844dd0c77cede2dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff554ea730fa9b9e830c4abb2d44d17f" id="r_aff554ea730fa9b9e830c4abb2d44d17f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff554ea730fa9b9e830c4abb2d44d17f">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
-<tr class="memdesc:aff554ea730fa9b9e830c4abb2d44d17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes reset button component.  <br /></td></tr>
+<tr class="memdesc:aff554ea730fa9b9e830c4abb2d44d17f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the reset button component.  <br /></td></tr>
 <tr class="separator:aff554ea730fa9b9e830c4abb2d44d17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fb8803dcd8805200f627d7171886c05" id="r_a1fb8803dcd8805200f627d7171886c05"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fb8803dcd8805200f627d7171886c05">loop</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
-<tr class="memdesc:a1fb8803dcd8805200f627d7171886c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles reset button component loop logic.  <br /></td></tr>
+<tr class="memdesc:a1fb8803dcd8805200f627d7171886c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the reset button component logic.  <br /></td></tr>
 <tr class="separator:a1fb8803dcd8805200f627d7171886c05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2092d47454216a02f2f254b0fc3496f3" id="r_a2092d47454216a02f2f254b0fc3496f3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2092d47454216a02f2f254b0fc3496f3">getPin</a> () const</td></tr>
-<tr class="memdesc:a2092d47454216a02f2f254b0fc3496f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves assigned pin number.  <br /></td></tr>
+<tr class="memdesc:a2092d47454216a02f2f254b0fc3496f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves pin number assigned to the button.  <br /></td></tr>
 <tr class="separator:a2092d47454216a02f2f254b0fc3496f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab85ae4de074ad0cb1f5e44528c109ecd" id="r_ab85ae4de074ad0cb1f5e44528c109ecd"><td class="memItemLeft" align="right" valign="top"><a id="ab85ae4de074ad0cb1f5e44528c109ecd" name="ab85ae4de074ad0cb1f5e44528c109ecd"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksResetButton</b> ()</td></tr>
@@ -208,12 +208,12 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
       </table>
 </div><div class="memdoc">
 
-<p>Constructs reset button component. </p>
+<p>Constructs the reset button component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pin</td><td>PIN number to use </td></tr>
-    <tr><td class="paramname">triggerState</td><td>State that triggers reset logic (LOW or HIGH) </td></tr>
-    <tr><td class="paramname">mode</td><td>Pin mode to set (INPUT / INPUT_PULLUP etc) </td></tr>
+    <tr><td class="paramname">pin</td><td>Pin number assigned to the button. </td></tr>
+    <tr><td class="paramname">triggerState</td><td>Pin state that triggers the reset logic (LOW or HIGH). </td></tr>
+    <tr><td class="paramname">mode</td><td>Pin mode (INPUT / INPUT_PULLUP etc). </td></tr>
   </table>
   </dd>
 </dl>
@@ -274,8 +274,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Retrieves assigned pin number. </p>
-<dl class="section return"><dt>Returns</dt><dd>PIN number assigned to the reset button. </dd></dl>
+<p>Retrieves pin number assigned to the button. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pin number assigned to the reset button. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a29879006a4ff502303a11eb534d3d8b3">pin</a>.</p>
 
@@ -304,14 +304,14 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Initializes reset button component. </p>
+<p>Initializes the reset button component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html">ksApplication</a> object that owns this component </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a684f870e77ac3795b3cf789a8a81cdde">ksf::ksComponent</a>.</p>
 
@@ -378,8 +378,14 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 </table>
 </div><div class="memdoc">
 
-<p>Handles reset button component loop logic. </p>
-<dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
+<p>Handles the reset button component logic. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html">ksApplication</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
 
