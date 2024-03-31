@@ -17,7 +17,7 @@ namespace ksf::comps
 {
 	class ksMqttConnector;
 	/*!
-		@brief Manages MQTT-related configuration.
+		@brief A component that manages MQTT-related configuration.
     
 		This configuration provider handles MQTT properties .
  		Detailed documentation on the provider's behavior can be fond on ksConfigProvider sub-page.
