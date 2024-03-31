@@ -33,7 +33,9 @@ namespace ksf::comps
 		};
 	};
 
-	/*! A structure that defines the configuration parameter. */
+	/*!
+		@brief ksConfigParameter is a structure that defines configuration parameter.
+	*/
 	struct ksConfigParameter
 	{
 		std::string id;
