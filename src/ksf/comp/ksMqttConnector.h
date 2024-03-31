@@ -26,7 +26,7 @@ namespace ksf
 	{
 		class ksWifiConnector;
 		/*!
-			@brief ksMqttConnector is responsible for MQTT connection management.
+			@brief A component which is responsible for MQTT connection management.
 		
 			The component is responsible for MQTT prefix handling, connection time counting as well as
 			connection status reporting. This component provides public methods that can be used to publish a message.
