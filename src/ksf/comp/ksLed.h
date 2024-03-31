@@ -15,7 +15,7 @@
 namespace ksf::comps
 {
 	/*!
-		@brief ksLed component simplifies driving the LED.
+		@brief A component that simplifies driving the LED.
 
 		It was designed to help the device to signal it's state using blink pattern.
 		This component has also some extra features like state inversion (driveAsActiveLow) and low-power pin driving mode
