@@ -14,6 +14,14 @@
 
 namespace ksf::comps
 {
+	/*!
+		@brief ksResetButton is a component that implements a reset button function.
+
+		On short press, it will cause component loop to return false, then ksAppRotator will move to the next application.
+		On long press, it will erase user data (factory reset).
+  
+		The component has also built-in debounce handling logic.
+	*/
 	class ksResetButton : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksResetButton, ksComponent)
