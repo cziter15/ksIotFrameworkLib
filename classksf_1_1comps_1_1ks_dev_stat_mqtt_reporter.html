@@ -85,7 +85,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="ksDevStatMqttReporter is a component that periodocally reports device state to the broker.">ksDevStatMqttReporter</a> is a component that periodocally reports device state to the broker.  
+<p>A component that periodocally reports device state to the broker.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_dev_stat_mqtt_reporter_8h_source.html">ksDevStatMqttReporter.h</a>&gt;</code></p>
@@ -172,8 +172,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="ksDevStatMqttReporter is a component that periodocally reports device state to the broker.">ksDevStatMqttReporter</a> is a component that periodocally reports device state to the broker. </p>
-<p>Upon instantiated, the component will look for ksMqrrConnector component. The interval between each update is defined by the construction parameter.</p>
+<div class="textblock"><p>A component that periodocally reports device state to the broker. </p>
+<p>Upon instantiated, the component will look for <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="ksMqttConnector is responsible for MQTT connection management.">ksMqttConnector</a> component. The interval between each update is defined by the construction parameter.</p>
 <p>Each update contain values like RSSI, device uptime, connection time and IP address. The subtopic used is "dstat", so for example RSSI will be sent to the topic named "deviceprefix/dstat/rssi". </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e354f7ea9757ca345769b2e0815fcbf" name="a4e354f7ea9757ca345769b2e0815fcbf"></a>
