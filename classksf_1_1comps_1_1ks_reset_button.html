@@ -83,6 +83,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::comps::ksResetButton Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p><a class="el" href="classksf_1_1comps_1_1ks_reset_button.html" title="ksResetButton is a component that implements a reset button function.">ksResetButton</a> is a component that implements a reset button function.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_reset_button_8h_source.html">ksResetButton.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::comps::ksResetButton:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -118,7 +123,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2092d47454216a02f2f254b0fc3496f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab85ae4de074ad0cb1f5e44528c109ecd" id="r_ab85ae4de074ad0cb1f5e44528c109ecd"><td class="memItemLeft" align="right" valign="top"><a id="ab85ae4de074ad0cb1f5e44528c109ecd" name="ab85ae4de074ad0cb1f5e44528c109ecd"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksResetButton</b> ()</td></tr>
-<tr class="memdesc:ab85ae4de074ad0cb1f5e44528c109ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html">ksResetButton</a>, restoring INPUT pin state. <br /></td></tr>
+<tr class="memdesc:ab85ae4de074ad0cb1f5e44528c109ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html" title="ksResetButton is a component that implements a reset button function.">ksResetButton</a>, restoring INPUT pin state. <br /></td></tr>
 <tr class="separator:ab85ae4de074ad0cb1f5e44528c109ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
 <tr class="memitem:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component" id="r_ac952d4ad53c77639a2bb6015c11800fb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb">postInit</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app)</td></tr>
@@ -174,7 +179,11 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d">componentState</a> { ksComponentState::NotInitialized }</td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p><a class="el" href="classksf_1_1comps_1_1ks_reset_button.html" title="ksResetButton is a component that implements a reset button function.">ksResetButton</a> is a component that implements a reset button function. </p>
+<p>On short press, it will cause component loop to return false, then <a class="el" href="classksf_1_1ks_app_rotator.html">ksAppRotator</a> will move to the next application. On long press, it will erase user data (factory reset).</p>
+<p>The component has also built-in debounce handling logic. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afb9e9f21f6eccae844dd0c77cede2dc5" name="afb9e9f21f6eccae844dd0c77cede2dc5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb9e9f21f6eccae844dd0c77cede2dc5">&#9670;&#160;</a></span>ksResetButton()</h2>
 
