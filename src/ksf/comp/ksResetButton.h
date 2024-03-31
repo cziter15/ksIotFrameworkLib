@@ -52,7 +52,7 @@ namespace ksf::comps
 
 			/*!
 				@brief Handles the reset button component logic.
-    				@param app Pointer to the parent ksApplication.
+   			 	@param app Pointer to the parent ksApplication.
 				@return True on success, false otherwise.
 			*/
 			bool loop(ksApplication* app) override;
