@@ -19,19 +19,19 @@
 
 #include "../ksApplication.h"
 #include "../ksConstants.h"
-#include "ksWiFiConfigurator.h"
+#include "ksWifiConfigurator.h"
 #include "ksConfigProvider.h"
 #include "ksDevicePortal.h"
 #include "ksLed.h"
 
 namespace ksf::comps
 {
-	ksWiFiConfigurator::ksWiFiConfigurator()
+	ksWifiConfigurator::ksWifiConfigurator()
 	{
-		ksWiFiConfigurator(PSTR("KSFDevice"));
+		ksWifiConfigurator(PSTR("KSFDevice"));
 	}
 	
-	ksWiFiConfigurator::ksWiFiConfigurator(std::string devicePrefixName)
+	ksWifiConfigurator::ksWifiConfigurator(std::string devicePrefixName)
 		 // As the device name is our field, we are able to move, it's better to do so than using const ref
 		: deviceName(std::move(devicePrefixName))
 	{
@@ -45,7 +45,7 @@ namespace ksf::comps
 #endif
 	}
 
-	bool ksWiFiConfigurator::init(ksApplication* app)
+	bool ksWifiConfigurator::init(ksApplication* app)
 	{
 		WiFi.softAP(deviceName.c_str());
 		app->addComponent<ksDevicePortal>();
@@ -53,7 +53,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	bool ksWiFiConfigurator::postInit(ksApplication* app)
+	bool ksWifiConfigurator::postInit(ksApplication* app)
 	{
 		std::vector<std::weak_ptr<ksLed>> ledCompsWp;
 		app->findComponents<ksLed>(ledCompsWp);
@@ -65,13 +65,13 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksWiFiConfigurator::handlePeriodicTasks()
+	void ksWifiConfigurator::handlePeriodicTasks()
 	{
 		if (WiFi.softAPgetStationNum() > 0)
 			configTimeout.restart();
 	}
 
-	bool ksWiFiConfigurator::loop(ksApplication* app)
+	bool ksWifiConfigurator::loop(ksApplication* app)
 	{
 		if (periodicTasksTimeout.triggered())
 			handlePeriodicTasks();
@@ -79,7 +79,7 @@ namespace ksf::comps
 		return !configTimeout.triggered();
 	}
 
-	ksWiFiConfigurator::~ksWiFiConfigurator()
+	ksWifiConfigurator::~ksWifiConfigurator()
 	{
 		WiFi.enableAP(false);
 	}

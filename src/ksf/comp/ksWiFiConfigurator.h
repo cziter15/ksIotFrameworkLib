@@ -14,9 +14,9 @@
 #include "../ksSimpleTimer.h"
 namespace ksf::comps
 {
-	class ksWiFiConfigurator : public ksComponent
+	class ksWifiConfigurator : public ksComponent
 	{
-		KSF_RTTI_DECLARATIONS(ksWiFiConfigurator, ksComponent)
+		KSF_RTTI_DECLARATIONS(ksWifiConfigurator, ksComponent)
 
 		protected:
 			ksApplication* owner{nullptr};							//!< Pointer to ksApplication object that owns this component.
@@ -33,16 +33,16 @@ namespace ksf::comps
 			/*!
 				@brief Constructs WiFi configurator object.
 			*/
-			ksWiFiConfigurator();
+			ksWifiConfigurator();
 
 			/*!
 				@brief Constructs WiFi configurator object.
 				@param devicePrefixName Device prefix name, will be used in AP (DEVPREFIX-112ACB84) and hostname
 			*/
-			ksWiFiConfigurator(std::string devicePrefixName);
+			ksWifiConfigurator(std::string devicePrefixName);
 
 			/*!
-				@brief Handles ksWiFiConfigurator logic.
+				@brief Handles ksWifiConfigurator logic.
 
 				It starts and handles Device Portal, where the user can configure the device (that means WiFi or
 				MQTT credential as well as custom defined device parameters).
@@ -52,14 +52,14 @@ namespace ksf::comps
 			bool loop(ksApplication* app) override;
 
 			/*!
-				@brief ksWiFiConfigurator init function.
+				@brief ksWifiConfigurator init function.
 				@param owner Pointer to the application object
 				@return True on success, false on fail.
 			*/
 			bool init(ksApplication* owner) override;
 
 			/*!
-				@brief ksWiFiConfigurator postInit function.
+				@brief ksWifiConfigurator postInit function.
 
 				Turns on all registered LEDs in config mode.
 
@@ -71,6 +71,6 @@ namespace ksf::comps
 			/*!
 				@brief Destructor for WiFi configurator component.
 			*/
-			virtual ~ksWiFiConfigurator();
+			virtual ~ksWifiConfigurator();
 	};
 }

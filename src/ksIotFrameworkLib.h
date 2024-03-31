@@ -20,7 +20,7 @@
 #include "ksf/comp/ksResetButton.h"
 #include "ksf/comp/ksMqttConfigProvider.h"
 #include "ksf/comp/ksMqttConnector.h"
-#include "ksf/comp/ksWiFiConfigurator.h"
+#include "ksf/comp/ksWifiConfigurator.h"
 #include "ksf/comp/ksWifiConnector.h"
 #include "ksf/comp/ksDevicePortal.h"
 #include "ksf/comp/ksDevStatMqttReporter.h"

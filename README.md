@@ -66,7 +66,7 @@ flowchart TD
 | ksDevStatMqttReporter | Reports device state periodically to the MQTT broker to the 'dstat' sub-topic. |
 | ksDevicePortal  | Handles all-in-one things like configuration, debug and OTA updates. |
 | ksResetButton  | Used to exit the app loop or reset the entire device (to trigger the config portal). |
-| ksWiFiConfigurator | The base WiFi configurator component, providing WiFi management portal and allowing config providers to inject and capture parameters. |
+| ksWifiConfigurator | The base WiFi configurator component, providing WiFi management portal and allowing config providers to inject and capture parameters. |
 | ksWiFiConnector | Manages WiFi connection (triggers events, handles reconnection etc.). |
 
 ### Rules:

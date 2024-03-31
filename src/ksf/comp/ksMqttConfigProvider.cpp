@@ -9,7 +9,7 @@
 
 #include "../ksApplication.h"
 #include "../ksConfig.h"
-#include "ksWiFiConfigurator.h"
+#include "ksWifiConfigurator.h"
 #include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"
 
