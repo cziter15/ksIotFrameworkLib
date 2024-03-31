@@ -18,9 +18,9 @@ namespace ksf::comps
 	class ksMqttConnector;
 
 	/*!
-		@brief ksDevStatMqttReporter is a component that periodocally reports device state to the broker.
+		@brief A component that periodocally reports device state to the broker.
 		
-		Upon instantiated, the component will look for ksMqrrConnector component.
+		Upon instantiated, the component will look for ksMqttConnector component.
 		The interval between each update is defined by the construction parameter.
 		
 		Each update contain values like RSSI, device uptime, connection time and IP address.
