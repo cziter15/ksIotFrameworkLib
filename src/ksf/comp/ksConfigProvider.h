@@ -34,7 +34,7 @@ namespace ksf::comps
 	};
 
 	/*!
-		@brief ksConfigParameter is a structure that defines configuration parameter.
+		@brief A structure that defines configuration parameter.
 	*/
 	struct ksConfigParameter
 	{
@@ -46,7 +46,7 @@ namespace ksf::comps
 	};
 
 	/*!
-		@brief ksConfigProvider is a component that provides a set of parameters to the ksWiFiConfigurator and is also responsible for handling its storage.
+		@brief A component that provides a set of parameters to the ksWiFiConfigurator and is also responsible for handling its storage.
 		
 		In the configurator application, it should be instantiated like a typical component, and ksWiFiConfigurator must be added to the component stack. 
 		In this case, it will manage the correct flow of data reading and saving.
