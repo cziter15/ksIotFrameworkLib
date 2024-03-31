@@ -14,5 +14,5 @@ var searchData=
   ['onupdatestart_11',['onUpdateStart',['../classksf_1_1comps_1_1ks_device_portal.html#a94f2d902c9447d79a165cdb0ed7417ab',1,'ksf::comps::ksDevicePortal']]],
   ['onwebsockettextmessage_12',['onWebsocketTextMessage',['../classksf_1_1misc_1_1ks_w_s_server.html#a507b6d18fbe0c211bec2bb593173d885',1,'ksf::misc::ksWSServer::onWebsocketTextMessage'],['../classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7',1,'ksf::comps::ksDevicePortal::onWebsocketTextMessage()']]],
   ['operator_20bool_13',['operator bool',['../classksf_1_1ks_config.html#af05e375f48e5ce57902a587393a95134',1,'ksf::ksConfig']]],
-  ['owner_14',['owner',['../classksf_1_1comps_1_1ks_wi_fi_configurator.html#a7390ec7db6c3f0da58a773d82a56a4b0',1,'ksf::comps::ksWiFiConfigurator']]]
+  ['owner_14',['owner',['../classksf_1_1comps_1_1ks_wifi_configurator.html#adf6a3a181faeec4431b72bd747aad08b',1,'ksf::comps::ksWifiConfigurator']]]
 ];

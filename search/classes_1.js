@@ -21,7 +21,7 @@ var searchData=
   ['ksresetbutton_18',['ksResetButton',['../classksf_1_1comps_1_1ks_reset_button.html',1,'ksf::comps']]],
   ['ksrtti_19',['ksRtti',['../classksf_1_1ks_rtti.html',1,'ksf']]],
   ['kssimpletimer_20',['ksSimpleTimer',['../classksf_1_1ks_simple_timer.html',1,'ksf']]],
-  ['kswificonfigurator_21',['ksWiFiConfigurator',['../classksf_1_1comps_1_1ks_wi_fi_configurator.html',1,'ksf::comps']]],
+  ['kswificonfigurator_21',['ksWifiConfigurator',['../classksf_1_1comps_1_1ks_wifi_configurator.html',1,'ksf::comps']]],
   ['kswificonnector_22',['ksWifiConnector',['../classksf_1_1comps_1_1ks_wifi_connector.html',1,'ksf::comps']]],
   ['kswsserver_23',['ksWSServer',['../classksf_1_1misc_1_1ks_w_s_server.html',1,'ksf::misc']]]
 ];
