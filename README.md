@@ -104,8 +104,7 @@ bool PelletInfo::init()
 ```
 
 ## Compiler flags
-- Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the board.txt file.
-- 
+- Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
 
 ## Custom RTTI
 - Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components. 
