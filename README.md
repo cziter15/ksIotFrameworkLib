@@ -10,12 +10,13 @@
   <img src="https://raw.githubusercontent.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg">
 </p>
 
-## What and why?
+## Motivation
 
-The goal of this project is to create a simple template or starting point for developing Internet of Things (IoT) applications using the ESP 8266/32 microcontroller. I noticed that I was frequently copying and modifying existing applications when creating new ones for different devices, and I wanted to streamline this process. This project aims to do just that by providing a more organized approach to starting new IoT projects with the ESP 8266/32.
+- The goal of this project is to create a simple template or starting point to develop IoT applications using Espressif microcontrollers. 
+- I was frequently copying and modifying source code for different devices and this is an attempt to streamline this process. 
 
 ## Doxygen
-Detailed documentation can be found on [here](https://cziter15.github.io/ksIotFrameworkLib).
+- Detailed documentation can be found on [here](https://cziter15.github.io/ksIotFrameworkLib).
 
 ## Architecture
 ```mermaid
@@ -56,10 +57,10 @@ flowchart TD
 - Components can be marked for removal, and they will be safely released in the next tick.
 
 ## Utilities
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/127d70e3-3bab-4578-b621-78a83b1bff09)
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1b144cdf-e345-4865-8ae7-92f0eaf31992)
 
 ## Components
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/2c46fafb-276a-48b0-bd65-caf00172182a)
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/c27aba37-4e54-49f5-9ad5-97439e7baf33)
 
 ### Rules:
 - Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
@@ -103,18 +104,19 @@ bool PelletInfo::init()
 ```
 
 ## Compiler flags
-Bare Arduino projects need to have C++17 enabled via `compiler.cpp.extra_flags=` option in the board.txt file.
+- Bare Arduino projects need to have C++17 enabled via `compiler.cpp.extra_flags=` option in the board.txt file.
 
 ## Custom RTTI
-Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components. 
-See ksConfigProvider.h for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
+- Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components. 
+- See ksConfigProvider.h for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
 ## Saving power
-By default, this framework supports power saving for the modem. This requires the DTIM to be set on the access point. 
-The best value for me is 3. It allows the ESP32 to go down from around 100mA to 20mA.
+- By default, this framework supports enables power saving for the modem.
+- Automatic modem sleep requires the DTIM to be set on the access point. 
+- The best value for was 3. It allows the ESP32 to go down from around 100mA to 20mA.
 
 ## Dependencies
-**It is highly recommended to use PlatformIO as it will automatically download dependencies!**
+- **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
 
 ### Frameworks
 - Arduino for ESP32 [ https://github.com/espressif/arduino-esp32 ]
