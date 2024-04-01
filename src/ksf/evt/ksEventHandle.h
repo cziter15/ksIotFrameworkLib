@@ -15,6 +15,13 @@
 namespace ksf::evt
 {
 	class ksEventInterface;
+
+	/*!
+		@brief Implements event handle, used to automatically unbind callback on destruction.
+
+		This is very important to avoid crashing the program in case that user forgets to unbind the callback.
+		Instead, the event handle will unbind the callback automatically when parent object is destroyed.
+	*/
 	class ksEventHandle
 	{
 		protected:

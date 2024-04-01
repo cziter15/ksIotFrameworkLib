@@ -26,6 +26,10 @@
 
 namespace ksf::evt
 {
+	/*!
+		@brief Base class for multicasting events.
+		@tparam Params... Event parameters.
+	*/
 	template <typename... Params>
 	class ksEvent : public evt::ksEventInterface
 	{

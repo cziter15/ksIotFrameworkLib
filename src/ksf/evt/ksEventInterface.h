@@ -13,6 +13,9 @@
 
 namespace ksf::evt
 {
+	/*!
+		@brief Implements interface for multicasting events.
+	*/
 	class ksEventInterface : public std::enable_shared_from_this<ksEventInterface>
 	{
 		friend class ksEventHandle;

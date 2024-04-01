@@ -23,9 +23,6 @@ namespace ksf
 
 namespace ksf::comps
 {
-	/*!
-		@brief Configuration parameter types.
-	*/
 	namespace EConfigParamType
 	{
 		/*!

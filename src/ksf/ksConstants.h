@@ -57,9 +57,6 @@
 
 namespace ksf
 {
-	/*!
-		@brief OTA boot types.
-	*/
 	namespace EOTAType
 	{
 		/*!
