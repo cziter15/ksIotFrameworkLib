@@ -11,6 +11,6 @@ var searchData=
   ['requestappbreak_8',['requestAppBreak',['../classksf_1_1comps_1_1ks_device_portal.html#a493f65235eb09023daeae7db6a800f0d',1,'ksf::comps::ksDevicePortal']]],
   ['requriedauthtoken_9',['requriedAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#af459c67b491ce00347a590de9dcee044',1,'ksf::misc::ksWSServer']]],
   ['restart_10',['restart',['../classksf_1_1ks_simple_timer.html#a7115f8d5cbd0be313e002f569e518879',1,'ksf::ksSimpleTimer']]],
-  ['rtti_11',['Custom RTTI',['../index.html#autotoc_md9',1,'']]],
-  ['rules_3a_12',['Rules:',['../index.html#autotoc_md5',1,'']]]
+  ['rtti_11',['Custom RTTI',['../index.html#autotoc_md10',1,'']]],
+  ['rules_3a_12',['Rules:',['../index.html#autotoc_md6',1,'']]]
 ];
