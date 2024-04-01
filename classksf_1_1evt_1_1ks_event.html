@@ -82,6 +82,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::evt::ksEvent&lt; Params &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for multicasting events.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_event_8h_source.html">ksEvent.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::evt::ksEvent&lt; Params &gt;:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -90,7 +95,7 @@ $(function() {
  <div class="center">
   <img src="classksf_1_1evt_1_1ks_event.png" usemap="#ksf::evt::ksEvent_3C_20Params_20_3E_map" alt=""/>
   <map id="ksf::evt::ksEvent_3C_20Params_20_3E_map" name="ksf::evt::ksEvent_3C_20Params_20_3E_map">
-<area href="classksf_1_1evt_1_1ks_event_interface.html" alt="ksf::evt::ksEventInterface" shape="rect" coords="0,56,294,80"/>
+<area href="classksf_1_1evt_1_1ks_event_interface.html" title="Implements interface for multicasting events." alt="ksf::evt::ksEventInterface" shape="rect" coords="0,56,294,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -123,7 +128,16 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastCallbackUI
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename... Params&gt;<br />
+class ksf::evt::ksEvent&lt; Params &gt;</div><p>Base class for multicasting events. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Params...</td><td>Event parameters. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac672facd2bd8e5084f8251b228d2cf4f" name="ac672facd2bd8e5084f8251b228d2cf4f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac672facd2bd8e5084f8251b228d2cf4f">&#9670;&#160;</a></span>broadcast()</h2>
 
@@ -229,7 +243,7 @@ template&lt;typename... Params&gt; </div>
 <p>Registers event (binds to callback list). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">outHandle</td><td>Reference to outHandle shared ptr (destruction of <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksEventHandle</a> object will unbind the event) </td></tr>
+    <tr><td class="paramname">outHandle</td><td>Reference to outHandle shared ptr (destruction of <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html" title="Implements event handle, used to automatically unbind callback on destruction.">ksEventHandle</a> object will unbind the event) </td></tr>
     <tr><td class="paramname">function</td><td>R-value reference to callback function </td></tr>
   </table>
   </dd>
@@ -267,7 +281,7 @@ template&lt;typename... Params&gt; </div>
 </div><div class="memdoc">
 
 <p>Unbinds event callback by specified unique ID. </p>
-<p>This ID is automatically assigned by registerEvent function and <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html">ksEventHandle</a> uses it to unbind automatically upon destruction.</p>
+<p>This ID is automatically assigned by registerEvent function and <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html" title="Implements event handle, used to automatically unbind callback on destruction.">ksEventHandle</a> uses it to unbind automatically upon destruction.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callbackUID</td><td>Unique id of the callback to unbind. </td></tr>
