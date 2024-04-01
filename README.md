@@ -1,4 +1,5 @@
 # ksIotFrameworkLib
+[![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&logoColor=fff)](https://cziter15.github.io/ksIotFrameworkLib)
 [![Build for PlatformIO](https://img.shields.io/badge/works%20best%20with-PlatformIO-orange?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMjUwMCIgaGVpZ2h0PSIyNTAwIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCI+PHBhdGggZD0iTTEyOCAwQzkzLjgxIDAgNjEuNjY2IDEzLjMxNCAzNy40OSAzNy40OSAxMy4zMTQgNjEuNjY2IDAgOTMuODEgMCAxMjhjMCAzNC4xOSAxMy4zMTQgNjYuMzM0IDM3LjQ5IDkwLjUxQzYxLjY2NiAyNDIuNjg2IDkzLjgxIDI1NiAxMjggMjU2YzM0LjE5IDAgNjYuMzM0LTEzLjMxNCA5MC41MS0zNy40OUMyNDIuNjg2IDE5NC4zMzQgMjU2IDE2Mi4xOSAyNTYgMTI4YzAtMzQuMTktMTMuMzE0LTY2LjMzNC0zNy40OS05MC41MUMxOTQuMzM0IDEzLjMxNCAxNjIuMTkgMCAxMjggMCIgZmlsbD0iI0ZGN0YwMCIvPjxwYXRoIGQ9Ik0yNDkuMzg2IDEyOGMwIDY3LjA0LTU0LjM0NyAxMjEuMzg2LTEyMS4zODYgMTIxLjM4NkM2MC45NiAyNDkuMzg2IDYuNjEzIDE5NS4wNCA2LjYxMyAxMjggNi42MTMgNjAuOTYgNjAuOTYgNi42MTQgMTI4IDYuNjE0YzY3LjA0IDAgMTIxLjM4NiA1NC4zNDYgMTIxLjM4NiAxMjEuMzg2IiBmaWxsPSIjRkZGIi8+PHBhdGggZD0iTTE2MC44NjkgNzQuMDYybDUuMTQ1LTE4LjUzN2M1LjI2NC0uNDcgOS4zOTItNC44ODYgOS4zOTItMTAuMjczIDAtNS43LTQuNjItMTAuMzItMTAuMzItMTAuMzJzLTEwLjMyIDQuNjItMTAuMzIgMTAuMzJjMCAzLjc1NSAyLjAxMyA3LjAzIDUuMDEgOC44MzdsLTUuMDUgMTguMTk1Yy0xNC40MzctMy42Ny0yNi42MjUtMy4zOS0yNi42MjUtMy4zOWwtMi4yNTggMS4wMXYxNDAuODcybDIuMjU4Ljc1M2MxMy42MTQgMCA3My4xNzctNDEuMTMzIDczLjMyMy04NS4yNyAwLTMxLjYyNC0yMS4wMjMtNDUuODI1LTQwLjU1NS01Mi4xOTd6TTE0Ni41MyAxNjQuOGMtMTEuNjE3LTE4LjU1Ny02LjcwNi02MS43NTEgMjMuNjQzLTY3LjkyNSA4LjMyLTEuMzMzIDE4LjUwOSA0LjEzNCAyMS41MSAxNi4yNzkgNy41ODIgMjUuNzY2LTM3LjAxNSA2MS44NDUtNDUuMTUzIDUxLjY0NnptMTguMjE2LTM5Ljc1MmE5LjM5OSA5LjM5OSAwIDAgMC05LjM5OSA5LjM5OSA5LjM5OSA5LjM5OSAwIDAgMCA5LjQgOS4zOTkgOS4zOTkgOS4zOTkgMCAwIDAgOS4zOTgtOS40IDkuMzk5IDkuMzk5IDAgMCAwLTkuMzk5LTkuMzk4em0yLjgxIDguNjcyYTIuMzc0IDIuMzc0IDAgMSAxIDAtNC43NDkgMi4zNzQgMi4zNzQgMCAwIDEgMCA0Ljc0OXoiIGZpbGw9IiNFNTcyMDAiLz48cGF0aCBkPSJNMTAxLjM3MSA3Mi43MDlsLTUuMDIzLTE4LjkwMWMyLjg3NC0xLjgzMiA0Ljc4Ni01LjA0IDQuNzg2LTguNzAxIDAtNS43LTQuNjItMTAuMzItMTAuMzItMTAuMzItNS42OTkgMC0xMC4zMTkgNC42Mi0xMC4zMTkgMTAuMzIgMCA1LjY4MiA0LjU5MiAxMC4yODkgMTAuMjY3IDEwLjMxN0w5NS44IDc0LjM3OGMtMTkuNjA5IDYuNTEtNDAuODg1IDIwLjc0Mi00MC44ODUgNTEuODguNDM2IDQ1LjAxIDU5LjU3MiA4NS4yNjcgNzMuMTg2IDg1LjI2N1Y2OC44OTJzLTEyLjI1Mi0uMDYyLTI2LjcyOSAzLjgxN3ptMTAuMzk1IDkyLjA5Yy04LjEzOCAxMC4yLTUyLjczNS0yNS44OC00NS4xNTQtNTEuNjQ1IDMuMDAyLTEyLjE0NSAxMy4xOS0xNy42MTIgMjEuNTExLTE2LjI4IDMwLjM1IDYuMTc1IDM1LjI2IDQ5LjM2OSAyMy42NDMgNjcuOTI2em0tMTguODItMzkuNDZhOS4zOTkgOS4zOTkgMCAwIDAtOS4zOTkgOS4zOTggOS4zOTkgOS4zOTkgMCAwIDAgOS40IDkuNCA5LjM5OSA5LjM5OSAwIDAgMCA5LjM5OC05LjQgOS4zOTkgOS4zOTkgMCAwIDAtOS4zOTktOS4zOTl6bS0yLjgxIDguNjcxYTIuMzc0IDIuMzc0IDAgMSAxIDAtNC43NDggMi4zNzQgMi4zNzQgMCAwIDEgMCA0Ljc0OHoiIGZpbGw9IiNGRjdGMDAiLz48L3N2Zz4=)](https://platformio.org)
 [![Hits-of-Code](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib)](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib/view)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/commits/master)
@@ -11,6 +12,10 @@
 ## What and why?
 
 The goal of this project is to create a simple template or starting point for developing Internet of Things (IoT) applications using the ESP 8266/32 microcontroller. I noticed that I was frequently copying and modifying existing applications when creating new ones for different devices, and I wanted to streamline this process. This project aims to do just that by providing a more organized approach to starting new IoT projects with the ESP 8266/32.
+
+# Doxygen
+
+
 
 ## Architecture
 ```mermaid
@@ -51,23 +56,10 @@ flowchart TD
 - Components can be marked for removal, and they will be safely released in the next tick.
 
 ## Utilities
-| Utility  | Function |
-| ------------- | ------------- |
-| ksEvent  | Provides a simple event broadcasting system. Used for MQTT events, etc. |
-| ksSimpleTimer  | A very simple "timer" mechanism. In the triggered() method, it calculates and checks if the specified interval has just passed. |
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/127d70e3-3bab-4578-b621-78a83b1bff09)
 
 ## Components
-| Component  | Function |
-| ------------- | ------------- |
-| ksConfigProvider  |Used to manage parameters. The configurator component calls each config provider to handle parameter injection/capture during the WiFi configuration stage. |
-| ksLed  | Used to control diodes, including blinking, turning off, and turning on. |
-| ksMqttConfigProvider  | Used to manage MQTT parameters (broker, password, prefix, etc.). |
-| ksMqttConnector  | Used to maintain a connection with MQTT. The user can bind to the onMessage and onConnected events. |
-| ksDevStatMqttReporter | Reports device state periodically to the MQTT broker to the 'dstat' sub-topic. |
-| ksDevicePortal  | Handles all-in-one things like configuration, debug and OTA updates. |
-| ksResetButton  | Used to exit the app loop or reset the entire device (to trigger the config portal). |
-| ksWifiConfigurator | The base WiFi configurator component, providing WiFi management portal and allowing config providers to inject and capture parameters. |
-| ksWiFiConnector | Manages WiFi connection (triggers events, handles reconnection etc.). |
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/2c46fafb-276a-48b0-bd65-caf00172182a)
 
 ### Rules:
 - Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
