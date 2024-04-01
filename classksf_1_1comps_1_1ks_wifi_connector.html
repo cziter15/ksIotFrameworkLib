@@ -85,6 +85,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::comps::ksWifiConnector Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A component that manages WiFi connection.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_wifi_connector_8h_source.html">ksWifiConnector.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::comps::ksWifiConnector:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -93,21 +98,21 @@ $(function() {
  <div class="center">
   <img src="classksf_1_1comps_1_1ks_wifi_connector.png" usemap="#ksf::comps::ksWifiConnector_map" alt=""/>
   <map id="ksf::comps::ksWifiConnector_map" name="ksf::comps::ksWifiConnector_map">
-<area href="classksf_1_1ks_component.html" alt="ksf::ksComponent" shape="rect" coords="0,56,168,80"/>
-<area href="classksf_1_1ks_rtti.html" alt="ksf::ksRtti" shape="rect" coords="0,0,168,24"/>
+<area href="classksf_1_1ks_component.html" title="Base component class." alt="ksf::ksComponent" shape="rect" coords="0,56,168,80"/>
+<area href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects." alt="ksf::ksRtti" shape="rect" coords="0,0,168,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f75830be77c4bfdbe18d2924739eecd" id="r_a1f75830be77c4bfdbe18d2924739eecd"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f75830be77c4bfdbe18d2924739eecd">getInstanceType</a> () const</td></tr>
-<tr class="memdesc:a1f75830be77c4bfdbe18d2924739eecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
+<tr class="memdesc:a1f75830be77c4bfdbe18d2924739eecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
 <tr class="separator:a1f75830be77c4bfdbe18d2924739eecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3c9f5b528500d8ec016fd50207bd9d21" id="r_a3c9f5b528500d8ec016fd50207bd9d21"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c9f5b528500d8ec016fd50207bd9d21">isA</a> (const size_t id) const</td></tr>
-<tr class="memdesc:a3c9f5b528500d8ec016fd50207bd9d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
+<tr class="memdesc:a3c9f5b528500d8ec016fd50207bd9d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
 <tr class="separator:a3c9f5b528500d8ec016fd50207bd9d21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b9f2666dfdfa7af71bc8d897d0ea9d2" id="r_a4b9f2666dfdfa7af71bc8d897d0ea9d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b9f2666dfdfa7af71bc8d897d0ea9d2">ksWifiConnector</a> (const char *hostname, bool <a class="el" href="#ad712e221c2bcc55d500b0365075cfee2">savePower</a>=true)</td></tr>
-<tr class="memdesc:a4b9f2666dfdfa7af71bc8d897d0ea9d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for WiFi connector component.  <br /></td></tr>
+<tr class="memdesc:a4b9f2666dfdfa7af71bc8d897d0ea9d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs WiFi connector component.  <br /></td></tr>
 <tr class="separator:a4b9f2666dfdfa7af71bc8d897d0ea9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a893fbb2fdb3c2b6a126e478ff92e325c" id="r_a893fbb2fdb3c2b6a126e478ff92e325c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a893fbb2fdb3c2b6a126e478ff92e325c">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
 <tr class="memdesc:a893fbb2fdb3c2b6a126e478ff92e325c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes WiFi connector component.  <br /></td></tr>
@@ -120,20 +125,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1dbeb307a217a5c267496f46c00d63c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4d6d1486214998fcb711c2e2f624d84" id="r_ae4d6d1486214998fcb711c2e2f624d84"><td class="memItemLeft" align="right" valign="top"><a id="ae4d6d1486214998fcb711c2e2f624d84" name="ae4d6d1486214998fcb711c2e2f624d84"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksWifiConnector</b> ()</td></tr>
-<tr class="memdesc:ae4d6d1486214998fcb711c2e2f624d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for WiFi connector component. <br /></td></tr>
+<tr class="memdesc:ae4d6d1486214998fcb711c2e2f624d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructos WiFi connector component. <br /></td></tr>
 <tr class="separator:ae4d6d1486214998fcb711c2e2f624d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
 <tr class="memitem:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component" id="r_ac952d4ad53c77639a2bb6015c11800fb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb">postInit</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app)</td></tr>
-<tr class="memdesc:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method called after component initialization.  <br /></td></tr>
+<tr class="memdesc:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method called after component initialization, used to setup references to other components.  <br /></td></tr>
 <tr class="separator:ac952d4ad53c77639a2bb6015c11800fb inherit pub_methods_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classksf_1_1ks_rtti"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classksf_1_1ks_rtti')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classksf_1_1ks_rtti.html">ksf::ksRtti</a></td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
-<tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to cast object to given type.  <br /></td></tr>
+<tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter.  <br /></td></tr>
 <tr class="separator:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti" id="r_a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">const TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a3256fe5f274ed29149d64dd575ff37f9">as</a> () const</td></tr>
-<tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to const cast object to given type.  <br /></td></tr>
+<tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter (const version).  <br /></td></tr>
 <tr class="separator:a3256fe5f274ed29149d64dd575ff37f9 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -158,7 +163,7 @@ std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::e
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac52bb4438c4024c91066caec2795f2dc" id="r_ac52bb4438c4024c91066caec2795f2dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac52bb4438c4024c91066caec2795f2dc">setupMacAddress</a> ()</td></tr>
-<tr class="memdesc:ac52bb4438c4024c91066caec2795f2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method to setup MAC address.  <br /></td></tr>
+<tr class="memdesc:ac52bb4438c4024c91066caec2795f2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method that generates MAC address for the device.  <br /></td></tr>
 <tr class="separator:ac52bb4438c4024c91066caec2795f2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2a0ac579cfc0b29ad0ade3de0b8cde4" id="r_ae2a0ac579cfc0b29ad0ade3de0b8cde4"><td class="memItemLeft" align="right" valign="top"><a id="ae2a0ac579cfc0b29ad0ade3de0b8cde4" name="ae2a0ac579cfc0b29ad0ade3de0b8cde4"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>wifiConnectedInternal</b> ()</td></tr>
@@ -173,15 +178,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>wifiDisconnectedInter
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa4aefb3cbb2365f443d51fa8900930c9" id="r_aa4aefb3cbb2365f443d51fa8900930c9"><td class="memItemLeft" align="right" valign="top"><a id="aa4aefb3cbb2365f443d51fa8900930c9" name="aa4aefb3cbb2365f443d51fa8900930c9"></a>
 <a class="el" href="classksf_1_1ks_simple_timer.html">ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>wifiTimeoutTimer</b> { 120000UL }</td></tr>
-<tr class="memdesc:aa4aefb3cbb2365f443d51fa8900930c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - timeout. <br /></td></tr>
+<tr class="memdesc:aa4aefb3cbb2365f443d51fa8900930c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - long timeout in case of issues. <br /></td></tr>
 <tr class="separator:aa4aefb3cbb2365f443d51fa8900930c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0564f0ed42827fbfc35bdf168b0490cb" id="r_a0564f0ed42827fbfc35bdf168b0490cb"><td class="memItemLeft" align="right" valign="top"><a id="a0564f0ed42827fbfc35bdf168b0490cb" name="a0564f0ed42827fbfc35bdf168b0490cb"></a>
 <a class="el" href="classksf_1_1ks_simple_timer.html">ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>wifiReconnectTimer</b> { 5000UL }</td></tr>
-<tr class="memdesc:a0564f0ed42827fbfc35bdf168b0490cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - reconnect. <br /></td></tr>
+<tr class="memdesc:a0564f0ed42827fbfc35bdf168b0490cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - reconnection timeout. <br /></td></tr>
 <tr class="separator:a0564f0ed42827fbfc35bdf168b0490cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20835a8e41863f79bd140f905d908bae" id="r_a20835a8e41863f79bd140f905d908bae"><td class="memItemLeft" align="right" valign="top"><a id="a20835a8e41863f79bd140f905d908bae" name="a20835a8e41863f79bd140f905d908bae"></a>
 <a class="el" href="classksf_1_1ks_simple_timer.html">ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>wifiIpCheckTimer</b> { 1000UL }</td></tr>
-<tr class="memdesc:a20835a8e41863f79bd140f905d908bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - IP check. <br /></td></tr>
+<tr class="memdesc:a20835a8e41863f79bd140f905d908bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - IP check interval. <br /></td></tr>
 <tr class="separator:a20835a8e41863f79bd140f905d908bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32228ab43c1d389d792f960e7e5b1aec" id="r_a32228ab43c1d389d792f960e7e5b1aec"><td class="memItemLeft" align="right" valign="top"><a id="a32228ab43c1d389d792f960e7e5b1aec" name="a32228ab43c1d389d792f960e7e5b1aec"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>wasConnected</b>: 1 {false}</td></tr>
@@ -199,7 +204,16 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d">componentState</a> { ksComponentState::NotInitialized }</td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A component that manages WiFi connection. </p>
+<p>This component handles WiFi connection, reconnecting automatically in case of disconnection.</p>
+<p>There are many things that this component manages:</p><ul>
+<li>MAC address generation (to easily identify ksIotFrameworkLib based devices)</li>
+<li>Simple power management (DTIM low-power mode)</li>
+<li>IP address validation, used to determine if WiFi connection was successful (not only using WiFi PHY state)</li>
+<li>Timeout management, used to break in case of longer WiFi connection issues (causing application to exit and swittch to configuration mode) </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4b9f2666dfdfa7af71bc8d897d0ea9d2" name="a4b9f2666dfdfa7af71bc8d897d0ea9d2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4b9f2666dfdfa7af71bc8d897d0ea9d2">&#9670;&#160;</a></span>ksWifiConnector()</h2>
 
@@ -219,11 +233,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for WiFi connector component. </p>
+<p>Constructs WiFi connector component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">hostname</td><td>Hostname to be used by WiFi class </td></tr>
-    <tr><td class="paramname">savePower</td><td>True to save power </td></tr>
+    <tr><td class="paramname">hostname</td><td>Hostname of the device, used also by mDNS service. </td></tr>
+    <tr><td class="paramname">savePower</td><td>If set, will put the device in modem sleep mode. This is useful to reduce power consumption, but increases reaction time. </td></tr>
   </table>
   </dd>
 </dl>
@@ -256,8 +270,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
 </table>
 </div><div class="memdoc">
 
-<p>This function is used to get type ID of object. </p>
-<dl class="section return"><dt>Returns</dt><dd>Type ID. </dd></dl>
+<p>Retrieves type ID of the object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Object type ID. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent</a>.</p>
 
@@ -289,7 +303,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
 <p>Initializes WiFi connector component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">owner</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html">ksApplication</a> object that owns this component </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -324,10 +338,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
 </table>
 </div><div class="memdoc">
 
-<p>This function is used to check if object is of given type. </p>
+<p>Checks whether object is of given type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>Type ID. </td></tr>
+    <tr><td class="paramname">id</td><td>Type ID to check against. </td></tr>
   </table>
   </dd>
 </dl>
@@ -385,6 +399,12 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
 </div><div class="memdoc">
 
 <p>Handles WiFi connector component loop logic. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
@@ -416,7 +436,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>savePower</b>: 1 {tru
 </table>
 </div><div class="memdoc">
 
-<p>Internal method to setup MAC address. </p>
+<p>Internal method that generates MAC address for the device. </p>
 <p>This MAC is generated by using original ChipID / MAC, but starts with 0xFA 0xF1 and then there are four Chip ID bytes. 0xFA 0xF1 works like prefix / signature to help identyfying devices in router properties / Wireshark (debugging) etc. </p>
 
 <p class="reference">Referenced by <a class="el" href="#a4b9f2666dfdfa7af71bc8d897d0ea9d2">ksWifiConnector()</a>.</p>

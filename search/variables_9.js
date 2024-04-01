@@ -7,6 +7,5 @@ var searchData=
   ['onhandleportalcommand_4',['onHandlePortalCommand',['../classksf_1_1comps_1_1ks_device_portal.html#a5ead9113c131284ee325740154194c7d',1,'ksf::comps::ksDevicePortal']]],
   ['onupdateend_5',['onUpdateEnd',['../classksf_1_1comps_1_1ks_device_portal.html#a7dc2e53045a02c604627f8101baa68e2',1,'ksf::comps::ksDevicePortal']]],
   ['onupdatestart_6',['onUpdateStart',['../classksf_1_1comps_1_1ks_device_portal.html#a94f2d902c9447d79a165cdb0ed7417ab',1,'ksf::comps::ksDevicePortal']]],
-  ['onwebsockettextmessage_7',['onWebsocketTextMessage',['../classksf_1_1misc_1_1ks_w_s_server.html#a507b6d18fbe0c211bec2bb593173d885',1,'ksf::misc::ksWSServer']]],
-  ['owner_8',['owner',['../classksf_1_1comps_1_1ks_wifi_configurator.html#adf6a3a181faeec4431b72bd747aad08b',1,'ksf::comps::ksWifiConfigurator']]]
+  ['onwebsockettextmessage_7',['onWebsocketTextMessage',['../classksf_1_1misc_1_1ks_w_s_server.html#a507b6d18fbe0c211bec2bb593173d885',1,'ksf::misc::ksWSServer']]]
 ];

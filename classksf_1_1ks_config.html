@@ -82,14 +82,19 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::ksConfig Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implements low-level configuration file handling.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_config_8h_source.html">ksConfig.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae29595441a2aff5b0d0b43a3e9f55c8c" id="r_ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae29595441a2aff5b0d0b43a3e9f55c8c">ksConfig</a> (const std::string &amp;fileName)</td></tr>
-<tr class="memdesc:ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that opens (or creates) specified config file and loads its contents into memory.  <br /></td></tr>
+<tr class="memdesc:ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor tha opens or creates configuration file.  <br /></td></tr>
 <tr class="separator:ae29595441a2aff5b0d0b43a3e9f55c8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714a7fe8087ccc2bd386bbadb467ce3e" id="r_a714a7fe8087ccc2bd386bbadb467ce3e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a714a7fe8087ccc2bd386bbadb467ce3e">setParam</a> (const std::string &amp;paramName, const std::string paramValue)</td></tr>
-<tr class="memdesc:a714a7fe8087ccc2bd386bbadb467ce3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets parameter value.  <br /></td></tr>
+<tr class="memdesc:a714a7fe8087ccc2bd386bbadb467ce3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets parameter value (creates new parameter if it does not exist).  <br /></td></tr>
 <tr class="separator:a714a7fe8087ccc2bd386bbadb467ce3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32af4b832d708c039351dea37fa7fcb3" id="r_a32af4b832d708c039351dea37fa7fcb3"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32af4b832d708c039351dea37fa7fcb3">getParam</a> (const std::string &amp;paramName, const std::string &amp;defaultValue=std::string()) const</td></tr>
 <tr class="memdesc:a32af4b832d708c039351dea37fa7fcb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves parameter value.  <br /></td></tr>
@@ -97,8 +102,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af05e375f48e5ce57902a587393a95134" id="r_af05e375f48e5ce57902a587393a95134"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af05e375f48e5ce57902a587393a95134">operator bool</a> () const</td></tr>
 <tr class="memdesc:af05e375f48e5ce57902a587393a95134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator bool override. Returns true if configFilename is not empty.  <br /></td></tr>
 <tr class="separator:af05e375f48e5ce57902a587393a95134"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a304947df2a72b5297cbca0bba3c8136f" id="r_a304947df2a72b5297cbca0bba3c8136f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a304947df2a72b5297cbca0bba3c8136f">~ksConfig</a> ()</td></tr>
-<tr class="memdesc:a304947df2a72b5297cbca0bba3c8136f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves config content to flash.  <br /></td></tr>
+<tr class="memitem:a304947df2a72b5297cbca0bba3c8136f" id="r_a304947df2a72b5297cbca0bba3c8136f"><td class="memItemLeft" align="right" valign="top"><a id="a304947df2a72b5297cbca0bba3c8136f" name="a304947df2a72b5297cbca0bba3c8136f"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksConfig</b> ()</td></tr>
+<tr class="memdesc:a304947df2a72b5297cbca0bba3c8136f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves config content on the device filesystem. In case there is no modification, nothing should actually happen. <br /></td></tr>
 <tr class="separator:a304947df2a72b5297cbca0bba3c8136f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -116,7 +122,10 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
 <tr class="memdesc:a3a57cb81bcf46a95a2973124c32cbf2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Config filename. <br /></td></tr>
 <tr class="separator:a3a57cb81bcf46a95a2973124c32cbf2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implements low-level configuration file handling. </p>
+<p>Uses std::map to store configuration parameters. When any parameter is modified, the config file is marked as dirty. Then on destruction, the config file is saved if it has been modified (marked as dirty) into the filesystem. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae29595441a2aff5b0d0b43a3e9f55c8c" name="ae29595441a2aff5b0d0b43a3e9f55c8c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae29595441a2aff5b0d0b43a3e9f55c8c">&#9670;&#160;</a></span>ksConfig()</h2>
 
@@ -132,45 +141,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor that opens (or creates) specified config file and loads its contents into memory. </p>
+<p>Constructor tha opens or creates configuration file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">configFile</td><td>Config file name </td></tr>
+    <tr><td class="paramname">fileName</td><td>Config filename. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="reference">References <a class="el" href="#a3a57cb81bcf46a95a2973124c32cbf2c">configPath</a>, and <a class="el" href="#a714a7fe8087ccc2bd386bbadb467ce3e">setParam()</a>.</p>
-
-</div>
-</div>
-<a id="a304947df2a72b5297cbca0bba3c8136f" name="a304947df2a72b5297cbca0bba3c8136f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a304947df2a72b5297cbca0bba3c8136f">&#9670;&#160;</a></span>~ksConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">ksf::ksConfig::~ksConfig </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Saves config content to flash. </p>
-<p>If config contents has not been modified, nothing will be saved. </p>
-
-<p class="reference">References <a class="el" href="#a2e448b2e918a7738ab03622a8c89ae0f">configParams</a>, <a class="el" href="#a3a57cb81bcf46a95a2973124c32cbf2c">configPath</a>, and <a class="el" href="#aea9a5bc2306e3582498f027b210af4eb">isDirty</a>.</p>
 
 </div>
 </div>
@@ -195,15 +174,14 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
 </div><div class="memdoc">
 
 <p>Retrieves parameter value. </p>
-<p>If parameter does not exist, defaultValue will be returned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">paramName</td><td>Parameter name </td></tr>
-    <tr><td class="paramname">defaultValue</td><td>Default value to return if parameter does not exist </td></tr>
+    <tr><td class="paramname">paramName</td><td>Name of the parameter to retrieve. </td></tr>
+    <tr><td class="paramname">defaultValue</td><td>Default value to return if parameter does not exist. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Parameter value or defaultValue if parameter does not exist. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Parameter value string (or defaultValue). </dd></dl>
 
 <p class="reference">References <a class="el" href="#a2e448b2e918a7738ab03622a8c89ae0f">configParams</a>.</p>
 
@@ -250,12 +228,11 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
       </table>
 </div><div class="memdoc">
 
-<p>Sets parameter value. </p>
-<p>If parameter does not exist, it will be created.</p>
+<p>Sets parameter value (creates new parameter if it does not exist). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">paramName</td><td>Parameter name </td></tr>
-    <tr><td class="paramname">paramValue</td><td>Parameter value (use std::move when possible) </td></tr>
+    <tr><td class="paramname">paramName</td><td>Parameter name. </td></tr>
+    <tr><td class="paramname">paramValue</td><td>Parameter value (use std::move when possible). </td></tr>
   </table>
   </dd>
 </dl>

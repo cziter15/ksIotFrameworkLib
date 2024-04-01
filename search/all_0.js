@@ -4,7 +4,7 @@ var searchData=
   ['addnewparam_1',['addNewParam',['../classksf_1_1comps_1_1ks_config_provider.html#a6e72aedea03159b059f197ebf21a95ef',1,'ksf::comps::ksConfigProvider']]],
   ['addnewparamwithconfigdefault_2',['addNewParamWithConfigDefault',['../classksf_1_1comps_1_1ks_config_provider.html#af0c39ab3c54f26fd79d55b2c6ec86e92',1,'ksf::comps::ksConfigProvider']]],
   ['and_20why_3',['What and why?',['../index.html#autotoc_md1',1,'']]],
-  ['app_4',['app',['../classksf_1_1comps_1_1ks_device_portal.html#a0ed6c88eac9a0254d732d74566ca12b1',1,'ksf::comps::ksDevicePortal']]],
+  ['app_4',['app',['../classksf_1_1comps_1_1ks_device_portal.html#a0ed6c88eac9a0254d732d74566ca12b1',1,'ksf::comps::ksDevicePortal::app'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#a88bfef0ffa77358a7b26ed066bd5fe29',1,'ksf::comps::ksWifiConfigurator::app']]],
   ['application_5',['Building application',['../index.html#autotoc_md6',1,'']]],
   ['architecture_6',['Architecture',['../index.html#autotoc_md2',1,'']]],
   ['arduinoota_7',['arduinoOTA',['../classksf_1_1comps_1_1ks_device_portal.html#a08bf056d0703b80eebf334e2e3830813',1,'ksf::comps::ksDevicePortal']]],

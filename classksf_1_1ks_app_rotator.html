@@ -81,6 +81,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::ksAppRotator&lt; AppTypes &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Application rotator component.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_app_rotator_8h_source.html">ksAppRotator.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -89,10 +94,19 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>loopNoDelay</b> ()</t
 <tr class="memdesc:a56b1387e324d76dd1fc0ca5558466028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the application loop. <br /></td></tr>
 <tr class="separator:a56b1387e324d76dd1fc0ca5558466028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0628a1bd2ba9e1de5715b2a77c304f3" id="r_af0628a1bd2ba9e1de5715b2a77c304f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0628a1bd2ba9e1de5715b2a77c304f3">loop</a> (unsigned long milliseconds)</td></tr>
-<tr class="memdesc:af0628a1bd2ba9e1de5715b2a77c304f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the application loop with a delay.  <br /></td></tr>
+<tr class="memdesc:af0628a1bd2ba9e1de5715b2a77c304f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs application loop with a delay between loops.  <br /></td></tr>
 <tr class="separator:af0628a1bd2ba9e1de5715b2a77c304f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;class... AppTypes&gt;<br />
+class ksf::ksAppRotator&lt; AppTypes &gt;</div><p>Application rotator component. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">...</td><td>List of application classes to be used. </td></tr>
+  </table>
+  </dd>
+</dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af0628a1bd2ba9e1de5715b2a77c304f3" name="af0628a1bd2ba9e1de5715b2a77c304f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af0628a1bd2ba9e1de5715b2a77c304f3">&#9670;&#160;</a></span>loop()</h2>
 
@@ -118,7 +132,7 @@ template&lt;class... AppTypes&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Runs the application loop with a delay. </p>
+<p>Runs application loop with a delay between loops. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">milliseconds</td><td>Delay time in milliseconds. </td></tr>

@@ -95,34 +95,34 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a450f4ebefd18543c646d577136774e72" id="r_a450f4ebefd18543c646d577136774e72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a450f4ebefd18543c646d577136774e72">ksWSServer</a> (uint16_t port)</td></tr>
-<tr class="memdesc:a450f4ebefd18543c646d577136774e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares ksWebServer on specified port but does not start it (call begin).  <br /></td></tr>
+<tr class="memdesc:a450f4ebefd18543c646d577136774e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares ksWebServer on specified port without actually starting it.  <br /></td></tr>
 <tr class="separator:a450f4ebefd18543c646d577136774e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81b95552fd9f0e4c49d59259ca5be2f0" id="r_a81b95552fd9f0e4c49d59259ca5be2f0"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81b95552fd9f0e4c49d59259ca5be2f0">getRequiredAuthToken</a> () const</td></tr>
-<tr class="memdesc:a81b95552fd9f0e4c49d59259ca5be2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns simple authtoken for WebSocket authentication.  <br /></td></tr>
+<tr class="memdesc:a81b95552fd9f0e4c49d59259ca5be2f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns simple authentication token for WebSocket authentication process.  <br /></td></tr>
 <tr class="separator:a81b95552fd9f0e4c49d59259ca5be2f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7c5303434271a77957a113dad7a2c37" id="r_ad7c5303434271a77957a113dad7a2c37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7c5303434271a77957a113dad7a2c37">setRequiredAuthToken</a> (uint64_t authToken)</td></tr>
 <tr class="memdesc:ad7c5303434271a77957a113dad7a2c37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets simple authtoken for WebSocket authentication.  <br /></td></tr>
 <tr class="separator:ad7c5303434271a77957a113dad7a2c37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30264ac138648d3ee913519cec7c5920" id="r_a30264ac138648d3ee913519cec7c5920"><td class="memItemLeft" align="right" valign="top"><a id="a30264ac138648d3ee913519cec7c5920" name="a30264ac138648d3ee913519cec7c5920"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
-<tr class="memdesc:a30264ac138648d3ee913519cec7c5920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the server listening on the specified port. <br /></td></tr>
+<tr class="memdesc:a30264ac138648d3ee913519cec7c5920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the server. <br /></td></tr>
 <tr class="separator:a30264ac138648d3ee913519cec7c5920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3807612909de8c2469cde02d7bcb3ab0" id="r_a3807612909de8c2469cde02d7bcb3ab0"><td class="memItemLeft" align="right" valign="top"><a id="a3807612909de8c2469cde02d7bcb3ab0" name="a3807612909de8c2469cde02d7bcb3ab0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>loop</b> ()</td></tr>
-<tr class="memdesc:a3807612909de8c2469cde02d7bcb3ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles server logic. <br /></td></tr>
+<tr class="memdesc:a3807612909de8c2469cde02d7bcb3ab0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles WebSocket server logic. <br /></td></tr>
 <tr class="separator:a3807612909de8c2469cde02d7bcb3ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6465499a17fef0e369e9f0f5802ef13" id="r_ab6465499a17fef0e369e9f0f5802ef13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6465499a17fef0e369e9f0f5802ef13">setMessageHandler</a> (ksWsServerMessageFunc_t func)</td></tr>
-<tr class="memdesc:ab6465499a17fef0e369e9f0f5802ef13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a message handler callback to WebSocket text receive messages.  <br /></td></tr>
+<tr class="memdesc:ab6465499a17fef0e369e9f0f5802ef13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a message handler to receive WebSocket text messages.  <br /></td></tr>
 <tr class="separator:ab6465499a17fef0e369e9f0f5802ef13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2224ec4f425cd7938cd89880cb5ce771" id="r_a2224ec4f425cd7938cd89880cb5ce771"><td class="memItemLeft" align="right" valign="top"><a id="a2224ec4f425cd7938cd89880cb5ce771" name="a2224ec4f425cd7938cd89880cb5ce771"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksWSServer</b> ()</td></tr>
-<tr class="memdesc:a2224ec4f425cd7938cd89880cb5ce771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Releases server resources. <br /></td></tr>
+<tr class="memdesc:a2224ec4f425cd7938cd89880cb5ce771"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs the server, releasing the resources. <br /></td></tr>
 <tr class="separator:a2224ec4f425cd7938cd89880cb5ce771"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad15ba719689c843931612f3c9d41111b" id="r_ad15ba719689c843931612f3c9d41111b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad15ba719689c843931612f3c9d41111b">handleNonWebsocketConnection</a> (WSclient_t *client) override</td></tr>
-<tr class="memdesc:ad15ba719689c843931612f3c9d41111b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles a situation wher the socket is not authorized.  <br /></td></tr>
+<tr class="memdesc:ad15ba719689c843931612f3c9d41111b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler for non-WebSocket connections on websocket port.  <br /></td></tr>
 <tr class="separator:ad15ba719689c843931612f3c9d41111b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -156,10 +156,10 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
       </table>
 </div><div class="memdoc">
 
-<p>Prepares ksWebServer on specified port but does not start it (call begin). </p>
+<p>Prepares ksWebServer on specified port without actually starting it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">port</td><td>WebSocket listening port. </td></tr>
+    <tr><td class="paramname">port</td><td>Port to listen for incoming WebSocket connections. </td></tr>
   </table>
   </dd>
 </dl>
@@ -184,8 +184,9 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
       </table>
 </div><div class="memdoc">
 
-<p>Returns simple authtoken for WebSocket authentication. </p>
-<p>The value 0 is considered to be invalid (no auth token). Auth token is set via <a class="el" href="#ad7c5303434271a77957a113dad7a2c37" title="Sets simple authtoken for WebSocket authentication.">setRequiredAuthToken()</a>. Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).</p>
+<p>Returns simple authentication token for WebSocket authentication process. </p>
+<p>The value 0 is considered to be empty token. Authentication token is set via <a class="el" href="#ad7c5303434271a77957a113dad7a2c37" title="Sets simple authtoken for WebSocket authentication.">setRequiredAuthToken()</a>.</p>
+<p>Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).</p>
 <dl class="section return"><dt>Returns</dt><dd>Auth token for WebSocket </dd></dl>
 
 <p class="reference">References <a class="el" href="#af459c67b491ce00347a590de9dcee044">requriedAuthToken</a>.</p>
@@ -215,10 +216,10 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
 </table>
 </div><div class="memdoc">
 
-<p>Handles a situation wher the socket is not authorized. </p>
+<p>Handler for non-WebSocket connections on websocket port. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">client</td><td>WSclient_t * ptr to the client struct </td></tr>
+    <tr><td class="paramname">clientS</td><td>Pointer to the WSclient_t object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -240,10 +241,10 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
       </table>
 </div><div class="memdoc">
 
-<p>Installs a message handler callback to WebSocket text receive messages. </p>
+<p>Installs a message handler to receive WebSocket text messages. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">func</td><td>Callback function to receive messages </td></tr>
+    <tr><td class="paramname">func</td><td>The message handler function. </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,7 +272,7 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
 <p>The value 0 is considered to be invalid (no auth token). Auth token is set via <a class="el" href="#ad7c5303434271a77957a113dad7a2c37" title="Sets simple authtoken for WebSocket authentication.">setRequiredAuthToken()</a>. Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">authToken</td><td>The token to set </td></tr>
+    <tr><td class="paramname">authToken</td><td>The token to set. </td></tr>
   </table>
   </dd>
 </dl>

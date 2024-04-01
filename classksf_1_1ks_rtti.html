@@ -81,6 +81,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::ksRtti Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implements RTTI (run-time type information) for objects.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_rtti_8h_source.html">ksRtti.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::ksRtti:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -89,36 +94,40 @@ $(function() {
  <div class="center">
   <img src="classksf_1_1ks_rtti.png" usemap="#ksf::ksRtti_map" alt=""/>
   <map id="ksf::ksRtti_map" name="ksf::ksRtti_map">
-<area href="classksf_1_1ks_component.html" alt="ksf::ksComponent" shape="rect" coords="0,56,204,80"/>
+<area href="classksf_1_1ks_component.html" title="Base component class." alt="ksf::ksComponent" shape="rect" coords="0,56,204,80"/>
 <area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for h..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="214,112,418,136"/>
 <area href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="A component that periodocally reports device state to the broker." alt="ksf::comps::ksDevStatMqttReporter" shape="rect" coords="214,168,418,192"/>
-<area href="classksf_1_1comps_1_1ks_device_portal.html" alt="ksf::comps::ksDevicePortal" shape="rect" coords="214,224,418,248"/>
+<area href="classksf_1_1comps_1_1ks_device_portal.html" title="A component thet implements web-based configuration portal accessible from local network." alt="ksf::comps::ksDevicePortal" shape="rect" coords="214,224,418,248"/>
 <area href="classksf_1_1comps_1_1ks_led.html" title="A component that simplifies driving the LED." alt="ksf::comps::ksLed" shape="rect" coords="214,280,418,304"/>
 <area href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management." alt="ksf::comps::ksMqttConnector" shape="rect" coords="214,336,418,360"/>
 <area href="classksf_1_1comps_1_1ks_reset_button.html" title="A component that implements reset button functionality." alt="ksf::comps::ksResetButton" shape="rect" coords="214,392,418,416"/>
-<area href="classksf_1_1comps_1_1ks_wifi_configurator.html" alt="ksf::comps::ksWifiConfigurator" shape="rect" coords="214,448,418,472"/>
-<area href="classksf_1_1comps_1_1ks_wifi_connector.html" alt="ksf::comps::ksWifiConnector" shape="rect" coords="214,504,418,528"/>
+<area href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="ksWifiConfigurator component class." alt="ksf::comps::ksWifiConfigurator" shape="rect" coords="214,448,418,472"/>
+<area href="classksf_1_1comps_1_1ks_wifi_connector.html" title="A component that manages WiFi connection." alt="ksf::comps::ksWifiConnector" shape="rect" coords="214,504,418,528"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab835f07a17adfa5d44313544df204025" id="r_ab835f07a17adfa5d44313544df204025"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab835f07a17adfa5d44313544df204025">getInstanceType</a> () const =0</td></tr>
-<tr class="memdesc:ab835f07a17adfa5d44313544df204025"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to get type ID of object.  <br /></td></tr>
+<tr class="memdesc:ab835f07a17adfa5d44313544df204025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
 <tr class="separator:ab835f07a17adfa5d44313544df204025"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84c5ab0cd0a529fd085e68de557ab4f4" id="r_a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84c5ab0cd0a529fd085e68de557ab4f4">isA</a> (const size_t id) const</td></tr>
-<tr class="memdesc:a84c5ab0cd0a529fd085e68de557ab4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to check if object is of given type.  <br /></td></tr>
+<tr class="memdesc:a84c5ab0cd0a529fd085e68de557ab4f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
 <tr class="separator:a84c5ab0cd0a529fd085e68de557ab4f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
-<tr class="memdesc:a33f1522c53fd457d441f9203ed04a628"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to cast object to given type.  <br /></td></tr>
+<tr class="memdesc:a33f1522c53fd457d441f9203ed04a628"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter.  <br /></td></tr>
 <tr class="separator:a33f1522c53fd457d441f9203ed04a628"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9" id="r_a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a3256fe5f274ed29149d64dd575ff37f9"><td class="memTemplItemLeft" align="right" valign="top">const TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3256fe5f274ed29149d64dd575ff37f9">as</a> () const</td></tr>
-<tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to const cast object to given type.  <br /></td></tr>
+<tr class="memdesc:a3256fe5f274ed29149d64dd575ff37f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter (const version).  <br /></td></tr>
 <tr class="separator:a3256fe5f274ed29149d64dd575ff37f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implements RTTI (run-time type information) for objects. </p>
+<p>This is a simple, but fast and lightweight implementation of RTTI feature. Provides the ability to check whether object is of given type and cast it to the type provided as a template parameter.</p>
+<p>Extensively used to implement components - <a class="el" href="classksf_1_1ks_component.html" title="Base component class.">ksComponent</a> and easily manage components in the application (<a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>). </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a33f1522c53fd457d441f9203ed04a628" name="a33f1522c53fd457d441f9203ed04a628"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33f1522c53fd457d441f9203ed04a628">&#9670;&#160;</a></span>as() <span class="overload">[1/2]</span></h2>
 
@@ -144,7 +153,13 @@ template&lt;typename TType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used to cast object to given type. </p>
+<p>Tries to cast object to the type provided as a template parameter. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TType</td><td>Target type. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to object of given type or nullptr if object is not of given type. </dd></dl>
 
 </div>
@@ -174,7 +189,13 @@ template&lt;typename TType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used to const cast object to given type. </p>
+<p>Tries to cast object to the type provided as a template parameter (const version). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TType</td><td>Target type. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>Const pointer to object of given type or nullptr if object is not of given type. </dd></dl>
 
 </div>
@@ -202,8 +223,8 @@ template&lt;typename TType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used to get type ID of object. </p>
-<dl class="section return"><dt>Returns</dt><dd>Type ID. </dd></dl>
+<p>Retrieves type ID of the object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Object type ID. </dd></dl>
 
 <p>Implemented in <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#acc6673a2b5a231587c568fcafc9fa42d">ksf::comps::ksConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a376642e99410bfe8b45f041e033925e6">ksf::comps::ksDevicePortal</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a4e354f7ea9757ca345769b2e0815fcbf">ksf::comps::ksDevStatMqttReporter</a>, <a class="el" href="classksf_1_1comps_1_1ks_led.html#a53fe8b7aa037908beb9d8145d112503d">ksf::comps::ksLed</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a7bfa5bbf18c8fe767d95ad2412c15c2e">ksf::comps::ksMqttConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#a7dbb790f4566011f629c50af9bb83152">ksf::comps::ksMqttConnector</a>, <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html#a73ed76888014734924db9b3a01cf2ab2">ksf::comps::ksResetButton</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#afdd48f90263e3a77eb60f0951c14e60b">ksf::comps::ksWifiConfigurator</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#a1f75830be77c4bfdbe18d2924739eecd">ksf::comps::ksWifiConnector</a>, and <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent</a>.</p>
 
@@ -232,10 +253,10 @@ template&lt;typename TType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>This function is used to check if object is of given type. </p>
+<p>Checks whether object is of given type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">id</td><td>Type ID. </td></tr>
+    <tr><td class="paramname">id</td><td>Type ID to check against. </td></tr>
   </table>
   </dd>
 </dl>

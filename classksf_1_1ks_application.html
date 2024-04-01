@@ -82,26 +82,31 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::ksApplication Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class that is a base for user-defined application.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_application_8h_source.html">ksApplication.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac418c7eb9b021d7b52e20cf7e870bc91" id="r_ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memTemplParams" colspan="2">template&lt;class TComponentType , class... TParams&gt; </td></tr>
 <tr class="memitem:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memTemplItemLeft" align="right" valign="top">std::weak_ptr&lt; TComponentType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac418c7eb9b021d7b52e20cf7e870bc91">addComponent</a> (TParams... arg)</td></tr>
-<tr class="memdesc:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a component of passed type.  <br /></td></tr>
+<tr class="memdesc:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates a component of the type defined by the template instance. This function will pass all template-defined parameters to the component constructor.  <br /></td></tr>
 <tr class="separator:ac418c7eb9b021d7b52e20cf7e870bc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa37ddabda1c13f2e1ab3e94babcfcc43" id="r_aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memTemplParams" colspan="2">template&lt;class TComponentType &gt; </td></tr>
 <tr class="memitem:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa37ddabda1c13f2e1ab3e94babcfcc43">findComponents</a> (std::vector&lt; std::weak_ptr&lt; TComponentType &gt; &gt; &amp;outComponents)</td></tr>
-<tr class="memdesc:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks for all components of passed type and puts them into passed vector.  <br /></td></tr>
+<tr class="memdesc:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates through all components and returns a vector of weak pointers with components that matches the type passed as a template parameter.  <br /></td></tr>
 <tr class="separator:aa37ddabda1c13f2e1ab3e94babcfcc43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a944269df1630cce9506ee228c12e1ebb" id="r_a944269df1630cce9506ee228c12e1ebb"><td class="memTemplParams" colspan="2">template&lt;class TComponentType &gt; </td></tr>
 <tr class="memitem:a944269df1630cce9506ee228c12e1ebb"><td class="memTemplItemLeft" align="right" valign="top">std::weak_ptr&lt; TComponentType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a944269df1630cce9506ee228c12e1ebb">findComponent</a> ()</td></tr>
-<tr class="memdesc:a944269df1630cce9506ee228c12e1ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks for a component of passed type and returns a weak pointer to it.  <br /></td></tr>
+<tr class="memdesc:a944269df1630cce9506ee228c12e1ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates through all components and returns a weak pointer to the first component that matches the type passed as a template parameter.  <br /></td></tr>
 <tr class="separator:a944269df1630cce9506ee228c12e1ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0df7f797abc4f477f17448aa89613ce" id="r_ae0df7f797abc4f477f17448aa89613ce"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0df7f797abc4f477f17448aa89613ce">init</a> ()=0</td></tr>
 <tr class="memdesc:ae0df7f797abc4f477f17448aa89613ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes application.  <br /></td></tr>
 <tr class="separator:ae0df7f797abc4f477f17448aa89613ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f4246bf46d16e6469b3967d399c7cd3" id="r_a5f4246bf46d16e6469b3967d399c7cd3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5f4246bf46d16e6469b3967d399c7cd3">loop</a> ()</td></tr>
-<tr class="memdesc:a5f4246bf46d16e6469b3967d399c7cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes application loop.  <br /></td></tr>
+<tr class="memdesc:a5f4246bf46d16e6469b3967d399c7cd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes application logic loop.  <br /></td></tr>
 <tr class="separator:a5f4246bf46d16e6469b3967d399c7cd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -111,7 +116,13 @@ std::list&lt; std::shared_ptr&lt; <a class="el" href="classksf_1_1ks_component.h
 <tr class="memdesc:a06c3c117592fa39614d331dd5bc89660"><td class="mdescLeft">&#160;</td><td class="mdescRight">An array with shared_ptr of components (holding main reference). <br /></td></tr>
 <tr class="separator:a06c3c117592fa39614d331dd5bc89660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that is a base for user-defined application. </p>
+<p><a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> implements core application logic. It is responsible for initializing and running components.</p>
+<p>You must override init method to build component stack. You can return false to stop the initialization. In this case, application will be stopped and <a class="el" href="classksf_1_1ks_app_rotator.html" title="Application rotator component.">ksAppRotator</a> will move to the next application.</p>
+<p>Do not override loop method until you have a good reason. If you do so, keep in mind that you should call base loop method and return the result properly. If any component returns false, application logic should be stopped. The best way is to add only small piece of code and return the reult of the base loop method. It is also safe to return false early, before calling base loop method.</p>
+<p>When init or loop returns false, application will be stopped. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac418c7eb9b021d7b52e20cf7e870bc91" name="ac418c7eb9b021d7b52e20cf7e870bc91"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac418c7eb9b021d7b52e20cf7e870bc91">&#9670;&#160;</a></span>addComponent()</h2>
 
@@ -137,19 +148,25 @@ template&lt;class TComponentType , class... TParams&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Instantiates a component of passed type. </p>
-<p>This function will pass all template-defined parameters as constructor parameters to the component. Keep in mind that passed parameters must match target component constructor parameters.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">...</td><td>- user (template) defined parameters</td></tr>
+<p>Instantiates a component of the type defined by the template instance. This function will pass all template-defined parameters to the component constructor. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TComponentType</td><td>A type of the component. </td></tr>
+    <tr><td class="paramname">TParams...</td><td>A list of parameters to be passed to the component constructor.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Weak pointer to the newly created component. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg...</td><td>A list of parameters to be passed to the component constructor.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Weak pointer to the created component. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a06c3c117592fa39614d331dd5bc89660">components</a>, and <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent::getInstanceType()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a95ce665dfb9817352fb6d4aafc172cb0">ksf::comps::ksWifiConfigurator::init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#aaf10ed3c6fa2336fc4d5b7e71bb89195">ksf::comps::ksWifiConfigurator::init()</a>.</p>
 
 </div>
 </div>
@@ -178,12 +195,18 @@ template&lt;class TComponentType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Looks for a component of passed type and returns a weak pointer to it. </p>
-<dl class="section return"><dt>Returns</dt><dd>Weak pointer to the component of passed type. </dd></dl>
+<p>Iterates through all components and returns a weak pointer to the first component that matches the type passed as a template parameter. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TComponentType</td><td>A type of the component to look for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Weak pointer to the first component that matches the type passed as a template parameter. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a06c3c117592fa39614d331dd5bc89660">components</a>, and <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent::getInstanceType()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a3943c29bbb8bea8568154903c379a8a4">ksf::comps::ksDevicePortal::postInit()</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a762ce8b72ef72aa6142a318ad5752c7a">ksf::comps::ksDevStatMqttReporter::postInit()</a>, and <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#a21a416188683a4005560288cf71a7d4f">ksf::comps::ksMqttConnector::postInit()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a3943c29bbb8bea8568154903c379a8a4">ksf::comps::ksDevicePortal::postInit()</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a762ce8b72ef72aa6142a318ad5752c7a">ksf::comps::ksDevStatMqttReporter::postInit()</a>, and <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#ae1e46595b6c1a5760c31149355e751c4">ksf::comps::ksMqttConnector::postInit()</a>.</p>
 
 </div>
 </div>
@@ -212,17 +235,23 @@ template&lt;class TComponentType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Looks for all components of passed type and puts them into passed vector. </p>
+<p>Iterates through all components and returns a vector of weak pointers with components that matches the type passed as a template parameter. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TComponentType</td><td>A type of the component to look for. </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">outComponents</td><td>Vector of weak pointers to components of passed type. </td></tr>
+    <tr><td class="paramname">outComponents</td><td>A vector of weak pointers to components that match the type passed as a template parameter. </td></tr>
   </table>
   </dd>
 </dl>
 
 <p class="reference">References <a class="el" href="#a06c3c117592fa39614d331dd5bc89660">components</a>, and <a class="el" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent::getInstanceType()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#afe2758af3db01493e3aae124b3bb0bc4">ksf::comps::ksDevicePortal::handle_getDeviceParams()</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7">ksf::comps::ksDevicePortal::onWebsocketTextMessage()</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a2f9319297c384cf9b94037ac957f7782">ksf::comps::ksWifiConfigurator::postInit()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#afe2758af3db01493e3aae124b3bb0bc4">ksf::comps::ksDevicePortal::handle_getDeviceParams()</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7">ksf::comps::ksDevicePortal::onWebsocketTextMessage()</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#af940a4472153cb497d35bf1ffe035dc2">ksf::comps::ksWifiConfigurator::postInit()</a>.</p>
 
 </div>
 </div>
@@ -250,7 +279,7 @@ template&lt;class TComponentType &gt; </div>
 </div><div class="memdoc">
 
 <p>Initializes application. </p>
-<dl class="section return"><dt>Returns</dt><dd>True on success, false on fail (will break application execution). </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise (will break application execution). </dd></dl>
 
 </div>
 </div>
@@ -277,8 +306,8 @@ template&lt;class TComponentType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Executes application loop. </p>
-<dl class="section return"><dt>Returns</dt><dd>True on success, false on fail (will break application execution). </dd></dl>
+<p>Executes application logic loop. </p>
+<dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise (will break application execution). </dd></dl>
 
 <p class="reference">References <a class="el" href="#a06c3c117592fa39614d331dd5bc89660">components</a>.</p>
 

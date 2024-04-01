@@ -82,6 +82,11 @@ $(function() {
   <div class="headertitle"><div class="title">ksf::ksSimpleTimer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Simple timer class, without using component architecture.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_simple_timer_8h_source.html">ksSimpleTimer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -96,10 +101,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>restart</b> ()</td></
 <tr class="memdesc:a7115f8d5cbd0be313e002f569e518879"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restarts timer. Will set last trigger time to current time w/o triggering the timer). <br /></td></tr>
 <tr class="separator:a7115f8d5cbd0be313e002f569e518879"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d12020dc37e1836c9c98ec92eade407" id="r_a5d12020dc37e1836c9c98ec92eade407"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5d12020dc37e1836c9c98ec92eade407">triggered</a> ()</td></tr>
-<tr class="memdesc:a5d12020dc37e1836c9c98ec92eade407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if timer interval just passed. Restarting timer is automatic. If interval is 0 then always returns false.  <br /></td></tr>
+<tr class="memdesc:a5d12020dc37e1836c9c98ec92eade407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if timer interval just passed and resets the timer in this case. If timer interval is 0 then always returns false.  <br /></td></tr>
 <tr class="separator:a5d12020dc37e1836c9c98ec92eade407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83285ce55d3a83397c2f72dd05d45dc6" id="r_a83285ce55d3a83397c2f72dd05d45dc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83285ce55d3a83397c2f72dd05d45dc6">hasTimePassed</a> () const</td></tr>
-<tr class="memdesc:a83285ce55d3a83397c2f72dd05d45dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if timer interval just passed. Restarting timer relies on user. If interval is 0 then always returns false.  <br /></td></tr>
+<tr class="memdesc:a83285ce55d3a83397c2f72dd05d45dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if timer interval just passed. Restarting timer relies on user. If timer interval is 0 then always returns false.  <br /></td></tr>
 <tr class="separator:a83285ce55d3a83397c2f72dd05d45dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -113,7 +118,14 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastTriggerTimeMs
 <tr class="memdesc:a9edd4228fe6272082c33002044c348f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last trigger time (milliseconds). <br /></td></tr>
 <tr class="separator:a9edd4228fe6272082c33002044c348f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simple timer class, without using component architecture. </p>
+<p>Used to trigger events periodically. Internally checks if timer interval just passed. When interval is 0, never triggers the timer.</p>
+<p>There are two ways to use it:</p><ul>
+<li>using <a class="el" href="#a5d12020dc37e1836c9c98ec92eade407" title="Checks if timer interval just passed and resets the timer in this case. If timer interval is 0 then a...">ksSimpleTimer::triggered()</a> method, that returns true if timer interval just passed and updates last trigger time.</li>
+<li>using <a class="el" href="#a83285ce55d3a83397c2f72dd05d45dc6" title="Checks if timer interval just passed. Restarting timer relies on user. If timer interval is 0 then al...">ksSimpleTimer::hasTimePassed()</a> method, that returns true if timer interval just passed, without updating last trigger time. </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a76af38376cf65d3062352ebcaca1c12f" name="a76af38376cf65d3062352ebcaca1c12f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76af38376cf65d3062352ebcaca1c12f">&#9670;&#160;</a></span>ksSimpleTimer()</h2>
 
@@ -157,7 +169,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastTriggerTimeMs
       </table>
 </div><div class="memdoc">
 
-<p>Checks if timer interval just passed. Restarting timer relies on user. If interval is 0 then always returns false. </p>
+<p>Checks if timer interval just passed. Restarting timer relies on user. If timer interval is 0 then always returns false. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if timer interval just passed, otherwise false. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a0e71a98ffe9b0bef207203f950da8e80">intervalMs</a>, and <a class="el" href="#a9edd4228fe6272082c33002044c348f3">lastTriggerTimeMs</a>.</p>
@@ -210,12 +222,12 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastTriggerTimeMs
       </table>
 </div><div class="memdoc">
 
-<p>Checks if timer interval just passed. Restarting timer is automatic. If interval is 0 then always returns false. </p>
+<p>Checks if timer interval just passed and resets the timer in this case. If timer interval is 0 then always returns false. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if timer just triggered, otherwise false. </dd></dl>
 
 <p class="reference">References <a class="el" href="#a83285ce55d3a83397c2f72dd05d45dc6">hasTimePassed()</a>, and <a class="el" href="#a7115f8d5cbd0be313e002f569e518879">restart()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a992ef9cf9bc8673b68872b7650b15f0b">ksf::comps::ksWifiConfigurator::loop()</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#a96a1495ed201956ba39b06a1b31af4ab">ksf::comps::ksWifiConnector::loop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a7336a2878a69f0f9452ae39fcfbc1412">ksf::comps::ksDevStatMqttReporter::loop()</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a992ef9cf9bc8673b68872b7650b15f0b">ksf::comps::ksWifiConfigurator::loop()</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#a96a1495ed201956ba39b06a1b31af4ab">ksf::comps::ksWifiConnector::loop()</a>.</p>
 
 </div>
 </div>
