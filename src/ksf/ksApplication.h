@@ -17,12 +17,28 @@
 
 #if APP_LOG_ENABLED
 typedef std::function<void(std::string&)> AppLogProviderFunc_t;
-typedef std::function<void(std::string&)> AppLogCallbackFunc_t;
+typedef std::function<void(std::string&&)> AppLogCallbackFunc_t;
 #endif
 
 namespace ksf 
 {
 	class ksComponent;
+
+	/*!
+		@brief A class that is a base for user-defined application.
+
+		ksApplication implements core application logic. It is responsible for initializing and running components.
+		
+		You must override init method to build component stack. You can return false to stop the initialization.
+		In this case, application will be stopped and ksAppRotator will move to the next application.
+
+		Do not override loop method until you have a good reason. If you do so, keep in mind that you should call base 
+		loop method and return the result properly. If any component returns false, application logic should be stopped.
+		The best way is to add only small piece of code and return the reult of the base loop method. It is also safe to
+		return false early, before calling base loop method.
+	
+		When init or loop returns false, application will be stopped.
+	*/
 	class ksApplication
 	{
 		protected:
@@ -33,14 +49,15 @@ namespace ksf
 #endif
 		public:
 			/*!
-				@brief Instantiates a component of passed type.
+				@brief Instantiates a component of the type defined by the template instance.
+				This function will pass all template-defined parameters to the component constructor.
 
-				This function will pass all template-defined parameters as constructor parameters to the component. 
-				Keep in mind that passed parameters must match target component constructor parameters.
+				@tparam TComponentType A type of the component.
+				@tparam TParams... A list of parameters to be passed to the component constructor.
+				
+				@param arg... A list of parameters to be passed to the component constructor.
 
-				@param ... - user (template) defined parameters
-
-				@return Weak pointer to the newly created component.
+				@return Weak pointer to the created component.
 			*/
 			template <class TComponentType, class... TParams>
 			std::weak_ptr<TComponentType> addComponent(TParams... arg)
@@ -56,8 +73,9 @@ namespace ksf
 			}
 
 			/*!
-				@brief Looks for all components of passed type and puts them into passed vector.
-				@param outComponents Vector of weak pointers to components of passed type.
+				@brief Iterates through all components and returns a vector of weak pointers with components that matches the type passed as a template parameter.
+				@tparam TComponentType A type of the component to look for.
+				@param outComponents A vector of weak pointers to components that match the type passed as a template parameter.
 			*/
 			template <class TComponentType>
 			void findComponents(std::vector<std::weak_ptr<TComponentType>>& outComponents)
@@ -80,8 +98,9 @@ namespace ksf
 			}
 
 			/*!
-				@brief Looks for a component of passed type and returns a weak pointer to it.
-				@return Weak pointer to the component of passed type.
+				@brief  Iterates through all components and returns a weak pointer to the first component that matches the type passed as a template parameter.
+				@tparam TComponentType A type of the component to look for.
+				@return Weak pointer to the first component that matches the type passed as a template parameter.
 			*/
 			template <class TComponentType>
 			std::weak_ptr<TComponentType> findComponent()
@@ -99,26 +118,26 @@ namespace ksf
 
 			/*!
 				@brief Initializes application.
-				@return True on success, false on fail (will break application execution).
+				@return True on success, false otherwise (will break application execution).
 			*/
 			virtual bool init() = 0;
 
 			/*!
-				@brief Executes application loop.
-				@return True on success, false on fail (will break application execution).
+				@brief Executes application logic loop.
+				@return True on success, false otherwise (will break application execution).
 			*/
 			virtual bool loop();
 
 #if APP_LOG_ENABLED
 			/*!
-				@brief Logs application messages.
-				@param logProviderFunction - function that returns string to be logged
+				@brief Calls log callback function with the string to be logged.
+				@param provideLogFn Function that appends a string to be logged using the reference provided as a parameter.
 			*/
 			void log(AppLogProviderFunc_t provideLogFn) const;
 
 			/*!
-				@brief Sets callback function for logging.
-				@param logProviderFunction - function that returns string to be logged
+				@brief Sets log callback function. Called every time a new log is generated.
+				@param logCallback Function that is called after every log - ksDevicePortal uses this function to send logs to the browser when using Terminal feature.
 			*/
 			void setLogCallback(AppLogCallbackFunc_t logCallback);
 #endif

@@ -14,12 +14,19 @@
 
 /*!
 	@brief Wrapper macro that allows to create nice file-manipulating sections. 
+	@param fileName Config filename.
 */
 #define USING_CONFIG_FILE(fileName) \
 	if (ksf::ksConfig config_file{ksf::ksConfig(fileName)})
 
 namespace ksf
 {
+	/*!
+		@brief Implements low-level configuration file handling.
+
+		Uses std::map to store configuration parameters. When any parameter is modified, the config file is marked as dirty.
+		Then on destruction, the config file is saved if it has been modified (marked as dirty) into the filesystem.
+	*/
 	class ksConfig
 	{
 		protected:
@@ -29,29 +36,23 @@ namespace ksf
 
 		public:
 			/*!
-				@brief Constructor that opens (or creates) specified config file and loads its contents into memory.
-				@param configFile Config file name
+				@brief Constructor tha opens or creates configuration file.
+				@param fileName Config filename.
 			*/
 			ksConfig(const std::string& fileName);
 
 			/*!
-				@brief Sets parameter value.
-				
-				If parameter does not exist, it will be created.
-
-				@param paramName Parameter name
-				@param paramValue Parameter value (use std::move when possible)
+				@brief Sets parameter value (creates new parameter if it does not exist).
+				@param paramName Parameter name.
+				@param paramValue Parameter value (use std::move when possible).
 			*/
 			void setParam(const std::string& paramName, const std::string paramValue);
 
 			/*!
-				@brief Retrieves parameter value. 
-				
-				If parameter does not exist, defaultValue will be returned.
-
-				@param paramName Parameter name
-				@param defaultValue Default value to return if parameter does not exist
-				@return Parameter value or defaultValue if parameter does not exist.
+				@brief Retrieves parameter value.
+				@param paramName Name of the parameter to retrieve.
+				@param defaultValue Default value to return if parameter does not exist.
+				@return Parameter value string (or defaultValue).
 			*/
 			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
 
@@ -62,9 +63,8 @@ namespace ksf
 			operator bool() const;
 
 			/*!
-				@brief Saves config content to flash. 
-
-				If config contents has not been modified, nothing will be saved.
+				@brief Saves config content on the device filesystem.
+				In case there is no modification, nothing should actually happen.
 			*/
 			virtual ~ksConfig();
 	};

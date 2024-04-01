@@ -14,18 +14,26 @@
 
 namespace ksf
 {
+	/*!
+		@brief Implements RTTI (run-time type information) for objects.
+
+		This is a simple, but fast and lightweight implementation of RTTI feature.
+		Provides the ability to check whether object is of given type and cast it to the type provided as a template parameter.
+
+		Extensively used to implement components - ksComponent and easily manage components in the application (ksApplication).
+	*/
 	class ksRtti
 	{
 		public:
 			/*!
-				@brief This function is used to get type ID of object.
-				@return Type ID.
+				@brief Retrieves type ID of the object.
+				@return Object type ID.
 			*/
 			virtual const size_t getInstanceType() const = 0;
 
 			/*!
-				@brief This function is used to check if object is of given type.
-				@param id Type ID.
+				@brief Checks whether object is of given type.
+				@param id Type ID to check against.
 				@return True if object is of given type, otherwise false.
 			*/ 
 			virtual bool isA(const size_t id) const
@@ -34,7 +42,8 @@ namespace ksf
 			}
 
 			/*!
-				@brief This function is used to cast object to given type.
+				@brief Tries to cast object to the type provided as a template parameter.
+				@tparam TType Target type.
 				@return Pointer to object of given type or nullptr if object is not of given type.
 			*/
 			template <typename TType>
@@ -47,7 +56,8 @@ namespace ksf
 			}
 
 			/*!
-				@brief This function is used to const cast object to given type.
+				@brief Tries to cast object to the type provided as a template parameter (const version).
+				@tparam TType Target type.
 				@return Const pointer to object of given type or nullptr if object is not of given type.
 			*/
 			template <typename TType>

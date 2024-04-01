@@ -38,18 +38,22 @@ namespace ksf::comps
 			/*!
 				@brief Calback executed on MQTT connection.
 
-    				This callback is used to restart reporter timer to match
+				This callback is used to restart reporter timer to match
 				the intervals between individual reports. The timer will be processed even if
 		 		the MQTT is not connected, but reportDevStats will quickly return.
 			*/
 			void onConnected();
 
 			/*!
-				@brief Reports device statistics to the broker.
+				@brief Reports device statistics to the MQTT broker.
 			*/
 			void reportDevStats() const;
 
 		public:
+			/*!
+				@brief Constructs device statistics reporter component.
+				@param intervalInSeconds Interval in seconds between each report.
+			*/
 			ksDevStatMqttReporter(uint8_t intervalInSeconds = 60);
 
 			/*!
@@ -57,14 +61,14 @@ namespace ksf::comps
 
 				This method is responsible for reference gathering (component lookup) as well as binding to the events.
 
-				@param app Pointer to the parent, which is ksApplication object.
+				@param app Pointer to the paren ksApplication.
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* app) override;
 
 			/*!
 				@brief Handles MQTT debug connector component loop logic.
-				@param app Pointer to the parent, which is ksApplication.
+				@param app Pointer to the parent ksApplication.
 				@return True on success, false on fail.
 			*/
 			bool loop(ksApplication* app) override;

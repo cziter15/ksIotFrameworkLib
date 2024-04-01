@@ -36,6 +36,10 @@
 
 namespace ksf
 {
+	/*!
+		@brief Application rotator component.
+		@tparam ... List of application classes to be used.
+	*/
 	template <class... AppTypes>
 	class ksAppRotator
 	{
@@ -46,12 +50,13 @@ namespace ksf
 
 			/*!
 				@brief Helper function template to create an application object.
+				@tparam TApplicationType A type of the application.
 				@return Unique pointer to the created application object.
 			*/
-			template <class T>
+			template <class TApplicationType>
 			static std::unique_ptr<ksApplication> spawnApp() 
 			{
-				return std::make_unique<T>();
+				return std::make_unique<TApplicationType>();
 			}
 
 			static constexpr std::array<TSpawnerFunc, sizeof...(AppTypes)> appSpawners{spawnApp<AppTypes>...};		//!< Array of application creators.
@@ -79,7 +84,7 @@ namespace ksf
 			}
 
 			/*!
-				@brief Runs the application loop with a delay.
+				@brief Runs application loop with a delay between loops.
 				@param milliseconds Delay time in milliseconds.
 			*/
 			void loop(unsigned long milliseconds)

@@ -41,6 +41,12 @@ namespace ksf
 		};
 	}
 
+	/*!
+		@brief Base component class.
+
+		A component is a part of the application that can be configured and managed by the application.
+		As it is using ksRtti, it must use KSF_RTTI_DECLARATIONS for proper initialization.
+	*/
 	class ksComponent : public ksRtti
 	{
 		KSF_RTTI_DECLARATIONS(ksComponent, ksRtti)
@@ -54,20 +60,21 @@ namespace ksf
 		public:
 			/*!
 				@brief Initializes component.
-				@param owner Pointer to the owning application.
+				@param app Pointer to the parent ksApplication.
 				@return True on success, false on fail.
 			*/
 			virtual bool init(ksApplication* app);
 
 			/*!
-				@brief Called from application loop.
+				@brief Handles component loop logic, called from application loop.
+				@param app Pointer to the parent ksApplication.
 				@return True on success, false on fail.
 			*/
 			virtual bool loop(ksApplication* app);
 
 			/*!
-				@brief Method called after component initialization.
-				@param owner Pointer to the owning application.
+				@brief Method called after component initialization, used to setup references to other components.
+				@param app Pointer to the parent ksApplication.
 				@return True on success, false on fail.
 			*/
 			virtual bool postInit(ksApplication* app);

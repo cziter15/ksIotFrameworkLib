@@ -38,11 +38,9 @@ namespace ksf
 			KSF_RTTI_DECLARATIONS(ksMqttConnector, ksComponent)
 
 			protected:
-
 #if APP_LOG_ENABLED
 				ksApplication* app{nullptr};									//!< Application pointer.
 #endif
-
 				std::unique_ptr<WiFiClient> wifiClientSp;						//!< Shared pointer to WiFiClient used to connect to MQTT.
 				std::unique_ptr<PubSubClient> mqttClientSp;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 
@@ -65,14 +63,14 @@ namespace ksf
 
 				/*!
 					@brief Connects to the MQTT broker.
-     
+
 					@return True on success, false on fail.
 				*/
 				bool connectToBroker();
 
 				/*!
 					@brief Connects to the MQTT broker (internal function).
-     
+
 					Binds onMessage callback, calls bound onConnected callbacks and is used to configures parameters.
 				*/
 				void mqttConnectedInternal();
@@ -100,7 +98,7 @@ namespace ksf
 
 				/*!
 					@brief Constructs ksMqttConnector object.
-     
+
 					@param sendConnectionStatus Indicates whether last will message should be used to signal device state.
 					@param usePersistentSession Indicates whether the session should be persistent.
 				*/
@@ -108,21 +106,21 @@ namespace ksf
 
 				/*!
 					@brief Instantiates the MQTT connector component.
-     
-					@param owner Pointer to the ksApplication object (parent).
+
+					@param app Pointer to the parent ksApplication.
 					@return True on success, false on fail.
 				*/
-				bool init(ksApplication* owner) override;
+				bool init(ksApplication* app) override;
 					
 				/*!
 					@brief Method that handles component post-initialization.
 					
 					Used to setup callbacks.
 
-					@param owner Pointer to the parent ksApplication.
+					@param app Pointer to the parent ksApplication.
 					@return True on success, false on fail.
 				*/
-				bool postInit(ksApplication* owner) override;
+				bool postInit(ksApplication* app) override;
 
 				/*!
 					@brief Executes MQTT connection logic.

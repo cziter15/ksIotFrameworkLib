@@ -23,8 +23,14 @@ namespace ksf
 
 namespace ksf::comps
 {
+	/*!
+		@brief Configuration parameter types.
+	*/
 	namespace EConfigParamType
 	{
+		/*!
+			@brief Configuration parameter type enum.
+		*/
 		enum Type
 		{
 			Text,

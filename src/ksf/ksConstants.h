@@ -57,8 +57,14 @@
 
 namespace ksf
 {
+	/*!
+		@brief OTA boot types.
+	*/
 	namespace EOTAType
 	{
+		/*!
+			@brief OTA boot type enum.
+		*/
 		enum Type
 		{
 			/*! No OTA happened. */
@@ -77,36 +83,36 @@ namespace ksf
 	extern const char* getNvsDirectory();
 
 	/*!
-		@brief Initializes ksIotFramework.
+		@brief Initializes the framework.
 	*/
 	extern void initializeFramework();
 
 	/*!
-		@brief Removes directory with all its content.
-		@param path Path to be removed.
-		@return True if removal was successful.
+		@brief Removes a directory with all its content.
+		@param path Path of the directory to be removed.
+		@return True if removal was successful. False if one or more of the steps failed.
 	*/
 	extern bool removeDirectory(const char* path);
 
 	/*!
-		@brief Erases configuration data (config file and NVS data).
+		@brief Erases the configuration data from the device. 
 		@return True if erase was successful. False if one or more of the steps failed.
 	*/
 	extern bool eraseConfigData();
 
 	/*!
-		@brief Updates device uptime, handling millis() function rollover.
+		@brief Updates the device uptime, handling millis() function rollover.
 	*/
 	extern void updateDeviceUptime();
 
 	/*!
-		@brief Retrieves device uptime in milliseconds (64 bit wide).
+		@brief Retrieves the device uptime in milliseconds (64 bit wide).
 		@return Milliseconds that have passed since device boot/restart.
 	*/
 	extern uint64_t millis64();
 
 	/*!
-		@brief Helper functionn double values into stirng.
+		@brief Helper function that converts double value into a stirng.
 
 		GCC is missing double support in std::to_string.
 
@@ -116,7 +122,7 @@ namespace ksf
 	extern std::string to_string(double value, const int base);
 
 	/*!
-		@brief Helper functionn float values into stirng.
+		@brief Helper function that converts float value into a stirng.
 
 		GCC is missing float support in std::to_string.
 
@@ -128,7 +134,10 @@ namespace ksf
 
 	/*!
 		@brief Helper function template to convert a string into another type.
-		@param input Value to be converted
+
+		@tparam _Type Type to be converted.
+
+		@param input Value to be converted.
 		@return Converted value in a form of string.
 	*/
 	template <typename _Type>
@@ -138,9 +147,13 @@ namespace ksf
 	}
 
 	/*!
-		@brief Helper function to convert from string to another type.
-		@param input Input - string, string_view etc
-		@param out Output reference - can be int, double (anything that  std::from_chars support)
+		@brief Helper function to convert string-like value into another type (int, double etc).
+
+		@tparam _In Input type.
+		@tparam _Out Output type.
+
+		@param input Input - string, string_view etc.
+		@param out Output reference - can be int, double (anything that std::from_chars support).
 		@return True if conversion succeded, otherwise false.
 	*/
 	template <typename _In, typename _Out>
@@ -151,24 +164,34 @@ namespace ksf
 	}
 
 	/*!
-		@brief Retrieves OTA boot type.
+		@brief Retrieves OTA boot type from device filesystem. If not found, returns EOTAType::NO_OTA.
+
+		There are few OTA boot types, which are defined in EOTAType::Type enum. This value is used to determine reset reason.
+		In case of system restart, if there's OTA boot set, it will be used to determine correct reset reason for System Restart.
+
 		@return OTA boot type.
 	*/
 	extern EOTAType::Type getOtaBootType();
 
 	/*!
-		@brief Saves OTA boot type.
+		@brief Saves OTA boot type to device filesystem.
 
-		The value will be used in next boot to determine what type of OTA has been started.
+		This value will be used on next boot to determine OTA boot type. Upon read, the file containing this value will be removed.
 
-		@param type OTA boot type to be saved
+		@param type OTA boot type.
 	*/
 	extern void saveOtaBootIndicator(EOTAType::Type type = EOTAType::OTA_GENERIC);
 
 	/*!
 		@brief Helper function to check if a string or string view starts with.
-		@param input Input string
-		@param match Matching string
+
+		@tparam _Type1 First type.
+		@tparam _Type2 Second type.
+
+		@param input Input 'string'.
+		@param match The string to check with input 'string'.
+
+		@return True if input starts with match. False otherwise.
 	*/
 	template<class _Type1, class _Type2>
 	inline bool starts_with(const _Type1& input, const _Type2& match)
@@ -182,29 +205,29 @@ namespace ksf
 	extern const std::string getResetReason();
 
 	/*!
-		@brief Helper function to get uptime from seconds.
-		@param seconds Seconds to be converted
-		@return Converted value in a form of string.
+		@brief Returns uptime string from seconds.
+		@param seconds Number of seconds.
+		@return Uptime in a form of string (day, hour, minute, second).
 	*/
 	extern const std::string getUptimeFromSeconds(uint32_t seconds);
 
 	/*!
-		@brief Helper function to get uptime in a form of string.
-		@return Uptime in a form of string.
+		@brief Helper function that returns uptime in a form of string.
+		@return Device uptime in a form of string (day, hour, minute, second).
 	*/
 	extern const std::string getUptimeString();
 
 	/*!
-		@brief This function loads WiFi credentials from flash.
-		@param ssid SSID ref to be loaded
-		@param password Password ref to be loaded
+		@brief Loads WiFi credentials from flash.
+		@param ssid SSID reference to be loaded.
+		@param password Password reference to be loaded.
 	*/
 	extern void loadCredentials(std::string& ssid, std::string& password);
 
 	/*!
-		@brief This function saves WiFi credentials to flash.
-		@param ssid SSID to be saved
-		@param password Password to be saved
+		@brief Saves WiFi credentials to flash.
+		@param ssid SSID to be saved.
+		@param password Password to be saved.
 	*/
 	extern void saveCredentials(std::string ssid, std::string password);
 }

@@ -69,7 +69,7 @@ namespace ksf
 		{
 			std::string theLog;
 			provideLogFn(theLog);
-			appLogCallback(theLog);
+			appLogCallback(std::move(theLog));
 		}
 	}
 

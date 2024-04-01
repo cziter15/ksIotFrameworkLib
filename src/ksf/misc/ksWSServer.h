@@ -17,8 +17,8 @@
 namespace ksf::misc
 {
 	/*!
-		@brief Callback function type for Websocket messsages.
-		@param client Websocket client ID.
+		@brief Callback function typedef for Websocket messsages.
+		@param client Websocket client number that identifies the client.
 		@param message Incomming websocket message (text / string view).
 	*/
 	typedef std::function<void(uint8_t client, std::string_view message)> ksWsServerMessageFunc_t;
@@ -31,22 +31,23 @@ namespace ksf::misc
 			ksWsServerMessageFunc_t onWebsocketTextMessage;						//!< Callback function to receive messages.
 
 			/*!
-				@brief Handles a situation wher the socket is not authorized
-				@param client WSclient_t *  ptr to the client struct
+				@brief Handler for non-WebSocket connections on websocket port.
+				@param clientS Pointer to the WSclient_t object.
 			*/
-			void handleNonWebsocketConnection(WSclient_t * client) override;
+			void handleNonWebsocketConnection(WSclient_t* client) override;
 
 		public:
 			/*!
-				@brief Prepares ksWebServer on specified port but does not start it (call begin).
-				@param port WebSocket listening port.
+				@brief Prepares ksWebServer on specified port without actually starting it.
+				@param port Port to listen for incoming WebSocket connections.
 			*/
 			ksWSServer(uint16_t port);
 
 			/*!
-				@brief Returns simple authtoken for WebSocket authentication.
+				@brief Returns simple authentication token for WebSocket authentication process.
 
-				The value 0 is considered to be invalid (no auth token). Auth token is set via setRequiredAuthToken().
+				The value 0 is considered to be empty token. Authentication token is set via setRequiredAuthToken().
+
 				Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to
 				the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).
 
@@ -61,28 +62,28 @@ namespace ksf::misc
 				Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to
 				the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).
 
-				@param authToken The token to set
+				@param authToken The token to set.
 			*/
 			void setRequiredAuthToken(uint64_t authToken);
 
 			/*!
-				@brief Starts the server listening on the specified port.
+				@brief Starts the server.
 			*/
 			void begin();
 
 			/*!
-				@brief Handles server logic.
+				@brief Handles WebSocket server logic.
 			*/
 			void loop();
 
 			/*!
-				@brief Installs a message handler callback to WebSocket text receive messages.
-				@param func Callback function to receive messages
+				@brief Installs a message handler to receive WebSocket text messages.
+				@param func The message handler function.
 			*/
 			void setMessageHandler(ksWsServerMessageFunc_t func);
 
 			/*!
-				@brief Releases server resources.
+				@brief Destructs the server, releasing the resources.
 			*/
 			virtual ~ksWSServer();
 	};

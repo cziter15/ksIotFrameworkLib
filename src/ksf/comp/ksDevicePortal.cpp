@@ -140,13 +140,13 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksDevicePortal::onAppLog(std::string& msgRef)
+	void ksDevicePortal::onAppLog(std::string&& message)
 	{
 		if (!webSocket)
 			return;
 
-		msgRef.insert(0, PROGMEM_NO_ID_RESPONSE);
-		webSocket->broadcastTXT(msgRef.c_str(), msgRef.size());
+		message.insert(0, PROGMEM_NO_ID_RESPONSE);
+		webSocket->broadcastTXT(message.c_str(), message.size());
 	}
 
 	void ksDevicePortal::rebootDevice()
@@ -326,7 +326,7 @@ namespace ksf::comps
 #else
 				std::string log{PSTR("Detailed logs are disabled (no APP_LOG_ENABLED set). Only command responses will be printed.")};
 #endif
-				onAppLog(log);
+				onAppLog(std::move(log));
 			}
 
 			return;

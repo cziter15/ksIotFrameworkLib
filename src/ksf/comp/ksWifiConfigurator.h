@@ -14,12 +14,18 @@
 #include "../ksSimpleTimer.h"
 namespace ksf::comps
 {
+	/*!
+		@brief ksWifiConfigurator component class.
+
+		Handles Device Portal, where the user can configure the device like WiFi or MQTT credentials 
+		as well as custom, application-defined parameters implemented using ksConfigProvider interface.
+	*/
 	class ksWifiConfigurator : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksWifiConfigurator, ksComponent)
 
 		protected:
-			ksApplication* owner{nullptr};							//!< Pointer to ksApplication object that owns this component.
+			ksApplication* app{nullptr};							//!< Pointer to ksApplication object that owns this component.
 			std::string deviceName;									//!< Device name (prefix).
 			ksf::ksSimpleTimer configTimeout{120 * 1000};			//!< Timeout for captive portal in ms.
 			ksf::ksSimpleTimer periodicTasksTimeout{1000};			//!< Timeout for loop in ms.
@@ -47,29 +53,27 @@ namespace ksf::comps
 				It starts and handles Device Portal, where the user can configure the device (that means WiFi or
 				MQTT credential as well as custom defined device parameters).
 
+				@param app Pointer to ksApplication object that owns this component.
 				@return True if loop succedeed, otherwise false.
 			*/
 			bool loop(ksApplication* app) override;
 
 			/*!
-				@brief ksWifiConfigurator init function.
-				@param owner Pointer to the application object
+				@brief Implements ksWifiConfigurator initialization logic.
+				@param app Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
-			bool init(ksApplication* owner) override;
+			bool init(ksApplication* app) override;
 
 			/*!
-				@brief ksWifiConfigurator postInit function.
-
-				Turns on all registered LEDs in config mode.
-
-				@param owner Pointer to ksApplication object that owns this component
+				@brief Implements ksWifiConfigurator post-initialization logic.
+				@param app Pointer to ksApplication object that owns this component
 				@return True on success, false on fail.
 			*/
-			bool postInit(ksApplication* owner) override;
+			bool postInit(ksApplication* app) override;
 
 			/*!
-				@brief Destructor for WiFi configurator component.
+				@brief Destructs WiFi configurator component.
 			*/
 			virtual ~ksWifiConfigurator();
 	};

@@ -18,9 +18,9 @@ namespace ksf::comps
 	class ksMqttConnector;
 	/*!
 		@brief A component that manages MQTT-related configuration.
-    
+
 		This configuration provider handles MQTT properties .
- 		Detailed documentation on the provider's behavior can be fond on ksConfigProvider sub-page.
+		Detailed documentation on the provider's behavior can be fond on ksConfigProvider sub-page.
 	*/
 	class ksMqttConfigProvider : public ksConfigProvider
 	{
@@ -29,7 +29,7 @@ namespace ksf::comps
 		public:
 			/*!
 				@brief Retrieves MQTT parameters.
-    
+
 				This method reads the configuation file to retrieve MQTT broker information from file.
  				The config contains data like MQTT address, device prefix, optional: credentials and expected SSL fingerprint.  
 			*/
@@ -38,7 +38,7 @@ namespace ksf::comps
 			/*!
 				@brief Saves MQTT aprameters into the configuration file.
 
-    				This method saves current (in-memory) MQTT properties into the configuration file.
+				This method saves current (in-memory) MQTT properties into the configuration file.
 			*/
 			void saveParams() override;
 

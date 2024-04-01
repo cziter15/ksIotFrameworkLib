@@ -13,6 +13,16 @@
 
 namespace ksf 
 {
+	/*!
+		@brief Simple timer class, without using component architecture.
+
+		Used to trigger events periodically. Internally checks if timer interval just passed.
+		When interval is 0, never triggers the timer.
+
+		There are two ways to use it:
+		- using ksSimpleTimer::triggered() method, that returns true if timer interval just passed and updates last trigger time.
+		- using ksSimpleTimer::hasTimePassed() method, that returns true if timer interval just passed, without updating last trigger time.
+	*/
 	class ksSimpleTimer
 	{
 		protected:
@@ -38,15 +48,15 @@ namespace ksf
 			void restart();
 
 			/*!
-				@brief Checks if timer interval just passed. Restarting timer is automatic.
-				If interval is 0 then always returns false.
+				@brief Checks if timer interval just passed and resets the timer in this case.
+				If timer interval is 0 then always returns false.
 				@return True if timer just triggered, otherwise false.
 			*/
 			bool triggered();
 			
 			/*!
 				@brief Checks if timer interval just passed. Restarting timer relies on user.
-				If interval is 0 then always returns false.
+				If timer interval is 0 then always returns false.
 				@return	True if timer interval just passed, otherwise false.
 			*/
 			bool hasTimePassed() const;
