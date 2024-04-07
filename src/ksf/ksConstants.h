@@ -37,11 +37,6 @@
 #define KSF_MQTT_TIMEOUT_SEC 4UL
 #endif
 
-#ifndef KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC
-/*! Configuration portal maximum time limit for test connection to AP. */
-#define KSF_CAP_WIFI_CONNECT_TIMEOUT_SEC 10UL
-#endif
-
 #ifndef KSF_WIFI_TIMEOUT_MS
 /*! Time in milliseconds that must pass without WiFi connection to trigger device restart. */
 #define KSF_WIFI_TIMEOUT_MS 120000UL
