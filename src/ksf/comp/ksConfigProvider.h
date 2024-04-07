@@ -13,9 +13,6 @@
 #include <list>
 #include "../ksComponent.h"
 
-class WiFiManager;
-class WiFiManagerParameter;
-
 namespace ksf
 {
 	class ksConfig;
