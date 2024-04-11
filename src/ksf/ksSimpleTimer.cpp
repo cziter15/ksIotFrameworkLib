@@ -26,7 +26,7 @@ namespace ksf
 
 	bool ksSimpleTimer::hasTimePassed() const
 	{
-		return intervalMs > 0 && millis() - lastTriggerTimeMs > intervalMs;
+		return intervalMs && millis() - lastTriggerTimeMs > intervalMs;
 	}
 
 	bool ksSimpleTimer::triggered()

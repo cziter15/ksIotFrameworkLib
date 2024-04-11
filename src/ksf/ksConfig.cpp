@@ -80,7 +80,7 @@ namespace ksf
 		if (!fileWriter)
 			return;
 
-		for (const auto& [name, value] : configParams)
+		for (const auto&[name, value] : configParams)
 		{
 			fileWriter.println(name.c_str());
 			fileWriter.println(value.c_str());

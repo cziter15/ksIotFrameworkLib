@@ -514,14 +514,14 @@ namespace ksf::comps
 		if (inRequest_NeedAuthentication())
 			return;
 	
-		HTTPUpload& upload{webServer->upload()};
+		auto& upload{webServer->upload()};
 		if (upload.status == UPLOAD_FILE_START)
 		{
 #if ESP8266
 			Update.runAsync(true);
-			uint32_t maxSketchSpace = (ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000;
+			auto maxSketchSpace{(ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000};
 #elif ESP32
-			uint32_t maxSketchSpace = UPDATE_SIZE_UNKNOWN;
+			auto maxSketchSpace{UPDATE_SIZE_UNKNOWN};
 #else
 			#error Platform not implemented.
 #endif

@@ -43,9 +43,9 @@ namespace ksf::comps
 	void ksWifiConnector::setupMacAddress()
 	{
 #if defined(ESP32)
-		uint32_t chipId {static_cast<uint32_t>(ESP.getEfuseMac())};
+		auto chipId{static_cast<uint32_t>(ESP.getEfuseMac())};
 #elif defined(ESP8266)
-		uint32_t chipId {ESP.getChipId()};
+		auto chipId{ESP.getChipId()};
 #else
 #error Platform not implemented.
 #endif
@@ -94,7 +94,7 @@ namespace ksf::comps
 	bool ksWifiConnector::loop(ksApplication* app)
 	{
 		if (wifiIpCheckTimer.triggered())
-			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
+			gotIpAddress = WiFi.localIP() != INADDR_NONE;
 
 		if (!isConnected())
 		{

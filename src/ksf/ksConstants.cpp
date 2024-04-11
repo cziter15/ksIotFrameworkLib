@@ -141,7 +141,7 @@ namespace ksf
 
 	uint64_t millis64() 
 	{
-		return (uint64_t) uptime_high32 << 32 | uptime_low32;
+		return (static_cast<uint64_t>(uptime_high32) << 32) | uptime_low32;
 	}
 
 	std::string to_string(double value, const int base)

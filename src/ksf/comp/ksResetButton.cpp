@@ -40,7 +40,7 @@ namespace ksf::comps
 
 	bool ksResetButton::loop(ksApplication* app)
 	{
-		if (uint8_t currentState{static_cast<uint8_t>(digitalRead(pin))}; currentState != lastState)
+		if (auto currentState{static_cast<uint8_t>(digitalRead(pin))}; currentState != lastState)
 		{
 			if (currentState == triggerState)
 			{

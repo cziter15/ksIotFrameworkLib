@@ -37,8 +37,8 @@ namespace ksf
 
 		for (uint8_t ci{0}, bi{0}; ci < fingerprint.size(); ci += 2)
 		{
-			uint8_t c = htoi(fingerprint[ci]);
-			uint8_t d = htoi(fingerprint[ci+1]);
+			uint8_t c{htoi(fingerprint[ci])};
+			uint8_t d{htoi(fingerprint[ci+1])};
 
 			if ((c>15) || (d>15))
 				return false;
