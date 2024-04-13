@@ -149,9 +149,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab101e26b5ea98a8b3e35295ab2b00680" id="r_ab101e26b5ea98a8b3e35295ab2b00680"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab101e26b5ea98a8b3e35295ab2b00680">publish</a> (const std::string &amp;topic, const std::string &amp;payload, bool retain=false, bool skipDevicePrefix=false)</td></tr>
 <tr class="memdesc:ab101e26b5ea98a8b3e35295ab2b00680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishes a message to the MQTT topic.  <br /></td></tr>
 <tr class="separator:ab101e26b5ea98a8b3e35295ab2b00680"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a7833df0f4760e30c26b9c08ff6d922" id="r_a9a7833df0f4760e30c26b9c08ff6d922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9a7833df0f4760e30c26b9c08ff6d922">setupConnection</a> (const std::string &amp;broker, const std::string &amp;port, std::string <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, std::string <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, std::string <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, const std::string &amp;fingerprint)</td></tr>
-<tr class="memdesc:a9a7833df0f4760e30c26b9c08ff6d922"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up MQTT connection.  <br /></td></tr>
-<tr class="separator:a9a7833df0f4760e30c26b9c08ff6d922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3c8abf7dcaecaa90dafe5bdfe08b466" id="r_aa3c8abf7dcaecaa90dafe5bdfe08b466"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3c8abf7dcaecaa90dafe5bdfe08b466">setupConnection</a> (const std::string <a class="el" href="#ae97565fa36122cb841acbb418928da1a">broker</a>, const std::string &amp;port, std::string <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, std::string <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, std::string <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, const std::string &amp;fingerprint)</td></tr>
+<tr class="memdesc:aa3c8abf7dcaecaa90dafe5bdfe08b466"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up MQTT connection.  <br /></td></tr>
+<tr class="separator:aa3c8abf7dcaecaa90dafe5bdfe08b466"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a2c69fad3a041cf706ff66b88afb663" id="r_a6a2c69fad3a041cf706ff66b88afb663"><td class="memItemLeft" align="right" valign="top"><a id="a6a2c69fad3a041cf706ff66b88afb663" name="a6a2c69fad3a041cf706ff66b88afb663"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksMqttConnector</b> ()</td></tr>
 <tr class="memdesc:a6a2c69fad3a041cf706ff66b88afb663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor (for uniqueptr purposes). <br /></td></tr>
@@ -257,6 +257,10 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>password</b></
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>prefix</b></td></tr>
 <tr class="memdesc:a2acc73077e7b4ef0d5f7cd03ad75da19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saved MQTT prefix. <br /></td></tr>
 <tr class="separator:a2acc73077e7b4ef0d5f7cd03ad75da19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae97565fa36122cb841acbb418928da1a" id="r_ae97565fa36122cb841acbb418928da1a"><td class="memItemLeft" align="right" valign="top"><a id="ae97565fa36122cb841acbb418928da1a" name="ae97565fa36122cb841acbb418928da1a"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>broker</b></td></tr>
+<tr class="memdesc:ae97565fa36122cb841acbb418928da1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saved MQTT broker. <br /></td></tr>
+<tr class="separator:ae97565fa36122cb841acbb418928da1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72c01e2f4d6d2115d5b11f7330f75971" id="r_a72c01e2f4d6d2115d5b11f7330f75971"><td class="memItemLeft" align="right" valign="top"><a id="a72c01e2f4d6d2115d5b11f7330f75971" name="a72c01e2f4d6d2115d5b11f7330f75971"></a>
 std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ksCertFingerprint</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>certFingerprint</b></td></tr>
 <tr class="memdesc:a72c01e2f4d6d2115d5b11f7330f75971"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared pointer to fingerprint validator. <br /></td></tr>
@@ -708,8 +712,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 </div>
 </div>
-<a id="a9a7833df0f4760e30c26b9c08ff6d922" name="a9a7833df0f4760e30c26b9c08ff6d922"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a7833df0f4760e30c26b9c08ff6d922">&#9670;&#160;</a></span>setupConnection()</h2>
+<a id="aa3c8abf7dcaecaa90dafe5bdfe08b466" name="aa3c8abf7dcaecaa90dafe5bdfe08b466"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c8abf7dcaecaa90dafe5bdfe08b466">&#9670;&#160;</a></span>setupConnection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -717,7 +721,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
         <tr>
           <td class="memname">void ksf::comps::ksMqttConnector::setupConnection </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>broker</em>, </span></td>
+          <td class="paramtype">const std::string</td>          <td class="paramname"><span class="paramname"><em>broker</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -759,7 +763,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a72c01e2f4d6d2115d5b11f7330f75971">certFingerprint</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, and <a class="el" href="#a437a9bcc82d47c0bc27f25c155d35ff3">wifiClientSp</a>.</p>
+<p class="reference">References <a class="el" href="#ae97565fa36122cb841acbb418928da1a">broker</a>, <a class="el" href="#a72c01e2f4d6d2115d5b11f7330f75971">certFingerprint</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#af745644b5a8c20a49ce70e22e5602303">mqttClientSp</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, and <a class="el" href="#a437a9bcc82d47c0bc27f25c155d35ff3">wifiClientSp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e">ksf::comps::ksMqttConfigProvider::setupMqttConnector()</a>.</p>
 
