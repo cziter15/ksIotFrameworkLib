@@ -54,8 +54,11 @@ namespace ksf::comps
 					prefix += TOPIC_DELIMETER;
 			}
 
-			if (savedBroker.length() > 0)
-				connector.setupConnection(savedBroker, port, std::move(login), std::move(password), std::move(prefix), fingerprint);
+			if (!savedBroker.empty())
+			{
+				if (uint16_t portNumber; ksf::from_chars(port, portNumber))
+					connector.setupConnection(std::move(savedBroker), port, std::move(login), std::move(password), std::move(prefix), fingerprint);
+			}
 		}
 	}
 

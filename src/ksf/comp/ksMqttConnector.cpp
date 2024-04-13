@@ -61,7 +61,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksMqttConnector::setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
+	void ksMqttConnector::setupConnection(const std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
 		if (!fingerprint.empty())
 		{
@@ -81,6 +81,7 @@ namespace ksf::comps
 		this->login = std::move(login);
 		this->password = std::move(password);
 		this->prefix = std::move(prefix);
+		this->broker = std::move(broker);
 
 		/* 
 		*	Set timeout for blocking calls (eg. connect). MQTT is handled async-like.
@@ -109,10 +110,12 @@ namespace ksf::comps
 		if (uint16_t portNumber; ksf::from_chars(port, portNumber))
 		{
 			IPAddress serverIP;
-			if (serverIP.fromString(broker.c_str()))
+			if (serverIP.fromString(this->broker.c_str()))
+			{
 				mqttClientSp->setServer(serverIP, portNumber);
-			else
-				mqttClientSp->setServer(broker.c_str(), portNumber);
+				this->broker.clear();
+			}
+			else mqttClientSp->setServer(this->broker.c_str(), portNumber);
 		}	
 	}
 

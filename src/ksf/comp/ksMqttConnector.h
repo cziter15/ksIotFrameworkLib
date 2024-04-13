@@ -58,6 +58,7 @@ namespace ksf
 				std::string login;												//!< Saved MQTT login.
 				std::string password;											//!< Saved MQTT password.
 				std::string prefix;												//!< Saved MQTT prefix.
+				std::string broker;												//!< Saved MQTT broker.
 
 				std::unique_ptr<ksCertFingerprint> certFingerprint;				//!< Shared pointer to fingerprint validator.
 
@@ -178,7 +179,7 @@ namespace ksf
 					@param password MQTT user password
 					@param fingerprint MQTT broker certificate fingerprint - if empty, secure connection won't be used
 				*/
-				void setupConnection(const std::string& broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint);
+				void setupConnection(const std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint);
 		
 				/*!
 					@brief Destructor (for uniqueptr purposes).
