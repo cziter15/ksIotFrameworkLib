@@ -76,6 +76,10 @@ namespace ksf::comps
 			wifiClientSp = std::make_unique<WiFiClient>();
 		}
 
+		/* Whoops, it looks like fingerprint validation failed. */
+		if (!wifiClientSp)
+			return;
+
 		mqttClientSp = std::make_unique<PubSubClient>(*wifiClientSp.get());
 
 		this->login = std::move(login);
