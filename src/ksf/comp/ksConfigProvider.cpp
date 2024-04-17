@@ -12,11 +12,16 @@
 
 namespace ksf::comps
 {
-	void ksConfigProvider::addNewParam(std::string id, std::string value, int maxLength, EConfigParamType::Type type)
+	void ksConfigProvider::addNewParam(std::string id, std::string label, std::string value, int maxLength, EConfigParamType::Type type)
 	{
+		/* If label is empty, we use id as label*/
+		if (label.empty())
+			label = id;
+
 		ksConfigParameter param
 		{
 			.id = std::move(id),
+			.label = std::move(label),
 			.value = std::move(value),
 			.type = type,
 			.maxLength = maxLength
@@ -25,10 +30,10 @@ namespace ksf::comps
 		params.push_back(std::move(param));
 	}
 
-	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, std::string id, int maxLength, EConfigParamType::Type type)
+	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, std::string id, std::string label, int maxLength, EConfigParamType::Type type)
 	{
 		auto& value{config.getParam(id)};
-		return addNewParam(std::move(id), std::move(value), maxLength, type);
+		return addNewParam(std::move(id), std::move(value), std::move(label), maxLength, type);
 	}
 
 	std::list<ksConfigParameter>& ksConfigProvider::getParameters()

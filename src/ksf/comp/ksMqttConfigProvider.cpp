@@ -16,15 +16,29 @@
 namespace ksf::comps
 {
 	/* Assign PGM returned strings to a set of macros. */
-	const char MQTT_FILENAME_TEXT[] 	PROGMEM {"mqtt.conf"};
-	
-	const char DEFPORT_AS_TEXT_PGM[] 	PROGMEM {"1883"};
-	const char BROKER_TEXT_PGM[]		PROGMEM {"broker"};
-	const char USER_TEXT_PGM[] 			PROGMEM {"user"};
-	const char FINGERPRINT_TEXT_PGM[] 	PROGMEM {"SSLFingerprint"};
-	const char PASSWORD_TEXT_PGM[] 		PROGMEM {"password"};
-	const char PREFIX_TEXT_PGM[] 		PROGMEM {"prefix"};
-	const char PORT_TEXT_PGM[]	 		PROGMEM {"port"};
+	const char MQTT_FILENAME_TEXT[] 				PROGMEM {"mqtt.conf"};
+
+	const char DEFPORT_AS_TEXT_PGM[] 				PROGMEM {"1883"};
+	const char BROKER_TEXT_PGM[]					PROGMEM {"broker"};
+	const char USER_TEXT_PGM[] 						PROGMEM {"user"};
+	const char FINGERPRINT_TEXT_PGM[] 				PROGMEM {"SSLFingerprint"};
+	const char PASSWORD_TEXT_PGM[] 					PROGMEM {"password"};
+	const char PREFIX_TEXT_PGM[] 					PROGMEM {"prefix"};
+	const char PORT_TEXT_PGM[]	 					PROGMEM {"port"};
+
+	const char MQTT_BROKER_ADDRESS_TEXT[] 			PROGMEM {"MQTT Address"};
+	const char MQTT_BROKER_PORT_TEXT[] 				PROGMEM {"MQTT Port"};
+	#ifdef ESP8266
+	const auto MQTT_SSL_FP_LEN{40};
+	const char MQTT_BROKER_SSL_FINGERPRINT_TEXT[] 	PROGMEM {"MQTT SSL Fingerprint (SHA1)"};
+	#else
+	const auto MQTT_SSL_FP_LEN{64};
+	const char MQTT_BROKER_SSL_FINGERPRINT_TEXT[] 	PROGMEM {"MQTT SSL Fingerprint (SHA256)"};
+	#endif
+	const char MQTT_BROKER_USER_TEXT[] 				PROGMEM {"MQTT Username"};
+	const char MQTT_BROKER_PASSWORD_TEXT[] 			PROGMEM {"MQTT Password"};
+	const char MQTT_BROKER_PREFIX_TEXT[] 			PROGMEM {"MQTT Topic Prefix"};
+
 
 	constexpr const char TOPIC_DELIMETER{'/'};
 
@@ -66,12 +80,12 @@ namespace ksf::comps
 	{		
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
-			addNewParamWithConfigDefault(config_file, BROKER_TEXT_PGM);
-			addNewParamWithConfigDefault(config_file, PORT_TEXT_PGM, 5, EConfigParamType::Number);
-			addNewParamWithConfigDefault(config_file, USER_TEXT_PGM);
-			addNewParamWithConfigDefault(config_file, FINGERPRINT_TEXT_PGM, 110);
-			addNewParamWithConfigDefault(config_file, PASSWORD_TEXT_PGM, 50, EConfigParamType::Password);
-			addNewParamWithConfigDefault(config_file, PREFIX_TEXT_PGM);
+			addNewParamWithConfigDefault(config_file, BROKER_TEXT_PGM, MQTT_BROKER_ADDRESS_TEXT);
+			addNewParamWithConfigDefault(config_file, PORT_TEXT_PGM, MQTT_BROKER_PORT_TEXT, 5, EConfigParamType::Number);
+			addNewParamWithConfigDefault(config_file, USER_TEXT_PGM, MQTT_BROKER_USER_TEXT);
+			addNewParamWithConfigDefault(config_file, FINGERPRINT_TEXT_PGM, MQTT_BROKER_SSL_FINGERPRINT_TEXT, MQTT_SSL_FP_LEN);
+			addNewParamWithConfigDefault(config_file, PASSWORD_TEXT_PGM, MQTT_BROKER_PASSWORD_TEXT, 50, EConfigParamType::Password);
+			addNewParamWithConfigDefault(config_file, PREFIX_TEXT_PGM, MQTT_BROKER_PREFIX_TEXT);
 		}
 	}
 

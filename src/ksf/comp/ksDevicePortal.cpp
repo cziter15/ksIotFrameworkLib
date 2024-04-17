@@ -466,6 +466,8 @@ namespace ksf::comps
 			{
 				response += PSTR("{\"id\": \"");
 				response += paramRef.id;
+				response += PSTR("\", \"label\": \"");
+				response += paramRef.label;
 				response += PSTR("\", \"value\": \"");
 				response += paramRef.value;
 				response += PSTR("\", \"default\": \"");
