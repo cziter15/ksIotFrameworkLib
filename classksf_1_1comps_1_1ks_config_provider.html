@@ -153,12 +153,12 @@ static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCla
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6e72aedea03159b059f197ebf21a95ef" id="r_a6e72aedea03159b059f197ebf21a95ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e72aedea03159b059f197ebf21a95ef">addNewParam</a> (std::string id, std::string value, int maxLength=50, EConfigParamType::Type type={})</td></tr>
-<tr class="memdesc:a6e72aedea03159b059f197ebf21a95ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configutation parameter.  <br /></td></tr>
-<tr class="separator:a6e72aedea03159b059f197ebf21a95ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0c39ab3c54f26fd79d55b2c6ec86e92" id="r_af0c39ab3c54f26fd79d55b2c6ec86e92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0c39ab3c54f26fd79d55b2c6ec86e92">addNewParamWithConfigDefault</a> (<a class="el" href="classksf_1_1ks_config.html">ksConfig</a> &amp;config, std::string id, int maxLength=50, EConfigParamType::Type type={})</td></tr>
-<tr class="memdesc:af0c39ab3c54f26fd79d55b2c6ec86e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configuation parameter (with default value).  <br /></td></tr>
-<tr class="separator:af0c39ab3c54f26fd79d55b2c6ec86e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b17eeb01e313fb4074b598f669541ce" id="r_a6b17eeb01e313fb4074b598f669541ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam</a> (std::string id, std::string label, std::string defaultValue, int maxLength=50, EConfigParamType::Type type={})</td></tr>
+<tr class="memdesc:a6b17eeb01e313fb4074b598f669541ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configutation parameter.  <br /></td></tr>
+<tr class="separator:a6b17eeb01e313fb4074b598f669541ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a197410e9beb0e96d1fb0c2551227ec75" id="r_a197410e9beb0e96d1fb0c2551227ec75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a197410e9beb0e96d1fb0c2551227ec75">addNewParamWithConfigDefault</a> (<a class="el" href="classksf_1_1ks_config.html">ksConfig</a> &amp;config, std::string id, std::string label={}, int maxLength=50, EConfigParamType::Type type={})</td></tr>
+<tr class="memdesc:a197410e9beb0e96d1fb0c2551227ec75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configuation parameter (with default value).  <br /></td></tr>
+<tr class="separator:a197410e9beb0e96d1fb0c2551227ec75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -174,8 +174,8 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <p>In the configurator application, it should be instantiated like a typical component, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> must be added to the component stack. In this case, it will manage the correct flow of data reading and saving.</p>
 <p>In contrast, in a normal application, it can be created for a short period of time, usually inside the application's init method, to read the data and return the required value. Refer to the EnergySensor init method for an example. Note that the component will be destroyed upon reaching the function return. Also, note that the setupRotations method can return false in case of a problem with the value retrieval (for example, no config present yet), thus causing the application to break and triggering the app rotator to move to the next defined application, usually AP-based configurator. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6e72aedea03159b059f197ebf21a95ef" name="a6e72aedea03159b059f197ebf21a95ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e72aedea03159b059f197ebf21a95ef">&#9670;&#160;</a></span>addNewParam()</h2>
+<a id="a6b17eeb01e313fb4074b598f669541ce" name="a6b17eeb01e313fb4074b598f669541ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b17eeb01e313fb4074b598f669541ce">&#9670;&#160;</a></span>addNewParam()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +191,12 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>value</em>, </span></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>label</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>defaultValue</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -215,19 +220,20 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>Unique identificator that will be also used as property label by Device Portal. </td></tr>
-    <tr><td class="paramname">value</td><td>Default parameter value. </td></tr>
+    <tr><td class="paramname">label</td><td>Parameter label. </td></tr>
+    <tr><td class="paramname">defaultValue</td><td>Default parameter value. </td></tr>
     <tr><td class="paramname">maxLength</td><td>Maximum length of the value. </td></tr>
     <tr><td class="paramname">type</td><td>Type of parameter, which tells the Device Portal which field type should be used. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="#af0c39ab3c54f26fd79d55b2c6ec86e92">addNewParamWithConfigDefault()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a197410e9beb0e96d1fb0c2551227ec75">addNewParamWithConfigDefault()</a>.</p>
 
 </div>
 </div>
-<a id="af0c39ab3c54f26fd79d55b2c6ec86e92" name="af0c39ab3c54f26fd79d55b2c6ec86e92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0c39ab3c54f26fd79d55b2c6ec86e92">&#9670;&#160;</a></span>addNewParamWithConfigDefault()</h2>
+<a id="a197410e9beb0e96d1fb0c2551227ec75" name="a197410e9beb0e96d1fb0c2551227ec75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a197410e9beb0e96d1fb0c2551227ec75">&#9670;&#160;</a></span>addNewParamWithConfigDefault()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,6 +250,11 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>label</em><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -268,7 +279,7 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   <table class="params">
     <tr><td class="paramname">config</td><td><a class="el" href="classksf_1_1ks_config.html" title="Implements low-level configuration file handling.">ksConfig</a> reference. </td></tr>
     <tr><td class="paramname">id</td><td>Unique identificator that will be also used as property label by Device Portal. </td></tr>
-    <tr><td class="paramname">value</td><td>Default parameter value. </td></tr>
+    <tr><td class="paramname">label</td><td>Parameter label. </td></tr>
     <tr><td class="paramname">maxLength</td><td>Maximum length of the value. </td></tr>
     <tr><td class="paramname">type</td><td>Type of parameter, which tells the Device Portal which field type should be used. <br  />
  </td></tr>
@@ -276,7 +287,7 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a6e72aedea03159b059f197ebf21a95ef">addNewParam()</a>, and <a class="el" href="classksf_1_1ks_config.html#a32af4b832d708c039351dea37fa7fcb3">ksf::ksConfig::getParam()</a>.</p>
+<p class="reference">References <a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam()</a>, and <a class="el" href="classksf_1_1ks_config.html#a32af4b832d708c039351dea37fa7fcb3">ksf::ksConfig::getParam()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ad41f00507bd0d2ec465cb4dd68884199">ksf::comps::ksMqttConfigProvider::readParams()</a>.</p>
 
