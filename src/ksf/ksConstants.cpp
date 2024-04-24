@@ -7,10 +7,13 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
+
+
 #if ESP32
 	#include <WiFi.h>
 	#include <esp_phy_init.h>
 	#include <nvs_flash.h>
+	#include <esp_task_wdt.h>
 #elif ESP8266
 	#include <ESP8266WiFi.h>
 #else			
@@ -38,11 +41,17 @@ namespace ksf
 	void initializeFramework()
 	{
 #ifdef ESP32
+		/* Setup watchdog. */
+		esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS, true);
+
 		/* Initialize filesystem. */
 		LittleFS.begin(true);
 #endif
 
 #if ESP8266
+		/* Setup watchdog. */
+		ESP.wdtEnable(KSF_WATCHDOG_TIMEOUT_SECS * 1000);
+
 		/* Initialize filesystem. */
 		LittleFS.begin();
 #endif

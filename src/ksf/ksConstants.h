@@ -47,6 +47,11 @@
 #define KSF_WIFI_RECONNECT_TIME_MS 5000UL
 #endif
 
+#ifndef KSF_WATCHDOG_TIMEOUT_SECS
+/*! Watchdog timeout in seconds. */
+#define KSF_WATCHDOG_TIMEOUT_SECS 10UL
+#endif
+
 /*! Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
