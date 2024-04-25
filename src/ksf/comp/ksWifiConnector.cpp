@@ -94,7 +94,7 @@ namespace ksf::comps
 	bool ksWifiConnector::loop(ksApplication* app)
 	{
 		if (wifiIpCheckTimer.triggered())
-			gotIpAddress = WiFi.localIP() != INADDR_NONE;
+			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
 
 		if (!isConnected())
 		{
@@ -104,7 +104,6 @@ namespace ksf::comps
 			if (wasConnected)
 			{
 				WiFi.disconnect(false, false);
-
 				wasConnected = false;
 				wifiDisconnectedInternal();
 			}
