@@ -178,7 +178,8 @@ How does it work under the hood?</h2>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
 Application rotator</h1>
 <p>The library implements one very useful utility named ksAppRotator. This object can wrap application instantiation logic into something like carousel or rotator.</p>
-<p>Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration. The app has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
+<p>Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration.</p>
+<p>Each application has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
 <p>This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
 <h1><a class="anchor" id="autotoc_md14"></a>
 Compiler flags</h1>
