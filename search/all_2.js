@@ -1,16 +1,10 @@
 var searchData=
 [
-  ['callbacks_0',['callbacks',['../classksf_1_1evt_1_1ks_event.html#a17a698a1e1f7be8ac6213e6e145850e5',1,'ksf::evt::ksEvent']]],
-  ['callbackuid_1',['callbackUID',['../classksf_1_1evt_1_1ks_event_handle.html#a275a07831b53b56d77b3b579cb6f7117',1,'ksf::evt::ksEventHandle']]],
-  ['certfingerprint_2',['certFingerprint',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a72c01e2f4d6d2115d5b11f7330f75971',1,'ksf::comps::ksMqttConnector']]],
-  ['compiler_20flags_3',['Compiler flags',['../index.html#autotoc_md9',1,'']]],
-  ['components_4',['components',['../classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660',1,'ksf::ksApplication']]],
-  ['components_5',['Components',['../index.html#autotoc_md5',1,'']]],
-  ['componentstate_6',['componentState',['../classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d',1,'ksf::ksComponent']]],
-  ['configparams_7',['configParams',['../classksf_1_1ks_config.html#a2e448b2e918a7738ab03622a8c89ae0f',1,'ksf::ksConfig']]],
-  ['configpath_8',['configPath',['../classksf_1_1ks_config.html#a3a57cb81bcf46a95a2973124c32cbf2c',1,'ksf::ksConfig']]],
-  ['configtimeout_9',['configTimeout',['../classksf_1_1comps_1_1ks_wifi_configurator.html#a22af6cd1c821587c9147383287fa4d13',1,'ksf::comps::ksWifiConfigurator']]],
-  ['connecttobroker_10',['connectToBroker',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ad3410bf2428ffe086fad10bbffb5384c',1,'ksf::comps::ksMqttConnector']]],
-  ['conneventhandle_11',['connEventHandle',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a9941dae7a03633582619f2bf6973f7e4',1,'ksf::comps::ksDevStatMqttReporter']]],
-  ['custom_20rtti_12',['Custom RTTI',['../index.html#autotoc_md10',1,'']]]
+  ['begin_0',['begin',['../classksf_1_1misc_1_1ks_w_s_server.html#a30264ac138648d3ee913519cec7c5920',1,'ksf::misc::ksWSServer']]],
+  ['blinkintervalms_1',['blinkIntervalMs',['../classksf_1_1comps_1_1ks_led.html#aad7cd66a8d631b1f1d94b61d76bbf372',1,'ksf::comps::ksLed']]],
+  ['blinkloops_2',['blinkLoops',['../classksf_1_1comps_1_1ks_led.html#a0a222a2588b3bc63ff1df4d671f99653',1,'ksf::comps::ksLed']]],
+  ['breakapp_3',['breakApp',['../classksf_1_1comps_1_1ks_device_portal.html#a573eb03602ce8a4352af1963ff80b748',1,'ksf::comps::ksDevicePortal']]],
+  ['broadcast_4',['broadcast',['../classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f',1,'ksf::evt::ksEvent']]],
+  ['broker_5',['broker',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ae97565fa36122cb841acbb418928da1a',1,'ksf::comps::ksMqttConnector']]],
+  ['building_20application_6',['Building application',['../index.html#autotoc_md11',1,'']]]
 ];

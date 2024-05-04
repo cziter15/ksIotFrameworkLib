@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['_7eksconfig_0',['~ksConfig',['../classksf_1_1ks_config.html#a304947df2a72b5297cbca0bba3c8136f',1,'ksf::ksConfig']]],
-  ['_7eksdeviceportal_1',['~ksDevicePortal',['../classksf_1_1comps_1_1ks_device_portal.html#a341b68e99384e4ae0a7038227bff92f6',1,'ksf::comps::ksDevicePortal']]],
-  ['_7ekseventhandle_2',['~ksEventHandle',['../classksf_1_1evt_1_1ks_event_handle.html#ad296ef8c5a77a0404666fc93123267ce',1,'ksf::evt::ksEventHandle']]],
-  ['_7eksled_3',['~ksLed',['../classksf_1_1comps_1_1ks_led.html#a1c87003b2282ae75929235a58f7ced0c',1,'ksf::comps::ksLed']]],
-  ['_7eksmqttconnector_4',['~ksMqttConnector',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a6a2c69fad3a041cf706ff66b88afb663',1,'ksf::comps::ksMqttConnector']]],
-  ['_7eksresetbutton_5',['~ksResetButton',['../classksf_1_1comps_1_1ks_reset_button.html#ab85ae4de074ad0cb1f5e44528c109ecd',1,'ksf::comps::ksResetButton']]],
-  ['_7ekswificonfigurator_6',['~ksWifiConfigurator',['../classksf_1_1comps_1_1ks_wifi_configurator.html#a98c0d0ea3e1f04d787b4acb6754ee995',1,'ksf::comps::ksWifiConfigurator']]],
-  ['_7ekswificonnector_7',['~ksWifiConnector',['../classksf_1_1comps_1_1ks_wifi_connector.html#ae4d6d1486214998fcb711c2e2f624d84',1,'ksf::comps::ksWifiConnector']]],
-  ['_7ekswsserver_8',['~ksWSServer',['../classksf_1_1misc_1_1ks_w_s_server.html#a2224ec4f425cd7938cd89880cb5ce771',1,'ksf::misc::ksWSServer']]]
+  ['wasconnected_0',['wasConnected',['../classksf_1_1comps_1_1ks_mqtt_connector.html#afc9123d68f055d4709f9f455cfb655f9',1,'ksf::comps::ksMqttConnector::wasConnected'],['../classksf_1_1comps_1_1ks_wifi_connector.html#a32228ab43c1d389d792f960e7e5b1aec',1,'ksf::comps::ksWifiConnector::wasConnected']]],
+  ['webserver_1',['webServer',['../classksf_1_1comps_1_1ks_device_portal.html#aed3161ec11cf98fc8afa61e0868596ad',1,'ksf::comps::ksDevicePortal']]],
+  ['websocket_2',['webSocket',['../classksf_1_1comps_1_1ks_device_portal.html#a70a982a1a01f3ae4011d6b78f2dcedbc',1,'ksf::comps::ksDevicePortal']]],
+  ['wificlientsp_3',['wifiClientSp',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a437a9bcc82d47c0bc27f25c155d35ff3',1,'ksf::comps::ksMqttConnector']]],
+  ['wificonnectedinternal_4',['wifiConnectedInternal',['../classksf_1_1comps_1_1ks_wifi_connector.html#ae2a0ac579cfc0b29ad0ade3de0b8cde4',1,'ksf::comps::ksWifiConnector']]],
+  ['wificonnwp_5',['wifiConnWp',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a00194e36edb73cbc7db830d42490fff4',1,'ksf::comps::ksMqttConnector']]],
+  ['wifidisconnectedinternal_6',['wifiDisconnectedInternal',['../classksf_1_1comps_1_1ks_wifi_connector.html#ad011586bdc807db81e5eb9b2766ed950',1,'ksf::comps::ksWifiConnector']]],
+  ['wifiipchecktimer_7',['wifiIpCheckTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a20835a8e41863f79bd140f905d908bae',1,'ksf::comps::ksWifiConnector']]],
+  ['wifireconnecttimer_8',['wifiReconnectTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a0564f0ed42827fbfc35bdf168b0490cb',1,'ksf::comps::ksWifiConnector']]],
+  ['wifitimeouttimer_9',['wifiTimeoutTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#aa4aefb3cbb2365f443d51fa8900930c9',1,'ksf::comps::ksWifiConnector']]],
+  ['work_20under_20the_20hood_10',['How does it work under the hood?',['../index.html#autotoc_md12',1,'']]],
+  ['wslistener_11',['wsListener',['../classksf_1_1misc_1_1ks_w_s_server.html#aa70db8c4e6820c660c1654807276b9c6',1,'ksf::misc::ksWSServer']]]
 ];
