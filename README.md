@@ -103,6 +103,13 @@ bool PelletInfo::init()
 }
 ```
 
+## Application rotator
+The library implements one very useful utility named ksAppRotator. This object can wrap application instantiation logic into something like carousel or rotator.
+
+Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration. The app has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.
+
+This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
+
 ## Compiler flags
 - Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
 
