@@ -23,6 +23,17 @@
 
 namespace ksf::comps
 {
+	inline void overrideDnsWithGoogleDns()
+	{
+		/* Define override DNS addresses. */
+		static const ip_addr primaryDns{LWIP_MAKEU32(8, 8, 8, 8)};
+		static const ip_addr secondaryDns{LWIP_MAKEU32(8, 8, 4, 4)};
+		
+		/* Set DNS servers. */
+		dns_setserver(0, &primaryDns);
+		dns_setserver(1, &secondaryDns);
+	}
+
 	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower) 
 		: savePower(savePower)
 	{
@@ -83,6 +94,7 @@ namespace ksf::comps
 
 	void ksWifiConnector::wifiConnectedInternal()
 	{
+		overrideDnsWithGoogleDns();
 		onConnected->broadcast();
 	}
 
