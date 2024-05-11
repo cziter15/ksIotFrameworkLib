@@ -10,15 +10,15 @@
   <img src="https://raw.githubusercontent.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg">
 </p>
 
-## 🌱 Motivation
+## Motivation 🌱
 
 - The goal of this project is to create a simple template or starting point to develop IoT applications using Espressif microcontrollers. 
 - I was frequently copying and modifying source code for different devices and this is an attempt to streamline this process. 
 
-## 📚 Doxygen
+## Doxygen 📚
 - Detailed documentation can be found on [here](https://cziter15.github.io/ksIotFrameworkLib).
 
-## ℹ️ Architecture
+## Architecture ℹ️
 ```mermaid
 flowchart TD
     AppState{AppState}
@@ -56,21 +56,21 @@ flowchart TD
 - Each component has init, postInit, and loop methods.
 - Components can be marked for removal, and they will be safely released in the next tick.
 
-## 📍 Utilities
+## Utilities 📍
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1b144cdf-e345-4865-8ae7-92f0eaf31992)
 
-## 📍 Components
+## Components 📍
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/c27aba37-4e54-49f5-9ad5-97439e7baf33)
 
-### ⚠️ Rules:
+### Rules ⚠️
 - Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
 - The **init** method is the best place to add dependent components, setup initial pin values etc.
 - The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**. This will handle cases when other components were added via init method.
 
-## 🌱 Building the application
+## Building the application 🌱
 To build an application, simply create a new class inherited from ksApplication and add your initial components inside the init method. See projects like **emon_fw** for reference.
 
-### 🔎 How does it work under the hood?
+### How does it work under the hood? 🔎
 - The application is created, followed by the invocation of its init() method. If false is returned from the init method, the subsequent execution of the loop will be skipped, resulting in no iteration over the components. The App Rotator will then try to run next apllication.
 - In case the init() method returns true, the application proceeds to execute its loop() function. This function traverses through the components, initializing each of them.
 - In the subsequent iteration, the application triggers the postInitialize() method for each component.
@@ -103,7 +103,7 @@ bool PelletInfo::init()
 }
 ```
 
-## 📍 Application rotator
+## Application rotator 📍
 The library implements one very useful utility named ksAppRotator. This object can wrap application instantiation logic into something like carousel or rotator.
 
 Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration. 
@@ -112,25 +112,25 @@ Each application has it's own loop method taking care of all underlying logic. I
 
 This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
 
-## 📍 Compiler flags
+## Compiler flags 📍
 - Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
 
-## 📍 Custom RTTI
+## Custom RTTI 📍
 - Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components. 
 - See ksConfigProvider.h for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
-## 🔥 Saving power
+## Saving the power 🔥
 - By default, this framework supports enables power saving for the modem.
 - Automatic modem sleep requires the DTIM to be set on the access point. 
 - The best value for was 3. It allows the ESP32 to go down from around 100mA to 20mA.
 
-## 💞️ Dependencies
+## Dependencies 💞️
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
 
-### 📍 Frameworks
+### Frameworks 📍
 - Arduino for ESP32 [ https://github.com/espressif/arduino-esp32 ]
 - Arduino for ESP8266 [ https://github.com/esp8266/Arduino ]
 
-### 📍 Libraries
+### Libraries 📍
 - PubSubClient [ https://github.com/knolleary/pubsubclient ]
 - arduinoWebSockets [ https://github.com/Links2004/arduinoWebSockets ]
