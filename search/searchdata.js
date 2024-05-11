@@ -1,6 +1,6 @@
 var indexSectionsWithContent =
 {
-  0: "1abcdefghiklmoprstuvw~",
+  0: "1abcdefghiklmoprstuvw~ℹ⚠🌱💞📍📚🔎🔥",
   1: "k",
   2: "abcfghiklmoprstuvw~",
   3: "abcdegilmoprstuw",

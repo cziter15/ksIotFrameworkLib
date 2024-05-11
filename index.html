@@ -79,18 +79,18 @@ $(function() {
 <p align="center"></p>
 <p><img src="https://raw.githubusercontent.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg" alt="" class="inline"/> </p>
 <h1><a class="anchor" id="autotoc_md5"></a>
-Motivation</h1>
+🌱 Motivation</h1>
 <ul>
 <li>The goal of this project is to create a simple template or starting point to develop IoT applications using Espressif microcontrollers.</li>
 <li>I was frequently copying and modifying source code for different devices and this is an attempt to streamline this process.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md6"></a>
-Doxygen</h1>
+📚 Doxygen</h1>
 <ul>
 <li>Detailed documentation can be found on <a href="https://cziter15.github.io/ksIotFrameworkLib">here</a>.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md7"></a>
-Architecture</h1>
+ℹ️ Architecture</h1>
 <div class="fragment"><div class="line">flowchart TD</div>
 <div class="line">    AppState{AppState}</div>
 <div class="line">    AppState --&gt; |NotInitialized| Application::Init</div>
@@ -127,23 +127,23 @@ Architecture</h1>
 <li>Components can be marked for removal, and they will be safely released in the next tick.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md8"></a>
-Utilities</h1>
+📍 Utilities</h1>
 <p><img src="https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1b144cdf-e345-4865-8ae7-92f0eaf31992" alt="image" class="inline"/></p>
 <h1><a class="anchor" id="autotoc_md9"></a>
-Components</h1>
+📍 Components</h1>
 <p><img src="https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/c27aba37-4e54-49f5-9ad5-97439e7baf33" alt="image" class="inline"/></p>
 <h2><a class="anchor" id="autotoc_md10"></a>
-Rules:</h2>
+⚠️ Rules:</h2>
 <ul>
 <li>Components should be added in the app's <b>init</b> method, so they will be available for <b>postInit</b> methods. (you can add them later, in loop() but that's another case)</li>
 <li>The <b>init</b> method is the best place to add dependent components, setup initial pin values etc.</li>
 <li>The <b>postInit</b> method is the best place to obtain a weak pointer to another component by calling <b>findComponent</b>. This will handle cases when other components were added via init method.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md11"></a>
-Building application</h1>
+🌱 Building the application</h1>
 <p>To build an application, simply create a new class inherited from ksApplication and add your initial components inside the init method. See projects like <b>emon_fw</b> for reference.</p>
 <h2><a class="anchor" id="autotoc_md12"></a>
-How does it work under the hood?</h2>
+🔎 How does it work under the hood?</h2>
 <ul>
 <li>The application is created, followed by the invocation of its init() method. If false is returned from the init method, the subsequent execution of the loop will be skipped, resulting in no iteration over the components. The App Rotator will then try to run next apllication.</li>
 <li>In case the init() method returns true, the application proceeds to execute its loop() function. This function traverses through the components, initializing each of them.</li>
@@ -176,42 +176,42 @@ How does it work under the hood?</h2>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md13"></a>
-Application rotator</h1>
+📍 Application rotator</h1>
 <p>The library implements one very useful utility named ksAppRotator. This object can wrap application instantiation logic into something like carousel or rotator.</p>
 <p>Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration.</p>
 <p>Each application has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
 <p>This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
 <h1><a class="anchor" id="autotoc_md14"></a>
-Compiler flags</h1>
+📍 Compiler flags</h1>
 <ul>
 <li>Bare Arduino projects need to have <code>gnu++2a</code> enabled via <code>compiler.cpp.extra_flags=</code> option in the <code>board.txt</code> file.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md15"></a>
-Custom RTTI</h1>
+📍 Custom RTTI</h1>
 <ul>
 <li>Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components.</li>
 <li>See <a class="el" href="ks_config_provider_8h_source.html">ksConfigProvider.h</a> for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md16"></a>
-Saving power</h1>
+🔥 Saving power</h1>
 <ul>
 <li>By default, this framework supports enables power saving for the modem.</li>
 <li>Automatic modem sleep requires the DTIM to be set on the access point.</li>
 <li>The best value for was 3. It allows the ESP32 to go down from around 100mA to 20mA.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md17"></a>
-Dependencies</h1>
+💞️ Dependencies</h1>
 <ul>
 <li><b>It is highly recommended to use PlatformIO as it will automatically download dependencies!</b></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md18"></a>
-Frameworks</h2>
+📍 Frameworks</h2>
 <ul>
 <li>Arduino for ESP32 [ <a href="https://github.com/espressif/arduino-esp32">https://github.com/espressif/arduino-esp32</a> ]</li>
 <li>Arduino for ESP8266 [ <a href="https://github.com/esp8266/Arduino">https://github.com/esp8266/Arduino</a> ]</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md19"></a>
-Libraries</h2>
+📍 Libraries</h2>
 <ul>
 <li>PubSubClient [ <a href="https://github.com/knolleary/pubsubclient">https://github.com/knolleary/pubsubclient</a> ]</li>
 <li>arduinoWebSockets [ <a href="https://github.com/Links2004/arduinoWebSockets">https://github.com/Links2004/arduinoWebSockets</a> ] </li>
