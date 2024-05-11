@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['⚠️_20rules_3a_0',['⚠️ Rules:',['../index.html#autotoc_md10',1,'']]]
+  ['⚠️_0',['Rules ⚠️',['../index.html#autotoc_md10',1,'']]]
 ];

@@ -10,6 +10,6 @@ var searchData=
   ['wifiipchecktimer_7',['wifiIpCheckTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a20835a8e41863f79bd140f905d908bae',1,'ksf::comps::ksWifiConnector']]],
   ['wifireconnecttimer_8',['wifiReconnectTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a0564f0ed42827fbfc35bdf168b0490cb',1,'ksf::comps::ksWifiConnector']]],
   ['wifitimeouttimer_9',['wifiTimeoutTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#aa4aefb3cbb2365f443d51fa8900930c9',1,'ksf::comps::ksWifiConnector']]],
-  ['work_20under_20the_20hood_10',['🔎 How does it work under the hood?',['../index.html#autotoc_md12',1,'']]],
+  ['work_20under_20the_20hood_20🔎_10',['How does it work under the hood? 🔎',['../index.html#autotoc_md12',1,'']]],
   ['wslistener_11',['wsListener',['../classksf_1_1misc_1_1ks_w_s_server.html#aa70db8c4e6820c660c1654807276b9c6',1,'ksf::misc::ksWSServer']]]
 ];
