@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ℹ️_0',['Architecture ℹ️',['../index.html#autotoc_md7',1,'']]]
+  ['ℹ️_20architecture_0',['ℹ️ Architecture',['../index.html#autotoc_md7',1,'']]]
 ];

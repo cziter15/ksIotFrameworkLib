@@ -7,6 +7,6 @@ var searchData=
   ['handlenonwebsocketconnection_4',['handleNonWebsocketConnection',['../classksf_1_1misc_1_1ks_w_s_server.html#ad15ba719689c843931612f3c9d41111b',1,'ksf::misc::ksWSServer']]],
   ['handleperiodictasks_5',['handlePeriodicTasks',['../classksf_1_1comps_1_1ks_wifi_configurator.html#a76610b6e276236e08d93a8fa4378d36d',1,'ksf::comps::ksWifiConfigurator']]],
   ['hastimepassed_6',['hasTimePassed',['../classksf_1_1ks_simple_timer.html#a83285ce55d3a83397c2f72dd05d45dc6',1,'ksf::ksSimpleTimer']]],
-  ['hood_20🔎_7',['How does it work under the hood? 🔎',['../index.html#autotoc_md12',1,'']]],
-  ['how_20does_20it_20work_20under_20the_20hood_20🔎_8',['How does it work under the hood? 🔎',['../index.html#autotoc_md12',1,'']]]
+  ['hood_7',['🔎 How does it work under the hood?',['../index.html#autotoc_md12',1,'']]],
+  ['how_20does_20it_20work_20under_20the_20hood_8',['🔎 How does it work under the hood?',['../index.html#autotoc_md12',1,'']]]
 ];
