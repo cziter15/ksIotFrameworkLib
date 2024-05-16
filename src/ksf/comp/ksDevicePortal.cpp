@@ -34,22 +34,6 @@
 		uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() & 0xFF; }
 		uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipSize()/1024; }
 	#endif
-	const char* ESP_getFlashMode(void) 
-	{
-		switch (ESP.getFlashChipMode()) 
-		{
-			case FM_QIO: return PSTR("FM: QIO");
-			case FM_QOUT: return PSTR("FM: QOUT");
-			case FM_DIO: return PSTR("FM: DIO");
-			case FM_DOUT: return PSTR("FM: DOUT");
-			#if defined(ESP32)
-				case FM_FAST_READ: return PSTR("FM: FAST_READ");
-				case FM_SLOW_READ: return PSTR("FM: SLOW_READ");
-			#endif
-			case FM_UNKNOWN: return PSTR("FM: UNKNOWN");
-			default: return PSTR("FM: INVALID");
-		}
-	}
 #else
 	#error Platform not implemented.
 #endif
@@ -340,16 +324,11 @@ namespace ksf::comps
 		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
 		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
-		response += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"");
-		response += PSTR("VID: ");
+		response += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"Vendor ID: ");
 		response += ksf::to_string(ESP_getFlashVendor());
-		response += PSTR(", ");
+		response += PSTR(", size: ");
 		response += ksf::to_string(ESP_getFlashSizeKB());
-		response += PSTR(" KB, ");
-		response += ksf::to_string(ESP.getFlashChipSpeed()/1000000);
-		response += PSTR(" MHz, ");
-		response += ESP_getFlashMode();
-		response += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
+		response += PSTR(" KB \"},{\"name\":\"Hostname\",\"value\":\"");
 		response += WiFi.getHostname();
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
