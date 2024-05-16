@@ -44,7 +44,7 @@ namespace ksf::misc
 			return true;
 		}, headerkeys, sizeof(headerkeys)/sizeof(char*));
 
-		
+		/* WStype_TEXT raw message handler. */
 		onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 			if (type == WStype_TEXT && onWebsocketTextMessage) {
 				auto sv{std::string_view(reinterpret_cast<char*>(payload), length)};
