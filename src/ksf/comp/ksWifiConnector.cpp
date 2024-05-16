@@ -116,14 +116,14 @@ namespace ksf::comps
 
 			if (wasConnected)
 			{
-				WiFi.disconnect(false, false);
+				esp_wifi_disconnect();
 				wasConnected = false;
 				wifiDisconnectedInternal();
 			}
 
 			if (wifiReconnectTimer.hasTimePassed())
 			{
-				WiFi.begin();
+				esp_wifi_connect();
 				wifiReconnectTimer.restart();
 			}
 		}
