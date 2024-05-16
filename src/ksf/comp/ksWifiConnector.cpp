@@ -14,6 +14,8 @@
 #elif ESP8266
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
+	#define esp_wifi_disconnect() wifi_station_disconnect()
+	#define esp_wifi_connect() wifi_station_connect()
 #else 			
 	#error Platform not implemented.
 #endif
