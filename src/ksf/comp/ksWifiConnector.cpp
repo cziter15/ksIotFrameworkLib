@@ -114,9 +114,6 @@ namespace ksf::comps
 
 	bool ksWifiConnector::loop(ksApplication* app)
 	{
-		if (wifiIpCheckTimer.triggered())
-			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
-
 		if (!isConnected())
 		{
 			if (wifiTimeoutTimer.triggered())
@@ -152,7 +149,7 @@ namespace ksf::comps
 
 	bool ksWifiConnector::isConnected() const
 	{
-		return WiFi.isConnected() && gotIpAddress;
+		return WiFi.isConnected();
 	}
 
 	ksWifiConnector::~ksWifiConnector()
