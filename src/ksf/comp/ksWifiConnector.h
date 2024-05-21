@@ -33,8 +33,6 @@ namespace ksf::comps
 		protected:
 			ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				//!< Wifi timer - long timeout in case of issues.
 			ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		//!< Wifi timer - reconnection timeout.
-			ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						//!< Wifi timer - IP check interval.
-
 			bool wasConnected : 1 {false};										//!< True if connected in previous loop.								//!< True if IP address is set.
 			bool savePower : 1 {true};											//!< True to save power.
 
