@@ -5,8 +5,7 @@ var searchData=
   ['websocket_2',['webSocket',['../classksf_1_1comps_1_1ks_device_portal.html#a70a982a1a01f3ae4011d6b78f2dcedbc',1,'ksf::comps::ksDevicePortal']]],
   ['wificlientsp_3',['wifiClientSp',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a437a9bcc82d47c0bc27f25c155d35ff3',1,'ksf::comps::ksMqttConnector']]],
   ['wificonnwp_4',['wifiConnWp',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a00194e36edb73cbc7db830d42490fff4',1,'ksf::comps::ksMqttConnector']]],
-  ['wifiipchecktimer_5',['wifiIpCheckTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a20835a8e41863f79bd140f905d908bae',1,'ksf::comps::ksWifiConnector']]],
-  ['wifireconnecttimer_6',['wifiReconnectTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a0564f0ed42827fbfc35bdf168b0490cb',1,'ksf::comps::ksWifiConnector']]],
-  ['wifitimeouttimer_7',['wifiTimeoutTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#aa4aefb3cbb2365f443d51fa8900930c9',1,'ksf::comps::ksWifiConnector']]],
-  ['wslistener_8',['wsListener',['../classksf_1_1misc_1_1ks_w_s_server.html#aa70db8c4e6820c660c1654807276b9c6',1,'ksf::misc::ksWSServer']]]
+  ['wifireconnecttimer_5',['wifiReconnectTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a0564f0ed42827fbfc35bdf168b0490cb',1,'ksf::comps::ksWifiConnector']]],
+  ['wifitimeouttimer_6',['wifiTimeoutTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#aa4aefb3cbb2365f443d51fa8900930c9',1,'ksf::comps::ksWifiConnector']]],
+  ['wslistener_7',['wsListener',['../classksf_1_1misc_1_1ks_w_s_server.html#aa70db8c4e6820c660c1654807276b9c6',1,'ksf::misc::ksWSServer']]]
 ];
