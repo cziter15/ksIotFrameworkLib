@@ -164,7 +164,7 @@ namespace ksf
 
 				/*!
 					@brief Publishes a message to the MQTT topic.
-					@param topic Target message`s topic name.
+					@param topic Target topic name.
 					@param payload Payload to be transmitted.
 					@param retain True if this publish should be retained, otherwise false.
 					@param skipDevicePrefix True if device prefix shouldn't be inserted to the topic, false otherwise.
