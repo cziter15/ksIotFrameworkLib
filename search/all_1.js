@@ -4,7 +4,7 @@ var searchData=
   ['addnewparam_1',['addNewParam',['../classksf_1_1comps_1_1ks_config_provider.html#a6b17eeb01e313fb4074b598f669541ce',1,'ksf::comps::ksConfigProvider']]],
   ['addnewparamwithconfigdefault_2',['addNewParamWithConfigDefault',['../classksf_1_1comps_1_1ks_config_provider.html#a197410e9beb0e96d1fb0c2551227ec75',1,'ksf::comps::ksConfigProvider']]],
   ['app_3',['app',['../classksf_1_1comps_1_1ks_device_portal.html#a0ed6c88eac9a0254d732d74566ca12b1',1,'ksf::comps::ksDevicePortal::app'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#a88bfef0ffa77358a7b26ed066bd5fe29',1,'ksf::comps::ksWifiConfigurator::app']]],
-  ['application_4',['🌱 Building the application',['../index.html#autotoc_md11',1,'']]],
+  ['application_4',['application',['../index.html#autotoc_md11',1,'🌱 Building the application'],['../md_tutorials_2readme.html#autotoc_md22',1,'Creating your first application']]],
   ['application_20placeholder_201_5',['Application Placeholder 1',['../md_examples_2readme.html#autotoc_md1',1,'']]],
   ['application_20rotator_6',['🔁 Application rotator',['../index.html#autotoc_md13',1,'']]],
   ['architecture_7',['ℹ️ Architecture',['../index.html#autotoc_md7',1,'']]],
