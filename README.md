@@ -7,7 +7,7 @@
 [![Commit activity](https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/commits/master)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/cziter15/ksIotFrameworkLib/master/doc/header.jpg">
+ ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054)
 </p>
 
 ## 🌱 Motivation
