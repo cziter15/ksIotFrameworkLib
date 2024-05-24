@@ -50,7 +50,7 @@ class MyApplication : public ksf::ksApplication
     }
     bool loop() override 
     {
-    return true;
+	return true;
     }
 };
 
