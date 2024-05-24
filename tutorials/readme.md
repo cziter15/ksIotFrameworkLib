@@ -23,19 +23,21 @@ Before using ksIotFrameworkLib, ensure you are familiar with PlatformIO and have
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/494565fa-4753-446c-a18e-c903626637a3)
 
-4. Open the `platformio.ini` file:![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/15565b44-8f44-4f7d-b63a-041573234e1f)
+4. Open the `platformio.ini` file:
 
-5. Add the following code and save the file:
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/15565b44-8f44-4f7d-b63a-041573234e1f)
+
+6. Add the following code and save the file:
 ```ini
 # Define library dependencies.
 lib_deps = 
 	ksIotFrameworkLib=https://github.com/cziter15/ksIotFrameworkLib
 ```
-6. Platformio will start downloading the dependencies
+6. Platformio will download required dependencies:
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/00ba25ba-7143-4986-ad29-f9adf2b5176c)
 
-7. Now open `main.cpp` file and replace the code with the following listing and save the file.
+8. Now open `main.cpp` file and replace the code with the following listing and save the file.
 ```cpp
 #include <ksIotFrameworkLib.h>
 
@@ -62,4 +64,4 @@ KSF_IMPLEMENT_APP_ROTATOR
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/afac0511-cf68-4007-ba89-b2902cabca6c)
 
-9. Now all that's left to do is implement the components and logic of your device. 
+10. Now all that's left to do is implement the components and logic of your device. 
