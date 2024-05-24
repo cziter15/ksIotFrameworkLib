@@ -10,7 +10,7 @@ Before using ksIotFrameworkLib, ensure you are familiar with PlatformIO and have
 - Search for the official `platformio ide` extension.
 - Install PlatformIO IDE extension.
 
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/5f67669d-1f18-4be6-a251-c7b1498387c5)
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/18dfb3a2-866c-4308-a197-5a90bbb13b90)
 
 ## Opening existing projects
 - If properly configured, the project should contain a `platformio.ini` file in its main directory.
@@ -25,7 +25,7 @@ Before using ksIotFrameworkLib, ensure you are familiar with PlatformIO and have
 
 3. Open the `platformio.ini` file:
 
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/15565b44-8f44-4f7d-b63a-041573234e1f)
+![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1d882165-c64f-40a6-addb-36141837c5dc)
 
 4. Add the following code and save the file:
 ```ini
