@@ -13,5 +13,6 @@ var searchData=
   ['onupdateend_10',['onUpdateEnd',['../classksf_1_1comps_1_1ks_device_portal.html#a7dc2e53045a02c604627f8101baa68e2',1,'ksf::comps::ksDevicePortal']]],
   ['onupdatestart_11',['onUpdateStart',['../classksf_1_1comps_1_1ks_device_portal.html#a94f2d902c9447d79a165cdb0ed7417ab',1,'ksf::comps::ksDevicePortal']]],
   ['onwebsockettextmessage_12',['onWebsocketTextMessage',['../classksf_1_1misc_1_1ks_w_s_server.html#a507b6d18fbe0c211bec2bb593173d885',1,'ksf::misc::ksWSServer::onWebsocketTextMessage'],['../classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7',1,'ksf::comps::ksDevicePortal::onWebsocketTextMessage()']]],
-  ['operator_20bool_13',['operator bool',['../classksf_1_1ks_config.html#af05e375f48e5ce57902a587393a95134',1,'ksf::ksConfig']]]
+  ['opening_20existing_20projects_13',['Opening existing projects',['../md_tutorials_2readme.html#autotoc_md22',1,'']]],
+  ['operator_20bool_14',['operator bool',['../classksf_1_1ks_config.html#af05e375f48e5ce57902a587393a95134',1,'ksf::ksConfig']]]
 ];

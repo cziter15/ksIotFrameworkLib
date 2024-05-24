@@ -12,6 +12,6 @@ var searchData=
   ['configtimeout_9',['configTimeout',['../classksf_1_1comps_1_1ks_wifi_configurator.html#a22af6cd1c821587c9147383287fa4d13',1,'ksf::comps::ksWifiConfigurator']]],
   ['connecttobroker_10',['connectToBroker',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ad3410bf2428ffe086fad10bbffb5384c',1,'ksf::comps::ksMqttConnector']]],
   ['conneventhandle_11',['connEventHandle',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a9941dae7a03633582619f2bf6973f7e4',1,'ksf::comps::ksDevStatMqttReporter']]],
-  ['creating_20your_20first_20application_12',['Creating your first application',['../md_tutorials_2readme.html#autotoc_md22',1,'']]],
+  ['creating_20your_20first_20application_12',['Creating your first application',['../md_tutorials_2readme.html#autotoc_md23',1,'']]],
   ['custom_20rtti_13',['#️⃣ Custom RTTI',['../index.html#autotoc_md15',1,'']]]
 ];
