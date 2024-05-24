@@ -1,5 +1,7 @@
 # Tutorials
-Before using ksIotFrameworkLib, ensure you are familiar with PlatformIO and have the correct IDE setup.
+In this directory, you will find step-by-step tutorials that guide you through building various firmware applications.
+
+**Before you start, read this page to ensure you are familiar with PlatformIO and have the correct IDE setup.**
 
 ## IDE Preparation
 
