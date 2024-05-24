@@ -23,18 +23,18 @@ Before using ksIotFrameworkLib, ensure you are familiar with PlatformIO and have
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/494565fa-4753-446c-a18e-c903626637a3)
 
-4. Open the `platformio.ini` file:
+3. Open the `platformio.ini` file:
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/15565b44-8f44-4f7d-b63a-041573234e1f)
 
-6. Add the following code and save the file:
+4. Add the following code and save the file:
 ```ini
 # Define library dependencies.
 lib_deps = 
 	ksIotFrameworkLib=https://github.com/cziter15/ksIotFrameworkLib
 ```
-6. Platformio will download required dependencies. Please be patient as it may take some time.
-8. Now open `main.cpp` file and replace the code with the following listing and save the file.
+5. Platformio will download required dependencies. Please be patient as it may take some time.
+6. Now open `main.cpp` file and replace the code with the following listing and save the file.
 ```cpp
 #include <ksIotFrameworkLib.h>
 
@@ -57,8 +57,8 @@ KSF_IMPLEMENT_APP_ROTATOR
 )
 ```
 
-8. Now you are able to build the application stub.
+7. Now you are able to build the application stub.
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/afac0511-cf68-4007-ba89-b2902cabca6c)
 
-10. Now all that's left to do is implement the components and logic of your device. 
+8. Now all that's left to do is implement the components and logic of your device. 
