@@ -33,10 +33,7 @@ Before using ksIotFrameworkLib, ensure you are familiar with PlatformIO and have
 lib_deps = 
 	ksIotFrameworkLib=https://github.com/cziter15/ksIotFrameworkLib
 ```
-6. Platformio will download required dependencies:
-
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/00ba25ba-7143-4986-ad29-f9adf2b5176c)
-
+6. Platformio will download required dependencies. Please be patient as it may take some time.
 8. Now open `main.cpp` file and replace the code with the following listing and save the file.
 ```cpp
 #include <ksIotFrameworkLib.h>
