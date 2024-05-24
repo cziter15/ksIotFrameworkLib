@@ -45,7 +45,7 @@ class MyApplication : public ksf::ksApplication
   public:
     bool init() override 
     {
-      return true;
+	return true;
     }
     bool loop() override 
     {
