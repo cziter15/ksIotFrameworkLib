@@ -5,6 +5,6 @@ using namespace apps;
 
 KSF_IMPLEMENT_APP_ROTATOR
 (
-	ConfigApp,
-    DeviceFunctionsApp
+	DeviceFunctionsApp,
+	ConfigApp
 )
