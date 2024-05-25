@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔅_20rules_3a_0',['🔅 Rules:',['../index.html#autotoc_md10',1,'']]]
+  ['🔎_20how_20does_20it_20work_20under_20the_20hood_0',['🔎 How does it work under the hood?',['../index.html#autotoc_md11',1,'']]]
 ];

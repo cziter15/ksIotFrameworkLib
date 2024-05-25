@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔎_20how_20does_20it_20work_20under_20the_20hood_0',['🔎 How does it work under the hood?',['../index.html#autotoc_md12',1,'']]]
+  ['🔡_20frameworks_0',['🔡 Frameworks',['../index.html#autotoc_md17',1,'']]],
+  ['🔡_20libraries_1',['🔡 Libraries',['../index.html#autotoc_md18',1,'']]]
 ];
