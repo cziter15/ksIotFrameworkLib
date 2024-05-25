@@ -25,8 +25,8 @@ namespace apps
 		}
 
 		/* Start LED blinking on finished init. */
-		if (auto statusLed_sp{wifiLedWp.lock()})
-			statusLed_sp->setBlinking(500);
+		if (auto wifiLedSp{wifiLedWp.lock()})
+			wifiLedSp->setBlinking(500);
 
 		/* Application finished initialization, return true as it succedeed. */
 		return true;
