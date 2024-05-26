@@ -39,4 +39,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: basoc-comfig-${{ github.run_id }}
-        path: /.pio/build/esp8266dev/firmware.bin
+        path: .pio/build/esp8266dev/firmware.bin
