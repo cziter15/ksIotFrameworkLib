@@ -35,3 +35,8 @@ jobs:
         pio upgrade
         cd basic-config
         pio run
+    - name: Deploy firmware artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: basoc-comfig-${{ github.run_id }}
+        path: firmware/.pio/build/esp8266dev/firmware.bin
