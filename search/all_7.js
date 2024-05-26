@@ -8,6 +8,5 @@ var searchData=
   ['handleperiodictasks_5',['handlePeriodicTasks',['../classksf_1_1comps_1_1ks_wifi_configurator.html#a76610b6e276236e08d93a8fa4378d36d',1,'ksf::comps::ksWifiConfigurator']]],
   ['hastimepassed_6',['hasTimePassed',['../classksf_1_1ks_simple_timer.html#a83285ce55d3a83397c2f72dd05d45dc6',1,'ksf::ksSimpleTimer']]],
   ['hood_7',['🔎 How does it work under the hood?',['../index.html#autotoc_md10',1,'']]],
-  ['how_20does_20it_20work_20under_20the_20hood_8',['🔎 How does it work under the hood?',['../index.html#autotoc_md10',1,'']]],
-  ['href_20basic_20config_20basic_20config_20a_9',['&lt;a href=&quot;/basic-config&quot; &gt;basic-config&lt;/a&gt;',['../md_examples_2readme.html#autotoc_md1',1,'']]]
+  ['how_20does_20it_20work_20under_20the_20hood_8',['🔎 How does it work under the hood?',['../index.html#autotoc_md10',1,'']]]
 ];

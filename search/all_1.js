@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['basic_20config_20a_0',['&lt;a href=&quot;/basic-config&quot; &gt;basic-config&lt;/a&gt;',['../md_examples_2readme.html#autotoc_md1',1,'']]],
-  ['basic_20config_20basic_20config_20a_1',['&lt;a href=&quot;/basic-config&quot; &gt;basic-config&lt;/a&gt;',['../md_examples_2readme.html#autotoc_md1',1,'']]],
+  ['basic_20config_0',['[basic-config](basic-config)',['../md_examples_2readme.html#autotoc_md1',1,'']]],
+  ['basic_20config_20basic_20config_1',['[basic-config](basic-config)',['../md_examples_2readme.html#autotoc_md1',1,'']]],
   ['begin_2',['begin',['../classksf_1_1misc_1_1ks_w_s_server.html#a30264ac138648d3ee913519cec7c5920',1,'ksf::misc::ksWSServer']]],
   ['blinkintervalms_3',['blinkIntervalMs',['../classksf_1_1comps_1_1ks_led.html#aad7cd66a8d631b1f1d94b61d76bbf372',1,'ksf::comps::ksLed']]],
   ['blinkloops_4',['blinkLoops',['../classksf_1_1comps_1_1ks_led.html#a0a222a2588b3bc63ff1df4d671f99653',1,'ksf::comps::ksLed']]],
