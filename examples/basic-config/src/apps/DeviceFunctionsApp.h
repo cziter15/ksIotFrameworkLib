@@ -8,7 +8,7 @@ namespace apps
 	{
 		protected:
 
-			std::weak_ptr<ksf::comps::ksLed> wifiLedWp;										// Weeak pointer to WiFi status LED component.
+			std::weak_ptr<ksf::comps::ksLed> connectionStatusLedWp;							// Weeak pointer to the status LED component.
 			std::weak_ptr<ksf::comps::ksMqttConnector> mqttConnWp;							// Weeak pointer to MQTT component.
 
 			std::unique_ptr<ksf::evt::ksEventHandle> connEventHandleSp, disEventHandleSp;	// Handles to MQTT events.
