@@ -2,7 +2,7 @@ var searchData=
 [
   ['saveparams_0',['saveParams',['../classksf_1_1comps_1_1ks_config_provider.html#a137995e9f92a86526a6feec85d7721b5',1,'ksf::comps::ksConfigProvider::saveParams()'],['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#a4d316f6e72e43ee5d121b48d2aee50fc',1,'ksf::comps::ksMqttConfigProvider::saveParams()']]],
   ['savepower_1',['savePower',['../classksf_1_1comps_1_1ks_wifi_connector.html#ad712e221c2bcc55d500b0365075cfee2',1,'ksf::comps::ksWifiConnector']]],
-  ['saving_20power_2',['🔥 Saving power',['../index.html#autotoc_md15',1,'']]],
+  ['saving_20power_2',['🔥 Saving power',['../index.html#autotoc_md14',1,'']]],
   ['scannetworktimestamp_3',['scanNetworkTimestamp',['../classksf_1_1comps_1_1ks_device_portal.html#a4fafe81b3100c79214a84bec4b093556',1,'ksf::comps::ksDevicePortal']]],
   ['sendconnectionstatus_4',['sendConnectionStatus',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a95b20ca302d48003c755183b21d65215',1,'ksf::comps::ksMqttConnector']]],
   ['setblinking_5',['setBlinking',['../classksf_1_1comps_1_1ks_led.html#ac4b5388865229bfb8b841df7b690900a',1,'ksf::comps::ksLed']]],
