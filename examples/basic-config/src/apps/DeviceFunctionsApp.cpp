@@ -15,18 +15,17 @@ namespace apps
 		mqttConnWp = addComponent<ksf::comps::ksMqttConnector>();
 
 		/* Create LED components. */
-		wifiLedWp = addComponent<ksf::comps::ksLed>(CFG_STATUS_LED);
+		connectionStatusLedWp = addComponent<ksf::comps::ksLed>(CFG_STATUS_LED);
 
 		/* Bind to MQTT callbacks. */
-		if (auto mqttConnSp{mqttConnWp.lock()})
+		if (auto connectionStatusLedSp{connectionStatusLedWp.lock()})
 		{
 			mqttConnSp->onConnected->registerEvent(connEventHandleSp, std::bind(&DeviceFunctionsApp::onMqttConnected, this));
 			mqttConnSp->onDisconnected->registerEvent(disEventHandleSp, std::bind(&DeviceFunctionsApp::onMqttDisconnected, this));
-		}
 
-		/* Start LED blinking on finished init. */
-		if (auto wifiLedSp{wifiLedWp.lock()})
+			/* Start LED blinking on finished init. */
 			wifiLedSp->setBlinking(500);
+		}
 
 		/* Application finished initialization, return true as it succedeed. */
 		return true;
@@ -34,22 +33,18 @@ namespace apps
 
 	void DeviceFunctionsApp::onMqttDisconnected()
 	{
-		if (auto wifiLedSp{wifiLedWp.lock()})
-			wifiLedSp->setBlinking(500);
+		if (auto connectionStatusLedSp{connectionStatusLedWp.lock()})
+			connectionStatusLedSp->setBlinking(500);
 	}
 
 	void DeviceFunctionsApp::onMqttConnected()
 	{
-		if (auto wifiLedSp{wifiLedWp.lock()})
-			wifiLedSp->setBlinking(0);
+		if (auto connectionStatusLedSp{connectionStatusLedWp.lock()})
+			connectionStatusLedSp->setBlinking(0);
 	}
 
 	bool DeviceFunctionsApp::loop()
 	{
-		/*
-			Return to superclass application loop.
-			It handles all our components and whole app logic.
-		*/
 		return ksApplication::loop();
 	}
 }
