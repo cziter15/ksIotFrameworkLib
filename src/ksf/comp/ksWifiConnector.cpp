@@ -114,6 +114,15 @@ namespace ksf::comps
 
 	bool ksWifiConnector::loop(ksApplication* app)
 	{
+		/*
+			It's good to have manual timer for checking if IP address is set. 
+			Sometimes the connection status is not updated as fast as it should.
+			It occurred for me on ESP32S3 when using "FunBox" as a router. Then after disabling WiFi and
+			re-enabling it, the device was not able to reconnect to the router.
+		*/
+		if (wifiIpCheckTimer.triggered())
+			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
+
 		if (!isConnected())
 		{
 			if (wifiTimeoutTimer.triggered())
@@ -149,7 +158,7 @@ namespace ksf::comps
 
 	bool ksWifiConnector::isConnected() const
 	{
-		return WiFi.isConnected();
+		return WiFi.isConnected() && gotIpAddress;
 	}
 
 	ksWifiConnector::~ksWifiConnector()
