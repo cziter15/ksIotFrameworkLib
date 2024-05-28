@@ -19,6 +19,10 @@
 ## 📚 Doxygen
 - Detailed documentation can be found on [here](https://cziter15.github.io/ksIotFrameworkLib).
 
+## 📚 Examples
+- Soome people prefer to learn by example. In this, open the [examples directory](examples).
+
+
 ## ℹ️ Architecture
 ```mermaid
 flowchart TD
