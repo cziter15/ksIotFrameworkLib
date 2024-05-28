@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ide_20preparation_0',['IDE Preparation',['../md_tutorials_2readme.html#autotoc_md19',1,'']]],
+  ['ide_20preparation_0',['IDE Preparation',['../md_tutorials_2readme.html#autotoc_md20',1,'']]],
   ['init_1',['init',['../classapps_1_1_config_app.html#ab4fc3e7ce12d6b110fd8ebd2e652dd50',1,'apps::ConfigApp::init()'],['../classapps_1_1_device_functions_app.html#a8e546282c365fec45f1ca92f12a5c287',1,'apps::DeviceFunctionsApp::init()'],['../classksf_1_1comps_1_1ks_device_portal.html#a2b75ab8090a6ac95008c3f6f417d821e',1,'ksf::comps::ksDevicePortal::init()'],['../classksf_1_1comps_1_1ks_led.html#a54708ddd80553023003ce7bba9f7430e',1,'ksf::comps::ksLed::init()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#a5218003f79bceb2207178361fc124aeb',1,'ksf::comps::ksMqttConnector::init()'],['../classksf_1_1comps_1_1ks_reset_button.html#aff554ea730fa9b9e830c4abb2d44d17f',1,'ksf::comps::ksResetButton::init()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#aaf10ed3c6fa2336fc4d5b7e71bb89195',1,'ksf::comps::ksWifiConfigurator::init()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#a893fbb2fdb3c2b6a126e478ff92e325c',1,'ksf::comps::ksWifiConnector::init()'],['../classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce',1,'ksf::ksApplication::init()'],['../classksf_1_1ks_component.html#a684f870e77ac3795b3cf789a8a81cdde',1,'ksf::ksComponent::init()']]],
   ['inrequest_5fneedauthentication_2',['inRequest_NeedAuthentication',['../classksf_1_1comps_1_1ks_device_portal.html#aadf8b151247f2364ac2da012acb51738',1,'ksf::comps::ksDevicePortal']]],
   ['intervalms_3',['intervalMs',['../classksf_1_1ks_simple_timer.html#a0e71a98ffe9b0bef207203f950da8e80',1,'ksf::ksSimpleTimer']]],
@@ -10,5 +10,5 @@ var searchData=
   ['isconnected_7',['isConnected',['../classksf_1_1comps_1_1ks_mqtt_connector.html#aa273e290cb18e2ea76db22a7c059b48e',1,'ksf::comps::ksMqttConnector::isConnected()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#a1dbeb307a217a5c267496f46c00d63c9',1,'ksf::comps::ksWifiConnector::isConnected()']]],
   ['isdirty_8',['isDirty',['../classksf_1_1ks_config.html#aea9a5bc2306e3582498f027b210af4eb',1,'ksf::ksConfig']]],
   ['isenabled_9',['isEnabled',['../classksf_1_1comps_1_1ks_led.html#ae9830a8a0dc7f41ebe2c1ded0a95a28a',1,'ksf::comps::ksLed']]],
-  ['it_20work_20under_20the_20hood_10',['🔎 How does it work under the hood?',['../index.html#autotoc_md10',1,'']]]
+  ['it_20work_20under_20the_20hood_10',['🔎 How does it work under the hood?',['../index.html#autotoc_md11',1,'']]]
 ];
