@@ -51,6 +51,12 @@ namespace ksf::comps
 
 		public:
 			/*!
+				@brief Called when Dev Stat Reporter timer is triggered. Users can bind to this event to add their own stats.
+				@param param_1 Shared pointer to the MQTT connector.
+			*/
+			DECLARE_KS_EVENT(onReportCustomStats, std::shared_ptr<ksMqttConnector>&)
+
+			/*!
 				@brief Constructs device statistics reporter component.
 				@param intervalInSeconds Interval in seconds between each report.
 			*/

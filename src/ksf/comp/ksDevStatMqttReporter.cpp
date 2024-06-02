@@ -51,6 +51,8 @@ namespace ksf::comps
 		mqttConnSp->publish(PSTR("dstat/uptimeSec"), ksf::to_string(millis64()/1000));
 		mqttConnSp->publish(PSTR("dstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
 		mqttConnSp->publish(PSTR("dstat/reconnCnt"), ksf::to_string(mqttConnSp->getReconnectCounter()));
+
+		onReportCustomStats->broadcast(mqttConnSp);
 	}
 	
 	bool ksDevStatMqttReporter::loop(ksApplication* app)
