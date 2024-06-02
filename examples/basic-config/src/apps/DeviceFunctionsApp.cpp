@@ -20,8 +20,8 @@ namespace apps
 		/* Bind to MQTT callbacks. */
 		if (auto connectionStatusLedSp{connectionStatusLedWp.lock()})
 		{
-			mqttConnSp->onConnected->registerEvent(connEventHandleSp, std::bind(&DeviceFunctionsApp::onMqttConnected, this));
-			mqttConnSp->onDisconnected->registerEvent(disEventHandleSp, std::bind(&DeviceFunctionsApp::onMqttDisconnected, this));
+			mqttConnSp->onConnected->registerEvent(connEventHandle, std::bind(&DeviceFunctionsApp::onMqttConnected, this));
+			mqttConnSp->onDisconnected->registerEvent(disEventHandle, std::bind(&DeviceFunctionsApp::onMqttDisconnected, this));
 
 			/* Start LED blinking on finished init. */
 			wifiLedSp->setBlinking(500);
