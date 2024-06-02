@@ -91,6 +91,7 @@ $(function(){ initResizable(false); });
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter-members.html">List of all members</a>  </div>
@@ -155,6 +156,12 @@ static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getCla
 <tr class="memitem:a1259b871ed5c2cd8cc06605be884700c inherit pub_static_methods_classksf_1_1ks_component" id="r_a1259b871ed5c2cd8cc06605be884700c"><td class="memItemLeft" align="right" valign="top">
 static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
 <tr class="separator:a1259b871ed5c2cd8cc06605be884700c inherit pub_static_methods_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:af0e8a72ec0550794dd846ee7e72b5f90" id="r_af0e8a72ec0550794dd846ee7e72b5f90"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; std::shared_ptr&lt; <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html">ksMqttConnector</a> &gt; &amp; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0e8a72ec0550794dd846ee7e72b5f90">onReportCustomStats</a> {std::make_shared&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;std::shared_ptr&lt;<a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html">ksMqttConnector</a>&gt;&amp;&gt;&gt;()}</td></tr>
+<tr class="memdesc:af0e8a72ec0550794dd846ee7e72b5f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when Dev Stat Reporter timer is triggered. Users can bind to this event to add their own stats.  <br /></td></tr>
+<tr class="separator:af0e8a72ec0550794dd846ee7e72b5f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -387,6 +394,31 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb">ksf::ksComponent</a>.</p>
 
 <p class="reference">References <a class="el" href="#a9941dae7a03633582619f2bf6973f7e4">connEventHandle</a>, <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, <a class="el" href="#aaf36a1e5900bef0469f527f962174723">mqttConnWp</a>, <a class="el" href="#a50a8b87a541070e20616a0815ce881d8">onConnected()</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#aeb2e99942201a89db129abe571115db6">ksf::comps::ksMqttConnector::onConnected</a>, and <a class="el" href="classksf_1_1evt_1_1ks_event.html#a172f69d818c73df76abc833fdda016a7">ksf::evt::ksEvent&lt; Params &gt;::registerEvent()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="af0e8a72ec0550794dd846ee7e72b5f90" name="af0e8a72ec0550794dd846ee7e72b5f90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0e8a72ec0550794dd846ee7e72b5f90">&#9670;&#160;</a></span>onReportCustomStats</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;std::shared_ptr&lt;<a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html">ksMqttConnector</a>&gt;&amp;&gt; &gt; ksf::comps::ksDevStatMqttReporter::onReportCustomStats {std::make_shared&lt;<a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt;std::shared_ptr&lt;<a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html">ksMqttConnector</a>&gt;&amp;&gt;&gt;()}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Called when Dev Stat Reporter timer is triggered. Users can bind to this event to add their own stats. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">param_1</td><td>Shared pointer to the MQTT connector. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">Referenced by <a class="el" href="#a4c5d0897b01f93c21dace3130746bdc5">reportDevStats()</a>.</p>
 
 </div>
 </div>
