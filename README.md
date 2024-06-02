@@ -19,7 +19,7 @@
 ## 📚 Doxygen
 - Detailed documentation can be found on [here](https://cziter15.github.io/ksIotFrameworkLib).
 
-## 📚 Examples
+## 🔎 Examples
 - Soome people prefer to learn by example. In this, open the [examples directory](examples).
 
 
