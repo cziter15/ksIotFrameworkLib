@@ -24,7 +24,7 @@ namespace apps
 			mqttConnSp->onDisconnected->registerEvent(disEventHandle, std::bind(&DeviceFunctionsApp::onMqttDisconnected, this));
 
 			/* Start LED blinking on finished init. */
-			wifiLedSp->setBlinking(500);
+			connectionStatusLedSp->setBlinking(500);
 		}
 
 		/* Application finished initialization, return true as it succedeed. */
