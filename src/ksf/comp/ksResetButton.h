@@ -41,7 +41,7 @@ namespace ksf::comps
 				@param triggerState Pin state that triggers the reset logic (LOW or HIGH).
 				@param mode Pin mode (INPUT / INPUT_PULLUP etc).
 			*/
-			ksResetButton(uint8_t pin, uint8_t triggerState, uint8_t mode = INPUT);
+			ksResetButton(uint8_t pin, uint8_t triggerState, uint8_t mode);
 
 			/*!
 				@brief Initializes the reset button component.
