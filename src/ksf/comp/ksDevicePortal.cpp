@@ -544,8 +544,13 @@ namespace ksf::comps
 			return;
 
 		if (webSocket)
-			webServer->sendHeader(PSTR("Set-Cookie"), PSTR("WSA=") + String(webSocket->getRequiredAuthToken()));
-
+		{
+			String wsaCookie{PSTR("WSA=")};
+			wsaCookie += String(webSocket->getRequiredAuthToken());
+			wsaCookie += PSTR("; SameSite=None");
+			webServer->sendHeader(PSTR("Set-Cookie"), wsaCookie);
+		}
+	
 		const auto& fileMD5{FPSTR(DEVICE_FRONTEND_HTML_MD5)};
 		if (webServer->header(PROGMEM_IF_NONE_MATCH) == fileMD5)
 		{
