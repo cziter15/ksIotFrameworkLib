@@ -12,6 +12,7 @@
 namespace ksf::misc
 {
 	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
+	const char AUTH_ERR [] PROGMEM {"error|auth"};
 
 	ksWSServer::ksWSServer(uint16_t port)
 	{
@@ -91,6 +92,7 @@ namespace ksf::misc
 
 	void ksWSServer::handleNonWebsocketConnection(WSclient_t * client) 
 	{
+		sendTXT(client->num, AUTH_ERR, sizeof(AUTH_ERR));
 		clientDisconnect(client);
 	}
 }

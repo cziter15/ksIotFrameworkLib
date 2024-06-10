@@ -591,7 +591,11 @@ namespace ksf::comps
 	void ksDevicePortal::setupWsServer()
 	{
 		webSocket = std::make_unique<ksf::misc::ksWSServer>(81);
-		webSocket->setRequiredAuthToken(generateAuthToken(portalPassword));
+
+		std::string authTokenToHash(portalPassword);
+		authTokenToHash.append(DEVICE_FRONTEND_HTML_MD5);
+		webSocket->setRequiredAuthToken(generateAuthToken(authTokenToHash));
+
 		webSocket->setMessageHandler(std::bind(&ksDevicePortal::onWebsocketTextMessage, this, _1, _2));
 		webSocket->enableHeartbeat(2000, 5000, 2);
 		webSocket->begin();
