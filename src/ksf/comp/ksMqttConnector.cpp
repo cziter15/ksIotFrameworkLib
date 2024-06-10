@@ -198,11 +198,23 @@ namespace ksf::comps
 
 			/* If not connected, return. */
 			if (!wifiClientSp->connected())
+			{
+				#ifdef APP_LOG_ENABLED
+					app->log([&](std::string& out) {
+						out += PSTR("[MQTT] Failed to connect...");
+					});
+				#endif
 				return false;
+			}
 
 			/* Verify certificate fingerprint. */
 			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
 			{
+#ifdef APP_LOG_ENABLED
+				app->log([&](std::string& out) {
+					out += PSTR("[MQTT] Certificate verification failed...");
+				});
+#endif
 				wifiClientSp->stop();
 				return false;
 			}
