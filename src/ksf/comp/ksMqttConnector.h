@@ -59,6 +59,7 @@ namespace ksf
 				std::string password;											//!< Saved MQTT password.
 				std::string prefix;												//!< Saved MQTT prefix.
 				std::string broker;												//!< Saved MQTT broker.
+				uint16_t portNumber{1883};										//!< Saved MQTT port number.
 
 				std::unique_ptr<ksCertFingerprint> certFingerprint;				//!< Shared pointer to fingerprint validator.
 

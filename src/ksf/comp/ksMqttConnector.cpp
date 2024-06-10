@@ -111,16 +111,8 @@ namespace ksf::comps
 		#error Platform not implemented.
 #endif
 
-		if (uint16_t portNumber; ksf::from_chars(port, portNumber))
-		{
-			IPAddress serverIP;
-			if (serverIP.fromString(this->broker.c_str()))
-			{
-				mqttClientSp->setServer(serverIP, portNumber);
-				this->broker.clear();
-			}
-			else mqttClientSp->setServer(this->broker.c_str(), portNumber);
-		}	
+		/* Load MQTT port. */
+		ksf::from_chars(port, portNumber);
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
@@ -198,15 +190,25 @@ namespace ksf::comps
 				out += PSTR("[MQTT] Trying to connect to MQTT broker...");
 			});
 #endif
-			// TODO: Here we can use saved credentials instead of memory ones.
+			/* Handle connection manually. */
+			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
+				wifiClientSp->connect(serverIP, portNumber);
+			else 
+				wifiClientSp->connect(this->broker.c_str(), portNumber);
+
+			/* If not connected, return. */
+			if (!wifiClientSp->connected())
+				return false;
+
+			/* Verify certificate fingerprint. */
+			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
+			{
+				wifiClientSp->stop();
+				return false;
+			}
+
 			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
 			{
-				if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
-				{
-					mqttClientSp->disconnect();
-					return false;
-				}
-
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Connected successfully to ");
