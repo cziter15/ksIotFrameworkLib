@@ -12,7 +12,6 @@
 namespace ksf::misc
 {
 	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
-	const char AUTH_ERR [] PROGMEM {"error|auth"};
 
 	ksWSServer::ksWSServer(uint16_t port)
 	{
@@ -87,12 +86,32 @@ namespace ksf::misc
 
 	void ksWSServer::setRequiredAuthToken(uint64_t authToken) 
 	{ 
-		requriedAuthToken = authToken; 
+		requriedAuthToken = authToken; 	
 	}
 
 	void ksWSServer::handleNonWebsocketConnection(WSclient_t * client) 
 	{
-		sendTXT(client->num, AUTH_ERR, sizeof(AUTH_ERR));
-		clientDisconnect(client);
+		/* 
+			Needed to implement custom handler here. The string should be the same as in WebSockets library to 
+			avoid duplication inside final binary image (this will be optimized out by the linker).
+		 */
+		String handshake{WEBSOCKETS_STRING(
+			"HTTP/1.1 101 Switching Protocols\r\n"
+			"Upgrade: websocket\r\n"
+			"Connection: Upgrade\r\n"
+			"Sec-WebSocket-Version: 13\r\n"
+			"Sec-WebSocket-Accept: "
+		)};
+		
+		/* Add accept key. */
+		handshake += acceptKey(client->cKey);
+		handshake += WEBSOCKETS_STRING("\r\n\r\n");
+
+		/* Send handshake. */
+		write(client, (uint8_t *)handshake.c_str(), handshake.length());
+		headerDone(client);
+
+		/* Now disconnect with proper error code. Frontend should handle it and reload the page. */
+		WebSockets::clientDisconnect(client, 1008);
 	}
 }
