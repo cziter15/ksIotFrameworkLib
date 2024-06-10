@@ -199,11 +199,11 @@ namespace ksf::comps
 			/* If not connected, return. */
 			if (!wifiClientSp->connected())
 			{
-				#ifdef APP_LOG_ENABLED
-					app->log([&](std::string& out) {
-						out += PSTR("[MQTT] Failed to connect...");
-					});
-				#endif
+#ifdef APP_LOG_ENABLED
+				app->log([&](std::string& out) {
+					out += PSTR("[MQTT] Failed to connect...");
+				});
+#endif
 				return false;
 			}
 
