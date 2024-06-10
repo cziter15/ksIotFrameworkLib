@@ -553,7 +553,6 @@ namespace ksf::comps
 			return;
 		}
 
-		webServer->sendHeader(PSTR("Cache-Control"), PSTR("private"));
 		webServer->sendHeader(PSTR("Content-Encoding"), PSTR("gzip"));
 		webServer->sendHeader(PSTR("ETag"), fileMD5);
 		webServer->send_P(200, PROGMEM_TEXT_HTML, (const char*)DEVICE_FRONTEND_HTML, DEVICE_FRONTEND_HTML_SIZE);
