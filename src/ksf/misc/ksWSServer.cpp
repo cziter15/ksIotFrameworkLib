@@ -11,7 +11,8 @@
 
 namespace ksf::misc
 {
-	const char PROGMEM_COOKIE [] PROGMEM {"Cookie"};
+	/* Error code returned to the frontend on validation fail. Frontend should reload the page in this case. */
+	constexpr auto WEBSOCKET_VALIDATION_FAIL{1008};
 
 	ksWSServer::ksWSServer(uint16_t port)
 	{
@@ -25,17 +26,16 @@ namespace ksf::misc
 
 	void ksWSServer::begin() 
 	{
-		WebSocketsServerCore::begin();
-	
 		/* Setup headers we want to validate. */
-		const char* headerkeys[] 
-		{ 
-			PROGMEM_COOKIE
-		};
+		const char COOKIE_STR [] PROGMEM {"Cookie"};
+		const char* headerkeys[] { COOKIE_STR };
 
-		/* Validate cookie set by main index page. */
+		/* Begin with the core. */
+		WebSocketsServerCore::begin();
+
+		/* Set onValidateHttpHeader validator, which will validate WSA cookie. */
 		onValidateHttpHeader([this](String headerName, String headerValue) {
-			if (requriedAuthToken != 0 && headerName.equalsIgnoreCase(PROGMEM_COOKIE))
+			if (requriedAuthToken != 0 && headerName.equalsIgnoreCase(COOKIE_STR))
 			{
 				String WSACookie(FPSTR("WSA="));
 				WSACookie += String(requriedAuthToken);
@@ -44,7 +44,7 @@ namespace ksf::misc
 			return true;
 		}, headerkeys, sizeof(headerkeys)/sizeof(char*));
 
-		/* WStype_TEXT raw message handler. */
+		/* Setup WStype_TEXT message handler. */
 		onEvent([this](uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
 			if (type == WStype_TEXT && onWebsocketTextMessage) {
 				auto sv{std::string_view(reinterpret_cast<char*>(payload), length)};
@@ -58,19 +58,19 @@ namespace ksf::misc
 
 	void ksWSServer::loop() 
 	{
+		/* Exit if not running. */
 		if(!_runnning)
 			return;
 
 		/* Listen for new clients. */
 		while (wsListener->hasClient()) 
 		{
-			auto client{new WiFiClient(wsListener->accept())};
-			if (!client)
-				break;
-			
-			handleNewClient(client);
+			if (auto client{new WiFiClient(wsListener->accept())})
+				handleNewClient(client);
+			else break;
 		}
 
+		/* Execute core logic. */
 		WebSocketsServerCore::loop();
 	}
 
@@ -112,6 +112,6 @@ namespace ksf::misc
 		headerDone(client);
 
 		/* Now disconnect with proper error code. Frontend should handle it and reload the page. */
-		WebSockets::clientDisconnect(client, 1008);
+		WebSockets::clientDisconnect(client, WEBSOCKET_VALIDATION_FAIL);
 	}
 }
