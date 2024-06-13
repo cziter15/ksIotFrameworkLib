@@ -139,6 +139,13 @@ namespace ksf::comps
 		ESP.restart();
 	}
 
+	void ksDevicePortal::triggerFactoryReset()
+	{
+		WiFi.mode(WIFI_OFF);
+		eraseConfigData();
+		rebootDevice();
+	}
+
 	std::string ksDevicePortal::handle_executeCommand(const std::string_view& body)
 	{
 		if (body.empty())
@@ -151,9 +158,7 @@ namespace ksf::comps
 		}
 		else if (body == PSTR("erase-config"))
 		{
-			WiFi.mode(WIFI_OFF);
-			eraseConfigData();
-			rebootDevice();
+			triggerFactoryReset();
 		}
 		else if (body == PSTR("erase-all-data"))
 		{
@@ -245,6 +250,11 @@ namespace ksf::comps
 		else if (command == PSTR("goToConfigMode"))
 		{
 			requestAppBreak();
+			return;
+		}
+		else if (command == PSTR("factoryReset"))
+		{
+			triggerFactoryReset();
 			return;
 		}
 		else if (command == PSTR("saveConfig"))

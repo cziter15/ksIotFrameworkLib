@@ -74,6 +74,11 @@ namespace ksf::comps
 			void requestAppBreak() { breakApp = true; }
 
 			/*!
+				@brief Triggers factory reset (erase config and reboot).
+			*/
+			void triggerFactoryReset();
+
+			/*!
 				@brief Starts device portal HTTP server.
 			*/
 			void setupHttpServer();
