@@ -8,8 +8,8 @@ var searchData=
   ['postinit_5',['postInit',['../classksf_1_1comps_1_1ks_device_portal.html#a3943c29bbb8bea8568154903c379a8a4',1,'ksf::comps::ksDevicePortal::postInit()'],['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a762ce8b72ef72aa6142a318ad5752c7a',1,'ksf::comps::ksDevStatMqttReporter::postInit()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#ae1e46595b6c1a5760c31149355e751c4',1,'ksf::comps::ksMqttConnector::postInit()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#af940a4472153cb497d35bf1ffe035dc2',1,'ksf::comps::ksWifiConfigurator::postInit()'],['../classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb',1,'ksf::ksComponent::postInit()']]],
   ['power_6',['🔥 Saving power',['../index.html#autotoc_md19',1,'']]],
   ['prefix_7',['prefix',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a2acc73077e7b4ef0d5f7cd03ad75da19',1,'ksf::comps::ksMqttConnector']]],
-  ['preparation_8',['Preparation',['../md_examples_2readme.html#autotoc_md1',1,'IDE Preparation'],['../md_tutorials_2readme.html#autotoc_md24',1,'IDE Preparation']]],
+  ['preparation_8',['IDE Preparation',['../md_examples_2readme.html#autotoc_md1',1,'']]],
   ['pressedtime_9',['pressedTime',['../classksf_1_1comps_1_1ks_reset_button.html#a838f42f24cf1d8a95f4820faebb7e302',1,'ksf::comps::ksResetButton']]],
-  ['projects_10',['projects',['../md_examples_2readme.html#autotoc_md2',1,'Opening existing projects'],['../md_tutorials_2readme.html#autotoc_md25',1,'Opening existing projects']]],
+  ['projects_10',['Opening existing projects',['../md_examples_2readme.html#autotoc_md2',1,'']]],
   ['publish_11',['publish',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ab101e26b5ea98a8b3e35295ab2b00680',1,'ksf::comps::ksMqttConnector']]]
 ];
