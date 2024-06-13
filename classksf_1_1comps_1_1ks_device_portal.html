@@ -178,6 +178,10 @@ Protected Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>requestAppBreak</b> ()</td></tr>
 <tr class="memdesc:a493f65235eb09023daeae7db6a800f0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Causes the application exit (and <a class="el" href="classksf_1_1ks_app_rotator.html" title="Application rotator component.">ksAppRotator</a> to spawn and process next defined application). <br /></td></tr>
 <tr class="separator:a493f65235eb09023daeae7db6a800f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035eda5d01f853d77445fd4b75d74909" id="r_a035eda5d01f853d77445fd4b75d74909"><td class="memItemLeft" align="right" valign="top"><a id="a035eda5d01f853d77445fd4b75d74909" name="a035eda5d01f853d77445fd4b75d74909"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>triggerFactoryReset</b> ()</td></tr>
+<tr class="memdesc:a035eda5d01f853d77445fd4b75d74909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Triggers factory reset (erase config and reboot). <br /></td></tr>
+<tr class="separator:a035eda5d01f853d77445fd4b75d74909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6c76bee527e97fbd9a4e08d09306633" id="r_ae6c76bee527e97fbd9a4e08d09306633"><td class="memItemLeft" align="right" valign="top"><a id="ae6c76bee527e97fbd9a4e08d09306633" name="ae6c76bee527e97fbd9a4e08d09306633"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setupHttpServer</b> ()</td></tr>
 <tr class="memdesc:ae6c76bee527e97fbd9a4e08d09306633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts device portal HTTP server. <br /></td></tr>
@@ -398,7 +402,7 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>String with commadn execution result. </dd></dl>
 
-<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="#a48dce11cf0fbd3747ab5b5a82db32b54">onHandlePortalCommand</a>, and <a class="el" href="#ace71e2cafe4c513d17b9a322f5916a74">rebootDevice()</a>.</p>
+<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="#a48dce11cf0fbd3747ab5b5a82db32b54">onHandlePortalCommand</a>, <a class="el" href="#ace71e2cafe4c513d17b9a322f5916a74">rebootDevice()</a>, and <a class="el" href="#a035eda5d01f853d77445fd4b75d74909">triggerFactoryReset()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a2992c9c68c1b62d4ddc6e0a64e1edfc7">onWebsocketTextMessage()</a>.</p>
 
@@ -828,7 +832,7 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">ksf::ksApplication::findComponents()</a>, <a class="el" href="#a57dc47de541111f018411b5faa74cec2">handle_executeCommand()</a>, <a class="el" href="#afe2758af3db01493e3aae124b3bb0bc4">handle_getDeviceParams()</a>, <a class="el" href="#aa3e6eaa1d017188595ae3eee922eca06">handle_getIdentity()</a>, <a class="el" href="#af57917c7ec92be83bf93cc83e6f92cc4">handle_scanNetworks()</a>, <a class="el" href="#a936722fcf49ca3cd49b58ad6fe207e22">logKeepAliveTimestamp</a>, <a class="el" href="#a71a92f3fba9cf819aad4115ae41b9b9a">onAppLog()</a>, <a class="el" href="#a493f65235eb09023daeae7db6a800f0d">requestAppBreak()</a>, and <a class="el" href="#a70a982a1a01f3ae4011d6b78f2dcedbc">webSocket</a>.</p>
+<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">ksf::ksApplication::findComponents()</a>, <a class="el" href="#a57dc47de541111f018411b5faa74cec2">handle_executeCommand()</a>, <a class="el" href="#afe2758af3db01493e3aae124b3bb0bc4">handle_getDeviceParams()</a>, <a class="el" href="#aa3e6eaa1d017188595ae3eee922eca06">handle_getIdentity()</a>, <a class="el" href="#af57917c7ec92be83bf93cc83e6f92cc4">handle_scanNetworks()</a>, <a class="el" href="#a936722fcf49ca3cd49b58ad6fe207e22">logKeepAliveTimestamp</a>, <a class="el" href="#a71a92f3fba9cf819aad4115ae41b9b9a">onAppLog()</a>, <a class="el" href="#a493f65235eb09023daeae7db6a800f0d">requestAppBreak()</a>, <a class="el" href="#a035eda5d01f853d77445fd4b75d74909">triggerFactoryReset()</a>, and <a class="el" href="#a70a982a1a01f3ae4011d6b78f2dcedbc">webSocket</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a2fc892e79d3813ab7b6135df5a475aee">setupWsServer()</a>.</p>
 
