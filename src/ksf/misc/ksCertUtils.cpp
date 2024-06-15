@@ -8,7 +8,7 @@
  */
 
 #include "ksCertUtils.h"
-#include "ksConstants.h"
+#include "../ksConstants.h"
 
 namespace ksf
 {

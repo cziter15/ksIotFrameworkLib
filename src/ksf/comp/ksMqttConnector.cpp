@@ -22,7 +22,7 @@
 #include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "../ksConfig.h"
-#include "../ksCertUtils.h"
+#include "../misc/ksCertUtils.h"
 #include "ksWifiConnector.h"
 #include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"

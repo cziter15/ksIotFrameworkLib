@@ -9,10 +9,9 @@
 
 #pragma once
 
-#include <WiFiClientSecure.h>
-
 #include <string>
 #include <stdint.h>
+#include <WiFiClientSecure.h>
 
 namespace ksf
 {
