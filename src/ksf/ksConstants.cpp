@@ -40,7 +40,7 @@ namespace ksf
 	void initializeFramework()
 	{
 #ifdef ESP32
-#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 0)
+#if ( IDF_VERSION_MAJOR >= 4 )
 		/* Setup watchdog. */
 		esp_task_wdt_config_t twdt_config = {
 			.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
