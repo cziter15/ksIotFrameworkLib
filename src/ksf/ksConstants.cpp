@@ -40,19 +40,17 @@ namespace ksf
 	void initializeFramework()
 	{
 #ifdef ESP32
-#if ( IDF_VERSION_MAJOR >= 4 )
-		/* Setup watchdog. */
-		esp_task_wdt_config_t twdt_config = {
-			.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
-			.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,		// Bitmask of all cores
-			.trigger_panic = false,
-		};
+		// TODO: In case of esp32 arduino 3
+		//esp_task_wdt_config_t twdt_config = {
+		//	.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
+		//	.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,		// Bitmask of all cores
+		//	.trigger_panic = false,
+		//};
+		//esp_task_wdt_init(&twdt_config);
 
-		esp_task_wdt_init(&twdt_config);
-#else
 		/* Setup watchdog. */
 		esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS, true);
-#endif
+
 		/* Initialize filesystem. */
 		LittleFS.begin(true);
 #endif
