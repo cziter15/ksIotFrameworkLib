@@ -41,8 +41,8 @@ namespace ksf
 #if APP_LOG_ENABLED
 				ksApplication* app{nullptr};									//!< Application pointer.
 #endif
-				std::unique_ptr<WiFiClient> wifiClientSp;						//!< Shared pointer to WiFiClient used to connect to MQTT.
-				std::unique_ptr<PubSubClient> mqttClientSp;						//!< Shared pointer to PubSubClient used to connect to MQTT.
+				std::unique_ptr<WiFiClient> wifiClientUq;						//!< Shared pointer to WiFiClient used to connect to MQTT.
+				std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 
 				std::weak_ptr<ksWifiConnector> wifiConnWp;						//!< Weak pointer to WiFi connector.
 

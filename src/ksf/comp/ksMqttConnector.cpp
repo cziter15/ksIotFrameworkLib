@@ -49,10 +49,10 @@ namespace ksf::comps
 		cfgProvider.setupMqttConnector(*this);
 
 		/*
-			Object mqttClientSp is created by setupConnection method.
+			Object mqttClientUq is created by setupConnection method.
 			That means init will return false when no MQTT config file found.
 		*/
-		return mqttClientSp != nullptr;
+		return mqttClientUq != nullptr;
 	}
 
 	bool ksMqttConnector::postInit(ksApplication* app)
@@ -69,18 +69,18 @@ namespace ksf::comps
 			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
-				wifiClientSp = std::move(secureClient);
+				wifiClientUq = std::move(secureClient);
 		}
 		else
 		{
-			wifiClientSp = std::make_unique<WiFiClient>();
+			wifiClientUq = std::make_unique<WiFiClient>();
 		}
 
 		/* Whoops, it looks like fingerprint validation failed. */
-		if (!wifiClientSp)
+		if (!wifiClientUq)
 			return;
 
-		mqttClientSp = std::make_unique<PubSubClient>(*wifiClientSp.get());
+		mqttClientUq = std::make_unique<PubSubClient>(*wifiClientUq.get());
 
 		this->login = std::move(login);
 		this->password = std::move(password);
@@ -104,9 +104,9 @@ namespace ksf::comps
 		*/
 	
 #if ESP32
-		wifiClientSp->setTimeout(KSF_MQTT_TIMEOUT_SEC);
+		wifiClientUq->setTimeout(KSF_MQTT_TIMEOUT_SEC);
 #elif ESP8266
-		wifiClientSp->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
+		wifiClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 #else			
 		#error Platform not implemented.
 #endif
@@ -118,7 +118,7 @@ namespace ksf::comps
 	void ksMqttConnector::mqttConnectedInternal()
 	{
 		lastSuccessConnectionTime = millis64();
-		mqttClientSp->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
+		mqttClientUq->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 		onConnected->broadcast();
 	}
 
@@ -155,12 +155,12 @@ namespace ksf::comps
 	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, ksMqttConnector::QosLevel qos)
 	{
 		uint8_t qosLevel{static_cast<uint8_t>(qos)};
-		mqttClientSp->subscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), qosLevel);
+		mqttClientUq->subscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), qosLevel);
 	}
 
 	void ksMqttConnector::unsubscribe(const std::string& topic, bool skipDevicePrefix)
 	{
-		mqttClientSp->unsubscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str());
+		mqttClientUq->unsubscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str());
 	}
 
 	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
@@ -177,7 +177,7 @@ namespace ksf::comps
 			out += payload;
 		});
 #endif
-		mqttClientSp->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
+		mqttClientUq->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
 	}
 
 	bool ksMqttConnector::connectToBroker()
@@ -191,51 +191,51 @@ namespace ksf::comps
 #endif
 			/* Handle connection manually. */
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
-				wifiClientSp->connect(serverIP, portNumber);
+				wifiClientUq->connect(serverIP, portNumber);
 			else 
-				wifiClientSp->connect(this->broker.c_str(), portNumber);
+				wifiClientUq->connect(this->broker.c_str(), portNumber);
 
 			/* If not connected, return. */
-			if (!wifiClientSp->connected())
+			if (!wifiClientUq->connected())
 				return false;
 
 			/* Verify certificate fingerprint. */
-			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientSp.get())))
+			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientUq.get())))
 			{
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Invalid certificate fingerprint! Disconnecting.");
 				});
 #endif
-				wifiClientSp->stop();
+				wifiClientUq->stop();
 				return false;
 			}
 
 			std::string willTopic{prefix + PSTR("connected")};
-			if (mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
+			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
 			{
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Connected successfully to ");
-					out += wifiClientSp->remoteIP().toString().c_str();
+					out += wifiClientUq->remoteIP().toString().c_str();
 					out += PSTR(" on port ");
-					out += ksf::to_string(wifiClientSp->remotePort());
+					out += ksf::to_string(wifiClientUq->remotePort());
 				});
 #endif
 
-				mqttClientSp->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
+				mqttClientUq->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
 				return true;
 			}
 
 			return false;
 		}
 
-		return mqttClientSp->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !usePersistentSession);
+		return mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !usePersistentSession);
 	}
 
 	bool ksMqttConnector::loop(ksApplication* app)
 	{
-		if (!mqttClientSp->loop())
+		if (!mqttClientUq->loop())
 		{
 			if (wasConnected)
 			{
@@ -265,7 +265,7 @@ namespace ksf::comps
 
 	bool ksMqttConnector::isConnected() const
 	{
-		return mqttClientSp ? mqttClientSp->connected() : false;
+		return mqttClientUq ? mqttClientUq->connected() : false;
 	}
 
 	uint32_t ksMqttConnector::getConnectionTimeSeconds() const
