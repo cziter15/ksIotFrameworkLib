@@ -12,6 +12,7 @@
 	#include <esp_phy_init.h>
 	#include <nvs_flash.h>
 	#include <esp_task_wdt.h>
+	#include "sdkconfig.h"
 #elif ESP8266
 	#include <ESP8266WiFi.h>
 #else			
@@ -39,9 +40,19 @@ namespace ksf
 	void initializeFramework()
 	{
 #ifdef ESP32
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 0)
+		/* Setup watchdog. */
+		esp_task_wdt_config_t twdt_config = {
+			.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
+			.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,		// Bitmask of all cores
+			.trigger_panic = false,
+		};
+
+		esp_task_wdt_init(&twdt_config);
+#else
 		/* Setup watchdog. */
 		esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS, true);
-
+#endif
 		/* Initialize filesystem. */
 		LittleFS.begin(true);
 #endif
@@ -57,7 +68,6 @@ namespace ksf
 		/* Initialize WiFi defaults. */
 		WiFi.persistent(false);
 		WiFi.mode(WIFI_OFF);
-		WiFi.setAutoConnect(false);
 		WiFi.setAutoReconnect(false);
 
 		/* Create NVS directory. */
