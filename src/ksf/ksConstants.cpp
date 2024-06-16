@@ -12,6 +12,7 @@
 	#include <esp_phy_init.h>
 	#include <nvs_flash.h>
 	#include <esp_task_wdt.h>
+	#include <esp_arduino_version.h>
 	#include "sdkconfig.h"
 #elif ESP8266
 	#include <ESP8266WiFi.h>
@@ -40,7 +41,7 @@ namespace ksf
 	void initializeFramework()
 	{
 #if ESP32
-		#ifdef CONFIG_SOC_CPU_CORES_NUM
+		#if (ESP_ARDUINO_VERSION_MAJOR >= 3)
 			esp_task_wdt_config_t twdt_config = {
 				.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
 				.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,
