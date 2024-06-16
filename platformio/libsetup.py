@@ -19,6 +19,7 @@ try:
 	for e in environments:
 		# remove unused flags
 		e.ProcessUnFlags("-std=gnu++11")
+		e.ProcessUnFlags("-fexceptions")
 		# add flags to environment
 		e.ProcessFlags("-std=gnu++2a")
 		e.ProcessFlags("-fno-exceptions")
