@@ -37,14 +37,6 @@ namespace ksf
 	static EOTAType::Type otaBootType{EOTAType::NO_OTA};				// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;						// Variables for assembling 64-bit version of millis.
 
-
-#if ESP32
-	template <typename T, typename = void>
-	struct is_defined : std::false_type {};
-
-	template <typename T>
-	struct is_defined<T, std::void_t<decltype(T::timeout_ms)>> : std::true_type {};
-
 	void initializeFramework()
 	{
 #if ESP32
