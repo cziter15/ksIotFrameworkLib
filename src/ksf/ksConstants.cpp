@@ -37,20 +37,27 @@ namespace ksf
 	static EOTAType::Type otaBootType{EOTAType::NO_OTA};				// Will be true if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;						// Variables for assembling 64-bit version of millis.
 
+
+#if ESP32
+	template <typename T, typename = void>
+	struct is_defined : std::false_type {};
+
+	template <typename T>
+	struct is_defined<T, std::void_t<decltype(T::timeout_ms)>> : std::true_type {};
+
 	void initializeFramework()
 	{
 #if ESP32
-#if (ARDUINO >= 10812)
-		esp_task_wdt_config_t twdt_config = {
+		#ifdef CONFIG_SOC_CPU_CORES_NUM
+			esp_task_wdt_config_t twdt_config = {
 				.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
 				.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,
 				.trigger_panic = true,
 			};
-
-		esp_task_wdt_init(&twdt_config);
-#else
-		esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS, true);
-#endif
+			esp_task_wdt_init(&twdt_config);
+		#else
+			esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS * 1000, true);
+		#endif
 		/* Initialize filesystem. */
 		LittleFS.begin(true);
 #endif
