@@ -40,7 +40,7 @@ namespace ksf
 	void initializeFramework()
 	{
 #ifdef ESP32
-#if DARDUINO_3_OR_ABOVE
+#if ARDUINO_3_OR_ABOVE
 		esp_task_wdt_config_t twdt_config = {
 			.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
 			.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,		// Bitmask of all cores
