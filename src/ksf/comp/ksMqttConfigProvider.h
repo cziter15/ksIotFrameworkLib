@@ -10,9 +10,6 @@
 #pragma once
 
 #include "ksConfigProvider.h"
-
-class WiFiManager;
-
 namespace ksf::comps
 {
 	class ksMqttConnector;
