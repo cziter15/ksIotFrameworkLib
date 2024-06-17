@@ -163,6 +163,6 @@ namespace ksf::comps
 
 	ksWifiConnector::~ksWifiConnector()
 	{
-		WiFi.disconnect(true, false);
+		WiFi.disconnect(true);
 	}
 }
