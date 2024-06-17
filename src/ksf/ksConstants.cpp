@@ -47,7 +47,7 @@ namespace ksf
 				.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,
 				.trigger_panic = true,
 			};
-			esp_task_wdt_init(&twdt_config);
+			esp_task_wdt_reconfigure(&twdt_config);
 		#else
 			esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS * 1000, true);
 		#endif
