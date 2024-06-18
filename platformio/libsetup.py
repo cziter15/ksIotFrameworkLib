@@ -41,8 +41,6 @@ try:
 				e.ProcessFlags("-DWiFiClient=NetworkClient")
 				e.ProcessFlags("-DWiFiServer=NetworkServer")
 				e.ProcessFlags("-DWiFiUDP=NetworkUDP")
-				e.ProcessFlags("-DARDUINO_3_OR_ABOVE=1")
-
 	ksPrintLog(Colors.Magenta, "Successfully tweaked platform settings for [" + str(len(environments)) + "] environments.")
 	ksPrintLog(Colors.Green, "Extra script finished.")
 except BaseException as err:
