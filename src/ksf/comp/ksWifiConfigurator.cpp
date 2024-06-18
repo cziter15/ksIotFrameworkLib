@@ -47,10 +47,8 @@ namespace ksf::comps
 
 	bool ksWifiConfigurator::init(ksApplication* app)
 	{
-		WiFi.softAPdisconnect();
 		WiFi.softAP(deviceName.c_str());
 		app->addComponent<ksDevicePortal>();
-
 		return true;
 	}
 
