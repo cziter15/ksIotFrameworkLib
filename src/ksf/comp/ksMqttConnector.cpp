@@ -107,7 +107,7 @@ namespace ksf::comps
 	
 #if ESP32
 		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_SEC);
-		netClientUq->setConnectionTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC))
+		netClientUq->setConnectionTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 #elif ESP8266
 		netClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 #else			
