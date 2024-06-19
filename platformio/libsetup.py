@@ -26,21 +26,7 @@ try:
 		e.ProcessFlags("-DCORE_DEBUG_LEVEL=0")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINO_OTA=1")
 		e.ProcessFlags("-DWEBSOCKETS_SAVE_RAM=1")
-		
-		# ESP32 version of Arduino has some changes for class names
-		if e["PIOPLATFORM"].startswith("espressif32"):
-			cpp_defines_dict = {}
-			for item in  e["CPPDEFINES"]:
-				if isinstance(item, tuple):
-					key, value = item
-					cpp_defines_dict[key] = value
-				elif isinstance(item, str):
-					cpp_defines_dict[item] = 1
-			if (int(cpp_defines_dict.get('ARDUINO', None)) >= 10812):
-				e.ProcessFlags("-DWiFiClientSecure=NetworkClientSecure")
-				e.ProcessFlags("-DWiFiClient=NetworkClient")
-				e.ProcessFlags("-DWiFiServer=NetworkServer")
-				e.ProcessFlags("-DWiFiUDP=NetworkUDP")
+
 	ksPrintLog(Colors.Magenta, "Successfully tweaked platform settings for [" + str(len(environments)) + "] environments.")
 	ksPrintLog(Colors.Green, "Extra script finished.")
 except BaseException as err:
