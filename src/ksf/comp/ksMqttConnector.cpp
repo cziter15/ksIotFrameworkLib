@@ -89,30 +89,7 @@ namespace ksf::comps
 		this->prefix = std::move(prefix);
 		this->broker = std::move(broker);
 
-		/* 
-		*	Set timeout for blocking calls (eg. connect). MQTT is handled async-like.
-		*
-		*	There's an inconsistency in setTimeout implementation between Arduino for ESP32 and ESP8266.
-		*	ESP32's WiFi client setTimeout method want seconds, while ESP8266's one wants milliseconds.
-		*	I've wasted some time to get what's really going on here, but eventually caught that.
-		*	Keep in mind that setTimeout wants time in seconds on ESP32 but getTimeout will return milliseconds.
-		* 
-		*	Timeout is required because underlying connect method is blocking. Without timeout it may trigger watchdog.
-		*
-		*	Please be aware of bugs present in Arduino-esp32 framework:
-		*	-	https://github.com/espressif/arduino-esp32/issues/7350
-		*	-	https://github.com/espressif/arduino-esp32/issues/7356
-		*	-	https://github.com/espressif/arduino-esp32/issues/7355
-		*/
-	
-#if ESP32
-		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_SEC);
-		netClientUq->setConnectionTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
-#elif ESP8266
 		netClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
-#else			
-		#error Platform not implemented.
-#endif
 
 		/* Load MQTT port. */
 		ksf::from_chars(port, portNumber);
