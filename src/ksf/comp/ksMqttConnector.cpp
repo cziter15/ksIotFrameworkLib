@@ -191,10 +191,18 @@ namespace ksf::comps
 				out += PSTR("[MQTT] Connecting to MQTT broker...");
 			});
 #endif
+
+#if ESP32
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber, netClientUq->getTimeout());
 			else 
 				netClientUq->connect(this->broker.c_str(), portNumber, netClientUq->getTimeout());
+#else
+			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
+				netClientUq->connect(serverIP, portNumber);
+			else 
+				netClientUq->connect(this->broker.c_str(), portNumber);
+#endif
 
 			/* If not connected, return. */
 			if (!netClientUq->connected())
