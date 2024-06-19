@@ -71,12 +71,14 @@ namespace ksf::comps
 			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
+			{	
+				#if ESP32
+					constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS/KSF_ONE_SEC_MS};
+					secureClient->setHandshakeTimeout(handshakeTimeoutSec);
+				#endif
+	
 				netClientUq = std::move(secureClient);
-
-			#if ESP32
-				constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS/KSF_ONE_SEC_MS};
-				secureClient->setHandshakeTimeout(handshakeTimeoutSec);
-			#endif
+			}
 		}
 		else
 		{
