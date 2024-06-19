@@ -10,23 +10,11 @@
 #if ESP32
 	#include <esp_wifi.h>
 	#include <WiFi.h>
-	#if ESP_ARDUINO_VERSION_MAJOR >= 3
-		#define NET_CLIENT_CLASS NetworkClient
-		#define NET_CLIENT_SECURE_CLASS NetworkClientSecure
-		#include <NetworkClient.h>
-		#include <NetworkClientSecure.h>
-	#else
-		#define NET_CLIENT_CLASS WiFiClient
-		#define NET_CLIENT_SECURE_CLASS WiFiClientSecure
-		#include <WiFiClient.h>
-		#include <WiFiClientSecure.h>
-	#endif
+	#include <WiFiClientSecure.h>
 #elif ESP8266
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
 	#include <WiFiClientSecure.h>
-	#define NET_CLIENT_CLASS WiFiClient
-	#define NET_CLIENT_SECURE_CLASS WiFiClientSecure
 #else 			
 	#error Platform not implemented.
 #endif
@@ -79,7 +67,7 @@ namespace ksf::comps
 	{
 		if (!fingerprint.empty())
 		{
-			auto secureClient{std::make_unique<NET_CLIENT_SECURE_CLASS>()};
+			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
 			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
@@ -87,7 +75,7 @@ namespace ksf::comps
 		}
 		else
 		{
-			netClientUq = std::make_unique<NET_CLIENT_CLASS>();
+			netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
 		}
 
 		/* Whoops, it looks like fingerprint validation failed. */
@@ -203,18 +191,17 @@ namespace ksf::comps
 				out += PSTR("[MQTT] Connecting to MQTT broker...");
 			});
 #endif
-			/* Handle connection manually. */
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
-				netClientUq->connect(serverIP, portNumber);
+				netClientUq->connect(serverIP, portNumber, netClientUq->getTimeout());
 			else 
-				netClientUq->connect(this->broker.c_str(), portNumber);
+				netClientUq->connect(this->broker.c_str(), portNumber, netClientUq->getTimeout());
 
 			/* If not connected, return. */
 			if (!netClientUq->connected())
 				return false;
 
 			/* Verify certificate fingerprint. */
-			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(netClientUq.get())))
+			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
 			{
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {

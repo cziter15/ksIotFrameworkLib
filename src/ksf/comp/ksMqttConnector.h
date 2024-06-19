@@ -16,7 +16,18 @@
 #include "../evt/ksEvent.h"
 #include "../ksSimpleTimer.h"
 
-class Client;
+#if (ESP32 && ESP_ARDUINO_VERSION_MAJOR >= 3)
+	class NetworkClient;
+	class NetworkClientSecure;
+	using ksMqttConnectorNetClient_t = NetworkClient;
+	using ksMqttConnectorNetClientSecure_t = NetworkClientSecure;
+#else
+	class WiFiClient;
+	class WiFiClientSecure;
+	using ksMqttConnectorNetClient_t = WiFiClient;
+	using ksMqttConnectorNetClientSecure_t = WiFiClientSecure;
+#endif
+
 class PubSubClient;
 class ksCertFingerprint;
 
@@ -41,7 +52,7 @@ namespace ksf
 #if APP_LOG_ENABLED
 				ksApplication* app{nullptr};									//!< Application pointer.
 #endif
-				std::unique_ptr<Client> netClientUq;							//!< Shared pointer to WiFiClient used to connect to MQTT.
+				std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
 				std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 
 				std::weak_ptr<ksWifiConnector> wifiConnWp;						//!< Weak pointer to WiFi connector.
