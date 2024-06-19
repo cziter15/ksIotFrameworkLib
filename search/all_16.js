@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['️⃣_20custom_20rtti_0',['#️⃣ Custom RTTI',['../index.html#autotoc_md12',1,'']]]
+  ['ℹ️_20architecture_0',['ℹ️ Architecture',['../index.html#autotoc_md4',1,'']]]
 ];
