@@ -107,6 +107,7 @@ namespace ksf::comps
 	
 #if ESP32
 		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_SEC);
+		netClientUq->setConnectionTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC))
 #elif ESP8266
 		netClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 #else			
@@ -191,18 +192,10 @@ namespace ksf::comps
 				out += PSTR("[MQTT] Connecting to MQTT broker...");
 			});
 #endif
-
-#if ESP32
-			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
-				netClientUq->connect(serverIP, portNumber, netClientUq->getTimeout());
-			else 
-				netClientUq->connect(this->broker.c_str(), portNumber, netClientUq->getTimeout());
-#else
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber);
 			else 
 				netClientUq->connect(this->broker.c_str(), portNumber);
-#endif
 
 			/* If not connected, return. */
 			if (!netClientUq->connected())
