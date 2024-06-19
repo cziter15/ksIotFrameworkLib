@@ -85,15 +85,16 @@ namespace ksf::comps
 			netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
 		}
 
-		/* Set MQTT timeout. */
+		/* Whoops, it looks like fingerprint validation failed. */
+		if (!netClientUq)
+			return;
+		
+		/* Set MQTT timeouts. */
 		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_MS);
 #if ESP32
 		netClientUq->setConnectionTimeout(KSF_MQTT_TIMEOUT_MS);
 #endif
-		/* Whoops, it looks like fingerprint validation failed. */
-		if (!netClientUq)
-			return;
-
+		
 		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
 
 		this->login = std::move(login);
