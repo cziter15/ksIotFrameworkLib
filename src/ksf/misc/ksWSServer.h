@@ -10,7 +10,6 @@
 #pragma once
 
 #include <WebSocketsServer.h>
-#include <WiFiServer.h>
 #include <functional>
 #include <string_view>
 
@@ -29,7 +28,7 @@ namespace ksf::misc
 	class ksWSServer : public WebSocketsServerCore 
 	{
 		protected:
-			std::unique_ptr<WiFiServer> wsListener;								//!< WS server (listener).
+			std::unique_ptr<WEBSOCKETS_NETWORK_SERVER_CLASS> wsListener;		//!< WS server (listener).
 			uint64_t requriedAuthToken{0};										//!< WS auth token.
 			ksWsServerMessageFunc_t onWebsocketTextMessage;						//!< Callback function to receive messages.
 

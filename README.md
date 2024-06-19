@@ -11,6 +11,16 @@
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054)
 
+> [!IMPORTANT]  
+> This library supports Arduino 3.0.1 on ESP32. However, due to [Platformio statement](https://github.com/platformio/platform-espressif32/issues/1225) it will not automatically pull latest versions.
+> If you want 3.0.1 version support, set your platform to my fork in your `platformio.ini` file.
+> 
+> ```platform = https://github.com/cziter15/platform-espressif32.git```
+
+> [!IMPORTANT]  
+> When it comes to ESP8266, latest version supported is based on SDK305. To use it, add `-DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305` to your build flags.
+
+
 ## 🌱 Motivation
 
 - The goal of this project is to create a simple template or starting point to develop IoT applications using Espressif microcontrollers. 

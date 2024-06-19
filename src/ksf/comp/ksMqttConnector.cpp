@@ -8,17 +8,31 @@
  */
 
 #if ESP32
-	#include <WiFi.h>
 	#include <esp_wifi.h>
+	#include <WiFi.h>
+	#if ESP_ARDUINO_VERSION_MAJOR >= 3
+		#define NET_CLIENT_CLASS NetworkClient
+		#define NET_CLIENT_SECURE_CLASS NetworkClientSecure
+		#include <NetworkClient.h>
+		#include <NetworkClientSecure.h>
+	#else
+		#define NET_CLIENT_CLASS WiFiClient
+		#define NET_CLIENT_SECURE_CLASS WiFiClientSecure
+		#include <WiFiClient.h>
+		#include <WiFiClientSecure.h>
+	#endif
 #elif ESP8266
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
+	#include <WiFiClientSecure.h>
+	#define NET_CLIENT_CLASS WiFiClient
+	#define NET_CLIENT_SECURE_CLASS WiFiClientSecure
 #else 			
 	#error Platform not implemented.
 #endif
 
 #include <PubSubClient.h>
-#include <WiFiClientSecure.h>
+
 #include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "../ksConfig.h"
@@ -65,22 +79,22 @@ namespace ksf::comps
 	{
 		if (!fingerprint.empty())
 		{
-			auto secureClient{std::make_unique<WiFiClientSecure>()};
+			auto secureClient{std::make_unique<NET_CLIENT_SECURE_CLASS>()};
 			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
-				wifiClientUq = std::move(secureClient);
+				netClientUq = std::move(secureClient);
 		}
 		else
 		{
-			wifiClientUq = std::make_unique<WiFiClient>();
+			netClientUq = std::make_unique<NET_CLIENT_CLASS>();
 		}
 
 		/* Whoops, it looks like fingerprint validation failed. */
-		if (!wifiClientUq)
+		if (!netClientUq)
 			return;
 
-		mqttClientUq = std::make_unique<PubSubClient>(*wifiClientUq.get());
+		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
 
 		this->login = std::move(login);
 		this->password = std::move(password);
@@ -104,9 +118,9 @@ namespace ksf::comps
 		*/
 	
 #if ESP32
-		wifiClientUq->setTimeout(KSF_MQTT_TIMEOUT_SEC);
+		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_SEC);
 #elif ESP8266
-		wifiClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
+		netClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 #else			
 		#error Platform not implemented.
 #endif
@@ -191,23 +205,23 @@ namespace ksf::comps
 #endif
 			/* Handle connection manually. */
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
-				wifiClientUq->connect(serverIP, portNumber);
+				netClientUq->connect(serverIP, portNumber);
 			else 
-				wifiClientUq->connect(this->broker.c_str(), portNumber);
+				netClientUq->connect(this->broker.c_str(), portNumber);
 
 			/* If not connected, return. */
-			if (!wifiClientUq->connected())
+			if (!netClientUq->connected())
 				return false;
 
 			/* Verify certificate fingerprint. */
-			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(wifiClientUq.get())))
+			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<WiFiClientSecure*>(netClientUq.get())))
 			{
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Invalid certificate fingerprint! Disconnecting.");
 				});
 #endif
-				wifiClientUq->stop();
+				netClientUq->stop();
 				return false;
 			}
 
@@ -217,9 +231,9 @@ namespace ksf::comps
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Connected successfully to ");
-					out += wifiClientUq->remoteIP().toString().c_str();
+					out += broker;
 					out += PSTR(" on port ");
-					out += ksf::to_string(wifiClientUq->remotePort());
+					out += std::to_string(portNumber);
 				});
 #endif
 
