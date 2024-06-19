@@ -72,12 +72,22 @@ namespace ksf::comps
 			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
 				netClientUq = std::move(secureClient);
+
+			#if ESP32
+				constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS/KSF_ONE_SEC_MS};
+				secureClient->setHandshakeTimeout(handshakeTimeoutSec);
+			#endif
 		}
 		else
 		{
 			netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
 		}
 
+		/* Set MQTT timeout. */
+		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_MS);
+#if ESP32
+		netClientUq->setConnectionTimeout(KSF_MQTT_TIMEOUT_MS);
+#endif
 		/* Whoops, it looks like fingerprint validation failed. */
 		if (!netClientUq)
 			return;
@@ -88,8 +98,6 @@ namespace ksf::comps
 		this->password = std::move(password);
 		this->prefix = std::move(prefix);
 		this->broker = std::move(broker);
-
-		netClientUq->setTimeout(KSF_SEC_TO_MS(KSF_MQTT_TIMEOUT_SEC));
 
 		/* Load MQTT port. */
 		ksf::from_chars(port, portNumber);

@@ -32,9 +32,9 @@
 #define KSF_MQTT_RECONNECT_DELAY_MS 5000UL
 #endif
 
-#ifndef KSF_MQTT_TIMEOUT_SEC
-/*! MQTT socket timeout in seconds. On ESP32 is also used as connect (blocking) timeout. */
-#define KSF_MQTT_TIMEOUT_SEC 4UL
+#ifndef KSF_MQTT_TIMEOUT_MS
+/*! MQTT socket timeout in milliseconds. On ESP32 is also used as connect (blocking) timeout. */
+#define KSF_MQTT_TIMEOUT_MS 4000UL
 #endif
 
 #ifndef KSF_WIFI_TIMEOUT_MS
