@@ -28,13 +28,15 @@ namespace ksf::comps
 
 	const char MQTT_BROKER_ADDRESS_TEXT[] 			PROGMEM {"MQTT Address"};
 	const char MQTT_BROKER_PORT_TEXT[] 				PROGMEM {"MQTT Port"};
-	#ifdef ESP8266
+
+#ifdef ESP8266
 	const auto MQTT_SSL_FP_LEN{40};
 	const char MQTT_BROKER_SSL_FINGERPRINT_TEXT[] 	PROGMEM {"MQTT SSL Fingerprint (SHA1)"};
-	#else
+#else
 	const auto MQTT_SSL_FP_LEN{64};
 	const char MQTT_BROKER_SSL_FINGERPRINT_TEXT[] 	PROGMEM {"MQTT SSL Fingerprint (SHA256)"};
-	#endif
+#endif
+
 	const char MQTT_BROKER_USER_TEXT[] 				PROGMEM {"MQTT Username"};
 	const char MQTT_BROKER_PASSWORD_TEXT[] 			PROGMEM {"MQTT Password"};
 	const char MQTT_BROKER_PREFIX_TEXT[] 			PROGMEM {"MQTT Topic Prefix"};
