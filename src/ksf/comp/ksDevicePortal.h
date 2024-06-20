@@ -26,7 +26,7 @@ class ArduinoOTAClass;
 	{
 		template<typename ServerType = WiFiServer> class ESP8266WebServerTemplate;
 	}
-	typedef WebServerClass esp8266webserver::ESP8266WebServerTemplate<WiFiServer> WebServerClass;
+	typedef esp8266webserver::ESP8266WebServerTemplate<WiFiServer> WebServerClass;
 #endif
 
 namespace ksf::misc
