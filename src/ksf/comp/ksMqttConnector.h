@@ -17,16 +17,19 @@
 #include "../ksSimpleTimer.h"
 
 #if (ESP32 && ESP_ARDUINO_VERSION_MAJOR >= 3)
-	#define ksMqttConnectorNetClient_t NetworkClient
-	#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
+	class NetworkClient;
+	class NetworkClientSecure;
+	typedef NetworkClient ksMqttConnectorNetClient_t;
+	typedef NetworkClientSecure ksMqttConnectorNetClientSecure_t;
 #else
-	#define ksMqttConnectorNetClient_t WiFiClient
-	#define ksMqttConnectorNetClientSecure_t WiFiClientSecure
+	class WiFiClient;
+	class WiFiClientSecure;
+	typedef WiFiClient ksMqttConnectorNetClient_t;
+	typedef WiFiClientSecure ksMqttConnectorNetClientSecure_t;
 #endif
 
 class PubSubClient;
 class ksCertFingerprint;
-class ksMqttConnectorNetClient_t;
 
 namespace ksf
 {

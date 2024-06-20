@@ -20,7 +20,7 @@
 		#include <ESP8266WiFi.h>
 		#include <ESP8266WebServer.h>
 
-		using WebServerClass = ESP8266WebServer;
+		typedef ESP8266WebServer WebServerClass;
 
 		uint8_t ESP_getFlashVendor() { return ESP.getFlashChipVendorId(); }
 		uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipRealSize()/1024; }
@@ -31,7 +31,7 @@
 		#include <WebServer.h>
 		#include "nvs_flash.h"
 
-		using WebServerClass = WebServer;
+		typedef WebServer WebServerClass;
 
 		extern uint32_t ESP_getFlashChipId(void);
 		uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() & 0xFF; }
