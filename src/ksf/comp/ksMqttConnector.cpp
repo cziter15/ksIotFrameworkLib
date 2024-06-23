@@ -69,41 +69,30 @@ namespace ksf::comps
 		{
 			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
 			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
-			
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
-			{	
-				#if ESP32
-					constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS/KSF_ONE_SEC_MS};
-					secureClient->setHandshakeTimeout(handshakeTimeoutSec);
-				#endif
-	
 				netClientUq = std::move(secureClient);
-			}
 		}
-		else
-		{
-			netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
-		}
+		else netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
 
 		/* Whoops, it looks like fingerprint validation failed. */
 		if (!netClientUq)
 			return;
 		
-		/* Set MQTT timeouts. */
+		/* Set socket timeouts. */
 		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_MS);
 #if ESP32
 		netClientUq->setConnectionTimeout(KSF_MQTT_TIMEOUT_MS);
 #endif
 		
-		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
-
+		/* Load MQTT parameters. */
 		this->login = std::move(login);
 		this->password = std::move(password);
 		this->prefix = std::move(prefix);
 		this->broker = std::move(broker);
-
-		/* Load MQTT port. */
 		ksf::from_chars(port, portNumber);
+
+		/* Create MQTT client. */
+		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
@@ -180,6 +169,7 @@ namespace ksf::comps
 				out += PSTR("[MQTT] Connecting to MQTT broker...");
 			});
 #endif
+			/* If host is an IP Address, use it. Otherwise use domain name. */
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber);
 			else 

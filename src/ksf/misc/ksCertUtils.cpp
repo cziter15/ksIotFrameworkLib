@@ -54,6 +54,8 @@ namespace ksf
 	{
 		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
 		{
+			constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS/KSF_ONE_SEC_MS};
+			clientSecure->setHandshakeTimeout(KSF_MQTT_TIMEOUT_MS/KSF_ONE_SEC_MS);
 			clientSecure->setInsecure();
 			return true;
 		}
