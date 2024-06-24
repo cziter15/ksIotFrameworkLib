@@ -29,7 +29,7 @@
 
 #ifndef KSF_MQTT_RECONNECT_DELAY_MS
 /*! MQTT reconnect delay in milliseconds. How much time in ms need to pass to retry connection. */
-#define KSF_MQTT_RECONNECT_DELAY_MS 5000UL
+#define KSF_MQTT_RECONNECT_DELAY_MS 10000UL
 #endif
 
 #ifndef KSF_MQTT_TIMEOUT_MS
