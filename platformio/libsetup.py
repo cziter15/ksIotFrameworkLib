@@ -17,9 +17,12 @@ try:
 		environments.append(lb.env)
 
 	for e in environments:
-		# remove unused flags
+		# remove flags
 		e.ProcessUnFlags("-std=gnu++11")
 		e.ProcessUnFlags("-fexceptions")
+		e.ProcessUnFlags("-DCORE_DEBUG_LEVEL")
+		e.ProcessUnFlags("-DNO_GLOBAL_ARDUINO_OTA")
+		e.ProcessUnFlags("-DWEBSOCKETS_SAVE_RAM")
 		# add flags to environment
 		e.ProcessFlags("-std=gnu++2a")
 		e.ProcessFlags("-fno-exceptions")
