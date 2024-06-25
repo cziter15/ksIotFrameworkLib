@@ -25,6 +25,7 @@ try:
 		# disable Arduino OTA global interface and save RAM in websockets
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINO_OTA=1")
 		e.ProcessFlags("-DWEBSOCKETS_SAVE_RAM=1")
+		e.ProcessFlags("-fno-exceptions")
 
 	ksPrintLog(Colors.Magenta, "Successfully tweaked platform settings for [" + str(len(environments)) + "] environments.")
 	ksPrintLog(Colors.Green, "Extra script finished.")
