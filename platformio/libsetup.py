@@ -10,23 +10,19 @@ ksPrintLog(Colors.Green, "Running extra script for library.")
 
 try:
 	Import("projenv", "env")
+	global_env = DefaultEnvironment()
+
 	ksPrintLog(Colors.Magenta, "Building library environment list.")
-	environments = [env, DefaultEnvironment(), projenv]
+	environments = [global_env, projenv, env]
 	
 	for lb in env.GetLibBuilders():
 		environments.append(lb.env)
 
 	for e in environments:
-		# remove flags
+		# require C++2a support
 		e.ProcessUnFlags("-std=gnu++11")
-		e.ProcessUnFlags("-fexceptions")
-		e.ProcessUnFlags("-DCORE_DEBUG_LEVEL")
-		e.ProcessUnFlags("-DNO_GLOBAL_ARDUINO_OTA")
-		e.ProcessUnFlags("-DWEBSOCKETS_SAVE_RAM")
-		# add flags to environment
 		e.ProcessFlags("-std=gnu++2a")
-		e.ProcessFlags("-fno-exceptions")
-		e.ProcessFlags("-DCORE_DEBUG_LEVEL=0")
+		# disable Arduino OTA global interface and save RAM in websockets
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINO_OTA=1")
 		e.ProcessFlags("-DWEBSOCKETS_SAVE_RAM=1")
 
