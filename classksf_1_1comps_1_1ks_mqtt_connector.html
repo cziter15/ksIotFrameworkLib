@@ -242,18 +242,23 @@ uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastSuccessConnec
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>reconnectCounter</b> {0}</td></tr>
 <tr class="memdesc:af7928b7e420a6e8b98b17e5b43127d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">MQTT reconnection counter. <br /></td></tr>
 <tr class="separator:af7928b7e420a6e8b98b17e5b43127d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95b20ca302d48003c755183b21d65215" id="r_a95b20ca302d48003c755183b21d65215"><td class="memItemLeft" align="right" valign="top"><a id="a95b20ca302d48003c755183b21d65215" name="a95b20ca302d48003c755183b21d65215"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendConnectionStatus</b>: 1 {true}</td></tr>
-<tr class="memdesc:a95b20ca302d48003c755183b21d65215"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send connection status to MQTT or not. <br /></td></tr>
-<tr class="separator:a95b20ca302d48003c755183b21d65215"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e80106d4063007faf9f1bc7eb1c889c" id="r_a8e80106d4063007faf9f1bc7eb1c889c"><td class="memItemLeft" align="right" valign="top"><a id="a8e80106d4063007faf9f1bc7eb1c889c" name="a8e80106d4063007faf9f1bc7eb1c889c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>usePersistentSession</b>: 1 {false}</td></tr>
-<tr class="memdesc:a8e80106d4063007faf9f1bc7eb1c889c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use persistent session or not. <br /></td></tr>
-<tr class="separator:a8e80106d4063007faf9f1bc7eb1c889c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc9123d68f055d4709f9f455cfb655f9" id="r_afc9123d68f055d4709f9f455cfb655f9"><td class="memItemLeft" align="right" valign="top"><a id="afc9123d68f055d4709f9f455cfb655f9" name="afc9123d68f055d4709f9f455cfb655f9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>wasConnected</b>: 1 {false}</td></tr>
-<tr class="memdesc:afc9123d68f055d4709f9f455cfb655f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if connected in previous loop. <br /></td></tr>
-<tr class="separator:afc9123d68f055d4709f9f455cfb655f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ffdac91e7348de9c54fac47971141c5" id="r_a2ffdac91e7348de9c54fac47971141c5"><td class="memItemLeft" ><a id="a2ffdac91e7348de9c54fac47971141c5" name="a2ffdac91e7348de9c54fac47971141c5"></a>
+struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e6d01cd25f265e7aa8b137ac1cabe2b" id="r_a5e6d01cd25f265e7aa8b137ac1cabe2b"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>sendConnectionStatus</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a5e6d01cd25f265e7aa8b137ac1cabe2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send connection status to MQTT or not. <br /></td></tr>
+<tr class="separator:a5e6d01cd25f265e7aa8b137ac1cabe2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34dbb66f83ddb5087d974833891ce406" id="r_a34dbb66f83ddb5087d974833891ce406"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>usePersistentSession</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a34dbb66f83ddb5087d974833891ce406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use persistent session or not. <br /></td></tr>
+<tr class="separator:a34dbb66f83ddb5087d974833891ce406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64306f573f967d8cc1d06b632a721683" id="r_a64306f573f967d8cc1d06b632a721683"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>wasConnected</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a64306f573f967d8cc1d06b632a721683"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if connected in previous loop. <br /></td></tr>
+<tr class="separator:a64306f573f967d8cc1d06b632a721683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ffdac91e7348de9c54fac47971141c5" id="r_a2ffdac91e7348de9c54fac47971141c5"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>bitflags</b> = {true, false, true}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a2ffdac91e7348de9c54fac47971141c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adac57d480a69d329fa59cf5ec897978b" id="r_adac57d480a69d329fa59cf5ec897978b"><td class="memItemLeft" align="right" valign="top"><a id="adac57d480a69d329fa59cf5ec897978b" name="adac57d480a69d329fa59cf5ec897978b"></a>
 <a class="el" href="classksf_1_1ks_simple_timer.html">ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>reconnectTimer</b> { 10000UL }</td></tr>
 <tr class="memdesc:adac57d480a69d329fa59cf5ec897978b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer that counts time between reconnection attempts. <br /></td></tr>
@@ -319,6 +324,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>, and <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -348,7 +355,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 <p>Connects to the MQTT broker. </p>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
 
-<p class="reference">References <a class="el" href="#ae97565fa36122cb841acbb418928da1a">broker</a>, <a class="el" href="#a72c01e2f4d6d2115d5b11f7330f75971">certFingerprint</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#a232ba38af05678ff7ae8bc1ab6ede034">netClientUq</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#ab2b5431473acbcaa5907d63743e9ca84">portNumber</a>, <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>, <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>, and <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>.</p>
+<p class="reference">References <a class="el" href="#ae97565fa36122cb841acbb418928da1a">broker</a>, <a class="el" href="#a72c01e2f4d6d2115d5b11f7330f75971">certFingerprint</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#a232ba38af05678ff7ae8bc1ab6ede034">netClientUq</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#ab2b5431473acbcaa5907d63743e9ca84">portNumber</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a728a903955e41f665a71722eaf16a492">loop()</a>.</p>
 
@@ -562,7 +569,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1ks_cert_fingerprint.html">ks
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
 
-<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="#ad3410bf2428ffe086fad10bbffb5384c">connectToBroker()</a>, <a class="el" href="classksf_1_1ks_simple_timer.html#a83285ce55d3a83397c2f72dd05d45dc6">ksf::ksSimpleTimer::hasTimePassed()</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#ac9219e05b7ebd1c2614a36bb8155efe7">mqttConnectedInternal()</a>, <a class="el" href="#aacb8a4b214c5ea6d71c74469fec167ce">onDisconnected</a>, <a class="el" href="#af7928b7e420a6e8b98b17e5b43127d27">reconnectCounter</a>, <a class="el" href="#adac57d480a69d329fa59cf5ec897978b">reconnectTimer</a>, <a class="el" href="classksf_1_1ks_simple_timer.html#a7115f8d5cbd0be313e002f569e518879">ksf::ksSimpleTimer::restart()</a>, <a class="el" href="#afc9123d68f055d4709f9f455cfb655f9">wasConnected</a>, and <a class="el" href="#a00194e36edb73cbc7db830d42490fff4">wifiConnWp</a>.</p>
+<p class="reference">References <a class="el" href="classksf_1_1evt_1_1ks_event.html#ac672facd2bd8e5084f8251b228d2cf4f">ksf::evt::ksEvent&lt; Params &gt;::broadcast()</a>, <a class="el" href="#ad3410bf2428ffe086fad10bbffb5384c">connectToBroker()</a>, <a class="el" href="classksf_1_1ks_simple_timer.html#a83285ce55d3a83397c2f72dd05d45dc6">ksf::ksSimpleTimer::hasTimePassed()</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#ac9219e05b7ebd1c2614a36bb8155efe7">mqttConnectedInternal()</a>, <a class="el" href="#aacb8a4b214c5ea6d71c74469fec167ce">onDisconnected</a>, <a class="el" href="#af7928b7e420a6e8b98b17e5b43127d27">reconnectCounter</a>, <a class="el" href="#adac57d480a69d329fa59cf5ec897978b">reconnectTimer</a>, <a class="el" href="classksf_1_1ks_simple_timer.html#a7115f8d5cbd0be313e002f569e518879">ksf::ksSimpleTimer::restart()</a>, and <a class="el" href="#a00194e36edb73cbc7db830d42490fff4">wifiConnWp</a>.</p>
 
 </div>
 </div>

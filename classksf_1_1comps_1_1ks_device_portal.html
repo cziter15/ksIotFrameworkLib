@@ -239,10 +239,15 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classksf_1_1ks_application.html">ksf::ksApplication</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>app</b> {nullptr}</td></tr>
 <tr class="memdesc:a0ed6c88eac9a0254d732d74566ca12b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application pointer. <br /></td></tr>
 <tr class="separator:a0ed6c88eac9a0254d732d74566ca12b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a573eb03602ce8a4352af1963ff80b748" id="r_a573eb03602ce8a4352af1963ff80b748"><td class="memItemLeft" align="right" valign="top"><a id="a573eb03602ce8a4352af1963ff80b748" name="a573eb03602ce8a4352af1963ff80b748"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>breakApp</b>: 1 {false}</td></tr>
-<tr class="memdesc:a573eb03602ce8a4352af1963ff80b748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to restart chip. <br /></td></tr>
-<tr class="separator:a573eb03602ce8a4352af1963ff80b748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f561363239b58eaa3deea22d780b4c1" id="r_a9f561363239b58eaa3deea22d780b4c1"><td class="memItemLeft" ><a id="a9f561363239b58eaa3deea22d780b4c1" name="a9f561363239b58eaa3deea22d780b4c1"></a>
+struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af94f6e09ebe49eaae578cc9094721381" id="r_af94f6e09ebe49eaae578cc9094721381"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>breakApp</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:af94f6e09ebe49eaae578cc9094721381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to break app logic. <br /></td></tr>
+<tr class="separator:af94f6e09ebe49eaae578cc9094721381"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f561363239b58eaa3deea22d780b4c1" id="r_a9f561363239b58eaa3deea22d780b4c1"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>bitflags</b> = {false}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a9f561363239b58eaa3deea22d780b4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a936722fcf49ca3cd49b58ad6fe207e22" id="r_a936722fcf49ca3cd49b58ad6fe207e22"><td class="memItemLeft" align="right" valign="top"><a id="a936722fcf49ca3cd49b58ad6fe207e22" name="a936722fcf49ca3cd49b58ad6fe207e22"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>logKeepAliveTimestamp</b> {0}</td></tr>
 <tr class="memdesc:a936722fcf49ca3cd49b58ad6fe207e22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating whether logs are enabled. <br /></td></tr>
@@ -627,7 +632,7 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
 
-<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="#a08bf056d0703b80eebf334e2e3830813">arduinoOTA</a>, <a class="el" href="#a573eb03602ce8a4352af1963ff80b748">breakApp</a>, <a class="el" href="#a9d9ecd302b4ef31f3778baf91eed0e48">dnsServer</a>, <a class="el" href="#ac0a6eac49ee8ccd90f1f074b0e097ef2">lastLoopExecutionTimestamp</a>, <a class="el" href="#a936722fcf49ca3cd49b58ad6fe207e22">logKeepAliveTimestamp</a>, <a class="el" href="#ae705cc9a95902b82e08c6d87340cb380">loopExecutionTime</a>, <a class="el" href="#a4fafe81b3100c79214a84bec4b093556">scanNetworkTimestamp</a>, <a class="el" href="#aed3161ec11cf98fc8afa61e0868596ad">webServer</a>, and <a class="el" href="#a70a982a1a01f3ae4011d6b78f2dcedbc">webSocket</a>.</p>
+<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="#a08bf056d0703b80eebf334e2e3830813">arduinoOTA</a>, <a class="el" href="#a9d9ecd302b4ef31f3778baf91eed0e48">dnsServer</a>, <a class="el" href="#ac0a6eac49ee8ccd90f1f074b0e097ef2">lastLoopExecutionTimestamp</a>, <a class="el" href="#a936722fcf49ca3cd49b58ad6fe207e22">logKeepAliveTimestamp</a>, <a class="el" href="#ae705cc9a95902b82e08c6d87340cb380">loopExecutionTime</a>, <a class="el" href="#a4fafe81b3100c79214a84bec4b093556">scanNetworkTimestamp</a>, <a class="el" href="#aed3161ec11cf98fc8afa61e0868596ad">webServer</a>, and <a class="el" href="#a70a982a1a01f3ae4011d6b78f2dcedbc">webSocket</a>.</p>
 
 </div>
 </div>
