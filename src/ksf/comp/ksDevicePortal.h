@@ -53,8 +53,10 @@ namespace ksf::comps
 
 		protected:
 			ksf::ksApplication* app{nullptr};							//!< Application pointer.
+			struct{
+				bool breakApp : 1;										//!< Flag to break app logic.
+			} bitflags = {false};
 
-			bool breakApp : 1 {false};									//!< Flag to restart chip.
 			uint32_t logKeepAliveTimestamp{0};							//!< Flag indicating whether logs are enabled.
 			uint32_t lastLoopExecutionTimestamp{0};						//!< Time of last loop execution (us)/
 			uint32_t loopExecutionTime{0};								//!< Diff (loop exec time).
@@ -71,7 +73,7 @@ namespace ksf::comps
 			/*!
 				@brief Causes the application exit (and ksAppRotator to spawn and process next defined application).
 			*/
-			void requestAppBreak() { breakApp = true; }
+			void requestAppBreak() { bitflags.breakApp = true; }
 
 			/*!
 				@brief Triggers factory reset (erase config and reboot).

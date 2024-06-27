@@ -34,9 +34,14 @@ namespace ksf::comps
 			ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				//!< Wifi timer - long timeout in case of issues.
 			ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		//!< Wifi timer - reconnection timeout.
 			ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						//!< Wifi timer - IP check interval.
-			bool wasConnected : 1 {false};										//!< True if connected in previous loop.								//!< True if IP address is set.
-			bool savePower : 1 {true};											//!< True to save power.
-			bool gotIpAddress : 1{false};										//!< True if IP address is set.
+
+			struct
+			{
+				bool wasConnected : 1;											//!< True if connected in previous loop.
+				bool savePower : 1;												//!< True to save power.
+				bool gotIpAddress : 1;											//!< True if IP address is set.
+			} bitflags = {false, true, false};
+
 			/*!
 				@brief Internal method that generates MAC address for the device.
 				

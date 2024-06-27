@@ -57,9 +57,11 @@ namespace ksf
 				uint64_t lastSuccessConnectionTime{0};							//!< Time of connection to MQTT broker in seconds.
 				uint32_t reconnectCounter{0};									//!< MQTT reconnection counter.
 
-				bool sendConnectionStatus : 1 {true};							//!< Send connection status to MQTT or not.
-				bool usePersistentSession : 1 {false};							//!< Use persistent session or not.
-				bool wasConnected : 1 {false};									//!< True if connected in previous loop.
+				struct {
+					bool sendConnectionStatus : 1;								//!< Send connection status to MQTT or not.
+					bool usePersistentSession : 1;								//!< Use persistent session or not.
+					bool wasConnected : 1;										//!< True if connected in previous loop.
+				} bitflags = {true, false, true};
 
 				ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		//!< Timer that counts time between reconnection attempts.
 

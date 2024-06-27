@@ -31,8 +31,10 @@ namespace ksf::comps
 			uint32_t blinkIntervalMs{0};				//!< Intervals between state change (0 to disable blinking).
 			uint32_t blinkLoops{0};						//!< Number of state change cycles (0 for infinite loop).
 
-			bool driveAsActiveLow : 1 { false };		//!< True if the LED should be active low, otherwise false.
-			bool driveAsPushPull : 1 { false };			//!< True if the LED should be driven as push-pull, otherwise false.
+			struct {
+				bool activeLow : 1;						//!< True if the LED should be active low, otherwise false.
+				bool driveAsPushPull : 1;				//!< True if the LED should be driven as push-pull, otherwise false.
+			} bitflags = {false, false};
 
 		public:
 			/*!

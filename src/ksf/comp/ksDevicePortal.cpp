@@ -624,7 +624,7 @@ namespace ksf::comps
 		loopExecutionTime = micros() - lastLoopExecutionTimestamp;
 
 		/* Return from the app on request. */
-		if (breakApp)
+		if (bitflags.breakApp)
 			return false;
 
 		/* Handle OTA stuff. */

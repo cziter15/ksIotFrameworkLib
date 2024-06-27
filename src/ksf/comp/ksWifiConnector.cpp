@@ -38,8 +38,8 @@ namespace ksf::comps
 	}
 
 	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower) 
-		: savePower(savePower)
 	{
+		bitflags.savePower = savePower;
 #if ESP32
 		/* Disable STA mode. */
 		WiFi.enableSTA(false);
@@ -88,7 +88,7 @@ namespace ksf::comps
 			return false;
 
 		WiFi.begin(ssid.c_str(), pass.c_str());
-		WiFi.setSleep(savePower);
+		WiFi.setSleep(bitflags.savePower);
 
 		configTime(0, 0, "pool.ntp.org", "time.nist.gov");
 		
@@ -121,17 +121,17 @@ namespace ksf::comps
 			re-enabling it, the device was not able to reconnect to the router.
 		*/
 		if (wifiIpCheckTimer.triggered())
-			gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
+			bitflags.gotIpAddress = WiFi.localIP().operator uint32_t() != 0;
 
 		if (!isConnected())
 		{
 			if (wifiTimeoutTimer.triggered())
 				return false;
 
-			if (wasConnected)
+			if (bitflags.wasConnected)
 			{
 				esp_wifi_disconnect();
-				wasConnected = false;
+				bitflags.wasConnected = false;
 				wifiDisconnectedInternal();
 			}
 
@@ -146,9 +146,9 @@ namespace ksf::comps
 			wifiReconnectTimer.restart();
 			wifiTimeoutTimer.restart();
 
-			if (!wasConnected)
+			if (!bitflags.wasConnected)
 			{
-				wasConnected = true;
+				bitflags.wasConnected = true;
 				wifiConnectedInternal();
 			}
 		}
@@ -158,7 +158,7 @@ namespace ksf::comps
 
 	bool ksWifiConnector::isConnected() const
 	{
-		return WiFi.isConnected() && gotIpAddress;
+		return WiFi.isConnected() && bitflags.gotIpAddress;
 	}
 
 	ksWifiConnector::~ksWifiConnector()

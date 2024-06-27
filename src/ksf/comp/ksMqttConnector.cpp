@@ -36,8 +36,10 @@ namespace ksf::comps
 	ksMqttConnector::~ksMqttConnector() = default;
 
 	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus, bool usePersistentSession)
-		: sendConnectionStatus(sendConnectionStatus), usePersistentSession(usePersistentSession)
-	{}
+	{
+		bitflags.sendConnectionStatus = sendConnectionStatus;
+		bitflags.usePersistentSession = usePersistentSession;
+	}
 
 	bool ksMqttConnector::init(ksApplication* app)
 	{
@@ -162,7 +164,7 @@ namespace ksf::comps
 
 	bool ksMqttConnector::connectToBroker()
 	{
-		if (sendConnectionStatus)
+		if (bitflags.sendConnectionStatus)
 		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
@@ -192,7 +194,7 @@ namespace ksf::comps
 			}
 
 			std::string willTopic{prefix + PSTR("connected")};
-			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !usePersistentSession))
+			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !bitflags.usePersistentSession))
 			{
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
@@ -210,16 +212,16 @@ namespace ksf::comps
 			return false;
 		}
 
-		return mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !usePersistentSession);
+		return mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !bitflags.usePersistentSession);
 	}
 
 	bool ksMqttConnector::loop(ksApplication* app)
 	{
 		if (!mqttClientUq->loop())
 		{
-			if (wasConnected)
+			if (bitflags.wasConnected)
 			{
-				wasConnected = false;
+				bitflags.wasConnected = false;
 				reconnectTimer.restart();
 				onDisconnected->broadcast();
 			}
@@ -230,7 +232,7 @@ namespace ksf::comps
 					if (wifiConnSp->isConnected() && connectToBroker())
 					{
 						++reconnectCounter;
-						wasConnected = true;
+						bitflags.wasConnected = true;
 						mqttConnectedInternal();
 					}
 
