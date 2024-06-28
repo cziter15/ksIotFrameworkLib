@@ -164,35 +164,35 @@ namespace ksf::comps
 
 	bool ksMqttConnector::connectToBroker()
 	{
-		if (bitflags.sendConnectionStatus)
+#ifdef APP_LOG_ENABLED
+		app->log([&](std::string& out) {
+			out += PSTR("[MQTT] Connecting to MQTT broker...");
+		});
+#endif
+		/* If host is an IP Address, use it. Otherwise use domain name. */
+		if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
+			netClientUq->connect(serverIP, portNumber);
+		else 
+			netClientUq->connect(this->broker.c_str(), portNumber);
+
+		/* If not connected, return. */
+		if (!netClientUq->connected())
+			return false;
+
+		/* Verify certificate fingerprint. */
+		if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
 		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
-				out += PSTR("[MQTT] Connecting to MQTT broker...");
+				out += PSTR("[MQTT] Invalid certificate fingerprint! Disconnecting.");
 			});
 #endif
-			/* If host is an IP Address, use it. Otherwise use domain name. */
-			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
-				netClientUq->connect(serverIP, portNumber);
-			else 
-				netClientUq->connect(this->broker.c_str(), portNumber);
+			netClientUq->stop();
+			return false;
+		}
 
-			/* If not connected, return. */
-			if (!netClientUq->connected())
-				return false;
-
-			/* Verify certificate fingerprint. */
-			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
-			{
-#ifdef APP_LOG_ENABLED
-				app->log([&](std::string& out) {
-					out += PSTR("[MQTT] Invalid certificate fingerprint! Disconnecting.");
-				});
-#endif
-				netClientUq->stop();
-				return false;
-			}
-
+		if (bitflags.sendConnectionStatus)
+		{
 			std::string willTopic{prefix + PSTR("connected")};
 			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !bitflags.usePersistentSession))
 			{
@@ -204,7 +204,6 @@ namespace ksf::comps
 					out += std::to_string(portNumber);
 				});
 #endif
-
 				mqttClientUq->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
 				return true;
 			}
