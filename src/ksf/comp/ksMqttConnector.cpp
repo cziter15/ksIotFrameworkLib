@@ -11,7 +11,6 @@
 	#include <esp_wifi.h>
 	#include <WiFi.h>
 	#include <WiFiClientSecure.h>
-	#include <lwip/dns.h>
 #elif ESP8266
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
@@ -175,13 +174,7 @@ namespace ksf::comps
 		if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 			netClientUq->connect(serverIP, portNumber);
 		else 
-		{
-#if ESP32
-			/* Clear DNS cache, it sometimes cause issues with no-ip connection. */
-			dns_clear_cache();
-#endif
 			netClientUq->connect(this->broker.c_str(), portNumber);
-		}
 
 		/* If not connected, return. */
 		if (!netClientUq->connected())
