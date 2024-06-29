@@ -11,7 +11,7 @@
 		{"name": "Krzysztof Strehlau"}
 	],
 	"build": {
-		"flags": "-std=gnu++17 -DNO_GLOBAL_ARDUINO_OTA=1 -DWEBSOCKETS_SAVE_RAM=1"
+		"extraScript": "platformio/libsetup.py"
 	},
 	"license": "MIT",
 	"dependencies": {
