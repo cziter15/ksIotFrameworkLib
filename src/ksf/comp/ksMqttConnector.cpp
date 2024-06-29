@@ -83,7 +83,8 @@ namespace ksf::comps
 		
 		/* Set socket timeouts. */
 		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_MS);
-#if ESP32
+		
+#if (ESP32 && ESP_ARDUINO_VERSION_MAJOR >= 3)
 		netClientUq->setConnectionTimeout(KSF_MQTT_TIMEOUT_MS);
 #endif
 		
