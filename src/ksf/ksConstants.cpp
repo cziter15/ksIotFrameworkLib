@@ -68,6 +68,10 @@ namespace ksf
 		WiFi.mode(WIFI_OFF);
 		WiFi.setAutoReconnect(false);
 
+#if ESP32
+		WiFi.enableIPv6();
+#endif
+
 		/* Create NVS directory. */
 		if (auto nvsDir{getNvsDirectory()}; !LittleFS.exists(nvsDir))
 			LittleFS.mkdir(nvsDir);
