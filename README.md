@@ -12,10 +12,10 @@
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054)
 
 > [!IMPORTANT]  
-> This library supports Arduino 3.0.2 on ESP32. However, due to [Platformio statement](https://github.com/platformio/platform-espressif32/issues/1225) it will not automatically pull latest versions.
-> If you want latest version support, set your platform to my fork in your `platformio.ini` file.
+> This library targets Arduino 3+ on ESP32. However, due to [Platformio statement](https://github.com/platformio/platform-espressif32/issues/1225) it will not automatically pull latest versions.
+> If you want latest version support, set your platform to my fork in your `platformio.ini` file. This platform fork is provided by @Jason2866.
 > 
-> ```platform = https://github.com/cziter15/platform-espressif32.git```
+> ```platform = https://github.com/pioarduino/platform-espressif32.git```
 
 > [!IMPORTANT]  
 > When it comes to ESP8266, latest version supported is based on SDK305. To use it, add `-DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305` to your build flags.
