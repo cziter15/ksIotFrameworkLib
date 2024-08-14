@@ -131,13 +131,13 @@ When it comes to ESP8266, latest version supported is based on SDK305. To use it
 <div class="line">    subgraph Application::Loop</div>
 <div class="line">        Loop{{For each component}} --&gt; CCS{State?}</div>
 <div class="line"> </div>
-<div class="line">        CCS --&gt; |Looping|LP1(Call component&#39;s loop)</div>
+<div class="line">        CCS --&gt; |Active|LP1(Call component&#39;s loop)</div>
 <div class="line">        CCS --&gt; |NotInitialized|LP2(Call component&#39;s init)</div>
 <div class="line">        CCS --&gt; |Initialized|LP3(Call component&#39;s postInit)</div>
-<div class="line">        CCS --&gt; |ToBeRemoved|LP4(Remove component)</div>
+<div class="line">        CCS --&gt; |ToRemove|LP4(Remove component)</div>
 <div class="line"> </div>
 <div class="line">    LP2 --&gt; SCS2(State -&gt; Initialized) --&gt; DF</div>
-<div class="line">    LP3 --&gt; SCS3(State -&gt; Looping) --&gt; DF</div>
+<div class="line">    LP3 --&gt; SCS3(State -&gt; Active) --&gt; DF</div>
 <div class="line">    LP1 --&gt; DF</div>
 <div class="line"> </div>
 <div class="line">        DF{Success?}</div>
