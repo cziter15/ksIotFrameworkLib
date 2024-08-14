@@ -31,13 +31,13 @@ namespace ksf
 			/*!
 				Component is "working" (postInit is called on transition from Initialized).
 			*/
-			Looping,
+			Active,
 			/*!
 				Component is marked to be removed. It will be removed within the next
 				component update, which can occur in current or next application loop. 
 				It depends on the order of components in the list.
 			*/
-			ToBeRemoved
+			ToRemove
 		};
 	}
 
