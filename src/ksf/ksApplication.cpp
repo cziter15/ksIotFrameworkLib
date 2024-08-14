@@ -50,7 +50,7 @@ namespace ksf
 				{
 					if (!comp->postInit(this))
 						return false;
-					comp->componentState = ksComponentState::Looping;
+					comp->componentState = ksComponentState::Active;
 				}
 				break;
 				
