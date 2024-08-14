@@ -24,14 +24,14 @@ namespace ksf
 
 			switch (comp->componentState)
 			{
-				case ksComponentState::Looping:
+				case ksComponentState::Active:
 				{
 					if (!comp->loop(this))
 						return false;
 				}
 				break;
 
-				case ksComponentState::ToBeRemoved:
+				case ksComponentState::ToRemove:
 				{
 					 it = components.erase(it);
 					 continue;
