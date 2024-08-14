@@ -48,13 +48,13 @@ flowchart TD
     subgraph Application::Loop
         Loop{{For each component}} --> CCS{State?}
 
-        CCS --> |Looping|LP1(Call component's loop)
+        CCS --> |Active|LP1(Call component's loop)
         CCS --> |NotInitialized|LP2(Call component's init)
         CCS --> |Initialized|LP3(Call component's postInit)
-        CCS --> |ToBeRemoved|LP4(Remove component)
+        CCS --> |ToRemove|LP4(Remove component)
 
 	LP2 --> SCS2(State -> Initialized) --> DF
-	LP3 --> SCS3(State -> Looping) --> DF
+	LP3 --> SCS3(State -> Active) --> DF
 	LP1 --> DF
 
         DF{Success?}
