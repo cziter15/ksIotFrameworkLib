@@ -38,5 +38,10 @@ jobs:
     - name: Deploy firmware artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: basoc-comfig-${{ github.run_id }}
+        name: basoc-esp8266-comfig-${{ github.run_id }}
         path: .pio/build/esp8266dev/firmware.bin
+    - name: Deploy firmware artifacts (esp8266)
+      uses: actions/upload-artifact@v3
+      with:
+        name: basoc-esp32-comfig-${{ github.run_id }}
+        path: .pio/build/esp32/firmware.bin
