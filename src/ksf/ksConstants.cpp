@@ -40,22 +40,22 @@ namespace ksf
 
 	void initializeFramework()
 	{
-#if ESP32
-		#if (ESP_ARDUINO_VERSION_MAJOR >= 3)
-			esp_task_wdt_config_t twdt_config = {
-				.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
-				.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,
-				.trigger_panic = false,
-			};
-			esp_task_wdt_reconfigure(&twdt_config);
-		#else
-			esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS * 1000, false);
-		#endif
+#if defined(ESP32)
+#if (ESP_ARDUINO_VERSION_MAJOR >= 3)
+		esp_task_wdt_config_t twdt_config = {
+			.timeout_ms = KSF_WATCHDOG_TIMEOUT_SECS * 1000,
+			.idle_core_mask = (1 << CONFIG_SOC_CPU_CORES_NUM) - 1,
+			.trigger_panic = false,
+		};
+		esp_task_wdt_reconfigure(&twdt_config);
+#else
+		esp_task_wdt_init(KSF_WATCHDOG_TIMEOUT_SECS * 1000, false);
+#endif
 		/* Initialize filesystem. */
 		LittleFS.begin(true);
 #endif
 
-#if ESP8266
+#if defined(ESP8266)
 		/* Setup watchdog. */
 		ESP.wdtEnable(KSF_WATCHDOG_TIMEOUT_SECS * 1000);
 
@@ -93,11 +93,11 @@ namespace ksf
 			return false;
 		for (auto entry{dir.openNextFile()}; entry; entry = dir.openNextFile())
 		{
-			#if ESP8266
-				std::string path{entry.fullName()};
-			#else
-				std::string path{entry.path()};
-			#endif
+#if defined(ESP8266)
+			std::string path{entry.fullName()};
+#else
+			std::string path{entry.path()};
+#endif
 
 			bool isDirectory{entry.isDirectory()};
 			entry.close();
@@ -121,11 +121,11 @@ namespace ksf
 	{
 		bool success{removeDirectory(getNvsDirectory())};
 
-		#if ESP8266
-			success &= !ESP.eraseConfig();
-		#elif ESP32
-			success &= nvs_flash_erase() != ESP_OK;
-		#endif
+#if defined(ESP8266)
+		success &= !ESP.eraseConfig();
+#elif defined(ESP32)
+		success &= nvs_flash_erase() != ESP_OK;
+#endif
 
 		return success;
 	}
@@ -186,7 +186,7 @@ namespace ksf
 	const std::string getResetReason()
 	{
 		auto otaBootType{getOtaBootType()};
-#if ESP32
+#if defined(ESP32)
 		switch (esp_reset_reason())
 		{
 			case ESP_RST_POWERON:
@@ -212,7 +212,7 @@ namespace ksf
 			default:
 				return PSTR("Unknown");
 		}
-#elif ESP8266
+#elif defined(ESP8266)
 		if (otaBootType != EOTAType::NO_OTA && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
 			return otaTypeToString(otaBootType);
 

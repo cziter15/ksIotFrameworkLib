@@ -31,16 +31,17 @@ namespace ksf::comps
 		ksWifiConfigurator(PSTR("KSFDevice"));
 	}
 	
+
 	ksWifiConfigurator::ksWifiConfigurator(std::string devicePrefixName)
 		 // As the device name is our field, we are able to move, it's better to do so than using const ref
 		: deviceName(std::move(devicePrefixName))
 	{
 		deviceName += '-';
-#if ESP32
+#if defined(ESP32)
 		deviceName += std::to_string(ESP.getEfuseMac());
-#elif ESP8266
+#elif defined(ESP8266)
 		deviceName += std::to_string(ESP.getChipId());
-#else			
+#else
 		#error Platform not implemented.
 #endif
 	}

@@ -16,7 +16,7 @@
 #include "../evt/ksEvent.h"
 #include "../ksSimpleTimer.h"
 
-#if (ESP32 && ESP_ARDUINO_VERSION_MAJOR >= 3)
+#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksMqttConnectorNetClient_t NetworkClient
 	#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
 #else

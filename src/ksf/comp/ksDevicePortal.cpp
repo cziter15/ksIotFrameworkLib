@@ -379,9 +379,9 @@ namespace ksf::comps
 		{
 			case WIFI_SCAN_FAILED:
 			{
-#if ESP32
+#if defined(ESP32)
 				WiFi.scanNetworks(true, false, true);
-#elif ESP8266
+#elif defined(ESP8266)
 				WiFi.scanNetworks(true, true);
 #else
 				#error Platform not implemented.
@@ -511,10 +511,10 @@ namespace ksf::comps
 		auto& upload{webServer->upload()};
 		if (upload.status == UPLOAD_FILE_START)
 		{
-#if ESP8266
+#if defined(ESP8266)
 			Update.runAsync(true);
 			auto maxSketchSpace{(ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000};
-#elif ESP32
+#elif defined(ESP32)
 			auto maxSketchSpace{UPDATE_SIZE_UNKNOWN};
 #else
 			#error Platform not implemented.
@@ -584,12 +584,12 @@ namespace ksf::comps
 		webServer->onNotFound(std::bind(&ksDevicePortal::onRequest_notFound, this));
 
 		/* Setup index page handler. */
-		webServer->on(FPSTR("/"), HTTP_GET, 
+		webServer->on(FPSTR("/"), HTTP_GET,
 			std::bind(&ksDevicePortal::onRequest_index, this)
 		);
 
 		/* Setup OTA update request handler. */
-		webServer->on("/api/flash", HTTP_POST, 
+		webServer->on("/api/flash", HTTP_POST,
 			std::bind(&ksDevicePortal::onRequest_otaFinish, this),	// Upload file part
 			std::bind(&ksDevicePortal::onRequest_otaChunk, this)	// Upload file end
 		);

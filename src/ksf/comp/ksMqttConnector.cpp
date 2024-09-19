@@ -169,13 +169,13 @@ namespace ksf::comps
 			});
 #endif
 
-#if ESP32
+#if defined(ESP32)
 			/* If host is an IP Address, use it. Otherwise use domain name. */
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber, KSF_MQTT_TIMEOUT_MS);
 			else 
 				netClientUq->connect(this->broker.c_str(), portNumber, KSF_MQTT_TIMEOUT_MS);
-#elif ESP8266
+#elif defined(ESP8266)
 			/* If host is an IP Address, use it. Otherwise use domain name. */
 			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber);
