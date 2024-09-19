@@ -12,9 +12,9 @@
 #include "ksDevStatMqttReporter.h"
 #include "ksMqttConnector.h"
 
-#if ESP32
+#if defined(ESP32)
 	#include <WiFi.h>
-#elif ESP8266
+#elif defined(ESP8266)
 	#include <ESP8266WiFi.h>
 #else			
 	#error Platform not implemented.

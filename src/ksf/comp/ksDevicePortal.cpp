@@ -66,9 +66,9 @@ namespace ksf::comps
 
 	inline uint64_t generateAuthToken(std::string& password)
 	{
-#if ESP32
+#if defined(ESP32)
 		uint64_t chipId{ESP.getEfuseMac()};
-#elif ESP8266
+#elif defined(ESP8266)
 		uint32_t chipId32{ESP.getChipId()};
 		uint64_t chipId{(uint64_t)chipId32 << 32 | ~chipId32};
 #else

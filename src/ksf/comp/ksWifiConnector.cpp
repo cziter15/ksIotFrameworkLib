@@ -7,11 +7,11 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#if ESP32
+#if defined(ESP32)
 	#include <WiFi.h>
 	#include <esp_wifi.h>
 	#include "lwip/dns.h"
-#elif ESP8266
+#elif defined(ESP8266)
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
 	#define esp_wifi_disconnect() wifi_station_disconnect()
@@ -40,7 +40,7 @@ namespace ksf::comps
 	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower) 
 	{
 		bitflags.savePower = savePower;
-#if ESP32
+#if defined(ESP32)
 		/* Disable STA mode. */
 		WiFi.enableSTA(false);
 		/* On ESP32 hostname must be set when not in STA mode. */
@@ -48,7 +48,7 @@ namespace ksf::comps
 #endif
 		WiFi.enableSTA(true);
 		setupMacAddress();
-#if ESP8266
+#if defined(ESP8266)
 		/* On ESP8266 hostname must be set when in STA mode. */
 		WiFi.setHostname(hostname);
 #endif

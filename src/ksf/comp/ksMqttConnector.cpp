@@ -7,11 +7,11 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#if ESP32
+#if defined(ESP32)
 	#include <esp_wifi.h>
 	#include <WiFi.h>
 	#include <WiFiClientSecure.h>
-#elif ESP8266
+#elif defined(ESP8266)
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
 	#include <WiFiClientSecure.h>
