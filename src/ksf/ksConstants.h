@@ -150,16 +150,22 @@ namespace ksf
 
 		@return A string representing the hexadecimal value of the input integer.
 	*/
-	inline std::string to_hex(int value) 
+	inline std::string to_hex(int value)
 	{
-		std::string hex;
-		while (value != 0) {
-			int nibble = value & 0xf;
-			char c = (nibble < 10) ? ('0' + nibble) : ('a' + (nibble - 10));
-			hex = c + hex;
-			value >>= 4;
+		if (value == 0)
+			return {"0"};
+
+		unsigned int uvalue{static_cast<unsigned int>(value)};
+		char buffer[8];
+		int pos{8}; 
+		while (uvalue != 0) 
+		{
+			int nibble{uvalue & 0xf};
+			buffer[--pos] = (nibble < 10) ? ('0' + nibble) : ('a' + (nibble - 10));
+			uvalue >>= 4;
 		}
-		return hex;
+
+		return std::string(buffer + pos, 8 - pos);
 	}
 
 	/*!
