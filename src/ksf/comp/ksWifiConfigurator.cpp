@@ -37,14 +37,9 @@ namespace ksf::comps
 		: deviceName(std::move(devicePrefixName))
 	{
 		deviceName += '-';
-#if defined(ESP32)
-		deviceName += std::to_string(ESP.getEfuseMac());
-#elif defined(ESP8266)
-		deviceName += std::to_string(ESP.getChipId());
-#else
-		#error Platform not implemented.
-#endif
+		deviceName += ksf::getDeviceUuidHex();
 	}
+
 
 	bool ksWifiConfigurator::init(ksApplication* app)
 	{

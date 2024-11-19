@@ -130,6 +130,17 @@ namespace ksf
 		return success;
 	}
 
+	std::string getDeviceUuidHex()
+	{
+		#if defined(ESP32)
+			return ksf::to_hex(ESP.getEfuseMac());
+		#elif defined(ESP8266)
+			return ksf::to_hex(ESP.getChipId());
+		#endif
+			
+		return {};
+	}
+
 	void saveOtaBootIndicator(EOTAType::Type type)
 	{
 		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, PSTR("w"))})
