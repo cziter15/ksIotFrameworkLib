@@ -175,12 +175,12 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">if</span> (value == 0)</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            <span class="keywordflow">return</span> {<span class="stringliteral">&quot;0&quot;</span>};</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uvalue{<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span><span class="keyword">&gt;</span>(value)};</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordtype">char</span> buffer[8];</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordtype">int</span> pos{8}; </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        <span class="keywordtype">char</span> buffer[8];</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uvalue{<span class="keyword">static_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span><span class="keyword">&gt;</span>(value)}, pos{8};</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">while</span> (uvalue != 0) </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        {</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordtype">int</span> nibble{uvalue &amp; 0xf};</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> nibble{uvalue &amp; 0xf};</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>            buffer[--pos] = (nibble &lt; 10) ? (<span class="charliteral">&#39;0&#39;</span> + nibble) : (<span class="charliteral">&#39;a&#39;</span> + (nibble - 10));</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            uvalue &gt;&gt;= 4;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
