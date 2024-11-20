@@ -155,12 +155,12 @@ namespace ksf
 		if (value == 0)
 			return {"0"};
 
-		unsigned int uvalue{static_cast<unsigned int>(value)};
 		char buffer[8];
-		int pos{8}; 
+		unsigned int uvalue{static_cast<unsigned int>(value)}, pos{8};
+		
 		while (uvalue != 0) 
 		{
-			int nibble{uvalue & 0xf};
+			unsigned int nibble{uvalue & 0xf};
 			buffer[--pos] = (nibble < 10) ? ('0' + nibble) : ('a' + (nibble - 10));
 			uvalue >>= 4;
 		}
