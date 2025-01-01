@@ -23,6 +23,12 @@ namespace ksf
 		this->intervalMs = intervalMs;
 		restart();
 	}
+	
+	void ksSimpleTimer::makeExpired()
+	{
+		if (!hasTimePassed())
+			lastTriggerTimeMs -= intervalMs;
+	}
 
 	bool ksSimpleTimer::hasTimePassed() const
 	{

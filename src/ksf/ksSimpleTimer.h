@@ -53,6 +53,11 @@ namespace ksf
 				@return True if timer just triggered, otherwise false.
 			*/
 			bool triggered();
+
+			/*!
+				@brief Makes the timer expired by substracing interval from last trigger time.
+			*/
+			void makeExpired();
 			
 			/*!
 				@brief Checks if timer interval just passed. Restarting timer relies on user.
