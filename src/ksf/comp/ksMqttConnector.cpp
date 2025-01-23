@@ -96,7 +96,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::mqttConnectedInternal()
 	{
-		lastSuccessConnectionTime = millis64();
+		lastSuccessConnectionTime = ksf::millis64();
 		mqttClientUq->setCallback(std::bind(&ksMqttConnector::mqttMessageInternal, this, _1, _2, _3));
 		onConnected->broadcast();
 	}
