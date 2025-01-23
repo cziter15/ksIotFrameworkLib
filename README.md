@@ -141,6 +141,7 @@ This is very flexible, because you can even raise fail (false) from application'
 
 ## 📑 Dependencies
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
+- **Unfortunately PlatformIO is not oficially supporting latest Arduino ports for ESP32, ksIotFrameworkLib is targeting it using pioarduino fork.**
 
 ### 🔡 Frameworks
 - Arduino for ESP32 [ https://github.com/espressif/arduino-esp32 ]
