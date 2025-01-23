@@ -259,6 +259,6 @@ namespace ksf::comps
 
 	uint32_t ksMqttConnector::getConnectionTimeSeconds() const
 	{
-		return isConnected() ? ((millis64() - lastSuccessConnectionTime) / KSF_ONE_SEC_MS) : 0;
+		return isConnected() ? ((ksf::millis64() - lastSuccessConnectionTime) / KSF_ONE_SEC_MS) : 0;
 	}
 }
