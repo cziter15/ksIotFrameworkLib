@@ -137,7 +137,7 @@ This is very flexible, because you can even raise fail (false) from application'
 ## 🔥 Saving power
 - By default, this framework supports enables power saving for the modem.
 - Automatic modem sleep requires the DTIM to be set on the access point. 
-- The best value for was 3. It allows the ESP32 to go down from around 100mA to 20mA.
+- The best value for me was 3. It allows the ESP32 to go down from around 100mA to 20mA.
 
 ## 📑 Dependencies
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
