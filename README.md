@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
 
 [![Depends on PlatformIO](https://img.shields.io/badge/Depends%20on-PlatformIO-orange?logo=platformio)](https://platformio.org)
-[![Depends on PioArduino](https://img.shields.io/badge/Depends%20on-PlatformIO-orange?logo=pioarduino)](https://github.com/pioarduino)
+[![Depends on PioArduino](https://img.shields.io/badge/Depends%20on-PioArduino-orange?logo=pioarduino)](https://github.com/pioarduino)
 [![Hits-of-Code](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib)](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib/view)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/commits/master)
 
