@@ -477,6 +477,9 @@ namespace ksf::comps
 					case EConfigParamType::Number:
 						response += PSTR("number");
 					break;
+					case EConfigParamType::Checkbox:
+						response += PSTR("checkbox");
+					break;
 				}
 
 				response += PSTR("\"},");

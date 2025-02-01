@@ -27,9 +27,10 @@ namespace ksf::comps
 		*/
 		enum Type
 		{
-			Text,
-			Password,
-			Number
+			Text,		// Renders a text field in the configurator. Value will be read as string.
+			Password,	// Renders a password field in the configurator. Text field will be hidden but value will still be read.
+			Number,		// Renders a number field in the configurator. Value will be read as string.
+			Checkbox	// Renders a checkbox in the configurator, the value will be read as "enabled" or "disabled" string.
 		};
 	};
 
