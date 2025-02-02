@@ -12,6 +12,7 @@
 #include <Arduino.h>
 #include <stdint.h>
 #include <memory>
+#include <IPAddress.h>
 
 #include "ksApplication.h"
 

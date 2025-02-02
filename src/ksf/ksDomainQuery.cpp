@@ -88,71 +88,84 @@ namespace ksf
 
 	void ksDomainQuery::receiveResponse()
 	{
+		/* Check if we have a response. */
 		if (udp->parsePacket() == 0) 
-			return;  // No data available
+			return;
 
-		uint8_t buffer[512];  // DNS responses are usually small, 512 bytes max for UDP
-		int len{udp->read(buffer, sizeof(buffer))};
+		/* Read the response. */
+		uint8_t buffer[512];
+		size_t len{static_cast<size_t>(udp->read(buffer, sizeof(buffer)))};
 		if (len < 12) 
-			return; // Minimum DNS header size
+			return;
 
-		// Validate transaction ID
+		/* Check the response ID. */
 		auto responseID{(buffer[0] << 8) | buffer[1]};
 		if (responseID != transactionID) 
-			return;  // Ignore mismatched responses
+			return;
 
-		// Check if response contains at least one answer
-		auto qdCount{(buffer[4] << 8) | buffer[5]};
+		/* Check if the response contains at least one answer. */
 		auto anCount{(buffer[6] << 8) | buffer[7]};
 		if (anCount == 0) 
-			return;  // No answers found
+			return;
 
-		// Skip the query section
+		/* Parse the header. */
 		size_t pos{12};
 		while (pos < len && buffer[pos] != 0x00) 
 			pos++;  // Skip domain name
 		pos += 5;  // Skip null terminator, QTYPE (2 bytes), and QCLASS (2 bytes)
 
-		// Parse the answer section
-		for (int i{0}; i < anCount; i++) 
+		/* Parse the answers. */
+		for (ssize_t i{0}; i < anCount; i++) 
 		{
 			while (pos < len && buffer[pos] >= 192) 
 				pos += 2; // Skip name (compressed)
 
+			/* Ensure we have enough data for the answer header. */
 			if (pos + 10 > len) 
-				return;  // Ensure we have enough data for the answer header
+				return;
 
+			/* Parse the answer header. */
 			auto type{(buffer[pos + 0] << 8) | buffer[pos + 1]};
 			auto dataLength{(buffer[pos + 8] << 8) | buffer[pos + 9]};
 			pos += 10;
 
+			/* Check if this is an A record. */
 			if (type == 1 && dataLength == 4 && pos + 4 <= len) 
 			{
+				/* Resolve the IP address. */
 				resolvedIP = IPAddress(buffer[pos], buffer[pos + 1], buffer[pos + 2], buffer[pos + 3]);
 				return;
 			}
 
-			pos += dataLength;  // Skip non-A records
+			pos += dataLength;
 		}
 	}
 
 	void ksDomainQuery::process()
 	{
-		if (!domain.empty() && resolvedIP.operator uint32_t() == 0)
+		/* Return if the domain is empty or if we have a valid IP. */
+		if (domain.empty())
+			return;
+
+		/* If we have a valid IP, return immediately, we're done. */
+		if (resolvedIP.operator uint32_t() != 0)
+			return;
+
+		/* Check if it's time to send a query. */
+		if (lastQuerySendTimeMs == 0 || millis() - lastQuerySendTimeMs > queryIntervalMs)
 		{
-			if (lastQuerySendTimeMs == 0 || millis() - lastQuerySendTimeMs > queryIntervalMs)
-			{
-				// If we have a valid IP, return immediately, we're done.
-				if (resolvedIP.fromString(domain.c_str()))
-					return;
+			/* If there's a valid IP, return immediately, we're done. */
+			if (resolvedIP.fromString(domain.c_str()))
+				return;
 
-				// Otherwise, send a query.
-				sendQuery();
-				lastQuerySendTimeMs = millis();
-			}
+			/* Send the DNS query. */
+			sendQuery();
 
-			// Receive response from the DNS server.
-			receiveResponse();
+			/* Update the last query send time. */
+			lastQuerySendTimeMs = millis();
 		}
+
+		/* Check if we have a response. */
+		receiveResponse();
 	}
 }

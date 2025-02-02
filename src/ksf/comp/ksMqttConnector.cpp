@@ -87,7 +87,7 @@ namespace ksf::comps
 		this->login = std::move(login);
 		this->password = std::move(password);
 		this->prefix = std::move(prefix);
-		this->domainQuery.setDomain(std::move(broker));
+		this->domainResolver.setDomain(std::move(broker));
 		ksf::from_chars(port, portNumber);
 
 		/* Create MQTT client. */
@@ -175,7 +175,7 @@ namespace ksf::comps
 			});
 #endif
 			IPAddress serverIP;
-			if (!domainQuery.getResolvedIP(serverIP))
+			if (!domainResolver.getResolvedIP(serverIP))
 			{
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
