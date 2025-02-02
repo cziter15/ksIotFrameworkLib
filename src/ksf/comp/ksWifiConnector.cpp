@@ -26,17 +26,6 @@
 
 namespace ksf::comps
 {
-	inline void overrideDnsWithGoogleDns()
-	{
-		/* Define override DNS addresses. */
-		static const ip_addr primaryDns{LWIP_MAKEU32(8, 8, 8, 8)};
-		static const ip_addr secondaryDns{LWIP_MAKEU32(8, 8, 4, 4)};
-		
-		/* Set DNS servers. */
-		dns_setserver(0, &primaryDns);
-		dns_setserver(1, &secondaryDns);
-	}
-
 	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower) 
 	{
 		bitflags.savePower = savePower;
@@ -95,22 +84,6 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksWifiConnector::wifiConnectedInternal()
-	{
-		/*
-			There is a bug in Arduino-esp8266 core which causes domain-based connections to fail in a specific case.
-			Easiest way to trigger the issue is to use LTE router and disconnect SIM card for a few seconds.
-			This will cause MQTT to disconnect and fail on each reconnect forever untill device reboot.
-			Manual DNS override resolves the issue. It might be also good idea to set default gateway as DNS.
-		*/
-		onConnected->broadcast();
-	}
-
-	void ksWifiConnector::wifiDisconnectedInternal()
-	{
-		onDisconnected->broadcast();
-	}
-
 	bool ksWifiConnector::loop(ksApplication* app)
 	{
 		/*
@@ -131,7 +104,7 @@ namespace ksf::comps
 			{
 				esp_wifi_disconnect();
 				bitflags.wasConnected = false;
-				wifiDisconnectedInternal();
+				onDisconnected->broadcast();
 			}
 
 			if (wifiReconnectTimer.hasTimePassed())
@@ -148,7 +121,7 @@ namespace ksf::comps
 			if (!bitflags.wasConnected)
 			{
 				bitflags.wasConnected = true;
-				wifiConnectedInternal();
+				onConnected->broadcast();
 			}
 		}
 

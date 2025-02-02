@@ -50,16 +50,6 @@ namespace ksf::comps
 			*/
 			void setupMacAddress();
 
-			/*!
-				@brief Internal method called on WiFi connection.
-			*/
-			void wifiConnectedInternal();
-
-			/*!
-				@brief Internal method called on WiFi disconnection.
-			*/
-			void wifiDisconnectedInternal();
-
 		public:
 			DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
 			DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
