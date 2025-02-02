@@ -243,6 +243,7 @@ namespace ksf::comps
 	bool ksMqttConnector::loop(ksApplication* app)
 	{
 		domainResolver.process();
+		
 		if (!mqttClientUq->loop())
 		{
 			if (bitflags.wasConnected)
