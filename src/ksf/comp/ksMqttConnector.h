@@ -15,6 +15,7 @@
 #include "../ksComponent.h"
 #include "../evt/ksEvent.h"
 #include "../ksSimpleTimer.h"
+#include "../ksDomainQuery.h"
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksMqttConnectorNetClient_t NetworkClient
@@ -49,6 +50,8 @@ namespace ksf
 #if APP_LOG_ENABLED
 				ksApplication* app{nullptr};									//!< Application pointer.
 #endif
+
+				ksDomainQuery domainResolver;									//!< Domain query used to resolve MQTT broker address.
 				std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
 				std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 
@@ -68,7 +71,6 @@ namespace ksf
 				std::string login;												//!< Saved MQTT login.
 				std::string password;											//!< Saved MQTT password.
 				std::string prefix;												//!< Saved MQTT prefix.
-				std::string broker;												//!< Saved MQTT broker.
 				uint16_t portNumber{1883};										//!< Saved MQTT port number.
 
 				std::unique_ptr<ksCertFingerprint> certFingerprint;				//!< Shared pointer to fingerprint validator.

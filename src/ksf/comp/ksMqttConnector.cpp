@@ -87,13 +87,19 @@ namespace ksf::comps
 		this->login = std::move(login);
 		this->password = std::move(password);
 		this->prefix = std::move(prefix);
-		this->broker = std::move(broker);
+		this->domainQuery.setDomain(std::move(broker));
 		ksf::from_chars(port, portNumber);
 
 		/* Create MQTT client. */
 		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
 	}
 
+	/*!
+		@brief Called when MQTT connection is established.
+		
+		This method is called after MQTT connection is established successfully.
+		It sets up the callback for incoming MQTT messages and broadcasts the onConnected event.
+	*/
 	void ksMqttConnector::mqttConnectedInternal()
 	{
 		lastSuccessConnectionTime = ksf::millis64();
@@ -168,22 +174,34 @@ namespace ksf::comps
 				out += PSTR("[MQTT] Connecting to MQTT broker...");
 			});
 #endif
+			IPAddress serverIP;
+			if (!domainQuery.getResolvedIP(serverIP))
+			{
+#ifdef APP_LOG_ENABLED
+				app->log([&](std::string& out) {
+					out += PSTR("[MQTT] Failed to resolve MQTT broker IP address!");
+				});
+#endif
+				return false;
+			} 
 
+			if (serverIP.operator uint32_t() != 0)
+			{
+#ifdef APP_LOG_ENABLED
+				app->log([&](std::string& out) {
+					out += PSTR("[MQTT] Connecting to the resolved IP address: ");
+					out += std::string(serverIP.toString().c_str());
+				});
+#endif
 #if defined(ESP32)
-			/* If host is an IP Address, use it. Otherwise use domain name. */
-			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber, KSF_MQTT_TIMEOUT_MS);
-			else 
-				netClientUq->connect(this->broker.c_str(), portNumber, KSF_MQTT_TIMEOUT_MS);
 #elif defined(ESP8266)
-			/* If host is an IP Address, use it. Otherwise use domain name. */
-			if (IPAddress serverIP; serverIP.fromString(this->broker.c_str()))
 				netClientUq->connect(serverIP, portNumber);
-			else 
-				netClientUq->connect(this->broker.c_str(), portNumber);
 #else
 			#error "Unsupported platform"
 #endif
+			}
+
 			/* If not connected, return. */
 			if (!netClientUq->connected())
 				return false;
@@ -206,7 +224,7 @@ namespace ksf::comps
 #ifdef APP_LOG_ENABLED
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Connected successfully to ");
-					out += broker;
+					out += std::string(serverIP.toString().c_str());
 					out += PSTR(" on port ");
 					out += std::to_string(portNumber);
 				});
@@ -224,6 +242,7 @@ namespace ksf::comps
 
 	bool ksMqttConnector::loop(ksApplication* app)
 	{
+		domainResolver.process();
 		if (!mqttClientUq->loop())
 		{
 			if (bitflags.wasConnected)
@@ -231,6 +250,7 @@ namespace ksf::comps
 				bitflags.wasConnected = false;
 				reconnectTimer.restart();
 				onDisconnected->broadcast();
+				domainResolver.invalidate();
 			}
 			else if (reconnectTimer.hasTimePassed())
 			{

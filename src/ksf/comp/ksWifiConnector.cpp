@@ -103,7 +103,6 @@ namespace ksf::comps
 			This will cause MQTT to disconnect and fail on each reconnect forever untill device reboot.
 			Manual DNS override resolves the issue. It might be also good idea to set default gateway as DNS.
 		*/
-		overrideDnsWithGoogleDns();
 		onConnected->broadcast();
 	}
 

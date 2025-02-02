@@ -370,6 +370,10 @@ namespace ksf::comps
 
 		response += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
 		response += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
+		response += PSTR("\"},{\"name\":\"DNS servers\",\"value\":\"");
+		response += WiFi.dnsIP().toString().c_str();
+		response += ", ";
+		response += WiFi.dnsIP(1).toString().c_str();
 		response += PSTR("\"}]");
 	}
 
