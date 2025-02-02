@@ -250,8 +250,8 @@ namespace ksf::comps
 			{
 				bitflags.wasConnected = false;
 				reconnectTimer.restart();
-				onDisconnected->broadcast();
 				domainResolver.invalidate();
+				onDisconnected->broadcast();
 			}
 			else if (reconnectTimer.triggered())
 			{
@@ -265,8 +265,8 @@ namespace ksf::comps
 							bitflags.wasConnected = true;
 							mqttConnectedInternal();
 						}
+						else domainResolver.invalidate();
 					}
-					else domainResolver.invalidate();
 				}
 			}
 		}
