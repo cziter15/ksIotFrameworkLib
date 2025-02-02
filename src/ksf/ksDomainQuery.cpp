@@ -73,8 +73,7 @@ namespace ksf
 				labelStart = domainBuffer.size();
 				domainBuffer.push_back(0); // Placeholder for next label length
 			} 
-			else 
-				domainBuffer.push_back(c);
+			else domainBuffer.push_back(c);
 		}
 
 		if (labelStart >= domainBuffer.size()) 
