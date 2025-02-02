@@ -253,19 +253,20 @@ namespace ksf::comps
 				onDisconnected->broadcast();
 				domainResolver.invalidate();
 			}
-			else if (reconnectTimer.hasTimePassed())
+			else if (reconnectTimer.triggered())
 			{
 				if (auto wifiConnSp{wifiConnWp.lock()})
 				{
-					if (wifiConnSp->isConnected() && connectToBroker())
+					if (wifiConnSp->isConnected())
 					{
-						++reconnectCounter;
-						bitflags.wasConnected = true;
-						mqttConnectedInternal();
+						if (connectToBroker())
+						{
+							++reconnectCounter;
+							bitflags.wasConnected = true;
+							mqttConnectedInternal();
+						}
 					}
-
-					/* This must be done after connectToBroker, because connect can block for few seconds. */
-					reconnectTimer.restart();
+					else domainResolver.invalidate();
 				}
 			}
 		}
