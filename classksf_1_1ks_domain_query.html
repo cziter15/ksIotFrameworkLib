@@ -134,12 +134,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>receiveResponse</b> (
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a59722d49c19fcb107bf5c3ec971bb669" id="r_a59722d49c19fcb107bf5c3ec971bb669"><td class="memItemLeft" align="right" valign="top"><a id="a59722d49c19fcb107bf5c3ec971bb669" name="a59722d49c19fcb107bf5c3ec971bb669"></a>
-std::unique_ptr&lt; WiFiUDP &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>udp</b></td></tr>
-<tr class="separator:a59722d49c19fcb107bf5c3ec971bb669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad88f4d87eeb5fb9a109d08de4fd7fe59" id="r_ad88f4d87eeb5fb9a109d08de4fd7fe59"><td class="memItemLeft" align="right" valign="top"><a id="ad88f4d87eeb5fb9a109d08de4fd7fe59" name="ad88f4d87eeb5fb9a109d08de4fd7fe59"></a>
 IPAddress&#160;</td><td class="memItemRight" valign="bottom"><b>serverIP</b></td></tr>
 <tr class="separator:ad88f4d87eeb5fb9a109d08de4fd7fe59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59722d49c19fcb107bf5c3ec971bb669" id="r_a59722d49c19fcb107bf5c3ec971bb669"><td class="memItemLeft" align="right" valign="top"><a id="a59722d49c19fcb107bf5c3ec971bb669" name="a59722d49c19fcb107bf5c3ec971bb669"></a>
+std::unique_ptr&lt; WiFiUDP &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>udp</b></td></tr>
+<tr class="separator:a59722d49c19fcb107bf5c3ec971bb669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55a8143d24ff9d2f2f94f2603e695302" id="r_a55a8143d24ff9d2f2f94f2603e695302"><td class="memItemLeft" align="right" valign="top"><a id="a55a8143d24ff9d2f2f94f2603e695302" name="a55a8143d24ff9d2f2f94f2603e695302"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>domain</b></td></tr>
 <tr class="separator:a55a8143d24ff9d2f2f94f2603e695302"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,9 +152,6 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>transactionID</b>
 <tr class="memitem:a9c06aced6ebe45f6b809b3ea2963452f" id="r_a9c06aced6ebe45f6b809b3ea2963452f"><td class="memItemLeft" align="right" valign="top"><a id="a9c06aced6ebe45f6b809b3ea2963452f" name="a9c06aced6ebe45f6b809b3ea2963452f"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTimeMs</b> {0}</td></tr>
 <tr class="separator:a9c06aced6ebe45f6b809b3ea2963452f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f539f938ac2b114e3c3aec7e9015e19" id="r_a2f539f938ac2b114e3c3aec7e9015e19"><td class="memItemLeft" align="right" valign="top"><a id="a2f539f938ac2b114e3c3aec7e9015e19" name="a2f539f938ac2b114e3c3aec7e9015e19"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>queryIntervalMs</b> {3000}</td></tr>
-<tr class="separator:a2f539f938ac2b114e3c3aec7e9015e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac04674ea552931429ff65797e3bbb823" name="ac04674ea552931429ff65797e3bbb823"></a>
@@ -175,7 +172,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>queryIntervalMs</
 <p>Constructs a new <a class="el" href="classksf_1_1ks_domain_query.html">ksDomainQuery</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dnsServer</td><td>IP address of the DNS server to use for resolving domain names. By default, 8.8.8.8 is used. </td></tr>
+    <tr><td class="paramname">dnsServer</td><td>IP address of the DNS server to use for resolving domain names. By default, KSF_DOMAIN_QUERY_DNS_SERVER is used. </td></tr>
   </table>
   </dd>
 </dl>
