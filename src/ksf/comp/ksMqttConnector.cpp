@@ -267,10 +267,10 @@ namespace ksf::comps
 						}
 						else domainResolver.invalidate();
 					}
-					
-					/* This must be done after connectToBroker, because connect can block for few seconds. */
-					reconnectTimer.restart()
 				}
+				
+				/* This must be done after connectToBroker, because connect can block for few seconds. */
+				reconnectTimer.restart()			
 			}
 		}
 		
