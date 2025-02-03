@@ -237,35 +237,46 @@ namespace ksf::comps
 
 	bool ksMqttConnector::loop(ksApplication* app)
 	{
+		/* Process domain resolver. */
 		domainResolver.process();
 		
-		if (!mqttClientUq->loop())
+		/* If MQTT is connected, process it. */
+		if (mqttClientUq->loop())
+			return true;
+		
+		/* If no MQTT connection, but was connected before, broadcast disconnected event, restart reconnect timer etc. */
+		if (bitflags.wasConnected)
 		{
-			if (bitflags.wasConnected)
-			{
-				bitflags.wasConnected = false;
-				reconnectTimer.restart();
-				domainResolver.invalidate();
-				onDisconnected->broadcast();
-			}
-			else if (reconnectTimer.hasTimePassed())
-			{
-				if (auto wifiConnSp{wifiConnWp.lock()})
-				{
-					if (wifiConnSp->isConnected() && connectToBroker())
-					{
-						++reconnectCounter;
-						bitflags.wasConnected = true;
-						mqttConnectedInternal();
-					}
-					else domainResolver.invalidate();
-				}
-				
-				/* This must be done after connectToBroker, because connect can block for few seconds. */
-				reconnectTimer.restart();
-			}
+			bitflags.wasConnected = false;
+			reconnectTimer.restart();
+			domainResolver.invalidate();
+			onDisconnected->broadcast();
+			return true;
 		}
 		
+		/* If reconnect timer expired, try to reconnect. */
+		if (reconnectTimer.hasTimePassed())
+		{
+			if (auto wifiConnSp{wifiConnWp.lock()})
+			{
+				if (wifiConnSp->isConnected() && connectToBroker())
+				{
+					/* On successful reconnection, increment reconnect counter and trigger event. */
+					++reconnectCounter;
+					bitflags.wasConnected = true;
+					mqttConnectedInternal();
+				}
+				else 
+				{
+					/* Always invalidate domain resolver in case we are not connected after retry. */
+					domainResolver.invalidate();
+				}
+			}
+			
+			/* This must be done after connectToBroker, because connect can block for few seconds. */
+			reconnectTimer.restart();
+		}
+
 		return true;
 	}
 
