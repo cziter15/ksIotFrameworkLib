@@ -270,7 +270,7 @@ namespace ksf::comps
 				}
 				
 				/* This must be done after connectToBroker, because connect can block for few seconds. */
-				reconnectTimer.restart()			
+				reconnectTimer.restart();			
 			}
 		}
 		
