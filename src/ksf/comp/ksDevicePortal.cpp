@@ -79,8 +79,6 @@ namespace ksf::comps
 		return webSocketToken;
 	}
 
-	ksDevicePortal::~ksDevicePortal() = default;
-	
 	ksDevicePortal::ksDevicePortal()
 		: ksDevicePortal(PSTR("ota_ksiotframework"))
 	{}
@@ -100,18 +98,24 @@ namespace ksf::comps
 		});
 	}
 	
+	ksDevicePortal::~ksDevicePortal()
+	{
+		/* Mandatory as ESP32 lacks proper destructor. */
+		if (arduinoOTA)
+			arduinoOTA->end();
+	}
+	
 	bool ksDevicePortal::init(ksApplication* app)
 	{
 		this->app = app;
-
-		arduinoOTA->setHostname(WiFi.getHostname());
-		arduinoOTA->begin();
-
 		return true;
 	}
 
 	bool ksDevicePortal::postInit(ksApplication* app)
 	{
+		arduinoOTA->setHostname(WiFi.getHostname());
+		arduinoOTA->begin();
+
 		if (WiFi.getMode() == WIFI_AP) 
 		{
 			dnsServer = std::make_unique<DNSServer>();
