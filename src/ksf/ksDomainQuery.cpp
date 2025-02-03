@@ -46,98 +46,115 @@ namespace ksf
 	
 	void ksDomainQuery::sendQuery()
 	{
-		transactionID++;
-
+		/* Begin a packet. */
 		if (!udp->beginPacket(serverIP, 53)) 
-			return; // Prevent sending if packet fails to begin
-
-		udp->write(transactionID >> 8);
-		udp->write(transactionID & 0xFF);
-		udp->write(0x01); udp->write(0x00); // Standard query
-		udp->write(0x00); udp->write(0x01); // One question
-		udp->write(0x00); udp->write(0x00); // No answer
-		udp->write(0x00); udp->write(0x00); // No authority
-		udp->write(0x00); udp->write(0x00); // No additional
-
-		// Encode domain
-		std::vector<uint8_t> domainBuffer;
-		size_t labelStart = 0;
-		domainBuffer.push_back(0);
-		for (char c : domain) 
-		{
-			if (c == '.') 
-			{
-				if (labelStart >= domainBuffer.size()) 
-					return; // Prevent buffer overrun
-				domainBuffer[labelStart] = domainBuffer.size() - labelStart - 1;
-				labelStart = domainBuffer.size();
-				domainBuffer.push_back(0); // Placeholder for next label length
-			} 
-			else domainBuffer.push_back(c);
-		}
-
-		if (labelStart >= domainBuffer.size()) 
 			return;
 
-		domainBuffer[labelStart] = domainBuffer.size() - labelStart - 1; // Final label length
-		domainBuffer.push_back(0x00); // Null terminator
+		/* Increment transaction ID and write it. */
+		++transactionID;
+		udp->write(static_cast<uint8_t>(transactionID >> 8));
+		udp->write(static_cast<uint8_t>(transactionID & 0xFF));
+		
+		/* Write flags and number of questions. */
+		udp->write(uint8_t{0x01}); udp->write(uint8_t{0x00}); // Standard query
+		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x01}); // One question
+		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No answer
+		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No authority
+		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No additional
 
-		// Send precomputed domain buffer
-		udp->write(domainBuffer.data(), domainBuffer.size());
+		/* Prcess domain name. */
+		for (size_t start{0}, pos = 0; ; start = pos + 1) 
+		{
+			pos = domain.find('.', start);
+			if (pos == std::string::npos)
+				pos = domain.size();
 
-		// Type A (IPv4) and Class IN
-		udp->write(0x00); udp->write(0x01);
-		udp->write(0x00); udp->write(0x01);
+			/* Check label length. */
+			auto labelLength{static_cast<uint8_t>(pos - start)};
+			if (labelLength == 0 || labelLength > 63)
+				return;
 
+			/* Write label length and label */
+			udp->write(labelLength);
+			udp->write(reinterpret_cast<const uint8_t*>(domain.data() + start), labelLength);
+
+			if (pos == domain.size())
+				break; 
+		}
+
+		/* Null terminator. */
+		udp->write(uint8_t{0x00});
+
+		/* Write query type and class. */
+		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x01});
+		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x01});
+
+		/* Send the query to the DNS server. */
 		udp->endPacket();
 	}
 
 	void ksDomainQuery::receiveResponse()
 	{
-		/* Return if no packet is available. */
-		if (udp->parsePacket() == 0) 
+		/* Return if no UDP packet is available. */
+		if (udp->parsePacket() == 0)
 			return;
 
-		/* Read UDP packet. */
+		/* Read the UDP packet. */
 		uint8_t buffer[512];
-		size_t len = udp->read(buffer, sizeof(buffer));
-		if (len < 12) 
+		auto len{static_cast<size_t>(udp->read(buffer, sizeof(buffer)))};
+		if (len < 12)
 			return;
 
-		/* Check transaction ID. */
-		if (auto responseID{(buffer[0] << 8) | buffer[1]}; responseID != transactionID) 
+		/* Check that the transaction ID matches. */
+		if (auto responseID{static_cast<uint16_t>((buffer[0] << 8) | buffer[1])}; responseID != transactionID)
 			return;
 
-		/* Check response code. */
-		size_t anCount{(static_cast<size_t>(buffer[6] << 8) | buffer[7])};
-		if (anCount == 0) 
+		/* Check number of answers. */
+		auto answerCount{static_cast<uint16_t>((buffer[6] << 8) | buffer[7])};
+		if (answerCount == 0)
 			return;
 
-		/* Skip query section */
-		size_t pos{12};
-		while (pos < len && buffer[pos] != 0x00) 
+		/* 
+			Skip over the header and query section.
+			Start after the header (12 bytes), then skip the QNAME (until a null byte),
+			and finally skip the null terminator, QTYPE (2 bytes), and QCLASS (2 bytes).
+		*/
+		size_t pos = 12;
+		while (pos < len && buffer[pos] != 0)
 			pos++;
-		pos += 5; // Skip null terminator, QTYPE (2 bytes), and QCLASS (2 bytes)
+		pos += 5;
 
-		/* Parse answers */
-		for (size_t i {0}; i < anCount; i++) 
+		/* Process the answers. */
+		for (size_t i{0}; i < answerCount; i++)
 		{
-			while (pos < len && buffer[pos] >= 192) 
+			/* 
+				Skip name pointers if present. 
+				In DNS, a pointer is indicated when the top two bits are set (0xC0).
+			*/
+			while (pos < len && (buffer[pos] & 0xC0) == 0xC0)
 				pos += 2;
 
-			if (pos + 10 > len) 
+			/*
+				Ensure that there's enough room for the variable part of the answer.
+				Fixed fields: TYPE (2), CLASS (2), TTL (4), RDLENGTH (2), RDATA (variable)
+			*/
+			if (pos + 10 > len)
 				return;
 
-			auto type{(buffer[pos] << 8) | buffer[pos + 1]};
-			auto dataLength{(buffer[pos + 8] << 8) | buffer[pos + 9]};
+			/* Read TYPE and RDLENGTH from the answer. */
+			auto type{static_cast<uint16_t>((buffer[pos] << 8) | buffer[pos + 1])};
+			auto dataLength{static_cast<uint16_t>((buffer[pos + 8] << 8) | buffer[pos + 9])};
 			pos += 10;
 
-			if (type == 1 && dataLength == 4 && pos + 4 <= len) 
+			/* If it's an A record (TYPE 1) and data length is 4 bytes (IPv4), read the IP address. */
+			if (type == 1 && dataLength == 4 && pos + 4 <= len)
 			{
+				/* Read the IP octects and construct the IP address. */
 				resolvedIP = IPAddress(buffer[pos], buffer[pos + 1], buffer[pos + 2], buffer[pos + 3]);
 				return;
 			}
 
+			/* Skip over the resource data if this answer is not the one we want. */
 			pos += dataLength;
 		}
 	}
