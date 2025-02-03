@@ -100,7 +100,10 @@ namespace ksf::comps
 	
 	ksDevicePortal::~ksDevicePortal()
 	{
-		/* Mandatory as ESP32 lacks proper destructor. */
+		/*
+			Watch out! It looks like ArduinoOTA library for both ESP8266 and ESP32 miss end() call in its destructor.
+			We should manually call it here. Otherwise we may get exception (crash) during application transition.
+		*/
 		if (arduinoOTA)
 			arduinoOTA->end();
 	}

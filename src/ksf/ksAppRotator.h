@@ -68,15 +68,22 @@ namespace ksf
 			void loopNoDelay()
 			{
 				/* If current application is valid and we looped, then we're done. */
-				if (currentApplication && currentApplication->loop())
+				if (currentApplication)
+				{
+					/* If loop fails, then destroy and try to do our business next delay. */
+					if (!currentApplication->loop())
+						currentApplication.reset();
+					
+					/* If current application is valid, then we're done. */
 					return;
+				}
 
 				/* Spawn application. */
 				currentApplication = appSpawners[appIndex]();
 
 				/* If not initialized, then destroy and try to do our business next delay. */
 				if (!currentApplication->init()) 
-					currentApplication.reset(nullptr);
+					currentApplication.reset();
 
 				/* Set next app index. */
 				if (++appIndex >= appSpawners.size())
