@@ -176,10 +176,8 @@ namespace ksf
 			if (resolvedIP.fromString(domain.c_str()))
 				return;
 
-			/* Send the DNS query. */
+			/* Send the DNS query and update the last query send time. */
 			sendQuery();
-
-			/* Update the last query send time. */
 			lastQuerySendTimeMs = millis();
 		}
 
