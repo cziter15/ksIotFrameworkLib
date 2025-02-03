@@ -181,7 +181,7 @@ namespace ksf::comps
 			});
 #endif
 			return false;
-		} 
+		}
 
 		if (serverIP.operator uint32_t() != 0)
 		{
