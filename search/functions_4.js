@@ -7,5 +7,5 @@ var searchData=
   ['getpin_4',['getPin',['../classksf_1_1comps_1_1ks_led.html#a1e9b8fab3d1bc4d80302c92fa7939d45',1,'ksf::comps::ksLed::getPin()'],['../classksf_1_1comps_1_1ks_reset_button.html#a2092d47454216a02f2f254b0fc3496f3',1,'ksf::comps::ksResetButton::getPin()']]],
   ['getreconnectcounter_5',['getReconnectCounter',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a3401589baf730b3cfa12fcd47369509b',1,'ksf::comps::ksMqttConnector']]],
   ['getrequiredauthtoken_6',['getRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a81b95552fd9f0e4c49d59259ca5be2f0',1,'ksf::misc::ksWSServer']]],
-  ['getresolvedip_7',['getResolvedIP',['../classksf_1_1ks_domain_query.html#a6689c4b93255a13f1bc79e039f311430',1,'ksf::ksDomainQuery']]]
+  ['getresolvedip_7',['getResolvedIP',['../classksf_1_1ks_domain_query.html#a9b17ce975f4f2ff42d6adb57bce6a444',1,'ksf::ksDomainQuery']]]
 ];

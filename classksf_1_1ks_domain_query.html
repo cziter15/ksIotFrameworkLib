@@ -96,11 +96,16 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">ksf::ksDomainQuery Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class for resolving domain names to IP addresses using DNS queries.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ks_domain_query_8h_source.html">ksDomainQuery.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac04674ea552931429ff65797e3bbb823" id="r_ac04674ea552931429ff65797e3bbb823"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac04674ea552931429ff65797e3bbb823">ksDomainQuery</a> (IPAddress dnsServer=IPAddress(8, 8, 8, 8))</td></tr>
-<tr class="memdesc:ac04674ea552931429ff65797e3bbb823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classksf_1_1ks_domain_query.html">ksDomainQuery</a> object.  <br /></td></tr>
+<tr class="memdesc:ac04674ea552931429ff65797e3bbb823"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classksf_1_1ks_domain_query.html" title="Class for resolving domain names to IP addresses using DNS queries.">ksDomainQuery</a> object.  <br /></td></tr>
 <tr class="separator:ac04674ea552931429ff65797e3bbb823"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa3483a2bff947f3237a7251f9ba4777" id="r_afa3483a2bff947f3237a7251f9ba4777"><td class="memItemLeft" align="right" valign="top"><a id="afa3483a2bff947f3237a7251f9ba4777" name="afa3483a2bff947f3237a7251f9ba4777"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>invalidate</b> ()</td></tr>
@@ -109,9 +114,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>invalidate</b> ()</td
 <tr class="memitem:af10ad345268f0b69e9a75dd761a1e487" id="r_af10ad345268f0b69e9a75dd761a1e487"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af10ad345268f0b69e9a75dd761a1e487">setDomain</a> (std::string domain)</td></tr>
 <tr class="memdesc:af10ad345268f0b69e9a75dd761a1e487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the domain to resolve IP address for.  <br /></td></tr>
 <tr class="separator:af10ad345268f0b69e9a75dd761a1e487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6689c4b93255a13f1bc79e039f311430" id="r_a6689c4b93255a13f1bc79e039f311430"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6689c4b93255a13f1bc79e039f311430">getResolvedIP</a> (IPAddress &amp;ip)</td></tr>
-<tr class="memdesc:a6689c4b93255a13f1bc79e039f311430"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the resolved IP address for the domain.  <br /></td></tr>
-<tr class="separator:a6689c4b93255a13f1bc79e039f311430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b17ce975f4f2ff42d6adb57bce6a444" id="r_a9b17ce975f4f2ff42d6adb57bce6a444"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b17ce975f4f2ff42d6adb57bce6a444">getResolvedIP</a> (IPAddress &amp;ip) const</td></tr>
+<tr class="memdesc:a9b17ce975f4f2ff42d6adb57bce6a444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the resolved IP address for the domain.  <br /></td></tr>
+<tr class="separator:a9b17ce975f4f2ff42d6adb57bce6a444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5923c3abfd5f2ed3cbe48fddf38f5611" id="r_a5923c3abfd5f2ed3cbe48fddf38f5611"><td class="memItemLeft" align="right" valign="top"><a id="a5923c3abfd5f2ed3cbe48fddf38f5611" name="a5923c3abfd5f2ed3cbe48fddf38f5611"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>process</b> ()</td></tr>
 <tr class="memdesc:a5923c3abfd5f2ed3cbe48fddf38f5611"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles resolver tasks, such as sending queries and receiving responses. <br /></td></tr>
@@ -153,7 +158,10 @@ uint16_t&#160;</td><td class="memItemRight" valign="bottom"><b>transactionID</b>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTimeMs</b> {0}</td></tr>
 <tr class="separator:a9c06aced6ebe45f6b809b3ea2963452f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class for resolving domain names to IP addresses using DNS queries. </p>
+<p>To avoid DNS caching, a new query is sent every KSF_DOMAIN_QUERY_INTERVAL_MS milliseconds. The motivation to write this component was to avoid issues that I had with standard DNS libraries. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac04674ea552931429ff65797e3bbb823" name="ac04674ea552931429ff65797e3bbb823"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac04674ea552931429ff65797e3bbb823">&#9670;&#160;</a></span>ksDomainQuery()</h2>
 
@@ -169,7 +177,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTime
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a new <a class="el" href="classksf_1_1ks_domain_query.html">ksDomainQuery</a> object. </p>
+<p>Constructs a new <a class="el" href="classksf_1_1ks_domain_query.html" title="Class for resolving domain names to IP addresses using DNS queries.">ksDomainQuery</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">dnsServer</td><td>IP address of the DNS server to use for resolving domain names. By default, KSF_DOMAIN_QUERY_DNS_SERVER is used. </td></tr>
@@ -180,8 +188,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTime
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6689c4b93255a13f1bc79e039f311430" name="a6689c4b93255a13f1bc79e039f311430"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6689c4b93255a13f1bc79e039f311430">&#9670;&#160;</a></span>getResolvedIP()</h2>
+<a id="a9b17ce975f4f2ff42d6adb57bce6a444" name="a9b17ce975f4f2ff42d6adb57bce6a444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b17ce975f4f2ff42d6adb57bce6a444">&#9670;&#160;</a></span>getResolvedIP()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,7 +198,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTime
           <td class="memname">bool ksf::ksDomainQuery::getResolvedIP </td>
           <td>(</td>
           <td class="paramtype">IPAddress &amp;</td>          <td class="paramname"><span class="paramname"><em>ip</em></span></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
