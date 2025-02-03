@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *	Copyright (c) 2025 Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFramework library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -34,13 +34,17 @@ namespace ksf
 		invalidate();
 	}
 	
-	bool ksDomainQuery::getResolvedIP(IPAddress& ip)
+	bool ksDomainQuery::getResolvedIP(IPAddress& ip) const
 	{
+		/* If we have a valid IP, return it. */
 		if (resolvedIP.operator uint32_t() != 0)
 		{
+			/* Copy the IP address to the output parameter. */
 			ip = resolvedIP;
 			return true;
 		}
+
+		/* In case of failure, return false. */
 		return false;
 	}
 	

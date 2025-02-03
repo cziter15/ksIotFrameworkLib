@@ -26,6 +26,12 @@ class ksUdpClient_t;
 
 namespace ksf 
 {
+	/*! 
+		@brief Class for resolving domain names to IP addresses using DNS queries.
+
+		To avoid DNS caching, a new query is sent every KSF_DOMAIN_QUERY_INTERVAL_MS milliseconds.
+		The motivation to write this component was to avoid issues that I had with standard DNS libraries.
+	*/
 	class ksDomainQuery
 	{
 		protected:
@@ -76,7 +82,7 @@ namespace ksf
 				@param ip IP address to store the resolved IP address in.
 				@return True if the resolved IP address was successfully retrieved, false otherwise.
 			*/
-			bool getResolvedIP(IPAddress& ip);
+			bool getResolvedIP(IPAddress& ip) const;
 
 			/*!
 				@brief Handles resolver tasks, such as sending queries and receiving responses.
