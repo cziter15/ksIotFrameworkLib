@@ -32,6 +32,16 @@
 #define KSF_MQTT_RECONNECT_DELAY_MS 10000UL
 #endif
 
+#ifndef KSF_DOMAIN_QUERY_INTERVAL_MS
+/*! Interval in milliseconds between DNS query retries. */
+#define KSF_DOMAIN_QUERY_INTERVAL_MS 3000UL
+#endif
+
+#ifndef KSF_DOMAIN_QUERY_DNS_SERVER
+/*! IP address of the DNS server to use for resolving domain names. */
+#define KSF_DOMAIN_QUERY_DNS_SERVER IPAddress(8, 8, 8, 8)
+#endif
+
 #ifndef KSF_MQTT_TIMEOUT_MS
 /*! MQTT socket timeout in milliseconds. On ESP32 is also used as connect (blocking) timeout. */
 #define KSF_MQTT_TIMEOUT_MS 4000UL

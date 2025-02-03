@@ -153,7 +153,7 @@ namespace ksf
 			return;
 
 		/* Check if it's time to send a query. */
-		if (lastQuerySendTimeMs == 0 || millis() - lastQuerySendTimeMs > queryIntervalMs)
+		if (lastQuerySendTimeMs == 0 || millis() - lastQuerySendTimeMs > KSF_DOMAIN_QUERY_INTERVAL_MS)
 		{
 			/* If there's a valid IP, return immediately, we're done. */
 			if (resolvedIP.fromString(domain.c_str()))

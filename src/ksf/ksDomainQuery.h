@@ -29,23 +29,19 @@ namespace ksf
 	class ksDomainQuery
 	{
 		protected:
-			/* UDP client. */
-			std::unique_ptr<ksUdpClient_t> udp;
-
 			/* DNS server IP address. */
 			IPAddress serverIP;
+			/* UDP client. */
+			std::unique_ptr<ksUdpClient_t> udp;
 
 			/* Domain to resolve IP address for. */
 			std::string domain;
 			/* Resolved IP address. */
 			IPAddress resolvedIP;
-
 			/* Transaction ID (last). */
 			uint16_t transactionID{0};
 			/* Last query send time. */
 			uint32_t lastQuerySendTimeMs{0};
-			/* Query interval in milliseconds. */
-			uint32_t queryIntervalMs{3000};
 
 			/*!
 				@brief Sends DNS query to the DNS server.
@@ -60,9 +56,9 @@ namespace ksf
 		public: 
 			/*!
 				@brief Constructs a new ksDomainQuery object.
-				@param dnsServer IP address of the DNS server to use for resolving domain names. By default, 8.8.8.8 is used.
+				@param dnsServer IP address of the DNS server to use for resolving domain names. By default, KSF_DOMAIN_QUERY_DNS_SERVER is used.
 			*/
-			ksDomainQuery(IPAddress dnsServer = IPAddress(8, 8, 8, 8));
+			ksDomainQuery(IPAddress dnsServer = KSF_DOMAIN_QUERY_DNS_SERVER);
 
 			/*!
 				@brief Invalidates the resolved IP address and the last query send time. It will cause a new query to be sent.
