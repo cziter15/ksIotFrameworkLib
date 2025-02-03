@@ -167,80 +167,71 @@ namespace ksf::comps
 
 	bool ksMqttConnector::connectToBroker()
 	{
-
+#ifdef APP_LOG_ENABLED
+		app->log([&](std::string& out) {
+			out += PSTR("[MQTT] Connecting to MQTT broker...");
+		});
+#endif
+		IPAddress serverIP;
+		if (!domainResolver.getResolvedIP(serverIP))
+		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
-				out += PSTR("[MQTT] Connecting to MQTT broker...");
+				out += PSTR("[MQTT] Failed to resolve MQTT broker IP address!");
 			});
 #endif
-			IPAddress serverIP;
-			if (!domainResolver.getResolvedIP(serverIP))
-			{
-#ifdef APP_LOG_ENABLED
-				app->log([&](std::string& out) {
-					out += PSTR("[MQTT] Failed to resolve MQTT broker IP address!");
-				});
-#endif
-				return false;
-			} 
+			return false;
+		} 
 
-			if (serverIP.operator uint32_t() != 0)
-			{
+		if (serverIP.operator uint32_t() != 0)
+		{
 #ifdef APP_LOG_ENABLED
-				app->log([&](std::string& out) {
-					out += PSTR("[MQTT] Connecting to the resolved IP address: ");
-					out += std::string(serverIP.toString().c_str());
-				});
+			app->log([&](std::string& out) {
+				out += PSTR("[MQTT] Connecting to the resolved IP address: ");
+				out += std::string(serverIP.toString().c_str());
+			});
 #endif
 #if defined(ESP32)
-				netClientUq->connect(serverIP, portNumber, KSF_MQTT_TIMEOUT_MS);
+			netClientUq->connect(serverIP, portNumber, KSF_MQTT_TIMEOUT_MS);
 #elif defined(ESP8266)
-				netClientUq->connect(serverIP, portNumber);
+			netClientUq->connect(serverIP, portNumber);
 #else
 			#error "Unsupported platform"
 #endif
-			}
+		}
 
-			/* If not connected, return. */
-			if (!netClientUq->connected())
-				return false;
+		/* If not connected, return. */
+		if (!netClientUq->connected())
+			return false;
 
-			/* Verify certificate fingerprint. */
-			if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
-			{
+		/* Verify certificate fingerprint. */
+		if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
+		{
 #ifdef APP_LOG_ENABLED
-				app->log([&](std::string& out) {
-					out += PSTR("[MQTT] Invalid certificate fingerprint! Disconnecting.");
-				});
+			app->log([&](std::string& out) {
+				out += PSTR("[MQTT] Invalid certificate fingerprint! Disconnecting.");
+			});
 #endif
-				netClientUq->stop();
-				return false;
-			}
- 
-			std::string willTopic;
-			if (bitflags.sendConnectionStatus)
-				willTopic = {prefix + PSTR("connected")};
-
-			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.empty() ? nullptr : willTopic.c_str(), 0, true, "0", !bitflags.usePersistentSession))
-			{
-#ifdef APP_LOG_ENABLED 
-				app->log([&](std::string& out) {
-					out += PSTR("[MQTT] Connected successfully to ");
-					out += std::string(serverIP.toString().c_str());
-					out += PSTR(" on port ");
-					out += std::to_string(portNumber);
-				});
-#endif
-
-				if (bitflags.sendConnectionStatus)
-					mqttClientUq->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
-				
-				return true;
-			}
-
+			netClientUq->stop();
 			return false;
 		}
 
+#ifdef APP_LOG_ENABLED
+		app->log([&](std::string& out) {
+			out += PSTR("[MQTT] Connected to the server, processing with MQTT...");
+		});
+#endif
+
+		if (bitflags.sendConnectionStatus)
+		{
+			std::string willTopic{prefix + PSTR("connected")};
+			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !bitflags.usePersistentSession))
+			{
+				mqttClientUq->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
+				return true;
+			}
+		}
+		
 		return mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !bitflags.usePersistentSession);
 	}
 
@@ -261,16 +252,14 @@ namespace ksf::comps
 			{
 				if (auto wifiConnSp{wifiConnWp.lock()})
 				{
-					if (wifiConnSp->isConnected())
+					if (wifiConnSp->isConnected() && connectToBroker())
 					{
-						if (connectToBroker())
-						{
-							++reconnectCounter;
-							bitflags.wasConnected = true;
-							mqttConnectedInternal();
-						}
-						else domainResolver.invalidate();
+						++reconnectCounter;
+						bitflags.wasConnected = true;
+						mqttConnectedInternal();
 					}
+
+					domainResolver.invalidate();
 				}
 				
 				/* This must be done after connectToBroker, because connect can block for few seconds. */
