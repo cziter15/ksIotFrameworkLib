@@ -10,11 +10,9 @@
 #pragma once
 
 #include <Arduino.h>
+#include <IPAddress.h>
 #include <stdint.h>
 #include <memory>
-#include <IPAddress.h>
-
-#include "ksApplication.h"
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksUdpClient_t NetworkUDP
