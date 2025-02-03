@@ -253,7 +253,7 @@ namespace ksf::comps
 				domainResolver.invalidate();
 				onDisconnected->broadcast();
 			}
-			else if (reconnectTimer.triggered())
+			else if (reconnectTimer.hasTimePassed())
 			{
 				if (auto wifiConnSp{wifiConnWp.lock()})
 				{
@@ -267,6 +267,9 @@ namespace ksf::comps
 						}
 						else domainResolver.invalidate();
 					}
+					
+					/* This must be done after connectToBroker, because connect can block for few seconds. */
+					reconnectTimer.restart()
 				}
 			}
 		}
