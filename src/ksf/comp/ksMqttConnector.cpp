@@ -167,8 +167,7 @@ namespace ksf::comps
 
 	bool ksMqttConnector::connectToBroker()
 	{
-		if (bitflags.sendConnectionStatus)
-		{
+
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
 				out += PSTR("[MQTT] Connecting to MQTT broker...");
@@ -217,11 +216,14 @@ namespace ksf::comps
 				netClientUq->stop();
 				return false;
 			}
+ 
+			std::string willTopic;
+			if (bitflags.sendConnectionStatus)
+				willTopic = {prefix + PSTR("connected")};
 
-			std::string willTopic{prefix + PSTR("connected")};
-			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.c_str(), 0, true, "0", !bitflags.usePersistentSession))
+			if (mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), willTopic.empty() ? nullptr : willTopic.c_str(), 0, true, "0", !bitflags.usePersistentSession))
 			{
-#ifdef APP_LOG_ENABLED
+#ifdef APP_LOG_ENABLED 
 				app->log([&](std::string& out) {
 					out += PSTR("[MQTT] Connected successfully to ");
 					out += std::string(serverIP.toString().c_str());
@@ -230,7 +232,9 @@ namespace ksf::comps
 				});
 #endif
 
-				mqttClientUq->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
+				if (bitflags.sendConnectionStatus)
+					mqttClientUq->publish(willTopic.c_str(), reinterpret_cast<const uint8_t*>("1"), 1, true);
+				
 				return true;
 			}
 
