@@ -31,7 +31,7 @@ namespace ksf
 		configPath += fileName;
 
 		/* Read config file. */
-		if (auto fileReader{LittleFS.open(configPath.c_str(), PSTR("r"))})
+		if (auto fileReader{LittleFS.open(configPath.c_str())}; fileReader)
 		{
 			/* Read until EOF. */
 			while (fileReader.available())
@@ -75,16 +75,19 @@ namespace ksf
 		if (!isDirty)
 			return;
 
-		/* If marked dirty, save changes to FS. */
-		auto fileWriter{LittleFS.open(configPath.c_str(), PSTR("w"))};
-		if (!fileWriter)
+		/* Open file for writing */
+		File fileWriter = LittleFS.open(configPath.c_str(), "w", true);
+		if (!fileWriter) 
 			return;
 
-		for (const auto&[name, value] : configParams)
+		/* Write parameters */
+		for (const auto& [name, value] : configParams) 
 		{
 			fileWriter.println(name.c_str());
 			fileWriter.println(value.c_str());
 		}
+
+		fileWriter.flush();
 		fileWriter.close();
 	}
 }
