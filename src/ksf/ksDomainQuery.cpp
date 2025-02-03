@@ -14,7 +14,7 @@
 namespace ksf 
 {
 	ksDomainQuery::ksDomainQuery(IPAddress dnsServer)
-	: serverIP(dnsServer)
+		: serverIP(dnsServer)
 	{
 		udp = std::make_unique<ksUdpClient_t>();
 		udp->begin(0);

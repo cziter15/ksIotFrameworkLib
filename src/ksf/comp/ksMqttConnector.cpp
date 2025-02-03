@@ -258,8 +258,7 @@ namespace ksf::comps
 						bitflags.wasConnected = true;
 						mqttConnectedInternal();
 					}
-
-					domainResolver.invalidate();
+					else domainResolver.invalidate();
 				}
 				
 				/* This must be done after connectToBroker, because connect can block for few seconds. */
