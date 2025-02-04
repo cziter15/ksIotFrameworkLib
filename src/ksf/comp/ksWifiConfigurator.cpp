@@ -30,7 +30,6 @@ namespace ksf::comps
 	{
 		ksWifiConfigurator(PSTR("KSFDevice"));
 	}
-	
 
 	ksWifiConfigurator::ksWifiConfigurator(std::string devicePrefixName)
 		 // As the device name is our field, we are able to move, it's better to do so than using const ref
