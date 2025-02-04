@@ -67,7 +67,7 @@ namespace ksf
 		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No additional
 
 		/* Prcess domain name. */
-		for (size_t start{0}, pos = 0; ; start = pos + 1) 
+		for (std::size_t start{0}, pos = 0; ; start = pos + 1) 
 		{
 			pos = domain.find('.', start);
 			if (pos == std::string::npos)
@@ -105,7 +105,7 @@ namespace ksf
 
 		/* Read the UDP packet. */
 		uint8_t buffer[512];
-		auto len{static_cast<size_t>(udp->read(buffer, sizeof(buffer)))};
+		auto len{static_cast<std::size_t>(udp->read(buffer, sizeof(buffer)))};
 		if (len < 12)
 			return;
 
@@ -123,13 +123,13 @@ namespace ksf
 			Start after the header (12 bytes), then skip the QNAME (until a null byte),
 			and finally skip the null terminator, QTYPE (2 bytes), and QCLASS (2 bytes).
 		*/
-		size_t pos = 12;
+		std::size_t pos{12};
 		while (pos < len && buffer[pos] != 0)
 			pos++;
 		pos += 5;
 
 		/* Process the answers. */
-		for (size_t i{0}; i < answerCount; i++)
+		for (std::size_t i{0}; i < answerCount; i++)
 		{
 			/* 
 				Skip name pointers if present. 
