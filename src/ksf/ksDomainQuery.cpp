@@ -165,12 +165,12 @@ namespace ksf
 
 	void ksDomainQuery::process()
 	{
-		/* Return if the domain is empty or if we have a valid IP. */
-		if (domain.empty())
-			return;
-
 		/* If we have a valid IP, return immediately, we're done. */
 		if (resolvedIP.operator uint32_t() != 0)
+			return;
+
+		/* Return if the domain is empty or if we have a valid IP. */
+		if (domain.empty())
 			return;
 
 		/* Check if it's time to send a query. */
