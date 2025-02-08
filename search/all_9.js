@@ -2,7 +2,7 @@ var searchData=
 [
   ['ksapplication_0',['ksApplication',['../classksf_1_1ks_application.html',1,'ksf']]],
   ['ksapprotator_1',['ksAppRotator',['../classksf_1_1ks_app_rotator.html',1,'ksf']]],
-  ['kscertfingerprint_2',['ksCertFingerprint',['../classksf_1_1ks_cert_fingerprint.html',1,'ksf']]],
+  ['kscertfingerprint_2',['ksCertFingerprint',['../classksf_1_1misc_1_1ks_cert_fingerprint.html',1,'ksf::misc']]],
   ['kscomponent_3',['ksComponent',['../classksf_1_1ks_component.html',1,'ksf']]],
   ['ksconfig_4',['ksConfig',['../classksf_1_1ks_config.html',1,'ksf::ksConfig'],['../classksf_1_1ks_config.html#ae29595441a2aff5b0d0b43a3e9f55c8c',1,'ksf::ksConfig::ksConfig()']]],
   ['ksconfigparameter_5',['ksConfigParameter',['../structksf_1_1comps_1_1ks_config_parameter.html',1,'ksf::comps']]],
