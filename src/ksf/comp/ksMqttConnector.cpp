@@ -70,7 +70,7 @@ namespace ksf::comps
 		if (!fingerprint.empty())
 		{
 			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
-			certFingerprint = std::make_unique<ksCertFingerprintHolder>();
+			certFingerprint = std::make_unique<misc::ksCertFingerprintHolder>();
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
 				netClientUq = std::move(secureClient);
 		}

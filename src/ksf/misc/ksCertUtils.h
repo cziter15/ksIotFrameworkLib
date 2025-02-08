@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include <WiFiClientSecure.h>
 
-namespace ksf
+namespace ksf::misc
 {
 	/*!
 		@brief Interface for certificate fingerprint verification.

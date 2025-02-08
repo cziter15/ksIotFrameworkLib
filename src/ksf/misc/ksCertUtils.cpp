@@ -10,7 +10,7 @@
 #include "ksCertUtils.h"
 #include "../ksConstants.h"
 
-namespace ksf
+namespace ksf::misc
 {
 	/*
 		Convert ascii char into a byte value.
