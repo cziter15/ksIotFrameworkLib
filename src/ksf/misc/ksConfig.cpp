@@ -9,9 +9,9 @@
 
 #include "LittleFS.h"
 #include "ksConfig.h"
-#include "ksConstants.h"
+#include "../ksConstants.h"
 
-namespace ksf
+namespace ksf::misc
 {
 	ksConfig::ksConfig(const std::string& fileName)
 		: configPath(getNvsDirectory())

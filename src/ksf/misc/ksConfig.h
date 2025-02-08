@@ -17,9 +17,9 @@
 	@param fileName Config filename.
 */
 #define USING_CONFIG_FILE(fileName) \
-	if (ksf::ksConfig config_file{ksf::ksConfig(fileName)})
+	if (ksf::misc::ksConfig config_file{ksf::misc::ksConfig(fileName)})
 
-namespace ksf
+namespace ksf::misc
 {
 	/*!
 		@brief Implements low-level configuration file handling.

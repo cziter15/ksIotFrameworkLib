@@ -13,7 +13,7 @@
 #include <stdint.h>
 #include <memory>
 
-#include "ksConstants.h"
+#include "../ksConstants.h"
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksUdpClient_t NetworkUDP
@@ -23,7 +23,7 @@
 
 class ksUdpClient_t;
 
-namespace ksf 
+namespace ksf::misc 
 {
 	/*! 
 		@brief Class for resolving domain names to IP addresses using DNS queries.
@@ -58,7 +58,7 @@ namespace ksf
 			*/
 			void receiveResponse();
 
-		public: 
+		public:
 			/*!
 				@brief Constructs a new ksDomainQuery object.
 				@param dnsServer IP address of the DNS server to use for resolving domain names. By default, KSF_DOMAIN_QUERY_DNS_SERVER is used.

@@ -11,7 +11,7 @@
 
 #include <stdint.h>
 
-namespace ksf 
+namespace ksf::misc
 {
 	/*!
 		@brief Simple timer class, without using component architecture.

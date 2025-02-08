@@ -10,9 +10,9 @@
 #pragma once
 
 #include "ksf/ksApplication.h"
-#include "ksf/ksSimpleTimer.h"
+#include "ksf/misc/ksSimpleTimer.h"
 #include "ksf/ksComponent.h"
-#include "ksf/ksConfig.h"
+#include "ksf/misc/ksConfig.h"
 #include "ksf/ksConstants.h"
 #include "ksf/evt/ksEvent.h"
 #include "ksf/comp/ksConfigProvider.h"

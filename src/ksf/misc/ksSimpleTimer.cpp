@@ -11,7 +11,7 @@
 
 #include "ksSimpleTimer.h"
 
-namespace ksf 
+namespace ksf::misc
 {
 	ksSimpleTimer::ksSimpleTimer(uint32_t intervalMs) 
 	{

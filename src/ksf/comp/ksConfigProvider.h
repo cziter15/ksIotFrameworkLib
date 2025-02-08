@@ -13,7 +13,7 @@
 #include <list>
 #include "../ksComponent.h"
 
-namespace ksf
+namespace ksf::misc
 {
 	class ksConfig;
 }
@@ -86,7 +86,7 @@ namespace ksf::comps
 				@param maxLength Maximum length of the value.
 				@param type Type of parameter, which tells the Device Portal which field type should be used.		
 			*/
-			void addNewParamWithConfigDefault(ksConfig& config, std::string id, std::string label = {}, int maxLength = 50, EConfigParamType::Type type = {});
+			void addNewParamWithConfigDefault(misc::ksConfig& config, std::string id, std::string label = {}, int maxLength = 50, EConfigParamType::Type type = {});
 
 		public:
 			/*!

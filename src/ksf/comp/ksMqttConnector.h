@@ -14,8 +14,8 @@
 
 #include "../ksComponent.h"
 #include "../evt/ksEvent.h"
-#include "../ksSimpleTimer.h"
-#include "../ksDomainQuery.h"
+#include "../misc/ksSimpleTimer.h"
+#include "../misc/ksDomainQuery.h"
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksMqttConnectorNetClient_t NetworkClient
@@ -53,7 +53,7 @@ namespace ksf::comps
 			ksApplication* app{nullptr};									//!< Application pointer.
 #endif
 
-			ksDomainQuery domainResolver;									//!< Domain query used to resolve MQTT broker address.
+			misc::ksDomainQuery domainResolver;									//!< Domain query used to resolve MQTT broker address.
 			std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
 			std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 
@@ -68,7 +68,7 @@ namespace ksf::comps
 				bool wasConnected : 1;										//!< True if connected in previous loop.
 			} bitflags = {true, false, true};
 
-			ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		//!< Timer that counts time between reconnection attempts.
+			misc::ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		//!< Timer that counts time between reconnection attempts.
 
 			std::string login;												//!< Saved MQTT login.
 			std::string password;											//!< Saved MQTT password.

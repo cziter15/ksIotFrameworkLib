@@ -11,7 +11,7 @@
 
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
-#include "../ksSimpleTimer.h"
+#include "../misc/ksSimpleTimer.h"
 
 namespace ksf::comps
 {
@@ -33,7 +33,7 @@ namespace ksf::comps
 		protected:
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				//!< Weak pointer to MQTT connector.
 			std::unique_ptr<evt::ksEventHandle> connEventHandle;	//!< Event handle for connection delegate.
-			ksSimpleTimer reporterTimer;							//!< Timer to report device stats.
+			misc::ksSimpleTimer reporterTimer;							//!< Timer to report device stats.
 
 			/*!
 				@brief Calback executed on MQTT connection.

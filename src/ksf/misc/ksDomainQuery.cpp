@@ -8,10 +8,9 @@
  */
 
 #include "ksDomainQuery.h"
-#include "ksConstants.h"
 #include <WiFiUdp.h>
 
-namespace ksf 
+namespace ksf::misc
 {
 	ksDomainQuery::ksDomainQuery(IPAddress dnsServer)
 		: serverIP(dnsServer)

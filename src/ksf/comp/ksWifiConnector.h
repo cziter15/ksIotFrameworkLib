@@ -11,7 +11,7 @@
 
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
-#include "../ksSimpleTimer.h"
+#include "../misc/ksSimpleTimer.h"
 
 namespace ksf::comps
 {
@@ -31,9 +31,9 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksWifiConnector, ksComponent)
 		
 		protected:
-			ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				//!< Wifi timer - long timeout in case of issues.
-			ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		//!< Wifi timer - reconnection timeout.
-			ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						//!< Wifi timer - IP check interval.
+			misc::ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				//!< Wifi timer - long timeout in case of issues.
+			misc::ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		//!< Wifi timer - reconnection timeout.
+			misc::ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						//!< Wifi timer - IP check interval.
 
 			struct
 			{

@@ -7,7 +7,7 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "../ksConfig.h"
+#include "../misc/ksConfig.h"
 #include "ksConfigProvider.h"
 
 namespace ksf::comps
@@ -30,7 +30,7 @@ namespace ksf::comps
 		params.push_back(std::move(param));
 	}
 
-	void ksConfigProvider::addNewParamWithConfigDefault(ksConfig& config, std::string id, std::string label, int maxLength, EConfigParamType::Type type)
+	void ksConfigProvider::addNewParamWithConfigDefault(misc::ksConfig& config, std::string id, std::string label, int maxLength, EConfigParamType::Type type)
 	{
 		auto& value{config.getParam(id)};
 		return addNewParam(std::move(id), std::move(label), std::move(value), maxLength, type);
