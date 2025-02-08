@@ -1,7 +1,7 @@
 var searchData=
 [
   ['password_0',['password',['../classksf_1_1comps_1_1ks_mqtt_connector.html#af38f406daf37f94b37cb74c9d7831cae',1,'ksf::comps::ksMqttConnector']]],
-  ['periodictaskstimeout_1',['periodicTasksTimeout',['../classksf_1_1comps_1_1ks_wifi_configurator.html#aa4b3048c5e1802e63c78cbe98a5ec121',1,'ksf::comps::ksWifiConfigurator']]],
+  ['periodictaskstimeout_1',['periodicTasksTimeout',['../classksf_1_1comps_1_1ks_wifi_configurator.html#aed26171387589f3953e954a1e11023d5',1,'ksf::comps::ksWifiConfigurator']]],
   ['pin_2',['pin',['../classksf_1_1comps_1_1ks_led.html#a5a944a7741ab9a0f1437021784a8d1e1',1,'ksf::comps::ksLed::pin'],['../classksf_1_1comps_1_1ks_reset_button.html#a29879006a4ff502303a11eb534d3d8b3',1,'ksf::comps::ksResetButton::pin']]],
   ['portalpassword_3',['portalPassword',['../classksf_1_1comps_1_1ks_device_portal.html#a320c4d5b38d622379742b43f4fa99464',1,'ksf::comps::ksDevicePortal']]],
   ['portnumber_4',['portNumber',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ab2b5431473acbcaa5907d63743e9ca84',1,'ksf::comps::ksMqttConnector']]],
@@ -9,6 +9,6 @@ var searchData=
   ['power_6',['🔥 Saving power',['../index.html#autotoc_md13',1,'']]],
   ['prefix_7',['prefix',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a2acc73077e7b4ef0d5f7cd03ad75da19',1,'ksf::comps::ksMqttConnector']]],
   ['pressedtime_8',['pressedTime',['../classksf_1_1comps_1_1ks_reset_button.html#a838f42f24cf1d8a95f4820faebb7e302',1,'ksf::comps::ksResetButton']]],
-  ['process_9',['process',['../classksf_1_1ks_domain_query.html#a5923c3abfd5f2ed3cbe48fddf38f5611',1,'ksf::ksDomainQuery']]],
+  ['process_9',['process',['../classksf_1_1misc_1_1ks_domain_query.html#a90739cb6ac868a2ea5646054daa05bf8',1,'ksf::misc::ksDomainQuery']]],
   ['publish_10',['publish',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ab101e26b5ea98a8b3e35295ab2b00680',1,'ksf::comps::ksMqttConnector']]]
 ];

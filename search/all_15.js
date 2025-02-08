@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['_7eksconfig_0',['~ksConfig',['../classksf_1_1ks_config.html#a304947df2a72b5297cbca0bba3c8136f',1,'ksf::ksConfig']]],
+  ['_7eksconfig_0',['~ksConfig',['../classksf_1_1misc_1_1ks_config.html#a0c87936c69a2758335686664025a681f',1,'ksf::misc::ksConfig']]],
   ['_7eksdeviceportal_1',['~ksDevicePortal',['../classksf_1_1comps_1_1ks_device_portal.html#a341b68e99384e4ae0a7038227bff92f6',1,'ksf::comps::ksDevicePortal']]],
-  ['_7eksdomainquery_2',['~ksDomainQuery',['../classksf_1_1ks_domain_query.html#a446896e23f3703d120262297ef914c3f',1,'ksf::ksDomainQuery']]],
+  ['_7eksdomainquery_2',['~ksDomainQuery',['../classksf_1_1misc_1_1ks_domain_query.html#acc1b30764c2ddbdf10d82e1a1441e8da',1,'ksf::misc::ksDomainQuery']]],
   ['_7ekseventhandle_3',['~ksEventHandle',['../classksf_1_1evt_1_1ks_event_handle.html#ad296ef8c5a77a0404666fc93123267ce',1,'ksf::evt::ksEventHandle']]],
   ['_7eksled_4',['~ksLed',['../classksf_1_1comps_1_1ks_led.html#a1c87003b2282ae75929235a58f7ced0c',1,'ksf::comps::ksLed']]],
   ['_7eksmqttconnector_5',['~ksMqttConnector',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a6a2c69fad3a041cf706ff66b88afb663',1,'ksf::comps::ksMqttConnector']]],

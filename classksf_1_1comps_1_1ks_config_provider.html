@@ -169,9 +169,9 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a6b17eeb01e313fb4074b598f669541ce" id="r_a6b17eeb01e313fb4074b598f669541ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam</a> (std::string id, std::string label, std::string defaultValue, int maxLength=50, EConfigParamType::Type type={})</td></tr>
 <tr class="memdesc:a6b17eeb01e313fb4074b598f669541ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configutation parameter.  <br /></td></tr>
 <tr class="separator:a6b17eeb01e313fb4074b598f669541ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a197410e9beb0e96d1fb0c2551227ec75" id="r_a197410e9beb0e96d1fb0c2551227ec75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a197410e9beb0e96d1fb0c2551227ec75">addNewParamWithConfigDefault</a> (<a class="el" href="classksf_1_1ks_config.html">ksConfig</a> &amp;config, std::string id, std::string label={}, int maxLength=50, EConfigParamType::Type type={})</td></tr>
-<tr class="memdesc:a197410e9beb0e96d1fb0c2551227ec75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configuation parameter (with default value).  <br /></td></tr>
-<tr class="separator:a197410e9beb0e96d1fb0c2551227ec75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcf9e639207edeef487fe7d73bbda22a" id="r_abcf9e639207edeef487fe7d73bbda22a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcf9e639207edeef487fe7d73bbda22a">addNewParamWithConfigDefault</a> (<a class="el" href="classksf_1_1misc_1_1ks_config.html">misc::ksConfig</a> &amp;config, std::string id, std::string label={}, int maxLength=50, EConfigParamType::Type type={})</td></tr>
+<tr class="memdesc:abcf9e639207edeef487fe7d73bbda22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines new configuation parameter (with default value).  <br /></td></tr>
+<tr class="separator:abcf9e639207edeef487fe7d73bbda22a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -241,12 +241,12 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="#a197410e9beb0e96d1fb0c2551227ec75">addNewParamWithConfigDefault()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#abcf9e639207edeef487fe7d73bbda22a">addNewParamWithConfigDefault()</a>.</p>
 
 </div>
 </div>
-<a id="a197410e9beb0e96d1fb0c2551227ec75" name="a197410e9beb0e96d1fb0c2551227ec75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a197410e9beb0e96d1fb0c2551227ec75">&#9670;&#160;</a></span>addNewParamWithConfigDefault()</h2>
+<a id="abcf9e639207edeef487fe7d73bbda22a" name="abcf9e639207edeef487fe7d73bbda22a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcf9e639207edeef487fe7d73bbda22a">&#9670;&#160;</a></span>addNewParamWithConfigDefault()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,7 +257,7 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
         <tr>
           <td class="memname">void ksf::comps::ksConfigProvider::addNewParamWithConfigDefault </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classksf_1_1ks_config.html">ksConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span>, </td>
+          <td class="paramtype"><a class="el" href="classksf_1_1misc_1_1ks_config.html">misc::ksConfig</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -290,7 +290,7 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <p>Defines new configuation parameter (with default value). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">config</td><td><a class="el" href="classksf_1_1ks_config.html" title="Implements low-level configuration file handling.">ksConfig</a> reference. </td></tr>
+    <tr><td class="paramname">config</td><td>ksConfig reference. </td></tr>
     <tr><td class="paramname">id</td><td>Unique identificator that will be also used as property label by Device Portal. </td></tr>
     <tr><td class="paramname">label</td><td>Parameter label. </td></tr>
     <tr><td class="paramname">maxLength</td><td>Maximum length of the value. </td></tr>
@@ -299,7 +299,7 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam()</a>, and <a class="el" href="classksf_1_1ks_config.html#a32af4b832d708c039351dea37fa7fcb3">ksf::ksConfig::getParam()</a>.</p>
+<p class="reference">References <a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam()</a>, and <a class="el" href="classksf_1_1misc_1_1ks_config.html#a5fd2d16273d7fea3717f020bf47389b7">ksf::misc::ksConfig::getParam()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ad41f00507bd0d2ec465cb4dd68884199">ksf::comps::ksMqttConfigProvider::readParams()</a>.</p>
 

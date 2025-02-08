@@ -7,5 +7,5 @@ var searchData=
   ['onrequest_5fotachunk_4',['onRequest_otaChunk',['../classksf_1_1comps_1_1ks_device_portal.html#a874a08f061b795a96dc4badf7415fd82',1,'ksf::comps::ksDevicePortal']]],
   ['onrequest_5fotafinish_5',['onRequest_otaFinish',['../classksf_1_1comps_1_1ks_device_portal.html#aaf77328746a9a3f01a584ffdf53a90c8',1,'ksf::comps::ksDevicePortal']]],
   ['onwebsockettextmessage_6',['onWebsocketTextMessage',['../classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7',1,'ksf::comps::ksDevicePortal']]],
-  ['operator_20bool_7',['operator bool',['../classksf_1_1ks_config.html#af05e375f48e5ce57902a587393a95134',1,'ksf::ksConfig']]]
+  ['operator_20bool_7',['operator bool',['../classksf_1_1misc_1_1ks_config.html#aef3eb1177e7b6deb4c67c07069d90cdb',1,'ksf::misc::ksConfig']]]
 ];

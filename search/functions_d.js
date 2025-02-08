@@ -1,14 +1,14 @@
 var searchData=
 [
   ['saveparams_0',['saveParams',['../classksf_1_1comps_1_1ks_config_provider.html#a137995e9f92a86526a6feec85d7721b5',1,'ksf::comps::ksConfigProvider::saveParams()'],['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#a4d316f6e72e43ee5d121b48d2aee50fc',1,'ksf::comps::ksMqttConfigProvider::saveParams()']]],
-  ['sendquery_1',['sendQuery',['../classksf_1_1ks_domain_query.html#ad17c2f6938d2e06dd6022c37b9e467a0',1,'ksf::ksDomainQuery']]],
+  ['sendquery_1',['sendQuery',['../classksf_1_1misc_1_1ks_domain_query.html#afce7934b50cc6c83de71c60fefda178c',1,'ksf::misc::ksDomainQuery']]],
   ['setblinking_2',['setBlinking',['../classksf_1_1comps_1_1ks_led.html#ac4b5388865229bfb8b841df7b690900a',1,'ksf::comps::ksLed']]],
-  ['setdomain_3',['setDomain',['../classksf_1_1ks_domain_query.html#af10ad345268f0b69e9a75dd761a1e487',1,'ksf::ksDomainQuery']]],
+  ['setdomain_3',['setDomain',['../classksf_1_1misc_1_1ks_domain_query.html#aba860776720bd72653ccbf94bf66a537',1,'ksf::misc::ksDomainQuery']]],
   ['setdriveaspushpull_4',['setDriveAsPushPull',['../classksf_1_1comps_1_1ks_led.html#ab6948ea0404741b5bd8c8ed6e1c957b2',1,'ksf::comps::ksLed']]],
   ['setenabled_5',['setEnabled',['../classksf_1_1comps_1_1ks_led.html#a07bd8f91be11f266ac3a31bfe8c1c79a',1,'ksf::comps::ksLed']]],
-  ['setinterval_6',['setInterval',['../classksf_1_1ks_simple_timer.html#a15d32e956c02488bea6a50eddcdecc6a',1,'ksf::ksSimpleTimer']]],
+  ['setinterval_6',['setInterval',['../classksf_1_1misc_1_1ks_simple_timer.html#a0532ae0dc7d825d5b6ce3b94f6080b9d',1,'ksf::misc::ksSimpleTimer']]],
   ['setmessagehandler_7',['setMessageHandler',['../classksf_1_1misc_1_1ks_w_s_server.html#ab6465499a17fef0e369e9f0f5802ef13',1,'ksf::misc::ksWSServer']]],
-  ['setparam_8',['setParam',['../classksf_1_1ks_config.html#a714a7fe8087ccc2bd386bbadb467ce3e',1,'ksf::ksConfig']]],
+  ['setparam_8',['setParam',['../classksf_1_1misc_1_1ks_config.html#aca932449b2cf5329fc4429b9dd94d0d9',1,'ksf::misc::ksConfig']]],
   ['setrequiredauthtoken_9',['setRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#ad7c5303434271a77957a113dad7a2c37',1,'ksf::misc::ksWSServer']]],
   ['setup_10',['setup',['../classksf_1_1misc_1_1ks_cert_fingerprint.html#a7f3a20ad39ac2531ab16d26f37c4e36a',1,'ksf::misc::ksCertFingerprint']]],
   ['setupconnection_11',['setupConnection',['../classksf_1_1comps_1_1ks_mqtt_connector.html#aa3c8abf7dcaecaa90dafe5bdfe08b466',1,'ksf::comps::ksMqttConnector']]],
