@@ -94,12 +94,6 @@ namespace ksf::comps
 		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
 	}
 
-	/*!
-		@brief Called when MQTT connection is established.
-		
-		This method is called after MQTT connection is established successfully.
-		It sets up the callback for incoming MQTT messages and broadcasts the onConnected event.
-	*/
 	void ksMqttConnector::mqttConnectedInternal()
 	{
 		lastSuccessConnectionTime = ksf::millis64();
