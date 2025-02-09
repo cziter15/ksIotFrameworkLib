@@ -104,9 +104,13 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a40b6641129916d736fcfcc06de7914c3" id="r_a40b6641129916d736fcfcc06de7914c3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a40b6641129916d736fcfcc06de7914c3">ksDomainQuery</a> (IPAddress dnsServer=IPAddress(8, 8, 8, 8))</td></tr>
-<tr class="memdesc:a40b6641129916d736fcfcc06de7914c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classksf_1_1misc_1_1ks_domain_query.html" title="Class for resolving domain names to IP addresses using DNS queries.">ksDomainQuery</a> object.  <br /></td></tr>
-<tr class="separator:a40b6641129916d736fcfcc06de7914c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2edcc09eccdc7ceddbb1db070b23eb0e" id="r_a2edcc09eccdc7ceddbb1db070b23eb0e"><td class="memItemLeft" align="right" valign="top"><a id="a2edcc09eccdc7ceddbb1db070b23eb0e" name="a2edcc09eccdc7ceddbb1db070b23eb0e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ksDomainQuery</b> ()</td></tr>
+<tr class="memdesc:a2edcc09eccdc7ceddbb1db070b23eb0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. Uses KSF_DOMAIN_QUERY_DNS_SERVER as the DNS server. <br /></td></tr>
+<tr class="separator:a2edcc09eccdc7ceddbb1db070b23eb0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3782d98ee2773cd8fa94cfaee365719b" id="r_a3782d98ee2773cd8fa94cfaee365719b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3782d98ee2773cd8fa94cfaee365719b">ksDomainQuery</a> (IPAddress dnsServer)</td></tr>
+<tr class="memdesc:a3782d98ee2773cd8fa94cfaee365719b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new <a class="el" href="classksf_1_1misc_1_1ks_domain_query.html" title="Class for resolving domain names to IP addresses using DNS queries.">ksDomainQuery</a> object.  <br /></td></tr>
+<tr class="separator:a3782d98ee2773cd8fa94cfaee365719b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af75475d7ae01e4c99651049c602fef2c" id="r_af75475d7ae01e4c99651049c602fef2c"><td class="memItemLeft" align="right" valign="top"><a id="af75475d7ae01e4c99651049c602fef2c" name="af75475d7ae01e4c99651049c602fef2c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>invalidate</b> ()</td></tr>
 <tr class="memdesc:af75475d7ae01e4c99651049c602fef2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invalidates the resolved IP address and the last query send time. It will cause a new query to be sent. <br /></td></tr>
@@ -162,8 +166,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTime
 <div class="textblock"><p>Class for resolving domain names to IP addresses using DNS queries. </p>
 <p>To avoid DNS caching, a new query is sent every KSF_DOMAIN_QUERY_INTERVAL_MS milliseconds. The motivation to write this component was to avoid issues that I had with standard DNS libraries. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a40b6641129916d736fcfcc06de7914c3" name="a40b6641129916d736fcfcc06de7914c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40b6641129916d736fcfcc06de7914c3">&#9670;&#160;</a></span>ksDomainQuery()</h2>
+<a id="a3782d98ee2773cd8fa94cfaee365719b" name="a3782d98ee2773cd8fa94cfaee365719b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3782d98ee2773cd8fa94cfaee365719b">&#9670;&#160;</a></span>ksDomainQuery()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,7 +175,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastQuerySendTime
         <tr>
           <td class="memname">ksf::misc::ksDomainQuery::ksDomainQuery </td>
           <td>(</td>
-          <td class="paramtype">IPAddress</td>          <td class="paramname"><span class="paramname"><em>dnsServer</em></span><span class="paramdefsep"> = </span><span class="paramdefval">IPAddress(8,&#160;8,&#160;8,&#160;8)</span></td><td>)</td>
+          <td class="paramtype">IPAddress</td>          <td class="paramname"><span class="paramname"><em>dnsServer</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
