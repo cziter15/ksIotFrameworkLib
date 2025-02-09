@@ -106,101 +106,102 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;list&gt;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;ksComponent.h&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#if APP_LOG_ENABLED</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">typedef</span> std::function&lt;void(std::string&amp;)&gt; AppLogProviderFunc_t;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">typedef</span> std::function&lt;void(std::string&amp;&amp;)&gt; AppLogCallbackFunc_t;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">namespace </span>ksf </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keyword">class </span><a class="code hl_class" href="classksf_1_1ks_component.html">ksComponent</a>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="};">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html">   42</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classksf_1_1ks_application.html">ksApplication</a></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">   45</a></span>            std::list&lt;std::shared_ptr&lt;ksComponent&gt;&gt; <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>;       </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#if APP_LOG_ENABLED</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>             AppLogCallbackFunc_t appLogCallback;                   </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keyword">template</span> &lt;<span class="keyword">class </span>TComponentType, <span class="keyword">class</span>... TParams&gt;</div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">   63</a></span>            std::weak_ptr&lt;TComponentType&gt; <a class="code hl_function" href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">addComponent</a>(TParams... arg)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                <span class="keyword">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(&amp;<a class="code hl_function" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksComponent::getInstanceType</a>), <span class="keyword">decltype</span>(&amp;TComponentType::getInstanceType)&gt;, </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                    <span class="stringliteral">&quot;You&#39;re calling addComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?&quot;</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                );</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="keyword">auto</span> componentSp{std::make_shared&lt;TComponentType&gt;(arg...)};</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="keyword">auto</span> componentWp{std::weak_ptr&lt;TComponentType&gt;(componentSp)};</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>.push_front(std::move(componentSp));</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">return</span> componentWp;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;ksComponent.h&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#if APP_LOG_ENABLED</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">typedef</span> std::function&lt;void(std::string&amp;)&gt; AppLogProviderFunc_t;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">typedef</span> std::function&lt;void(std::string&amp;&amp;)&gt; AppLogCallbackFunc_t;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span>ksf </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">class </span><a class="code hl_class" href="classksf_1_1ks_component.html">ksComponent</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html">   43</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classksf_1_1ks_application.html">ksApplication</a></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">   46</a></span>            std::list&lt;std::shared_ptr&lt;ksComponent&gt;&gt; <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>;       </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#if APP_LOG_ENABLED</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>             AppLogCallbackFunc_t appLogCallback;                   </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="keyword">template</span> &lt;<span class="keyword">class </span>TComponentType, <span class="keyword">class</span>... TParams&gt;</div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">   64</a></span>            std::weak_ptr&lt;TComponentType&gt; <a class="code hl_function" href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">addComponent</a>(TParams... arg)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keyword">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(&amp;<a class="code hl_function" href="classksf_1_1ks_component.html#a84143a4d98122f3f1d8c42df4742158d">ksComponent::getInstanceType</a>), <span class="keyword">decltype</span>(&amp;TComponentType::getInstanceType)&gt;, </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <span class="stringliteral">&quot;You&#39;re calling addComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?&quot;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                );</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="keyword">auto</span> componentSp{std::make_shared&lt;TComponentType&gt;(arg...)};</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <span class="keyword">auto</span> componentWp{std::weak_ptr&lt;TComponentType&gt;(componentSp)};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>.push_front(std::move(componentSp));</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">return</span> componentWp;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            }</div>
 </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            <span class="keyword">template</span> &lt;<span class="keyword">class</span> TComponentType&gt;</div>
-<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">   81</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">findComponents</a>(std::vector&lt;std::weak_ptr&lt;TComponentType&gt;&gt;&amp; outComponents)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keyword">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(&amp;<a class="code hl_function" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksComponent::getInstanceType</a>), <span class="keyword">decltype</span>(&amp;TComponentType::getInstanceType)&gt;, </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                    <span class="stringliteral">&quot;You&#39;re calling findComponents, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?&quot;</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                );</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                outComponents.clear();</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; comp : <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>)</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                {</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                    <span class="keywordflow">if</span> (comp-&gt;isA(TComponentType::getClassType()))</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    {</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                        std::weak_ptr&lt;TComponentType&gt; castedCompWp{std::static_pointer_cast&lt;TComponentType&gt;(comp)};</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                        <span class="keywordflow">if</span> (!castedCompWp.expired())</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                            outComponents.push_back(std::move(castedCompWp));</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                    }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                }</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keyword">template</span> &lt;<span class="keyword">class</span> TComponentType&gt;</div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">   82</a></span>            <span class="keywordtype">void</span> <a class="code hl_function" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">findComponents</a>(std::vector&lt;std::weak_ptr&lt;TComponentType&gt;&gt;&amp; outComponents)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keyword">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(&amp;<a class="code hl_function" href="classksf_1_1ks_component.html#a84143a4d98122f3f1d8c42df4742158d">ksComponent::getInstanceType</a>), <span class="keyword">decltype</span>(&amp;TComponentType::getInstanceType)&gt;, </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                    <span class="stringliteral">&quot;You&#39;re calling findComponents, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?&quot;</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                );</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                outComponents.clear();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; comp : <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    <span class="keywordflow">if</span> (comp-&gt;isA(TComponentType::getClassType()))</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    {</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                        std::weak_ptr&lt;TComponentType&gt; castedCompWp{std::static_pointer_cast&lt;TComponentType&gt;(comp)};</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                        <span class="keywordflow">if</span> (!castedCompWp.expired())</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                            outComponents.push_back(std::move(castedCompWp));</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    }</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                }</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            }</div>
 </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keyword">template</span> &lt;<span class="keyword">class</span> TComponentType&gt;</div>
-<div class="foldopen" id="foldopen00106" data-start="{" data-end="}">
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">  106</a></span>            std::weak_ptr&lt;TComponentType&gt; <a class="code hl_function" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">findComponent</a>()</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            {</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                <span class="keyword">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(&amp;<a class="code hl_function" href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksComponent::getInstanceType</a>), <span class="keyword">decltype</span>(&amp;TComponentType::getInstanceType)&gt;, </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="stringliteral">&quot;You&#39;re calling findComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?&quot;</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                );</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; comp : <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>)</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    <span class="keywordflow">if</span> (comp-&gt;isA(TComponentType::getClassType()))</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                        <span class="keywordflow">return</span> std::static_pointer_cast&lt;TComponentType&gt;(comp);</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                <span class="keywordflow">return</span> std::weak_ptr&lt;TComponentType&gt;();</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            <span class="keyword">template</span> &lt;<span class="keyword">class</span> TComponentType&gt;</div>
+<div class="foldopen" id="foldopen00107" data-start="{" data-end="}">
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">  107</a></span>            std::weak_ptr&lt;TComponentType&gt; <a class="code hl_function" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">findComponent</a>()</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                <span class="keyword">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(&amp;<a class="code hl_function" href="classksf_1_1ks_component.html#a84143a4d98122f3f1d8c42df4742158d">ksComponent::getInstanceType</a>), <span class="keyword">decltype</span>(&amp;TComponentType::getInstanceType)&gt;, </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    <span class="stringliteral">&quot;You&#39;re calling findComponent, but provided type lacks RTTI implementation. Did you miss KSF_RTTI_DECLARATIONS?&quot;</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                );</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; comp : <a class="code hl_variable" href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">components</a>)</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    <span class="keywordflow">if</span> (comp-&gt;isA(TComponentType::getClassType()))</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                        <span class="keywordflow">return</span> std::static_pointer_cast&lt;TComponentType&gt;(comp);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                <span class="keywordflow">return</span> std::weak_ptr&lt;TComponentType&gt;();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            }</div>
 </div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce">  123</a></span>            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce">init</a>() = 0;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classksf_1_1ks_application.html#a5f4246bf46d16e6469b3967d399c7cd3">loop</a>();</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor">#if APP_LOG_ENABLED</span><span class="preprocessor"></span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>            <span class="keywordtype">void</span> log(AppLogProviderFunc_t provideLogFn) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordtype">void</span> setLogCallback(AppLogCallbackFunc_t logCallback);</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    };</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce">  124</a></span>            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce">init</a>() = 0;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classksf_1_1ks_application.html#a5f4246bf46d16e6469b3967d399c7cd3">loop</a>();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#if APP_LOG_ENABLED</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            <span class="keywordtype">void</span> log(AppLogProviderFunc_t provideLogFn) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordtype">void</span> setLogCallback(AppLogCallbackFunc_t logCallback);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    };</div>
 </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>}</div>
-<div class="ttc" id="aclassksf_1_1ks_application_html"><div class="ttname"><a href="classksf_1_1ks_application.html">ksf::ksApplication</a></div><div class="ttdoc">A class that is a base for user-defined application.</div><div class="ttdef"><b>Definition</b> ksApplication.h:43</div></div>
-<div class="ttc" id="aclassksf_1_1ks_application_html_a06c3c117592fa39614d331dd5bc89660"><div class="ttname"><a href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">ksf::ksApplication::components</a></div><div class="ttdeci">std::list&lt; std::shared_ptr&lt; ksComponent &gt; &gt; components</div><div class="ttdoc">An array with shared_ptr of components (holding main reference).</div><div class="ttdef"><b>Definition</b> ksApplication.h:45</div></div>
-<div class="ttc" id="aclassksf_1_1ks_application_html_a5f4246bf46d16e6469b3967d399c7cd3"><div class="ttname"><a href="classksf_1_1ks_application.html#a5f4246bf46d16e6469b3967d399c7cd3">ksf::ksApplication::loop</a></div><div class="ttdeci">virtual bool loop()</div><div class="ttdoc">Executes application logic loop.</div><div class="ttdef"><b>Definition</b> ksApplication.cpp:15</div></div>
-<div class="ttc" id="aclassksf_1_1ks_application_html_a944269df1630cce9506ee228c12e1ebb"><div class="ttname"><a href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent</a></div><div class="ttdeci">std::weak_ptr&lt; TComponentType &gt; findComponent()</div><div class="ttdoc">Iterates through all components and returns a weak pointer to the first component that matches the ty...</div><div class="ttdef"><b>Definition</b> ksApplication.h:106</div></div>
-<div class="ttc" id="aclassksf_1_1ks_application_html_aa37ddabda1c13f2e1ab3e94babcfcc43"><div class="ttname"><a href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">ksf::ksApplication::findComponents</a></div><div class="ttdeci">void findComponents(std::vector&lt; std::weak_ptr&lt; TComponentType &gt; &gt; &amp;outComponents)</div><div class="ttdoc">Iterates through all components and returns a vector of weak pointers with components that matches th...</div><div class="ttdef"><b>Definition</b> ksApplication.h:81</div></div>
-<div class="ttc" id="aclassksf_1_1ks_application_html_ac418c7eb9b021d7b52e20cf7e870bc91"><div class="ttname"><a href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">ksf::ksApplication::addComponent</a></div><div class="ttdeci">std::weak_ptr&lt; TComponentType &gt; addComponent(TParams... arg)</div><div class="ttdoc">Instantiates a component of the type defined by the template instance. This function will pass all te...</div><div class="ttdef"><b>Definition</b> ksApplication.h:63</div></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
+<div class="ttc" id="aclassksf_1_1ks_application_html"><div class="ttname"><a href="classksf_1_1ks_application.html">ksf::ksApplication</a></div><div class="ttdoc">A class that is a base for user-defined application.</div><div class="ttdef"><b>Definition</b> ksApplication.h:44</div></div>
+<div class="ttc" id="aclassksf_1_1ks_application_html_a06c3c117592fa39614d331dd5bc89660"><div class="ttname"><a href="classksf_1_1ks_application.html#a06c3c117592fa39614d331dd5bc89660">ksf::ksApplication::components</a></div><div class="ttdeci">std::list&lt; std::shared_ptr&lt; ksComponent &gt; &gt; components</div><div class="ttdoc">An array with shared_ptr of components (holding main reference).</div><div class="ttdef"><b>Definition</b> ksApplication.h:46</div></div>
+<div class="ttc" id="aclassksf_1_1ks_application_html_a5f4246bf46d16e6469b3967d399c7cd3"><div class="ttname"><a href="classksf_1_1ks_application.html#a5f4246bf46d16e6469b3967d399c7cd3">ksf::ksApplication::loop</a></div><div class="ttdeci">virtual bool loop()</div><div class="ttdoc">Executes application logic loop.</div><div class="ttdef"><b>Definition</b> ksApplication.cpp:16</div></div>
+<div class="ttc" id="aclassksf_1_1ks_application_html_a944269df1630cce9506ee228c12e1ebb"><div class="ttname"><a href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent</a></div><div class="ttdeci">std::weak_ptr&lt; TComponentType &gt; findComponent()</div><div class="ttdoc">Iterates through all components and returns a weak pointer to the first component that matches the ty...</div><div class="ttdef"><b>Definition</b> ksApplication.h:107</div></div>
+<div class="ttc" id="aclassksf_1_1ks_application_html_aa37ddabda1c13f2e1ab3e94babcfcc43"><div class="ttname"><a href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">ksf::ksApplication::findComponents</a></div><div class="ttdeci">void findComponents(std::vector&lt; std::weak_ptr&lt; TComponentType &gt; &gt; &amp;outComponents)</div><div class="ttdoc">Iterates through all components and returns a vector of weak pointers with components that matches th...</div><div class="ttdef"><b>Definition</b> ksApplication.h:82</div></div>
+<div class="ttc" id="aclassksf_1_1ks_application_html_ac418c7eb9b021d7b52e20cf7e870bc91"><div class="ttname"><a href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">ksf::ksApplication::addComponent</a></div><div class="ttdeci">std::weak_ptr&lt; TComponentType &gt; addComponent(TParams... arg)</div><div class="ttdoc">Instantiates a component of the type defined by the template instance. This function will pass all te...</div><div class="ttdef"><b>Definition</b> ksApplication.h:64</div></div>
 <div class="ttc" id="aclassksf_1_1ks_application_html_ae0df7f797abc4f477f17448aa89613ce"><div class="ttname"><a href="classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce">ksf::ksApplication::init</a></div><div class="ttdeci">virtual bool init()=0</div><div class="ttdoc">Initializes application.</div></div>
 <div class="ttc" id="aclassksf_1_1ks_component_html"><div class="ttname"><a href="classksf_1_1ks_component.html">ksf::ksComponent</a></div><div class="ttdoc">Base component class.</div><div class="ttdef"><b>Definition</b> ksComponent.h:50</div></div>
-<div class="ttc" id="aclassksf_1_1ks_component_html_a14664605111e8cc9a655bb7e87b9f29e"><div class="ttname"><a href="classksf_1_1ks_component.html#a14664605111e8cc9a655bb7e87b9f29e">ksf::ksComponent::getInstanceType</a></div><div class="ttdeci">virtual const size_t getInstanceType() const</div><div class="ttdoc">Retrieves type ID of the object.</div><div class="ttdef"><b>Definition</b> ksComponent.h:51</div></div>
+<div class="ttc" id="aclassksf_1_1ks_component_html_a84143a4d98122f3f1d8c42df4742158d"><div class="ttname"><a href="classksf_1_1ks_component.html#a84143a4d98122f3f1d8c42df4742158d">ksf::ksComponent::getInstanceType</a></div><div class="ttdeci">virtual const std::size_t getInstanceType() const</div><div class="ttdoc">Retrieves type ID of the object.</div><div class="ttdef"><b>Definition</b> ksComponent.h:51</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -124,12 +124,12 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a14664605111e8cc9a655bb7e87b9f29e" id="r_a14664605111e8cc9a655bb7e87b9f29e"><td class="memItemLeft" align="right" valign="top">virtual const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14664605111e8cc9a655bb7e87b9f29e">getInstanceType</a> () const</td></tr>
-<tr class="memdesc:a14664605111e8cc9a655bb7e87b9f29e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
-<tr class="separator:a14664605111e8cc9a655bb7e87b9f29e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a286b01d0faa7e74983efb15cdc80c748" id="r_a286b01d0faa7e74983efb15cdc80c748"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a286b01d0faa7e74983efb15cdc80c748">isA</a> (const size_t id) const</td></tr>
-<tr class="memdesc:a286b01d0faa7e74983efb15cdc80c748"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
-<tr class="separator:a286b01d0faa7e74983efb15cdc80c748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84143a4d98122f3f1d8c42df4742158d" id="r_a84143a4d98122f3f1d8c42df4742158d"><td class="memItemLeft" align="right" valign="top">virtual const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84143a4d98122f3f1d8c42df4742158d">getInstanceType</a> () const</td></tr>
+<tr class="memdesc:a84143a4d98122f3f1d8c42df4742158d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
+<tr class="separator:a84143a4d98122f3f1d8c42df4742158d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21b807fa08051e1dbada776449485379" id="r_a21b807fa08051e1dbada776449485379"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21b807fa08051e1dbada776449485379">isA</a> (const std::size_t id) const</td></tr>
+<tr class="memdesc:a21b807fa08051e1dbada776449485379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
+<tr class="separator:a21b807fa08051e1dbada776449485379"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a684f870e77ac3795b3cf789a8a81cdde" id="r_a684f870e77ac3795b3cf789a8a81cdde"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a684f870e77ac3795b3cf789a8a81cdde">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app)</td></tr>
 <tr class="memdesc:a684f870e77ac3795b3cf789a8a81cdde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes component.  <br /></td></tr>
 <tr class="separator:a684f870e77ac3795b3cf789a8a81cdde"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,9 +151,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1259b871ed5c2cd8cc06605be884700c" id="r_a1259b871ed5c2cd8cc06605be884700c"><td class="memItemLeft" align="right" valign="top"><a id="a1259b871ed5c2cd8cc06605be884700c" name="a1259b871ed5c2cd8cc06605be884700c"></a>
-static const size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
-<tr class="separator:a1259b871ed5c2cd8cc06605be884700c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4024e5927e3431046ff12d7a586dc2e5" id="r_a4024e5927e3431046ff12d7a586dc2e5"><td class="memItemLeft" align="right" valign="top"><a id="a4024e5927e3431046ff12d7a586dc2e5" name="a4024e5927e3431046ff12d7a586dc2e5"></a>
+static const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getClassType</b> ()</td></tr>
+<tr class="separator:a4024e5927e3431046ff12d7a586dc2e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -170,8 +170,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 <div class="textblock"><p>Base component class. </p>
 <p>A component is a part of the application that can be configured and managed by the application. As it is using <a class="el" href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects.">ksRtti</a>, it must use KSF_RTTI_DECLARATIONS for proper initialization. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a14664605111e8cc9a655bb7e87b9f29e" name="a14664605111e8cc9a655bb7e87b9f29e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14664605111e8cc9a655bb7e87b9f29e">&#9670;&#160;</a></span>getInstanceType()</h2>
+<a id="a84143a4d98122f3f1d8c42df4742158d" name="a84143a4d98122f3f1d8c42df4742158d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84143a4d98122f3f1d8c42df4742158d">&#9670;&#160;</a></span>getInstanceType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -180,7 +180,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual const size_t ksf::ksComponent::getInstanceType </td>
+          <td class="memname">virtual const std::size_t ksf::ksComponent::getInstanceType </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -196,9 +196,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 <p>Retrieves type ID of the object. </p>
 <dl class="section return"><dt>Returns</dt><dd>Object type ID. </dd></dl>
 
-<p>Implements <a class="el" href="classksf_1_1ks_rtti.html#ab835f07a17adfa5d44313544df204025">ksf::ksRtti</a>.</p>
+<p>Implements <a class="el" href="classksf_1_1ks_rtti.html#a1c3282d0b589d1fd9655a01a05c0ac12">ksf::ksRtti</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#acc6673a2b5a231587c568fcafc9fa42d">ksf::comps::ksConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a376642e99410bfe8b45f041e033925e6">ksf::comps::ksDevicePortal</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a4e354f7ea9757ca345769b2e0815fcbf">ksf::comps::ksDevStatMqttReporter</a>, <a class="el" href="classksf_1_1comps_1_1ks_led.html#a53fe8b7aa037908beb9d8145d112503d">ksf::comps::ksLed</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a7bfa5bbf18c8fe767d95ad2412c15c2e">ksf::comps::ksMqttConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#a7dbb790f4566011f629c50af9bb83152">ksf::comps::ksMqttConnector</a>, <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html#a73ed76888014734924db9b3a01cf2ab2">ksf::comps::ksResetButton</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#afdd48f90263e3a77eb60f0951c14e60b">ksf::comps::ksWifiConfigurator</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#a1f75830be77c4bfdbe18d2924739eecd">ksf::comps::ksWifiConnector</a>.</p>
+<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a46b5678ae963359bfaa9c93ab1a5bb19">ksf::comps::ksConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a344da875450e84e4eaa12e0d507bc075">ksf::comps::ksDevicePortal</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#aaa4fd60c29037effa5cfd1c72dd50f59">ksf::comps::ksDevStatMqttReporter</a>, <a class="el" href="classksf_1_1comps_1_1ks_led.html#af642c7a676d8c6e676d2c668162ba995">ksf::comps::ksLed</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a7beec06b6bb4bec54f95b5f7919dafcf">ksf::comps::ksMqttConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#a04f92ecf71ebdc6ed7c9c5edeabd2591">ksf::comps::ksMqttConnector</a>, <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html#a968a297e1474b98595c6f5b869e2ab30">ksf::comps::ksResetButton</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#ad62ba9ea6b7cd686787a3a5e983afaa1">ksf::comps::ksWifiConfigurator</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#aac64b50d213913d0c0232ae83ef8c863">ksf::comps::ksWifiConnector</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">ksf::ksApplication::addComponent()</a>, <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, and <a class="el" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">ksf::ksApplication::findComponents()</a>.</p>
 
@@ -242,8 +242,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 
 </div>
 </div>
-<a id="a286b01d0faa7e74983efb15cdc80c748" name="a286b01d0faa7e74983efb15cdc80c748"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a286b01d0faa7e74983efb15cdc80c748">&#9670;&#160;</a></span>isA()</h2>
+<a id="a21b807fa08051e1dbada776449485379" name="a21b807fa08051e1dbada776449485379"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21b807fa08051e1dbada776449485379">&#9670;&#160;</a></span>isA()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,7 +254,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
         <tr>
           <td class="memname">virtual bool ksf::ksComponent::isA </td>
           <td>(</td>
-          <td class="paramtype">const size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td class="paramtype">const std::size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -274,9 +274,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if object is of given type, otherwise false. </dd></dl>
 
-<p>Reimplemented from <a class="el" href="classksf_1_1ks_rtti.html#a84c5ab0cd0a529fd085e68de557ab4f4">ksf::ksRtti</a>.</p>
+<p>Reimplemented from <a class="el" href="classksf_1_1ks_rtti.html#a52bfcf077c1a2ec004cf2841e6f89244">ksf::ksRtti</a>.</p>
 
-<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#abd847581f934d5e67b0deafdf2884d27">ksf::comps::ksConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a17f39258b36ee0f902ed28ba71dc8532">ksf::comps::ksDevicePortal</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a12ee5aa09cbaa9f7419e097a42357d1c">ksf::comps::ksDevStatMqttReporter</a>, <a class="el" href="classksf_1_1comps_1_1ks_led.html#a381037e05ed26b334c81853cb53fc817">ksf::comps::ksLed</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a1b5e47d42f23e33853ac1b0d4275c540">ksf::comps::ksMqttConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#ae2515a6080975c49fa5f8fddda90dcda">ksf::comps::ksMqttConnector</a>, <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html#a6ea1bf709aee9cca8796b8739a68d57c">ksf::comps::ksResetButton</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a652a9aefbb8729c75ef16bb1a9d3eb63">ksf::comps::ksWifiConfigurator</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#a3c9f5b528500d8ec016fd50207bd9d21">ksf::comps::ksWifiConnector</a>.</p>
+<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a33de8a828c7f876cdf9a43135511657b">ksf::comps::ksConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a2256f5166ece72d25fffb83292d17e4d">ksf::comps::ksDevicePortal</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#aa6c93f7dab79feaed63af780882a53fc">ksf::comps::ksDevStatMqttReporter</a>, <a class="el" href="classksf_1_1comps_1_1ks_led.html#a2b2d30c143dd36c7f3c682e01c5417ee">ksf::comps::ksLed</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a708c4427f57d233fe3951f9718e6ad0f">ksf::comps::ksMqttConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#a3a66432b7e14ce14d34f55153f8070c5">ksf::comps::ksMqttConnector</a>, <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html#a3aa67c6ce32314bd5a33b01695fbc66d">ksf::comps::ksResetButton</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a30e0cd467c391628f046d25027fa101b">ksf::comps::ksWifiConfigurator</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#ab91bb1db440a6adf8b98ea15b854b5d2">ksf::comps::ksWifiConnector</a>.</p>
 
 </div>
 </div>
