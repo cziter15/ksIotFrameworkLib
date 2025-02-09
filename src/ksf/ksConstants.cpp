@@ -20,7 +20,7 @@
 	#error Platform not implemented.
 #endif
 
-#include "LittleFS.h"
+#include <LittleFS.h>
 
 #include "ksConstants.h"
 #include "misc/ksConfig.h"

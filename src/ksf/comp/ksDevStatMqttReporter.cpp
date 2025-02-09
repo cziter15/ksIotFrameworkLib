@@ -7,12 +7,10 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "../ksConstants.h"
 #include "../ksApplication.h"
-#include "ksDevStatMqttReporter.h"
 #include "ksMqttConnector.h"
-
 #if defined(ESP32)
 	#include <WiFi.h>
 #elif defined(ESP8266)
@@ -20,6 +18,8 @@
 #else			
 	#error Platform not implemented.
 #endif
+
+#include "ksDevStatMqttReporter.h"
 
 namespace ksf::comps
 {

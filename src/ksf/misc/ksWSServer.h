@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *	Copyright (c) 2021-2025, Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFramework library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -9,9 +9,11 @@
 
 #pragma once
 
-#include <WebSocketsServer.h>
+#include <memory>
+#include <inttypes.h>
 #include <functional>
 #include <string_view>
+#include <WebSocketsServer.h>
 
 namespace ksf::misc
 {

@@ -10,6 +10,7 @@
 #pragma once
 
 #include <memory>
+#include <cstddef>
 
 namespace ksf::evt
 {

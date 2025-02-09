@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *	Copyright (c) 2021-2025, Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFramework library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -7,10 +7,10 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "LittleFS.h"
 #include "ksConfig.h"
 #include "../ksConstants.h"
 
+#include <LittleFS.h>
 namespace ksf::misc
 {
 	ksConfig::ksConfig(const std::string& fileName)

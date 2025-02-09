@@ -14,13 +14,14 @@
 #else			
 #error Platform not implemented.
 #endif
-
+#include <Arduino.h>
 #include <Esp.h>
 
 #include "../ksApplication.h"
 #include "../ksConstants.h"
+
 #include "ksResetButton.h"
-#include "Arduino.h"
+
 
 namespace ksf::comps
 {

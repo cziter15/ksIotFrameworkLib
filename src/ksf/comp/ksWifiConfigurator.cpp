@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *	Copyright (c) 2021-2025, Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFramework library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -19,10 +19,11 @@
 
 #include "../ksApplication.h"
 #include "../ksConstants.h"
-#include "ksWifiConfigurator.h"
 #include "ksConfigProvider.h"
 #include "ksDevicePortal.h"
 #include "ksLed.h"
+
+#include "ksWifiConfigurator.h"
 
 namespace ksf::comps
 {

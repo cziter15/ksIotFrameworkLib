@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *	Copyright (c) 2021-2025, Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFramework library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -18,7 +18,6 @@
 #else 			
 	#error Platform not implemented.
 #endif
-
 #include <PubSubClient.h>
 
 #include "../ksApplication.h"

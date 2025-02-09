@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include <stddef.h>
+#include <cstddef>
 
 namespace ksf
 {
@@ -29,14 +29,14 @@ namespace ksf
 				@brief Retrieves type ID of the object.
 				@return Object type ID.
 			*/
-			virtual const size_t getInstanceType() const = 0;
+			virtual const std::size_t getInstanceType() const = 0;
 
 			/*!
 				@brief Checks whether object is of given type.
 				@param id Type ID to check against.
 				@return True if object is of given type, otherwise false.
 			*/ 
-			virtual bool isA(const size_t id) const
+			virtual bool isA(const std::size_t id) const
 			{
 				return false;
 			}
@@ -72,15 +72,15 @@ namespace ksf
 
 	#define KSF_RTTI_DECLARATIONS(_Type, _ParentType)								\
 		public:																		\
-			virtual const size_t getInstanceType() const							\
+			virtual const std::size_t getInstanceType() const						\
 			{																		\
 				return _Type::getClassType(); 										\
 			}																		\
-			static const size_t getClassType()										\
+			static const std::size_t getClassType()									\
 			{																		\
-				static int d{0}; return (size_t)&d; 								\
+				static int d{0}; return (std::size_t)&d; 							\
 			}																		\
-			virtual bool isA(const size_t id) const									\
+			virtual bool isA(const std::size_t id) const							\
 			{																		\
 				if (id == getClassType())											\
 					return true;													\

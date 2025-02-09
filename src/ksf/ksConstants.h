@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2021-2023, Krzysztof Strehlau
+ *	Copyright (c) 2021-2025, Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFramework library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -9,13 +9,12 @@
 
 #pragma once
 
+#include <Arduino.h>
 #include <stdint.h>
 #include <limits>
 #include <string>
 #include <charconv>
-#include "stdlib_noniso.h"
-
-#include "Arduino.h"
+#include <stdlib_noniso.h>
 
 /*! One second in milliseconds. */
 #define KSF_ONE_SEC_MS 1000UL
