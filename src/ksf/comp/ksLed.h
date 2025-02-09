@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <inttypes.h>
 #include "../ksComponent.h"
 
 namespace ksf::comps

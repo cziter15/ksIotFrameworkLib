@@ -31,15 +31,15 @@ namespace ksf::comps
 		KSF_RTTI_DECLARATIONS(ksWifiConnector, ksComponent)
 		
 		protected:
-			misc::ksSimpleTimer wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS};				//!< Wifi timer - long timeout in case of issues.
-			misc::ksSimpleTimer wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS};		//!< Wifi timer - reconnection timeout.
-			misc::ksSimpleTimer wifiIpCheckTimer{KSF_ONE_SEC_MS};						//!< Wifi timer - IP check interval.
+			misc::ksSimpleTimer wifiTimeoutTimer;						//!< Wifi timer - long timeout in case of issues.
+			misc::ksSimpleTimer wifiReconnectTimer;						//!< Wifi timer - reconnection timeout.
+			misc::ksSimpleTimer wifiIpCheckTimer;						//!< Wifi timer - IP check interval.
 
 			struct
 			{
-				bool wasConnected : 1;											//!< True if connected in previous loop.
-				bool savePower : 1;												//!< True to save power.
-				bool gotIpAddress : 1;											//!< True if IP address is set.
+				bool wasConnected : 1;									//!< True if connected in previous loop.
+				bool savePower : 1;										//!< True to save power.
+				bool gotIpAddress : 1;									//!< True if IP address is set.
 			} bitflags = {false, true, false};
 
 			/*!
@@ -51,8 +51,8 @@ namespace ksf::comps
 			void setupMacAddress();
 
 		public:
-			DECLARE_KS_EVENT(onConnected)									// onConnected event that user can bind to.
-			DECLARE_KS_EVENT(onDisconnected)								// onDisconnected event that user can bind to.
+			DECLARE_KS_EVENT(onConnected)								// onConnected event that user can bind to.
+			DECLARE_KS_EVENT(onDisconnected)							// onDisconnected event that user can bind to.
 
 			/*!
 				@brief Constructs WiFi connector component.

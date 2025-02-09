@@ -9,12 +9,6 @@
 
 #pragma once
 
-#include "ksf/ksApplication.h"
-#include "ksf/misc/ksSimpleTimer.h"
-#include "ksf/ksComponent.h"
-#include "ksf/misc/ksConfig.h"
-#include "ksf/ksConstants.h"
-#include "ksf/evt/ksEvent.h"
 #include "ksf/comp/ksConfigProvider.h"
 #include "ksf/comp/ksLed.h"
 #include "ksf/comp/ksResetButton.h"
@@ -24,5 +18,10 @@
 #include "ksf/comp/ksWifiConnector.h"
 #include "ksf/comp/ksDevicePortal.h"
 #include "ksf/comp/ksDevStatMqttReporter.h"
-
 #include "ksf/ksAppRotator.h"
+#include "ksf/ksApplication.h"
+#include "ksf/ksComponent.h"
+#include "ksf/evt/ksEvent.h"
+#include "ksf/misc/ksConfig.h"
+#include "ksf/misc/ksSimpleTimer.h"
+#include "ksf/ksConstants.h"

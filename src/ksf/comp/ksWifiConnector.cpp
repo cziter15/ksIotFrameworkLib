@@ -26,7 +26,8 @@
 
 namespace ksf::comps
 {
-	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower) 
+	ksWifiConnector::ksWifiConnector(const char* hostname, bool savePower)
+		: wifiTimeoutTimer{KSF_WIFI_TIMEOUT_MS}, wifiReconnectTimer{KSF_WIFI_RECONNECT_TIME_MS}, wifiIpCheckTimer{KSF_ONE_SEC_MS}
 	{
 		bitflags.savePower = savePower;
 #if defined(ESP32)

@@ -53,11 +53,11 @@ namespace ksf::comps
 			ksApplication* app{nullptr};									//!< Application pointer.
 #endif
 
-			misc::ksDomainQuery domainResolver;									//!< Domain query used to resolve MQTT broker address.
+			misc::ksDomainQuery domainResolver;								//!< Domain query used to resolve MQTT broker address.
 			std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
 			std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
-
 			std::weak_ptr<ksWifiConnector> wifiConnWp;						//!< Weak pointer to WiFi connector.
+			misc::ksSimpleTimer reconnectTimer;								//!< Timer that counts time between reconnection attempts.
 
 			uint64_t lastSuccessConnectionTime{0};							//!< Time of connection to MQTT broker in seconds.
 			uint32_t reconnectCounter{0};									//!< MQTT reconnection counter.
@@ -67,8 +67,6 @@ namespace ksf::comps
 				bool usePersistentSession : 1;								//!< Use persistent session or not.
 				bool wasConnected : 1;										//!< True if connected in previous loop.
 			} bitflags = {true, false, true};
-
-			misc::ksSimpleTimer reconnectTimer{KSF_MQTT_RECONNECT_DELAY_MS};		//!< Timer that counts time between reconnection attempts.
 
 			std::string login;												//!< Saved MQTT login.
 			std::string password;											//!< Saved MQTT password.
