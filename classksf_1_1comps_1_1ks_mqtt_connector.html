@@ -238,6 +238,10 @@ std::unique_ptr&lt; PubSubClient &gt;&#160;</td><td class="memItemRight" valign=
 std::weak_ptr&lt; <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html">ksWifiConnector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>wifiConnWp</b></td></tr>
 <tr class="memdesc:a00194e36edb73cbc7db830d42490fff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weak pointer to WiFi connector. <br /></td></tr>
 <tr class="separator:a00194e36edb73cbc7db830d42490fff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3272849e991b131d65f75bf8c8b1912a" id="r_a3272849e991b131d65f75bf8c8b1912a"><td class="memItemLeft" align="right" valign="top"><a id="a3272849e991b131d65f75bf8c8b1912a" name="a3272849e991b131d65f75bf8c8b1912a"></a>
+<a class="el" href="classksf_1_1misc_1_1ks_simple_timer.html">misc::ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>reconnectTimer</b></td></tr>
+<tr class="memdesc:a3272849e991b131d65f75bf8c8b1912a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer that counts time between reconnection attempts. <br /></td></tr>
+<tr class="separator:a3272849e991b131d65f75bf8c8b1912a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b3892df535c4e3d814f49682a6dd3ed" id="r_a5b3892df535c4e3d814f49682a6dd3ed"><td class="memItemLeft" align="right" valign="top"><a id="a5b3892df535c4e3d814f49682a6dd3ed" name="a5b3892df535c4e3d814f49682a6dd3ed"></a>
 uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastSuccessConnectionTime</b> {0}</td></tr>
 <tr class="memdesc:a5b3892df535c4e3d814f49682a6dd3ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time of connection to MQTT broker in seconds. <br /></td></tr>
@@ -263,10 +267,6 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:a8153969435aa598c31efb28eaf25232c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff859b126fedb0921914ae8f95bd238f" id="r_aff859b126fedb0921914ae8f95bd238f"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>bitflags</b> = {true, false, true}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:aff859b126fedb0921914ae8f95bd238f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3272849e991b131d65f75bf8c8b1912a" id="r_a3272849e991b131d65f75bf8c8b1912a"><td class="memItemLeft" align="right" valign="top"><a id="a3272849e991b131d65f75bf8c8b1912a" name="a3272849e991b131d65f75bf8c8b1912a"></a>
-<a class="el" href="classksf_1_1misc_1_1ks_simple_timer.html">misc::ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>reconnectTimer</b> {KSF_MQTT_RECONNECT_DELAY_MS}</td></tr>
-<tr class="memdesc:a3272849e991b131d65f75bf8c8b1912a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer that counts time between reconnection attempts. <br /></td></tr>
-<tr class="separator:a3272849e991b131d65f75bf8c8b1912a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79283a0a011bab07f8010c02b33b1a63" id="r_a79283a0a011bab07f8010c02b33b1a63"><td class="memItemLeft" align="right" valign="top"><a id="a79283a0a011bab07f8010c02b33b1a63" name="a79283a0a011bab07f8010c02b33b1a63"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>login</b></td></tr>
 <tr class="memdesc:a79283a0a011bab07f8010c02b33b1a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saved MQTT login. <br /></td></tr>
@@ -324,7 +324,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>, and <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>.</p>
+<p class="reference">References <a class="el" href="#a3272849e991b131d65f75bf8c8b1912a">reconnectTimer</a>, <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>, and <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a7dbb790f4566011f629c50af9bb83152">getInstanceType()</a>.</p>
 
