@@ -9,7 +9,6 @@
 
 #pragma once
 
-#include <Arduino.h>
 #include "../ksComponent.h"
 
 namespace ksf::comps

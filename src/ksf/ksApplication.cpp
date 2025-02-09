@@ -9,7 +9,7 @@
 
 #include "ksApplication.h"
 #include "ksComponent.h"
-
+#include "ksConstants.h"
 namespace ksf
 {
 	bool ksApplication::loop()

@@ -8,18 +8,22 @@
  */
 
 #include "ksDomainQuery.h"
+#include "../ksConstants.h"
+
 #include <WiFiUdp.h>
 
 namespace ksf::misc
 {
+	ksDomainQuery::~ksDomainQuery() = default;
+
+	ksDomainQuery::ksDomainQuery() : ksDomainQuery(KSF_DOMAIN_QUERY_DNS_SERVER) {}
+
 	ksDomainQuery::ksDomainQuery(IPAddress dnsServer)
 		: serverIP(dnsServer)
 	{
 		udp = std::make_unique<ksUdpClient_t>();
 		udp->begin(0);
 	}
-
-	ksDomainQuery::~ksDomainQuery() = default;
 
 	void ksDomainQuery::invalidate()
 	{

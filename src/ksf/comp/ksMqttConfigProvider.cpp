@@ -8,6 +8,7 @@
  */
 
 #include "../ksApplication.h"
+#include "../ksConstants.h"
 #include "../misc/ksConfig.h"
 #include "ksWifiConfigurator.h"
 #include "ksMqttConnector.h"

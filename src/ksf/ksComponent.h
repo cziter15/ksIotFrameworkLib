@@ -9,7 +9,6 @@
 
 #pragma once
 
-#include "ksConstants.h"
 #include "ksRtti.h"
 
 namespace ksf 

@@ -9,11 +9,10 @@
 
 #pragma once
 
+#include <Arduino.h>
 #include <IPAddress.h>
 #include <stdint.h>
 #include <memory>
-
-#include "../ksConstants.h"
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksUdpClient_t NetworkUDP
@@ -60,11 +59,16 @@ namespace ksf::misc
 
 		public:
 			/*!
+				@brief Default constructor.
+				Uses KSF_DOMAIN_QUERY_DNS_SERVER as the DNS server.
+			*/
+			ksDomainQuery();
+
+			/*!
 				@brief Constructs a new ksDomainQuery object.
 				@param dnsServer IP address of the DNS server to use for resolving domain names. By default, KSF_DOMAIN_QUERY_DNS_SERVER is used.
 			*/
-			ksDomainQuery(IPAddress dnsServer = KSF_DOMAIN_QUERY_DNS_SERVER);
-
+			ksDomainQuery(IPAddress dnsServer);
 			/*!
 				@brief Invalidates the resolved IP address and the last query send time. It will cause a new query to be sent.
 			*/

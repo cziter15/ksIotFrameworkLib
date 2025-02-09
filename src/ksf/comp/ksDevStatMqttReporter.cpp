@@ -8,6 +8,7 @@
  */
 
 #include "Arduino.h"
+#include "../ksConstants.h"
 #include "../ksApplication.h"
 #include "ksDevStatMqttReporter.h"
 #include "ksMqttConnector.h"
