@@ -1,10 +1,9 @@
 # ksIotFrameworkLib
 
-> Arduino Library for ESP32/ESP8266 - composition oriented internet of things framework that provides simple and extendable architecture, handles device setup (WiFi setup, MQTT and application specific configuration), network connectivity, MQTT telemetry protocol and more...
+> Arduino Library for ESP32/ESP8266 - a composition-oriented Internet of Things framework that provides a simple and extendable architecture, handles device setup (WiFi setup, MQTT and application-specific configuration), network connectivity, MQTT telemetry protocol, and more...
 
 [![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&style=for-the-badge)](https://cziter15.github.io/ksIotFrameworkLib)
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
-
 [![Depends on PlatformIO](https://img.shields.io/badge/Depends%20on-PlatformIO-orange?logo=platformio)](https://platformio.org)
 [![Depends on PioArduino](https://img.shields.io/badge/Depends%20on-PioArduino-orange?logo=pioarduino)](https://github.com/pioarduino)
 [![Hits-of-Code](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib)](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib/view)
@@ -12,29 +11,31 @@
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054)
 
-> [!IMPORTANT]  
-> This library targets Arduino 3+ on ESP32. However, due to [Platformio statement](https://github.com/platformio/platform-espressif32/issues/1225) it will not automatically pull latest versions.
-> If you want latest version support, set your platform to pioarduino (by Jason2866) fork in your `platformio.ini` file.
-> 
-> ```platform = https://github.com/pioarduino/platform-espressif32.git```
+> **IMPORTANT**  
+> This library targets Arduino 3+ on ESP32. However, due to [Platformio statement](https://github.com/platformio/platform-espressif32/issues/1225), it will not automatically pull the latest versions.  
+> To use the latest version, set your platform to the pioarduino (by Jason2866) fork in your `platformio.ini` file:
+> ```plaintext
+> platform = https://github.com/pioarduino/platform-espressif32.git
+> ```
 
-> [!IMPORTANT]  
-> When it comes to ESP8266, latest version supported is based on SDK305. To use it, add `-DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305` to your build flags.
+> **IMPORTANT**  
+> For ESP8266, the latest supported version is based on SDK305. To use it, add `-DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305` to your build flags.
 
+## Motivation
 
-## 🌱 Motivation
+- The goal of this project is to create a simple template or starting point for developing IoT applications using Espressif microcontrollers.
+- This project aims to streamline the process of copying and modifying source code for different devices.
 
-- The goal of this project is to create a simple template or starting point to develop IoT applications using Espressif microcontrollers. 
-- I was frequently copying and modifying source code for different devices and this is an attempt to streamline this process. 
+## Documentation
 
-## 📚 Doxygen
-- Detailed documentation can be found on [here](https://cziter15.github.io/ksIotFrameworkLib).
+- Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
 
-## 🔎 Examples
-- Soome people prefer to learn by example. In this, open the [examples directory](examples).
+## Examples
 
+- For examples, open the [examples directory](examples).
 
-## ℹ️ Architecture
+## Architecture
+
 ```mermaid
 flowchart TD
     AppState{AppState}
@@ -42,8 +43,7 @@ flowchart TD
     AppState --> |Initialized| Application::Loop
 
     subgraph Application::Init
-        A(Add initial components) -->
-	B(Mark app state as initialized)
+        A(Add initial components) --> B(Mark app state as initialized)
     end
    
     subgraph Application::Loop
@@ -54,22 +54,22 @@ flowchart TD
         CCS --> |Initialized|LP3(Call component's postInit)
         CCS --> |ToRemove|LP4(Remove component)
 
-	LP2 --> SCS2(State -> Initialized) --> DF
-	LP3 --> SCS3(State -> Active) --> DF
-	LP1 --> DF
+        LP2 --> SCS2(State -> Initialized) --> DF
+        LP3 --> SCS3(State -> Active) --> DF
+        LP1 --> DF
 
         DF{Success?}
         DF --> |True|X0{{Continue}}
         DF --> |False|X1{{Break}}
 
-	LP4 --> Continue
+        LP4 --> Continue
     end
 ```
 
 - Only one application can be executed simultaneously.
 - Each application has its own components. Components are a key part of the framework.
-- Components have states. State change logic is handled in the application's loop.
-- Each component has init, postInit, and loop methods.
+- Components have states. State change logic is handled in the application's `loop`.
+- Each component has `init`, `postInit`, and `loop` methods.
 - Components can be marked for removal, and they will be safely released in the next tick.
 
 ## 📏 Utilities
@@ -79,19 +79,19 @@ flowchart TD
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/c27aba37-4e54-49f5-9ad5-97439e7baf33)
 
 ### 🔅 Rules:
-- Components should be added in the app's **init** method, so they will be available for **postInit** methods. (you can add them later, in loop() but that's another case)
-- The **init** method is the best place to add dependent components, setup initial pin values etc.
-- The **postInit** method is the best place to obtain a weak pointer to another component by calling **findComponent**. This will handle cases when other components were added via init method.
+- Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can add them later, in `loop` but that's another case)
+- The `init` method is the best place to add dependent components, setup initial pin values etc.
+- The `postInit` method is the best place to obtain a weak pointer to another component by calling `findComponent`. This will handle cases when other components were added via `init` method.
 
 ## 🌱 Building the application
-To build an application, simply create a new class inherited from ksApplication and add your initial components inside the init method. See projects like **emon_fw** for reference.
+To build an application, simply create a new class inherited from `ksApplication` and add your initial components inside the `init` method. See projects like **emon_fw** for reference.
 
 ### 🔎 How does it work under the hood?
-- The application is created, followed by the invocation of its init() method. If false is returned from the init method, the subsequent execution of the loop will be skipped, resulting in no iteration over the components. The App Rotator will then try to run next apllication.
-- In case the init() method returns true, the application proceeds to execute its loop() function. This function traverses through the components, initializing each of them.
-- In the subsequent iteration, the application triggers the postInitialize() method for each component.
-- Following this, the application is fully initialized and enters a looping state where it iterates over the components, invoking their respective loop methods.
-- If any component returns false during it's loop method, the application will break and the App Rotator will select the next application for execution.
+- The application is created, followed by the invocation of its `init` method. If false is returned from the init method, the subsequent execution of the `loop` will be skipped, resulting in no iteration over the components. The App Rotator will then try to run next apllication.
+- In case the `init` method returns true, the application proceeds to execute its `loop` function. This function traverses through the components, initializing each of them.
+- In the subsequent iteration, the application triggers the `postInit` method for each component.
+- Following this, the application is fully initialized and enters a looping state where it iterates over the components, invoking their respective `loop` methods.
+- If any component returns false during it's `loop` method, the application will break and the App Rotator will select the next application for execution.
 
 ```c++
 bool PelletInfo::init()
@@ -120,7 +120,7 @@ bool PelletInfo::init()
 ```
 
 ## 🔁 Application rotator
-The library implements one very useful utility named ksAppRotator. This object can wrap application instantiation logic into something like carousel or rotator.
+The library implements one very useful utility named `ksAppRotator`. This object can wrap application instantiation logic into something like carousel or rotator.
 
 Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration. 
 
@@ -145,9 +145,9 @@ This is very flexible, because you can even raise fail (false) from application'
 - **Unfortunately PlatformIO is not oficially supporting latest Arduino ports for ESP32, ksIotFrameworkLib is targeting it using pioarduino fork.**
 
 ### 🔡 Frameworks
-- Arduino for ESP32 [ https://github.com/espressif/arduino-esp32 ]
-- Arduino for ESP8266 [ https://github.com/esp8266/Arduino ]
+- [Arduino for ESP32](https://github.com/espressif/arduino-esp32)
+- [Arduino for ESP8266](https://github.com/esp8266/Arduino)
 
 ### 🔡 Libraries
-- PubSubClient [ https://github.com/knolleary/pubsubclient ]
-- arduinoWebSockets [ https://github.com/Links2004/arduinoWebSockets ]
+- [PubSubClient](https://github.com/knolleary/pubsubclient)
+- [arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
