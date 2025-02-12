@@ -206,8 +206,8 @@ Architecture</h1>
 🔁 Application rotator</h1>
 <p>The library implements one very useful utility named <code>ksAppRotator</code>. This object can wrap application instantiation logic into something like carousel or rotator.</p>
 <p>Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration.</p>
-<p>Each application has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
-<p>This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
+<p>Each application has it's own <code>loop</code> method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
+<p>This is very flexible, because you can even raise fail (false) from application's <code>init</code> method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
 <h1><a class="anchor" id="autotoc_md11"></a>
 🔣 Compiler flags</h1>
 <ul>
@@ -216,8 +216,8 @@ Architecture</h1>
 <h1><a class="anchor" id="autotoc_md12"></a>
 #️⃣ Custom RTTI</h1>
 <ul>
-<li>Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components.</li>
-<li>See <a class="el" href="ks_config_provider_8h_source.html">ksConfigProvider.h</a> for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.</li>
+<li>Use the <code>KSF_RTTI_DECLARATIONS</code> macro to provide proper runtime type information generation for proper casting of components.</li>
+<li>See <code><a class="el" href="ks_config_provider_8h_source.html">ksConfigProvider.h</a></code> for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md13"></a>
 🔥 Saving power</h1>
