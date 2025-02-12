@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📚_20doxygen_0',['📚 Doxygen',['../index.html#autotoc_md2',1,'']]]
+  ['🔅_20rules_3a_0',['🔅 Rules:',['../index.html#autotoc_md7',1,'']]]
 ];

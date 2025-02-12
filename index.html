@@ -89,43 +89,44 @@ $(function(){ initResizable(false); });
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
 <blockquote class="doxtable">
-<p>Arduino Library for ESP32/ESP8266 - composition oriented internet of things framework that provides simple and extendable architecture, handles device setup (WiFi setup, MQTT and application specific configuration), network connectivity, MQTT telemetry protocol and more... </p>
+<p>Arduino Library for ESP32/ESP8266 - a composition-oriented Internet of Things framework that provides a simple and extendable architecture, handles device setup (WiFi setup, MQTT and application-specific configuration), network connectivity, MQTT telemetry protocol, and more... </p>
 </blockquote>
-<p><a href="https://cziter15.github.io/ksIotFrameworkLib"><img src="https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&amp;style=for-the-badge" alt="Read the documentation" class="inline"/></a> <a href="https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE"><img src="https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge" alt="License" class="inline"/></a></p>
-<p><a href="https://platformio.org"><img src="https://img.shields.io/badge/Depends%20on-PlatformIO-orange?logo=platformio" alt="Depends on PlatformIO" class="inline"/></a> <a href="https://github.com/pioarduino"><img src="https://img.shields.io/badge/Depends%20on-PioArduino-orange?logo=pioarduino" alt="Depends on PioArduino" class="inline"/></a> <a href="https://hitsofcode.com/github/cziter15/ksIotFrameworkLib/view"><img src="https://hitsofcode.com/github/cziter15/ksIotFrameworkLib" alt="Hits-of-Code" class="inline"/></a> <a href="https://github.com/cziter15/ksIotFrameworkLib/commits/master"><img src="https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib" alt="Commit activity" class="inline"/></a></p>
+<p><a href="https://cziter15.github.io/ksIotFrameworkLib"><img src="https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&amp;style=for-the-badge" alt="Read the documentation" class="inline"/></a> <a href="https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE"><img src="https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge" alt="License" class="inline"/></a> <a href="https://platformio.org"><img src="https://img.shields.io/badge/Depends%20on-PlatformIO-orange?logo=platformio" alt="Depends on PlatformIO" class="inline"/></a> <a href="https://github.com/pioarduino"><img src="https://img.shields.io/badge/Depends%20on-PioArduino-orange?logo=pioarduino" alt="Depends on PioArduino" class="inline"/></a> <a href="https://hitsofcode.com/github/cziter15/ksIotFrameworkLib/view"><img src="https://hitsofcode.com/github/cziter15/ksIotFrameworkLib" alt="Hits-of-Code" class="inline"/></a> <a href="https://github.com/cziter15/ksIotFrameworkLib/commits/master"><img src="https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib" alt="Commit activity" class="inline"/></a></p>
 <p><img src="https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054" alt="image" class="inline"/></p>
-<dl class="section important"><dt>Important</dt><dd>This library targets Arduino 3+ on ESP32. However, due to <a href="https://github.com/platformio/platform-espressif32/issues/1225">Platformio statement</a> it will not automatically pull latest versions. If you want latest version support, set your platform to pioarduino (by Jason2866) fork in your <code>platformio.ini</code> file. <br  />
-<br  />
- <div class="fragment"><div class="line">= https://github.com/pioarduino/platform-espressif32.git</div>
-</div><!-- fragment --></dd>
-<dd>
-When it comes to ESP8266, latest version supported is based on SDK305. To use it, add <code>-DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305</code> to your build flags.</dd></dl>
+<blockquote class="doxtable">
+<p><b>IMPORTANT</b> <br  />
+ This library targets Arduino 3+ on ESP32. However, due to <a href="https://github.com/platformio/platform-espressif32/issues/1225">Platformio statement</a>, it will not automatically pull the latest versions. <br  />
+ To use the latest version, set your platform to the pioarduino (by Jason2866) fork in your <code>platformio.ini</code> file: </p><div class="fragment"><div class="line">platform = https://github.com/pioarduino/platform-espressif32.git</div>
+</div><!-- fragment --> </blockquote>
+<blockquote class="doxtable">
+<p><b>IMPORTANT</b> <br  />
+ For ESP8266, the latest supported version is based on SDK305. To use it, add <code>-DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305</code> to your build flags. </p>
+</blockquote>
 <h1><a class="anchor" id="autotoc_md1"></a>
-🌱 Motivation</h1>
+Motivation</h1>
 <ul>
-<li>The goal of this project is to create a simple template or starting point to develop IoT applications using Espressif microcontrollers.</li>
-<li>I was frequently copying and modifying source code for different devices and this is an attempt to streamline this process.</li>
+<li>The goal of this project is to create a simple template or starting point for developing IoT applications using Espressif microcontrollers.</li>
+<li>This project aims to streamline the process of copying and modifying source code for different devices.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
-📚 Doxygen</h1>
+Documentation</h1>
 <ul>
-<li>Detailed documentation can be found on <a href="https://cziter15.github.io/ksIotFrameworkLib">here</a>.</li>
+<li>Detailed documentation can be found <a href="https://cziter15.github.io/ksIotFrameworkLib">here</a>.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
-🔎 Examples</h1>
+Examples</h1>
 <ul>
-<li>Soome people prefer to learn by example. In this, open the [examples directory](examples).</li>
+<li>For examples, open the [examples directory](examples).</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md4"></a>
-ℹ️ Architecture</h1>
+Architecture</h1>
 <div class="fragment"><div class="line">flowchart TD</div>
 <div class="line">    AppState{AppState}</div>
 <div class="line">    AppState --&gt; |NotInitialized| Application::Init</div>
 <div class="line">    AppState --&gt; |Initialized| Application::Loop</div>
 <div class="line"> </div>
 <div class="line">    subgraph Application::Init</div>
-<div class="line">        A(Add initial components) --&gt;</div>
-<div class="line">    B(Mark app state as initialized)</div>
+<div class="line">        A(Add initial components) --&gt; B(Mark app state as initialized)</div>
 <div class="line">    end</div>
 <div class="line">   </div>
 <div class="line">    subgraph Application::Loop</div>
@@ -136,21 +137,21 @@ When it comes to ESP8266, latest version supported is based on SDK305. To use it
 <div class="line">        CCS --&gt; |Initialized|LP3(Call component&#39;s postInit)</div>
 <div class="line">        CCS --&gt; |ToRemove|LP4(Remove component)</div>
 <div class="line"> </div>
-<div class="line">    LP2 --&gt; SCS2(State -&gt; Initialized) --&gt; DF</div>
-<div class="line">    LP3 --&gt; SCS3(State -&gt; Active) --&gt; DF</div>
-<div class="line">    LP1 --&gt; DF</div>
+<div class="line">        LP2 --&gt; SCS2(State -&gt; Initialized) --&gt; DF</div>
+<div class="line">        LP3 --&gt; SCS3(State -&gt; Active) --&gt; DF</div>
+<div class="line">        LP1 --&gt; DF</div>
 <div class="line"> </div>
 <div class="line">        DF{Success?}</div>
 <div class="line">        DF --&gt; |True|X0{{Continue}}</div>
 <div class="line">        DF --&gt; |False|X1{{Break}}</div>
 <div class="line"> </div>
-<div class="line">    LP4 --&gt; Continue</div>
+<div class="line">        LP4 --&gt; Continue</div>
 <div class="line">    end</div>
 </div><!-- fragment --><ul>
 <li>Only one application can be executed simultaneously.</li>
 <li>Each application has its own components. Components are a key part of the framework.</li>
-<li>Components have states. State change logic is handled in the application's loop.</li>
-<li>Each component has init, postInit, and loop methods.</li>
+<li>Components have states. State change logic is handled in the application's <code>loop</code>.</li>
+<li>Each component has <code>init</code>, <code>postInit</code>, and <code>loop</code> methods.</li>
 <li>Components can be marked for removal, and they will be safely released in the next tick.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
@@ -162,21 +163,21 @@ When it comes to ESP8266, latest version supported is based on SDK305. To use it
 <h2><a class="anchor" id="autotoc_md7"></a>
 🔅 Rules:</h2>
 <ul>
-<li>Components should be added in the app's <b>init</b> method, so they will be available for <b>postInit</b> methods. (you can add them later, in loop() but that's another case)</li>
-<li>The <b>init</b> method is the best place to add dependent components, setup initial pin values etc.</li>
-<li>The <b>postInit</b> method is the best place to obtain a weak pointer to another component by calling <b>findComponent</b>. This will handle cases when other components were added via init method.</li>
+<li>Components should be added in the app's <code>init</code> method, so they will be available for <code>postInit</code> methods. (you can add them later, in <code>loop</code> but that's another case)</li>
+<li>The <code>init</code> method is the best place to add dependent components, setup initial pin values etc.</li>
+<li>The <code>postInit</code> method is the best place to obtain a weak pointer to another component by calling <code>findComponent</code>. This will handle cases when other components were added via <code>init</code> method.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md8"></a>
 🌱 Building the application</h1>
-<p>To build an application, simply create a new class inherited from ksApplication and add your initial components inside the init method. See projects like <b>emon_fw</b> for reference.</p>
+<p>To build an application, simply create a new class inherited from <code>ksApplication</code> and add your initial components inside the <code>init</code> method. See projects like <b>emon_fw</b> for reference.</p>
 <h2><a class="anchor" id="autotoc_md9"></a>
 🔎 How does it work under the hood?</h2>
 <ul>
-<li>The application is created, followed by the invocation of its init() method. If false is returned from the init method, the subsequent execution of the loop will be skipped, resulting in no iteration over the components. The App Rotator will then try to run next apllication.</li>
-<li>In case the init() method returns true, the application proceeds to execute its loop() function. This function traverses through the components, initializing each of them.</li>
-<li>In the subsequent iteration, the application triggers the postInitialize() method for each component.</li>
-<li>Following this, the application is fully initialized and enters a looping state where it iterates over the components, invoking their respective loop methods.</li>
-<li>If any component returns false during it's loop method, the application will break and the App Rotator will select the next application for execution.</li>
+<li>The application is created, followed by the invocation of its <code>init</code> method. If false is returned from the init method, the subsequent execution of the <code>loop</code> will be skipped, resulting in no iteration over the components. The App Rotator will then try to run next apllication.</li>
+<li>In case the <code>init</code> method returns true, the application proceeds to execute its <code>loop</code> function. This function traverses through the components, initializing each of them.</li>
+<li>In the subsequent iteration, the application triggers the <code>postInit</code> method for each component.</li>
+<li>Following this, the application is fully initialized and enters a looping state where it iterates over the components, invoking their respective <code>loop</code> methods.</li>
+<li>If any component returns false during it's <code>loop</code> method, the application will break and the App Rotator will select the next application for execution.</li>
 </ul>
 <div class="fragment"><div class="line"><span class="keywordtype">bool</span> PelletInfo::init()</div>
 <div class="line">{</div>
@@ -203,7 +204,7 @@ When it comes to ESP8266, latest version supported is based on SDK305. To use it
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 🔁 Application rotator</h1>
-<p>The library implements one very useful utility named ksAppRotator. This object can wrap application instantiation logic into something like carousel or rotator.</p>
+<p>The library implements one very useful utility named <code>ksAppRotator</code>. This object can wrap application instantiation logic into something like carousel or rotator.</p>
 <p>Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration.</p>
 <p>Each application has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
 <p>This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
@@ -234,14 +235,14 @@ When it comes to ESP8266, latest version supported is based on SDK305. To use it
 <h2><a class="anchor" id="autotoc_md15"></a>
 🔡 Frameworks</h2>
 <ul>
-<li>Arduino for ESP32 [ <a href="https://github.com/espressif/arduino-esp32">https://github.com/espressif/arduino-esp32</a> ]</li>
-<li>Arduino for ESP8266 [ <a href="https://github.com/esp8266/Arduino">https://github.com/esp8266/Arduino</a> ]</li>
+<li><a href="https://github.com/espressif/arduino-esp32">Arduino for ESP32</a></li>
+<li><a href="https://github.com/esp8266/Arduino">Arduino for ESP8266</a></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md16"></a>
 🔡 Libraries</h2>
 <ul>
-<li>PubSubClient [ <a href="https://github.com/knolleary/pubsubclient">https://github.com/knolleary/pubsubclient</a> ]</li>
-<li>arduinoWebSockets [ <a href="https://github.com/Links2004/arduinoWebSockets">https://github.com/Links2004/arduinoWebSockets</a> ] </li>
+<li><a href="https://github.com/knolleary/pubsubclient">PubSubClient</a></li>
+<li><a href="https://github.com/Links2004/arduinoWebSockets">arduinoWebSockets</a> </li>
 </ul>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
