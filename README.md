@@ -124,16 +124,16 @@ The library implements one very useful utility named `ksAppRotator`. This object
 
 Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration. 
 
-Each application has it's own loop method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.
+Each application has it's own `loop` method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.
 
-This is very flexible, because you can even raise fail (false) from application's init method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
+This is very flexible, because you can even raise fail (false) from application's `init` method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
 
 ## 🔣 Compiler flags
 - Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
 
 ## #️⃣ Custom RTTI
-- Use the KSF_RTTI_DECLARATIONS macro to provide proper runtime type information generation for proper casting of components. 
-- See ksConfigProvider.h for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
+- Use the `KSF_RTTI_DECLARATIONS` macro to provide proper runtime type information generation for proper casting of components. 
+- See `ksConfigProvider.h` for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
 ## 🔥 Saving power
 - By default, this framework supports enables power saving for the modem.
