@@ -4,6 +4,7 @@
 
 [![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&style=for-the-badge)](https://cziter15.github.io/ksIotFrameworkLib)
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
+
 [![Depends on PlatformIO](https://img.shields.io/badge/Depends%20on-PlatformIO-orange?logo=platformio)](https://platformio.org)
 [![Depends on PioArduino](https://img.shields.io/badge/Depends%20on-PioArduino-orange?logo=pioarduino)](https://github.com/pioarduino)
 [![Hits-of-Code](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib)](https://hitsofcode.com/github/cziter15/ksIotFrameworkLib/view)
