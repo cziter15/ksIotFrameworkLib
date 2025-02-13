@@ -15,6 +15,17 @@
 
 namespace ksf::misc
 {
+	uint16_t readUint16(const uint8_t* buffer, std::size_t pos) 
+	{
+		return static_cast<uint16_t>((buffer[pos] << 8) | buffer[pos + 1]);
+	}
+
+	void writeUint16(const std::unique_ptr<ksUdpClient_t>& udp, uint16_t value) 
+	{
+		udp->write(static_cast<uint8_t>(value >> 8));
+		udp->write(static_cast<uint8_t>(value & 0xFF));
+	}
+
 	ksDomainQuery::~ksDomainQuery() = default;
 
 	ksDomainQuery::ksDomainQuery() : ksDomainQuery(KSF_DOMAIN_QUERY_DNS_SERVER) {}
@@ -60,17 +71,16 @@ namespace ksf::misc
 
 		/* Increment transaction ID and write it. */
 		++transactionID;
-		udp->write(static_cast<uint8_t>(transactionID >> 8));
-		udp->write(static_cast<uint8_t>(transactionID & 0xFF));
+		writeUint16(udp, transactionID);
 		
 		/* Write flags and number of questions. */
-		udp->write(uint8_t{0x01}); udp->write(uint8_t{0x00}); // Standard query
-		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x01}); // One question
-		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No answer
-		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No authority
-		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x00}); // No additional
+		writeUint16(udp, 0x0100); // Standard query
+		writeUint16(udp, 0x0001); // One question
+		writeUint16(udp, 0x0000); // No answer
+		writeUint16(udp, 0x0000); // No authority
+		writeUint16(udp, 0x0000); // No additional
 
-		/* Prcess domain name. */
+		/* Process domain name. */
 		for (std::size_t start{0}, pos = 0; ; start = pos + 1) 
 		{
 			pos = domain.find('.', start);
@@ -94,8 +104,8 @@ namespace ksf::misc
 		udp->write(uint8_t{0x00});
 
 		/* Write query type and class. */
-		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x01});
-		udp->write(uint8_t{0x00}); udp->write(uint8_t{0x01});
+		writeUint16(udp, 0x0001); // Type A
+		writeUint16(udp, 0x0001); // Class IN
 
 		/* Send the query to the DNS server. */
 		udp->endPacket();
@@ -114,11 +124,11 @@ namespace ksf::misc
 			return;
 
 		/* Check that the transaction ID matches. */
-		if (auto responseID{static_cast<uint16_t>((buffer[0] << 8) | buffer[1])}; responseID != transactionID)
+		if (readUint16(buffer, 0) != transactionID)
 			return;
 
 		/* Check number of answers. */
-		auto answerCount{static_cast<uint16_t>((buffer[6] << 8) | buffer[7])};
+		auto answerCount{readUint16(buffer, 6)};
 		if (answerCount == 0)
 			return;
 
@@ -150,8 +160,8 @@ namespace ksf::misc
 				return;
 
 			/* Read TYPE and RDLENGTH from the answer. */
-			auto type{static_cast<uint16_t>((buffer[pos] << 8) | buffer[pos + 1])};
-			auto dataLength{static_cast<uint16_t>((buffer[pos + 8] << 8) | buffer[pos + 9])};
+			auto type{readUint16(buffer, pos)};
+			auto dataLength{readUint16(buffer, pos + 8)};
 			pos += 10;
 
 			/* If it's an A record (TYPE 1) and data length is 4 bytes (IPv4), read the IP address. */

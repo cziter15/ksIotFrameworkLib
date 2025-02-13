@@ -161,16 +161,13 @@ namespace ksf::comps
 	{
 		if (body.empty())
 			return PSTR("No command received. Don't be shy. Try 'help'.");
-		else if (body == PSTR("help"))
+
+		if (body == PSTR("help"))
 			return PSTR("Available commands: reboot-device, erase-config, erase-all-data, help");
 		else if (body == PSTR("reboot-device"))
-		{
 			rebootDevice();
-		}
 		else if (body == PSTR("erase-config"))
-		{
 			triggerFactoryReset();
-		}
 		else if (body == PSTR("erase-all-data"))
 		{
 			WiFi.mode(WIFI_OFF);
