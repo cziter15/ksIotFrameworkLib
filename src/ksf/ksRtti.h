@@ -49,7 +49,7 @@ namespace ksf
 			template <typename TType>
 			TType* as() 
 			{
-				if (is(TType::getClassType()))
+				if (isA(TType::getClassType()))
 					return (TType*)this;
 
 				return nullptr;
@@ -63,7 +63,7 @@ namespace ksf
 			template <typename TType>
 			const TType* as() const
 			{
-				if (is(TType::getClassType()))
+				if (isA(TType::getClassType()))
 					return (TType*)this;
 
 				return nullptr;
