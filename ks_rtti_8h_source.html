@@ -124,7 +124,7 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">   50</a></span>            TType* <a class="code hl_function" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a>() </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>            {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="keywordflow">if</span> (is(TType::getClassType()))</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                <span class="keywordflow">if</span> (<a class="code hl_function" href="classksf_1_1ks_rtti.html#a52bfcf077c1a2ec004cf2841e6f89244">isA</a>(TType::getClassType()))</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                    <span class="keywordflow">return</span> (TType*)<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
@@ -135,7 +135,7 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classksf_1_1ks_rtti.html#a3256fe5f274ed29149d64dd575ff37f9">   64</a></span>            <span class="keyword">const</span> TType* <a class="code hl_function" href="classksf_1_1ks_rtti.html#a3256fe5f274ed29149d64dd575ff37f9">as</a>()<span class="keyword"> const</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">            </span>{</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keywordflow">if</span> (is(TType::getClassType()))</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                <span class="keywordflow">if</span> (<a class="code hl_function" href="classksf_1_1ks_rtti.html#a52bfcf077c1a2ec004cf2841e6f89244">isA</a>(TType::getClassType()))</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                    <span class="keywordflow">return</span> (TType*)<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
