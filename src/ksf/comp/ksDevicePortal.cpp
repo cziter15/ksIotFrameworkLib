@@ -161,10 +161,10 @@ namespace ksf::comps
 	{
 		if (body.empty())
 			return PSTR("No command received. Don't be shy. Try 'help'.");
-
 		if (body == PSTR("help"))
 			return PSTR("Available commands: reboot-device, erase-config, erase-all-data, help");
-		else if (body == PSTR("reboot-device"))
+		
+		if (body == PSTR("reboot-device"))
 			rebootDevice();
 		else if (body == PSTR("erase-config"))
 			triggerFactoryReset();
