@@ -13,8 +13,6 @@
 
 namespace ksf
 {
-	ksApplication::~ksApplication() = default;
-
 	bool ksApplication::loop()
 	{
 		/* This call will keep millis64 on track (handles rollover). */

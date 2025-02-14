@@ -77,10 +77,5 @@ namespace ksf
 				@return True on success, false on fail.
 			*/
 			virtual bool postInit(ksApplication* app);
-
-			/*!
-				@brief Virtual destructor to ensure proper cleanup of derived classes
-			*/
-			virtual ~ksComponent();
 	};
 }

@@ -143,9 +143,5 @@ namespace ksf
 			*/
 			void setLogCallback(AppLogCallbackFunc_t logCallback);
 #endif
-			/*!
-				@brief Destructs application.
-			*/
-			virtual ~ksApplication();
 	};
 }

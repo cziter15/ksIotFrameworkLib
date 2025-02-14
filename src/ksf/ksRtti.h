@@ -25,8 +25,6 @@ namespace ksf
 	class ksRtti
 	{
 		public:
-			virtual ~ksRtti() = default;
-			
 			/*!
 				@brief Retrieves type ID of the object.
 				@return Object type ID.

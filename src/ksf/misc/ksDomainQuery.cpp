@@ -26,8 +26,6 @@ namespace ksf::misc
 		udp->write(static_cast<uint8_t>(value & 0xFF));
 	}
 
-	ksDomainQuery::~ksDomainQuery() = default;
-
 	ksDomainQuery::ksDomainQuery() : ksDomainQuery(KSF_DOMAIN_QUERY_DNS_SERVER) {}
 
 	ksDomainQuery::ksDomainQuery(IPAddress dnsServer)
