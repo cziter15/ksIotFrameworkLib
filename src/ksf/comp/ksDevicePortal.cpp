@@ -171,13 +171,11 @@ namespace ksf::comps
 		else if (body == PSTR("erase-all-data"))
 		{
 			WiFi.mode(WIFI_OFF);
-#if defined(ESP32)
-			nvs_flash_erase();
-#elif defined(ESP8266)
-			ESP.eraseConfig();
-#else
-			#error Platform not implemented.
-#endif
+			#if ESP32
+				nvs_flash_erase();
+			#elif ESP8266
+				ESP.eraseConfig();
+			#endif
 			LittleFS.format();
 			rebootDevice();
 		}
