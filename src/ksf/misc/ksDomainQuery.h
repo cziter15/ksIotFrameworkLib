@@ -91,5 +91,10 @@ namespace ksf::misc
 				@brief Handles resolver tasks, such as sending queries and receiving responses.
 			*/
 			void process();
+
+			/*!
+				@brief Destructor.
+			*/
+			virtual ~ksDomainQuery();
 	};
 }
