@@ -172,9 +172,11 @@ namespace ksf::comps
 		{
 			WiFi.mode(WIFI_OFF);
 #if defined(ESP32)
-				nvs_flash_erase();
+			nvs_flash_erase();
 #elif defined(ESP8266)
-				ESP.eraseConfig();
+			ESP.eraseConfig();
+#else
+			#error Platform not implemented.
 #endif
 			LittleFS.format();
 			rebootDevice();
