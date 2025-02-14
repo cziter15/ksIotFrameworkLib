@@ -171,11 +171,11 @@ namespace ksf::comps
 		else if (body == PSTR("erase-all-data"))
 		{
 			WiFi.mode(WIFI_OFF);
-			#if ESP32
+#if defined(ESP32)
 				nvs_flash_erase();
-			#elif ESP8266
+#elif defined(ESP8266)
 				ESP.eraseConfig();
-			#endif
+#endif
 			LittleFS.format();
 			rebootDevice();
 		}
