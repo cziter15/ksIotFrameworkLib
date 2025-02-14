@@ -123,9 +123,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a28b95e555a1da1bf15b72467f6c133bc" id="r_a28b95e555a1da1bf15b72467f6c133bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28b95e555a1da1bf15b72467f6c133bc">unbind</a> (std::size_t callbackUID) override</td></tr>
 <tr class="memdesc:a28b95e555a1da1bf15b72467f6c133bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unbinds event callback by specified unique ID.  <br /></td></tr>
 <tr class="separator:a28b95e555a1da1bf15b72467f6c133bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac672facd2bd8e5084f8251b228d2cf4f" id="r_ac672facd2bd8e5084f8251b228d2cf4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac672facd2bd8e5084f8251b228d2cf4f">broadcast</a> (Params... params)</td></tr>
-<tr class="memdesc:ac672facd2bd8e5084f8251b228d2cf4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts event to all bound callbacks.  <br /></td></tr>
-<tr class="separator:ac672facd2bd8e5084f8251b228d2cf4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5b0ecfe3c6f6c4093e316c8d3c7299f" id="r_af5b0ecfe3c6f6c4093e316c8d3c7299f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5b0ecfe3c6f6c4093e316c8d3c7299f">broadcast</a> (Params... params) const</td></tr>
+<tr class="memdesc:af5b0ecfe3c6f6c4093e316c8d3c7299f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Broadcasts event to all bound callbacks.  <br /></td></tr>
+<tr class="separator:af5b0ecfe3c6f6c4093e316c8d3c7299f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -148,8 +148,8 @@ class ksf::evt::ksEvent&lt; Params &gt;</div><p>Base class for multicasting even
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ac672facd2bd8e5084f8251b228d2cf4f" name="ac672facd2bd8e5084f8251b228d2cf4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac672facd2bd8e5084f8251b228d2cf4f">&#9670;&#160;</a></span>broadcast()</h2>
+<a id="af5b0ecfe3c6f6c4093e316c8d3c7299f" name="af5b0ecfe3c6f6c4093e316c8d3c7299f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5b0ecfe3c6f6c4093e316c8d3c7299f">&#9670;&#160;</a></span>broadcast()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +163,7 @@ template&lt;typename... Params&gt; </div>
           <td class="memname">void <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::evt::ksEvent</a>&lt; Params &gt;::broadcast </td>
           <td>(</td>
           <td class="paramtype">Params...</td>          <td class="paramname"><span class="paramname"><em>params</em></span></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
