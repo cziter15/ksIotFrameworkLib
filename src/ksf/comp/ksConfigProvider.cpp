@@ -34,7 +34,7 @@ namespace ksf::comps
 	void ksConfigProvider::addNewParamWithConfigDefault(misc::ksConfig& config, std::string id, std::string label, int maxLength, EConfigParamType::Type type)
 	{
 		auto& value{config.getParam(id)};
-		return addNewParam(std::move(id), std::move(label), std::move(value), maxLength, type);
+		addNewParam(std::move(id), std::move(label), std::move(value), maxLength, type);
 	}
 
 	std::list<ksConfigParameter>& ksConfigProvider::getParameters()
