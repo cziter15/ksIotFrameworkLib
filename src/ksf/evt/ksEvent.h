@@ -81,7 +81,7 @@ namespace ksf::evt
 				@brief Broadcasts event to all bound callbacks.
 				@param args Event parameters.
 			*/
-			void broadcast(Params... params)
+			void broadcast(Params... params) const
 			{
 				for (const auto& [uid, function] : callbacks)
 					function(params...);
