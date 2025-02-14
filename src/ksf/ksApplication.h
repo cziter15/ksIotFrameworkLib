@@ -49,6 +49,7 @@ namespace ksf
 			 AppLogCallbackFunc_t appLogCallback;					//!< Callback function for logging
 #endif
 		public:
+
 			/*!
 				@brief Instantiates a component of the type defined by the template instance.
 				This function will pass all template-defined parameters to the component constructor.
@@ -142,5 +143,9 @@ namespace ksf
 			*/
 			void setLogCallback(AppLogCallbackFunc_t logCallback);
 #endif
+			/*!
+				@brief Destructs application.
+			*/
+			virtual ~ksApplication();
 	};
 }

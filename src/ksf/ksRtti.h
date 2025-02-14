@@ -25,6 +25,8 @@ namespace ksf
 	class ksRtti
 	{
 		public:
+			virtual ~ksRtti() = default;
+			
 			/*!
 				@brief Retrieves type ID of the object.
 				@return Object type ID.
@@ -50,7 +52,7 @@ namespace ksf
 			TType* as() 
 			{
 				if (isA(TType::getClassType()))
-					return (TType*)this;
+					return static_cast<TType*>(this);
 
 				return nullptr;
 			}
@@ -64,7 +66,7 @@ namespace ksf
 			const TType* as() const
 			{
 				if (isA(TType::getClassType()))
-					return (TType*)this;
+					return static_cast<const TType*>(this);
 
 				return nullptr;
 			}

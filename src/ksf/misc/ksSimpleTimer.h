@@ -60,5 +60,10 @@ namespace ksf::misc
 				@return	True if timer interval just passed, otherwise false.
 			*/
 			bool hasTimePassed() const;
+
+			/*!
+				@brief Destructor.
+			*/
+			virtual ~ksSimpleTimer();
 	};
 }

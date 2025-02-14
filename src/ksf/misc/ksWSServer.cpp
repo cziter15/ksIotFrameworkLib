@@ -76,7 +76,7 @@ namespace ksf::misc
 
 	void ksWSServer::setMessageHandler(ksWsServerMessageFunc_t func)
 	{ 
-		onWebsocketTextMessage = func;
+		onWebsocketTextMessage = std::move(func);
 	}
 
 	uint64_t ksWSServer::getRequiredAuthToken() const 
