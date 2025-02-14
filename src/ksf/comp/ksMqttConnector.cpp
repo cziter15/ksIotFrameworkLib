@@ -67,9 +67,10 @@ namespace ksf::comps
 
 	void ksMqttConnector::setupConnection(const std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
+		/* Set up secure connection if a fingerprint is provided. */
 		if (!fingerprint.empty())
 		{
-			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
+			auto secureClient = std::make_unique<ksMqttConnectorNetClientSecure_t>();
 			certFingerprint = std::make_unique<misc::ksCertFingerprintHolder>();
 			if (certFingerprint->setup(secureClient.get(), fingerprint))
 				netClientUq = std::move(secureClient);
@@ -79,7 +80,7 @@ namespace ksf::comps
 		/* Whoops, it looks like fingerprint validation failed. */
 		if (!netClientUq)
 			return;
-		
+
 		/* Set socket timeouts. */
 		netClientUq->setTimeout(KSF_MQTT_TIMEOUT_MS);
 
@@ -91,7 +92,7 @@ namespace ksf::comps
 		ksf::from_chars(port, portNumber);
 
 		/* Create MQTT client. */
-		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
+		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq);
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
@@ -103,8 +104,8 @@ namespace ksf::comps
 
 	void ksMqttConnector::mqttMessageInternal(const char* topic, const uint8_t* payload, uint32_t length)
 	{
-		bool handlesDeviceMessage{onDeviceMessage->isBound()};
-		bool handlesAnyMessage{onAnyMessage->isBound()};
+		auto handlesDeviceMessage{onDeviceMessage->isBound()};
+		auto handlesAnyMessage{onAnyMessage->isBound()};
 
 		if (!handlesDeviceMessage && !handlesAnyMessage)
 			return;
@@ -133,8 +134,7 @@ namespace ksf::comps
 
 	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, ksMqttConnector::QosLevel qos)
 	{
-		uint8_t qosLevel{static_cast<uint8_t>(qos)};
-		mqttClientUq->subscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), qosLevel);
+		mqttClientUq->subscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), static_cast<uint8_t>(qos));
 	}
 
 	void ksMqttConnector::unsubscribe(const std::string& topic, bool skipDevicePrefix)

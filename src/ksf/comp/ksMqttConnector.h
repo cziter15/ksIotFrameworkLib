@@ -62,11 +62,13 @@ namespace ksf::comps
 			uint64_t lastSuccessConnectionTime{0};							//!< Time of connection to MQTT broker in seconds.
 			uint32_t reconnectCounter{0};									//!< MQTT reconnection counter.
 
-			struct {
+			struct 
+			{
 				bool sendConnectionStatus : 1;								//!< Send connection status to MQTT or not.
 				bool usePersistentSession : 1;								//!< Use persistent session or not.
 				bool wasConnected : 1;										//!< True if connected in previous loop.
-			} bitflags = {true, false, true};
+			} 
+			bitflags = {true, false, true};
 
 			std::string login;												//!< Saved MQTT login.
 			std::string password;											//!< Saved MQTT password.

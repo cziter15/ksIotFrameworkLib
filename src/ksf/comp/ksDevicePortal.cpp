@@ -181,11 +181,9 @@ namespace ksf::comps
 		}
 		else
 		{
-			bool handled {false};
-			
+			bool handled{false};
 			std::string response;
 			onHandlePortalCommand->broadcast(body, handled, response);
-			
 			if (handled)
 				return response;
 		}
@@ -273,11 +271,10 @@ namespace ksf::comps
 
 			/* Parse body. */
 			std::map<std::string_view, std::string_view> paramMap;
-			size_t startPos = 0;
-			size_t endPos = body.find('\n');
+			size_t startPos{0}, endPos{body.find('\n')};
 			while (endPos != std::string_view::npos) 
 			{
-				std::string_view line{body.substr(startPos, endPos - startPos)};
+				auto line{body.substr(startPos, endPos - startPos)};
 				size_t equalPos{line.find('=')};
 
 				if (equalPos != std::string_view::npos) 
@@ -301,7 +298,7 @@ namespace ksf::comps
 
 				for (auto& parameter : configCompSp->getParameters())
 				{
-					std::string param_id{PSTR("param_") + parameter.id};
+					auto param_id{PSTR("param_") + parameter.id};
 					if (auto param_it{paramMap.find(param_id)}; param_it != paramMap.end())
 					{
 						auto& [paramName, paramValue] = *param_it;
@@ -317,7 +314,7 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("logKeepAlive"))
 		{
-			bool enabledLogsRightNow{logKeepAliveTimestamp==0};
+			auto enabledLogsRightNow{ logKeepAliveTimestamp ==0 };
 			logKeepAliveTimestamp = std::max(1UL, millis());
 
 			if (enabledLogsRightNow)
@@ -434,7 +431,7 @@ namespace ksf::comps
 		std::vector<std::weak_ptr<ksConfigProvider>> configCompsWp;
 		app->findComponents<ksConfigProvider>(configCompsWp);
 
-		bool isInConfigMode{static_cast<bool>(WiFi.getMode() & WIFI_AP)};
+		auto isInConfigMode{static_cast<bool>(WiFi.getMode() & WIFI_AP)};
 		response += PSTR("{\"isConfigMode\": ");
 		response += isInConfigMode ? PSTR("true") : PSTR("false");
 
@@ -622,7 +619,7 @@ namespace ksf::comps
 	{
 		webSocket = std::make_unique<ksf::misc::ksWSServer>(81);
 
-		std::string authTokenToHash(portalPassword);
+		auto authTokenToHash(portalPassword);
 		authTokenToHash.append(DEVICE_FRONTEND_HTML_MD5);
 		webSocket->setRequiredAuthToken(generateAuthToken(authTokenToHash));
 

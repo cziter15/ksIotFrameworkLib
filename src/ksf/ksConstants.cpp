@@ -88,39 +88,40 @@ namespace ksf
 
 	bool removeDirectory(const char* path)
 	{
-		auto dir{LittleFS.open(path, PSTR("r"))};
+		auto dir = LittleFS.open(path, PSTR("r"));
 		if (!dir || !dir.isDirectory())
 			return false;
-		for (auto entry{dir.openNextFile()}; entry; entry = dir.openNextFile())
+	
+		for (auto entry = dir.openNextFile(); entry; entry = dir.openNextFile())
 		{
-#if defined(ESP8266)
-			std::string path{entry.fullName()};
-#else
-			std::string path{entry.path()};
-#endif
+	#if defined(ESP8266)
+			auto entryPath{entry.fullName()};
+	#else
+			auto entryPath{entry.path()};
+	#endif
+			auto isDirectory{entry.isDirectory()};
 
-			bool isDirectory{entry.isDirectory()};
 			entry.close();
-
-			if (!path.empty() && path[0] != '.' && path[0] != 0)
+	
+			if (entryPath && entryPath[0] != '.' && entryPath[0] != 0)
 			{
 				if (isDirectory)
 				{
-					if (!removeDirectory(path.c_str())) 
+					if (!removeDirectory(entryPath)) 
 						return false;
 				}
-				else if (!LittleFS.remove(path.c_str()))
+				else if (!LittleFS.remove(entryPath))
 					return false;
 			}
 		}
+	
 		dir.close();
 		return LittleFS.rmdir(path);
 	}
 
 	bool eraseConfigData()
 	{
-		bool success{removeDirectory(getNvsDirectory())};
-
+		auto success{removeDirectory(getNvsDirectory())};
 #if defined(ESP8266)
 		success &= !ESP.eraseConfig();
 #elif defined(ESP32)
@@ -132,11 +133,11 @@ namespace ksf
 
 	std::string getDeviceUuidHex()
 	{
-		#if defined(ESP32)
-			return ksf::to_hex(ESP.getEfuseMac());
-		#elif defined(ESP8266)
-			return ksf::to_hex(ESP.getChipId());
-		#endif
+	#if defined(ESP32)
+		return ksf::to_hex(ESP.getEfuseMac());
+	#elif defined(ESP8266)
+		return ksf::to_hex(ESP.getChipId());
+	#endif
 			
 		return {};
 	}
@@ -157,11 +158,9 @@ namespace ksf
 
 	void updateDeviceUptime()
 	{
-		uint32_t new_low32{millis()};
-		
+		auto new_low32{static_cast<uint32_t>(millis())};
 		if (new_low32 < uptime_low32) 
 			uptime_high32++;
-
 		uptime_low32 = new_low32;
 	}
 
