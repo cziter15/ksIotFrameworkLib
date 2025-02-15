@@ -42,6 +42,12 @@ namespace ksf::misc
 			ksConfig(const std::string& fileName);
 
 			/*!
+				@brief Saves config content on the device filesystem.
+				In case there is no modification, nothing should actually happen.
+			*/
+			virtual ~ksConfig();
+
+			/*!
 				@brief Sets parameter value (creates new parameter if it does not exist).
 				@param paramName Parameter name.
 				@param paramValue Parameter value (use std::move when possible).
@@ -61,12 +67,6 @@ namespace ksf::misc
 				@return True if configFilename is not empty, otherwise false.
 			*/
 			operator bool() const;
-
-			/*!
-				@brief Saves config content on the device filesystem.
-				In case there is no modification, nothing should actually happen.
-			*/
-			virtual ~ksConfig();
 	};
 }
 

@@ -199,6 +199,11 @@ namespace ksf::comps
 			ksDevicePortal();
 
 			/*!
+				@brief Destructs the Device Portal component.
+			*/
+			virtual ~ksDevicePortal();
+
+			/*!
 				@brief Constructs the Device Portal component with custom password.
 
 				@param password Password used to authenticate the user.
@@ -225,10 +230,5 @@ namespace ksf::comps
 				@return True on success, false otherwise.
 			*/
 			bool loop(ksApplication* app) override;
-
-			/*!
-				@brief Destructs the Device Portal component.
-			*/
-			virtual ~ksDevicePortal();
 	};
 }

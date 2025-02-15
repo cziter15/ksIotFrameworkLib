@@ -47,6 +47,11 @@ namespace ksf::comps
 			ksLed(uint8_t pin, bool activeLow = false, bool driveAsPushPull = false);
 
 			/*!
+				@brief Destructs the component and restores INPUT mode on the assigned pin.
+			*/
+			virtual ~ksLed();
+
+			/*!
 				@brief Initializes the LED component.
 				@param owner Pointer to parent ksApplication object.
 				@return True if init succedeed, otherwise false.
@@ -95,10 +100,5 @@ namespace ksf::comps
 				@return Pin number assigned to LED.
 			*/
 			uint8_t getPin() const { return pin; }
-
-			/*!
-				@brief Destructs the component and restores INPUT mode on the assigned pin.
-			*/
-			virtual ~ksLed();
 	};
 }

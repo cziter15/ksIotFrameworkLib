@@ -11,7 +11,14 @@
 
 #include <string>
 #include <stdint.h>
-#include <WiFiClientSecure.h>
+
+#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
+	#define ksCertUtilsNetCLientSecure_t NetworkClientSecure
+#else
+	#define ksCertUtilsNetCLientSecure_t WiFiClientSecure
+#endif
+
+class ksCertUtilsNetCLientSecure_t;
 
 namespace ksf::misc
 {
@@ -35,24 +42,29 @@ namespace ksf::misc
 
 		public:
 			/*!
+				@brief Constructor.
+			*/
+			ksCertFingerprint();
+
+			/*!
 				@brief Destructor.
 			*/
 			virtual ~ksCertFingerprint();
 
 			/*!
 				@brief Performs certificate fingerprint setup (platform dependent).
-				@param client Pointer of WiFiClientSecure
+				@param client Pointer of ksCertUtilsNetCLientSecure_t
 				@param fingerprint Fingerprint string
 				@return True if setup has been successfull, otherwise false.
 			*/
-			virtual bool setup(WiFiClientSecure* client, const std::string& fingerprint);
+			virtual bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) = 0;
 
 			/*!
 				@brief Performs certificate fingerprint validation (platform dependent).
-				@param client Pointer of WiFiClientSecure
+				@param client Pointer of ksCertUtilsNetCLientSecure_t
 				@return True on verification pass, otherwise false.
 			*/
-			virtual bool verify(WiFiClientSecure* client) const;
+			virtual bool verify(ksCertUtilsNetCLientSecure_t* client) const = 0;
 	};
 
 #ifdef ESP32
@@ -67,18 +79,18 @@ namespace ksf::misc
 				
 				On ESP32 it will copy fingerprint into fingerprintBytes.
 				
-				@param client Pointer to WiFiClientSecure
+				@param client Pointer to ksCertUtilsNetCLientSecure_t
 				@param fingerprint Fingerprint string
 				@return True if setup passed, otherwise false.
 			*/
-			bool setup(WiFiClientSecure* client, const std::string& fingerprint) override;
+			bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) override;
 
 			/*!
 				@brief Converts bytes into a string and performs fingerprint validation.
-				@param client Pointer to WiFiClientSecure
+				@param client Pointer to ksCertUtilsNetCLientSecure_t
 				@return True if verification passed, otherwise false.
 			*/
-			bool verify(WiFiClientSecure* client) const override;
+			bool verify(ksCertUtilsNetCLientSecure_t* client) const override;
 	};
 
 	using ksCertFingerprintHolder = ksCertFingerprintESP32;
@@ -90,21 +102,21 @@ namespace ksf::misc
 		public:
 			/*!
 				@brief Performs fingerprint setup (platform dependent).
-				@param client Pointer of WiFiClientSecure.
+				@param client Pointer of ksCertUtilsNetCLientSecure_t.
 				@param fingerprint Fingerprint string.
 				@return True if setup passed, otherwise false.
 			*/
-			bool setup(WiFiClientSecure* client, const std::string& fingerprint) override;
+			bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) override;
 
 			/*!
 				@brief Converts bytes into a string and performs fingerprint validation.
 
 				Always returns true on ESP8266 as this functionality is handled under the hood.
 
-				@param client Pointer to WiFiClientSecure
+				@param client Pointer to ksCertUtilsNetCLientSecure_t
 				@return Always true in case of ESP8266.
 			*/
-			bool verify(WiFiClientSecure* client) const override;
+			bool verify(ksCertUtilsNetCLientSecure_t* client) const override;
 	};
 
 	using ksCertFingerprintHolder = ksCertFingerprintESP8266;

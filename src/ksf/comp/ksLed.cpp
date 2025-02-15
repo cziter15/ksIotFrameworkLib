@@ -21,6 +21,11 @@ namespace ksf::comps
 		bitflags.driveAsPushPull = driveAsPushPull;
 	}
 
+	ksLed::~ksLed()
+	{
+		pinMode(pin, INPUT);
+	}
+
 	bool ksLed::init(ksApplication* owner)
 	{
 		if (!bitflags.driveAsPushPull)
@@ -84,10 +89,5 @@ namespace ksf::comps
 			pinMode(pin, (bitflags.activeLow ? !enabled : enabled) ? INPUT_PULLUP : INPUT_PULLDOWN);
 		else
 			digitalWrite(pin, (bitflags.activeLow ? !enabled : enabled) ? HIGH : LOW);
-	}
-
-	ksLed::~ksLed()
-	{
-		pinMode(pin, INPUT);
 	}
 }

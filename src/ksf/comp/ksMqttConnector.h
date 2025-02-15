@@ -121,6 +121,11 @@ namespace ksf::comps
 			ksMqttConnector(bool sendConnectionStatus = true, bool usePersistentSession = false);
 
 			/*!
+				@brief Destructs ksMqttConnector object.
+			*/
+			virtual ~ksMqttConnector();
+
+			/*!
 				@brief Instantiates the MQTT connector component.
 
 				@param app Pointer to the parent ksApplication.

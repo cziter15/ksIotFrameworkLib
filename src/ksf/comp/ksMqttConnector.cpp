@@ -39,6 +39,8 @@ namespace ksf::comps
 		bitflags.usePersistentSession = usePersistentSession;
 	}
 
+	ksMqttConnector::~ksMqttConnector() = default;
+
 	bool ksMqttConnector::init(ksApplication* app)
 	{
 		ksMqttConfigProvider cfgProvider;

@@ -53,23 +53,6 @@ namespace ksf::misc
 		}
 	}
 
-	void ksConfig::setParam(const std::string& paramName, std::string paramValue)
-	{
-		isDirty = true;
-		configParams.insert_or_assign(paramName, std::move(paramValue));
-	}
-
-	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
-	{
-		const auto& found{configParams.find(paramName)};
-		return found == configParams.end() ? defaultValue : found->second;
-	}
-
-	ksConfig::operator bool() const
-	{
-		return !configPath.empty();
-	}
-
 	ksConfig::~ksConfig()
 	{
 		if (!isDirty)
@@ -86,5 +69,22 @@ namespace ksf::misc
 			fileWriter.println(value.c_str());
 		}
 		fileWriter.close();
+	}
+
+	void ksConfig::setParam(const std::string& paramName, std::string paramValue)
+	{
+		isDirty = true;
+		configParams.insert_or_assign(paramName, std::move(paramValue));
+	}
+
+	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
+	{
+		const auto& found{configParams.find(paramName)};
+		return found == configParams.end() ? defaultValue : found->second;
+	}
+
+	ksConfig::operator bool() const
+	{
+		return !configPath.empty();
 	}
 }

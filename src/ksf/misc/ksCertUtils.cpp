@@ -7,9 +7,10 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
+#include <WiFiClientSecure.h>
+
 #include "ksCertUtils.h"
 #include "../ksConstants.h"
-
 namespace ksf::misc
 {
 	/*
@@ -30,6 +31,7 @@ namespace ksf::misc
 		return 255;
 	}
 
+	ksCertFingerprint::ksCertFingerprint() = default;
 	ksCertFingerprint::~ksCertFingerprint() = default;
 	
 	bool ksCertFingerprint::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const
@@ -52,7 +54,7 @@ namespace ksf::misc
 	}
 
 #ifdef ESP32
-	bool ksCertFingerprintESP32::setup(WiFiClientSecure* clientSecure, const std::string& fingerprint)
+	bool ksCertFingerprintESP32::setup(ksCertUtilsNetCLientSecure_t* clientSecure, const std::string& fingerprint)
 	{
 		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
 		{
@@ -64,7 +66,7 @@ namespace ksf::misc
 		return false;
 	}
 
-	bool ksCertFingerprintESP32::verify(WiFiClientSecure* client) const
+	bool ksCertFingerprintESP32::verify(ksCertUtilsNetCLientSecure_t* client) const
 	{
 		static const char characters[] {"0123456789ABCDEF"};
 
@@ -82,7 +84,7 @@ namespace ksf::misc
 #endif
 
 #ifdef ESP8266
-	bool ksCertFingerprintESP8266::setup(WiFiClientSecure* clientSecure, const std::string& fingerprint)
+	bool ksCertFingerprintESP8266::setup(ksCertUtilsNetCLientSecure_t* clientSecure, const std::string& fingerprint)
 	{
 		uint8_t fingerprintBytes[20];
 		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
@@ -94,7 +96,7 @@ namespace ksf::misc
 		return false;
 	}
 
-	bool ksCertFingerprintESP8266::verify(WiFiClientSecure* client) const
+	bool ksCertFingerprintESP8266::verify(ksCertUtilsNetCLientSecure_t* client) const
 	{
 		return true;
 	}
