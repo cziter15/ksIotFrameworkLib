@@ -49,6 +49,10 @@ namespace ksf
 			 AppLogCallbackFunc_t appLogCallback;					//!< Callback function for logging
 #endif
 		public:
+			/*! 
+				@brief Destructor.
+			*/
+			virtual ~ksApplication();
 
 			/*!
 				@brief Instantiates a component of the type defined by the template instance.

@@ -38,6 +38,11 @@ namespace ksf::comps
 		deviceName += ksf::getDeviceUuidHex();
 	}
 
+	ksWifiConfigurator::~ksWifiConfigurator()
+	{
+		WiFi.softAPdisconnect(true);
+	}
+
 	bool ksWifiConfigurator::init(ksApplication* app)
 	{
 		WiFi.softAP(deviceName.c_str());
@@ -69,10 +74,5 @@ namespace ksf::comps
 			handlePeriodicTasks();
 
 		return !configTimeout.triggered();
-	}
-
-	ksWifiConfigurator::~ksWifiConfigurator()
-	{
-		WiFi.softAPdisconnect(true);
 	}
 }

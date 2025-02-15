@@ -62,6 +62,11 @@ namespace ksf::comps
 			ksWifiConnector(const char* hostname, bool savePower = true);
 
 			/*!
+				@brief Destructos WiFi connector component.
+			*/
+			virtual ~ksWifiConnector();
+
+			/*!
 				@brief Initializes WiFi connector component.
 				@param app Pointer to the parent ksApplication.
 				@return True on success, false on fail.
@@ -80,10 +85,5 @@ namespace ksf::comps
 				@return True if connected. False otherwise.
 			*/
 			bool isConnected() const;
-
-			/*!
-				@brief Destructos WiFi connector component.
-			*/
-			virtual ~ksWifiConnector();
 	};
 }

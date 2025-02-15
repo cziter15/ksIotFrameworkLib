@@ -25,6 +25,11 @@ namespace ksf
 	class ksRtti
 	{
 		public:
+			/*! 
+				@brief  Destructor. 
+			*/
+			virtual ~ksRtti() = default;
+
 			/*!
 				@brief Retrieves type ID of the object.
 				@return Object type ID.

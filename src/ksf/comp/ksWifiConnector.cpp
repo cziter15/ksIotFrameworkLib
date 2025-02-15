@@ -45,6 +45,11 @@ namespace ksf::comps
 #endif
 	}
 
+	ksWifiConnector::~ksWifiConnector()
+	{
+		WiFi.disconnect(true);
+	}
+
 	void ksWifiConnector::setupMacAddress()
 	{
 #if defined(ESP32)
@@ -133,10 +138,5 @@ namespace ksf::comps
 	bool ksWifiConnector::isConnected() const
 	{
 		return WiFi.isConnected() && bitflags.gotIpAddress;
-	}
-
-	ksWifiConnector::~ksWifiConnector()
-	{
-		WiFi.disconnect(true);
 	}
 }

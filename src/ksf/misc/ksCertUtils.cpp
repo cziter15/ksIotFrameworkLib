@@ -29,6 +29,8 @@ namespace ksf::misc
 
 		return 255;
 	}
+
+	ksCertFingerprint::~ksCertFingerprint() = default;
 	
 	bool ksCertFingerprint::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const
 	{

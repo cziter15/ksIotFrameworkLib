@@ -65,6 +65,11 @@ namespace ksf::misc
 			ksDomainQuery();
 
 			/*!
+				@brief Destructor.
+			*/
+			virtual ~ksDomainQuery();
+
+			/*!
 				@brief Constructs a new ksDomainQuery object.
 				@param dnsServer IP address of the DNS server to use for resolving domain names. By default, KSF_DOMAIN_QUERY_DNS_SERVER is used.
 			*/
@@ -91,10 +96,5 @@ namespace ksf::misc
 				@brief Handles resolver tasks, such as sending queries and receiving responses.
 			*/
 			void process();
-
-			/*!
-				@brief Destructor.
-			*/
-			virtual ~ksDomainQuery();
 	};
 }

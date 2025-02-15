@@ -49,6 +49,11 @@ namespace ksf::comps
 			ksWifiConfigurator(std::string devicePrefixName);
 
 			/*!
+				@brief Destructs WiFi configurator component.
+			*/
+			virtual ~ksWifiConfigurator();
+
+			/*!
 				@brief Handles ksWifiConfigurator logic.
 
 				It starts and handles Device Portal, where the user can configure the device (that means WiFi or
@@ -72,10 +77,5 @@ namespace ksf::comps
 				@return True on success, false on fail.
 			*/
 			bool postInit(ksApplication* app) override;
-
-			/*!
-				@brief Destructs WiFi configurator component.
-			*/
-			virtual ~ksWifiConfigurator();
 	};
 }

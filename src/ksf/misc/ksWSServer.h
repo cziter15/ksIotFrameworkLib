@@ -48,6 +48,11 @@ namespace ksf::misc
 			ksWSServer(uint16_t port);
 
 			/*!
+				@brief Destructs the server, releasing the resources.
+			*/
+			virtual ~ksWSServer();
+
+			/*!
 				@brief Returns simple authentication token for WebSocket authentication process.
 
 				The value 0 is considered to be empty token. Authentication token is set via setRequiredAuthToken().
@@ -85,10 +90,5 @@ namespace ksf::misc
 				@param func The message handler function.
 			*/
 			void setMessageHandler(ksWsServerMessageFunc_t func);
-
-			/*!
-				@brief Destructs the server, releasing the resources.
-			*/
-			virtual ~ksWSServer();
 	};
 }

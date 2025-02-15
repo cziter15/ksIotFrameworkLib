@@ -32,6 +32,11 @@ namespace ksf::comps
 		: pin(pin), triggerState(triggerState), mode(mode)
 	{}
 
+	ksResetButton::~ksResetButton()
+	{
+		pinMode(pin, INPUT);
+	}
+
 	bool ksResetButton::init(ksApplication* app)
 	{
 		pinMode(pin, mode);
@@ -68,10 +73,5 @@ namespace ksf::comps
 		}
 
 		return true;
-	}
-
-	ksResetButton::~ksResetButton()
-	{
-		pinMode(pin, INPUT);
 	}
 }

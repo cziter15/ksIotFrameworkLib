@@ -35,6 +35,11 @@ namespace ksf::misc
 
 		public:
 			/*!
+				@brief Destructor.
+			*/
+			virtual ~ksCertFingerprint();
+
+			/*!
 				@brief Performs certificate fingerprint setup (platform dependent).
 				@param client Pointer of WiFiClientSecure
 				@param fingerprint Fingerprint string

@@ -45,6 +45,11 @@ namespace ksf::comps
 			ksResetButton(uint8_t pin, uint8_t triggerState, uint8_t mode);
 
 			/*!
+				@brief Destructs ksResetButton, restoring INPUT pin state.
+			*/
+			virtual ~ksResetButton();
+
+			/*!
 				@brief Initializes the reset button component.
 				@param app Pointer to the parent ksApplication.
 				@return True on success, false otherwise.
@@ -63,10 +68,5 @@ namespace ksf::comps
 				@return Pin number assigned to the reset button.
 			*/
 			uint8_t getPin() const { return pin; }
-
-			/*!
-				@brief Destructs ksResetButton, restoring INPUT pin state.
-			*/
-			virtual ~ksResetButton();
 	};
 }
