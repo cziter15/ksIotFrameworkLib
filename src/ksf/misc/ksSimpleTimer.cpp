@@ -18,6 +18,8 @@ namespace ksf::misc
 		setInterval(intervalMs);
 	}
 
+	ksSimpleTimer::~ksSimpleTimer() = default;
+
 	void ksSimpleTimer::setInterval(uint32_t intervalMs)
 	{
 		this->intervalMs = intervalMs;

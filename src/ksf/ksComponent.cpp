@@ -11,8 +11,6 @@
 
 namespace ksf 
 {
-	ksComponent::~ksComponent() = default;
-
 	bool ksComponent::init(ksApplication* app)
 	{
 		return true;

@@ -37,6 +37,11 @@ namespace ksf::misc
 			ksSimpleTimer(uint32_t intervalMs);
 
 			/*!
+				@brief Destructs timer.
+			*/
+			virtual ~ksSimpleTimer();
+
+			/*!
 				@brief Sets timer interval (milliseconds) and restarts the timer.
 				@param intervalMs Timer interval in milliseconds. If 0 then timer is disabled.
 			*/

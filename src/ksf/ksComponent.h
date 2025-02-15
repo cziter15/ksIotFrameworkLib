@@ -57,11 +57,6 @@ namespace ksf
 			ksComponentState::TYPE componentState { ksComponentState::NotInitialized };
 
 		public:
-			/*! 
-				@brief  Destructor. 
-			*/
-			virtual ~ksComponent();
-
 			/*!
 				@brief Initializes component.
 				@param app Pointer to the parent ksApplication.

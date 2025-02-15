@@ -27,5 +27,8 @@ namespace ksf::evt
 				@param callbackUID Unique callback ID
 			*/
 			virtual void unbind(std::size_t callbackUID) = 0;
+
+		public:
+			virtual ~ksEventInterface() = default;
 	};
 }
