@@ -22,6 +22,10 @@
 	#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
 #elif defined (ESP8266)
 	#define ksMqttConnectorNetClient_t WiFiClient
+	namespace BearSSL
+	{
+		class WiFiClientSecure;
+	}
 	#define ksMqttConnectorNetClientSecure_t BearSSL::WiFiClientSecure
 #else
 	#error Platform not implemented.
