@@ -20,9 +20,11 @@
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksMqttConnectorNetClient_t NetworkClient
 	#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
-#else
+#elif defined (ESP8266)
 	#define ksMqttConnectorNetClient_t WiFiClient
-	#define ksMqttConnectorNetClientSecure_t WiFiClientSecure
+	#define ksMqttConnectorNetClientSecure_t BearSSL::WiFiClientSecure
+#else
+	#error Platform not implemented.
 #endif
 
 class PubSubClient;

@@ -12,13 +12,18 @@
 #include <string>
 #include <stdint.h>
 
-#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
-	#define ksCertUtilsNetCLientSecure_t NetworkClientSecure
-#else
+#if defined(ESP32)
 	#define ksCertUtilsNetCLientSecure_t WiFiClientSecure
+	class ksCertUtilsNetCLientSecure_t
+#elif defined(ESP8266)
+	namespace BearSSL 
+	{
+		class WiFiClientSecure;
+	}
+	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
+#else
+	#error Platform not implemented.
 #endif
-
-class ksCertUtilsNetCLientSecure_t;
 
 namespace ksf::misc
 {
