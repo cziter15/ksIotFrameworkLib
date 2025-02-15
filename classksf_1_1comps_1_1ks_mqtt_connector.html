@@ -230,10 +230,10 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classksf_1_1misc_1_1ks_domain_query.html">misc::ksDomainQuery</a>&#160;</td><td class="memItemRight" valign="bottom"><b>domainResolver</b></td></tr>
 <tr class="memdesc:a322640c8bb8cc5f369a7d2a9ab67d59e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Domain query used to resolve MQTT broker address. <br /></td></tr>
 <tr class="separator:a322640c8bb8cc5f369a7d2a9ab67d59e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a232ba38af05678ff7ae8bc1ab6ede034" id="r_a232ba38af05678ff7ae8bc1ab6ede034"><td class="memItemLeft" align="right" valign="top"><a id="a232ba38af05678ff7ae8bc1ab6ede034" name="a232ba38af05678ff7ae8bc1ab6ede034"></a>
-std::unique_ptr&lt; WiFiClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>netClientUq</b></td></tr>
-<tr class="memdesc:a232ba38af05678ff7ae8bc1ab6ede034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared pointer to WiFiClient used to connect to MQTT. <br /></td></tr>
-<tr class="separator:a232ba38af05678ff7ae8bc1ab6ede034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d3874da427668efce77650ff60a1ee2" id="r_a1d3874da427668efce77650ff60a1ee2"><td class="memItemLeft" align="right" valign="top"><a id="a1d3874da427668efce77650ff60a1ee2" name="a1d3874da427668efce77650ff60a1ee2"></a>
+std::unique_ptr&lt; ksMqttConnectorNetClient_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>netClientUq</b></td></tr>
+<tr class="memdesc:a1d3874da427668efce77650ff60a1ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared pointer to WiFiClient used to connect to MQTT. <br /></td></tr>
+<tr class="separator:a1d3874da427668efce77650ff60a1ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61ba0c64348bc892107da76723b78525" id="r_a61ba0c64348bc892107da76723b78525"><td class="memItemLeft" align="right" valign="top"><a id="a61ba0c64348bc892107da76723b78525" name="a61ba0c64348bc892107da76723b78525"></a>
 std::unique_ptr&lt; PubSubClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>mqttClientUq</b></td></tr>
 <tr class="memdesc:a61ba0c64348bc892107da76723b78525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shared pointer to PubSubClient used to connect to MQTT. <br /></td></tr>
@@ -361,7 +361,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <p>Connects to the MQTT broker. </p>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false on fail. </dd></dl>
 
-<p class="reference">References <a class="el" href="#a8d0858d55ef5908b2777ebd37ee4b9cc">certFingerprint</a>, <a class="el" href="#a322640c8bb8cc5f369a7d2a9ab67d59e">domainResolver</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#a232ba38af05678ff7ae8bc1ab6ede034">netClientUq</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#ab2b5431473acbcaa5907d63743e9ca84">portNumber</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
+<p class="reference">References <a class="el" href="#a8d0858d55ef5908b2777ebd37ee4b9cc">certFingerprint</a>, <a class="el" href="#a322640c8bb8cc5f369a7d2a9ab67d59e">domainResolver</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#a1d3874da427668efce77650ff60a1ee2">netClientUq</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#ab2b5431473acbcaa5907d63743e9ca84">portNumber</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#a728a903955e41f665a71722eaf16a492">loop()</a>.</p>
 
@@ -805,7 +805,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a8d0858d55ef5908b2777ebd37ee4b9cc">certFingerprint</a>, <a class="el" href="#a322640c8bb8cc5f369a7d2a9ab67d59e">domainResolver</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#a232ba38af05678ff7ae8bc1ab6ede034">netClientUq</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#ab2b5431473acbcaa5907d63743e9ca84">portNumber</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
+<p class="reference">References <a class="el" href="#a8d0858d55ef5908b2777ebd37ee4b9cc">certFingerprint</a>, <a class="el" href="#a322640c8bb8cc5f369a7d2a9ab67d59e">domainResolver</a>, <a class="el" href="#a79283a0a011bab07f8010c02b33b1a63">login</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#a1d3874da427668efce77650ff60a1ee2">netClientUq</a>, <a class="el" href="#af38f406daf37f94b37cb74c9d7831cae">password</a>, <a class="el" href="#ab2b5431473acbcaa5907d63743e9ca84">portNumber</a>, and <a class="el" href="#a2acc73077e7b4ef0d5f7cd03ad75da19">prefix</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e">ksf::comps::ksMqttConfigProvider::setupMqttConnector()</a>.</p>
 
