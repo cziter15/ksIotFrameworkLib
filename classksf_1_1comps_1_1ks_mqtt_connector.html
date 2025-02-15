@@ -135,6 +135,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a97dd66cd5cb6dbb6819ff73376c048ed" id="r_a97dd66cd5cb6dbb6819ff73376c048ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97dd66cd5cb6dbb6819ff73376c048ed">ksMqttConnector</a> (bool <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>=true, bool <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>=false)</td></tr>
 <tr class="memdesc:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management.">ksMqttConnector</a> object.  <br /></td></tr>
 <tr class="separator:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a2c69fad3a041cf706ff66b88afb663" id="r_a6a2c69fad3a041cf706ff66b88afb663"><td class="memItemLeft" align="right" valign="top"><a id="a6a2c69fad3a041cf706ff66b88afb663" name="a6a2c69fad3a041cf706ff66b88afb663"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksMqttConnector</b> ()</td></tr>
+<tr class="memdesc:a6a2c69fad3a041cf706ff66b88afb663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management.">ksMqttConnector</a> object. <br /></td></tr>
+<tr class="separator:a6a2c69fad3a041cf706ff66b88afb663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5218003f79bceb2207178361fc124aeb" id="r_a5218003f79bceb2207178361fc124aeb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5218003f79bceb2207178361fc124aeb">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
 <tr class="memdesc:a5218003f79bceb2207178361fc124aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates the MQTT connector component.  <br /></td></tr>
 <tr class="separator:a5218003f79bceb2207178361fc124aeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -326,7 +330,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 
 <p class="reference">References <a class="el" href="#a3272849e991b131d65f75bf8c8b1912a">reconnectTimer</a>, <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>, and <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a04f92ecf71ebdc6ed7c9c5edeabd2591">getInstanceType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a04f92ecf71ebdc6ed7c9c5edeabd2591">getInstanceType()</a>, and <a class="el" href="#a6a2c69fad3a041cf706ff66b88afb663">~ksMqttConnector()</a>.</p>
 
 </div>
 </div>
@@ -382,6 +386,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <dl class="section return"><dt>Returns</dt><dd>MQTT connection time in seconds. </dd></dl>
 
 <p class="reference">References <a class="el" href="#aa273e290cb18e2ea76db22a7c059b48e">isConnected()</a>, and <a class="el" href="#a5b3892df535c4e3d814f49682a6dd3ed">lastSuccessConnectionTime</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a6a2c69fad3a041cf706ff66b88afb663">~ksMqttConnector()</a>.</p>
 
 </div>
 </div>
@@ -485,6 +491,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 
 <p class="reference">References <a class="el" href="classksf_1_1ks_component.html#a684f870e77ac3795b3cf789a8a81cdde">ksf::ksComponent::init()</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, and <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e">ksf::comps::ksMqttConfigProvider::setupMqttConnector()</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="#a6a2c69fad3a041cf706ff66b88afb663">~ksMqttConnector()</a>.</p>
+
 </div>
 </div>
 <a id="a3a66432b7e14ce14d34f55153f8070c5" name="a3a66432b7e14ce14d34f55153f8070c5"></a>
@@ -543,7 +551,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 
 <p class="reference">References <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a90dbb9c15993dd07c37385274bd54f49">getConnectionTimeSeconds()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a90dbb9c15993dd07c37385274bd54f49">getConnectionTimeSeconds()</a>, and <a class="el" href="#a6a2c69fad3a041cf706ff66b88afb663">~ksMqttConnector()</a>.</p>
 
 </div>
 </div>
@@ -576,6 +584,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
 
 <p class="reference">References <a class="el" href="#ad3410bf2428ffe086fad10bbffb5384c">connectToBroker()</a>, <a class="el" href="#a322640c8bb8cc5f369a7d2a9ab67d59e">domainResolver</a>, <a class="el" href="#a61ba0c64348bc892107da76723b78525">mqttClientUq</a>, <a class="el" href="#ac9219e05b7ebd1c2614a36bb8155efe7">mqttConnectedInternal()</a>, <a class="el" href="#aacb8a4b214c5ea6d71c74469fec167ce">onDisconnected</a>, <a class="el" href="#af7928b7e420a6e8b98b17e5b43127d27">reconnectCounter</a>, <a class="el" href="#a3272849e991b131d65f75bf8c8b1912a">reconnectTimer</a>, and <a class="el" href="#a00194e36edb73cbc7db830d42490fff4">wifiConnWp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a6a2c69fad3a041cf706ff66b88afb663">~ksMqttConnector()</a>.</p>
 
 </div>
 </div>
@@ -695,6 +705,8 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb">ksf::ksComponent</a>.</p>
 
 <p class="reference">References <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, and <a class="el" href="#a00194e36edb73cbc7db830d42490fff4">wifiConnWp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="#a6a2c69fad3a041cf706ff66b88afb663">~ksMqttConnector()</a>.</p>
 
 </div>
 </div>

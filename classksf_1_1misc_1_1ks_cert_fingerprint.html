@@ -92,7 +92,7 @@ $(function(){ initResizable(false); });
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classksf_1_1misc_1_1ks_cert_fingerprint-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">ksf::misc::ksCertFingerprint Class Reference</div></div>
+  <div class="headertitle"><div class="title">ksf::misc::ksCertFingerprint Class Reference<span class="mlabels"><span class="mlabel abstract">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -103,16 +103,20 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8cf8d5e030feb0b9101e1c0434e94d09" id="r_a8cf8d5e030feb0b9101e1c0434e94d09"><td class="memItemLeft" align="right" valign="top"><a id="a8cf8d5e030feb0b9101e1c0434e94d09" name="a8cf8d5e030feb0b9101e1c0434e94d09"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ksCertFingerprint</b> ()</td></tr>
+<tr class="memdesc:a8cf8d5e030feb0b9101e1c0434e94d09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:a8cf8d5e030feb0b9101e1c0434e94d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26dab8c1045b51256b8c671fec040bc2" id="r_a26dab8c1045b51256b8c671fec040bc2"><td class="memItemLeft" align="right" valign="top"><a id="a26dab8c1045b51256b8c671fec040bc2" name="a26dab8c1045b51256b8c671fec040bc2"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksCertFingerprint</b> ()</td></tr>
 <tr class="memdesc:a26dab8c1045b51256b8c671fec040bc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:a26dab8c1045b51256b8c671fec040bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f3a20ad39ac2531ab16d26f37c4e36a" id="r_a7f3a20ad39ac2531ab16d26f37c4e36a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f3a20ad39ac2531ab16d26f37c4e36a">setup</a> (WiFiClientSecure *client, const std::string &amp;fingerprint)</td></tr>
-<tr class="memdesc:a7f3a20ad39ac2531ab16d26f37c4e36a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs certificate fingerprint setup (platform dependent).  <br /></td></tr>
-<tr class="separator:a7f3a20ad39ac2531ab16d26f37c4e36a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe9f030e98aa14bb1af417e9e2261672" id="r_afe9f030e98aa14bb1af417e9e2261672"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe9f030e98aa14bb1af417e9e2261672">verify</a> (WiFiClientSecure *client) const</td></tr>
-<tr class="memdesc:afe9f030e98aa14bb1af417e9e2261672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs certificate fingerprint validation (platform dependent).  <br /></td></tr>
-<tr class="separator:afe9f030e98aa14bb1af417e9e2261672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac82d57e8296113598bef1582a1054c8e" id="r_ac82d57e8296113598bef1582a1054c8e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac82d57e8296113598bef1582a1054c8e">setup</a> (WiFiClientSecure *client, const std::string &amp;fingerprint)=0</td></tr>
+<tr class="memdesc:ac82d57e8296113598bef1582a1054c8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs certificate fingerprint setup (platform dependent).  <br /></td></tr>
+<tr class="separator:ac82d57e8296113598bef1582a1054c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8445a8abaa37a1b50456ad68b533ba9a" id="r_a8445a8abaa37a1b50456ad68b533ba9a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8445a8abaa37a1b50456ad68b533ba9a">verify</a> (WiFiClientSecure *client) const =0</td></tr>
+<tr class="memdesc:a8445a8abaa37a1b50456ad68b533ba9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs certificate fingerprint validation (platform dependent).  <br /></td></tr>
+<tr class="separator:a8445a8abaa37a1b50456ad68b533ba9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -169,8 +173,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7f3a20ad39ac2531ab16d26f37c4e36a" name="a7f3a20ad39ac2531ab16d26f37c4e36a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f3a20ad39ac2531ab16d26f37c4e36a">&#9670;&#160;</a></span>setup()</h2>
+<a id="ac82d57e8296113598bef1582a1054c8e" name="ac82d57e8296113598bef1582a1054c8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac82d57e8296113598bef1582a1054c8e">&#9670;&#160;</a></span>setup()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,7 +195,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -199,7 +203,7 @@ Protected Member Functions</h2></td></tr>
 <p>Performs certificate fingerprint setup (platform dependent). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">client</td><td>Pointer of WiFiClientSecure </td></tr>
+    <tr><td class="paramname">client</td><td>Pointer of ksCertUtilsNetCLientSecure_t </td></tr>
     <tr><td class="paramname">fingerprint</td><td>Fingerprint string </td></tr>
   </table>
   </dd>
@@ -208,8 +212,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afe9f030e98aa14bb1af417e9e2261672" name="afe9f030e98aa14bb1af417e9e2261672"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe9f030e98aa14bb1af417e9e2261672">&#9670;&#160;</a></span>verify()</h2>
+<a id="a8445a8abaa37a1b50456ad68b533ba9a" name="a8445a8abaa37a1b50456ad68b533ba9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8445a8abaa37a1b50456ad68b533ba9a">&#9670;&#160;</a></span>verify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,7 +230,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel virtual">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -234,7 +238,7 @@ Protected Member Functions</h2></td></tr>
 <p>Performs certificate fingerprint validation (platform dependent). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">client</td><td>Pointer of WiFiClientSecure </td></tr>
+    <tr><td class="paramname">client</td><td>Pointer of ksCertUtilsNetCLientSecure_t </td></tr>
   </table>
   </dd>
 </dl>
