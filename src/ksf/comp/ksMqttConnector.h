@@ -17,22 +17,26 @@
 #include "../misc/ksSimpleTimer.h"
 #include "../misc/ksDomainQuery.h"
 
-#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
-	#define ksMqttConnectorNetClient_t NetworkClient
-	#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
-#elif defined (ESP8266)
+#if (defined(ESP32))
+	#if ESP_ARDUINO_VERSION_MAJOR >= 3
+		#define ksMqttConnectorNetClient_t NetworkClient
+		#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
+	#else
+		#define ksMqttConnectorNetClient_t WiFiClient
+		#define ksMqttConnectorNetClientSecure_t WiFiClientSecure
+	#endif
+	class ksMqttConnectorNetClientSecure_t;
+	class ksMqttConnectorNetClient_t;
+#elif defined(ESP8266)
+	namespace BearSSL{class WiFiClientSecure;}
+	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
 	#define ksMqttConnectorNetClient_t WiFiClient
-	namespace BearSSL
-	{
-		class WiFiClientSecure;
-	}
-	#define ksMqttConnectorNetClientSecure_t BearSSL::WiFiClientSecure
+	class ksMqttConnectorNetClient_t;
 #else
 	#error Platform not implemented.
 #endif
 
 class PubSubClient;
-class ksMqttConnectorNetClient_t;
 
 namespace ksf::misc
 {
