@@ -29,7 +29,7 @@
 	class ksMqttConnectorNetClient_t;
 #elif defined(ESP8266)
 	namespace BearSSL{class WiFiClientSecure;}
-	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
+	#define ksMqttConnectorNetClientSecure_t BearSSL::WiFiClientSecure
 	#define ksMqttConnectorNetClient_t WiFiClient
 	class ksMqttConnectorNetClient_t;
 #else
