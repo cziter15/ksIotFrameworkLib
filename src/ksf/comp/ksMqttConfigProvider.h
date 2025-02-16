@@ -29,7 +29,7 @@ namespace ksf::comps
 				@brief Retrieves MQTT parameters.
 
 				This method reads the configuation file to retrieve MQTT broker information from file.
- 				The config contains data like MQTT address, device prefix, optional: credentials and expected SSL fingerprint.  
+ 				The config contains data like MQTT address, device prefix, optional: credentials and expected SSL fingerprint.
 			*/
 			void readParams() override;
 

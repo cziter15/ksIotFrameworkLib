@@ -67,6 +67,10 @@ namespace ksf::comps
 
 	void ksMqttConnector::setupConnection(const std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
+		/*
+			If present, fingerprint is used in the process of creating secure MQTT connection.
+			If fingerprint is empty, the connection will be insecure.
+		*/
 		if (!fingerprint.empty())
 		{
 			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
