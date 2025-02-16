@@ -14,7 +14,7 @@
 
 #if defined(ESP32)
 	#define ksCertUtilsNetCLientSecure_t WiFiClientSecure
-	class ksCertUtilsNetCLientSecure_t
+	class ksCertUtilsNetCLientSecure_t;
 #elif defined(ESP8266)
 	namespace BearSSL
 	{
