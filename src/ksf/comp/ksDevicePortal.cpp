@@ -468,8 +468,6 @@ namespace ksf::comps
 				response += paramRef.label;
 				response += PSTR("\", \"value\": \"");
 				response += paramRef.value;
-				response += PSTR("\", \"default\": \"");
-				response += paramRef.defaultValue;
 				response += PSTR("\", \"type\": \"");
 				
 				switch (paramRef.type)

@@ -43,7 +43,6 @@ namespace ksf::comps
 	{
 		std::string id;
 		std::string label;
-		std::string defaultValue;
 		std::string value;
 		EConfigParamType::Type type{};
 		int maxLength{};
