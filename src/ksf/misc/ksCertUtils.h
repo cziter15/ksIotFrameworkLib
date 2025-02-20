@@ -18,7 +18,7 @@
 	#else
 		#define ksCertUtilsNetCLientSecure_t WiFiClientSecure
 	#endif
-	class ksCertUtilsNetCLientSecure_t
+	class ksCertUtilsNetCLientSecure_t;
 #elif (defined(ESP8266))
 	namespace BearSSL{class WiFiClientSecure;}
 	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
