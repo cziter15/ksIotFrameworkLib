@@ -96,7 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A class that is a base for user-defined application.  
+<p>A class that serves as the base for user-defined applications.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_application_8h_source.html">ksApplication.h</a>&gt;</code></p>
@@ -134,11 +134,11 @@ std::list&lt; std::shared_ptr&lt; <a class="el" href="classksf_1_1ks_component.h
 <tr class="separator:a06c3c117592fa39614d331dd5bc89660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A class that is a base for user-defined application. </p>
-<p><a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> implements core application logic. It is responsible for initializing and running components.</p>
-<p>You must override init method to build component stack. You can return false to stop the initialization. In this case, application will be stopped and <a class="el" href="classksf_1_1ks_app_rotator.html" title="Application rotator component.">ksAppRotator</a> will move to the next application.</p>
-<p>Do not override loop method until you have a good reason. If you do so, keep in mind that you should call base loop method and return the result properly. If any component returns false, application logic should be stopped. The best way is to add only small piece of code and return the reult of the base loop method. It is also safe to return false early, before calling base loop method.</p>
-<p>When init or loop returns false, application will be stopped. </p>
+<div class="textblock"><p>A class that serves as the base for user-defined applications. </p>
+<p><a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> implements core application logic, handling the initialization and execution of components.</p>
+<p>You must override the init method to build the component stack. Returning false will stop the initialization, and <a class="el" href="classksf_1_1ks_app_rotator.html" title="Application rotator component.">ksAppRotator</a> will move to the next application.</p>
+<p>Avoid overriding the loop method unless absolutely necessary. If you do, ensure you call the base loop method and return the result correctly. If any component returns false, the application logic should stop. It is best to add only small pieces of code and return the result of the base loop method, and it's safe to return false early, even before calling the base loop method.</p>
+<p>When either init or loop returns false, the application will stop. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac418c7eb9b021d7b52e20cf7e870bc91" name="ac418c7eb9b021d7b52e20cf7e870bc91"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac418c7eb9b021d7b52e20cf7e870bc91">&#9670;&#160;</a></span>addComponent()</h2>

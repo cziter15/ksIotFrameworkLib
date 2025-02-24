@@ -137,7 +137,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implements low-level configuration file handling. </p>
-<p>Uses std::map to store configuration parameters. When any parameter is modified, the config file is marked as dirty. Then on destruction, the config file is saved if it has been modified (marked as dirty) into the filesystem. </p>
+<p>Uses std::map to store configuration parameters. When any parameter is modified, the config file is marked as dirty. Upon destruction, if the file has been modified, it is saved to the filesystem. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afbc501695c996c0e4e980dc8a6e8aa1d" name="afbc501695c996c0e4e980dc8a6e8aa1d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afbc501695c996c0e4e980dc8a6e8aa1d">&#9670;&#160;</a></span>ksConfig()</h2>

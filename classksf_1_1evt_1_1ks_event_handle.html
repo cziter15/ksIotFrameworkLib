@@ -96,7 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Implements event handle, used to automatically unbind callback on destruction.  
+<p>Implements an event handle that automatically unbinds callbacks on destruction.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_event_handle_8h_source.html">ksEventHandle.h</a>&gt;</code></p>
@@ -123,8 +123,8 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>callbackUID</b
 <tr class="separator:a275a07831b53b56d77b3b579cb6f7117"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implements event handle, used to automatically unbind callback on destruction. </p>
-<p>This is very important to avoid crashing the program in case that user forgets to unbind the callback. Instead, the event handle will unbind the callback automatically when parent object is destroyed. </p>
+<div class="textblock"><p>Implements an event handle that automatically unbinds callbacks on destruction. </p>
+<p>This prevents program crashes caused by forgetting to manually unbind callbacks. When the parent object is destroyed, the event handle ensures the callback is automatically unbound. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2ba584af638b4d972ecac8ed0660db14" name="a2ba584af638b4d972ecac8ed0660db14"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2ba584af638b4d972ecac8ed0660db14">&#9670;&#160;</a></span>ksEventHandle()</h2>

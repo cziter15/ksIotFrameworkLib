@@ -99,7 +99,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A component thet implements web-based configuration portal accessible from local network.  
+<p>A component that implements a web-based configuration portal accessible from the local network.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_device_portal_8h_source.html">ksDevicePortal.h</a>&gt;</code></p>
@@ -297,9 +297,9 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A component thet implements web-based configuration portal accessible from local network. </p>
-<p>The portal can be used to upload OTA update, both in access point and station mode. There's also web-based terminal which can be used to debug the device and examine realitme application logs.</p>
-<p>In case of confiugrator application, please don't add this component directly and use <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> instead. In case of "normal application", you have to add the component manually if you want to use it. </p>
+<div class="textblock"><p>A component that implements a web-based configuration portal accessible from the local network. </p>
+<p>The portal allows OTA updates in both access point and station modes. It also includes a web-based terminal for debugging the device and viewing real-time application logs.</p>
+<p>In a configurator application, do not add this component directly; use <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> instead. In a "normal application," you must manually add the component if you wish to use it. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa08cdda2becff4848d75630cd0add2ed" name="aa08cdda2becff4848d75630cd0add2ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa08cdda2becff4848d75630cd0add2ed">&#9670;&#160;</a></span>ksDevicePortal() <span class="overload">[1/2]</span></h2>
@@ -560,7 +560,7 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
 <p>Initializes the device portal component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -634,7 +634,7 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
 <p>Handles core logic of the device portal component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -879,7 +879,7 @@ std::unique_ptr&lt; ArduinoOTAClass &gt;&#160;</td><td class="memItemRight" vali
 <p>Post-initializes the device portal component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>

@@ -100,7 +100,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A component which is responsible for MQTT connection management.  
+<p>A component responsible for managing MQTT connections.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_mqtt_connector_8h_source.html">ksMqttConnector.h</a>&gt;</code></p>
@@ -133,11 +133,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3a66432b7e14ce14d34f55153f8070c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
 <tr class="separator:a3a66432b7e14ce14d34f55153f8070c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a97dd66cd5cb6dbb6819ff73376c048ed" id="r_a97dd66cd5cb6dbb6819ff73376c048ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a97dd66cd5cb6dbb6819ff73376c048ed">ksMqttConnector</a> (bool <a class="el" href="#a95b20ca302d48003c755183b21d65215">sendConnectionStatus</a>=true, bool <a class="el" href="#a8e80106d4063007faf9f1bc7eb1c889c">usePersistentSession</a>=false)</td></tr>
-<tr class="memdesc:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management.">ksMqttConnector</a> object.  <br /></td></tr>
+<tr class="memdesc:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component responsible for managing MQTT connections.">ksMqttConnector</a> object.  <br /></td></tr>
 <tr class="separator:a97dd66cd5cb6dbb6819ff73376c048ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a2c69fad3a041cf706ff66b88afb663" id="r_a6a2c69fad3a041cf706ff66b88afb663"><td class="memItemLeft" align="right" valign="top"><a id="a6a2c69fad3a041cf706ff66b88afb663" name="a6a2c69fad3a041cf706ff66b88afb663"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksMqttConnector</b> ()</td></tr>
-<tr class="memdesc:a6a2c69fad3a041cf706ff66b88afb663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management.">ksMqttConnector</a> object. <br /></td></tr>
+<tr class="memdesc:a6a2c69fad3a041cf706ff66b88afb663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component responsible for managing MQTT connections.">ksMqttConnector</a> object. <br /></td></tr>
 <tr class="separator:a6a2c69fad3a041cf706ff66b88afb663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5218003f79bceb2207178361fc124aeb" id="r_a5218003f79bceb2207178361fc124aeb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5218003f79bceb2207178361fc124aeb">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
 <tr class="memdesc:a5218003f79bceb2207178361fc124aeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instantiates the MQTT connector component.  <br /></td></tr>
@@ -296,9 +296,9 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A component which is responsible for MQTT connection management. </p>
-<p>The component is responsible for MQTT prefix handling, connection time counting as well as connection status reporting. This component provides public methods that can be used to publish a message.</p>
-<p>The user can register event handlers to receive connection state events as well as message arrival event. </p>
+<div class="textblock"><p>A component responsible for managing MQTT connections. </p>
+<p>This component handles MQTT prefix management, connection time tracking, and status reporting. It also provides public methods for publishing messages.</p>
+<p>Users can register event handlers to receive connection state updates and message arrival events. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a97dd66cd5cb6dbb6819ff73376c048ed" name="a97dd66cd5cb6dbb6819ff73376c048ed"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97dd66cd5cb6dbb6819ff73376c048ed">&#9670;&#160;</a></span>ksMqttConnector()</h2>
@@ -319,7 +319,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
       </table>
 </div><div class="memdoc">
 
-<p>Constructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management.">ksMqttConnector</a> object. </p>
+<p>Constructs <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component responsible for managing MQTT connections.">ksMqttConnector</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sendConnectionStatus</td><td>Indicates whether last will message should be used to signal device state. </td></tr>
@@ -481,7 +481,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <p>Instantiates the MQTT connector component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -696,7 +696,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1misc_1_1ks_cert_fingerprint.
 <p>Used to setup callbacks.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>

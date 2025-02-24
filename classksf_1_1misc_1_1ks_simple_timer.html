@@ -96,7 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Simple timer class, without using component architecture.  
+<p>A simple timer class that does not rely on component architecture.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_simple_timer_8h_source.html">ksSimpleTimer.h</a>&gt;</code></p>
@@ -136,11 +136,11 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>lastTriggerTimeMs
 <tr class="separator:a35a7cf780710c5d737af5cde06e55965"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simple timer class, without using component architecture. </p>
-<p>Used to trigger events periodically. Internally checks if timer interval just passed. When interval is 0, never triggers the timer.</p>
-<p>There are two ways to use it:</p><ul>
-<li>using <a class="el" href="#a3964b7ee76adf5d2f9d622c433093188" title="Checks if timer interval just passed and resets the timer in this case. If timer interval is 0 then a...">ksSimpleTimer::triggered()</a> method, that returns true if timer interval just passed and updates last trigger time.</li>
-<li>using <a class="el" href="#a24f2c9429da8f7c0249984f9d81b1cc5" title="Checks if timer interval just passed. Restarting timer relies on user. If timer interval is 0 then al...">ksSimpleTimer::hasTimePassed()</a> method, that returns true if timer interval just passed, without updating last trigger time. </li>
+<div class="textblock"><p>A simple timer class that does not rely on component architecture. </p>
+<p>Used to trigger events periodically by internally checking if the timer interval has passed. If the interval is set to 0, the timer will never trigger.</p>
+<p>There are two ways to use this timer:</p><ul>
+<li>By using the <a class="el" href="#a3964b7ee76adf5d2f9d622c433093188" title="Checks if timer interval just passed and resets the timer in this case. If timer interval is 0 then a...">ksSimpleTimer::triggered()</a> method, which returns true if the timer interval has just passed and updates the last trigger time.</li>
+<li>By using the <a class="el" href="#a24f2c9429da8f7c0249984f9d81b1cc5" title="Checks if timer interval just passed. Restarting timer relies on user. If timer interval is 0 then al...">ksSimpleTimer::hasTimePassed()</a> method, which returns true if the timer interval has just passed without updating the last trigger time. </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aef07a3f11a3530cd9e912780223544ec" name="aef07a3f11a3530cd9e912780223544ec"></a>

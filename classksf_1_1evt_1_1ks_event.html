@@ -249,7 +249,7 @@ template&lt;typename... Params&gt; </div>
 <p>Registers event (binds to callback list). </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">outHandle</td><td>Reference to outHandle shared ptr (destruction of <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html" title="Implements event handle, used to automatically unbind callback on destruction.">ksEventHandle</a> object will unbind the event) </td></tr>
+    <tr><td class="paramname">outHandle</td><td>Reference to outHandle shared ptr (destruction of <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html" title="Implements an event handle that automatically unbinds callbacks on destruction.">ksEventHandle</a> object will unbind the event) </td></tr>
     <tr><td class="paramname">function</td><td>R-value reference to callback function </td></tr>
   </table>
   </dd>
@@ -287,7 +287,7 @@ template&lt;typename... Params&gt; </div>
 </div><div class="memdoc">
 
 <p>Unbinds event callback by specified unique ID. </p>
-<p>This ID is automatically assigned by registerEvent function and <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html" title="Implements event handle, used to automatically unbind callback on destruction.">ksEventHandle</a> uses it to unbind automatically upon destruction.</p>
+<p>This ID is automatically assigned by registerEvent function and <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html" title="Implements an event handle that automatically unbinds callbacks on destruction.">ksEventHandle</a> uses it to unbind automatically upon destruction.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callbackUID</td><td>Unique id of the callback to unbind. </td></tr>

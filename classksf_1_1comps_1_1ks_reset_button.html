@@ -198,8 +198,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A component that implements reset button functionality. </p>
-<p>On short press, it will cause component loop to return false, then <a class="el" href="classksf_1_1ks_app_rotator.html" title="Application rotator component.">ksAppRotator</a> will move to the next application. On long press, it will erase user data (factory reset).</p>
-<p>The component has also built-in debounce handling logic. </p>
+<p>On a short press, the component loop returns false, prompting <a class="el" href="classksf_1_1ks_app_rotator.html" title="Application rotator component.">ksAppRotator</a> to switch to the next application. On a long press, it performs a factory reset by erasing user data.</p>
+<p>The component also includes built-in debounce handling. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5673b5a2326ac89ff61fde6214ac8643" name="a5673b5a2326ac89ff61fde6214ac8643"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5673b5a2326ac89ff61fde6214ac8643">&#9670;&#160;</a></span>ksResetButton()</h2>
@@ -330,7 +330,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 <p>Initializes the reset button component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -404,7 +404,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>releasedTime</b> 
 <p>Handles the reset button component logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>

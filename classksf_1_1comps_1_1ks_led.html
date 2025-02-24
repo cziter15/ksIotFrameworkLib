@@ -97,7 +97,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A component that simplifies driving the LED.  
+<p>A component that simplifies LED control.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_led_8h_source.html">ksLed.h</a>&gt;</code></p>
@@ -217,8 +217,8 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A component that simplifies driving the LED. </p>
-<p>It was designed to help the device to signal it's state using blink pattern. This component has also some extra features like state inversion (driveAsActiveLow) and low-power pin driving mode knowm as driveAsPushPull, which uses pull resistors and significantly reduces the amout of emitted light. </p>
+<div class="textblock"><p>A component that simplifies LED control. </p>
+<p>Designed to help the device indicate its state using blink patterns, this component also includes additional features such as state inversion (driveAsActiveLow) and a low-power pin driving mode (driveAsPushPull). The driveAsPushPull mode utilizes pull resistors, significantly reducing emitted light. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9900da46e213614c74662553ac07a8ea" name="a9900da46e213614c74662553ac07a8ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9900da46e213614c74662553ac07a8ea">&#9670;&#160;</a></span>ksLed()</h2>
@@ -349,7 +349,7 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <p>Initializes the LED component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">owner</td><td>Pointer to parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> object. </td></tr>
+    <tr><td class="paramname">owner</td><td>Pointer to parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object. </td></tr>
   </table>
   </dd>
 </dl>

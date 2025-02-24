@@ -99,7 +99,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A component that manages WiFi connection.  
+<p>A component that manages the WiFi connection.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_wifi_connector_8h_source.html">ksWifiConnector.h</a>&gt;</code></p>
@@ -219,13 +219,13 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A component that manages WiFi connection. </p>
-<p>This component handles WiFi connection, reconnecting automatically in case of disconnection.</p>
-<p>There are many things that this component manages:</p><ul>
-<li>MAC address generation (to easily identify ksIotFrameworkLib based devices)</li>
-<li>Simple power management (DTIM low-power mode)</li>
-<li>IP address validation, used to determine if WiFi connection was successful (not only using WiFi PHY state)</li>
-<li>Timeout management, used to break in case of longer WiFi connection issues (causing application to exit and swittch to configuration mode) </li>
+<div class="textblock"><p>A component that manages the WiFi connection. </p>
+<p>This component handles WiFi connectivity and automatically reconnects in case of disconnection.</p>
+<p>Key functionalities include:</p><ul>
+<li>MAC address generation for easy identification of ksIotFrameworkLib-based devices.</li>
+<li>Simple power management using DTIM low-power mode.</li>
+<li>IP address validation to confirm a successful WiFi connection beyond just the PHY state.</li>
+<li>Timeout management to handle prolonged connection issues, triggering an application exit and switching to configuration mode if necessary. </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4b9f2666dfdfa7af71bc8d897d0ea9d2" name="a4b9f2666dfdfa7af71bc8d897d0ea9d2"></a>
@@ -321,7 +321,7 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <p>Initializes WiFi connector component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -415,7 +415,7 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <p>Handles WiFi connector component loop logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>

@@ -99,7 +99,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A component that periodocally reports device state to the broker.  
+<p>A component that periodically reports the device state to the broker.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_dev_stat_mqtt_reporter_8h_source.html">ksDevStatMqttReporter.h</a>&gt;</code></p>
@@ -196,9 +196,9 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A component that periodocally reports device state to the broker. </p>
-<p>Upon instantiated, the component will look for <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management.">ksMqttConnector</a> component. The interval between each update is defined by the construction parameter.</p>
-<p>Each update contain values like RSSI, device uptime, connection time and IP address. The subtopic used is "dstat", so for example RSSI will be sent to the topic named "deviceprefix/dstat/rssi". </p>
+<div class="textblock"><p>A component that periodically reports the device state to the broker. </p>
+<p>Upon instantiation, the component searches for the <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component responsible for managing MQTT connections.">ksMqttConnector</a> component. The update interval is specified as a construction parameter.</p>
+<p>Each update includes values such as RSSI, device uptime, connection time, and IP address. The subtopic used is "dstat," so, for example, RSSI is published to the topic "deviceprefix/dstat/rssi". </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeba778fa1e37f1b71e24e9e6a3659067" name="aeba778fa1e37f1b71e24e9e6a3659067"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeba778fa1e37f1b71e24e9e6a3659067">&#9670;&#160;</a></span>ksDevStatMqttReporter()</h2>
@@ -324,7 +324,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <p>Handles MQTT debug connector component loop logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -395,7 +395,7 @@ std::unique_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event_handle.html"
 <p>This method is responsible for reference gathering (component lookup) as well as binding to the events.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the paren <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the paren <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>

@@ -98,7 +98,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A component that provides a set of parameters to the <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> and is also responsible for handling its storage.  
+<p>A component responsible for providing a set of parameters to <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> and managing its storage.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_config_provider_8h_source.html">ksConfigProvider.h</a>&gt;</code></p>
@@ -181,15 +181,17 @@ Protected Member Functions</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ada21e72b8c09bb566639a70426e3a101" id="r_ada21e72b8c09bb566639a70426e3a101"><td class="memItemLeft" align="right" valign="top"><a id="ada21e72b8c09bb566639a70426e3a101" name="ada21e72b8c09bb566639a70426e3a101"></a>
 std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html">ksConfigParameter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>params</b></td></tr>
+<tr class="memdesc:ada21e72b8c09bb566639a70426e3a101"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of configuration parameters. <br /></td></tr>
 <tr class="separator:ada21e72b8c09bb566639a70426e3a101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d">componentState</a> { ksComponentState::NotInitialized }</td></tr>
 <tr class="separator:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A component that provides a set of parameters to the <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> and is also responsible for handling its storage. </p>
-<p>In the configurator application, it should be instantiated like a typical component, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> must be added to the component stack. In this case, it will manage the correct flow of data reading and saving.</p>
-<p>In contrast, in a normal application, it can be created for a short period of time, usually inside the application's init method, to read the data and return the required value. Refer to the EnergySensor init method for an example. Note that the component will be destroyed upon reaching the function return. Also, note that the setupRotations method can return false in case of a problem with the value retrieval (for example, no config present yet), thus causing the application to break and triggering the app rotator to move to the next defined application, usually AP-based configurator. </p>
+<div class="textblock"><p>A component responsible for providing a set of parameters to <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> and managing its storage. </p>
+<p>In the configurator application, this component should be instantiated like any other, with <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> included in the component stack. In this setup, it ensures the proper flow of data reading and saving.</p>
+<p>In a standard application, however, it is typically created temporarily—often within the application's init method—to read the necessary data and return the required value. For an example, refer to the EnergySensor init method. The component is destroyed once the function returns.</p>
+<p>Additionally, be aware that the setupRotations method may return false if there is an issue retrieving the value (e.g., if no configuration is present). This could cause the application to fail, triggering the app rotator to switch to the next defined application, which is usually an AP-based configurator. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6b17eeb01e313fb4074b598f669541ce" name="a6b17eeb01e313fb4074b598f669541ce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6b17eeb01e313fb4074b598f669541ce">&#9670;&#160;</a></span>addNewParam()</h2>
@@ -244,6 +246,8 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
   </table>
   </dd>
 </dl>
+
+<p class="reference">References <a class="el" href="#ada21e72b8c09bb566639a70426e3a101">params</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="#abcf9e639207edeef487fe7d73bbda22a">addNewParamWithConfigDefault()</a>.</p>
 

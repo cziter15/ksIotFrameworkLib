@@ -111,14 +111,14 @@ $(function(){ initResizable(false); });
   <img src="classksf_1_1ks_component.png" usemap="#ksf::ksComponent_map" alt=""/>
   <map id="ksf::ksComponent_map" name="ksf::ksComponent_map">
 <area href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects." alt="ksf::ksRtti" shape="rect" coords="0,0,204,24"/>
-<area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for h..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="214,112,418,136"/>
-<area href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="A component that periodocally reports device state to the broker." alt="ksf::comps::ksDevStatMqttReporter" shape="rect" coords="214,168,418,192"/>
-<area href="classksf_1_1comps_1_1ks_device_portal.html" title="A component thet implements web-based configuration portal accessible from local network." alt="ksf::comps::ksDevicePortal" shape="rect" coords="214,224,418,248"/>
-<area href="classksf_1_1comps_1_1ks_led.html" title="A component that simplifies driving the LED." alt="ksf::comps::ksLed" shape="rect" coords="214,280,418,304"/>
-<area href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management." alt="ksf::comps::ksMqttConnector" shape="rect" coords="214,336,418,360"/>
+<area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component responsible for providing a set of parameters to ksWifiConfigurator and managing its stor..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="214,112,418,136"/>
+<area href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="A component that periodically reports the device state to the broker." alt="ksf::comps::ksDevStatMqttReporter" shape="rect" coords="214,168,418,192"/>
+<area href="classksf_1_1comps_1_1ks_device_portal.html" title="A component that implements a web-based configuration portal accessible from the local network." alt="ksf::comps::ksDevicePortal" shape="rect" coords="214,224,418,248"/>
+<area href="classksf_1_1comps_1_1ks_led.html" title="A component that simplifies LED control." alt="ksf::comps::ksLed" shape="rect" coords="214,280,418,304"/>
+<area href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component responsible for managing MQTT connections." alt="ksf::comps::ksMqttConnector" shape="rect" coords="214,336,418,360"/>
 <area href="classksf_1_1comps_1_1ks_reset_button.html" title="A component that implements reset button functionality." alt="ksf::comps::ksResetButton" shape="rect" coords="214,392,418,416"/>
 <area href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration." alt="ksf::comps::ksWifiConfigurator" shape="rect" coords="214,448,418,472"/>
-<area href="classksf_1_1comps_1_1ks_wifi_connector.html" title="A component that manages WiFi connection." alt="ksf::comps::ksWifiConnector" shape="rect" coords="214,504,418,528"/>
+<area href="classksf_1_1comps_1_1ks_wifi_connector.html" title="A component that manages the WiFi connection." alt="ksf::comps::ksWifiConnector" shape="rect" coords="214,504,418,528"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -172,7 +172,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base component class. </p>
-<p>A component is a part of the application that can be configured and managed by the application. As it is using <a class="el" href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects.">ksRtti</a>, it must use KSF_RTTI_DECLARATIONS for proper initialization. </p>
+<p>A component is a part of the application that can be configured and managed by the application. As it uses <a class="el" href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects.">ksRtti</a>, it must include KSF_RTTI_DECLARATIONS for proper initialization. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a84143a4d98122f3f1d8c42df4742158d" name="a84143a4d98122f3f1d8c42df4742158d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a84143a4d98122f3f1d8c42df4742158d">&#9670;&#160;</a></span>getInstanceType()</h2>
@@ -234,7 +234,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 <p>Initializes component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -310,7 +310,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 <p>Handles component loop logic, called from application loop. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -346,7 +346,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 <p>Method called after component initialization, used to setup references to other components. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>. </td></tr>
   </table>
   </dd>
 </dl>

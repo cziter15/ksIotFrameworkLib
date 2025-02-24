@@ -108,14 +108,14 @@ $(function(){ initResizable(false); });
   <img src="classksf_1_1ks_rtti.png" usemap="#ksf::ksRtti_map" alt=""/>
   <map id="ksf::ksRtti_map" name="ksf::ksRtti_map">
 <area href="classksf_1_1ks_component.html" title="Base component class." alt="ksf::ksComponent" shape="rect" coords="0,56,204,80"/>
-<area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for h..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="214,112,418,136"/>
-<area href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="A component that periodocally reports device state to the broker." alt="ksf::comps::ksDevStatMqttReporter" shape="rect" coords="214,168,418,192"/>
-<area href="classksf_1_1comps_1_1ks_device_portal.html" title="A component thet implements web-based configuration portal accessible from local network." alt="ksf::comps::ksDevicePortal" shape="rect" coords="214,224,418,248"/>
-<area href="classksf_1_1comps_1_1ks_led.html" title="A component that simplifies driving the LED." alt="ksf::comps::ksLed" shape="rect" coords="214,280,418,304"/>
-<area href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component which is responsible for MQTT connection management." alt="ksf::comps::ksMqttConnector" shape="rect" coords="214,336,418,360"/>
+<area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component responsible for providing a set of parameters to ksWifiConfigurator and managing its stor..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="214,112,418,136"/>
+<area href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html" title="A component that periodically reports the device state to the broker." alt="ksf::comps::ksDevStatMqttReporter" shape="rect" coords="214,168,418,192"/>
+<area href="classksf_1_1comps_1_1ks_device_portal.html" title="A component that implements a web-based configuration portal accessible from the local network." alt="ksf::comps::ksDevicePortal" shape="rect" coords="214,224,418,248"/>
+<area href="classksf_1_1comps_1_1ks_led.html" title="A component that simplifies LED control." alt="ksf::comps::ksLed" shape="rect" coords="214,280,418,304"/>
+<area href="classksf_1_1comps_1_1ks_mqtt_connector.html" title="A component responsible for managing MQTT connections." alt="ksf::comps::ksMqttConnector" shape="rect" coords="214,336,418,360"/>
 <area href="classksf_1_1comps_1_1ks_reset_button.html" title="A component that implements reset button functionality." alt="ksf::comps::ksResetButton" shape="rect" coords="214,392,418,416"/>
 <area href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration." alt="ksf::comps::ksWifiConfigurator" shape="rect" coords="214,448,418,472"/>
-<area href="classksf_1_1comps_1_1ks_wifi_connector.html" title="A component that manages WiFi connection." alt="ksf::comps::ksWifiConnector" shape="rect" coords="214,504,418,528"/>
+<area href="classksf_1_1comps_1_1ks_wifi_connector.html" title="A component that manages the WiFi connection." alt="ksf::comps::ksWifiConnector" shape="rect" coords="214,504,418,528"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -142,8 +142,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksRtti</b> ()=def
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implements RTTI (run-time type information) for objects. </p>
-<p>This is a simple, but fast and lightweight implementation of RTTI feature. Provides the ability to check whether object is of given type and cast it to the type provided as a template parameter.</p>
-<p>Extensively used to implement components - <a class="el" href="classksf_1_1ks_component.html" title="Base component class.">ksComponent</a> and easily manage components in the application (<a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a>). </p>
+<p>This is a simple, fast, and lightweight implementation of the RTTI feature. It provides the ability to check whether an object is of a given type and to cast it to the type specified as a template parameter.</p>
+<p>It is extensively used to implement components (<a class="el" href="classksf_1_1ks_component.html" title="Base component class.">ksComponent</a>) and to easily manage components within the application (<a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a>). </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a33f1522c53fd457d441f9203ed04a628" name="a33f1522c53fd457d441f9203ed04a628"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33f1522c53fd457d441f9203ed04a628">&#9670;&#160;</a></span>as() <span class="overload">[1/2]</span></h2>

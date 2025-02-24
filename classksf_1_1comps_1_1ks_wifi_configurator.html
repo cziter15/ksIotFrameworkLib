@@ -178,7 +178,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>handlePeriodicTasks</
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a88bfef0ffa77358a7b26ed066bd5fe29" id="r_a88bfef0ffa77358a7b26ed066bd5fe29"><td class="memItemLeft" align="right" valign="top"><a id="a88bfef0ffa77358a7b26ed066bd5fe29" name="a88bfef0ffa77358a7b26ed066bd5fe29"></a>
 <a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>app</b> {nullptr}</td></tr>
-<tr class="memdesc:a88bfef0ffa77358a7b26ed066bd5fe29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> object that owns this component. <br /></td></tr>
+<tr class="memdesc:a88bfef0ffa77358a7b26ed066bd5fe29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object that owns this component. <br /></td></tr>
 <tr class="separator:a88bfef0ffa77358a7b26ed066bd5fe29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af561e65c5fb0c156d1d5d9b55e070951" id="r_af561e65c5fb0c156d1d5d9b55e070951"><td class="memItemLeft" align="right" valign="top"><a id="af561e65c5fb0c156d1d5d9b55e070951" name="af561e65c5fb0c156d1d5d9b55e070951"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>deviceName</b></td></tr>
@@ -198,7 +198,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>deviceName</b>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A component that manages AP-based configuration. </p>
-<p>Handles Device Portal, where the user can configure the device like WiFi or MQTT credentials as well as custom, application-defined parameters implemented using <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html" title="A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for h...">ksConfigProvider</a> interface. </p>
+<p>This component handles the Device Portal, allowing users to configure WiFi and MQTT credentials, as well as custom application-specific parameters implemented via the <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html" title="A component responsible for providing a set of parameters to ksWifiConfigurator and managing its stor...">ksConfigProvider</a> interface. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad7366dac8b7fbbc30e82af7fa2b895bc" name="ad7366dac8b7fbbc30e82af7fa2b895bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7366dac8b7fbbc30e82af7fa2b895bc">&#9670;&#160;</a></span>ksWifiConfigurator()</h2>
@@ -286,7 +286,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>deviceName</b>
 <p>Implements <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> initialization logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> object that owns this component </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object that owns this component </td></tr>
   </table>
   </dd>
 </dl>
@@ -361,7 +361,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>deviceName</b>
 <p>It starts and handles Device Portal, where the user can configure the device (that means WiFi or MQTT credential as well as custom defined device parameters).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> object that owns this component. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object that owns this component. </td></tr>
   </table>
   </dd>
 </dl>
@@ -399,7 +399,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>deviceName</b>
 <p>Implements <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html" title="A component that manages AP-based configuration.">ksWifiConfigurator</a> post-initialization logic. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that is a base for user-defined application.">ksApplication</a> object that owns this component </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object that owns this component </td></tr>
   </table>
   </dd>
 </dl>

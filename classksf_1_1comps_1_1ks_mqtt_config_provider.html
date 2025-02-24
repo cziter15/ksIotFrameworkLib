@@ -108,7 +108,7 @@ $(function(){ initResizable(false); });
  <div class="center">
   <img src="classksf_1_1comps_1_1ks_mqtt_config_provider.png" usemap="#ksf::comps::ksMqttConfigProvider_map" alt=""/>
   <map id="ksf::comps::ksMqttConfigProvider_map" name="ksf::comps::ksMqttConfigProvider_map">
-<area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for h..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="0,112,197,136"/>
+<area href="classksf_1_1comps_1_1ks_config_provider.html" title="A component responsible for providing a set of parameters to ksWifiConfigurator and managing its stor..." alt="ksf::comps::ksConfigProvider" shape="rect" coords="0,112,197,136"/>
 <area href="classksf_1_1ks_component.html" title="Base component class." alt="ksf::ksComponent" shape="rect" coords="0,56,197,80"/>
 <area href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects." alt="ksf::ksRtti" shape="rect" coords="0,0,197,24"/>
   </map>
@@ -186,6 +186,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classksf_1_1comps_1_1ks_config_provider"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classksf_1_1comps_1_1ks_config_provider')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html">ksf::comps::ksConfigProvider</a></td></tr>
 <tr class="memitem:ada21e72b8c09bb566639a70426e3a101 inherit pro_attribs_classksf_1_1comps_1_1ks_config_provider" id="r_ada21e72b8c09bb566639a70426e3a101"><td class="memItemLeft" align="right" valign="top">
 std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html">ksConfigParameter</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>params</b></td></tr>
+<tr class="memdesc:ada21e72b8c09bb566639a70426e3a101 inherit pro_attribs_classksf_1_1comps_1_1ks_config_provider"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of configuration parameters. <br /></td></tr>
 <tr class="separator:ada21e72b8c09bb566639a70426e3a101 inherit pro_attribs_classksf_1_1comps_1_1ks_config_provider"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_component.html#ac946b878dc913d67a11492db06afbb5d">componentState</a> { ksComponentState::NotInitialized }</td></tr>
@@ -193,7 +194,7 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A component that manages MQTT-related configuration. </p>
-<p>This configuration provider handles MQTT properties . Detailed documentation on the provider's behavior can be fond on <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html" title="A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for h...">ksConfigProvider</a> sub-page. </p>
+<p>This configuration provider handles MQTT properties. Detailed documentation on its behavior can be found on the <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html" title="A component responsible for providing a set of parameters to ksWifiConfigurator and managing its stor...">ksConfigProvider</a> sub-page. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a7beec06b6bb4bec54f95b5f7919dafcf" name="a7beec06b6bb4bec54f95b5f7919dafcf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7beec06b6bb4bec54f95b5f7919dafcf">&#9670;&#160;</a></span>getInstanceType()</h2>
@@ -320,6 +321,8 @@ std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html
 <p>This method saves current (in-memory) MQTT properties into the configuration file. </p>
 
 <p>Implements <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a137995e9f92a86526a6feec85d7721b5">ksf::comps::ksConfigProvider</a>.</p>
+
+<p class="reference">References <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#ada21e72b8c09bb566639a70426e3a101">ksf::comps::ksConfigProvider::params</a>.</p>
 
 </div>
 </div>
