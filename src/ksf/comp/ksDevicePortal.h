@@ -40,13 +40,13 @@ namespace ksf::comps
 	class ksMqttConnector;
 
 	/*!
-		@brief A component thet implements web-based configuration portal accessible from local network.
+		@brief A component that implements a web-based configuration portal accessible from the local network.
 
-		The portal can be used to upload OTA update, both in access point and station mode.
-		There's also web-based terminal which can be used to debug the device and examine realitme application logs.
+		The portal allows OTA updates in both access point and station modes. 
+		It also includes a web-based terminal for debugging the device and viewing real-time application logs.
 
-		In case of confiugrator application, please don't add this component directly and use ksWifiConfigurator instead.
-		In case of "normal application", you have to add the component manually if you want to use it.
+		In a configurator application, do not add this component directly; use ksWifiConfigurator instead. 
+		In a "normal application," you must manually add the component if you wish to use it.
 	*/
 	class ksDevicePortal : public ksComponent
 	{

@@ -17,10 +17,10 @@ namespace ksf
 	/*!
 		@brief Implements RTTI (run-time type information) for objects.
 
-		This is a simple, but fast and lightweight implementation of RTTI feature.
-		Provides the ability to check whether object is of given type and cast it to the type provided as a template parameter.
+		This is a simple, fast, and lightweight implementation of the RTTI feature. 
+		It provides the ability to check whether an object is of a given type and to cast it to the type specified as a template parameter.
 
-		Extensively used to implement components - ksComponent and easily manage components in the application (ksApplication).
+		It is extensively used to implement components (ksComponent) and to easily manage components within the application (ksApplication).
 	*/
 	class ksRtti
 	{

@@ -16,11 +16,11 @@
 namespace ksf::comps
 {
 	/*!
-		@brief A component that simplifies driving the LED.
+		@brief A component that simplifies LED control.
 
-		It was designed to help the device to signal it's state using blink pattern.
-		This component has also some extra features like state inversion (driveAsActiveLow) and low-power pin driving mode
- 		knowm as driveAsPushPull, which uses pull resistors and significantly reduces the amout of emitted light.
+		Designed to help the device indicate its state using blink patterns, this component also includes additional features 
+		such as state inversion (driveAsActiveLow) and a low-power pin driving mode (driveAsPushPull). 
+		The driveAsPushPull mode utilizes pull resistors, significantly reducing emitted light.
 	*/
 	class ksLed : public ksComponent
 	{

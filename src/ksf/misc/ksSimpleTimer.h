@@ -14,14 +14,14 @@
 namespace ksf::misc
 {
 	/*!
-		@brief Simple timer class, without using component architecture.
+		@brief A simple timer class that does not rely on component architecture.
 
-		Used to trigger events periodically. Internally checks if timer interval just passed.
-		When interval is 0, never triggers the timer.
+		Used to trigger events periodically by internally checking if the timer interval has passed. 
+		If the interval is set to 0, the timer will never trigger.
 
-		There are two ways to use it:
-		- using ksSimpleTimer::triggered() method, that returns true if timer interval just passed and updates last trigger time.
-		- using ksSimpleTimer::hasTimePassed() method, that returns true if timer interval just passed, without updating last trigger time.
+		There are two ways to use this timer:
+		- By using the ksSimpleTimer::triggered() method, which returns true if the timer interval has just passed and updates the last trigger time.
+		- By using the ksSimpleTimer::hasTimePassed() method, which returns true if the timer interval has just passed without updating the last trigger time.
 	*/
 	class ksSimpleTimer
 	{

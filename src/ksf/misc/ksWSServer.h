@@ -25,7 +25,7 @@ namespace ksf::misc
 	typedef std::function<void(uint8_t client, std::string_view message)> ksWsServerMessageFunc_t;
 
 	/*!
-		@brief Wrapper around WebSocketsServerCore that adds WebSocket authentication and better message handling.
+		@brief A wrapper around WebSocketsServerCore that adds WebSocket authentication and enhanced message handling.
 	*/
 	class ksWSServer : public WebSocketsServerCore 
 	{

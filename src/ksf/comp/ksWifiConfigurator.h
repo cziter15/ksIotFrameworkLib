@@ -18,8 +18,8 @@ namespace ksf::comps
 	/*!
 		@brief A component that manages AP-based configuration.
 
-		Handles Device Portal, where the user can configure the device like WiFi or MQTT credentials 
-		as well as custom, application-defined parameters implemented using ksConfigProvider interface.
+		This component handles the Device Portal, allowing users to configure WiFi and MQTT credentials, 
+		as well as custom application-specific parameters implemented via the ksConfigProvider interface.
 	*/
 	class ksWifiConfigurator : public ksComponent
 	{

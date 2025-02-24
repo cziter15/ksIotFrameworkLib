@@ -16,15 +16,15 @@
 namespace ksf::comps
 {
 	/*!
-		@brief A component that manages WiFi connection.
+		@brief A component that manages the WiFi connection.
 
-		This component handles WiFi connection, reconnecting automatically in case of disconnection.
+		This component handles WiFi connectivity and automatically reconnects in case of disconnection.
 
-		There are many things that this component manages:
-		- MAC address generation (to easily identify ksIotFrameworkLib based devices)
-		- Simple power management (DTIM low-power mode)
-		- IP address validation, used to determine if WiFi connection was successful (not only using WiFi PHY state)
-		- Timeout management, used to break in case of longer WiFi connection issues (causing application to exit and swittch to configuration mode)
+		Key functionalities include:
+		- MAC address generation for easy identification of ksIotFrameworkLib-based devices.
+		- Simple power management using DTIM low-power mode.
+		- IP address validation to confirm a successful WiFi connection beyond just the PHY state.
+		- Timeout management to handle prolonged connection issues, triggering an application exit and switching to configuration mode if necessary.
 	*/
 	class ksWifiConnector : public ksComponent
 	{

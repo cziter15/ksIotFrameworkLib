@@ -26,19 +26,19 @@ namespace ksf
 	class ksComponent;
 
 	/*!
-		@brief A class that is a base for user-defined application.
+		@brief A class that serves as the base for user-defined applications.
 
-		ksApplication implements core application logic. It is responsible for initializing and running components.
-		
-		You must override init method to build component stack. You can return false to stop the initialization.
-		In this case, application will be stopped and ksAppRotator will move to the next application.
+		ksApplication implements core application logic, handling the initialization and execution of components.
 
-		Do not override loop method until you have a good reason. If you do so, keep in mind that you should call base 
-		loop method and return the result properly. If any component returns false, application logic should be stopped.
-		The best way is to add only small piece of code and return the reult of the base loop method. It is also safe to
-		return false early, before calling base loop method.
-	
-		When init or loop returns false, application will be stopped.
+		You must override the init method to build the component stack. Returning false will stop the initialization, 
+		and ksAppRotator will move to the next application.
+
+		Avoid overriding the loop method unless absolutely necessary. If you do, ensure you call the base loop method 
+		and return the result correctly. If any component returns false, the application logic should stop. 
+		It is best to add only small pieces of code and return the result of the base loop method, and it's safe to return 
+		false early, even before calling the base loop method.
+
+		When either init or loop returns false, the application will stop.
 	*/
 	class ksApplication
 	{

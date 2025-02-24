@@ -29,10 +29,10 @@ namespace ksf::comps
 		*/
 		enum Type
 		{
-			Text,		// Renders a text field in the configurator. Value will be read as string.
-			Password,	// Renders a password field in the configurator. Text field will be hidden but value will still be read.
-			Number,		// Renders a number field in the configurator. Value will be read as string.
-			Checkbox	// Renders a checkbox in the configurator, the value will be read as "enabled" or "disabled" string.
+			Text,		//!< Renders a text field in the configurator. Value will be read as string.
+			Password,	//!< Renders a password field in the configurator. Text field will be hidden but value will still be read.
+			Number,		//!< Renders a number field in the configurator. Value will be read as string.
+			Checkbox	//!< Renders a checkbox in the configurator, the value will be read as "enabled" or "disabled" string.
 		};
 	};
 
@@ -41,31 +41,31 @@ namespace ksf::comps
 	*/
 	struct ksConfigParameter
 	{
-		std::string id;
-		std::string label;
-		std::string value;
-		EConfigParamType::Type type{};
-		int maxLength{};
+		std::string id;					//!< Unique parameter identifier.
+		std::string label;				//!< Value label.
+		std::string value;				//!< Default parameter value.
+		EConfigParamType::Type type{}; 	//!< Parameter type.
+		int maxLength{}; 				//!< Maximum length of the parameter value.
 	};
 
 	/*!
-		@brief A component that provides a set of parameters to the ksWifiConfigurator and is also responsible for handling its storage.
-		
-		In the configurator application, it should be instantiated like a typical component, and ksWifiConfigurator must be added to the component stack. 
-		In this case, it will manage the correct flow of data reading and saving.
-		
-		In contrast, in a normal application, it can be created for a short period of time, usually inside the application's 
-		init method, to read the data and return the required value.
-		Refer to the EnergySensor init method for an example. Note that the component will be destroyed upon reaching the function return. 
-		Also, note that the setupRotations method can return false in case of a problem with the value retrieval (for example, no config present yet), thus 
-		causing the application to break and triggering the app rotator to move to the next defined application, usually AP-based configurator.
+		@brief A component responsible for providing a set of parameters to ksWifiConfigurator and managing its storage.
+
+		In the configurator application, this component should be instantiated like any other, with ksWifiConfigurator included in the component stack. 
+		In this setup, it ensures the proper flow of data reading and saving.
+
+		In a standard application, however, it is typically created temporarily—often within the application's init method—to read the necessary data and return the required value. 
+		For an example, refer to the EnergySensor init method. The component is destroyed once the function returns.
+
+		Additionally, be aware that the setupRotations method may return false if there is an issue retrieving the value (e.g., if no configuration is present). 
+		This could cause the application to fail, triggering the app rotator to switch to the next defined application, which is usually an AP-based configurator.
 	*/
 	class ksConfigProvider : public ksComponent
 	{
 		KSF_RTTI_DECLARATIONS(ksConfigProvider, ksComponent)
 
 		protected:
-			std::list<ksConfigParameter> params;
+			std::list<ksConfigParameter> params;	//!< List of configuration parameters.
 			
 			/*!
 				@brief Defines new configutation parameter.
@@ -80,12 +80,12 @@ namespace ksf::comps
 
 			/*!
 				@brief Defines new configuation parameter (with default value).
-				
+
 				@param config ksConfig reference.
 				@param id Unique identificator that will be also used as property label by Device Portal.
 				@param label Parameter label.
 				@param maxLength Maximum length of the value.
-				@param type Type of parameter, which tells the Device Portal which field type should be used.		
+				@param type Type of parameter, which tells the Device Portal which field type should be used.
 			*/
 			void addNewParamWithConfigDefault(misc::ksConfig& config, std::string id, std::string label = {}, int maxLength = 50, EConfigParamType::Type type = {});
 

@@ -43,8 +43,8 @@ namespace ksf
 	/*!
 		@brief Base component class.
 
-		A component is a part of the application that can be configured and managed by the application.
-		As it is using ksRtti, it must use KSF_RTTI_DECLARATIONS for proper initialization.
+		A component is a part of the application that can be configured and managed by the application. 
+		As it uses ksRtti, it must include KSF_RTTI_DECLARATIONS for proper initialization.
 	*/
 	class ksComponent : public ksRtti
 	{

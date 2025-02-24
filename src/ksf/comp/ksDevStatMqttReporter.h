@@ -18,13 +18,13 @@ namespace ksf::comps
 	class ksMqttConnector;
 
 	/*!
-		@brief A component that periodocally reports device state to the broker.
-		
-		Upon instantiated, the component will look for ksMqttConnector component.
-		The interval between each update is defined by the construction parameter.
-		
-		Each update contain values like RSSI, device uptime, connection time and IP address.
-		The subtopic used is "dstat", so for example RSSI will be sent to the topic named "deviceprefix/dstat/rssi". 
+		@brief A component that periodically reports the device state to the broker.
+
+		Upon instantiation, the component searches for the ksMqttConnector component. 
+		The update interval is specified as a construction parameter.
+
+		Each update includes values such as RSSI, device uptime, connection time, and IP address. 
+		The subtopic used is "dstat," so, for example, RSSI is published to the topic "deviceprefix/dstat/rssi".
 	*/
 	class ksDevStatMqttReporter : public ksComponent
 	{
@@ -33,7 +33,7 @@ namespace ksf::comps
 		protected:
 			std::weak_ptr<ksMqttConnector> mqttConnWp;				//!< Weak pointer to MQTT connector.
 			std::unique_ptr<evt::ksEventHandle> connEventHandle;	//!< Event handle for connection delegate.
-			misc::ksSimpleTimer reporterTimer;							//!< Timer to report device stats.
+			misc::ksSimpleTimer reporterTimer;						//!< Timer to report device stats.
 
 			/*!
 				@brief Calback executed on MQTT connection.

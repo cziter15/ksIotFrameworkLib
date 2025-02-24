@@ -18,10 +18,10 @@ namespace ksf::comps
 	/*!
 		@brief A component that implements reset button functionality.
 
-		On short press, it will cause component loop to return false, then ksAppRotator will move to the next application.
-		On long press, it will erase user data (factory reset).
+		On a short press, the component loop returns false, prompting ksAppRotator to switch to the next application. 
+		On a long press, it performs a factory reset by erasing user data.
 
-		The component has also built-in debounce handling logic.
+		The component also includes built-in debounce handling.
 	*/
 	class ksResetButton : public ksComponent
 	{

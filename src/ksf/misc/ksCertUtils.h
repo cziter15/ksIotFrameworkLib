@@ -31,8 +31,8 @@ namespace ksf::misc
 	/*!
 		@brief Interface for certificate fingerprint verification.
 
-		Implements platform-dependent certificate fingerprint verification. 
-		Used to validate certificate fingerprints without the requirement of certificate-chain verification.
+		Implements platform-specific certificate fingerprint verification. 
+		This allows validation of certificate fingerprints without requiring certificate-chain verification.
 	*/
 	class ksCertFingerprint
 	{

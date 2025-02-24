@@ -24,8 +24,8 @@ namespace ksf::misc
 	/*!
 		@brief Implements low-level configuration file handling.
 
-		Uses std::map to store configuration parameters. When any parameter is modified, the config file is marked as dirty.
-		Then on destruction, the config file is saved if it has been modified (marked as dirty) into the filesystem.
+		Uses std::map to store configuration parameters. When any parameter is modified, the config file is marked as dirty. 
+		Upon destruction, if the file has been modified, it is saved to the filesystem.
 	*/
 	class ksConfig
 	{

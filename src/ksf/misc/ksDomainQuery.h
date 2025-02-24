@@ -24,11 +24,11 @@ class ksUdpClient_t;
 
 namespace ksf::misc 
 {
-	/*! 
+	/*!
 		@brief Class for resolving domain names to IP addresses using DNS queries.
 
-		To avoid DNS caching, a new query is sent every KSF_DOMAIN_QUERY_INTERVAL_MS milliseconds.
-		The motivation to write this component was to avoid issues that I had with standard DNS libraries.
+		To prevent DNS caching, a new query is sent every KSF_DOMAIN_QUERY_INTERVAL_MS milliseconds. 
+		This component was created to address issues encountered with standard DNS libraries.
 	*/
 	class ksDomainQuery
 	{
