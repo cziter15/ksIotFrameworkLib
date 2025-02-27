@@ -2,6 +2,7 @@
 
 > Arduino Library for ESP32/ESP8266 - a composition-oriented Internet of Things framework that provides a simple and extendable architecture, handles device setup (WiFi setup, MQTT and application-specific configuration), network connectivity, MQTT telemetry protocol, and more...
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/55d611f83c3947acb7ee087ad2564ae4)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib?utm_source=github.com&utm_medium=referral&utm_content=cziter15/ksIotFrameworkLib&utm_campaign=Badge_Grade)
 [![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&style=for-the-badge)](https://cziter15.github.io/ksIotFrameworkLib)
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
 
