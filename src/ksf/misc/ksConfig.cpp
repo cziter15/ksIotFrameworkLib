@@ -39,16 +39,15 @@ namespace ksf::misc
 				/* Read key. */
 				std::string name{fileReader.readStringUntil('\n').c_str()};
 				if (!name.empty())
-					name.pop_back();
+					name.erase(name.length() - 1);
 
 				/* Read value. */
 				std::string val{fileReader.readStringUntil('\n').c_str()};
 				if (!val.empty())
-					val.pop_back();
+					val.erase(val.length() - 1);
 
 				/* Set param. */
-				if (!name.empty() && !val.empty())
-					setParam(name, std::move(val));
+				setParam(name, std::move(val));
 			}
 
 			/* Close file. */
