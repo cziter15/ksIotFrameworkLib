@@ -65,7 +65,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	void ksMqttConnector::setupConnection(const std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
+	void ksMqttConnector::setupConnection(std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
 		/*
 			If present, fingerprint is used in the process of creating secure MQTT connection.
