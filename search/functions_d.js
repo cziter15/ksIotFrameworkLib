@@ -11,7 +11,7 @@ var searchData=
   ['setparam_8',['setParam',['../classksf_1_1misc_1_1ks_config.html#aca932449b2cf5329fc4429b9dd94d0d9',1,'ksf::misc::ksConfig']]],
   ['setrequiredauthtoken_9',['setRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#ad7c5303434271a77957a113dad7a2c37',1,'ksf::misc::ksWSServer']]],
   ['setup_10',['setup',['../classksf_1_1misc_1_1ks_cert_fingerprint.html#a156f0dbc3a0fb5124e5a9b78b8e1cc8b',1,'ksf::misc::ksCertFingerprint']]],
-  ['setupconnection_11',['setupConnection',['../classksf_1_1comps_1_1ks_mqtt_connector.html#aa3c8abf7dcaecaa90dafe5bdfe08b466',1,'ksf::comps::ksMqttConnector']]],
+  ['setupconnection_11',['setupConnection',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a62e45ab36a3176fafe09a198623aa884',1,'ksf::comps::ksMqttConnector']]],
   ['setuphttpserver_12',['setupHttpServer',['../classksf_1_1comps_1_1ks_device_portal.html#ae6c76bee527e97fbd9a4e08d09306633',1,'ksf::comps::ksDevicePortal']]],
   ['setupmacaddress_13',['setupMacAddress',['../classksf_1_1comps_1_1ks_wifi_connector.html#ac52bb4438c4024c91066caec2795f2dc',1,'ksf::comps::ksWifiConnector']]],
   ['setupmqttconnector_14',['setupMqttConnector',['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e',1,'ksf::comps::ksMqttConfigProvider']]],
