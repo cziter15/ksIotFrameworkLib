@@ -38,11 +38,13 @@ namespace ksf::misc
 			{
 				/* Read key. */
 				std::string name{fileReader.readStringUntil('\n').c_str()};
-				name = name.substr(0, name.length() - 1);
+				if (!name.empty() && name.back() == '\n')
+					name.pop_back();
 
 				/* Read value. */
 				std::string val{fileReader.readStringUntil('\n').c_str()};
-				val = val.substr(0, val.length() - 1);
+				if (!val.empty() && val.back() == '\n')
+					val.pop_back();
 
 				/* Set param. */
 				setParam(name, std::move(val));
