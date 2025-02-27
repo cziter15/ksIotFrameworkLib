@@ -59,19 +59,20 @@ namespace ksf::comps
 #else
 #error Platform not implemented.
 #endif
-		uint8_t mac_sta[6] = {
-			0xfa, 0xf1, 
-			static_cast<uint8_t>(chipId >> 8),
-			static_cast<uint8_t>(chipId), 
-			static_cast<uint8_t>(chipId >> 16), 
-			static_cast<uint8_t>(chipId >> 24)
-		};
+
+	const uint8_t mac_sta[6] = {
+		0xfa, 0xf1, 
+		static_cast<uint8_t>(chipId >> 8),
+		static_cast<uint8_t>(chipId), 
+		static_cast<uint8_t>(chipId >> 16), 
+		static_cast<uint8_t>(chipId >> 24)
+	};
 #if defined(ESP32)
-		esp_wifi_set_mac(WIFI_IF_STA, mac_sta);
+	esp_wifi_set_mac(WIFI_IF_STA, const_cast<uint8_t*>(mac_sta));
 #elif defined(ESP8266)
-		wifi_set_macaddr(STATION_IF, mac_sta);
+	wifi_set_macaddr(STATION_IF, const_cast<uint8_t*>(mac_sta));
 #else
-#error Platform not implemented.
+	#error Platform not implemented.
 #endif
 	}
 
