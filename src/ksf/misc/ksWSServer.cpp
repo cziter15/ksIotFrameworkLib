@@ -26,7 +26,7 @@ namespace ksf::misc
 	void ksWSServer::begin() 
 	{
 		/* Setup headers we want to validate. */
-		static const char COOKIE_STR [] PROGMEM {"Cookie"};
+		static constexpr char COOKIE_STR[] PROGMEM {"Cookie"};
 		const char* headerkeys[] { COOKIE_STR };
 
 		/* Begin with the core. */
