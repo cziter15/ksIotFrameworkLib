@@ -58,14 +58,14 @@ namespace ksf::comps
 	constexpr auto WIFI_SCAN_TIMEOUT{15000UL};
 	constexpr auto LOG_KEEPALIVE_INTERVAL{8000UL};
 
-	const char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
-	const char PROGMEM_APPLICATION_JSON [] PROGMEM {"application/json"};
-	const char PROGMEM_TEXT_HTML [] PROGMEM {"text/html"};
-	const char PROGMEM_ACCEPT [] PROGMEM {"Accept"};
-	const char PROGMEM_IF_NONE_MATCH [] PROGMEM {"If-None-Match"};
-	const char PROGMEM_NO_ID_RESPONSE [] PROGMEM {"null\n"};
+	static constexpr char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
+	static constexpr char PROGMEM_APPLICATION_JSON[] PROGMEM {"application/json"};
+	static constexpr char PROGMEM_TEXT_HTML[] PROGMEM {"text/html"};
+	static constexpr char PROGMEM_ACCEPT[] PROGMEM {"Accept"};
+	static constexpr char PROGMEM_IF_NONE_MATCH[] PROGMEM {"If-None-Match"};
+	static constexpr char PROGMEM_NO_ID_RESPONSE[] PROGMEM {"null\n"};
 
-	inline uint64_t generateAuthToken(std::string& password)
+	inline uint64_t generateAuthToken(const std::string& password)
 	{
 #if defined(ESP32)
 		uint64_t chipId{ESP.getEfuseMac()};
@@ -76,8 +76,7 @@ namespace ksf::comps
 		#error Platform not implemented.
 #endif
 		std::hash<std::string> hasher;
-		uint64_t webSocketToken{chipId ^ hasher(password)};
-		return webSocketToken;
+		return chipId ^ hasher(password);
 	}
 
 	ksDevicePortal::ksDevicePortal()
@@ -89,15 +88,15 @@ namespace ksf::comps
 	{
 		arduinoOTA->setPassword(this->portalPassword.c_str());
 		
-		arduinoOTA->onStart([&]() {
+		arduinoOTA->onStart([this]() {
 			onUpdateStart->broadcast();
 		});
 
-		arduinoOTA->onEnd([&]() {
+		arduinoOTA->onEnd([this]() {
 			updateFinished(false);
 		});
 	}
-	
+
 	ksDevicePortal::~ksDevicePortal()
 	{
 		/*
