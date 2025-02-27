@@ -15,9 +15,8 @@ namespace ksf::misc
 	constexpr auto WEBSOCKET_VALIDATION_FAIL{1008};
 
 	ksWSServer::ksWSServer(uint16_t port)
-	{
-		wsListener = std::make_unique<WiFiServer>(port);
-	}
+		: wsListener(std::make_unique<WiFiServer>(port))
+	{}
 
 	ksWSServer::~ksWSServer()
 	{

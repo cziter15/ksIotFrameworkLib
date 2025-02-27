@@ -75,7 +75,7 @@ namespace ksf
 		/* Handle OTA boot indicator. */
 		if (auto indicatorFile{LittleFS.open(OTA_FILENAME_TEXT, PSTR("r"))})
 		{
-			otaBootType = indicatorFile.size() == 0 ? EOTAType::OTA_GENERIC : static_cast<EOTAType::Type>(indicatorFile.read());
+			otaBootType = (indicatorFile.size() > 0) ? static_cast<EOTAType::Type>(indicatorFile.read()) : EOTAType::OTA_GENERIC;
 			indicatorFile.close();
 			LittleFS.remove(OTA_FILENAME_TEXT);
 		}
