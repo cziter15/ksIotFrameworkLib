@@ -210,6 +210,6 @@ namespace ksf::comps
 				@param password MQTT user password
 				@param fingerprint MQTT broker certificate fingerprint - if empty, secure connection won't be used
 			*/
-			void setupConnection(const std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint);
+			void setupConnection(std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint);
 	};
 }
