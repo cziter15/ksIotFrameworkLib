@@ -88,11 +88,11 @@ namespace ksf
 
 	bool removeDirectory(const char* path)
 	{
-		auto dir = LittleFS.open(path, PSTR("r"));
+		auto dir{LittleFS.open(path, PSTR("r"))};
 		if (!dir || !dir.isDirectory())
 			return false;
 	
-		for (auto entry = dir.openNextFile(); entry; entry = dir.openNextFile())
+		for (auto entry{dir.openNextFile()}; entry; entry = dir.openNextFile())
 		{
 	#if defined(ESP8266)
 			auto entryPath{entry.fullName()};
@@ -114,7 +114,7 @@ namespace ksf
 					return false;
 			}
 		}
-	
+
 		dir.close();
 		return LittleFS.rmdir(path);
 	}
