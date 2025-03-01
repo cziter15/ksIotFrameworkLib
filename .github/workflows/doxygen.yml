@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+    - uses: actions/checkout@v2
     - name: Doxygen Action
-      uses: mattnotmitt/doxygen-action@85e6279cec87321a52edac9c87bce653a07cf6c2
+      uses: mattnotmitt/doxygen-action@v1.1.0
       with:
         doxyfile-path: "./Doxyfile"
         working-directory: "."
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@aa83d0c2cfc3d813560e13068d3152aa21490171
+      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./html
