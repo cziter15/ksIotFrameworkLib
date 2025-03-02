@@ -17,7 +17,7 @@
  namespace ksf::misc
  {
 	 ksConfig::ksConfig(const std::string& fileName)
-		 : configPath{getNvsDirectory()}, isDirty{false}
+		 : isDirty{false}, configPath{getNvsDirectory()}
 	 {
 		 /* If no file specified, clear internal path. */
 		 if (fileName.empty())

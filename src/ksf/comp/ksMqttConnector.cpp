@@ -250,7 +250,7 @@ namespace ksf::comps
 		}
 		
 		/* Process domain resolver. */
-		domainResolver.process()
+		domainResolver.process();
 			
 		/* If reconnect timer expired, try to reconnect. */
 		if (reconnectTimer.hasTimePassed())
