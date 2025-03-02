@@ -234,14 +234,11 @@ namespace ksf::comps
 	}
 
 	bool ksMqttConnector::loop(ksApplication* app)
-	{
-		/* Process domain resolver. */
-		domainResolver.process();
-		
+	{		
 		/* If MQTT is connected, process it. */
 		if (mqttClientUq->loop())
 			return true;
-		
+			
 		/* If no MQTT connection, but was connected before, broadcast disconnected event, restart reconnect timer etc. */
 		if (bitflags.wasConnected)
 		{
@@ -252,6 +249,9 @@ namespace ksf::comps
 			return true;
 		}
 		
+		/* Process domain resolver. */
+		domainResolver.process()
+			
 		/* If reconnect timer expired, try to reconnect. */
 		if (reconnectTimer.hasTimePassed())
 		{
