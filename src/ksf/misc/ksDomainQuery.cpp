@@ -122,9 +122,14 @@ namespace ksf::misc
 
 		/* Read the UDP packet. */
 		uint8_t buffer[MAX_DNS_UDP_PACKET_SIZE];
-		auto len{static_cast<std::size_t>(udp->read(buffer, MAX_DNS_UDP_PACKET_SIZE))};
-		if (len < 12 || len > MAX_DNS_UDP_PACKET_SIZE)
+		ssize_t bytesRead{udp->read(buffer, MAX_DNS_UDP_PACKET_SIZE)};
+		if (bytesRead < 0)
 			return;
+
+		/* Check length. */
+		auto len{static_cast<std::size_t>(bytesRead)};
+		if (len < 12 || len > MAX_DNS_UDP_PACKET_SIZE)
+		    return;
 
 		/* Check that the transaction ID matches. */
 		if (readUint16(buffer, 0) != transactionID)
