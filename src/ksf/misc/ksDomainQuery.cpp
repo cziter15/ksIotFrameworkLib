@@ -121,6 +121,7 @@ namespace ksf::misc
 			return;
 
 		/* Read the UDP packet. */
+		uint8_t buffer[MAX_DNS_UDP_PACKET_SIZE];
 		auto len{static_cast<std::size_t>(udp->read(buffer, MAX_DNS_UDP_PACKET_SIZE))};
 		if (len < 12 || len > MAX_DNS_UDP_PACKET_SIZE)
 		    return;
