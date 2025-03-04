@@ -2,14 +2,14 @@
 
 > Arduino Library for ESP32/ESP8266 - a composition-oriented Internet of Things framework that provides a simple and extendable architecture, handles device setup (WiFi setup, MQTT and application-specific configuration), network connectivity, MQTT telemetry protocol, and more...
 
-[![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&style=for-the-badge)](https://cziter15.github.io/ksIotFrameworkLib)
-[![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
+[![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&style=for-the-badge)](https://cziter15.github.io/ksIotFrameworkLib)[![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
 [![Lines of Code](https://img.shields.io/endpoint?color=blue&url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2Fcziter15%2Fksiotframeworklib%2Fbadge%3Ffilter%3D.hpp%24%2C.cpp%24%2C.h%24%26label%3DLines%2520of%2520Code)](https://github.com/cziter15/ksiotframeworklib)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/commits/master)
 [![Depends on platformio](https://img.shields.io/badge/depends%20on-platformio-orange?logo=platformio)](https://platformio.org)
 [![Depends on pioarduino](https://img.shields.io/badge/depends%20on-pioarduino-orange?logo=pioarduino&color=darkgreen)](https://github.com/pioarduino)
+
 
 ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054)
 
