@@ -85,7 +85,7 @@ namespace ksf::misc
 
 	void ksWSServer::setRequiredAuthToken(uint64_t authToken) 
 	{ 
-		requriedAuthToken = authToken; 	
+		requriedAuthToken = authToken;
 	}
 
 	void ksWSServer::handleNonWebsocketConnection(WSclient_t * client) 
