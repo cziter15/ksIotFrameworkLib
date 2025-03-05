@@ -25,7 +25,7 @@
 > For ESP8266, the latest supported version is based on SDK305.
 > To use it, please add this build flag:
 > ```plaintext
-> DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305` 
+> DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305
 >```
 
 ## Motivation
