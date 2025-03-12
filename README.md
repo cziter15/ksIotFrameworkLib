@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
-[![](https://tokei.rs/b1/github/cziter15/ksIotFramewoekLib)](https://github.com/cziter15/ksIotFramewoekLib)
+[![Total lines](https://tokei.rs/b1/github/cziter15/ksIotFramewoekLib)](https://github.com/cziter15/ksIotFramewoekLib)
 [![Commit activity](https://img.shields.io/github/commit-activity/m/cziter15/ksIotFrameworkLib)](https://github.com/cziter15/ksIotFrameworkLib/commits/master)
 [![Powered by platformio](https://img.shields.io/badge/powered%20by-platformio-orange?logo=platformio)](https://platformio.org)
 [![Powered by pioarduino](https://img.shields.io/badge/powered%20by-pioarduino-orange?logo=pioarduino&color=darkgreen)](https://github.com/pioarduino)
