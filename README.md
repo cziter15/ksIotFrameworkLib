@@ -30,20 +30,17 @@
 >```
 
 ## 📜 Motivation
-
-- The goal of this project is to create a simple template or starting point for developing IMotivationoT applications using Espressif microcontrollers.
+- The goal of this project is to create a simple template or starting point for development of applications targeting Espressif microcontrollers.
 - This project aims to streamline the process of copying and modifying source code for different devices.
 
 ## 📚 Documentation
-
 - Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
 
 ## Examples
-
+l
 - For examples, refer to the [examples directory](https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples).
 
 ## 🛠️ Architecture
-
 ```mermaid
 flowchart TD
     AppState{AppState}
@@ -110,7 +107,6 @@ flowchart TD
 - The `postInit` method is the best place to obtain a weak pointer to another component by calling `findComponent`. This will handle cases when other components were added via `init` method.
 
 ## 🌱 Building the Application
-
 To create an application, define a new class that inherits from `ksApplication` and add initial components in the `init` method. Refer to projects like [**emon_fw**](https://github.com/cziter15/emon_fw) for a practical example.
 
 ### 🔎 How It Works
