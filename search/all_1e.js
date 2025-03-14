@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔣_20compiler_20flags_0',['🔣 Compiler flags',['../index.html#autotoc_md11',1,'']]]
+  ['🔎_20how_20it_20works_0',['🔎 How It Works',['../index.html#autotoc_md9',1,'']]]
 ];
