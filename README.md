@@ -37,7 +37,6 @@
 - Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
 
 ## Examples
-l
 - For examples, refer to the [examples directory](https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples).
 
 ## 🛠️ Architecture
