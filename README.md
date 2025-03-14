@@ -80,11 +80,29 @@ flowchart TD
 - Components implement `init`, `postInit`, and `loop` methods.
 - Components marked for removal are safely deleted in the next cycle.
 
-## 📏 Utilities
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1b144cdf-e345-4865-8ae7-92f0eaf31992)
+## 📏 Utilities and components structure
 
-## 🔨 Components
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/c27aba37-4e54-49f5-9ad5-97439e7baf33)
+       📁 ksf
+       ├── 📄 ksAppRotator        ─── Application rotator component
+       ├── 📄 ksRtti              ─── Implements RTTI (run-time type information) for objects
+       ├── 📄 ksComponent         ─── Base component class
+       ├── 📄 ksConstants         ─── Basic low-level definitions
+       ├── 📂 misc
+       │   ├── 📄 ksCertUtils     ─── MQTT certificate utilities
+       │   ├── 📄 ksConfig        ─── Configuration file handling
+       │   ├── 📄 ksDomainQuery   ─── Custom DNS implementation
+       │   ├── 📄 ksSimpleTimer   ─── Simple timer functionality
+       │   └── 📄 ksWSServer      ─── Internal WS handling for device portal
+       └── 📂 comps
+           ├── 📄 ksConfigProvider      ─── Manages configuration parameters and storage
+           ├── 📄 ksDevStatMqttReporter ─── Sends periodic device status updates via MQTT
+           ├── 📄 ksDevicePortal        ─── Implements a web-based configuration portal
+           ├── 📄 ksLed                 ─── Simplifies LED control
+           ├── 📄 ksMqttConfigProvider  ─── Manages MQTT-related configuration
+           ├── 📄 ksMqttConnector       ─── Handles MQTT connection management
+           ├── 📄 ksResetButton         ─── Implements reset button functionality
+           ├── 📄 ksWifiConfigurator    ─── Handles WiFi configuration setup
+           └──📄 ksWifiConnector       ─── Manages WiFi connection
 
 ### 🔅 Rules:
 - Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can add them later, in `loop` but that's another case)
