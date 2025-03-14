@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔨_20components_0',['🔨 Components',['../index.html#autotoc_md6',1,'']]]
+  ['🛠️_20architecture_0',['🛠️ Architecture',['../index.html#autotoc_md4',1,'']]]
 ];

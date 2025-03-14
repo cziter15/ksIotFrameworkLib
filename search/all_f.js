@@ -12,7 +12,7 @@ var searchData=
   ['requestappbreak_9',['requestAppBreak',['../classksf_1_1comps_1_1ks_device_portal.html#a493f65235eb09023daeae7db6a800f0d',1,'ksf::comps::ksDevicePortal']]],
   ['requriedauthtoken_10',['requriedAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#af459c67b491ce00347a590de9dcee044',1,'ksf::misc::ksWSServer']]],
   ['restart_11',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
-  ['rotator_12',['🔁 Application rotator',['../index.html#autotoc_md10',1,'']]],
-  ['rtti_13',['#️⃣ Custom RTTI',['../index.html#autotoc_md12',1,'']]],
-  ['rules_3a_14',['🔅 Rules:',['../index.html#autotoc_md7',1,'']]]
+  ['rotator_12',['🔁 Application rotator',['../index.html#autotoc_md9',1,'']]],
+  ['rtti_13',['#️⃣ Custom RTTI',['../index.html#autotoc_md11',1,'']]],
+  ['rules_3a_14',['🔅 Rules:',['../index.html#autotoc_md6',1,'']]]
 ];
