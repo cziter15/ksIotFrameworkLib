@@ -109,7 +109,7 @@ flowchart TD
 To create an application, define a new class that inherits from `ksApplication` and add initial components in the `init` method. Refer to projects like [**emon_fw**](https://github.com/cziter15/emon_fw) for a practical example.
 
 ### 🔎 How It Works
-- The application is instantiated, and its init method is called. If `init` returns `false`, the `loop` method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.
+- The application is instantiated, and its `init` method is called. If `init` returns `false`, the `loop` method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.
 - If `init` returns `true`, the `loop` method executes, initializing all components.
 - In the next iteration, each component’s `postInit` method is invoked.
 - Once initialized, the application enters a continuous loop, calling each component’s `loop` method.
@@ -148,7 +148,7 @@ Typically the device hosts two applications. First application is running core d
 
 Each application has it's own `loop` method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.
 
-This is very flexible, because you can even raise fail (false) from application's `init` method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
+This is very flexible, because you can even raise fail (return `false`) from application's `init` method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
 
 ## 🔣 Compiler flags
 - Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
