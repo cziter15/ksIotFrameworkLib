@@ -191,7 +191,7 @@ Examples</h1>
 <h2><a class="anchor" id="autotoc_md8"></a>
 🔎 How It Works</h2>
 <ul>
-<li>The application is instantiated, and its init method is called. If <code>init</code> returns <code>false</code>, the <code>loop</code> method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.</li>
+<li>The application is instantiated, and its <code>init</code> method is called. If <code>init</code> returns <code>false</code>, the <code>loop</code> method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.</li>
 <li>If <code>init</code> returns <code>true</code>, the <code>loop</code> method executes, initializing all components.</li>
 <li>In the next iteration, each component’s <code>postInit</code> method is invoked.</li>
 <li>Once initialized, the application enters a continuous loop, calling each component’s <code>loop</code> method.</li>
@@ -225,7 +225,7 @@ Examples</h1>
 <p>The library implements one very useful utility named <code>ksAppRotator</code>. This object can wrap application instantiation logic into something like carousel or rotator.</p>
 <p>Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration.</p>
 <p>Each application has it's own <code>loop</code> method taking care of all underlying logic. In case of fail (which can happen anytime, even when creating the application object), the rotator will spawn next application and start processing it's logic until fail or break.</p>
-<p>This is very flexible, because you can even raise fail (false) from application's <code>init</code> method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
+<p>This is very flexible, because you can even raise fail (return <code>false</code>) from application's <code>init</code> method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).</p>
 <h1><a class="anchor" id="autotoc_md10"></a>
 🔣 Compiler flags</h1>
 <ul>
