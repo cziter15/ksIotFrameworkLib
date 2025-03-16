@@ -101,7 +101,7 @@ flowchart TD
            └──📄 ksWifiConnector       ─── Manages WiFi connection
 
 ### 🔅 Rules:
-- Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can add them later, in `loop` but that's another case)
+- Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can anytime later, from the `loop` but please treat it like exceptional case)
 - The `init` method is the best place to add dependent components, setup initial pin values etc.
 - The `postInit` method is the best place to obtain a weak pointer to another component by calling `findComponent`. This will handle cases when other components were added via `init` method.
 
