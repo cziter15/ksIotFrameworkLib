@@ -32,6 +32,7 @@
 ## 📜 Motivation
 - The goal of this project is to create a simple template or starting point for development of applications targeting Espressif microcontrollers.
 - This project aims to streamline the process of copying and modifying source code for different devices.
+- I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.
 
 ## 📚 Documentation
 - Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
