@@ -159,9 +159,9 @@ This is very flexible, because you can even raise fail (return `false`) from app
 - See `ksConfigProvider.h` for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
 ## 🔥 Saving power
-- By default, this framework supports enables power saving for the modem.
-- Automatic modem sleep requires the DTIM to be set on the access point. 
-- The best value for me was 3. It allows the ESP32 to go down from around 100mA to 20mA.
+- Modem sleep is enabled by default and can be controlled as an optional parameter in the `ksWifiConnector` constructor.
+- Automatic modem sleep requires the DTIM _(Delivery Traffic Indication Message)_ to be correctly set on the access point. 
+- The best value for me was `3`. It allows the ESP32 to go down from around 100mA to 20mA.
 
 ## 📑 Dependencies
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
