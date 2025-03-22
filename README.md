@@ -80,26 +80,26 @@ flowchart TD
 ## 📏 Utilities and components structure
 
        📁 ksf
-       ├── 📄 ksAppRotator                    ─── Application rotator component
-       ├── 📄 ksRtti                          ─── Implements RTTI (run-time type information) for objects
-       ├── 📄 ksComponent                     ─── Base component class
-       ├── 📄 ksConstants                     ─── Basic low-level definitions
+       ├── 📄 ksAppRotator                 ─── Application rotator component
+       ├── 📄 ksRtti                       ─── Implements RTTI (run-time type information) for objects
+       ├── 📄 ksComponent                  ─── Base component class
+       ├── 📄 ksConstants                  ─── Basic low-level definitions
        ├── 📂 misc
-       │   ├── 📄 ksCertUtils                 ─── MQTT certificate utilities
-       │   ├── 📄 ksConfig                    ─── Configuration file handling
-       │   ├── 📄 ksDomainQuery               ─── Custom DNS implementation
-       │   ├── 📄 ksSimpleTimer               ─── Simple timer functionality
-       │   └── 📄 ksWSServer                  ─── Internal WS handling for device portal
+       │   ├── 📄 ksCertUtils              ─── MQTT certificate utilities
+       │   ├── 📄 ksConfig                 ─── Configuration file handling
+       │   ├── 📄 ksDomainQuery            ─── Custom DNS implementation
+       │   ├── 📄 ksSimpleTimer            ─── Simple timer functionality
+       │   └── 📄 ksWSServer               ─── Internal WS handling for device portal
        └── 📂 comps
-           ├── 📄 ksConfigProvider            ─── Manages configuration parameters and storage
-           ├── 📄 ksDevStatMqttReporter       ─── Sends periodic device status updates via MQTT
-           ├── 📄 ksDevicePortal              ─── Implements a web-based configuration portal
-           ├── 📄 ksLed                       ─── Simplifies LED control
-           ├── 📄 ksMqttConfigProvider        ─── Manages MQTT-related configuration
-           ├── 📄 ksMqttConnector             ─── Handles MQTT connection management
-           ├── 📄 ksResetButton               ─── Implements reset button functionality
-           ├── 📄 ksWifiConfigurator          ─── Handles WiFi configuration setup
-           └── 📄 ksWifiConnector             ─── Manages WiFi connection
+           ├── 📄 ksConfigProvider         ─── Manages configuration parameters and storage
+           ├── 📄 ksDevStatMqttReporter    ─── Sends periodic device status updates via MQTT
+           ├── 📄 ksDevicePortal           ─── Implements a web-based configuration portal
+           ├── 📄 ksLed                    ─── Simplifies LED control
+           ├── 📄 ksMqttConfigProvider     ─── Manages MQTT-related configuration
+           ├── 📄 ksMqttConnector          ─── Handles MQTT connection management
+           ├── 📄 ksResetButton            ─── Implements reset button functionality
+           ├── 📄 ksWifiConfigurator       ─── Handles WiFi configuration setup
+           └── 📄 ksWifiConnector          ─── Manages WiFi connection
 
 ### 🔅 Rules:
 - Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can anytime later, from the `loop` but please treat it like exceptional case)
