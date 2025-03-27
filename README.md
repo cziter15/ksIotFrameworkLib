@@ -25,9 +25,10 @@
 >
 > For ESP8266, the latest supported version is based on SDK305.
 > To use it, please add this build flag:
-> ```plaintext
+> 
+> ```
 > DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305
->```
+> ```
 
 ## 📜 Motivation
 - The goal of this project is to create a simple template or starting point for development of applications targeting Espressif microcontrollers.
@@ -43,32 +44,44 @@
 ## 🛠️ Architecture
 ```mermaid
 flowchart TD
-    AppState{AppState}
-    AppState --> |NotInitialized| Application::Init
-    AppState --> |Initialized| Application::Loop
+ subgraph Application_Init["Application_Init"]
+        B("Mark app state as initialized")
+        A("Add initial components")
+  end
+ subgraph Application_Loop["Application_Loop"]
+        CCS{"State?"}
+        Loop{{"For each component"}}
+        LP1@{ label: "Call component's loop" }
+        LP2@{ label: "Call component's init" }
+        LP3@{ label: "Call component's postInit" }
+        LP4("Remove component")
+        DF{"Success?"}
+        SCS2("State -> Initialized")
+        SCS3("State -> Active")
+        X0{{"Continue"}}
+        X1{{"Break"}}
+        Continue["Continue"]
+  end
+    AppState{"AppState"} -- NotInitialized --> Application_Init
+    AppState -- Initialized --> Application_Loop
+    A --> B
+    Loop --> CCS
+    CCS -- Active --> LP1
+    CCS -- NotInitialized --> LP2
+    CCS -- Initialized --> LP3
+    CCS -- ToRemove --> LP4
+    LP2 --> SCS2
+    SCS2 --> DF
+    LP3 --> SCS3
+    SCS3 --> DF
+    LP1 --> DF
+    DF -- True --> X0
+    DF -- False --> X1
+    LP4 --> Continue
+    LP1@{ shape: rounded}
+    LP2@{ shape: rounded}
+    LP3@{ shape: rounded}
 
-    subgraph Application::Init
-        A(Add initial components) --> B(Mark app state as initialized)
-    end
-   
-    subgraph Application::Loop
-        Loop{{For each component}} --> CCS{State?}
-
-        CCS --> |Active|LP1(Call component's loop)
-        CCS --> |NotInitialized|LP2(Call component's init)
-        CCS --> |Initialized|LP3(Call component's postInit)
-        CCS --> |ToRemove|LP4(Remove component)
-
-        LP2 --> SCS2(State -> Initialized) --> DF
-        LP3 --> SCS3(State -> Active) --> DF
-        LP1 --> DF
-
-        DF{Success?}
-        DF --> |True|X0{{Continue}}
-        DF --> |False|X1{{Break}}
-
-        LP4 --> Continue
-    end
 ```
 
 - Only one application runs at a time.
