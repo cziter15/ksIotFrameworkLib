@@ -100,8 +100,8 @@ $(function(){ initResizable(false); });
 </div><!-- fragment --> </blockquote>
 <blockquote class="doxtable">
 <p>&zwj;<b>IMPORTANT FOR ESP8266</b></p>
-<p>For ESP8266, the latest supported version is based on SDK305. To use it, please add this build flag: </p><div class="fragment"><div class="line">DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305</div>
-<div class="line">&gt;</div>
+<p>For ESP8266, the latest supported version is based on SDK305. To use it, please add this build flag:</p>
+<div class="fragment"><div class="line">DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305</div>
 </div><!-- fragment --> </blockquote>
 <h1><a class="anchor" id="autotoc_md1"></a>
 📜 Motivation</h1>
@@ -123,32 +123,43 @@ Examples</h1>
 <h1><a class="anchor" id="autotoc_md4"></a>
 🛠️ Architecture</h1>
 <div class="fragment"><div class="line">flowchart TD</div>
-<div class="line">    AppState{AppState}</div>
-<div class="line">    AppState --&gt; |NotInitialized| Application::Init</div>
-<div class="line">    AppState --&gt; |Initialized| Application::Loop</div>
-<div class="line"> </div>
-<div class="line">    subgraph Application::Init</div>
-<div class="line">        A(Add initial components) --&gt; B(Mark app state as initialized)</div>
-<div class="line">    end</div>
-<div class="line">   </div>
-<div class="line">    subgraph Application::Loop</div>
-<div class="line">        Loop{{For each component}} --&gt; CCS{State?}</div>
-<div class="line"> </div>
-<div class="line">        CCS --&gt; |Active|LP1(Call component&#39;s loop)</div>
-<div class="line">        CCS --&gt; |NotInitialized|LP2(Call component&#39;s init)</div>
-<div class="line">        CCS --&gt; |Initialized|LP3(Call component&#39;s postInit)</div>
-<div class="line">        CCS --&gt; |ToRemove|LP4(Remove component)</div>
-<div class="line"> </div>
-<div class="line">        LP2 --&gt; SCS2(State -&gt; Initialized) --&gt; DF</div>
-<div class="line">        LP3 --&gt; SCS3(State -&gt; Active) --&gt; DF</div>
-<div class="line">        LP1 --&gt; DF</div>
-<div class="line"> </div>
-<div class="line">        DF{Success?}</div>
-<div class="line">        DF --&gt; |True|X0{{Continue}}</div>
-<div class="line">        DF --&gt; |False|X1{{Break}}</div>
-<div class="line"> </div>
-<div class="line">        LP4 --&gt; Continue</div>
-<div class="line">    end</div>
+<div class="line"> subgraph Application_Init[&quot;Application_Init&quot;]</div>
+<div class="line">        B(&quot;Mark app state as initialized&quot;)</div>
+<div class="line">        A(&quot;Add initial components&quot;)</div>
+<div class="line">  end</div>
+<div class="line"> subgraph Application_Loop[&quot;Application_Loop&quot;]</div>
+<div class="line">        CCS{&quot;State?&quot;}</div>
+<div class="line">        Loop{{&quot;For each component&quot;}}</div>
+<div class="line">        LP1@{ label: &quot;Call component&#39;s loop&quot; }</div>
+<div class="line">        LP2@{ label: &quot;Call component&#39;s init&quot; }</div>
+<div class="line">        LP3@{ label: &quot;Call component&#39;s postInit&quot; }</div>
+<div class="line">        LP4(&quot;Remove component&quot;)</div>
+<div class="line">        DF{&quot;Success?&quot;}</div>
+<div class="line">        SCS2(&quot;State -&gt; Initialized&quot;)</div>
+<div class="line">        SCS3(&quot;State -&gt; Active&quot;)</div>
+<div class="line">        X0{{&quot;Continue&quot;}}</div>
+<div class="line">        X1{{&quot;Break&quot;}}</div>
+<div class="line">        Continue[&quot;Continue&quot;]</div>
+<div class="line">  end</div>
+<div class="line">    AppState{&quot;AppState&quot;} -- NotInitialized --&gt; Application_Init</div>
+<div class="line">    AppState -- Initialized --&gt; Application_Loop</div>
+<div class="line">    A --&gt; B</div>
+<div class="line">    Loop --&gt; CCS</div>
+<div class="line">    CCS -- Active --&gt; LP1</div>
+<div class="line">    CCS -- NotInitialized --&gt; LP2</div>
+<div class="line">    CCS -- Initialized --&gt; LP3</div>
+<div class="line">    CCS -- ToRemove --&gt; LP4</div>
+<div class="line">    LP2 --&gt; SCS2</div>
+<div class="line">    SCS2 --&gt; DF</div>
+<div class="line">    LP3 --&gt; SCS3</div>
+<div class="line">    SCS3 --&gt; DF</div>
+<div class="line">    LP1 --&gt; DF</div>
+<div class="line">    DF -- True --&gt; X0</div>
+<div class="line">    DF -- False --&gt; X1</div>
+<div class="line">    LP4 --&gt; Continue</div>
+<div class="line">    LP1@{ shape: rounded}</div>
+<div class="line">    LP2@{ shape: rounded}</div>
+<div class="line">    LP3@{ shape: rounded}</div>
 </div><!-- fragment --><ul>
 <li>Only one application runs at a time.</li>
 <li>Each application manages its own set of components, the framework's core building blocks.</li>
