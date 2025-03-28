@@ -18,7 +18,7 @@
 > This library targets Arduino 3+ on ESP32. Due to [PlatformIO limitations](https://github.com/platformio/platform-espressif32/issues/1225), it does not automatically fetch the latest versions.
 > Use the pioarduino fork by Jason2866 in your `platformio.ini` file:
 > ```ini
-> platform = https://github.com/pioarduino/platform-espressif32.git
+> platform = https://github.com/pioarduino/platform-espressif32/releases/download/stable/platform-espressif32.zip
 > ```
 
 > **IMPORTANT FOR ESP8266**
