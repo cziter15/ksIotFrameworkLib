@@ -12,7 +12,6 @@
 #include "ksDomainQuery.h"
 #include "../ksConstants.h"
 
-
 namespace ksf::misc
 {
 	constexpr std::size_t MAX_DNS_UDP_PACKET_SIZE = 512;
