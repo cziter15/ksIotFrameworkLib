@@ -186,7 +186,7 @@ namespace ksf::comps
 				return response;
 		}
 
-		return PSTR("Command not recognized: ") + std::string(body);
+		return PSTR("[ DevicePortal ] Command not recognized: ") + std::string(body);
 	}
 
 	void ksDevicePortal::updateFinished(bool fromPortal)
