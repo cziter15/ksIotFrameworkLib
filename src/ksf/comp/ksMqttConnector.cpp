@@ -118,7 +118,7 @@ namespace ksf::comps
 		
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
-			out += PSTR("[ MQTT ] Received on topic: ");
+			out += PSTR("[ MqttConnector ] Received on topic: ");
 			out += topicStr;
 			out += PSTR(", value: ");
 			out += payloadStr;
@@ -150,7 +150,7 @@ namespace ksf::comps
 	{
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
-			out += PSTR("[ MQTT ] ");
+			out += PSTR("[ MqttConnector ] ");
 			if (retain)
 				out += PSTR("(Retained) ");
 			out += PSTR("Publish to: ");
@@ -167,7 +167,7 @@ namespace ksf::comps
 	{
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
-			out += PSTR("[ MQTT ] Connecting to MQTT broker...");
+			out += PSTR("[ MqttConnector ] Connecting to MQTT broker...");
 		});
 #endif
 		IPAddress serverIP;
@@ -175,7 +175,7 @@ namespace ksf::comps
 		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
-				out += PSTR("[ MQTT ] Failed to resolve MQTT broker IP address!");
+				out += PSTR("[ MqttConnector ] Failed to resolve MQTT broker IP address!");
 			});
 #endif
 			return false;
@@ -185,7 +185,7 @@ namespace ksf::comps
 		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
-				out += PSTR("[ MQTT ] Connecting to the resolved IP address: ");
+				out += PSTR("[ MqttConnector ] Connecting to the resolved IP address: ");
 				out += std::string(serverIP.toString().c_str());
 			});
 #endif
@@ -207,7 +207,7 @@ namespace ksf::comps
 		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
-				out += PSTR("[ MQTT ] Invalid certificate fingerprint! Disconnecting.");
+				out += PSTR("[ MqttConnector ] Invalid certificate fingerprint! Disconnecting.");
 			});
 #endif
 			netClientUq->stop();
@@ -216,7 +216,7 @@ namespace ksf::comps
 
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
-			out += PSTR("[ MQTT ] Connected successfully and will now authenticate.");
+			out += PSTR("[ MqttConnector ] Connected successfully and will now authenticate.");
 		});
 #endif
 
