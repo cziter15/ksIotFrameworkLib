@@ -197,31 +197,37 @@ namespace ksf
 	{
 		auto otaBootType{getOtaBootType()};
 #if defined(ESP32)
-		const auto reason {esp_reset_reason()};
-
-		// Handle software restarts (including OTA)
-		if (reason == ESP_RST_SW)
-			return (otaBootType != EOTAType::NO_OTA) ? otaTypeToString(otaBootType) : PSTR("Software/System restart");
-
-		// Use a switch statement for the remaining reset reasons.
-		switch (reason)
+		switch (esp_reset_reason())
 		{
-			case ESP_RST_POWERON:   return PSTR("Power On");
-			case ESP_RST_PANIC:     return PSTR("Exception");
-			case ESP_RST_INT_WDT:   return PSTR("Watchdog (interrupt)");
-			case ESP_RST_TASK_WDT:  return PSTR("Watchdog (task)");
-			case ESP_RST_WDT:       return PSTR("Watchdog (other)");
-			case ESP_RST_DEEPSLEEP: return PSTR("Deep-Sleep Wake");
-			case ESP_RST_BROWNOUT:  return PSTR("Brownout");
-			case ESP_RST_SDIO:      return PSTR("SDIO");
-			default:                return PSTR("Unknown");
+			case ESP_RST_POWERON:
+				return PSTR("Power On");
+			case ESP_RST_SW:
+				if (otaBootType != EOTAType::NO_OTA)
+					return otaTypeToString(otaBootType);
+				return PSTR("Software/System restart");
+			case ESP_RST_PANIC:
+				return PSTR("Exception");
+			case ESP_RST_INT_WDT:
+				return PSTR("Watchdog (interrupt)");
+			case ESP_RST_TASK_WDT:
+				return PSTR("Watchdog (task)");
+			case ESP_RST_WDT:
+				return PSTR("Watchdog (other)");
+			case ESP_RST_DEEPSLEEP:
+				return PSTR("Deep-Sleep Wake");
+			case ESP_RST_BROWNOUT:
+				return PSTR("Brownout");
+			case ESP_RST_SDIO:
+				return PSTR("SDIO");
+			default:
+				return PSTR("Unknown");
 		}
 #elif defined(ESP8266)
 		if (otaBootType != EOTAType::NO_OTA && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
 			return otaTypeToString(otaBootType);
 
 		return {ESP.getResetReason().c_str()};
-#else
+#else			
 		#error Platform not implemented.
 #endif
 	}
