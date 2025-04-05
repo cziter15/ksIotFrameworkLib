@@ -14,5 +14,5 @@ var searchData=
   ['restart_11',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
   ['rotator_12',['🔁 Application rotator',['../index.html#autotoc_md9',1,'']]],
   ['rtti_13',['#️⃣ Custom RTTI',['../index.html#autotoc_md11',1,'']]],
-  ['rules_3a_14',['🔅 Rules:',['../index.html#autotoc_md6',1,'']]]
+  ['rules_14',['🔅 Rules',['../index.html#autotoc_md6',1,'']]]
 ];
