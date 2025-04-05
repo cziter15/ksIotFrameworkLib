@@ -45,6 +45,7 @@
 - For examples, refer to the [examples directory](https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples).
 
 ## 🛠️ Architecture
+
 ```mermaid
 flowchart TD
  subgraph Application_Init["Application_Init"]

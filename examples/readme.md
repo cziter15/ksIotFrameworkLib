@@ -32,13 +32,15 @@ In this directory, you will find examples that guide you through building variou
 
    ![platformio.ini](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1d882165-c64f-40a6-addb-36141837c5dc)
 
+
 4. Add the following code and save the file:
 
-	```ini
-	# Define library dependencies.
-	lib_deps = 
-		ksIotFrameworkLib=https://github.com/cziter15/ksIotFrameworkLib
-	```
+   ```ini
+   # Define library dependencies.
+   lib_deps = 
+       ksIotFrameworkLib=https://github.com/cziter15/ksIotFrameworkLib
+   ```
+
 5. PlatformIO will download the required dependencies. Please be patient, as it may take some time.
 
 6. Now open the `main.cpp` file, replace the code with the following, and save the file:
@@ -49,22 +51,22 @@ In this directory, you will find examples that guide you through building variou
    class MyApplication : public ksf::ksApplication
    {
    public:
-	   bool init() override 
-	   {
-		   return true;
-	   }
+       bool init() override 
+       {
+           return true;
+       }
 
-	   bool loop() override 
-	   {
-		   return true;
-	   }
+       bool loop() override 
+       {
+           return true;
+       }
    };
 
    KSF_IMPLEMENT_APP_ROTATOR
    (
-	   MyApplication
+       MyApplication
    )
-   ```
+
 7. Now you are able to build the application stub.
 
 	![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/afac0511-cf68-4007-ba89-b2902cabca6c)
@@ -72,4 +74,5 @@ In this directory, you will find examples that guide you through building variou
 8. Now all that's left to do is implement the components and logic of your device. 
 
 ## [basic-config](basic-config)
+
 This application demonstrates how create most typical application stack. One ksApplication is responsible for device logic and the another is the application that is used to configure the device.
