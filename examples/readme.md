@@ -71,5 +71,5 @@ In this directory, you will find examples that guide you through building variou
 
 8. Now all that's left to do is implement the components and logic of your device. 
 
-# [basic-config](basic-config)
+## [basic-config](basic-config)
 This application demonstrates how create most typical application stack. One ksApplication is responsible for device logic and the another is the application that is used to configure the device.
