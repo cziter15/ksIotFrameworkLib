@@ -96,6 +96,7 @@ flowchart TD
 
 ## 📏 Utilities and components structure
 
+<pre>
     📁 ksf
     ├── 📄 ksAppRotator                 ─── Application rotator component
     ├── 📄 ksRtti                       ─── Implements RTTI (run-time type information) for objects
@@ -117,6 +118,7 @@ flowchart TD
         ├── 📄 ksResetButton            ─── Implements reset button functionality
         ├── 📄 ksWifiConfigurator       ─── Handles WiFi configuration setup
         └── 📄 ksWifiConnector          ─── Manages WiFi connection
+</pre>
 
 ### 🔅 Rules
 
