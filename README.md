@@ -21,6 +21,7 @@
 > platform = https://github.com/pioarduino/platform-espressif32/releases/download/stable/platform-espressif32.zip
 > ```
 
+
 > **IMPORTANT FOR ESP8266**
 >
 > For ESP8266, the latest supported version is based on SDK305.
@@ -31,14 +32,17 @@
 > ```
 
 ## 📜 Motivation
+
 - The goal of this project is to create a simple template or starting point for development of applications targeting Espressif microcontrollers.
 - This project aims to streamline the process of copying and modifying source code for different devices.
 - I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.
 
 ## 📚 Documentation
+
 - Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
 
 ## Examples
+
 - For examples, refer to the [examples directory](https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples).
 
 ## 🛠️ Architecture
@@ -115,14 +119,17 @@ flowchart TD
            └── 📄 ksWifiConnector          ─── Manages WiFi connection
 
 ### 🔅 Rules:
+
 - Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can anytime later, from the `loop` but please treat it like exceptional case)
 - The `init` method is the best place to add dependent components, setup initial pin values etc.
 - The `postInit` method is the best place to obtain a weak pointer to another component by calling `findComponent`. This will handle cases when other components were added via `init` method.
 
 ## 🌱 Building the Application
+
 To create an application, define a new class that inherits from `ksApplication` and add initial components in the `init` method. Refer to projects like [**emon_fw**](https://github.com/cziter15/emon_fw) for a practical example.
 
 ### 🔎 How It Works
+
 - The application is instantiated, and its `init` method is called. If `init` returns `false`, the `loop` method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.
 - If `init` returns `true`, the `loop` method executes, initializing all components.
 - In the next iteration, each component’s `postInit` method is invoked.
@@ -156,6 +163,7 @@ bool PelletInfo::init()
 ```
 
 ## 🔁 Application rotator
+
 The library implements one very useful utility named `ksAppRotator`. This object can wrap application instantiation logic into something like carousel or rotator.
 
 Typically the device hosts two applications. First application is running core device logic while the second one is dedicated to help the user with the device configuration. 
@@ -165,24 +173,30 @@ Each application has it's own `loop` method taking care of all underlying logic.
 This is very flexible, because you can even raise fail (return `false`) from application's `init` method and then go directly into the configuration mode (for example there's no WiFi credentials provided by the user).
 
 ## 🔣 Compiler flags
+
 - Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
 
 ## #️⃣ Custom RTTI
+
 - Use the `KSF_RTTI_DECLARATIONS` macro to provide proper runtime type information generation for proper casting of components. 
 - See `ksConfigProvider.h` for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
 ## 🔥 Saving power
+
 - Modem sleep is enabled by default and can be controlled as an optional parameter in the `ksWifiConnector` constructor.
 - Automatic modem sleep requires the DTIM _(Delivery Traffic Indication Message)_ to be correctly set on the access point. 
 - The best value for me was `3`. It allows the ESP32 to go down from around 100mA to 20mA.
 
 ## 📑 Dependencies
+
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
 
 ### 🔡 Frameworks
+
 - [Arduino for ESP32](https://github.com/espressif/arduino-esp32)
 - [Arduino for ESP8266](https://github.com/esp8266/Arduino)
 
 ### 🔡 Libraries
+
 - [PubSubClient](https://github.com/knolleary/pubsubclient)
 - [arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
