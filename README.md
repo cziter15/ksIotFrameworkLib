@@ -20,8 +20,7 @@
 > ```ini
 > platform = https://github.com/pioarduino/platform-espressif32/releases/download/stable/platform-espressif32.zip
 > ```
-
-
+>
 > **IMPORTANT FOR ESP8266**
 >
 > For ESP8266, the latest supported version is based on SDK305.
