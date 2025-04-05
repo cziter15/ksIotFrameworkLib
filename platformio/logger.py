@@ -1,9 +1,8 @@
-#	Copyright (c) 2021-2022, Krzysztof Strehlau
-#	
-#	This file is part of the ksIotFramework library.
-#	All licensing information can be found inside LICENSE.md file
-#
-#	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
+# flake8: noqa
+# Copyright (c) 2021-2025, Krzysztof Strehlau
+# This file is part of the ksIotFramework library.
+# All licensing information can be found inside LICENSE.md file
+# https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
 
 class Colors:
 	End 				= "\033[0m"
