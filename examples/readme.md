@@ -24,6 +24,7 @@ In this directory, you will find examples that guide you through building variou
 ## Creating Your First Application
 
 1. Open PlatformIO UI.
+
 2. Click on `New project`, and select your ESP version. Then click `Finish`.
 
    ![New Project](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/494565fa-4753-446c-a18e-c903626637a3)
@@ -31,7 +32,6 @@ In this directory, you will find examples that guide you through building variou
 3. Open the `platformio.ini` file:
 
    ![platformio.ini](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/1d882165-c64f-40a6-addb-36141837c5dc)
-
 
 4. Add the following code and save the file:
 
