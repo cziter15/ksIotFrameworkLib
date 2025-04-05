@@ -41,30 +41,30 @@ In this directory, you will find examples that guide you through building variou
 	```
 5. PlatformIO will download the required dependencies. Please be patient, as it may take some time.
 
-6. Now open the main.cpp file, replace the code with the following, and save the file:
+6. Now open the `main.cpp` file, replace the code with the following, and save the file:
 
-	```cpp
-	#include <ksIotFrameworkLib.h>
+   ```cpp
+   #include <ksIotFrameworkLib.h>
 
-	class MyApplication : public ksf::ksApplication
-	{
-	public:
-		bool init() override 
-		{
-			return true;
-		}
+   class MyApplication : public ksf::ksApplication
+   {
+   public:
+	   bool init() override 
+	   {
+		   return true;
+	   }
 
-		bool loop() override 
-		{
-			return true;
-		}
-	};
+	   bool loop() override 
+	   {
+		   return true;
+	   }
+   };
 
-	KSF_IMPLEMENT_APP_ROTATOR
-	(
-		MyApplication
-	)
-	```
+   KSF_IMPLEMENT_APP_ROTATOR
+   (
+	   MyApplication
+   )
+   ```
 7. Now you are able to build the application stub.
 
 	![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/afac0511-cf68-4007-ba89-b2902cabca6c)
