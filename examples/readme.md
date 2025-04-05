@@ -69,7 +69,7 @@ In this directory, you will find examples that guide you through building variou
 
 7. Now you are able to build the application stub.
 
-	![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/afac0511-cf68-4007-ba89-b2902cabca6c)
+   ![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/afac0511-cf68-4007-ba89-b2902cabca6c)
 
 8. Now all that's left to do is implement the components and logic of your device. 
 

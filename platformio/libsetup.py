@@ -12,7 +12,7 @@ try:
 	Import("projenv", "env")
 	ksPrintLog(Colors.Magenta, "Building library environment list.")
 	environments = [env, DefaultEnvironment(), projenv]
-	
+
 	for lb in env.GetLibBuilders():
 		environments.append(lb.env)
 
