@@ -24,37 +24,27 @@ namespace ksf
 		for (auto it{components.begin()}; it != components.end();)
 		{
 			auto& comp{*it};
-
 			switch (comp->componentState)
 			{
 				case ksComponentState::Active:
-				{
 					if (!comp->loop(this))
 						return false;
-				}
 				break;
 
 				case ksComponentState::ToRemove:
-				{
 					 it = components.erase(it);
-					 continue;
-				}
-				break;
+				continue;
 
 				case ksComponentState::NotInitialized:
-				{
 					if (!comp->init(this))
 						return false;
 					comp->componentState = ksComponentState::Initialized;
-				}
 				break;
 				
 				case ksComponentState::Initialized:
-				{
 					if (!comp->postInit(this))
 						return false;
 					comp->componentState = ksComponentState::Active;
-				}
 				break;
 				
 				default: break;

@@ -52,7 +52,7 @@ namespace ksf::comps
 			{
 				pressedTime = millis();
 			}
-			else if (currentState != triggerState)
+			else
 			{
 				releasedTime = millis();
 
