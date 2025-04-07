@@ -19,24 +19,10 @@ namespace ksf
 	{
 		enum TYPE 
 		{
-			/*!
-				Component is not yet initialized.
-			*/
-			NotInitialized,
-			/*!
-				Component is initialized (init is called on transition from NonInitialized).
-			*/
-			Initialized,
-			/*!
-				Component is "working" (postInit is called on transition from Initialized).
-			*/
-			Active,
-			/*!
-				Component is marked to be removed. It will be removed within the next
-				component update, which can occur in current or next application loop. 
-				It depends on the order of components in the list.
-			*/
-			ToRemove
+			NotInitialized, 	//!< Component is not yet initialized.
+			Initialized, 		//!< Component is initialized (init is called on transition from NonInitialized).
+			Active, 			//!< Component is "working" (postInit is called on transition from Initialized).
+			ToRemove			//!< Component is marked to be removed on the next update (order dependent)
 		};
 	}
 
@@ -53,8 +39,7 @@ namespace ksf
 		friend class ksApplication;
 
 		protected:
-			/*! Current component state. */
-			ksComponentState::TYPE componentState { ksComponentState::NotInitialized };
+			ksComponentState::TYPE componentState { ksComponentState::NotInitialized }; //!< Holds current state of the component.
 
 		public:
 			/*!
