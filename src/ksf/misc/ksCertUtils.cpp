@@ -32,6 +32,7 @@ namespace ksf::misc
 	}
 
 	ksCertFingerprint::ksCertFingerprint() = default;
+
 	ksCertFingerprint::~ksCertFingerprint() = default;
 	
 	bool ksCertFingerprint::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const
