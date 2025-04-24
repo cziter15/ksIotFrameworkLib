@@ -12,7 +12,7 @@
 [![Powered by platformio](https://img.shields.io/badge/powered%20by-platformio-orange?logo=platformio)](https://platformio.org)
 [![Powered by pioarduino](https://img.shields.io/badge/powered%20by-pioarduino-orange?logo=arduino&color=darkgreen)](https://github.com/pioarduino)
 
-![image](https://github.com/cziter15/ksIotFrameworkLib/assets/5003708/a17e4fe9-144c-4422-be40-90e0f402b054)
+![image](https://github.com/user-attachments/assets/d23e7245-659c-4639-a86e-5ac5bef78a43)
 
 > **IMPORTANT FOR ESP32**
 >
