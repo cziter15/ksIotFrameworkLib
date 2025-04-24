@@ -242,6 +242,7 @@ namespace ksf
 
 	/*!
 		@brief Helper function to get latest reset reason.
+		@return A string representing the reason for the last reset.
 	*/
 	extern const std::string getResetReason();
 
