@@ -15,9 +15,9 @@
 
 namespace ksf::misc
 {
-	constexpr std::size_t MAX_DNS_UDP_PACKET_SIZE = 512;
+	constexpr auto MAX_DNS_UDP_PACKET_SIZE = 512;
 
-	uint16_t readUint16(const uint8_t* buffer, std::size_t pos) 
+	uint16_t readUint16(const uint8_t* buffer, int pos) 
 	{
 		return static_cast<uint16_t>((buffer[pos] << 8) | buffer[pos + 1]);
 	}
@@ -122,8 +122,8 @@ namespace ksf::misc
 
 		/* Read the UDP packet. */
 		uint8_t buffer[MAX_DNS_UDP_PACKET_SIZE];
-		auto len{static_cast<std::size_t>(udp->read(buffer, MAX_DNS_UDP_PACKET_SIZE))};
-		if (len < 12 || len > MAX_DNS_UDP_PACKET_SIZE)
+		auto len{(udp->read(buffer, MAX_DNS_UDP_PACKET_SIZE))};
+		if (len < 12)
 			return;
 
 		/* Check that the transaction ID matches. */
@@ -140,13 +140,13 @@ namespace ksf::misc
 			Start after the header (12 bytes), then skip the QNAME (until a null byte),
 			and finally skip the null terminator, QTYPE (2 bytes), and QCLASS (2 bytes).
 		*/
-		std::size_t pos{12};
+		auto pos{12};
 		while (pos < len && buffer[pos] != 0)
 			pos++;
 		pos += 5;
 
 		/* Process the answers. */
-		for (std::size_t i{0}; i < answerCount; i++)
+		for (auto i{0}; i < answerCount; i++)
 		{
 			/* 
 				Skip name pointers if present. 
