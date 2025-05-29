@@ -24,4 +24,5 @@
 #include "ksf/evt/ksEvent.h"
 #include "ksf/misc/ksConfig.h"
 #include "ksf/misc/ksSimpleTimer.h"
+#include "ksf/misc/ksDomainQuery.h"
 #include "ksf/ksConstants.h"
