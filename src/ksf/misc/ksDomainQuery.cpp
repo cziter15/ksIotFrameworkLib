@@ -123,7 +123,7 @@ namespace ksf::misc
 		/* Read the UDP packet. */
 		uint8_t buffer[MAX_DNS_UDP_PACKET_SIZE];
 		auto len{(udp->read(buffer, MAX_DNS_UDP_PACKET_SIZE))};
-		if (len < 12)
+		if (len < 12 || len > MAX_DNS_UDP_PACKET_SIZE)
 			return;
 
 		/* Check that the transaction ID matches. */
