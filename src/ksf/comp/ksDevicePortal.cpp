@@ -58,6 +58,10 @@ namespace ksf::comps
 	constexpr auto WIFI_SCAN_TIMEOUT{15000UL};
 	constexpr auto LOG_KEEPALIVE_INTERVAL{8000UL};
 
+	constexpr auto WS_PING_INTERVAL_MS{2000UL};
+	constexpr auto WS_PONG_TIMEOUT_MS{5000UL};
+	constexpr auto WS_DISCONNECT_TIMEOUT_COUNT{2U};
+
 	static constexpr char PROGMEM_TEXT_PLAIN[] PROGMEM {"text/plain"};
 	static constexpr char PROGMEM_APPLICATION_JSON[] PROGMEM {"application/json"};
 	static constexpr char PROGMEM_TEXT_HTML[] PROGMEM {"text/html"};
@@ -620,7 +624,8 @@ namespace ksf::comps
 		webSocket->setRequiredAuthToken(generateAuthToken(authTokenToHash));
 
 		webSocket->setMessageHandler(std::bind(&ksDevicePortal::onWebsocketTextMessage, this, _1, _2));
-		webSocket->enableHeartbeat(2000, 5000, 2);
+		webSocket->enableHeartbeat(WS_PING_INTERVAL_MS, WS_PONG_TIMEOUT_MS, WS_DISCONNECT_TIMEOUT_COUNT);
+
 		webSocket->begin();
 	}
 
