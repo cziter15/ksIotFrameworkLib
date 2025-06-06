@@ -619,7 +619,7 @@ namespace ksf::comps
 	{
 		webSocket = std::make_unique<ksf::misc::ksWSServer>(81);
 
-		auto authTokenToHash(portalPassword);
+		auto authTokenToHash{portalPassword};
 		authTokenToHash.append(DEVICE_FRONTEND_HTML_MD5);
 		webSocket->setRequiredAuthToken(generateAuthToken(authTokenToHash));
 
