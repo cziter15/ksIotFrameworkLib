@@ -316,7 +316,7 @@ namespace ksf::comps
 		}
 		else if (command == PSTR("logKeepAlive"))
 		{
-			auto enabledLogsRightNow{ logKeepAliveTimestamp ==0 };
+			auto enabledLogsRightNow{ logKeepAliveTimestamp == 0 };
 			logKeepAliveTimestamp = std::max(1UL, millis());
 
 			if (enabledLogsRightNow)
