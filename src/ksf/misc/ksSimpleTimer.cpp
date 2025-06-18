@@ -28,10 +28,6 @@ namespace ksf::misc
 
 	bool ksSimpleTimer::hasTimePassed() const
 	{
-		/* If interval is set to 0, it means the timer is disabled. */
-		if (intervalMs == 0)
-			return false;
-
 		return intervalMs && millis() - lastTriggerTimeMs > intervalMs;
 	}
 
