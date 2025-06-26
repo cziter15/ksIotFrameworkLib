@@ -170,6 +170,7 @@ bool PelletInfo::init()
 The library provides a very useful utility called `ksAppRotator`. This object can wrap application instantiation logic into a carousel-like rotation mechanism.
 
 Typically, a device hosts two applications:
+
 - Core application - Runs the core device logic.
 - Configuration assistant - Assists the user with device configuration.
 
