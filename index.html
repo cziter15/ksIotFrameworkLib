@@ -234,8 +234,8 @@ Examples</h1>
 🔁 Application rotator</h1>
 <p>The library provides a very useful utility called <code>ksAppRotator</code>. This object can wrap application instantiation logic into a carousel-like rotation mechanism.</p>
 <p>Typically, a device hosts two applications:</p><ul>
-<li>Primary application - Runs the core device logic.</li>
-<li>Secondary application - Assists the user with device configuration.</li>
+<li>Core application - Runs the core device logic.</li>
+<li>Configuration assistant - Assists the user with device configuration.</li>
 </ul>
 <p>Each application implements its own <code>loop()</code> method to manage its logic. In case of a failure at any point (including during the application’s construction), the rotator will seamlessly switch to the next application and begin executing its logic.</p>
 <p>This design is highly flexible. For example, you can trigger a failure (<code>return false</code>) during an application’s <code>init()</code> method, allowing the system to immediately switch into configuration mode if conditions require it (e.g. missing WiFi credentials).</p>
