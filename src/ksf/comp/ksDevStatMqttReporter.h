@@ -24,7 +24,7 @@ namespace ksf::comps
 		The update interval is specified as a construction parameter.
 
 		Each update includes values such as RSSI, device uptime, connection time, and IP address. 
-		The subtopic used is "dstat," so, for example, RSSI is published to the topic "deviceprefix/dstat/rssi".
+		The subtopic used is "dstat" so, for example, RSSI is published to the topic "deviceprefix/dstat/rssi".
 	*/
 	class ksDevStatMqttReporter : public ksComponent
 	{
