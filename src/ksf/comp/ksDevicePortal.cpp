@@ -11,28 +11,21 @@
 #include <DNSServer.h>
 #include <ArduinoOTA.h>
 #include <LittleFS.h>
-
 #if defined(ESP32) || defined(ESP8266)
 	#if defined(ESP8266)
 		#define HARDWARE "ESP8266"
-
 		#include "flash_hal.h"
 		#include <ESP8266WiFi.h>
 		#include <ESP8266WebServer.h>
-
 		using WebServerClass = ESP8266WebServer;
-
 		uint8_t ESP_getFlashVendor() { return ESP.getFlashChipVendorId(); }
 		uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipRealSize()/1024; }
 	#elif defined(ESP32)
 		#define HARDWARE "ESP32"
-
 		#include <WiFi.h>
 		#include <WebServer.h>
 		#include "nvs_flash.h"
-
 		using WebServerClass = WebServer;
-
 		extern uint32_t ESP_getFlashChipId(void);
 		uint8_t ESP_getFlashVendor() { return ESP_getFlashChipId() & 0xFF; }
 		uint32_t ESP_getFlashSizeKB() { return ESP.getFlashChipSize()/1024; }

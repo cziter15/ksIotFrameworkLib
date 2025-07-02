@@ -7,13 +7,14 @@
  *  https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
- #include "ksConfig.h"
- #include "../ksConstants.h"
- 
  #include <LittleFS.h>
  #include <array>
  #include <string_view>
  
+ #include "../ksConstants.h"
+ 
+ #include "ksConfig.h"
+
  namespace ksf::misc
  {
 	 ksConfig::ksConfig(const std::string& fileName)

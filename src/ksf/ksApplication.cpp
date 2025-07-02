@@ -7,9 +7,11 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
-#include "ksApplication.h"
+
 #include "ksComponent.h"
 #include "ksConstants.h"
+
+#include "ksApplication.h"
 
 namespace ksf
 {

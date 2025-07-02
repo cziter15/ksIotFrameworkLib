@@ -10,8 +10,9 @@
 #include <cstddef>
 #include <WiFiUdp.h>
 
-#include "ksDomainQuery.h"
 #include "../ksConstants.h"
+
+#include "ksDomainQuery.h"
 
 namespace ksf::misc
 {

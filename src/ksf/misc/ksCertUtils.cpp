@@ -9,8 +9,10 @@
 
 #include <WiFiClientSecure.h>
 
-#include "ksCertUtils.h"
 #include "../ksConstants.h"
+
+#include "ksCertUtils.h"
+
 namespace ksf::misc
 {
 	/*

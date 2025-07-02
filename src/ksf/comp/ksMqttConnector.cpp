@@ -25,8 +25,9 @@
 #include "../misc/ksConfig.h"
 #include "../misc/ksCertUtils.h"
 #include "ksWifiConnector.h"
-#include "ksMqttConnector.h"
 #include "ksMqttConfigProvider.h"
+
+#include "ksMqttConnector.h"
 
 using namespace std::placeholders;
 

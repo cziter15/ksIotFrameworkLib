@@ -12,7 +12,6 @@
 #include <string>
 #include <utility>
 #include <list>
-
 #include "../ksComponent.h"
 
 namespace ksf::misc

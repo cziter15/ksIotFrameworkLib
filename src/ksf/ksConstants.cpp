@@ -19,11 +19,11 @@
 #else			
 	#error Platform not implemented.
 #endif
-
 #include <LittleFS.h>
 
-#include "ksConstants.h"
 #include "misc/ksConfig.h"
+
+#include "ksConstants.h"
 
 namespace ksf
 {
