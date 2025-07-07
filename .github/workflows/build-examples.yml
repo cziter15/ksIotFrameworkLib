@@ -1,9 +1,7 @@
 name: build-examples
 on:
   workflow_dispatch:
-#  push:
-#    paths:
-#      - 'firmware/**'
+  push:
 jobs:
   build-with-pio:
     runs-on: ubuntu-latest
