@@ -9,8 +9,8 @@
 [![build-examples](https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml/badge.svg)](https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
 [![Lines of Code](https://img.shields.io/endpoint?color=blue&url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2Fcziter15%2Fksiotframeworklib%2Fbadge%3Ffilter%3D.hpp%24%2C.cpp%24%2C.h%24%26label%3DLines%2520of%2520Code)](https://github.com/cziter15/ksiotframeworklib)
-[![Powered by platformio](https://img.shields.io/badge/powered%20by-platformio-orange?logo=platformio)](https://platformio.org)
-[![Powered by pioarduino](https://img.shields.io/badge/powered%20by-pioarduino-orange?logo=arduino&color=darkgreen)](https://github.com/pioarduino)
+[![Powered by platformio](https://img.shields.io/badge/powered%20by-platformio-royalblue?logo=platformio)](https://platformio.org)
+[![Powered by pioarduino](https://img.shields.io/badge/powered%20by-pioarduino-royalblue?logo=arduino)](https://github.com/pioarduino)
 
 ![image](https://github.com/user-attachments/assets/d23e7245-659c-4639-a86e-5ac5bef78a43)
 
