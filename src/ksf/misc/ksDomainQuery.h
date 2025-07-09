@@ -1,7 +1,7 @@
 /*
  *	Copyright (c) 2025, Krzysztof Strehlau
  *
- *	This file is a part of the ksIotFramework library.
+ *	This file is a part of the ksIotFrameworkLib IoT library.
  *	All licensing information can be found inside LICENSE.md file.
  *
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
