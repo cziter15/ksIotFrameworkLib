@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📏_20utilities_20and_20components_20structure_0',['📏 Utilities and components structure',['../index.html#autotoc_md6',1,'']]]
+  ['📑_20dependencies_0',['📑 Dependencies',['../index.html#autotoc_md20',1,'']]]
 ];

@@ -91,6 +91,8 @@ $(function(){ initResizable(false); });
 <blockquote class="doxtable">
 <p>&zwj;Arduino Library for ESP32/ESP8266 - a composition-oriented Internet of Things framework that provides a simple and extendable architecture, handles device setup (WiFi setup, MQTT and application-specific configuration), network connectivity, MQTT telemetry protocol, and more... </p>
 </blockquote>
+<h1><a class="anchor" id="autotoc_md1"></a>
+</h1>
 <p><a href="https://cziter15.github.io/ksIotFrameworkLib"><img src="https://img.shields.io/badge/Docs%20at-Doxygen-darkblue?style=for-the-badge&amp;labelColor=blue&amp;logo=doxygen" alt="Docs at Doxygen" class="inline"/></a> <a href="https://github.com/cziter15/ksIotFrameworkLib/wiki"><img src="https://img.shields.io/badge/Docs%20at-Wiki-darkblue?style=for-the-badge&amp;labelColor=blue&amp;logo=wikidotjs" alt="Docs at Wiki" class="inline"/></a> <a href="https://github.com/cziter15/ksIotFrameworkLib?tab=License-1-ov-file#readme"><img src="https://img.shields.io/badge/License-MIT%20(no%20AI%20training%20allowed)-darkblue?style=for-the-badge&amp;labelColor=blue" alt="License" class="inline"/></a></p>
 <p><a href="https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml"><img src="https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml/badge.svg" alt="build-examples" style="pointer-events: none;" class="inline"/></a> <a href="https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&amp;utm_medium=referral&amp;utm_content=&amp;utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943" alt="Codacy Badge" class="inline"/></a> <a href="https://github.com/cziter15/ksiotframeworklib"><img src="https://img.shields.io/endpoint?color=blue&amp;url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2Fcziter15%2Fksiotframeworklib%2Fbadge%3Ffilter%3D.hpp%24%2C.cpp%24%2C.h%24%26label%3DLines%2520of%2520Code" alt="Lines of Code" class="inline"/></a> <a href="https://platformio.org"><img src="https://img.shields.io/badge/powered%20by-platformio-royalblue?logo=platformio" alt="Powered by platformio" class="inline"/></a> <a href="https://github.com/pioarduino"><img src="https://img.shields.io/badge/powered%20by-pioarduino-royalblue?logo=arduino" alt="Powered by pioarduino" class="inline"/></a></p>
 <p><img src="https://github.com/user-attachments/assets/d23e7245-659c-4639-a86e-5ac5bef78a43" alt="image" class="inline"/></p>
@@ -101,15 +103,17 @@ $(function(){ initResizable(false); });
 <p>For ESP8266, the latest supported version is based on SDK305. To use it, please add this build flag:</p>
 <div class="fragment"><div class="line">DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305</div>
 </div><!-- fragment --> </blockquote>
-<h1><a class="anchor" id="autotoc_md1"></a>
-📜 Motivation</h1>
+<h1><a class="anchor" id="autotoc_md2"></a>
+</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+📜 Motivation</h2>
 <ul>
 <li>The goal of this project is to create a solid starting point for development of applications targeting Espressif microcontrollers.</li>
 <li>This project aims to streamline the process of copying and modifying source code for different devices.</li>
 <li>I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2"></a>
-🚀 Possible use cases</h1>
+<h2><a class="anchor" id="autotoc_md4"></a>
+🚀 Possible use cases</h2>
 <ul>
 <li>IoT devices of any kind</li>
 <li>Telemetry (send sensor or status data)</li>
@@ -119,18 +123,19 @@ $(function(){ initResizable(false); });
 <blockquote class="doxtable">
 <p>&zwj;The library is not limited to these use cases and is architected to support a broad spectrum of IoT applications. One of my personal implementations involves remote control of a heating boiler, seamlessly integrated with Home Assistant through MQTT. I have devices running continuously for months without any interruptions, demonstrating the library’s reliability and stability in real-world deployments. </p>
 </blockquote>
-<h1><a class="anchor" id="autotoc_md3"></a>
-📚 Documentation</h1>
+<h2><a class="anchor" id="autotoc_md5"></a>
+📚 Documentation</h2>
 <ul>
 <li>Detailed documentation can be found <a href="https://cziter15.github.io/ksIotFrameworkLib">here</a>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md4"></a>
-Examples</h1>
+<h2><a class="anchor" id="autotoc_md6"></a>
+📟 Examples</h2>
 <ul>
 <li>For examples, refer to the <a href="https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples">examples directory</a>.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
-🛠️ Architecture</h1>
+<hr  />
+<h2><a class="anchor" id="autotoc_md8"></a>
+🛠️ Architecture</h2>
 <div class="fragment"><div class="line">flowchart TD</div>
 <div class="line"> subgraph Application_Init[&quot;Application_Init&quot;]</div>
 <div class="line">        B(&quot;Mark app state as initialized&quot;)</div>
@@ -176,8 +181,8 @@ Examples</h1>
 <li>Components implement <code>init</code>, <code>postInit</code>, and <code>loop</code> methods.</li>
 <li>Components marked for removal are safely deleted in the next cycle.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md6"></a>
-📏 Utilities and components structure</h1>
+<h3><a class="anchor" id="autotoc_md9"></a>
+📏 Utilities and components structure</h3>
 <div class="fragment"><div class="line">📁 ksf</div>
 <div class="line">├── 📄 ksAppRotator                 ─── Application rotator component</div>
 <div class="line">├── 📄 ksRtti                       ─── Implements RTTI (run-time type information) for objects</div>
@@ -199,18 +204,19 @@ Examples</h1>
 <div class="line">    ├── 📄 ksResetButton            ─── Implements reset button functionality</div>
 <div class="line">    ├── 📄 ksWifiConfigurator       ─── Handles WiFi configuration setup</div>
 <div class="line">    └── 📄 ksWifiConnector          ─── Manages WiFi connection</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
-🔅 Rules</h2>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md10"></a>
+🔅 Rules</h3>
 <ul>
 <li>Components should be added in the app's <code>init</code> method, so they will be available for <code>postInit</code> methods. (you can anytime later, from the <code>loop</code> but please treat it like exceptional case)</li>
 <li>The <code>init</code> method is the best place to add dependent components, setup initial pin values etc.</li>
 <li>The <code>postInit</code> method is the best place to obtain a weak pointer to another component by calling <code>findComponent</code>. This will handle cases when other components were added via <code>init</code> method.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md8"></a>
-🌱 Building the Application</h1>
+<hr  />
+<h2><a class="anchor" id="autotoc_md12"></a>
+🌱 Building the Application</h2>
 <p>To create an application, define a new class that inherits from <code>ksApplication</code> and add initial components in the <code>init</code> method. Refer to projects like <a href="https://github.com/cziter15/emon_fw"><b>emon_fw</b></a> for a practical example.</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
-🔎 How It Works</h2>
+<h3><a class="anchor" id="autotoc_md13"></a>
+🔎 How It Works</h3>
 <ul>
 <li>The application is instantiated, and its <code>init</code> method is called. If <code>init</code> returns <code>false</code>, the <code>loop</code> method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.</li>
 <li>If <code>init</code> returns <code>true</code>, the <code>loop</code> method executes, initializing all components.</li>
@@ -241,8 +247,9 @@ Examples</h1>
 <div class="line">    <span class="comment">// Initialization completed; return true to indicate success</span></div>
 <div class="line">    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
-🔁 Application rotator</h1>
+</div><!-- fragment --><hr  />
+<h2><a class="anchor" id="autotoc_md15"></a>
+🔁 Application rotator</h2>
 <p>The library provides a very useful utility called <code>ksAppRotator</code>. This object can wrap application instantiation logic into a carousel-like rotation mechanism.</p>
 <p>Typically, a device hosts two applications:</p>
 <ul>
@@ -251,37 +258,36 @@ Examples</h1>
 </ul>
 <p>Each application implements its own <code>loop()</code> method to manage its logic. In case of a failure at any point (including during the application’s construction), the rotator will seamlessly switch to the next application and begin executing its logic.</p>
 <p>This design is highly flexible. For example, you can trigger a failure (<code>return false</code>) during an application’s <code>init()</code> method, allowing the system to immediately switch into configuration mode if conditions require it (e.g. missing WiFi credentials).</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
-🔣 Compiler flags</h1>
+<hr  />
+<h2><a class="anchor" id="autotoc_md17"></a>
+🧩 Miscellaneous</h2>
+<h3><a class="anchor" id="autotoc_md18"></a>
+🔣 Compiler flags / Custom RTTI</h3>
 <ul>
 <li>Bare Arduino projects need to have <code>gnu++2a</code> enabled via <code>compiler.cpp.extra_flags=</code> option in the <code>board.txt</code> file.</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md12"></a>
-#️⃣ Custom RTTI</h1>
-<ul>
 <li>Use the <code>KSF_RTTI_DECLARATIONS</code> macro to provide proper runtime type information generation for proper casting of components.</li>
 <li>See <code><a class="el" href="ks_config_provider_8h_source.html">ksConfigProvider.h</a></code> for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md13"></a>
-🔥 Saving power</h1>
+<h3><a class="anchor" id="autotoc_md19"></a>
+🔥 Saving power</h3>
 <ul>
 <li>Modem sleep is enabled by default and can be controlled as an optional parameter in the <code>ksWifiConnector</code> constructor.</li>
 <li>Automatic modem sleep requires the DTIM <em>(Delivery Traffic Indication Message)</em> to be correctly set on the access point.</li>
 <li>The best value for me was <code>3</code>. It allows the ESP32 to go down from around 100mA to 20mA.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md14"></a>
-📑 Dependencies</h1>
+<h3><a class="anchor" id="autotoc_md20"></a>
+📑 Dependencies</h3>
 <ul>
 <li><b>It is highly recommended to use PlatformIO as it will automatically download dependencies!</b></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md15"></a>
-🔡 Frameworks</h2>
+<h4><a class="anchor" id="autotoc_md21"></a>
+🔡 Frameworks</h4>
 <ul>
 <li><a href="https://github.com/espressif/arduino-esp32">Arduino for ESP32</a></li>
 <li><a href="https://github.com/esp8266/Arduino">Arduino for ESP8266</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md16"></a>
-🔡 Libraries</h2>
+<h4><a class="anchor" id="autotoc_md22"></a>
+🔡 Libraries</h4>
 <ul>
 <li><a href="https://github.com/knolleary/pubsubclient">PubSubClient</a></li>
 <li><a href="https://github.com/Links2004/arduinoWebSockets">arduinoWebSockets</a> </li>
