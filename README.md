@@ -33,9 +33,20 @@
 
 ## 📜 Motivation
 
-- The goal of this project is to create a simple template or starting point for development of applications targeting Espressif microcontrollers.
+- The goal of this project is to create a solid starting point for development of applications targeting Espressif microcontrollers.
 - This project aims to streamline the process of copying and modifying source code for different devices.
 - I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.
+
+## 🚀 Possible use cases
+
+- IoT devices of any kind
+- Telemetry (send sensor or status data)
+- Remote control (switch devices, send commands)
+- Smart home automations
+
+The library is not limited to these use cases and is designed to support a wide range of applications.
+One of my personal use cases is remote control of a heating boiler, integrated with Home Assistant via MQTT.
+The library supports a CANbus driver capable of efficiently handling multiple frames while maintaining seamless connectivity with the MQTT server.
 
 ## 📚 Documentation
 
