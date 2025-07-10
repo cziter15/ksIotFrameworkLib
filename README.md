@@ -2,6 +2,8 @@
 
 > Arduino Library for ESP32/ESP8266 - a composition-oriented Internet of Things framework that provides a simple and extendable architecture, handles device setup (WiFi setup, MQTT and application-specific configuration), network connectivity, MQTT telemetry protocol, and more...
 
+---
+
 [![Docs at Doxygen](https://img.shields.io/badge/Docs%20at-Doxygen-darkblue?style=for-the-badge&labelColor=blue&logo=doxygen)](https://cziter15.github.io/ksIotFrameworkLib)
 [![Docs at Wiki](https://img.shields.io/badge/Docs%20at-Wiki-darkblue?style=for-the-badge&labelColor=blue&logo=wikidotjs)](https://github.com/cziter15/ksIotFrameworkLib/wiki)
 [![License](https://img.shields.io/badge/License-MIT%20(no%20AI%20training%20allowed)-darkblue?style=for-the-badge&labelColor=blue)](https://github.com/cziter15/ksIotFrameworkLib?tab=License-1-ov-file#readme)
@@ -31,13 +33,15 @@
 > DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305
 > ```
 
-## 📜 Motivation
+---
+
+### 📜 Motivation
 
 - The goal of this project is to create a solid starting point for development of applications targeting Espressif microcontrollers.
 - This project aims to streamline the process of copying and modifying source code for different devices.
 - I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.
 
-## 🚀 Possible use cases
+### 🚀 Possible use cases
 
 - IoT devices of any kind
 - Telemetry (send sensor or status data)
@@ -48,15 +52,17 @@
 > One of my personal implementations involves remote control of a heating boiler, seamlessly integrated with Home Assistant through MQTT.
 > I have devices running continuously for months without any interruptions, demonstrating the library’s reliability and stability in real-world deployments.
 
-## 📚 Documentation
+### 📚 Documentation
 
 - Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
 
-## Examples
+### 📟 Examples
 
 - For examples, refer to the [examples directory](https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples).
 
-## 🛠️ Architecture
+---
+
+### 🛠️ Architecture
 
 ```mermaid
 flowchart TD
@@ -106,7 +112,7 @@ flowchart TD
 - Components implement `init`, `postInit`, and `loop` methods.
 - Components marked for removal are safely deleted in the next cycle.
 
-## 📏 Utilities and components structure
+#### 📏 Utilities and components structure
 
 ```text
     📁 ksf
@@ -132,17 +138,19 @@ flowchart TD
         └── 📄 ksWifiConnector          ─── Manages WiFi connection
 ```
 
-### 🔅 Rules
+#### 🔅 Rules
 
 - Components should be added in the app's `init` method, so they will be available for `postInit` methods. (you can anytime later, from the `loop` but please treat it like exceptional case)
 - The `init` method is the best place to add dependent components, setup initial pin values etc.
 - The `postInit` method is the best place to obtain a weak pointer to another component by calling `findComponent`. This will handle cases when other components were added via `init` method.
 
-## 🌱 Building the Application
+---
+
+### 🌱 Building the Application
 
 To create an application, define a new class that inherits from `ksApplication` and add initial components in the `init` method. Refer to projects like [**emon_fw**](https://github.com/cziter15/emon_fw) for a practical example.
 
-### 🔎 How It Works
+#### 🔎 How It Works
 
 - The application is instantiated, and its `init` method is called. If `init` returns `false`, the `loop` method is skipped, and the App Rotator proceeds to instantiate and run the next application in its sequence.
 - If `init` returns `true`, the `loop` method executes, initializing all components.
@@ -176,7 +184,9 @@ bool PelletInfo::init()
 }
 ```
 
-## 🔁 Application rotator
+---
+
+### 🔁 Application rotator
 
 The library provides a very useful utility called `ksAppRotator`. This object can wrap application instantiation logic into a carousel-like rotation mechanism.
 
@@ -189,31 +199,32 @@ Each application implements its own `loop()` method to manage its logic. In case
 
 This design is highly flexible. For example, you can trigger a failure (`return false`) during an application’s `init()` method, allowing the system to immediately switch into configuration mode if conditions require it (e.g. missing WiFi credentials).
 
-## 🔣 Compiler flags
+---
+
+### 🧩 Miscellaneous
+
+#### 🔣 Compiler flags / Custom RTTI
 
 - Bare Arduino projects need to have `gnu++2a` enabled via `compiler.cpp.extra_flags=` option in the `board.txt` file.
-
-## #️⃣ Custom RTTI
-
 - Use the `KSF_RTTI_DECLARATIONS` macro to provide proper runtime type information generation for proper casting of components. 
 - See `ksConfigProvider.h` for an example. Your application components should use this macro, otherwise the component finding mechanism won't work.
 
-## 🔥 Saving power
+#### 🔥 Saving power
 
 - Modem sleep is enabled by default and can be controlled as an optional parameter in the `ksWifiConnector` constructor.
 - Automatic modem sleep requires the DTIM _(Delivery Traffic Indication Message)_ to be correctly set on the access point. 
 - The best value for me was `3`. It allows the ESP32 to go down from around 100mA to 20mA.
 
-## 📑 Dependencies
+#### 📑 Dependencies
 
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
 
-### 🔡 Frameworks
+##### 🔡 Frameworks
 
 - [Arduino for ESP32](https://github.com/espressif/arduino-esp32)
 - [Arduino for ESP8266](https://github.com/esp8266/Arduino)
 
-### 🔡 Libraries
+##### 🔡 Libraries
 
 - [PubSubClient](https://github.com/knolleary/pubsubclient)
 - [arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
