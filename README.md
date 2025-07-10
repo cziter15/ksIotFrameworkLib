@@ -4,7 +4,7 @@
 
 [![Read the documentation](https://img.shields.io/badge/Doxygen-2C4AA8?logo=doxygen&style=for-the-badge)](https://cziter15.github.io/ksIotFrameworkLib)
 [![Read the wiki](https://img.shields.io/badge/wiki-258ffa?logo=wikidotjs&style=for-the-badge)](https://github.com/cziter15/ksIotFrameworkLib/wiki)
-[![License](https://img.shields.io/github/license/cziter15/ksIotFrameworkLib?style=for-the-badge&color=44aa33)](https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/License-MIT%20(no%20AI%20training%20allowed)-darkgreen?style=for-the-badge)]([https://opensource.org/licenses/MIT](https://github.com/cziter15/ksIotFrameworkLib?tab=License-1-ov-file#readme))
 
 [![build-examples](https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml/badge.svg)](https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
