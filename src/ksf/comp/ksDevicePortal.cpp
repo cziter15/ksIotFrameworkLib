@@ -361,7 +361,7 @@ namespace ksf::comps
 			else response += PSTR("down, ");
 
 			response += std::to_string(mqttConnSp->getReconnectCounter());
-			response += PSTR(" attempts");
+			response += PSTR(" attempt(s)");
 		}
 		else response += PSTR("not present");
 
