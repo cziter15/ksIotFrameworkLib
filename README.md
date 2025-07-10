@@ -18,25 +18,6 @@
 
 ## 🚀 Unlock your ideas with ksIotFrameworkLib
 
-> **IMPORTANT FOR ESP32**
->
-> This library targets Arduino 3+ on ESP32. Due to [PlatformIO limitations](https://github.com/platformio/platform-espressif32/issues/1225), it does not automatically fetch the latest versions.
-> Use the pioarduino fork by Jason2866 in your `platformio.ini` file:
-> ```ini
-> platform = https://github.com/pioarduino/platform-espressif32/releases/download/stable/platform-espressif32.zip
-> ```
->
-> **IMPORTANT FOR ESP8266**
->
-> For ESP8266, the latest supported version is based on SDK305.
-> To use it, please add this build flag:
-> 
-> ```
-> DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305
-> ```
-
----
-
 ### 📜 Motivation
 
 - The goal of this project is to create a solid starting point for development of applications targeting Espressif microcontrollers.
@@ -61,6 +42,25 @@
 ### 📟 Examples
 
 - For examples, refer to the [examples directory](https://github.com/cziter15/ksIotFrameworkLib/tree/master/examples).
+
+---
+
+> **IMPORTANT FOR ESP32**
+>
+> This library targets Arduino 3+ on ESP32. Due to [PlatformIO limitations](https://github.com/platformio/platform-espressif32/issues/1225), it does not automatically fetch the latest versions.
+> Use the pioarduino fork by Jason2866 in your `platformio.ini` file:
+> ```ini
+> platform = https://github.com/pioarduino/platform-espressif32/releases/download/stable/platform-espressif32.zip
+> ```
+>
+> **IMPORTANT FOR ESP8266**
+>
+> For ESP8266, the latest supported version is based on SDK305.
+> To use it, please add this build flag:
+> 
+> ```
+> DPIO_FRAMEWORK_ARDUINO_ESPRESSIF_SDK305
+> ```
 
 ---
 
