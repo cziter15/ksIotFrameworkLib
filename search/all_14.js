@@ -7,7 +7,7 @@ var searchData=
   ['wifiipchecktimer_4',['wifiIpCheckTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a08310412b9f4b3363fda3e8775b1ae25',1,'ksf::comps::ksWifiConnector']]],
   ['wifireconnecttimer_5',['wifiReconnectTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#afb0cc11a89172157ea202b0690a176ad',1,'ksf::comps::ksWifiConnector']]],
   ['wifitimeouttimer_6',['wifiTimeoutTimer',['../classksf_1_1comps_1_1ks_wifi_connector.html#a88ef645b5070c2f9a063b756286d2477',1,'ksf::comps::ksWifiConnector']]],
-  ['with_20ksiotframeworklib_7',['Unlock your ideas with ksIotFrameworkLib...',['../index.html#autotoc_md2',1,'']]],
+  ['with_20ksiotframeworklib_7',['🚀 Unlock your ideas with ksIotFrameworkLib',['../index.html#autotoc_md2',1,'']]],
   ['works_8',['🔎 How It Works',['../index.html#autotoc_md14',1,'']]],
   ['wslistener_9',['wsListener',['../classksf_1_1misc_1_1ks_w_s_server.html#a169aaf6bac76dfc12f9137307ad190dd',1,'ksf::misc::ksWSServer']]]
 ];
