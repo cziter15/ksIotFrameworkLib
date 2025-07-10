@@ -7,5 +7,5 @@ var searchData=
   ['handlenonwebsocketconnection_4',['handleNonWebsocketConnection',['../classksf_1_1misc_1_1ks_w_s_server.html#ad15ba719689c843931612f3c9d41111b',1,'ksf::misc::ksWSServer']]],
   ['handleperiodictasks_5',['handlePeriodicTasks',['../classksf_1_1comps_1_1ks_wifi_configurator.html#a76610b6e276236e08d93a8fa4378d36d',1,'ksf::comps::ksWifiConfigurator']]],
   ['hastimepassed_6',['hasTimePassed',['../classksf_1_1misc_1_1ks_simple_timer.html#a24f2c9429da8f7c0249984f9d81b1cc5',1,'ksf::misc::ksSimpleTimer']]],
-  ['how_20it_20works_7',['🔎 How It Works',['../index.html#autotoc_md13',1,'']]]
+  ['how_20it_20works_7',['🔎 How It Works',['../index.html#autotoc_md14',1,'']]]
 ];
