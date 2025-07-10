@@ -44,9 +44,9 @@
 - Remote control (switch devices, send commands)
 - Smart home automations
 
-The library is not limited to these use cases and is designed to support a wide range of applications.
-One of my personal use cases is remote control of a heating boiler, integrated with Home Assistant via MQTT.
-The library supports a CANbus driver capable of efficiently handling multiple frames while maintaining seamless connectivity with the MQTT server.
+> The library is not limited to these use cases and is architected to support a broad spectrum of IoT applications. 
+> One of my personal implementations involves remote control of a heating boiler, seamlessly integrated with Home Assistant through MQTT.
+> I have devices running continuously for months without any interruptions, demonstrating the library’s reliability and stability in real-world deployments.
 
 ## 📚 Documentation
 
