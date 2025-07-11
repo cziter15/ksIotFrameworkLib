@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔁_20application_20rotator_0',['🔁 Application rotator',['../index.html#autotoc_md16',1,'']]]
+  ['📟_20examples_0',['📟 Examples',['../index.html#autotoc_md6',1,'']]]
 ];

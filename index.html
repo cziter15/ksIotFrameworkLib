@@ -97,24 +97,28 @@ $(function(){ initResizable(false); });
 <p><a href="https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml"><img src="https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml/badge.svg" alt="build-examples" style="pointer-events: none;" class="inline"/></a> <a href="https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&amp;utm_medium=referral&amp;utm_content=&amp;utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943" alt="Codacy Badge" class="inline"/></a> <a href="https://github.com/cziter15/ksiotframeworklib"><img src="https://img.shields.io/endpoint?color=blue&amp;url=https%3A%2F%2Fghloc.vercel.app%2Fapi%2Fcziter15%2Fksiotframeworklib%2Fbadge%3Ffilter%3D.hpp%24%2C.cpp%24%2C.h%24%26label%3DLines%2520of%2520Code" alt="Lines of Code" class="inline"/></a> <a href="https://platformio.org"><img src="https://img.shields.io/badge/powered%20by-platformio-royalblue?logo=platformio" alt="Powered by platformio" class="inline"/></a> <a href="https://github.com/pioarduino"><img src="https://img.shields.io/badge/powered%20by-pioarduino-royalblue?logo=arduino" alt="Powered by pioarduino" class="inline"/></a></p>
 <p><img src="https://github.com/user-attachments/assets/d23e7245-659c-4639-a86e-5ac5bef78a43" alt="image" class="inline"/></p>
 <h1><a class="anchor" id="autotoc_md2"></a>
-🚀 Introduction</h1>
+🌟 Introduction</h1>
+<p><b><code>ksIotFrameworkLib</code></b> is an <b>Arduino-based C++ framework</b> designed for <b>ESP32 and ESP8266</b> microcontrollers. <br  />
+</p>
+<p>The library takes care of the usual IoT boilerplate for you - from first-time Wi-Fi provisioning with a captive portal, to reliable MQTT publishing with robust reconnection. It also provides a built-in <b>web portal</b> local device configuration, over-the-air firmware updates, live status monitoring &amp; console access.</p>
+<p>By handling these repetitive foundations, <code>ksIotFrameworkLib</code> lets you concentrate on the unique logic of your smart sensors, controllers, or DIY automations - without needing to reinvent connectivity or configuration layers every time.</p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 📜 Motivation</h2>
 <ul>
-<li>The goal of this project is to create a solid starting point for development of applications targeting Espressif microcontrollers.</li>
-<li>This project aims to streamline the process of copying and modifying source code for different devices.</li>
-<li>I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.</li>
+<li>Create a <b>solid starting point</b> for developing applications targeting Espressif microcontrollers.</li>
+<li><b>Streamline</b> the process of adapting and reusing code across multiple devices.</li>
+<li>Apply the <b>DRY principle</b> (Don't Repeat Yourself) to DIY IoT projects by consolidating common functionality into a simple, reusable library.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
-🚀 Possible use cases</h2>
+🚀 Possible Use Cases</h2>
 <ul>
-<li>IoT devices of any kind</li>
-<li>Telemetry (send sensor or status data)</li>
-<li>Remote control (switch devices, send commands)</li>
+<li>IoT devices of all kinds</li>
+<li>Telemetry systems (sending sensor data, device statuses)</li>
+<li>Remote control applications (switching devices, executing commands)</li>
 <li>Smart home automations</li>
 </ul>
 <blockquote class="doxtable">
-<p>&zwj;The library is not limited to these use cases and is architected to support a broad spectrum of IoT applications. One of my personal implementations involves remote control of a heating boiler, seamlessly integrated with Home Assistant through MQTT. I have devices running continuously for months without any interruptions, demonstrating the library’s reliability and stability in real-world deployments. </p>
+<p>&zwj;💡 The library is not limited to these examples - it’s designed to support a wide range of IoT projects. For instance, one of my personal implementations involves remotely controlling a heating boiler, fully integrated with Home Assistant via MQTT. I have devices running <b>continuously for months without interruptions</b>, demonstrating the library’s stability and reliability in real-world deployments. </p>
 </blockquote>
 <h2><a class="anchor" id="autotoc_md5"></a>
 📚 Documentation</h2>
