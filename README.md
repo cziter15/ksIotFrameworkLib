@@ -16,24 +16,28 @@
 
 ![image](https://github.com/user-attachments/assets/d23e7245-659c-4639-a86e-5ac5bef78a43)
 
-## 🚀 Introduction
+## 🌟 Introduction
+
+**`ksIotFrameworkLib`** is an **Arduino-based C++ framework** designed for **ESP32 and ESP8266** microcontrollers.  
+
+The library takes care of the usual IoT boilerplate for you - from first-time Wi-Fi provisioning with a captive portal, to reliable MQTT publishing with robust reconnection. It also provides a built-in **web portal** local device configuration, over-the-air firmware updates, live status monitoring & console access. 
+
+By handling these repetitive foundations, `ksIotFrameworkLib` lets you concentrate on the unique logic of your smart sensors, controllers, or DIY automations - without needing to reinvent connectivity or configuration layers every time.
 
 ### 📜 Motivation
 
-- The goal of this project is to create a solid starting point for development of applications targeting Espressif microcontrollers.
-- This project aims to streamline the process of copying and modifying source code for different devices.
-- I wanted to apply DRY pattern for my DYI devices, by integrating all common components into a simple library.
+- Create a **solid starting point** for developing applications targeting Espressif microcontrollers.
+- **Streamline** the process of adapting and reusing code across multiple devices.
+- Apply the **DRY principle** (Don't Repeat Yourself) to DIY IoT projects by consolidating common functionality into a simple, reusable library.
 
-### 🚀 Possible use cases
+### 🚀 Possible Use Cases
 
-- IoT devices of any kind
-- Telemetry (send sensor or status data)
-- Remote control (switch devices, send commands)
+- IoT devices of all kinds
+- Telemetry systems (sending sensor data, device statuses)
+- Remote control applications (switching devices, executing commands)
 - Smart home automations
 
-> The library is not limited to these use cases and is architected to support a broad spectrum of IoT applications. 
-> One of my personal implementations involves remote control of a heating boiler, seamlessly integrated with Home Assistant through MQTT.
-> I have devices running continuously for months without any interruptions, demonstrating the library’s reliability and stability in real-world deployments.
+> 💡 The library is not limited to these examples - it’s designed to support a wide range of IoT projects. For instance, one of my personal implementations involves remotely controlling a heating boiler, fully integrated with Home Assistant via MQTT. I have devices running **continuously for months without interruptions**, demonstrating the library’s stability and reliability in real-world deployments.
 
 ### 📚 Documentation
 
