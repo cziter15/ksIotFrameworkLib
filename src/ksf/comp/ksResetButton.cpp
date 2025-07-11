@@ -22,7 +22,6 @@
 
 #include "ksResetButton.h"
 
-
 namespace ksf::comps
 {
 	#define SHORT_TRIGGER 50

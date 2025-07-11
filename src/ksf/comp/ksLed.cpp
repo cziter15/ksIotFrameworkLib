@@ -82,10 +82,9 @@ namespace ksf::comps
 	void ksLed::setEnabled(bool enabled)
 	{
 		/* Fix for ESP8266, where INPUT_PULLUP is not defined. Use only INPUT there. */
-		#ifndef INPUT_PULLDOWN
-			#define INPUT_PULLDOWN INPUT
-		#endif
-
+#ifndef INPUT_PULLDOWN
+		#define INPUT_PULLDOWN INPUT
+#endif
 		if (bitflags.driveAsPushPull)
 			pinMode(pin, (bitflags.activeLow ? !enabled : enabled) ? INPUT_PULLUP : INPUT_PULLDOWN);
 		else

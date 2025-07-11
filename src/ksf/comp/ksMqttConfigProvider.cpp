@@ -17,9 +17,7 @@
 
 namespace ksf::comps
 {
-	/* Assign PGM returned strings to a set of macros. */
 	const char MQTT_FILENAME_TEXT[] 				PROGMEM {"mqtt.conf"};
-
 	const char DEFPORT_AS_TEXT_PGM[] 				PROGMEM {"1883"};
 	const char BROKER_TEXT_PGM[]					PROGMEM {"broker"};
 	const char USER_TEXT_PGM[] 						PROGMEM {"user"};
@@ -27,10 +25,8 @@ namespace ksf::comps
 	const char PASSWORD_TEXT_PGM[] 					PROGMEM {"password"};
 	const char PREFIX_TEXT_PGM[] 					PROGMEM {"prefix"};
 	const char PORT_TEXT_PGM[]	 					PROGMEM {"port"};
-
 	const char MQTT_BROKER_ADDRESS_TEXT[] 			PROGMEM {"MQTT Address"};
 	const char MQTT_BROKER_PORT_TEXT[] 				PROGMEM {"MQTT Port"};
-
 #if defined(ESP8266)
 	const auto MQTT_SSL_FP_LEN{40};
 	const char MQTT_BROKER_SSL_FINGERPRINT_TEXT[] 	PROGMEM {"MQTT SSL Fingerprint (SHA1)"};
@@ -40,12 +36,9 @@ namespace ksf::comps
 #else
 	#error Platform not implemented.
 #endif
-
 	const char MQTT_BROKER_USER_TEXT[] 				PROGMEM {"MQTT Username"};
 	const char MQTT_BROKER_PASSWORD_TEXT[] 			PROGMEM {"MQTT Password"};
 	const char MQTT_BROKER_PREFIX_TEXT[] 			PROGMEM {"MQTT Topic Prefix"};
-
-
 	constexpr const char TOPIC_DELIMETER{'/'};
 
 	void ksMqttConfigProvider::setupMqttConnector(ksMqttConnector& connector)
@@ -60,9 +53,7 @@ namespace ksf::comps
 			const auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
 			const auto& fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
 			
-			/*
-				These parameters are copied here. Later they are moved directly to the fields of the connector.
-			*/
+			/* These parameters are copied here. Later they are moved directly to the fields of the connector. */
 			auto login{config_file.getParam(USER_TEXT_PGM)};
 			auto password{config_file.getParam(PASSWORD_TEXT_PGM)};
 			auto prefix{config_file.getParam(PREFIX_TEXT_PGM)};
@@ -83,7 +74,7 @@ namespace ksf::comps
 	}
 
 	void ksMqttConfigProvider::readParams()
-	{		
+	{
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			addNewParamWithConfigDefault(config_file, BROKER_TEXT_PGM, MQTT_BROKER_ADDRESS_TEXT);
@@ -102,7 +93,6 @@ namespace ksf::comps
 			for (auto& param : params)
 				config_file.setParam(param.id, std::move(param.value));
 		}
-
 		params.clear();
 	}
 }

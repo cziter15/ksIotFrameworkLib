@@ -33,14 +33,14 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	ksMqttConnector::~ksMqttConnector() = default;
-
 	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus, bool usePersistentSession)
 		: reconnectTimer(KSF_MQTT_RECONNECT_DELAY_MS)
 	{
 		bitflags.sendConnectionStatus = sendConnectionStatus;
 		bitflags.usePersistentSession = usePersistentSession;
 	}
+
+	ksMqttConnector::~ksMqttConnector() = default;
 
 	bool ksMqttConnector::init(ksApplication* app)
 	{

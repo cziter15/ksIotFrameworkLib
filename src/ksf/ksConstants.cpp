@@ -28,10 +28,8 @@
 namespace ksf
 {
 	const char NVS_DIRECTORY[] PROGMEM {"/nvs"};						// NVS directory name.
-
 	const char OTA_FILENAME_TEXT[] PROGMEM {"/ksf.otabooted"};			// File name for OTA boot indicator.
 	const char WIFI_CRED_FILENAME_TEXT[] PROGMEM {"ksf.wificred"};		// File name for WiFi credentials.
-
 	const char SSID_PARAM_NAME[] PROGMEM {"ssid"};						// Param name from progmem - ssid
 	const char PASSWORD_PARAM_NAME[] PROGMEM {"password"};				// Param name from progmem - password
 
