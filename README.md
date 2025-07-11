@@ -24,13 +24,7 @@ The library takes care of the usual IoT boilerplate for you - from first-time Wi
 
 By handling these repetitive foundations, `ksIotFrameworkLib` lets you concentrate on the unique logic of your smart sensors, controllers, or DIY automations - without needing to reinvent connectivity or configuration layers every time.
 
-### 📜 Motivation
-
-- Create a **solid starting point** for developing applications targeting Espressif microcontrollers.
-- **Streamline** the process of adapting and reusing code across multiple devices.
-- Apply the **DRY principle** (Don't Repeat Yourself) to DIY IoT projects by consolidating common functionality into a simple, reusable library.
-
-### 🚀 Possible Use Cases
+### 🚀 Possible use cases
 
 - IoT devices of all kinds
 - Telemetry systems (sending sensor data, device statuses)
@@ -38,6 +32,12 @@ By handling these repetitive foundations, `ksIotFrameworkLib` lets you concentra
 - Smart home automations
 
 > 💡 The library is not limited to these examples - it’s designed to support a wide range of IoT projects. For instance, one of my personal implementations involves remotely controlling a heating boiler, fully integrated with Home Assistant via MQTT. I have devices running **continuously for months without interruptions**, demonstrating the library’s stability and reliability in real-world deployments.
+
+### 📜 Motivation to create it
+
+- Create a **solid starting point** for developing applications targeting Espressif microcontrollers.
+- **Streamline** the process of adapting and reusing code across multiple devices.
+- Apply the **DRY principle** (Don't Repeat Yourself) to DIY IoT projects by consolidating common functionality into a simple, reusable library.
 
 ### 📚 Documentation
 
