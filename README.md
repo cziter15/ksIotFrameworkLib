@@ -16,7 +16,7 @@
 
 ![image](https://github.com/user-attachments/assets/d23e7245-659c-4639-a86e-5ac5bef78a43)
 
-## 🚀 Unlock your ideas with ksIotFrameworkLib
+## 🚀 Introduction
 
 ### 📜 Motivation
 
