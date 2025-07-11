@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚀_20possible_20use_20cases_0',['🚀 Possible use cases',['../index.html#autotoc_md3',1,'']]]
+  ['🚀_20potential_20use_20cases_0',['🚀 Potential use cases',['../index.html#autotoc_md3',1,'']]]
 ];
