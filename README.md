@@ -26,10 +26,9 @@ By handling these repetitive foundations, `ksIotFrameworkLib` lets you concentra
 
 ### 🚀 Potential use cases
 
-- IoT devices of all kinds
+- Smart home solutions (services, monitoring, alarming)
 - Telemetry systems (sending sensor data, device statuses)
 - Remote control applications (switching devices, executing commands)
-- Smart home automations
 
 > 💡 The library is not limited to these examples - it’s designed to support a wide range of IoT projects. For instance, one of my personal implementations involves remotely controlling a heating boiler, fully integrated with Home Assistant via MQTT. I have devices running **continuously for months without interruptions**, demonstrating the library’s stability and reliability in real-world deployments.
 
