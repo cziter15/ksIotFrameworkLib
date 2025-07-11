@@ -221,16 +221,18 @@ This design is highly flexible. For example, you can trigger a failure (`return 
 - Automatic modem sleep requires the DTIM _(Delivery Traffic Indication Message)_ to be correctly set on the access point. 
 - The best value for me was `3`. It allows the ESP32 to go down from around 100mA to 20mA.
 
-#### 📑 Dependencies
+---
+
+### 📑 Dependencies
 
 - **It is highly recommended to use PlatformIO as it will automatically download dependencies!**
 
-##### 🔡 Frameworks
+#### 🔡 Frameworks
 
 - [Arduino for ESP32](https://github.com/espressif/arduino-esp32)
 - [Arduino for ESP8266](https://github.com/esp8266/Arduino)
 
-##### 🔡 Libraries
+#### 🔡 Libraries
 
 - [PubSubClient](https://github.com/knolleary/pubsubclient)
 - [arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
