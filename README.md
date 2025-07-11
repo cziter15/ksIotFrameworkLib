@@ -20,7 +20,7 @@
 
 **`ksIotFrameworkLib`** is an **Arduino-based C++ framework** designed for **ESP32 and ESP8266** microcontrollers.  
 
-The library takes care of the usual IoT boilerplate for you - from first-time Wi-Fi provisioning with a captive portal, to reliable MQTT publishing with robust reconnection mechanism. It also provides a built-in **web portal** local device configuration, over-the-air firmware updates, live status monitoring & console access. 
+The library handles the typical IoT boilerplate for you, from initial Wi-Fi provisioning via a captive portal to dependable MQTT publishing with a solid reconnection strategy. It also includes a built-in LAN accessible web portal for device configuration, over-the-air firmware updates, live status monitoring, and terminal access. The terminal, a special feature of the web portal, lets you view real-time application logs and define your own commands.
 
 By handling these repetitive foundations, `ksIotFrameworkLib` lets you concentrate on the unique logic of your smart sensors, controllers, or DIY automations - without needing to reinvent connectivity or configuration layers every time.
 
