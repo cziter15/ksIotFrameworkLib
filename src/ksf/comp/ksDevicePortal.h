@@ -56,7 +56,8 @@ namespace ksf::comps
 			ksf::ksApplication* app{nullptr};							//!< Application pointer.
 			struct{
 				bool breakApp : 1;										//!< Flag to break app logic.
-			} bitflags = {false};
+				bool isSafeToCallEndOta : 1;							//!< Flag indicating that OTA class is initialized.
+			} bitflags = {false, false};								//!< Bit flags for internal use.
 
 			uint32_t logKeepAliveTimestamp{0};							//!< Flag indicating whether logs are enabled.
 			uint32_t lastLoopExecutionTimestamp{0};						//!< Time of last loop execution (us)/

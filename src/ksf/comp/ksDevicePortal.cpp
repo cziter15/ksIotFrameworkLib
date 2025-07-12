@@ -100,7 +100,7 @@ namespace ksf::comps
 			Watch out! It looks like ArduinoOTA library for both ESP8266 and ESP32 miss end() call in its destructor.
 			We should manually call it here. Otherwise we may get exception (crash) during application transition.
 		*/
-		if (arduinoOTA)
+		if (bitflags.isSafeToCallEndOta && arduinoOTA)
 			arduinoOTA->end();
 	}
 	
@@ -114,6 +114,7 @@ namespace ksf::comps
 	{
 		arduinoOTA->setHostname(WiFi.getHostname());
 		arduinoOTA->begin();
+		bitflags.isSafeToCallEndOta = true;
 
 		if (WiFi.getMode() == WIFI_AP) 
 		{
