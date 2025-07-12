@@ -251,7 +251,12 @@ struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 &#160;&#160;&#160;bool&#160;&#160;&#160;<b>breakApp</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
 <tr class="memdesc:af94f6e09ebe49eaae578cc9094721381"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag to break app logic. <br /></td></tr>
 <tr class="separator:af94f6e09ebe49eaae578cc9094721381"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f561363239b58eaa3deea22d780b4c1" id="r_a9f561363239b58eaa3deea22d780b4c1"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>bitflags</b> = {false}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memitem:aa026dc37ec92c69b9ddd484d5c16a523" id="r_aa026dc37ec92c69b9ddd484d5c16a523"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>isSafeToCallEndOta</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:aa026dc37ec92c69b9ddd484d5c16a523"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating that OTA class is initialized. <br /></td></tr>
+<tr class="separator:aa026dc37ec92c69b9ddd484d5c16a523"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f561363239b58eaa3deea22d780b4c1" id="r_a9f561363239b58eaa3deea22d780b4c1"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>bitflags</b> = {false, false}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a9f561363239b58eaa3deea22d780b4c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bit flags for internal use. <br /></td></tr>
 <tr class="separator:a9f561363239b58eaa3deea22d780b4c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a936722fcf49ca3cd49b58ad6fe207e22" id="r_a936722fcf49ca3cd49b58ad6fe207e22"><td class="memItemLeft" align="right" valign="top"><a id="a936722fcf49ca3cd49b58ad6fe207e22" name="a936722fcf49ca3cd49b58ad6fe207e22"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>logKeepAliveTimestamp</b> {0}</td></tr>
@@ -639,7 +644,7 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ad866ef7860087398ce847201725b1019">ksf::ksComponent</a>.</p>
 
-<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="#a08bf056d0703b80eebf334e2e3830813">arduinoOTA</a>, <a class="el" href="#a9d9ecd302b4ef31f3778baf91eed0e48">dnsServer</a>, <a class="el" href="#ac0a6eac49ee8ccd90f1f074b0e097ef2">lastLoopExecutionTimestamp</a>, <a class="el" href="#a936722fcf49ca3cd49b58ad6fe207e22">logKeepAliveTimestamp</a>, <a class="el" href="#ae705cc9a95902b82e08c6d87340cb380">loopExecutionTime</a>, <a class="el" href="#a4fafe81b3100c79214a84bec4b093556">scanNetworkTimestamp</a>, <a class="el" href="#aed3161ec11cf98fc8afa61e0868596ad">webServer</a>, and <a class="el" href="#a70a982a1a01f3ae4011d6b78f2dcedbc">webSocket</a>.</p>
+<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="#a08bf056d0703b80eebf334e2e3830813">arduinoOTA</a>, <a class="el" href="#a9f561363239b58eaa3deea22d780b4c1">bitflags</a>, <a class="el" href="#a9d9ecd302b4ef31f3778baf91eed0e48">dnsServer</a>, <a class="el" href="#ac0a6eac49ee8ccd90f1f074b0e097ef2">lastLoopExecutionTimestamp</a>, <a class="el" href="#a936722fcf49ca3cd49b58ad6fe207e22">logKeepAliveTimestamp</a>, <a class="el" href="#ae705cc9a95902b82e08c6d87340cb380">loopExecutionTime</a>, <a class="el" href="#a4fafe81b3100c79214a84bec4b093556">scanNetworkTimestamp</a>, <a class="el" href="#aed3161ec11cf98fc8afa61e0868596ad">webServer</a>, and <a class="el" href="#a70a982a1a01f3ae4011d6b78f2dcedbc">webSocket</a>.</p>
 
 </div>
 </div>
@@ -884,7 +889,7 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb">ksf::ksComponent</a>.</p>
 
-<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="#a08bf056d0703b80eebf334e2e3830813">arduinoOTA</a>, <a class="el" href="#a9d9ecd302b4ef31f3778baf91eed0e48">dnsServer</a>, <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, <a class="el" href="#a4484797e62d2e4ad675db2d836f95d04">mqttConnectorWp</a>, <a class="el" href="#ae6c76bee527e97fbd9a4e08d09306633">setupHttpServer()</a>, and <a class="el" href="#a2fc892e79d3813ab7b6135df5a475aee">setupWsServer()</a>.</p>
+<p class="reference">References <a class="el" href="#a0ed6c88eac9a0254d732d74566ca12b1">app</a>, <a class="el" href="#a08bf056d0703b80eebf334e2e3830813">arduinoOTA</a>, <a class="el" href="#a9f561363239b58eaa3deea22d780b4c1">bitflags</a>, <a class="el" href="#a9d9ecd302b4ef31f3778baf91eed0e48">dnsServer</a>, <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, <a class="el" href="#a4484797e62d2e4ad675db2d836f95d04">mqttConnectorWp</a>, <a class="el" href="#ae6c76bee527e97fbd9a4e08d09306633">setupHttpServer()</a>, and <a class="el" href="#a2fc892e79d3813ab7b6135df5a475aee">setupWsServer()</a>.</p>
 
 </div>
 </div>

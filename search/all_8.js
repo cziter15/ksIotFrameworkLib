@@ -12,5 +12,6 @@ var searchData=
   ['isconnected_9',['isConnected',['../classksf_1_1comps_1_1ks_mqtt_connector.html#aa273e290cb18e2ea76db22a7c059b48e',1,'ksf::comps::ksMqttConnector::isConnected()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#a1dbeb307a217a5c267496f46c00d63c9',1,'ksf::comps::ksWifiConnector::isConnected()']]],
   ['isdirty_10',['isDirty',['../classksf_1_1misc_1_1ks_config.html#afff8db88d089a9d0ed178df85bc82a87',1,'ksf::misc::ksConfig']]],
   ['isenabled_11',['isEnabled',['../classksf_1_1comps_1_1ks_led.html#ae9830a8a0dc7f41ebe2c1ded0a95a28a',1,'ksf::comps::ksLed']]],
-  ['it_20works_12',['🔎 How It Works',['../index.html#autotoc_md14',1,'']]]
+  ['issafetocallendota_12',['isSafeToCallEndOta',['../classksf_1_1comps_1_1ks_device_portal.html#a9149406f781dd5db5b5afa4a924d93a6',1,'ksf::comps::ksDevicePortal']]],
+  ['it_20works_13',['🔎 How It Works',['../index.html#autotoc_md14',1,'']]]
 ];
