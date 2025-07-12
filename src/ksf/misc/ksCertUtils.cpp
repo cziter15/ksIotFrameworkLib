@@ -24,13 +24,13 @@ namespace ksf::misc
 			return false;
 
 		auto hexToValue = [](char c) -> uint8_t {
-			if (c >= '0' && c <= '9') 
+			if (c>='0' && c <='9') 
 				return c - '0';
-			if (c >= 'A' && c <= 'F') 
-				return c - 'A' + 10;
-			if (c >= 'a' && c <= 'f') 
-				return c - 'a' + 10;
-			return 16;
+			if (c>='A' && c<='F') 
+				return 10 + c - 'A';
+			if (c>='a' && c<='f') 
+				return 10 + c - 'a';
+			return 255;
 		};
 
 		for (uint8_t bi{0}; bi < bytesLen; ++bi) 
