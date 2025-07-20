@@ -240,7 +240,7 @@ namespace ksf
 
 	const std::string getUptimeString()
 	{
-		auto uptime{millis64()/1000};
+		auto uptime{millis64() / static_cast<uint64_t>(KSF_ONE_SEC_MS)};
 		return getUptimeFromSeconds(uptime);
 	}
 
