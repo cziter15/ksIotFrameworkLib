@@ -240,8 +240,8 @@ namespace ksf
 
 	const std::string getUptimeString()
 	{
-		auto uptime{millis64() / static_cast<uint64_t>(KSF_ONE_SEC_MS)};
-		return getUptimeFromSeconds(uptime);
+		auto uptimeSeconds{millis64() / KSF_ONE_SEC_MS};
+		return getUptimeFromSeconds(static_cast<uint32_t>(uptimeSeconds));
 	}
 
 	void loadCredentials(std::string& ssid, std::string& password)
