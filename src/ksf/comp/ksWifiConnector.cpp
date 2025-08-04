@@ -10,7 +10,6 @@
 #if defined(ESP32)
 	#include <WiFi.h>
 	#include <esp_wifi.h>
-	#include "lwip/dns.h"
 #elif defined(ESP8266)
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
