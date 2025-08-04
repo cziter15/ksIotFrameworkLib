@@ -155,7 +155,8 @@ namespace ksf::comps
 			if (retain)
 				out += PSTR("(Retained) ");
 			out += PSTR("Publish to: ");
-			out += prefix;
+			if (!skipDevicePrefix)
+				out += prefix;
 			out += topic;
 			out += PSTR(", value: ");
 			out += payload;
