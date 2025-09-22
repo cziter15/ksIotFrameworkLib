@@ -1,5 +1,5 @@
 /*
- *	Copyright (c) 2020-2025, Krzysztof Strehlau
+ *	Copyright (c) 2020-2026, Krzysztof Strehlau
  *
  *	This file is a part of the ksIotFrameworkLib IoT library.
  *	All licensing information can be found inside LICENSE.md file.
@@ -118,7 +118,7 @@ namespace ksf
 	extern uint64_t millis64();
 
 	/*!
-		@brief Helper function that converts double value into a stirng.
+		@brief Helper function that converts double value into a string.
 
 		GCC is missing double support in std::to_string.
 
@@ -128,7 +128,7 @@ namespace ksf
 	extern std::string to_string(double value, const int base);
 
 	/*!
-		@brief Helper function that converts float value into a stirng.
+		@brief Helper function that converts float value into a string.
 
 		GCC is missing float support in std::to_string.
 
@@ -194,7 +194,7 @@ namespace ksf
 		return result.ec == std::errc();
 	}
 
-	/**
+	/*!
 		@brief Retrieves device UUID in a form of hexadecimal string.
 
 		This function returns device UUID in a form of hexadecimal string, which is used to identify the device. The UUID is
