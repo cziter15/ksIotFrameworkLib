@@ -106,10 +106,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afbc501695c996c0e4e980dc8a6e8aa1d" id="r_afbc501695c996c0e4e980dc8a6e8aa1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbc501695c996c0e4e980dc8a6e8aa1d">ksConfig</a> (const std::string &amp;fileName)</td></tr>
 <tr class="memdesc:afbc501695c996c0e4e980dc8a6e8aa1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor tha opens or creates configuration file.  <br /></td></tr>
 <tr class="separator:afbc501695c996c0e4e980dc8a6e8aa1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46b13cf3a6c6ddca4249d5de02ad9eca" id="r_a46b13cf3a6c6ddca4249d5de02ad9eca"><td class="memItemLeft" align="right" valign="top"><a id="a46b13cf3a6c6ddca4249d5de02ad9eca" name="a46b13cf3a6c6ddca4249d5de02ad9eca"></a>
+<tr class="memitem:a0c87936c69a2758335686664025a681f" id="r_a0c87936c69a2758335686664025a681f"><td class="memItemLeft" align="right" valign="top"><a id="a0c87936c69a2758335686664025a681f" name="a0c87936c69a2758335686664025a681f"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksConfig</b> ()</td></tr>
-<tr class="memdesc:a46b13cf3a6c6ddca4249d5de02ad9eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves config content on the device filesystem. In case there is no modification, nothing should actually happen. <br /></td></tr>
-<tr class="separator:a46b13cf3a6c6ddca4249d5de02ad9eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a0c87936c69a2758335686664025a681f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves config content on the device filesystem. In case there is no modification, nothing should actually happen. <br /></td></tr>
+<tr class="separator:a0c87936c69a2758335686664025a681f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca932449b2cf5329fc4429b9dd94d0d9" id="r_aca932449b2cf5329fc4429b9dd94d0d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca932449b2cf5329fc4429b9dd94d0d9">setParam</a> (const std::string &amp;paramName, const std::string paramValue)</td></tr>
 <tr class="memdesc:aca932449b2cf5329fc4429b9dd94d0d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets parameter value (creates new parameter if it does not exist).  <br /></td></tr>
 <tr class="separator:aca932449b2cf5329fc4429b9dd94d0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,6 +162,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#abb3eea9a364e935106ba989312488a8b">configParams</a>, and <a class="el" href="#ab9130c59214221cb5a9b105c8e92164c">configPath</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -193,6 +195,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Parameter value string (or defaultValue). </dd></dl>
+
+<p class="reference">References <a class="el" href="#abb3eea9a364e935106ba989312488a8b">configParams</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#abcf9e639207edeef487fe7d73bbda22a">ksf::comps::ksConfigProvider::addNewParamWithConfigDefault()</a>.</p>
 
@@ -246,10 +250,13 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
   </dd>
 </dl>
 
+<p class="reference">References <a class="el" href="#abb3eea9a364e935106ba989312488a8b">configParams</a>, and <a class="el" href="#afff8db88d089a9d0ed178df85bc82a87">isDirty</a>.</p>
+
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/ksf/misc/<a class="el" href="ks_config_8h_source.html">ksConfig.h</a></li>
+<li>src/ksf/misc/<b>ksConfig.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
