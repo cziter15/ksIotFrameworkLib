@@ -26,6 +26,7 @@
 			configPath.clear();
 			return;
 		}
+
 		/* Add leading slash and assemble file path. */
 		if (fileName[0] != '/')
 			configPath += '/';
