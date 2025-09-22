@@ -20,74 +20,73 @@
 	ksConfig::ksConfig(const std::string& fileName)
 		: isDirty{false}, configPath{getNvsDirectory()}
 	{
-		/* If no file specified, clear internal path. */
-		if (fileName.empty())
-		{
-			configPath.clear();
-			return;
-		}
-
-		/* Add leading slash and assemble file path. */
-		if (fileName[0] != '/')
-			configPath += '/';
-		configPath += fileName;
-
-		/* Read config file. */
-		File fileReader{LittleFS.open(configPath.c_str(), "r")};
-		if (fileReader)
-		{
-			/* Use std::array for fixed buffer with automatic memory management */
-			constexpr size_t bufferSize{256};
-			std::array<char, bufferSize> buffer{};
-			
-			std::string key;
-			bool isReadingKey{true};
-			
-			while (fileReader.available())
-			{
-				/* Ensure we leave space for null terminator */
-				size_t maxReadSize{buffer.size() - 1};
-				size_t bytesRead{fileReader.readBytesUntil('\n', buffer.data(), maxReadSize)};
-				
-				/* Safety check to prevent buffer overrun */
-				if (bytesRead >= maxReadSize)
-					bytesRead = maxReadSize;
-				
-				/* Ensure null termination */
-				buffer[bytesRead] = '\0';
-				
-				/* Remove trailing CR if present */
-				if (bytesRead > 0 && buffer[bytesRead - 1] == '\r')
-					buffer[bytesRead - 1] = '\0';
-				
-				/* Use string_view to avoid unnecessary copying */
-				std::string_view line{buffer.data()};
-				
-				if (isReadingKey)
-				{
-					key = line;
-					isReadingKey = false;
-				}
-				else
-				{
-					configParams[key] = std::string{line};
-					isReadingKey = true;
-				}
-			}
-			fileReader.close();
-		}
+	/* If no file specified, clear internal path. */
+	if (fileName.empty())
+	{
+		configPath.clear();
+		return;
 	}
- 
+
+	/* Add leading slash and assemble file path. */
+	if (fileName[0] != '/')
+		configPath += '/';
+	configPath += fileName;
+
+	/* Read config file. */
+	File fileReader{LittleFS.open(configPath.c_str(), "r")};
+	if (fileReader)
+	{
+		/* Use std::array for fixed buffer with automatic memory management */
+		constexpr size_t bufferSize{256};
+		std::array<char, bufferSize> buffer{};
+		
+		std::string key;
+		bool isReadingKey{true};
+		
+		while (fileReader.available())
+		{
+			/* Ensure we leave space for null terminator */
+			size_t maxReadSize{buffer.size() - 1};
+			size_t bytesRead{fileReader.readBytesUntil('\n', buffer.data(), maxReadSize)};
+			
+			/* Safety check to prevent buffer overrun */
+			if (bytesRead >= maxReadSize)
+				bytesRead = maxReadSize;
+			
+			/* Ensure null termination */
+			buffer[bytesRead] = '\0';
+			
+			/* Remove trailing CR if present */
+			if (bytesRead > 0 && buffer[bytesRead - 1] == '\r')
+				buffer[bytesRead - 1] = '\0';
+			
+			/* Use string_view to avoid unnecessary copying */
+			std::string_view line{buffer.data()};
+			
+			if (isReadingKey)
+			{
+				key = line;
+				isReadingKey = false;
+			}
+			else
+			{
+				configParams[key] = std::string{line};
+				isReadingKey = true;
+			}
+		}
+		fileReader.close();
+	}
+
 	ksConfig::~ksConfig()
 	{
 		if (!isDirty || configPath.empty())
 			return;
-
+	
 		/* If marked dirty, save changes to FS. */
 		File fileWriter{LittleFS.open(configPath.c_str(), "w")};
 		if (!fileWriter)
 			return;
-
+	
 		for (const auto& [name, value] : configParams)
 		{
 			fileWriter.println(name.c_str());
@@ -100,13 +99,13 @@
 		isDirty = true;
 		configParams[paramName] = std::move(paramValue);
 	}
-
+	
 	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
 		auto it{configParams.find(paramName)};
 		return (it == configParams.end()) ? defaultValue : it->second;
 	}
-
+	
 	ksConfig::operator bool() const
 	{
 		return !configPath.empty();
