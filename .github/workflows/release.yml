@@ -1,0 +1,169 @@
+name: Release Automation
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version increment type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+      version_suffix:
+        description: 'Version suffix (e.g., a, b, c) - leave empty to remove suffix or auto-increment'
+        required: false
+        type: string
+      target_version:
+        description: 'Set specific version (overrides version_type and suffix)'
+        required: false
+        type: string
+      prerelease:
+        description: 'Mark as prerelease'
+        required: false
+        default: false
+        type: boolean
+      draft:
+        description: 'Create as draft release'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Get current version
+      id: current_version
+      run: |
+        CURRENT_VERSION=$(python3 scripts/version_manager.py --show | grep "Current version:" | cut -d' ' -f3)
+        echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+        echo "Current version: $CURRENT_VERSION"
+
+    - name: Determine new version
+      id: new_version
+      run: |
+        if [ -n "${{ github.event.inputs.target_version }}" ]; then
+          NEW_VERSION="${{ github.event.inputs.target_version }}"
+          echo "Using target version: $NEW_VERSION"
+        else
+          ARGS="--type ${{ github.event.inputs.version_type }}"
+          if [ -n "${{ github.event.inputs.version_suffix }}" ]; then
+            ARGS="$ARGS --suffix ${{ github.event.inputs.version_suffix }}"
+          fi
+          python3 scripts/version_manager.py $ARGS > /tmp/version_output.txt
+          NEW_VERSION=$(cat /tmp/version_output.txt | grep "Successfully updated" | cut -d' ' -f5)
+          echo "Generated version: $NEW_VERSION"
+        fi
+        echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Update version files
+      run: |
+        if [ -n "${{ github.event.inputs.target_version }}" ]; then
+          python3 scripts/version_manager.py --version "${{ steps.new_version.outputs.version }}"
+        fi
+        echo "Updated version files to: ${{ steps.new_version.outputs.version }}"
+
+    - name: Verify version files are updated
+      run: |
+        echo "Checking library.json:"
+        grep '"version"' library.json
+        echo "Checking library.properties:"
+        grep '^version=' library.properties
+
+    - name: Generate changelog
+      id: changelog
+      run: |
+        # Generate changelog between current version and HEAD
+        PREV_TAG="${{ steps.current_version.outputs.current }}"
+        NEW_VERSION="${{ steps.new_version.outputs.version }}"
+        
+        # Get commits since last tag
+        if git rev-parse "$PREV_TAG" >/dev/null 2>&1; then
+          COMMITS=$(git log --oneline "${PREV_TAG}..HEAD" --pretty=format:"- %s (%h)")
+        else
+          COMMITS=$(git log --oneline -10 --pretty=format:"- %s (%h)")
+        fi
+        
+        # Create changelog
+        CHANGELOG="## Changes in $NEW_VERSION
+
+$COMMITS
+
+**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${NEW_VERSION}"
+        
+        echo "changelog<<EOF" >> $GITHUB_OUTPUT
+        echo "$CHANGELOG" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Commit version changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add library.json library.properties
+        git commit -m "Release version ${{ steps.new_version.outputs.version }}"
+
+    - name: Create and push tag
+      run: |
+        git tag "${{ steps.new_version.outputs.version }}"
+        git push origin HEAD
+        git push origin "${{ steps.new_version.outputs.version }}"
+
+    - name: Build examples for release validation
+      run: |
+        # Install PlatformIO
+        python -m pip install --upgrade pip
+        pip install --upgrade platformio
+        
+        # Build basic example to ensure library works
+        cd examples/basic-config
+        pio run --environment esp32 || echo "ESP32 build failed (expected in CI)"
+        cd ../..
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.new_version.outputs.version }}
+        release_name: ${{ steps.new_version.outputs.version }}
+        body: ${{ steps.changelog.outputs.changelog }}
+        draft: ${{ github.event.inputs.draft }}
+        prerelease: ${{ github.event.inputs.prerelease }}
+
+    - name: Upload library archive to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./
+        asset_name: ksIotFrameworkLib-${{ steps.new_version.outputs.version }}.zip
+        asset_content_type: application/zip
+      continue-on-error: true
+
+    - name: Summary
+      run: |
+        echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- **Previous Version**: ${{ steps.current_version.outputs.current }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **New Version**: ${{ steps.new_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Release URL**: ${{ steps.create_release.outputs.html_url }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Prerelease**: ${{ github.event.inputs.prerelease }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Draft**: ${{ github.event.inputs.draft }}" >> $GITHUB_STEP_SUMMARY

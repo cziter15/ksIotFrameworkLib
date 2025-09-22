@@ -235,3 +235,32 @@ This design is highly flexible. For example, you can trigger a failure (`return 
 
 - [PubSubClient](https://github.com/knolleary/pubsubclient)
 - [arduinoWebSockets](https://github.com/Links2004/arduinoWebSockets)
+
+---
+
+### 🚀 Release Automation
+
+This repository includes automated release management with version incrementing and GitHub release creation.
+
+#### Quick Release (GitHub Actions)
+1. Go to **Actions** → **Release Automation**
+2. Click **Run workflow**
+3. Choose version type (patch/minor/major) and options
+4. The automation will update `library.json` and `library.properties`, create tags, and publish releases
+
+#### Local Scripts
+```bash
+# Show current version
+./scripts/release.sh show
+
+# Create a patch release
+./scripts/release.sh release --type patch
+
+# Create a minor release with pre-release flag
+./scripts/release.sh release --type minor --prerelease
+
+# Bump version locally without releasing
+./scripts/release.sh bump --type patch --suffix a
+```
+
+📖 **Full documentation**: [Release Automation Guide](docs/RELEASE_AUTOMATION.md)
