@@ -1,1 +1,4 @@
 platformio/__pycache__/*
+scripts/__pycache__/*
+*.pyc
+__pycache__/
