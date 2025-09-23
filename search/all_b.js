@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['maxlength_0',['maxLength',['../structksf_1_1comps_1_1ks_config_parameter.html#a51bc56091ebf454c1c4f32c480c4fd56',1,'ksf::comps::ksConfigParameter']]],
-  ['miscellaneous_1',['🧩 Miscellaneous',['../index.html#autotoc_md18',1,'']]],
-  ['mode_2',['mode',['../classksf_1_1comps_1_1ks_reset_button.html#a801b0826bec2cbcef312909b6b9806f3',1,'ksf::comps::ksResetButton']]],
-  ['motivation_20to_20create_20the_20library_3',['📜 Motivation to create the library',['../index.html#autotoc_md4',1,'']]],
-  ['mqttclientuq_4',['mqttClientUq',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a61ba0c64348bc892107da76723b78525',1,'ksf::comps::ksMqttConnector']]],
-  ['mqttconnectedinternal_5',['mqttConnectedInternal',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ac9219e05b7ebd1c2614a36bb8155efe7',1,'ksf::comps::ksMqttConnector']]],
-  ['mqttconnectorwp_6',['mqttConnectorWp',['../classksf_1_1comps_1_1ks_device_portal.html#a4484797e62d2e4ad675db2d836f95d04',1,'ksf::comps::ksDevicePortal']]],
-  ['mqttconnwp_7',['mqttConnWp',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#aaf36a1e5900bef0469f527f962174723',1,'ksf::comps::ksDevStatMqttReporter']]],
-  ['mqttmessageinternal_8',['mqttMessageInternal',['../classksf_1_1comps_1_1ks_mqtt_connector.html#af3130af3aa3b1591a42e42896bf62eb1',1,'ksf::comps::ksMqttConnector']]]
+  ['generation_0',['📊 Changelog Generation',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md22',1,'']]],
+  ['getconnectiontimeseconds_1',['getConnectionTimeSeconds',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a90dbb9c15993dd07c37385274bd54f49',1,'ksf::comps::ksMqttConnector']]],
+  ['getinstancetype_2',['getInstanceType',['../classksf_1_1comps_1_1ks_config_provider.html#a46b5678ae963359bfaa9c93ab1a5bb19',1,'ksf::comps::ksConfigProvider::getInstanceType()'],['../classksf_1_1comps_1_1ks_device_portal.html#a344da875450e84e4eaa12e0d507bc075',1,'ksf::comps::ksDevicePortal::getInstanceType()'],['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#aaa4fd60c29037effa5cfd1c72dd50f59',1,'ksf::comps::ksDevStatMqttReporter::getInstanceType()'],['../classksf_1_1comps_1_1ks_led.html#af642c7a676d8c6e676d2c668162ba995',1,'ksf::comps::ksLed::getInstanceType()'],['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#a7beec06b6bb4bec54f95b5f7919dafcf',1,'ksf::comps::ksMqttConfigProvider::getInstanceType()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#a04f92ecf71ebdc6ed7c9c5edeabd2591',1,'ksf::comps::ksMqttConnector::getInstanceType()'],['../classksf_1_1comps_1_1ks_reset_button.html#a968a297e1474b98595c6f5b869e2ab30',1,'ksf::comps::ksResetButton::getInstanceType()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#ad62ba9ea6b7cd686787a3a5e983afaa1',1,'ksf::comps::ksWifiConfigurator::getInstanceType()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#aac64b50d213913d0c0232ae83ef8c863',1,'ksf::comps::ksWifiConnector::getInstanceType()'],['../classksf_1_1ks_component.html#a84143a4d98122f3f1d8c42df4742158d',1,'ksf::ksComponent::getInstanceType()'],['../classksf_1_1ks_rtti.html#a1c3282d0b589d1fd9655a01a05c0ac12',1,'ksf::ksRtti::getInstanceType()']]],
+  ['getparam_3',['getParam',['../classksf_1_1misc_1_1ks_config.html#a5fd2d16273d7fea3717f020bf47389b7',1,'ksf::misc::ksConfig']]],
+  ['getparameters_4',['getParameters',['../classksf_1_1comps_1_1ks_config_provider.html#a15e1288f8c0f9ea8b83885ab500ba20d',1,'ksf::comps::ksConfigProvider']]],
+  ['getpin_5',['getPin',['../classksf_1_1comps_1_1ks_led.html#a1e9b8fab3d1bc4d80302c92fa7939d45',1,'ksf::comps::ksLed::getPin()'],['../classksf_1_1comps_1_1ks_reset_button.html#a2092d47454216a02f2f254b0fc3496f3',1,'ksf::comps::ksResetButton::getPin()']]],
+  ['getreconnectcounter_6',['getReconnectCounter',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a3401589baf730b3cfa12fcd47369509b',1,'ksf::comps::ksMqttConnector']]],
+  ['getrequiredauthtoken_7',['getRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a81b95552fd9f0e4c49d59259ca5be2f0',1,'ksf::misc::ksWSServer']]],
+  ['getresolvedip_8',['getResolvedIP',['../classksf_1_1misc_1_1ks_domain_query.html#ae0f26233a1241715cbc392faccac16c4',1,'ksf::misc::ksDomainQuery']]],
+  ['git_20issues_9',['Git Issues',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md26',1,'']]],
+  ['github_20actions_10',['Quick Release (GitHub Actions)',['../index.html#autotoc_md55',1,'']]],
+  ['github_20actions_20automatic_11',['For GitHub Actions (Automatic)',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md18',1,'']]],
+  ['github_20actions_20issues_12',['GitHub Actions Issues',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md25',1,'']]],
+  ['github_20actions_20recommended_13',['Using GitHub Actions (Recommended)',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md2',1,'']]],
+  ['github_20cli_14',['Installing GitHub CLI',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md20',1,'']]],
+  ['github_20workflows_20release_20yml_20tt_15',['&lt;tt&gt;.github/workflows/release.yml&lt;/tt&gt;',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md10',1,'']]],
+  ['gotipaddress_16',['gotIpAddress',['../classksf_1_1comps_1_1ks_wifi_connector.html#a23e10a819e8e91c564a84b6774c857bf',1,'ksf::comps::ksWifiConnector']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🧩_20miscellaneous_0',['🧩 Miscellaneous',['../index.html#autotoc_md18',1,'']]]
+  ['📜_20motivation_20to_20create_20the_20library_0',['📜 Motivation to create the library',['../index.html#autotoc_md32',1,'']]]
 ];

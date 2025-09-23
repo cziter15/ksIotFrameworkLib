@@ -1,17 +1,10 @@
 var searchData=
 [
-  ['id_0',['id',['../structksf_1_1comps_1_1ks_config_parameter.html#a99d67380c982e195ff16c9d4c9221940',1,'ksf::comps::ksConfigParameter']]],
-  ['init_1',['init',['../classksf_1_1comps_1_1ks_device_portal.html#a2b75ab8090a6ac95008c3f6f417d821e',1,'ksf::comps::ksDevicePortal::init()'],['../classksf_1_1comps_1_1ks_led.html#a54708ddd80553023003ce7bba9f7430e',1,'ksf::comps::ksLed::init()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#a5218003f79bceb2207178361fc124aeb',1,'ksf::comps::ksMqttConnector::init()'],['../classksf_1_1comps_1_1ks_reset_button.html#aff554ea730fa9b9e830c4abb2d44d17f',1,'ksf::comps::ksResetButton::init()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#aaf10ed3c6fa2336fc4d5b7e71bb89195',1,'ksf::comps::ksWifiConfigurator::init()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#a893fbb2fdb3c2b6a126e478ff92e325c',1,'ksf::comps::ksWifiConnector::init()'],['../classksf_1_1ks_application.html#ae0df7f797abc4f477f17448aa89613ce',1,'ksf::ksApplication::init()'],['../classksf_1_1ks_component.html#a684f870e77ac3795b3cf789a8a81cdde',1,'ksf::ksComponent::init()']]],
-  ['inrequest_5fneedauthentication_2',['inRequest_NeedAuthentication',['../classksf_1_1comps_1_1ks_device_portal.html#aadf8b151247f2364ac2da012acb51738',1,'ksf::comps::ksDevicePortal']]],
-  ['intervalms_3',['intervalMs',['../classksf_1_1misc_1_1ks_simple_timer.html#a9c052a104fe5e1c811a657df6af51ea3',1,'ksf::misc::ksSimpleTimer']]],
-  ['introduction_4',['🌟 Introduction',['../index.html#autotoc_md2',1,'']]],
-  ['invalidate_5',['invalidate',['../classksf_1_1misc_1_1ks_domain_query.html#af75475d7ae01e4c99651049c602fef2c',1,'ksf::misc::ksDomainQuery']]],
-  ['isa_6',['isA',['../classksf_1_1comps_1_1ks_config_provider.html#a33de8a828c7f876cdf9a43135511657b',1,'ksf::comps::ksConfigProvider::isA()'],['../classksf_1_1comps_1_1ks_device_portal.html#a2256f5166ece72d25fffb83292d17e4d',1,'ksf::comps::ksDevicePortal::isA()'],['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#aa6c93f7dab79feaed63af780882a53fc',1,'ksf::comps::ksDevStatMqttReporter::isA()'],['../classksf_1_1comps_1_1ks_led.html#a2b2d30c143dd36c7f3c682e01c5417ee',1,'ksf::comps::ksLed::isA()'],['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#a708c4427f57d233fe3951f9718e6ad0f',1,'ksf::comps::ksMqttConfigProvider::isA()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#a3a66432b7e14ce14d34f55153f8070c5',1,'ksf::comps::ksMqttConnector::isA()'],['../classksf_1_1comps_1_1ks_reset_button.html#a3aa67c6ce32314bd5a33b01695fbc66d',1,'ksf::comps::ksResetButton::isA()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#a30e0cd467c391628f046d25027fa101b',1,'ksf::comps::ksWifiConfigurator::isA()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#ab91bb1db440a6adf8b98ea15b854b5d2',1,'ksf::comps::ksWifiConnector::isA()'],['../classksf_1_1ks_component.html#a21b807fa08051e1dbada776449485379',1,'ksf::ksComponent::isA()'],['../classksf_1_1ks_rtti.html#a52bfcf077c1a2ec004cf2841e6f89244',1,'ksf::ksRtti::isA()']]],
-  ['isblinking_7',['isBlinking',['../classksf_1_1comps_1_1ks_led.html#a39401225820c0b94f07792287a6b9376',1,'ksf::comps::ksLed']]],
-  ['isbound_8',['isBound',['../classksf_1_1evt_1_1ks_event.html#ab85a2d7e4b758a99bae5f2696668ddf0',1,'ksf::evt::ksEvent']]],
-  ['isconnected_9',['isConnected',['../classksf_1_1comps_1_1ks_mqtt_connector.html#aa273e290cb18e2ea76db22a7c059b48e',1,'ksf::comps::ksMqttConnector::isConnected()'],['../classksf_1_1comps_1_1ks_wifi_connector.html#a1dbeb307a217a5c267496f46c00d63c9',1,'ksf::comps::ksWifiConnector::isConnected()']]],
-  ['isdirty_10',['isDirty',['../classksf_1_1misc_1_1ks_config.html#afff8db88d089a9d0ed178df85bc82a87',1,'ksf::misc::ksConfig']]],
-  ['isenabled_11',['isEnabled',['../classksf_1_1comps_1_1ks_led.html#ae9830a8a0dc7f41ebe2c1ded0a95a28a',1,'ksf::comps::ksLed']]],
-  ['issafetocallendota_12',['isSafeToCallEndOta',['../classksf_1_1comps_1_1ks_device_portal.html#a9149406f781dd5db5b5afa4a924d93a6',1,'ksf::comps::ksDevicePortal']]],
-  ['it_20works_13',['🔎 How It Works',['../index.html#autotoc_md14',1,'']]]
+  ['dependencies_0',['📑 Dependencies',['../index.html#autotoc_md50',1,'']]],
+  ['details_1',['🛠 Script Details',['../md_docs_2_r_e_l_e_a_s_e___a_u_t_o_m_a_t_i_o_n.html#autotoc_md7',1,'']]],
+  ['devicename_2',['deviceName',['../classksf_1_1comps_1_1ks_wifi_configurator.html#af561e65c5fb0c156d1d5d9b55e070951',1,'ksf::comps::ksWifiConfigurator']]],
+  ['dnsserver_3',['dnsServer',['../classksf_1_1comps_1_1ks_device_portal.html#a9d9ecd302b4ef31f3778baf91eed0e48',1,'ksf::comps::ksDevicePortal']]],
+  ['documentation_4',['📚 Documentation',['../index.html#autotoc_md33',1,'']]],
+  ['domainresolver_5',['domainResolver',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a322640c8bb8cc5f369a7d2a9ab67d59e',1,'ksf::comps::ksMqttConnector']]],
+  ['driveaspushpull_6',['driveAsPushPull',['../classksf_1_1comps_1_1ks_led.html#a79747cb65b374896c24931539221efc6',1,'ksf::comps::ksLed']]]
 ];
