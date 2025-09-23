@@ -40,7 +40,7 @@ namespace ksf::comps
 				bool wasConnected : 1;									//!< True if connected in previous loop.
 				bool savePower : 1;										//!< True to save power.
 				bool gotIpAddress : 1;									//!< True if IP address is set.
-			} bitflags = {false, true, false};
+			} __attribute__((packed)) bitflags = {false, true, false};
 
 			/*!
 				@brief Internal method that generates MAC address for the device.
