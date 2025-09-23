@@ -179,6 +179,23 @@ std::shared_ptr&lt; <a class="el" href="classksf_1_1evt_1_1ks_event.html">ksf::e
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
+<tr class="memitem:a64533c05f21f31d86b7cdcb6d7479ab8" id="r_a64533c05f21f31d86b7cdcb6d7479ab8"><td class="memItemLeft" ><a id="a64533c05f21f31d86b7cdcb6d7479ab8" name="a64533c05f21f31d86b7cdcb6d7479ab8"></a>
+struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a6eb69a7817a4f12f407b1abaa7af3" id="r_a48a6eb69a7817a4f12f407b1abaa7af3"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>wasConnected</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a48a6eb69a7817a4f12f407b1abaa7af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if connected in previous loop. <br /></td></tr>
+<tr class="separator:a48a6eb69a7817a4f12f407b1abaa7af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a834a821f203a30408680acda91a7f7e2" id="r_a834a821f203a30408680acda91a7f7e2"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>savePower</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a834a821f203a30408680acda91a7f7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">True to save power. <br /></td></tr>
+<tr class="separator:a834a821f203a30408680acda91a7f7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77fff76cb8a87e0b2d73f76f4f217ccc" id="r_a77fff76cb8a87e0b2d73f76f4f217ccc"><td class="memItemLeft" >
+&#160;&#160;&#160;bool&#160;&#160;&#160;<b>gotIpAddress</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="memdesc:a77fff76cb8a87e0b2d73f76f4f217ccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if IP address is set. <br /></td></tr>
+<tr class="separator:a77fff76cb8a87e0b2d73f76f4f217ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64533c05f21f31d86b7cdcb6d7479ab8" id="r_a64533c05f21f31d86b7cdcb6d7479ab8"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>__attribute__</b> ((packed)) bitflags&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
+<tr class="separator:a64533c05f21f31d86b7cdcb6d7479ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac52bb4438c4024c91066caec2795f2dc" id="r_ac52bb4438c4024c91066caec2795f2dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac52bb4438c4024c91066caec2795f2dc">setupMacAddress</a> ()</td></tr>
 <tr class="memdesc:ac52bb4438c4024c91066caec2795f2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal method that generates MAC address for the device.  <br /></td></tr>
 <tr class="separator:ac52bb4438c4024c91066caec2795f2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -197,23 +214,6 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="classksf_1_1misc_1_1ks_simple_timer.html">misc::ksSimpleTimer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>wifiIpCheckTimer</b></td></tr>
 <tr class="memdesc:a08310412b9f4b3363fda3e8775b1ae25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wifi timer - IP check interval. <br /></td></tr>
 <tr class="separator:a08310412b9f4b3363fda3e8775b1ae25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57999bf01a15a9aaafff884036844959" id="r_a57999bf01a15a9aaafff884036844959"><td class="memItemLeft" ><a id="a57999bf01a15a9aaafff884036844959" name="a57999bf01a15a9aaafff884036844959"></a>
-struct {&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a6eb69a7817a4f12f407b1abaa7af3" id="r_a48a6eb69a7817a4f12f407b1abaa7af3"><td class="memItemLeft" >
-&#160;&#160;&#160;bool&#160;&#160;&#160;<b>wasConnected</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a48a6eb69a7817a4f12f407b1abaa7af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if connected in previous loop. <br /></td></tr>
-<tr class="separator:a48a6eb69a7817a4f12f407b1abaa7af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a834a821f203a30408680acda91a7f7e2" id="r_a834a821f203a30408680acda91a7f7e2"><td class="memItemLeft" >
-&#160;&#160;&#160;bool&#160;&#160;&#160;<b>savePower</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a834a821f203a30408680acda91a7f7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">True to save power. <br /></td></tr>
-<tr class="separator:a834a821f203a30408680acda91a7f7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77fff76cb8a87e0b2d73f76f4f217ccc" id="r_a77fff76cb8a87e0b2d73f76f4f217ccc"><td class="memItemLeft" >
-&#160;&#160;&#160;bool&#160;&#160;&#160;<b>gotIpAddress</b>: 1&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="memdesc:a77fff76cb8a87e0b2d73f76f4f217ccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if IP address is set. <br /></td></tr>
-<tr class="separator:a77fff76cb8a87e0b2d73f76f4f217ccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57999bf01a15a9aaafff884036844959" id="r_a57999bf01a15a9aaafff884036844959"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><b>bitflags</b> = {false, true, false}&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a57999bf01a15a9aaafff884036844959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classksf_1_1ks_component"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classksf_1_1ks_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a></td></tr>
 <tr class="memitem:ac946b878dc913d67a11492db06afbb5d inherit pro_attribs_classksf_1_1ks_component" id="r_ac946b878dc913d67a11492db06afbb5d"><td class="memItemLeft" align="right" valign="top">
 ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>componentState</b> { ksComponentState::NotInitialized }</td></tr>
