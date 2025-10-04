@@ -42,7 +42,7 @@ jobs:
           NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
           git add library.properties library.json
-          git commit -m "Bump version to ${NEW_VERSION}"
+          git commit -m "Bump version to ${NEW_VERSION}" || echo "No changes to commit"
           git push
 
       - name: Create Release Tag
@@ -53,7 +53,7 @@ jobs:
           git push origin "v${NEW_VERSION}"
 
       - name: Create GitHub Release (with auto notes)
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@<FULL_COMMIT_SHA>
         with:
-          tag_name: "${{ github.event.inputs.new_version }}"
+          tag_name: "v${{ github.event.inputs.new_version }}"
           generate_release_notes: true
