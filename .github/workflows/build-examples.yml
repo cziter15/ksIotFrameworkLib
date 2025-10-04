@@ -1,4 +1,4 @@
-name: build-examples
+name: Build application examples
 on:
   workflow_dispatch:
   push:
