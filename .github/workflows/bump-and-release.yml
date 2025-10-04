@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper release notes generation
 
       - name: Show current version
         run: |
@@ -52,9 +54,67 @@ jobs:
           git tag "v${NEW_VERSION}"
           git push origin "v${NEW_VERSION}"
 
-      - name: Create GitHub Release (with auto notes)
+      - name: Generate Release Notes with Summary
+        id: release_notes
+        env:
+          NEW_VERSION: ${{ github.event.inputs.new_version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Get the previous tag
+          PREVIOUS_TAG=$(git tag --sort=-version:refname | grep -v "v${NEW_VERSION}" | head -n 1)
+          echo "Previous tag: ${PREVIOUS_TAG}"
+          
+          # Generate changelog
+          if [ -z "$PREVIOUS_TAG" ]; then
+            CHANGELOG=$(git log --pretty=format:"- %s (%h)" --no-merges)
+          else
+            CHANGELOG=$(git log ${PREVIOUS_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+          fi
+          
+          # Get commit statistics
+          if [ -z "$PREVIOUS_TAG" ]; then
+            COMMIT_COUNT=$(git rev-list --count HEAD)
+            FILES_CHANGED=$(git diff --name-only $(git rev-list --max-parents=0 HEAD) HEAD | wc -l)
+          else
+            COMMIT_COUNT=$(git rev-list --count ${PREVIOUS_TAG}..HEAD)
+            FILES_CHANGED=$(git diff --name-only ${PREVIOUS_TAG}..HEAD | wc -l)
+          fi
+          
+          # Create release notes with summary
+          cat > release_notes.md << 'EOF'
+          ## 📋 Summary
+          
+          This release includes **${COMMIT_COUNT} commit(s)** with changes to **${FILES_CHANGED} file(s)**.
+          
+          ### 🎯 Key Highlights
+          
+          <!-- Manually describe key features/fixes or use AI to generate -->
+          - Version bump to ${NEW_VERSION}
+          - Bug fixes and improvements
+          - Performance enhancements
+          
+          ## 📝 Full Changelog
+          
+          ${CHANGELOG}
+          
+          ---
+          
+          **Full Diff**: https://github.com/${{ github.repository }}/compare/${PREVIOUS_TAG}...v${NEW_VERSION}
+          EOF
+          
+          # Replace variables in the template
+          sed -i "s/\${COMMIT_COUNT}/${COMMIT_COUNT}/g" release_notes.md
+          sed -i "s/\${FILES_CHANGED}/${FILES_CHANGED}/g" release_notes.md
+          sed -i "s/\${NEW_VERSION}/${NEW_VERSION}/g" release_notes.md
+          sed -i "s|\${CHANGELOG}|${CHANGELOG}|g" release_notes.md
+          sed -i "s|\${PREVIOUS_TAG}|${PREVIOUS_TAG}|g" release_notes.md
+          
+          # Set output
+          echo "notes_file=release_notes.md" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191
         with:
-          tag_name: "${{ github.event.inputs.new_version }}"
-          generate_release_notes: true
-          
+          tag_name: "v${{ github.event.inputs.new_version }}"
+          body_path: release_notes.md
+          generate_release_notes: false
