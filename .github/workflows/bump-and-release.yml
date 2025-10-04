@@ -53,7 +53,8 @@ jobs:
           git push origin "v${NEW_VERSION}"
 
       - name: Create GitHub Release (with auto notes)
-        uses: softprops/action-gh-release@<FULL_COMMIT_SHA>
+        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191
         with:
-          tag_name: "v${{ github.event.inputs.new_version }}"
+          tag_name: "${{ github.event.inputs.new_version }}"
           generate_release_notes: true
+          
