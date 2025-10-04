@@ -26,23 +26,31 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Update library.properties version
+        env:
+          NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
-          sed -i "s/^version=.*/version=${{ github.event.inputs.new_version }}/" library.properties
+          sed -i "s/^version=.*/version=${NEW_VERSION}/" library.properties
 
       - name: Update library.json version
+        env:
+          NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
-          jq ".version = \"${{ github.event.inputs.new_version }}\"" library.json > tmp.json && mv tmp.json library.json
+          jq ".version = \"${NEW_VERSION}\"" library.json > tmp.json && mv tmp.json library.json
 
       - name: Commit changes
+        env:
+          NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
           git add library.properties library.json
-          git commit -m "Bump version to ${{ github.event.inputs.new_version }}"
+          git commit -m "Bump version to ${NEW_VERSION}"
           git push
 
       - name: Create Release Tag
+        env:
+          NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
-          git tag "v${{ github.event.inputs.new_version }}"
-          git push origin "v${{ github.event.inputs.new_version }}"
+          git tag "v${NEW_VERSION}"
+          git push origin "v${NEW_VERSION}"
 
       - name: Create GitHub Release (with auto notes)
         uses: softprops/action-gh-release@v2
