@@ -1,5 +1,5 @@
 # flake8: noqa
-# Copyright (c) 2020-2025, Krzysztof Strehlau
+# Copyright (c) 2020-2026, Krzysztof Strehlau
 # This file is part of the ksIotFrameworkLib IoT library.
 # All licensing information can be found inside LICENSE.md file
 # https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
@@ -9,9 +9,6 @@ from logger import ksPrintLog, Colors
 ksPrintLog(Colors.Green, "Running extra script for library.")
 
 try:
-	# Import PlatformIO SCons functions
-	from SCons.Script import Import, DefaultEnvironment
-	
 	Import("projenv", "env")
 	ksPrintLog(Colors.Magenta, "Building library environment list.")
 	environments = [env, DefaultEnvironment(), projenv]
