@@ -47,5 +47,5 @@ jobs:
       - name: Create GitHub Release (with auto notes)
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: "v${{ github.event.inputs.new_version }}"
+          tag_name: "${{ github.event.inputs.new_version }}"
           generate_release_notes: true
