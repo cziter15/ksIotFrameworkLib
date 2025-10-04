@@ -3,27 +3,21 @@
 # This file is part of the ksIotFrameworkLib IoT library.
 # All licensing information can be found inside LICENSE.md file
 # https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
-
-
 class Colors:
     """ANSI color codes for terminal output."""
-
     End = "\033[0m"
-
     Bold = "\033[1m"
     Dim = "\033[2m"
     Underlined = "\033[4m"
     Blink = "\033[5m"
     Reverse = "\033[7m"
     Hidden = "\033[8m"
-
     ResetBold = "\033[21m"
     ResetDim = "\033[22m"
     ResetUnderlined = "\033[24m"
     ResetBlink = "\033[25m"
     ResetReverse = "\033[27m"
     ResetHidden = "\033[28m"
-
     Default = "\033[39m"
     Black = "\033[30m"
     Red = "\033[31m"
@@ -41,8 +35,6 @@ class Colors:
     LightMagenta = "\033[95m"
     LightCyan = "\033[96m"
     White = "\033[97m"
-
-
 def ks_print_log(color, text):
     """
     Print a formatted log message with color.
