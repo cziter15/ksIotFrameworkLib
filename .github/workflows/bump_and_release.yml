@@ -1,10 +1,10 @@
-name: Bump Version and Release
+name: Release new version
 
 on:
   workflow_dispatch:
     inputs:
       new_version:
-        description: 'Version to release (e.g., 1.2.3)'
+        description: 'Version to release'
         required: true
         type: string
 
@@ -14,6 +14,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Show current version
+        run: |
+          echo "Current version is:"
+          grep '^version=' library.properties || echo "Not found"
 
       - name: Set up Git user
         run: |
