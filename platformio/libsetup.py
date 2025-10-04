@@ -9,6 +9,9 @@ from logger import ksPrintLog, Colors
 ksPrintLog(Colors.Green, "Running extra script for library.")
 
 try:
+	# Import PlatformIO SCons functions
+	from SCons.Script import Import, DefaultEnvironment
+	
 	Import("projenv", "env")
 	ksPrintLog(Colors.Magenta, "Building library environment list.")
 	environments = [env, DefaultEnvironment(), projenv]
