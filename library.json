@@ -1,23 +1,25 @@
 {
-	"name": "ksIotFrameworkLib",
-	"version": "1.0.22",
-	"description": "Arduino based Library for ESP32/ESP8266 - composition oriented internet of things framework that provides easy to use architecture, handles device setup (wifi manager), network connectivity, MQTT telemetry protocol and more... ",
-	"keywords": "iot, framework, esp32, esp8266, library",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/cziter15/ksIotFrameworkLib.git"
-	},
-	"authors": [
-		{"name": "Krzysztof Strehlau"}
-	],
-	"build": {
-		"extraScript": "platformio/libsetup.py"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"cziter15/pubsubclient3": "https://github.com/cziter15/pubsubclient3",
-		"cziter15/arduinoWebSockets": "https://github.com/cziter15/arduinoWebSockets"
-	},
-	"frameworks": "arduino",
-	"platforms": "esp32,esp8266"
+  "name": "ksIotFrameworkLib",
+  "version": "1.0.22b",
+  "description": "Arduino based Library for ESP32/ESP8266 - composition oriented internet of things framework that provides easy to use architecture, handles device setup (wifi manager), network connectivity, MQTT telemetry protocol and more... ",
+  "keywords": "iot, framework, esp32, esp8266, library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cziter15/ksIotFrameworkLib.git"
+  },
+  "authors": [
+    {
+      "name": "Krzysztof Strehlau"
+    }
+  ],
+  "build": {
+    "extraScript": "platformio/libsetup.py"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cziter15/pubsubclient3": "https://github.com/cziter15/pubsubclient3",
+    "cziter15/arduinoWebSockets": "https://github.com/cziter15/arduinoWebSockets"
+  },
+  "frameworks": "arduino",
+  "platforms": "esp32,esp8266"
 }
