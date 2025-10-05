@@ -6,41 +6,35 @@ on:
         description: 'Version to release'
         required: true
         type: string
-
 permissions:
   contents: write
-
 jobs:
   bump-version-and-release:
+    name: Bump version and release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0   # Fetch full history & tags for proper release notes
-
       - name: Show current version
         run: |
           echo "Current version is:"
           grep '^version=' library.properties || echo "Not found"
-
       - name: Set up Git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Bump library.properties version
         env:
           NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
           sed -i "s/^version=.*/version=${NEW_VERSION}/" library.properties
-
       - name: Bump library.json version
         env:
           NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
           jq ".version = \"${NEW_VERSION}\"" library.json > tmp.json && mv tmp.json library.json
-
       - name: Commit & push version bump
         env:
           NEW_VERSION: ${{ github.event.inputs.new_version }}
@@ -48,14 +42,12 @@ jobs:
           git add library.properties library.json
           git commit -m "Bump version to ${NEW_VERSION}" || echo "No changes to commit"
           git push
-
       - name: Create and push tag
         env:
           NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
-          git tag "v${NEW_VERSION}"
-          git push origin "v${NEW_VERSION}"
-
+          git tag "${NEW_VERSION}"
+          git push origin "${NEW_VERSION}"
       - name: Build release notes
         env:
           NEW_VERSION: ${{ github.event.inputs.new_version }}
@@ -63,22 +55,14 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --tags || true
-
-          # Determine range for changelog
           PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || true)
           if [ -n "$PREV_TAG" ]; then
             RANGE="${PREV_TAG}..HEAD"
           else
             RANGE="--no-merges HEAD"
           fi
-
-          # Collect commits
           git log $RANGE --pretty=format:'%h %s (%an)' > commits.raw
-
-          # Start notes file
-          printf "# Release v%s\n\n" "${NEW_VERSION}" > release_notes.md
-
-          # Conventional-commit grouping
+          printf "# Release %s\n\n" "${NEW_VERSION}" > release_notes.md
           for type in feat fix docs chore perf refactor test; do
             if grep -Ei "^(.*: )?${type}(\(.+\))?: " commits.raw >/dev/null 2>&1; then
               header=$(case $type in
@@ -97,8 +81,6 @@ jobs:
               echo >> release_notes.md
             fi
           done
-
-          # Other changes
           if grep -Eiv "^(.*: )?(feat|fix|docs|chore|perf|refactor|test)(\(.+\))?: " commits.raw >/dev/null 2>&1; then
             printf "## Other changes\n\n" >> release_notes.md
             grep -Eiv "^(.*: )?(feat|fix|docs|chore|perf|refactor|test)(\(.+\))?: " commits.raw \
@@ -106,33 +88,12 @@ jobs:
               | sed 's/^/- /' >> release_notes.md
             echo >> release_notes.md
           fi
-
-          # Optional AI summary
-          if command -v gh >/dev/null 2>&1 && gh help ai >/dev/null 2>&1; then
-            echo "Generating AI summary..."
-            SUMMARY=$(gh ai chat --repo "${{ github.repository }}" <<'EOF'
-          Please read the following commit entries and produce a short (4-8 bullet) user-facing release summary grouped by type: Features, Fixes, Others. Keep bullets concise and single-line.
-
-          Commit entries:
-          $(cat commits.raw)
-          EOF
-            ) || true
-
-            if [ -n "$SUMMARY" ]; then
-              printf "## Summary\n\n%s\n\n" "$SUMMARY" > head.md
-              cat head.md release_notes.md > tmp.md && mv tmp.md release_notes.md
-            fi
-          fi
-
-          # Fallback if nothing generated
-          [ -s release_notes.md ] || echo -e "# Release v${NEW_VERSION}\n\nNo changes detected." > release_notes.md
-
+          [ -s release_notes.md ] || echo -e "# Release ${NEW_VERSION}\n\nNo changes detected." > release_notes.md
       - name: Create GitHub Release with notes-file
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_VERSION: ${{ github.event.inputs.new_version }}
         run: |
-          # Authenticate and publish
           echo "${GITHUB_TOKEN}" | gh auth login --with-token >/dev/null 2>&1 || true
           gh release create "${NEW_VERSION}" \
             --notes-file release_notes.md \
