@@ -134,7 +134,7 @@ jobs:
         run: |
           # Authenticate and publish
           echo "${GITHUB_TOKEN}" | gh auth login --with-token >/dev/null 2>&1 || true
-          gh release create "v${NEW_VERSION}" \
+          gh release create "${NEW_VERSION}" \
             --notes-file release_notes.md \
             --repo "${{ github.repository }}" \
             --target "${{ github.sha }}"
