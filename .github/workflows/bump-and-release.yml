@@ -110,12 +110,12 @@ jobs:
           # Optional AI summary
           if command -v gh >/dev/null 2>&1 && gh help ai >/dev/null 2>&1; then
             echo "Generating AI summary..."
-            SUMMARY=$(gh ai chat --repo "${{ github.repository }}" <<EOF
-Please read the following commit entries and produce a short (4-8 bullet) user-facing release summary grouped by type: Features, Fixes, Others. Keep bullets concise and single-line.
+            SUMMARY=$(gh ai chat --repo "${{ github.repository }}" <<'EOF'
+          Please read the following commit entries and produce a short (4-8 bullet) user-facing release summary grouped by type: Features, Fixes, Others. Keep bullets concise and single-line.
 
-Commit entries:
-$(cat commits.raw)
-EOF
+          Commit entries:
+          $(cat commits.raw)
+          EOF
             ) || true
 
             if [ -n "$SUMMARY" ]; then
