@@ -24,10 +24,10 @@
 
 namespace ksf::comps
 {
-	static constexpr char RSSI_TOPIC[] PROGMEM {"dstat/rssi"};
-	static constexpr char UPTIME_TOPIC[] PROGMEM {"dstat/uptimeSec"};
-	static constexpr char CONN_TIME_TOPIC[] PROGMEM {"dstat/connTimeSec"};
-	static constexpr char RECONN_CNT_TOPIC[] PROGMEM {"dstat/reconnCnt"};
+	static constexpr char RSSI_TOPIC[] 			PROGMEM {"dstat/rssi"};
+	static constexpr char UPTIME_TOPIC[] 		PROGMEM {"dstat/uptimeSec"};
+	static constexpr char CONN_TIME_TOPIC[] 	PROGMEM {"dstat/connTimeSec"};
+	static constexpr char RECONN_CNT_TOPIC[] 	PROGMEM {"dstat/reconnCnt"};
 
 	ksDevStatMqttReporter::ksDevStatMqttReporter(uint8_t intervalInSeconds) 
 		: reporterTimer(KSF_SEC_TO_MS(intervalInSeconds))
