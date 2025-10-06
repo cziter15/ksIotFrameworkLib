@@ -60,7 +60,7 @@ namespace ksf::comps
 			} bitflags = {false, false};								//!< Bit flags for internal use.
 
 			uint32_t logKeepAliveTimestamp{0};							//!< Flag indicating whether logs are enabled.
-			uint32_t lastLoopExecutionTimestamp{0};						//!< Time of last loop execution (us)/
+			uint32_t lastLoopExecutionTimestamp{0};						//!< Time of last loop execution (us).
 			uint32_t loopExecutionTime{0};								//!< Diff (loop exec time).
 			uint32_t scanNetworkTimestamp{0};							//!< Timestamp of last scan.
 
@@ -165,7 +165,7 @@ namespace ksf::comps
 			/*!
 				@brief Websocket handler for user commands endpoint.
 				@param body Command string from the browser.
-				@return String with commadn execution result.
+				@return String with command execution result.
 			*/
 			std::string handle_executeCommand(const std::string_view& body);
 

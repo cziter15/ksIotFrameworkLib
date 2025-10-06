@@ -34,10 +34,10 @@ namespace ksf::misc
 
 		/* Set onValidateHttpHeader validator, which will validate WSA cookie. */
 		onValidateHttpHeader([this](String headerName, String headerValue) {
-			if (requriedAuthToken != 0 && headerName.equalsIgnoreCase(COOKIE_STR))
+			if (requiredAuthToken != 0 && headerName.equalsIgnoreCase(COOKIE_STR))
 			{
 				String WSACookie(FPSTR("WSA="));
-				WSACookie += String(requriedAuthToken);
+				WSACookie += String(requiredAuthToken);
 				return headerValue.indexOf(WSACookie) != -1;
 			}
 			return true;
@@ -80,12 +80,12 @@ namespace ksf::misc
 
 	uint64_t ksWSServer::getRequiredAuthToken() const 
 	{ 
-		return requriedAuthToken; 
+		return requiredAuthToken; 
 	}
 
 	void ksWSServer::setRequiredAuthToken(uint64_t authToken) 
 	{ 
-		requriedAuthToken = authToken;
+		requiredAuthToken = authToken;
 	}
 
 	void ksWSServer::handleNonWebsocketConnection(WSclient_t * client) 
