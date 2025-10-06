@@ -20,11 +20,13 @@ jobs:
           fetch-depth: 0   # Fetch full history & tags for proper release notes
       - name: Determine version (auto or manual)
         id: determine-version
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.new_version }}
         run: |
           set -euo pipefail
-          INPUT_VERSION="${{ github.event.inputs.new_version }}"
+          INPUT_VERSION="${INPUT_VERSION}"
           git fetch --tags --quiet || true
-          if [ "${INPUT_VERSION}" != "auto" ]; then
+          if [ "$INPUT_VERSION" != "auto" ]; then
             CANDIDATE="${INPUT_VERSION}"
           else
             CURRENT="$(git tag --list '[0-9]*.[0-9]*.[0-9]*' | sort -V | tail -n1)"
@@ -52,15 +54,18 @@ jobs:
           fi
           echo "new_version=$CANDIDATE" >> "$GITHUB_OUTPUT"
       - name: Show chosen version
+        env:
+          NEW_VERSION: ${{ steps.determine-version.outputs.new_version }}
         run: |
-          echo "Chosen new version: ${{ steps.determine-version.outputs.new_version }}"
+          echo "Chosen new version: $NEW_VERSION"
       - name: Set up Git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - name: Ensure version does not already exist
+        env:
+          NEW_VERSION: ${{ steps.determine-version.outputs.new_version }}
         run: |
-          NEW_VERSION="${{ steps.determine-version.outputs.new_version }}"
           if git rev-parse -q --verify "refs/tags/${NEW_VERSION}" >/dev/null; then
             echo "Tag ${NEW_VERSION} already exists. Aborting."
             exit 1
@@ -113,7 +118,16 @@ jobs:
           printf "# Release %s\n\n" "${NEW_VERSION}" > release_notes.md
           for type in feat fix docs chore perf refactor test; do
             if grep -Ei "^(.*: )?${type}(\(.+\))?: " commits.raw >/dev/null 2>&1; then
-              header=$(case $type in feat) echo "Features";; fix) echo "Fixes";; docs) echo "Documentation";; chore) echo "Chores";; perf) echo "Performance";; refactor) echo "Refactors";; test) echo "Tests";; esac)
+              header=$(case $type in
+                feat) echo "Features";;
+                fix) echo "Fixes";;
+                docs) echo "Documentation";;
+                chore) echo "Chores";;
+                perf) echo "Performance";;
+                refactor) echo "Refactors";;
+                test) echo "Tests";;
+                *) echo ""
+              esac)
               printf "## %s\n\n" "$header" >> release_notes.md
               grep -Ei "^(.*: )?${type}(\(.+\))?: " commits.raw | sed -E 's/^[0-9a-f]+ //; s/([a-z]+)(\(.+\))?: //I; s/\s+\([^)]+\)$//' | sed 's/^/- /' >> release_notes.md
               echo >> release_notes.md
@@ -129,6 +143,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEW_VERSION: ${{ steps.determine-version.outputs.new_version }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
         run: |
           echo "${GITHUB_TOKEN}" | gh auth login --with-token >/dev/null 2>&1 || true
-          gh release create "${NEW_VERSION}" --notes-file release_notes.md --repo "${{ github.repository }}" --target "${{ github.sha }}"
+          gh release create "${NEW_VERSION}" --notes-file release_notes.md --repo "${REPO}" --target "${SHA}"
