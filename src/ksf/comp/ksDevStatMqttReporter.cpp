@@ -24,6 +24,11 @@
 
 namespace ksf::comps
 {
+	static constexpr char RSSI_TOPIC[] PROGMEM {"dstat/rssi"};
+	static constexpr char UPTIME_TOPIC[] PROGMEM {"dstat/uptimeSec"};
+	static constexpr char CONN_TIME_TOPIC[] PROGMEM {"dstat/connTimeSec"};
+	static constexpr char RECONN_CNT_TOPIC[] PROGMEM {"dstat/reconnCnt"};
+
 	ksDevStatMqttReporter::ksDevStatMqttReporter(uint8_t intervalInSeconds) 
 		: reporterTimer(KSF_SEC_TO_MS(intervalInSeconds))
 	{}
@@ -49,10 +54,10 @@ namespace ksf::comps
 		if (!mqttConnSp || !mqttConnSp->isConnected())
 			return;
 
-		mqttConnSp->publish(PSTR("dstat/rssi"), ksf::to_string(WiFi.RSSI()));
-		mqttConnSp->publish(PSTR("dstat/uptimeSec"), ksf::to_string(ksf::millis64()/1000));
-		mqttConnSp->publish(PSTR("dstat/connTimeSec"), ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
-		mqttConnSp->publish(PSTR("dstat/reconnCnt"), ksf::to_string(mqttConnSp->getReconnectCounter()));
+		mqttConnSp->publish(RSSI_TOPIC, ksf::to_string(WiFi.RSSI()));
+		mqttConnSp->publish(UPTIME_TOPIC, ksf::to_string(ksf::millis64()/1000));
+		mqttConnSp->publish(CONN_TIME_TOPIC, ksf::to_string(mqttConnSp->getConnectionTimeSeconds()));
+		mqttConnSp->publish(RECONN_CNT_TOPIC, ksf::to_string(mqttConnSp->getReconnectCounter()));
 
 		onReportCustomStats->broadcast(mqttConnSp);
 	}
