@@ -114,10 +114,12 @@ jobs:
           else
             RANGE="--no-merges HEAD"
           fi
-          git log $RANGE --pretty=format:'%h %s (%an)' > commits.raw || true
+          # Use subject-only (no short-hash) so grep patterns can match the start of the subject
+          git log $RANGE --pretty=format:'%s (%an)' > commits.raw || true
           printf "# Release %s\n\n" "${NEW_VERSION}" > release_notes.md
           for type in feat fix docs chore perf refactor test; do
-            if grep -Ei "^(.*: )?${type}(\(.+\))?: " commits.raw >/dev/null 2>&1; then
+            # Match either conventional 'type:' or 'type(scope):' OR the alternative '(type) ' prefix
+            if grep -Ei "^(.*: )?(\(${type}\)|${type}(\(.+\))?:) " commits.raw >/dev/null 2>&1; then
               header=$(case $type in
                 feat) echo "Features";;
                 fix) echo "Fixes";;
@@ -129,13 +131,19 @@ jobs:
                 *) echo ""
               esac)
               printf "## %s\n\n" "$header" >> release_notes.md
-              grep -Ei "^(.*: )?${type}(\(.+\))?: " commits.raw | sed -E 's/^[0-9a-f]+ //; s/([a-z]+)(\(.+\))?: //I; s/\s+\([^)]+\)$//' | sed 's/^/- /' >> release_notes.md
+              # Remove either leading "(type) " or "type(scope): " or "type: " and strip trailing author
+              grep -Ei "^(.*: )?(\(${type}\)|${type}(\(.+\))?:) " commits.raw \
+                | sed -E 's/^\([a-zA-Z]+\)\s*//; s/^([a-z]+)(\(.+\))?: //I; s/\s+\([^)]+\)$//' \
+                | sed 's/^/- /' >> release_notes.md
               echo >> release_notes.md
             fi
           done
-          if grep -Eiv "^(.*: )?(feat|fix|docs|chore|perf|refactor|test)(\(.+\))?: " commits.raw >/dev/null 2>&1; then
+          # Any remaining lines that do not match the known types go into "Other changes"
+          if grep -Eiv "^(.*: )?(\((feat|fix|docs|chore|perf|refactor|test)\)|feat|fix|docs|chore|perf|refactor|test)(\(.+\))?:? " commits.raw >/dev/null 2>&1; then
             printf "## Other changes\n\n" >> release_notes.md
-            grep -Eiv "^(.*: )?(feat|fix|docs|chore|perf|refactor|test)(\(.+\))?: " commits.raw | sed -E 's/^[0-9a-f]+ //; s/\s+\([^)]+\)$//' | sed 's/^/- /' >> release_notes.md
+            grep -Eiv "^(.*: )?(\((feat|fix|docs|chore|perf|refactor|test)\)|feat|fix|docs|chore|perf|refactor|test)(\(.+\))?:? " commits.raw \
+              | sed -E 's/^\([a-zA-Z]+\)\s*//; s/^([a-z]+)(\(.+\))?: //I; s/\s+\([^)]+\)$//' \
+              | sed 's/^/- /' >> release_notes.md
             echo >> release_notes.md
           fi
           [ -s release_notes.md ] || echo -e "# Release ${NEW_VERSION}\n\nNo changes detected." > release_notes.md
