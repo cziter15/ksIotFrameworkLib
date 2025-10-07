@@ -23,10 +23,6 @@ Use clear commit messages for consistency and automated releases.
 Be concise and specific
 Reference issues when possible
 
-## Git hook (optional)
-
-Run `./.githooks/install-hooks.sh` to enable automatic commit message checks.
-
 ## Before pull requests
 
 - Follow commit format
