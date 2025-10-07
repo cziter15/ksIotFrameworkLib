@@ -195,7 +195,7 @@ namespace ksf::comps
 
 	bool ksDevicePortal::inRequest_NeedAuthentication()
 	{
-		if (WiFi.localIP() == webServer->client().localIP())
+		if (WiFi.localIP() != webServer->client().localIP())
 			return false;
 
 		if (portalPassword.empty() || webServer->authenticate(PSTR("admin"), portalPassword.c_str()))
