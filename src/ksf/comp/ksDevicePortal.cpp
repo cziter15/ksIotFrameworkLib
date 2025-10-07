@@ -215,7 +215,7 @@ namespace ksf::comps
 		if (commandStart >= message.size())
 			return;
 
-		auto commandEnd{message.find('\n', commandStart + 1)};
+		auto commandEnd{message.find('\n', commandStart)};
 		if (commandEnd == std::string_view::npos)
 			commandEnd = message.size();
 
@@ -389,10 +389,12 @@ namespace ksf::comps
 				#error Platform not implemented.
 #endif
 				scanNetworkTimestamp = std::max(1UL, millis());
+				break;
 			}
 			case WIFI_SCAN_RUNNING:
 			{
 				response += PSTR("{}");
+				break;
 			}
 			return;
 
