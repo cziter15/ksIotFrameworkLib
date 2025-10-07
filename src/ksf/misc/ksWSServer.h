@@ -18,9 +18,9 @@
 namespace ksf::misc
 {
 	/*!
-		@brief Callback function typedef for Websocket messsages.
+		@brief Callback function typedef for Websocket messages.
 		@param client Websocket client number that identifies the client.
-		@param message Incomming websocket message (text / string view).
+		@param message Incoming websocket message (text / string view).
 	*/
 	typedef std::function<void(uint8_t client, std::string_view message)> ksWsServerMessageFunc_t;
 
@@ -31,12 +31,12 @@ namespace ksf::misc
 	{
 		protected:
 			std::unique_ptr<WEBSOCKETS_NETWORK_SERVER_CLASS> wsListener;		//!< WS server (listener).
-			uint64_t requriedAuthToken{0};										//!< WS auth token.
+			uint64_t requiredAuthToken{0};										//!< WS auth token.
 			ksWsServerMessageFunc_t onWebsocketTextMessage;						//!< Callback function to receive messages.
 
 			/*!
 				@brief Handler for non-WebSocket connections on websocket port.
-				@param clientS Pointer to the WSclient_t object.
+				@param client Pointer to the WSclient_t object.
 			*/
 			void handleNonWebsocketConnection(WSclient_t* client) override;
 
