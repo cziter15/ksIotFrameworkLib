@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔅_20rules_0',['🔅 Rules',['../index.html#autotoc_md34',1,'']]]
+  ['🚀_20potential_20use_20cases_0',['🚀 Potential use cases',['../index.html#autotoc_md10',1,'']]]
 ];

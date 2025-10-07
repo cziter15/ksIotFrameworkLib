@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔁_20application_20rotator_0',['🔁 Application rotator',['../index.html#autotoc_md39',1,'']]]
+  ['🔣_20compiler_20flags_20custom_20rtti_0',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md26',1,'']]]
 ];

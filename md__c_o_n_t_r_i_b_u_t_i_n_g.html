@@ -88,192 +88,45 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<p>Thank you for your interest in contributing to ksIotFrameworkLib! This document provides guidelines and information for contributors.</p>
+<p>Use clear commit messages for consistency and automated releases.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-📝 Commit Message Format</h1>
-<p>This repository uses a standardized commit message format to maintain consistency and generate meaningful release notes.</p>
-<h2><a class="anchor" id="autotoc_md2"></a>
-Format</h2>
-<div class="fragment"><div class="line">(type) Brief description of changes #issue_number</div>
-</div><!-- fragment --><p><b>Components:</b></p>
+Format:</h1>
+<p>(type) short description #issue_number</p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Commit Types</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">Description   </th><th class="markdownTableHeadNone">Example    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>feat</b>   </td><td class="markdownTableBodyNone">Adds a new feature or capability   </td><td class="markdownTableBodyNone"><code>(feat) Add WiFi reconnection logic</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>fix</b>   </td><td class="markdownTableBodyNone">Resolves a bug or issue   </td><td class="markdownTableBodyNone"><code>(fix) Handle MQTT reconnect crash #12</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>docs</b>   </td><td class="markdownTableBodyNone">Updates or improves documentation   </td><td class="markdownTableBodyNone"><code>(docs) Update README with setup steps</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>chore</b>   </td><td class="markdownTableBodyNone">Maintenance or build-related task   </td><td class="markdownTableBodyNone"><code>(chore) Update dependency versions</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>perf</b>   </td><td class="markdownTableBodyNone">Improves performance or efficiency   </td><td class="markdownTableBodyNone"><code>(perf) Reduce memory usage in parser</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>refactor</b>   </td><td class="markdownTableBodyNone">Code cleanup or structure change   </td><td class="markdownTableBodyNone"><code>(refactor) Simplify config loader</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>test</b>   </td><td class="markdownTableBodyNone">Adds or updates tests   </td><td class="markdownTableBodyNone"><code>(test) Add unit tests for network manager</code>   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Tips:</h1>
+<p>Be concise and specific Reference issues when possible</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Git hook (optional):</h1>
+<p>Run <code>./.githooks/install-hooks.sh</code> to enable automatic commit message checks.</p>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Before pull requests:</h1>
 <ul>
-<li><code>(type)</code> - The type of change, enclosed in parentheses</li>
-<li>Brief description - A concise, descriptive message about what was changed</li>
-<li><code>#issue_number</code> - (Optional) Reference to the related issue number</li>
+<li>Follow commit format</li>
+<li>Describe changes clearly</li>
+<li>Ensure builds and tests pass</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Valid Commit Types</h2>
-<p>The following commit types are recognized by the release workflow:</p>
-<ul>
-<li><code>(feat)</code> - New features</li>
-<li><code>(fix)</code> - Bug fixes</li>
-<li><code>(docs)</code> - Documentation changes</li>
-<li><code>(chore)</code> - Maintenance tasks (build, configs, dependencies)</li>
-<li><code>(perf)</code> - Performance improvements</li>
-<li><code>(refactor)</code> - Code refactoring</li>
-<li><code>(test)</code> - Test additions or modifications</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
-Examples</h2>
-<p><b>Good commit messages:</b></p>
-<div class="fragment"><div class="line">(fix) resolve memory leak in MQTT connector #123</div>
-<div class="line">(feat) add WiFi reconnection logic</div>
-<div class="line">(docs) update README with installation steps</div>
-<div class="line">(chore) update dependency versions</div>
-<div class="line">(perf) optimize memory usage in component</div>
-<div class="line">(refactor) simplify authentication logic</div>
-<div class="line">(test) add unit tests for config provider</div>
-</div><!-- fragment --><p><b>Avoid:</b></p>
-<div class="fragment"><div class="line">Initial plan</div>
-<div class="line">Update files</div>
-<div class="line">Fixed stuff</div>
-<div class="line">WIP</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
-Important Notes</h2>
-<ol type="1">
-<li><b>Be specific</b> - Describe what was changed, not just that something was changed.</li>
-<li><b>Keep it concise</b> - The description should be brief but informative.</li>
-<li><b>Reference issues</b> - When working on a specific issue, include the issue number at the end.</li>
-<li><b>Use lowercase</b> - Start the description with a lowercase letter unless it's a proper noun.</li>
-</ol>
 <h1><a class="anchor" id="autotoc_md6"></a>
-🪝 Git Hooks</h1>
-<h2><a class="anchor" id="autotoc_md7"></a>
-Commit Message Validation Hook</h2>
-<p>A Git commit-msg hook is available to automatically validate commit messages against the repository's format.</p>
-<h3><a class="anchor" id="autotoc_md8"></a>
-Installation</h3>
-<h4><a class="anchor" id="autotoc_md9"></a>
-Automatic Installation</h4>
-<p>Run the installation script from the repository root:</p>
-<div class="fragment"><div class="line">./.githooks/install-hooks.sh</div>
-</div><!-- fragment --><p>This script will:</p>
-<ul>
-<li>Copy the hooks to your <code>.git/hooks</code> directory</li>
-<li>Make them executable</li>
-<li>Backup any existing hooks</li>
-</ul>
-<h4><a class="anchor" id="autotoc_md10"></a>
-Manual Installation</h4>
-<p>Alternatively, you can manually install the hooks:</p>
-<div class="fragment"><div class="line"># From the repository root</div>
-<div class="line">cp .githooks/commit-msg .git/hooks/commit-msg</div>
-<div class="line">chmod +x .git/hooks/commit-msg</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
-Usage</h3>
-<p>Once installed, the hook will run automatically when you create a commit (via <code>git commit</code>).</p>
-<p>If the hook detects an issue, it will:</p>
-<ol type="1">
-<li>Display an error message explaining the problem</li>
-<li>Show the required format</li>
-<li>Suggest a corrected version of your message</li>
-<li>Prevent the commit from being created</li>
-</ol>
-<p>You can then fix your commit message and try again.</p>
-<h3><a class="anchor" id="autotoc_md12"></a>
-Examples</h3>
-<p><b>Invalid format - hook rejects with suggestion:</b></p>
-<div class="fragment"><div class="line">$ git commit -m &quot;added WiFi feature&quot;</div>
-<div class="line">✗ Commit message error: Message does not follow the required format</div>
-<div class="line">Suggested format: (feat) added WiFi feature</div>
-</div><!-- fragment --><p><b>Invalid type - hook suggests correct type:</b></p>
-<div class="fragment"><div class="line">$ git commit -m &quot;(feature) add WiFi&quot;</div>
-<div class="line">✗ Invalid commit type &#39;feature&#39;</div>
-<div class="line">Suggested format: (feat) add WiFi</div>
-</div><!-- fragment --><p><b>Valid format - hook accepts:</b></p>
-<div class="fragment"><div class="line">$ git commit -m &quot;(feat) add WiFi reconnection logic&quot;</div>
-<div class="line">✓ Commit message format is valid</div>
-</div><!-- fragment --><p><b>Generic message - hook warns but accepts:</b></p>
-<div class="fragment"><div class="line">$ git commit -m &quot;(chore) WIP&quot;</div>
-<div class="line">⚠ Warning: Commit message is too generic: &#39;WIP&#39;</div>
-<div class="line">✓ Commit message format is valid</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md13"></a>
-Features</h3>
-<p>The commit-msg hook provides:</p>
-<ul>
-<li>✅ Validation of commit message format</li>
-<li>✅ Validation of commit type (feat, fix, docs, etc.)</li>
-<li>✅ Smart suggestions based on commit message content</li>
-<li>✅ Warnings for generic/vague commit messages</li>
-<li>✅ Automatic skipping for merge and revert commits</li>
-<li>✅ Colored output for better readability</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md14"></a>
-Bypassing Hooks</h3>
-<p>If you need to bypass the hooks (not recommended), you can use:</p>
-<div class="fragment"><div class="line">git commit --no-verify -m &quot;your message&quot;</div>
-</div><!-- fragment --><p>However, please note that commits that don't follow the format may not be properly categorized in release notes.</p>
-<h3><a class="anchor" id="autotoc_md15"></a>
-Troubleshooting</h3>
-<p><b>Hook not running:</b></p>
-<p>Make sure the hook is executable:</p>
-<div class="fragment"><div class="line">chmod +x .git/hooks/commit-msg</div>
-</div><!-- fragment --><p><b>Hook installed but not working:</b></p>
-<p>Check that the hook file exists and is in the correct location:</p>
-<div class="fragment"><div class="line">ls -la .git/hooks/commit-msg</div>
-</div><!-- fragment --><p><b>Need to update hooks:</b></p>
-<p>Re-run the installation script:</p>
-<div class="fragment"><div class="line">./.githooks/install-hooks.sh</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md16"></a>
-🔄 Release Workflow Integration</h1>
-<p>The repository uses an automated release workflow that:</p>
-<ul>
-<li>Parses commit messages to generate release notes</li>
-<li>Groups commits by type (Features, Fixes, Documentation, etc.)</li>
-<li>Supports both <code>(type)</code> and <code>type:</code> or <code>type(scope):</code> formats</li>
-<li>Creates semantic version tags (e.g., <code>1.0.33</code>)</li>
-</ul>
-<p>Your commit messages will appear in release notes, so write them with end users in mind.</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
-📋 Pull Request Guidelines</h1>
-<p>When submitting a pull request:</p>
-<ol type="1">
-<li>Ensure all commits follow the commit message format</li>
-<li>Include a clear description of the changes</li>
-<li>Reference any related issues</li>
-<li>Ensure your code builds without errors</li>
-<li>Test your changes thoroughly</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md18"></a>
-🐛 Reporting Issues</h1>
-<p>When reporting issues:</p>
-<ol type="1">
-<li>Use a clear and descriptive title</li>
-<li>Provide steps to reproduce the issue</li>
-<li>Include relevant code snippets or error messages</li>
-<li>Specify your environment (ESP32/ESP8266, Arduino version, etc.)</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md19"></a>
-💡 Suggesting Features</h1>
-<p>Feature suggestions are welcome! Please:</p>
-<ol type="1">
-<li>Check if the feature has already been requested</li>
-<li>Provide a clear use case</li>
-<li>Explain how it would benefit the project</li>
-<li>Be open to discussion and feedback</li>
-</ol>
-<h1><a class="anchor" id="autotoc_md20"></a>
-📚 Documentation</h1>
-<p>Documentation improvements are always appreciated. Whether it's:</p>
-<ul>
-<li>Fixing typos</li>
-<li>Clarifying instructions</li>
-<li>Adding examples</li>
-<li>Improving code comments</li>
-</ul>
-<p>All contributions help make the project better!</p>
-<h1><a class="anchor" id="autotoc_md21"></a>
-🤝 Code of Conduct</h1>
-<p>Be respectful and considerate in all interactions. We're all here to learn and improve the project together.</p>
-<h1><a class="anchor" id="autotoc_md22"></a>
-❓ Questions</h1>
-<p>If you have questions about contributing, feel free to:</p>
-<ul>
-<li>Open an issue for discussion</li>
-<li>Check the <a href="https://github.com/cziter15/ksIotFrameworkLib/wiki">Wiki</a></li>
-<li>Review existing issues and pull requests</li>
-</ul>
-<p>Thank you for contributing to ksIotFrameworkLib! </p>
+Thank you for contributing!</h1>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

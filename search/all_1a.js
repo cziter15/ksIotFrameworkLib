@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🐛_20reporting_20issues_0',['🐛 Reporting Issues',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md18',1,'']]]
+  ['📏_20utilities_20and_20components_20structure_0',['📏 Utilities and components structure',['../index.html#autotoc_md17',1,'']]]
 ];
