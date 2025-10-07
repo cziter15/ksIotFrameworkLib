@@ -235,3 +235,32 @@ This design is highly flexible. For example, you can trigger a failure (`return 
 
 - [PubSubClient](https://github.com/cziter15/pubsubclient3) originally developed by @hmueller01 and @knolleary
 - [arduinoWebSockets](https://github.com/cziter15/arduinoWebSockets) originally developed by @Links2004
+
+---
+
+### 🛠️ Development
+
+#### 📝 Commit Message Format
+
+This repository uses a standardized commit message format to maintain consistency and generate meaningful release notes. A Git hook is available to validate commit messages automatically.
+
+**Format:**
+```
+(type) Brief description of changes #issue_number
+```
+
+**Valid types:**
+- `(feat)` - New features
+- `(fix)` - Bug fixes
+- `(docs)` - Documentation changes
+- `(chore)` - Maintenance tasks
+- `(perf)` - Performance improvements
+- `(refactor)` - Code refactoring
+- `(test)` - Test additions or modifications
+
+**Installing commit hooks:**
+```bash
+./.githooks/install-hooks.sh
+```
+
+For more details, see [.githooks/README.md](.githooks/README.md)
