@@ -342,7 +342,7 @@ namespace ksf::comps
 		response += PSTR(" KB \"},{\"name\":\"Framework\",\"value\":\"");
 		response += PSTR(KSF_LIBRARY_VERSION);
 		response += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
-		response += WiFi.getHostname();
+		response += ksf::jsonEscape(WiFi.getHostname());
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
 		response += PSTR(" bytes\"},{\"name\":\"Loop-to-loop time\",\"value\":\"");
@@ -389,7 +389,7 @@ namespace ksf::comps
 				response += PSTR("{\"rssi\":");
 				response += ksf::to_string(WiFi.RSSI(i));
 				response += PSTR(",\"ssid\":\"");
-				response += WiFi.SSID(i).c_str();
+				response += ksf::jsonEscape(WiFi.SSID(i).c_str());
 				response += PSTR("\",\"channel\":");
 				response += ksf::to_string(WiFi.channel(i));
 				response += PSTR(",\"secure\":");
@@ -438,9 +438,9 @@ namespace ksf::comps
 		ksf::loadCredentials(ssid, pass);
 
 		response += PSTR(",\"ssid\":\"");
-		response += ssid;
+		response += ksf::jsonEscape(ssid);
 		response += PSTR("\", \"password\":\"");
-		response += pass;
+		response += ksf::jsonEscape(pass);
 		response += PSTR("\",\"params\": [");
 
 		for (auto& configCompWp : configCompsWp)

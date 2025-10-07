@@ -244,6 +244,17 @@ namespace ksf
 	}
 
 	/*!
+		@brief Escapes a string for safe use in JSON.
+
+		This function escapes special characters according to JSON specification (RFC 8259).
+		It handles: double quotes, backslashes, and control characters.
+
+		@param input The string to be escaped.
+		@return JSON-safe escaped string.
+	*/
+	extern std::string jsonEscape(const std::string& input);
+
+	/*!
 		@brief Helper function to get latest reset reason.
 		@return A string representing the reason for the last reset.
 	*/
