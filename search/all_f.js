@@ -12,7 +12,7 @@ var searchData=
   ['requestappbreak_9',['requestAppBreak',['../classksf_1_1comps_1_1ks_device_portal.html#a493f65235eb09023daeae7db6a800f0d',1,'ksf::comps::ksDevicePortal']]],
   ['requiredauthtoken_10',['requiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a2e142ee4cd90503c7f7d718c872d6134',1,'ksf::misc::ksWSServer']]],
   ['restart_11',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
-  ['rotator_12',['🔁 Application rotator',['../index.html#autotoc_md16',1,'']]],
-  ['rtti_13',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md19',1,'']]],
-  ['rules_14',['🔅 Rules',['../index.html#autotoc_md11',1,'']]]
+  ['rotator_12',['🔁 Application rotator',['../index.html#autotoc_md17',1,'']]],
+  ['rtti_13',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md20',1,'']]],
+  ['rules_14',['🔅 Rules',['../index.html#autotoc_md12',1,'']]]
 ];
