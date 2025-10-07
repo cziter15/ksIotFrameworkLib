@@ -94,7 +94,8 @@ $(function(){ initResizable(false); });
 </pre><p><b>Format 2 (Conventional Commits style):</b> </p><pre class="fragment">type: &lt;short description&gt;
 type(scope): &lt;short description&gt;
 </pre><p>Valid types: feat, fix, docs, style, refactor, perf, test, chore</p>
-<p>Examples:</p><ul>
+<p>Examples:</p>
+<ul>
 <li><code>(feat) add OAuth2 token refresh</code></li>
 <li><code>feat: add OAuth2 token refresh</code></li>
 <li><code>feat(auth): add OAuth2 token refresh</code></li>
@@ -109,7 +110,8 @@ type(scope): &lt;short description&gt;
 </ul>
 </li>
 </ol>
-<p>CI enforcement:</p><ul>
+<p>CI enforcement:</p>
+<ul>
 <li>A GitHub Actions workflow will validate commit messages on pull requests and block merges with invalid commits.</li>
 </ul>
 <p>If you cannot run the local hook, CI will still validate commits and will fail the PR if commits are invalid. Please update your commit messages to match the required format. </p>
