@@ -244,6 +244,55 @@ namespace ksf
 		return getUptimeFromSeconds(static_cast<uint32_t>(uptimeSeconds));
 	}
 
+	std::string jsonEscape(const std::string& input)
+	{
+		std::string output;
+		output.reserve(input.size());
+
+		for (auto ch : input)
+		{
+			switch (ch)
+			{
+				case '"':
+					output += PSTR("\\\"");
+					break;
+				case '\\':
+					output += PSTR("\\\\");
+					break;
+				case '\b':
+					output += PSTR("\\b");
+					break;
+				case '\f':
+					output += PSTR("\\f");
+					break;
+				case '\n':
+					output += PSTR("\\n");
+					break;
+				case '\r':
+					output += PSTR("\\r");
+					break;
+				case '\t':
+					output += PSTR("\\t");
+					break;
+				default:
+					if (ch >= 0 && ch < 0x20)
+					{
+						// Escape other control characters as \uXXXX
+						char buf[7];
+						snprintf(buf, sizeof(buf), "\\u%04x", static_cast<unsigned char>(ch));
+						output += buf;
+					}
+					else
+					{
+						output += ch;
+					}
+					break;
+			}
+		}
+
+		return output;
+	}
+
 	void loadCredentials(std::string& ssid, std::string& password)
 	{
 		USING_CONFIG_FILE(WIFI_CRED_FILENAME_TEXT)

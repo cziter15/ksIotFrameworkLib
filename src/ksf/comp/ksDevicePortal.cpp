@@ -342,15 +342,15 @@ namespace ksf::comps
 		response += PSTR(" KB \"},{\"name\":\"Framework\",\"value\":\"");
 		response += PSTR(KSF_LIBRARY_VERSION);
 		response += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
-		response += WiFi.getHostname();
+		response += ksf::jsonEscape(WiFi.getHostname());
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
 		response += PSTR(" bytes\"},{\"name\":\"Loop-to-loop time\",\"value\":\"");
 		response += ksf::to_string(loopExecutionTime);
 		response += PSTR(" μs\"},{\"name\":\"Device uptime\",\"value\":\"");
-		response += ksf::getUptimeString();
+		response += ksf::jsonEscape(ksf::getUptimeString());
 		response += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
-		response += ksf::getResetReason();
+		response += ksf::jsonEscape(ksf::getResetReason());
 		response += PSTR("\"},{\"name\":\"MQTT status\",\"value\":\" ");
 
 		if (auto mqttConnSp{mqttConnectorWp.lock()})
@@ -358,7 +358,7 @@ namespace ksf::comps
 			if (mqttConnSp->isConnected())
 			{
 				response += PSTR("up for ");
-				response += ksf::getUptimeFromSeconds(mqttConnSp->getConnectionTimeSeconds());
+				response += ksf::jsonEscape(ksf::getUptimeFromSeconds(mqttConnSp->getConnectionTimeSeconds()));
 				response += PSTR(", ");
 			}
 			else response += PSTR("down, ");
@@ -369,11 +369,11 @@ namespace ksf::comps
 		else response += PSTR("not present");
 
 		response += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
-		response += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
+		response += ksf::jsonEscape(WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str());
 		response += PSTR("\"},{\"name\":\"DNS servers\",\"value\":\"");
-		response += WiFi.dnsIP().toString().c_str();
+		response += ksf::jsonEscape(WiFi.dnsIP().toString().c_str());
 		response += ", ";
-		response += WiFi.dnsIP(1).toString().c_str();
+		response += ksf::jsonEscape(WiFi.dnsIP(1).toString().c_str());
 		response += PSTR("\"}]");
 	}
 
@@ -389,7 +389,7 @@ namespace ksf::comps
 				response += PSTR("{\"rssi\":");
 				response += ksf::to_string(WiFi.RSSI(i));
 				response += PSTR(",\"ssid\":\"");
-				response += WiFi.SSID(i).c_str();
+				response += ksf::jsonEscape(WiFi.SSID(i).c_str());
 				response += PSTR("\",\"channel\":");
 				response += ksf::to_string(WiFi.channel(i));
 				response += PSTR(",\"secure\":");
@@ -438,9 +438,9 @@ namespace ksf::comps
 		ksf::loadCredentials(ssid, pass);
 
 		response += PSTR(",\"ssid\":\"");
-		response += ssid;
+		response += ksf::jsonEscape(ssid);
 		response += PSTR("\", \"password\":\"");
-		response += pass;
+		response += ksf::jsonEscape(pass);
 		response += PSTR("\",\"params\": [");
 
 		for (auto& configCompWp : configCompsWp)
@@ -456,11 +456,11 @@ namespace ksf::comps
 			for (auto paramRef : paramListRef)
 			{
 				response += PSTR("{\"id\": \"");
-				response += paramRef.id;
+				response += ksf::jsonEscape(paramRef.id);
 				response += PSTR("\", \"label\": \"");
-				response += paramRef.label;
+				response += ksf::jsonEscape(paramRef.label);
 				response += PSTR("\", \"value\": \"");
-				response += paramRef.value;
+				response += ksf::jsonEscape(paramRef.value);
 				response += PSTR("\", \"type\": \"");
 				
 				switch (paramRef.type)
