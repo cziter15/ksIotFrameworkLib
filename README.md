@@ -122,16 +122,23 @@ flowchart TD
 ```text
     📁 ksf
     ├── 📄 ksAppRotator                 ─── Application rotator component
+    ├── 📄 ksApplication                ─── Base application class
     ├── 📄 ksRtti                       ─── Implements RTTI (run-time type information) for objects
     ├── 📄 ksComponent                  ─── Base component class
     ├── 📄 ksConstants                  ─── Basic low-level definitions
+    ├── 📂 evt
+    │   ├── 📄 ksEvent                  ─── Event system implementation
+    │   ├── 📄 ksEventHandle            ─── Event handle management
+    │   └── 📄 ksEventInterface         ─── Event interface definition
     ├── 📂 misc
     │   ├── 📄 ksCertUtils              ─── MQTT certificate utilities
     │   ├── 📄 ksConfig                 ─── Configuration file handling
     │   ├── 📄 ksDomainQuery            ─── Custom DNS implementation
     │   ├── 📄 ksSimpleTimer            ─── Simple timer functionality
     │   └── 📄 ksWSServer               ─── Internal WS handling for device portal
-    └── 📂 comps
+    ├── 📂 res
+    │   └── 📄 otaWebpage               ─── OTA update webpage resources
+    └── 📂 comp
         ├── 📄 ksConfigProvider         ─── Manages configuration parameters and storage
         ├── 📄 ksDevStatMqttReporter    ─── Sends periodic device status updates via MQTT
         ├── 📄 ksDevicePortal           ─── Implements a web-based configuration portal
