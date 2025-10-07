@@ -335,13 +335,13 @@ namespace ksf::comps
 		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
 		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
-		response += PSTR(" MHz)\"},{\"name\":\"Library version\",\"value\":\"");
-		response += PSTR(KSF_LIBRARY_VERSION);
-		response += PSTR("\"},{\"name\":\"Flash chip\",\"value\":\"Vendor ID: ");
+		response += PSTR(" MHz)\"},{\"name\":\"Flash chip\",\"value\":\"Vendor ID: ");
 		response += ksf::to_string(ESP_getFlashVendor());
 		response += PSTR(", size: ");
 		response += ksf::to_string(ESP_getFlashSizeKB());
-		response += PSTR(" KB \"},{\"name\":\"Hostname\",\"value\":\"");
+		response += PSTR(" KB \"},{\"name\":\"Library version\",\"value\":\"");
+		response += PSTR(KSF_LIBRARY_VERSION);
+		response += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
 		response += WiFi.getHostname();
 		response += PSTR("\"},{\"name\":\"Free heap\",\"value\":\"");
 		response += ksf::to_string(ESP.getFreeHeap());
