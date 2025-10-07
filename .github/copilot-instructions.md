@@ -72,5 +72,4 @@ The repository uses an automated release workflow that:
 - Supports both `(type)` and `type:` or `type(scope):` formats
 - Creates semantic version tags (e.g., `1.0.33`)
 
-
 Your commit messages will appear in release notes, so write them with end users in mind.
