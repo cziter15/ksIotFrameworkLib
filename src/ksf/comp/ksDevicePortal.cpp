@@ -348,9 +348,9 @@ namespace ksf::comps
 		response += PSTR(" bytes\"},{\"name\":\"Loop-to-loop time\",\"value\":\"");
 		response += ksf::to_string(loopExecutionTime);
 		response += PSTR(" μs\"},{\"name\":\"Device uptime\",\"value\":\"");
-		response += ksf::jsonEscape(ksf::getUptimeString());
+		response += ksf::getUptimeString();
 		response += PSTR("\"},{\"name\":\"Reset reason\",\"value\":\"");
-		response += ksf::jsonEscape(ksf::getResetReason());
+		response += ksf::getResetReason();
 		response += PSTR("\"},{\"name\":\"MQTT status\",\"value\":\" ");
 
 		if (auto mqttConnSp{mqttConnectorWp.lock()})
@@ -358,7 +358,7 @@ namespace ksf::comps
 			if (mqttConnSp->isConnected())
 			{
 				response += PSTR("up for ");
-				response += ksf::jsonEscape(ksf::getUptimeFromSeconds(mqttConnSp->getConnectionTimeSeconds()));
+				response += ksf::getUptimeFromSeconds(mqttConnSp->getConnectionTimeSeconds());
 				response += PSTR(", ");
 			}
 			else response += PSTR("down, ");
@@ -369,11 +369,11 @@ namespace ksf::comps
 		else response += PSTR("not present");
 
 		response += PSTR("\"},{\"name\":\"IP address\",\"value\":\"");
-		response += ksf::jsonEscape(WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str());
+		response += WiFi.getMode() == WIFI_AP ?  WiFi.softAPIP().toString().c_str() : WiFi.localIP().toString().c_str();
 		response += PSTR("\"},{\"name\":\"DNS servers\",\"value\":\"");
-		response += ksf::jsonEscape(WiFi.dnsIP().toString().c_str());
+		response += WiFi.dnsIP().toString().c_str();
 		response += ", ";
-		response += ksf::jsonEscape(WiFi.dnsIP(1).toString().c_str());
+		response += WiFi.dnsIP(1).toString().c_str();
 		response += PSTR("\"}]");
 	}
 
