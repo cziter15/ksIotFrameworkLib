@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔣_20compiler_20flags_20custom_20rtti_0',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md19',1,'']]]
+  ['🔡_20frameworks_0',['🔡 Frameworks',['../index.html#autotoc_md23',1,'']]],
+  ['🔡_20libraries_1',['🔡 Libraries',['../index.html#autotoc_md24',1,'']]]
 ];
