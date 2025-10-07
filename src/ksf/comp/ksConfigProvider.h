@@ -101,7 +101,7 @@ namespace ksf::comps
 
 			/*!
 				@brief Outputs the parameter list to the configuration file.
-			*/
+			*/ 
 			virtual void saveParams() = 0;
 	};
 }
