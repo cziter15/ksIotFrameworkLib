@@ -185,7 +185,7 @@ namespace ksf
 
 		@param input Input - string, string_view etc.
 		@param out Output reference - can be int, double (anything that std::from_chars support).
-		@return True if conversion succeded, otherwise false.
+		@return True if conversion succeeded, otherwise false.
 	*/
 	template <typename _In, typename _Out>
 	bool from_chars(const _In& input, _Out& out)
@@ -237,7 +237,7 @@ namespace ksf
 	template<class _Type1, class _Type2>
 	inline bool starts_with(const _Type1& input, const _Type2& match)
 	{
-		return input.size() >= match.size()	&& std::equal(match.begin(), match.end(), input.begin());
+		return input.size() >= match.size() && std::equal(match.begin(), match.end(), input.begin());
 	}
 
 	/*!

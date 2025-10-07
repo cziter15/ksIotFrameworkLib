@@ -39,7 +39,7 @@ namespace ksf::comps
 	const char MQTT_BROKER_USER_TEXT[] 				PROGMEM {"MQTT Username"};
 	const char MQTT_BROKER_PASSWORD_TEXT[] 			PROGMEM {"MQTT Password"};
 	const char MQTT_BROKER_PREFIX_TEXT[] 			PROGMEM {"MQTT Topic Prefix"};
-	constexpr const char TOPIC_DELIMETER{'/'};
+	constexpr const char TOPIC_DELIMITER{'/'};
 
 	void ksMqttConfigProvider::setupMqttConnector(ksMqttConnector& connector)
 	{
@@ -61,8 +61,8 @@ namespace ksf::comps
 			if (prefix.length() > 0)
 			{
 				/* Apply suffix correction. */
-				if (prefix.back() != TOPIC_DELIMETER)
-					prefix += TOPIC_DELIMETER;
+				if (prefix.back() != TOPIC_DELIMITER)
+					prefix += TOPIC_DELIMITER;
 			}
 
 			if (!savedBroker.empty())
