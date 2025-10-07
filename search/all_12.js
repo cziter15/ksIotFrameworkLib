@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['unbind_0',['unbind',['../classksf_1_1evt_1_1ks_event.html#a28b95e555a1da1bf15b72467f6c133bc',1,'ksf::evt::ksEvent::unbind()'],['../classksf_1_1evt_1_1ks_event_interface.html#a9da6e0357176b359db6f5004f66caf7a',1,'ksf::evt::ksEventInterface::unbind()']]],
-  ['unsubscribe_1',['unsubscribe',['../classksf_1_1comps_1_1ks_mqtt_connector.html#aa0371f700a74e710804fc4e7c99e75e4',1,'ksf::comps::ksMqttConnector']]],
-  ['updatefinished_2',['updateFinished',['../classksf_1_1comps_1_1ks_device_portal.html#a2febff831199e81498a8bbf8b91f0e4b',1,'ksf::comps::ksDevicePortal']]],
-  ['use_20cases_3',['🚀 Potential use cases',['../index.html#autotoc_md3',1,'']]],
-  ['usepersistentsession_4',['usePersistentSession',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a8e80106d4063007faf9f1bc7eb1c889c',1,'ksf::comps::ksMqttConnector']]],
-  ['utilities_20and_20components_20structure_5',['📏 Utilities and components structure',['../index.html#autotoc_md10',1,'']]]
+  ['the_20application_0',['🌱 Building the Application',['../index.html#autotoc_md36',1,'']]],
+  ['the_20library_1',['📜 Motivation to create the library',['../index.html#autotoc_md27',1,'']]],
+  ['to_20create_20the_20library_2',['📜 Motivation to create the library',['../index.html#autotoc_md27',1,'']]],
+  ['to_20ksiotframeworklib_3',['Contributing to ksIotFrameworkLib',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html',1,'']]],
+  ['triggered_4',['triggered',['../classksf_1_1misc_1_1ks_simple_timer.html#a3964b7ee76adf5d2f9d622c433093188',1,'ksf::misc::ksSimpleTimer']]],
+  ['triggerfactoryreset_5',['triggerFactoryReset',['../classksf_1_1comps_1_1ks_device_portal.html#a035eda5d01f853d77445fd4b75d74909',1,'ksf::comps::ksDevicePortal']]],
+  ['triggerstate_6',['triggerState',['../classksf_1_1comps_1_1ks_reset_button.html#a19333b9f885a6e61c27e04f206b75cb7',1,'ksf::comps::ksResetButton']]],
+  ['troubleshooting_7',['Troubleshooting',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md15',1,'']]],
+  ['type_8',['type',['../structksf_1_1comps_1_1ks_config_parameter.html#a2a51ec51e1b435711105c1dbb9125b57',1,'ksf::comps::ksConfigParameter']]],
+  ['types_9',['Valid Commit Types',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md3',1,'']]]
 ];

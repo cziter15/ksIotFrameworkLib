@@ -17,7 +17,7 @@ var searchData=
   ['ksevent_3c_3e_14',['ksEvent&lt;&gt;',['../classksf_1_1evt_1_1ks_event.html',1,'ksf::evt']]],
   ['kseventhandle_15',['ksEventHandle',['../classksf_1_1evt_1_1ks_event_handle.html',1,'ksf::evt::ksEventHandle'],['../classksf_1_1evt_1_1ks_event_handle.html#a2ba584af638b4d972ecac8ed0660db14',1,'ksf::evt::ksEventHandle::ksEventHandle()']]],
   ['kseventinterface_16',['ksEventInterface',['../classksf_1_1evt_1_1ks_event_interface.html',1,'ksf::evt']]],
-  ['ksiotframeworklib_17',['ksIotFrameworkLib',['../index.html',1,'']]],
+  ['ksiotframeworklib_17',['ksIotFrameworkLib',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html',1,'Contributing to ksIotFrameworkLib'],['../index.html',1,'ksIotFrameworkLib']]],
   ['ksled_18',['ksLed',['../classksf_1_1comps_1_1ks_led.html',1,'ksf::comps::ksLed'],['../classksf_1_1comps_1_1ks_led.html#a9900da46e213614c74662553ac07a8ea',1,'ksf::comps::ksLed::ksLed()']]],
   ['ksmqttconfigprovider_19',['ksMqttConfigProvider',['../classksf_1_1comps_1_1ks_mqtt_config_provider.html',1,'ksf::comps']]],
   ['ksmqttconnector_20',['ksMqttConnector',['../classksf_1_1comps_1_1ks_mqtt_connector.html',1,'ksf::comps::ksMqttConnector'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#a97dd66cd5cb6dbb6819ff73376c048ed',1,'ksf::comps::ksMqttConnector::ksMqttConnector()']]],

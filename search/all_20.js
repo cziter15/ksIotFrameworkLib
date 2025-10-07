@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['🔡_20frameworks_0',['🔡 Frameworks',['../index.html#autotoc_md23',1,'']]],
-  ['🔡_20libraries_1',['🔡 Libraries',['../index.html#autotoc_md24',1,'']]]
+  ['📜_20motivation_20to_20create_20the_20library_0',['📜 Motivation to create the library',['../index.html#autotoc_md27',1,'']]]
 ];

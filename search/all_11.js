@@ -1,10 +1,26 @@
 var searchData=
 [
-  ['the_20application_0',['🌱 Building the Application',['../index.html#autotoc_md13',1,'']]],
-  ['the_20library_1',['📜 Motivation to create the library',['../index.html#autotoc_md4',1,'']]],
-  ['to_20create_20the_20library_2',['📜 Motivation to create the library',['../index.html#autotoc_md4',1,'']]],
-  ['triggered_3',['triggered',['../classksf_1_1misc_1_1ks_simple_timer.html#a3964b7ee76adf5d2f9d622c433093188',1,'ksf::misc::ksSimpleTimer']]],
-  ['triggerfactoryreset_4',['triggerFactoryReset',['../classksf_1_1comps_1_1ks_device_portal.html#a035eda5d01f853d77445fd4b75d74909',1,'ksf::comps::ksDevicePortal']]],
-  ['triggerstate_5',['triggerState',['../classksf_1_1comps_1_1ks_reset_button.html#a19333b9f885a6e61c27e04f206b75cb7',1,'ksf::comps::ksResetButton']]],
-  ['type_6',['type',['../structksf_1_1comps_1_1ks_config_parameter.html#a2a51ec51e1b435711105c1dbb9125b57',1,'ksf::comps::ksConfigParameter']]]
+  ['saveparams_0',['saveParams',['../classksf_1_1comps_1_1ks_config_provider.html#a137995e9f92a86526a6feec85d7721b5',1,'ksf::comps::ksConfigProvider::saveParams()'],['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#a4d316f6e72e43ee5d121b48d2aee50fc',1,'ksf::comps::ksMqttConfigProvider::saveParams()']]],
+  ['savepower_1',['savePower',['../classksf_1_1comps_1_1ks_wifi_connector.html#ad712e221c2bcc55d500b0365075cfee2',1,'ksf::comps::ksWifiConnector']]],
+  ['saving_20power_2',['🔥 Saving power',['../index.html#autotoc_md43',1,'']]],
+  ['scannetworktimestamp_3',['scanNetworkTimestamp',['../classksf_1_1comps_1_1ks_device_portal.html#a4fafe81b3100c79214a84bec4b093556',1,'ksf::comps::ksDevicePortal']]],
+  ['sendconnectionstatus_4',['sendConnectionStatus',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a95b20ca302d48003c755183b21d65215',1,'ksf::comps::ksMqttConnector']]],
+  ['sendquery_5',['sendQuery',['../classksf_1_1misc_1_1ks_domain_query.html#afce7934b50cc6c83de71c60fefda178c',1,'ksf::misc::ksDomainQuery']]],
+  ['setblinking_6',['setBlinking',['../classksf_1_1comps_1_1ks_led.html#ac4b5388865229bfb8b841df7b690900a',1,'ksf::comps::ksLed']]],
+  ['setdomain_7',['setDomain',['../classksf_1_1misc_1_1ks_domain_query.html#aba860776720bd72653ccbf94bf66a537',1,'ksf::misc::ksDomainQuery']]],
+  ['setdriveaspushpull_8',['setDriveAsPushPull',['../classksf_1_1comps_1_1ks_led.html#ab6948ea0404741b5bd8c8ed6e1c957b2',1,'ksf::comps::ksLed']]],
+  ['setenabled_9',['setEnabled',['../classksf_1_1comps_1_1ks_led.html#a07bd8f91be11f266ac3a31bfe8c1c79a',1,'ksf::comps::ksLed']]],
+  ['setinterval_10',['setInterval',['../classksf_1_1misc_1_1ks_simple_timer.html#a0532ae0dc7d825d5b6ce3b94f6080b9d',1,'ksf::misc::ksSimpleTimer']]],
+  ['setmessagehandler_11',['setMessageHandler',['../classksf_1_1misc_1_1ks_w_s_server.html#ab6465499a17fef0e369e9f0f5802ef13',1,'ksf::misc::ksWSServer']]],
+  ['setparam_12',['setParam',['../classksf_1_1misc_1_1ks_config.html#aca932449b2cf5329fc4429b9dd94d0d9',1,'ksf::misc::ksConfig']]],
+  ['setrequiredauthtoken_13',['setRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#ad7c5303434271a77957a113dad7a2c37',1,'ksf::misc::ksWSServer']]],
+  ['setup_14',['setup',['../classksf_1_1misc_1_1ks_cert_fingerprint.html#a156f0dbc3a0fb5124e5a9b78b8e1cc8b',1,'ksf::misc::ksCertFingerprint']]],
+  ['setupconnection_15',['setupConnection',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a62e45ab36a3176fafe09a198623aa884',1,'ksf::comps::ksMqttConnector']]],
+  ['setuphttpserver_16',['setupHttpServer',['../classksf_1_1comps_1_1ks_device_portal.html#ae6c76bee527e97fbd9a4e08d09306633',1,'ksf::comps::ksDevicePortal']]],
+  ['setupmacaddress_17',['setupMacAddress',['../classksf_1_1comps_1_1ks_wifi_connector.html#ac52bb4438c4024c91066caec2795f2dc',1,'ksf::comps::ksWifiConnector']]],
+  ['setupmqttconnector_18',['setupMqttConnector',['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e',1,'ksf::comps::ksMqttConfigProvider']]],
+  ['setupwsserver_19',['setupWsServer',['../classksf_1_1comps_1_1ks_device_portal.html#a2fc892e79d3813ab7b6135df5a475aee',1,'ksf::comps::ksDevicePortal']]],
+  ['structure_20',['📏 Utilities and components structure',['../index.html#autotoc_md33',1,'']]],
+  ['subscribe_21',['subscribe',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a327f16a26deb354be7374bdb0e26cdbd',1,'ksf::comps::ksMqttConnector']]],
+  ['suggesting_20features_22',['💡 Suggesting Features',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md19',1,'']]]
 ];

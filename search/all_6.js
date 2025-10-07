@@ -8,5 +8,7 @@ var searchData=
   ['getreconnectcounter_5',['getReconnectCounter',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a3401589baf730b3cfa12fcd47369509b',1,'ksf::comps::ksMqttConnector']]],
   ['getrequiredauthtoken_6',['getRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a81b95552fd9f0e4c49d59259ca5be2f0',1,'ksf::misc::ksWSServer']]],
   ['getresolvedip_7',['getResolvedIP',['../classksf_1_1misc_1_1ks_domain_query.html#ae0f26233a1241715cbc392faccac16c4',1,'ksf::misc::ksDomainQuery']]],
-  ['gotipaddress_8',['gotIpAddress',['../classksf_1_1comps_1_1ks_wifi_connector.html#a23e10a819e8e91c564a84b6774c857bf',1,'ksf::comps::ksWifiConnector']]]
+  ['git_20hooks_8',['🪝 Git Hooks',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md6',1,'']]],
+  ['gotipaddress_9',['gotIpAddress',['../classksf_1_1comps_1_1ks_wifi_connector.html#a23e10a819e8e91c564a84b6774c857bf',1,'ksf::comps::ksWifiConnector']]],
+  ['guidelines_10',['📋 Pull Request Guidelines',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md17',1,'']]]
 ];
