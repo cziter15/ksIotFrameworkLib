@@ -149,10 +149,10 @@ Protected Attributes</h2></td></tr>
 std::unique_ptr&lt; WEBSOCKETS_NETWORK_SERVER_CLASS &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>wsListener</b></td></tr>
 <tr class="memdesc:a169aaf6bac76dfc12f9137307ad190dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">WS server (listener). <br /></td></tr>
 <tr class="separator:a169aaf6bac76dfc12f9137307ad190dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af459c67b491ce00347a590de9dcee044" id="r_af459c67b491ce00347a590de9dcee044"><td class="memItemLeft" align="right" valign="top"><a id="af459c67b491ce00347a590de9dcee044" name="af459c67b491ce00347a590de9dcee044"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>requriedAuthToken</b> {0}</td></tr>
-<tr class="memdesc:af459c67b491ce00347a590de9dcee044"><td class="mdescLeft">&#160;</td><td class="mdescRight">WS auth token. <br /></td></tr>
-<tr class="separator:af459c67b491ce00347a590de9dcee044"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e142ee4cd90503c7f7d718c872d6134" id="r_a2e142ee4cd90503c7f7d718c872d6134"><td class="memItemLeft" align="right" valign="top"><a id="a2e142ee4cd90503c7f7d718c872d6134" name="a2e142ee4cd90503c7f7d718c872d6134"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>requiredAuthToken</b> {0}</td></tr>
+<tr class="memdesc:a2e142ee4cd90503c7f7d718c872d6134"><td class="mdescLeft">&#160;</td><td class="mdescRight">WS auth token. <br /></td></tr>
+<tr class="separator:a2e142ee4cd90503c7f7d718c872d6134"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a507b6d18fbe0c211bec2bb593173d885" id="r_a507b6d18fbe0c211bec2bb593173d885"><td class="memItemLeft" align="right" valign="top"><a id="a507b6d18fbe0c211bec2bb593173d885" name="a507b6d18fbe0c211bec2bb593173d885"></a>
 ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>onWebsocketTextMessage</b></td></tr>
 <tr class="memdesc:a507b6d18fbe0c211bec2bb593173d885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to receive messages. <br /></td></tr>
@@ -207,7 +207,7 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
 <p>Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).</p>
 <dl class="section return"><dt>Returns</dt><dd>Auth token for WebSocket </dd></dl>
 
-<p class="reference">References <a class="el" href="#af459c67b491ce00347a590de9dcee044">requriedAuthToken</a>.</p>
+<p class="reference">References <a class="el" href="#a2e142ee4cd90503c7f7d718c872d6134">requiredAuthToken</a>.</p>
 
 </div>
 </div>
@@ -237,7 +237,7 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
 <p>Handler for non-WebSocket connections on websocket port. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">clientS</td><td>Pointer to the WSclient_t object. </td></tr>
+    <tr><td class="paramname">client</td><td>Pointer to the WSclient_t object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -295,7 +295,7 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#af459c67b491ce00347a590de9dcee044">requriedAuthToken</a>.</p>
+<p class="reference">References <a class="el" href="#a2e142ee4cd90503c7f7d718c872d6134">requiredAuthToken</a>.</p>
 
 </div>
 </div>

@@ -10,7 +10,7 @@ var searchData=
   ['reportdevstats_7',['reportDevStats',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a4c5d0897b01f93c21dace3130746bdc5',1,'ksf::comps::ksDevStatMqttReporter']]],
   ['reportertimer_8',['reporterTimer',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a438be9e2f2a5749db02d729aaf76cae9',1,'ksf::comps::ksDevStatMqttReporter']]],
   ['requestappbreak_9',['requestAppBreak',['../classksf_1_1comps_1_1ks_device_portal.html#a493f65235eb09023daeae7db6a800f0d',1,'ksf::comps::ksDevicePortal']]],
-  ['requriedauthtoken_10',['requriedAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#af459c67b491ce00347a590de9dcee044',1,'ksf::misc::ksWSServer']]],
+  ['requiredauthtoken_10',['requiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a2e142ee4cd90503c7f7d718c872d6134',1,'ksf::misc::ksWSServer']]],
   ['restart_11',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
   ['rotator_12',['🔁 Application rotator',['../index.html#autotoc_md16',1,'']]],
   ['rtti_13',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md19',1,'']]],
