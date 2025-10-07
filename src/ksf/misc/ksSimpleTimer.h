@@ -48,7 +48,7 @@ namespace ksf::misc
 			void setInterval(uint32_t intervalMs);
 
 			/*!
-				@brief Restarts timer. Will set last trigger time to current time w/o triggering the timer).
+				@brief Restarts timer. Will set last trigger time to current time w/o triggering the timer.
 			*/
 			void restart();
 

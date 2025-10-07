@@ -29,13 +29,13 @@ namespace ksf::comps
 			/*!
 				@brief Retrieves MQTT parameters.
 
-				This method reads the configuation file to retrieve MQTT broker information from file.
+				This method reads the configuration file to retrieve MQTT broker information from file.
  				The config contains data like MQTT address, device prefix, optional: credentials and expected SSL fingerprint.
 			*/
 			void readParams() override;
 
 			/*!
-				@brief Saves MQTT aprameters into the configuration file.
+				@brief Saves MQTT parameters into the configuration file.
 
 				This method saves current (in-memory) MQTT properties into the configuration file.
 			*/

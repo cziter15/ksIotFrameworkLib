@@ -67,9 +67,9 @@ namespace ksf::comps
 			std::list<ksConfigParameter> params;	//!< List of configuration parameters.
 			
 			/*!
-				@brief Defines new configutation parameter.
+				@brief Defines new configuration parameter.
 
-				@param id Unique identificator that will be also used as property label by Device Portal.
+				@param id Unique identifier that will be also used as property label by Device Portal.
 				@param label Parameter label.
 				@param defaultValue Default parameter value.
 				@param maxLength Maximum length of the value.
@@ -78,10 +78,10 @@ namespace ksf::comps
 			void addNewParam(std::string id, std::string label, std::string defaultValue, int maxLength = 50, EConfigParamType::Type type = {});
 
 			/*!
-				@brief Defines new configuation parameter (with default value).
+				@brief Defines new configuration parameter (with default value).
 
 				@param config ksConfig reference.
-				@param id Unique identificator that will be also used as property label by Device Portal.
+				@param id Unique identifier that will be also used as property label by Device Portal.
 				@param label Parameter label.
 				@param maxLength Maximum length of the value.
 				@param type Type of parameter, which tells the Device Portal which field type should be used.
