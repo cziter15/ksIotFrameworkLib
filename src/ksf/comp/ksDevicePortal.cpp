@@ -339,7 +339,7 @@ namespace ksf::comps
 		response += ksf::to_string(ESP_getFlashVendor());
 		response += PSTR(", size: ");
 		response += ksf::to_string(ESP_getFlashSizeKB());
-		response += PSTR(" KB \"},{\"name\":\"Framework ver.\",\"value\":\"");
+		response += PSTR(" KB \"},{\"name\":\"Framework\",\"value\":\"");
 		response += PSTR(KSF_LIBRARY_VERSION);
 		response += PSTR("\"},{\"name\":\"Hostname\",\"value\":\"");
 		response += WiFi.getHostname();
