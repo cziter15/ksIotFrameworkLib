@@ -1,6 +1,6 @@
 {
   "name": "ksIotFrameworkLib",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "Arduino based Library for ESP32/ESP8266 - composition oriented internet of things framework that provides easy to use architecture, handles device setup (wifi manager), network connectivity, MQTT telemetry protocol and more... ",
   "keywords": "iot, framework, esp32, esp8266, library",
   "repository": {
