@@ -2,8 +2,15 @@
 set -euo pipefail
 
 # Support both (type) format and type: or type(scope): format
-PATTERN='^(\(feat|\(fix|\(docs|\(style|\(refactor|\(perf|\(test|\(chore\) .+|(feat|fix|docs|style|refactor|perf|test|chore)(\([^)]+\))?: .+)'
 
+# Pattern for "(type) message" format, e.g., "(feat) add new feature"
+TYPE_PAREN='\\((feat|fix|docs|style|refactor|perf|test|chore)\\) .+'
+
+# Pattern for "type: message" or "type(scope): message" format, e.g., "feat: add new feature" or "feat(core): add new feature"
+TYPE_COLON='(feat|fix|docs|style|refactor|perf|test|chore)(\\([^)]+\\))?: .+'
+
+# Combine both patterns, anchored to start of line
+PATTERN="^(${TYPE_PAREN}|${TYPE_COLON})"
 if [ -z "${1-}" ]; then
   echo "Usage: $0 <commit-range-or-sha1..sha2>"
   echo "Example: $0 origin/main..HEAD"
