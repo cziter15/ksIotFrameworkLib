@@ -377,50 +377,43 @@ namespace ksf::comps
 
 	void ksDevicePortal::handle_scanNetworks(std::string& response)
 	{
-		switch (WiFi.scanComplete())
+		if (auto scanResult{WiFi.scanComplete()}; scanResult > 0)
 		{
-			case WIFI_SCAN_FAILED:
+			response += '[';
+			for (int i{0}; i < scanResult; ++i)
 			{
-#if defined(ESP32)
-				WiFi.scanNetworks(true, false, true);
-#elif defined(ESP8266)
-				WiFi.scanNetworks(true, true);
-#else
-				#error Platform not implemented.
-#endif
-				scanNetworkTimestamp = std::max(1UL, millis());
-				break;
+				if (i > 0)
+					response += ',';
+				response += PSTR("{\"rssi\":");
+				response += ksf::to_string(WiFi.RSSI(i));
+				response += PSTR(",\"ssid\":\"");
+				response += WiFi.SSID(i).c_str();
+				response += PSTR("\",\"channel\":");
+				response += ksf::to_string(WiFi.channel(i));
+				response += PSTR(",\"secure\":");
+				response += ksf::to_string(WiFi.encryptionType(i));
+				response += '}';
 			}
-			case WIFI_SCAN_RUNNING:
-			{
-				response += PSTR("{}");
-				break;
-			}
+			response +=	']';
+			WiFi.scanDelete();
+			WiFi.enableSTA(false);
+			scanNetworkTimestamp = 0;
 			return;
-
-			default:
+		}
+		else
+		{
+			if (scanResult == WIFI_SCAN_FAILED)
 			{
-				response += '[';
-				for (int i{0}; i < WiFi.scanComplete(); ++i)
-				{
-					if (i > 0)
-						response += ',';
-					response += PSTR("{\"rssi\":");
-					response += ksf::to_string(WiFi.RSSI(i));
-					response += PSTR(",\"ssid\":\"");
-					response += WiFi.SSID(i).c_str();
-					response += PSTR("\",\"channel\":");
-					response += ksf::to_string(WiFi.channel(i));
-					response += PSTR(",\"secure\":");
-					response += ksf::to_string(WiFi.encryptionType(i));
-					response += '}';
-				}
-				response +=	']';
-
-				WiFi.scanDelete();
-				WiFi.enableSTA(false);
-				scanNetworkTimestamp = 0;
+	#if defined(ESP32)
+				WiFi.scanNetworks(true, false, true);
+	#elif defined(ESP8266)
+				WiFi.scanNetworks(true, true);
+	#else
+				#error Platform not implemented.
+	#endif
+				scanNetworkTimestamp = std::max(1UL, millis());
 			}
+			response += PSTR("{}");
 		}
 	}
 
