@@ -64,6 +64,9 @@
 /*! Helper macro for init ks Framework. */
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
+/*! Library version string. Auto-bumped by workflow. */
+#define KSF_LIBRARY_VERSION "1.0.33"
+
 namespace ksf
 {
 	namespace EOTAType
