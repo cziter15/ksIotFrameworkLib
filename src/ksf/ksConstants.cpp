@@ -255,38 +255,39 @@ namespace ksf
 			{
 				case '"':
 					output += PSTR("\\\"");
-					break;
+				break;
 				case '\\':
 					output += PSTR("\\\\");
 					break;
 				case '\b':
 					output += PSTR("\\b");
-					break;
+				break;
 				case '\f':
 					output += PSTR("\\f");
-					break;
+				break;
 				case '\n':
 					output += PSTR("\\n");
-					break;
+				break;
 				case '\r':
 					output += PSTR("\\r");
-					break;
+				break;
 				case '\t':
 					output += PSTR("\\t");
-					break;
+				break;
 				default:
-					if (ch >= 0 && ch < 0x20)
+					if (static_cast<unsigned char>(ch) < 0x20)
 					{
-						// Escape other control characters as \uXXXX
-						char buf[7];
-						snprintf(buf, sizeof(buf), "\\u%04x", static_cast<unsigned char>(ch));
-						output += buf;
+						unsigned int val{static_cast<unsigned char>(ch)};
+						const char hex[]{"0123456789abcdef"};
+						output += '\\';
+						output += 'u';
+						output += hex[(val >> 12) & 0xF];
+						output += hex[(val >> 8) & 0xF];
+						output += hex[(val >> 4) & 0xF];
+						output += hex[val & 0xF];
 					}
-					else
-					{
-						output += ch;
-					}
-					break;
+					else output += ch;
+				break;
 			}
 		}
 
