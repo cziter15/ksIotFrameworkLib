@@ -14,6 +14,5 @@ var searchData=
   ['onupdateend_11',['onUpdateEnd',['../classksf_1_1comps_1_1ks_device_portal.html#a7dc2e53045a02c604627f8101baa68e2',1,'ksf::comps::ksDevicePortal']]],
   ['onupdatestart_12',['onUpdateStart',['../classksf_1_1comps_1_1ks_device_portal.html#a94f2d902c9447d79a165cdb0ed7417ab',1,'ksf::comps::ksDevicePortal']]],
   ['onwebsockettextmessage_13',['onWebsocketTextMessage',['../classksf_1_1misc_1_1ks_w_s_server.html#a507b6d18fbe0c211bec2bb593173d885',1,'ksf::misc::ksWSServer::onWebsocketTextMessage'],['../classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7',1,'ksf::comps::ksDevicePortal::onWebsocketTextMessage()']]],
-  ['operator_20bool_14',['operator bool',['../classksf_1_1misc_1_1ks_config.html#aef3eb1177e7b6deb4c67c07069d90cdb',1,'ksf::misc::ksConfig']]],
-  ['optional_15',['Git hook (optional)',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md4',1,'']]]
+  ['operator_20bool_14',['operator bool',['../classksf_1_1misc_1_1ks_config.html#aef3eb1177e7b6deb4c67c07069d90cdb',1,'ksf::misc::ksConfig']]]
 ];
