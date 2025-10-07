@@ -13,6 +13,7 @@ Use the following format for commit messages:
 ```
 
 **Components:**
+
 - `(type)` - The type of change, enclosed in parentheses
 - Brief description - A concise, descriptive message about what was changed
 - `#issue_number` - (Optional) Reference to the related issue number
@@ -65,9 +66,11 @@ WIP
 ### Release Workflow Integration
 
 The repository uses an automated release workflow that:
+
 - Parses commit messages to generate release notes
 - Groups commits by type (Features, Fixes, Documentation, etc.)
 - Supports both `(type)` and `type:` or `type(scope):` formats
 - Creates semantic version tags (e.g., `1.0.33`)
+
 
 Your commit messages will appear in release notes, so write them with end users in mind.
