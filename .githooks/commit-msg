@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+MSG_FILE="$1"
+# Read only first line (header)
+MSG="$(sed -n '1p' "$MSG_FILE")"
+
+# Support both (type) format and type: or type(scope): format
+PATTERN='^(\(feat|\(fix|\(docs|\(style|\(refactor|\(perf|\(test|\(chore\) .+|(feat|fix|docs|style|refactor|perf|test|chore)(\([^)]+\))?: .+)'
+
+if ! grep -Eq "$PATTERN" <<< "$MSG"; then
+  echo "ERROR: Commit message does not follow the required format."
+  echo "Expected patterns:"
+  echo "  - (type) <description>            (e.g., (feat) add OAuth2 token refresh)"
+  echo "  - type: <description>             (e.g., feat: add OAuth2 token refresh)"
+  echo "  - type(scope): <description>      (e.g., feat(auth): add OAuth2 token refresh)"
+  echo "Valid types: feat, fix, docs, style, refactor, perf, test, chore"
+  exit 1
+fi
+
+exit 0
