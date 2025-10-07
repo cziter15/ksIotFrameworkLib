@@ -2,7 +2,7 @@
 
 Use clear commit messages for consistency and automated releases.
 
-## Format:
+## Format
 
 (type) short description #issue_number
 
@@ -18,20 +18,19 @@ Use clear commit messages for consistency and automated releases.
 | **refactor**| Code cleanup or structure change | `(refactor) Simplify config loader`          |
 | **test**    | Adds or updates tests            | `(test) Add unit tests for network manager`  |
 
-
-## Tips:
+## Tips
 
 Be concise and specific
 Reference issues when possible
 
-## Git hook (optional):
+## Git hook (optional)
 
 Run `./.githooks/install-hooks.sh` to enable automatic commit message checks.
 
-## Before pull requests:
+## Before pull requests
 
 - Follow commit format
 - Describe changes clearly
 - Ensure builds and tests pass
 
-## Thank you for contributing!
+## Thank you for contributing
