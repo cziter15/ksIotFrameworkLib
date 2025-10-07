@@ -13,24 +13,9 @@ jobs:
           fetch-depth: 0
 
       - name: Validate commit messages in PR
-        env:
-          PATTERN: "^(\\(feat|\\(fix|\\(docs|\\(style|\\(refactor|\\(perf|\\(test|\\(chore\\) .+|(feat|fix|docs|style|refactor|perf|test|chore)(\\([^)]+\\))?: .+)"
         run: |
           set -euo pipefail
           base=${{ github.event.pull_request.base.sha }}
           head=${{ github.event.pull_request.head.sha }}
           echo "Checking commits from $base..$head"
-          bad=0
-          for sha in $(git rev-list $base..$head); do
-            header=$(git log --format=%B -n1 $sha | sed -n '1p')
-            if ! echo "$header" | grep -Eq "$PATTERN"; then
-              echo "Invalid commit message in $sha:" 
-              git log --format=%B -n1 $sha | sed -n '1,5p'
-              echo
-              bad=1
-            fi
-          done
-          if [ $bad -ne 0 ]; then
-            echo "::error::One or more commits do not follow the required commit message format."
-            exit 1
-          fi
+          ./scripts/validate-commit-messages.sh $base $head
