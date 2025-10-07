@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔥_20saving_20power_0',['🔥 Saving power',['../index.html#autotoc_md27',1,'']]]
+  ['🚀_20potential_20use_20cases_0',['🚀 Potential use cases',['../index.html#autotoc_md10',1,'']]]
 ];

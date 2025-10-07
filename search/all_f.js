@@ -1,17 +1,19 @@
 var searchData=
 [
-  ['params_0',['params',['../classksf_1_1comps_1_1ks_config_provider.html#ada21e72b8c09bb566639a70426e3a101',1,'ksf::comps::ksConfigProvider']]],
-  ['password_1',['password',['../classksf_1_1comps_1_1ks_mqtt_connector.html#af38f406daf37f94b37cb74c9d7831cae',1,'ksf::comps::ksMqttConnector']]],
-  ['periodictaskstimeout_2',['periodicTasksTimeout',['../classksf_1_1comps_1_1ks_wifi_configurator.html#aed26171387589f3953e954a1e11023d5',1,'ksf::comps::ksWifiConfigurator']]],
-  ['pin_3',['pin',['../classksf_1_1comps_1_1ks_led.html#a5a944a7741ab9a0f1437021784a8d1e1',1,'ksf::comps::ksLed::pin'],['../classksf_1_1comps_1_1ks_reset_button.html#a29879006a4ff502303a11eb534d3d8b3',1,'ksf::comps::ksResetButton::pin']]],
-  ['portalpassword_4',['portalPassword',['../classksf_1_1comps_1_1ks_device_portal.html#a320c4d5b38d622379742b43f4fa99464',1,'ksf::comps::ksDevicePortal']]],
-  ['portnumber_5',['portNumber',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ab2b5431473acbcaa5907d63743e9ca84',1,'ksf::comps::ksMqttConnector']]],
-  ['postinit_6',['postInit',['../classksf_1_1comps_1_1ks_device_portal.html#a3943c29bbb8bea8568154903c379a8a4',1,'ksf::comps::ksDevicePortal::postInit()'],['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a762ce8b72ef72aa6142a318ad5752c7a',1,'ksf::comps::ksDevStatMqttReporter::postInit()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#ae1e46595b6c1a5760c31149355e751c4',1,'ksf::comps::ksMqttConnector::postInit()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#af940a4472153cb497d35bf1ffe035dc2',1,'ksf::comps::ksWifiConfigurator::postInit()'],['../classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb',1,'ksf::ksComponent::postInit()']]],
-  ['potential_20use_20cases_7',['🚀 Potential use cases',['../index.html#autotoc_md10',1,'']]],
-  ['power_8',['🔥 Saving power',['../index.html#autotoc_md27',1,'']]],
-  ['prefix_9',['prefix',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a2acc73077e7b4ef0d5f7cd03ad75da19',1,'ksf::comps::ksMqttConnector']]],
-  ['pressedtime_10',['pressedTime',['../classksf_1_1comps_1_1ks_reset_button.html#a838f42f24cf1d8a95f4820faebb7e302',1,'ksf::comps::ksResetButton']]],
-  ['process_11',['process',['../classksf_1_1misc_1_1ks_domain_query.html#a90739cb6ac868a2ea5646054daa05bf8',1,'ksf::misc::ksDomainQuery']]],
-  ['publish_12',['publish',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ab101e26b5ea98a8b3e35295ab2b00680',1,'ksf::comps::ksMqttConnector']]],
-  ['pull_20requests_3a_13',['Before pull requests:',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]]
+  ['readparams_0',['readParams',['../classksf_1_1comps_1_1ks_config_provider.html#a0d115049edd41092f31cb49a0eac2988',1,'ksf::comps::ksConfigProvider::readParams()'],['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#ad41f00507bd0d2ec465cb4dd68884199',1,'ksf::comps::ksMqttConfigProvider::readParams()']]],
+  ['rebootdevice_1',['rebootDevice',['../classksf_1_1comps_1_1ks_device_portal.html#ace71e2cafe4c513d17b9a322f5916a74',1,'ksf::comps::ksDevicePortal']]],
+  ['receiveresponse_2',['receiveResponse',['../classksf_1_1misc_1_1ks_domain_query.html#a3e8de9bf4f875bfbd61d51c2b8636d3d',1,'ksf::misc::ksDomainQuery']]],
+  ['reconnectcounter_3',['reconnectCounter',['../classksf_1_1comps_1_1ks_mqtt_connector.html#af7928b7e420a6e8b98b17e5b43127d27',1,'ksf::comps::ksMqttConnector']]],
+  ['reconnecttimer_4',['reconnectTimer',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a3272849e991b131d65f75bf8c8b1912a',1,'ksf::comps::ksMqttConnector']]],
+  ['registerevent_5',['registerEvent',['../classksf_1_1evt_1_1ks_event.html#a172f69d818c73df76abc833fdda016a7',1,'ksf::evt::ksEvent']]],
+  ['releasedtime_6',['releasedTime',['../classksf_1_1comps_1_1ks_reset_button.html#a3b7c09ba82d65c6aece78ac67e285258',1,'ksf::comps::ksResetButton']]],
+  ['reportdevstats_7',['reportDevStats',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a4c5d0897b01f93c21dace3130746bdc5',1,'ksf::comps::ksDevStatMqttReporter']]],
+  ['reportertimer_8',['reporterTimer',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a438be9e2f2a5749db02d729aaf76cae9',1,'ksf::comps::ksDevStatMqttReporter']]],
+  ['requestappbreak_9',['requestAppBreak',['../classksf_1_1comps_1_1ks_device_portal.html#a493f65235eb09023daeae7db6a800f0d',1,'ksf::comps::ksDevicePortal']]],
+  ['requests_10',['Before pull requests',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]],
+  ['requiredauthtoken_11',['requiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a2e142ee4cd90503c7f7d718c872d6134',1,'ksf::misc::ksWSServer']]],
+  ['restart_12',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
+  ['rotator_13',['🔁 Application rotator',['../index.html#autotoc_md23',1,'']]],
+  ['rtti_14',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md26',1,'']]],
+  ['rules_15',['🔅 Rules',['../index.html#autotoc_md18',1,'']]]
 ];

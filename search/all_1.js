@@ -1,14 +1,12 @@
 var searchData=
 [
-  ['activelow_0',['activeLow',['../classksf_1_1comps_1_1ks_led.html#af938483daf772d709e04d3a877006843',1,'ksf::comps::ksLed']]],
-  ['addcomponent_1',['addComponent',['../classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91',1,'ksf::ksApplication']]],
-  ['addnewparam_2',['addNewParam',['../classksf_1_1comps_1_1ks_config_provider.html#a6b17eeb01e313fb4074b598f669541ce',1,'ksf::comps::ksConfigProvider']]],
-  ['addnewparamwithconfigdefault_3',['addNewParamWithConfigDefault',['../classksf_1_1comps_1_1ks_config_provider.html#abcf9e639207edeef487fe7d73bbda22a',1,'ksf::comps::ksConfigProvider']]],
-  ['and_20components_20structure_4',['📏 Utilities and components structure',['../index.html#autotoc_md17',1,'']]],
-  ['app_5',['app',['../classksf_1_1comps_1_1ks_device_portal.html#a0ed6c88eac9a0254d732d74566ca12b1',1,'ksf::comps::ksDevicePortal::app'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#a88bfef0ffa77358a7b26ed066bd5fe29',1,'ksf::comps::ksWifiConfigurator::app']]],
-  ['application_6',['🌱 Building the Application',['../index.html#autotoc_md20',1,'']]],
-  ['application_20rotator_7',['🔁 Application rotator',['../index.html#autotoc_md23',1,'']]],
-  ['architecture_8',['🛠️ Architecture',['../index.html#autotoc_md16',1,'']]],
-  ['arduinoota_9',['arduinoOTA',['../classksf_1_1comps_1_1ks_device_portal.html#a08bf056d0703b80eebf334e2e3830813',1,'ksf::comps::ksDevicePortal']]],
-  ['as_10',['as',['../classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628',1,'ksf::ksRtti::as()'],['../classksf_1_1ks_rtti.html#a3256fe5f274ed29149d64dd575ff37f9',1,'ksf::ksRtti::as() const']]]
+  ['before_20pull_20requests_0',['Before pull requests',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]],
+  ['begin_1',['begin',['../classksf_1_1misc_1_1ks_w_s_server.html#a30264ac138648d3ee913519cec7c5920',1,'ksf::misc::ksWSServer']]],
+  ['bitflags_2',['bitflags',['../classksf_1_1comps_1_1ks_device_portal.html#a9f561363239b58eaa3deea22d780b4c1',1,'ksf::comps::ksDevicePortal']]],
+  ['blinkintervalms_3',['blinkIntervalMs',['../classksf_1_1comps_1_1ks_led.html#aad7cd66a8d631b1f1d94b61d76bbf372',1,'ksf::comps::ksLed']]],
+  ['blinkloops_4',['blinkLoops',['../classksf_1_1comps_1_1ks_led.html#a0a222a2588b3bc63ff1df4d671f99653',1,'ksf::comps::ksLed']]],
+  ['blockquote_5',['blockquote',['../index.html#autotoc_md8',1,'&lt;/blockquote&gt;'],['../index.html#autotoc_md15',1,'&lt;/blockquote&gt;']]],
+  ['breakapp_6',['breakApp',['../classksf_1_1comps_1_1ks_device_portal.html#a573eb03602ce8a4352af1963ff80b748',1,'ksf::comps::ksDevicePortal']]],
+  ['broadcast_7',['broadcast',['../classksf_1_1evt_1_1ks_event.html#af5b0ecfe3c6f6c4093e316c8d3c7299f',1,'ksf::evt::ksEvent']]],
+  ['building_20the_20application_8',['🌱 Building the Application',['../index.html#autotoc_md20',1,'']]]
 ];
