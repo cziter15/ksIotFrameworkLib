@@ -252,7 +252,7 @@ namespace ksf
 		@param input The string to be escaped.
 		@return JSON-safe escaped string.
 	*/
-	extern std::string jsonEscape(const std::string& input);
+	extern std::string json_escape(const std::string& input);
 
 	/*!
 		@brief Helper function to get latest reset reason.

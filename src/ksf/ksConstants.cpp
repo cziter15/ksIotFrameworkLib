@@ -244,7 +244,7 @@ namespace ksf
 		return getUptimeFromSeconds(static_cast<uint32_t>(uptimeSeconds));
 	}
 
-	std::string jsonEscape(const std::string& input)
+	std::string json_escape(const std::string& input)
 	{
 		std::string output;
 		output.reserve(input.size());
