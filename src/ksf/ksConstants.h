@@ -65,7 +65,7 @@
 #define KSF_FRAMEWORK_INIT() ksf::initializeFramework();
 
 /*! Library version string. Auto-bumped by workflow. */
-#define KSF_LIBRARY_VERSION "1.0.33"
+#define KSF_LIBRARY_VERSION "1.0.35"
 
 namespace ksf
 {
