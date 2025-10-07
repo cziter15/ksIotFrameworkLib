@@ -5,7 +5,8 @@ MSG_FILE="$1"
 MSG="$(sed -n '1p' "$MSG_FILE")"
 
 # Support both (type) format and type: or type(scope): format
-PATTERN='^(\(feat|\(fix|\(docs|\(style|\(refactor|\(perf|\(test|\(chore\) .+|(feat|fix|docs|style|refactor|perf|test|chore)(\([^)]+\))?: .+)'
+# Extract pattern from shared config file
+PATTERN="$(cat "$(dirname "$0")/../.commit-msg-pattern")"
 
 if ! grep -Eq "$PATTERN" <<< "$MSG"; then
   echo "ERROR: Commit message does not follow the required format."
