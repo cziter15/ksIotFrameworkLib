@@ -456,11 +456,11 @@ namespace ksf::comps
 			for (auto paramRef : paramListRef)
 			{
 				response += PSTR("{\"id\": \"");
-				response += ksf::jsonEscape(paramRef.id);
+				response += paramRef.id;
 				response += PSTR("\", \"label\": \"");
-				response += ksf::jsonEscape(paramRef.label);
+				response += paramRef.label;
 				response += PSTR("\", \"value\": \"");
-				response += ksf::jsonEscape(paramRef.value);
+				response += paramRef.value;
 				response += PSTR("\", \"type\": \"");
 				
 				switch (paramRef.type)
