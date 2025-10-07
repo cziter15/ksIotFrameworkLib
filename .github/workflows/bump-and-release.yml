@@ -84,11 +84,18 @@ jobs:
           if [ -f library.json ]; then
             jq ".version = \"${NEW_VERSION}\"" library.json > tmp.json && mv tmp.json library.json
           fi
+      - name: Bump ksConstants.h version
+        env:
+          NEW_VERSION: ${{ steps.determine-version.outputs.new_version }}
+        run: |
+          if [ -f src/ksf/ksConstants.h ]; then
+            sed -i "s/^#define KSF_LIBRARY_VERSION \".*\"/#define KSF_LIBRARY_VERSION \"${NEW_VERSION}\"/" src/ksf/ksConstants.h
+          fi
       - name: Commit & push version bump
         env:
           NEW_VERSION: ${{ steps.determine-version.outputs.new_version }}
         run: |
-          git add library.properties library.json || true
+          git add library.properties library.json src/ksf/ksConstants.h || true
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
