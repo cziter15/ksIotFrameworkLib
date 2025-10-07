@@ -190,16 +190,23 @@ $(function(){ initResizable(false); });
 📏 Utilities and components structure</h3>
 <div class="fragment"><div class="line">📁 ksf</div>
 <div class="line">├── 📄 ksAppRotator                 ─── Application rotator component</div>
+<div class="line">├── 📄 ksApplication                ─── Base application class</div>
 <div class="line">├── 📄 ksRtti                       ─── Implements RTTI (run-time type information) for objects</div>
 <div class="line">├── 📄 ksComponent                  ─── Base component class</div>
 <div class="line">├── 📄 ksConstants                  ─── Basic low-level definitions</div>
+<div class="line">├── 📂 evt</div>
+<div class="line">│   ├── 📄 ksEvent                  ─── Event system implementation</div>
+<div class="line">│   ├── 📄 ksEventHandle            ─── Event handle management</div>
+<div class="line">│   └── 📄 ksEventInterface         ─── Event interface definition</div>
 <div class="line">├── 📂 misc</div>
 <div class="line">│   ├── 📄 ksCertUtils              ─── MQTT certificate utilities</div>
 <div class="line">│   ├── 📄 ksConfig                 ─── Configuration file handling</div>
 <div class="line">│   ├── 📄 ksDomainQuery            ─── Custom DNS implementation</div>
 <div class="line">│   ├── 📄 ksSimpleTimer            ─── Simple timer functionality</div>
 <div class="line">│   └── 📄 ksWSServer               ─── Internal WS handling for device portal</div>
-<div class="line">└── 📂 comps</div>
+<div class="line">├── 📂 res</div>
+<div class="line">│   └── 📄 otaWebpage               ─── OTA update webpage resources</div>
+<div class="line">└── 📂 comp</div>
 <div class="line">    ├── 📄 ksConfigProvider         ─── Manages configuration parameters and storage</div>
 <div class="line">    ├── 📄 ksDevStatMqttReporter    ─── Sends periodic device status updates via MQTT</div>
 <div class="line">    ├── 📄 ksDevicePortal           ─── Implements a web-based configuration portal</div>
