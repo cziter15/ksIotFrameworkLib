@@ -2,11 +2,7 @@
 
 Use clear commit messages for consistency and automated releases.
 
-## Format
-
-`(type) short description #issue_number`
-
-## Commit Types
+## Commit format / type
 
 | Type       | Description                      | Example                                      |
 |-------------|----------------------------------|----------------------------------------------|
