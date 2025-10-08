@@ -95,7 +95,7 @@
 		}
 		fileWriter.close();
 	}
-	void ksConfig::setParam(const std::string& paramName, std::string paramValue)
+	void ksConfig::setParam(const std::string& paramName, std::string&& paramValue)
 	{
 		isDirty = true;
 		configParams[paramName] = std::move(paramValue);

@@ -258,20 +258,20 @@ namespace ksf
 		@brief Helper function to get latest reset reason.
 		@return A string representing the reason for the last reset.
 	*/
-	extern const std::string getResetReason();
+	extern std::string getResetReason();
 
 	/*!
 		@brief Returns uptime string from seconds.
 		@param seconds Number of seconds.
 		@return Uptime in a form of string (day, hour, minute, second).
 	*/
-	extern const std::string getUptimeFromSeconds(uint32_t seconds);
+	extern std::string getUptimeFromSeconds(uint32_t seconds);
 
 	/*!
 		@brief Helper function that returns uptime in a form of string.
 		@return Device uptime in a form of string (day, hour, minute, second).
 	*/
-	extern const std::string getUptimeString();
+	extern std::string getUptimeString();
 
 	/*!
 		@brief Loads WiFi credentials from flash.

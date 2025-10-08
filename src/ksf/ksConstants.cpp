@@ -178,7 +178,7 @@ namespace ksf
 		return to_string(static_cast<double>(value), base);
 	}
 
-	inline const std::string otaTypeToString(EOTAType::Type type)
+	inline std::string otaTypeToString(EOTAType::Type type)
 	{
 		switch (type)
 		{
@@ -191,7 +191,7 @@ namespace ksf
 		}
 	}
 
-	const std::string getResetReason()
+	std::string getResetReason()
 	{
 		auto otaBootType{getOtaBootType()};
 #if defined(ESP32)
@@ -230,15 +230,22 @@ namespace ksf
 #endif
 	}
 
-	const std::string getUptimeFromSeconds(uint32_t sec)
+	std::string getUptimeFromSeconds(uint32_t sec)
 	{
-		return 	to_string(sec / 60 / 60 / 24) + "d " +
-				to_string(sec / 60 / 60 % 24) + "h " +
-				to_string(sec / 60 % 60) + "m " +
-				to_string(sec % 60) + "s";
+		std::string result;
+		result.reserve(32);  // Pre-allocate space for typical uptime string
+		result += to_string(sec / 60 / 60 / 24);
+		result += "d ";
+		result += to_string(sec / 60 / 60 % 24);
+		result += "h ";
+		result += to_string(sec / 60 % 60);
+		result += "m ";
+		result += to_string(sec % 60);
+		result += "s";
+		return result;
 	}
 
-	const std::string getUptimeString()
+	std::string getUptimeString()
 	{
 		auto uptimeSeconds{millis64() / KSF_ONE_SEC_MS};
 		return getUptimeFromSeconds(static_cast<uint32_t>(uptimeSeconds));
@@ -247,32 +254,33 @@ namespace ksf
 	std::string json_escape(const std::string& input)
 	{
 		std::string output;
-		output.reserve(input.size());
+		// Reserve space with multiplier for potential escape sequences
+		output.reserve(input.size() * 6 / 5);
 
 		for (auto ch : input)
 		{
 			switch (ch)
 			{
 				case '"':
-					output += PSTR("\\\"");
+					output.append(PSTR("\\\""), 2);
 				break;
 				case '\\':
-					output += PSTR("\\\\");
+					output.append(PSTR("\\\\"), 2);
 					break;
 				case '\b':
-					output += PSTR("\\b");
+					output.append(PSTR("\\b"), 2);
 				break;
 				case '\f':
-					output += PSTR("\\f");
+					output.append(PSTR("\\f"), 2);
 				break;
 				case '\n':
-					output += PSTR("\\n");
+					output.append(PSTR("\\n"), 2);
 				break;
 				case '\r':
-					output += PSTR("\\r");
+					output.append(PSTR("\\r"), 2);
 				break;
 				case '\t':
-					output += PSTR("\\t");
+					output.append(PSTR("\\t"), 2);
 				break;
 				default:
 					if (static_cast<unsigned char>(ch) < 0x20)

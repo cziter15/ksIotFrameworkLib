@@ -52,7 +52,7 @@ namespace ksf::misc
 				@param paramName Parameter name.
 				@param paramValue Parameter value (use std::move when possible).
 			*/
-			void setParam(const std::string& paramName, const std::string paramValue);
+			void setParam(const std::string& paramName, std::string&& paramValue);
 
 			/*!
 				@brief Retrieves parameter value.
