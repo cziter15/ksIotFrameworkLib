@@ -178,7 +178,7 @@ namespace ksf
 		return to_string(static_cast<double>(value), base);
 	}
 
-	inline std::string otaTypeToString(EOTAType::Type type)
+	inline const std::string otaTypeToString(EOTAType::Type type)
 	{
 		switch (type)
 		{
@@ -191,7 +191,7 @@ namespace ksf
 		}
 	}
 
-	std::string getResetReason()
+	const std::string getResetReason()
 	{
 		auto otaBootType{getOtaBootType()};
 #if defined(ESP32)
@@ -230,7 +230,7 @@ namespace ksf
 #endif
 	}
 
-	std::string getUptimeFromSeconds(uint32_t sec)
+	const std::string getUptimeFromSeconds(uint32_t sec)
 	{
 		std::string result;
 		result.reserve(32);  // Pre-allocate space for typical uptime string
@@ -245,7 +245,7 @@ namespace ksf
 		return result;
 	}
 
-	std::string getUptimeString()
+	const std::string getUptimeString()
 	{
 		auto uptimeSeconds{millis64() / KSF_ONE_SEC_MS};
 		return getUptimeFromSeconds(static_cast<uint32_t>(uptimeSeconds));
