@@ -8,7 +8,7 @@ var searchData=
   ['setenabled_5',['setEnabled',['../classksf_1_1comps_1_1ks_led.html#a07bd8f91be11f266ac3a31bfe8c1c79a',1,'ksf::comps::ksLed']]],
   ['setinterval_6',['setInterval',['../classksf_1_1misc_1_1ks_simple_timer.html#a0532ae0dc7d825d5b6ce3b94f6080b9d',1,'ksf::misc::ksSimpleTimer']]],
   ['setmessagehandler_7',['setMessageHandler',['../classksf_1_1misc_1_1ks_w_s_server.html#ab6465499a17fef0e369e9f0f5802ef13',1,'ksf::misc::ksWSServer']]],
-  ['setparam_8',['setParam',['../classksf_1_1misc_1_1ks_config.html#aca932449b2cf5329fc4429b9dd94d0d9',1,'ksf::misc::ksConfig']]],
+  ['setparam_8',['setParam',['../classksf_1_1misc_1_1ks_config.html#a4d21b774f647ba3adce5f164122d87ba',1,'ksf::misc::ksConfig']]],
   ['setrequiredauthtoken_9',['setRequiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#ad7c5303434271a77957a113dad7a2c37',1,'ksf::misc::ksWSServer']]],
   ['setup_10',['setup',['../classksf_1_1misc_1_1ks_cert_fingerprint.html#a156f0dbc3a0fb5124e5a9b78b8e1cc8b',1,'ksf::misc::ksCertFingerprint']]],
   ['setupconnection_11',['setupConnection',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a62e45ab36a3176fafe09a198623aa884',1,'ksf::comps::ksMqttConnector']]],

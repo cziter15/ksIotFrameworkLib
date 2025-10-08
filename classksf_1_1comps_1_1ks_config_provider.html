@@ -124,9 +124,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a33de8a828c7f876cdf9a43135511657b" id="r_a33de8a828c7f876cdf9a43135511657b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33de8a828c7f876cdf9a43135511657b">isA</a> (const std::size_t id) const</td></tr>
 <tr class="memdesc:a33de8a828c7f876cdf9a43135511657b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
 <tr class="separator:a33de8a828c7f876cdf9a43135511657b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15e1288f8c0f9ea8b83885ab500ba20d" id="r_a15e1288f8c0f9ea8b83885ab500ba20d"><td class="memItemLeft" align="right" valign="top"><a id="a15e1288f8c0f9ea8b83885ab500ba20d" name="a15e1288f8c0f9ea8b83885ab500ba20d"></a>
-std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html">ksConfigParameter</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getParameters</b> ()</td></tr>
-<tr class="memdesc:a15e1288f8c0f9ea8b83885ab500ba20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides const reference to the list of managed parameters. <br /></td></tr>
+<tr class="memitem:a15e1288f8c0f9ea8b83885ab500ba20d" id="r_a15e1288f8c0f9ea8b83885ab500ba20d"><td class="memItemLeft" align="right" valign="top">std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html">ksConfigParameter</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15e1288f8c0f9ea8b83885ab500ba20d">getParameters</a> ()</td></tr>
+<tr class="memdesc:a15e1288f8c0f9ea8b83885ab500ba20d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides reference to the list of managed parameters.  <br /></td></tr>
 <tr class="separator:a15e1288f8c0f9ea8b83885ab500ba20d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d115049edd41092f31cb49a0eac2988" id="r_a0d115049edd41092f31cb49a0eac2988"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d115049edd41092f31cb49a0eac2988">readParams</a> ()=0</td></tr>
 <tr class="memdesc:a0d115049edd41092f31cb49a0eac2988"><td class="mdescLeft">&#160;</td><td class="mdescRight">Populates the parameter list by processing the configuration file.  <br /></td></tr>
@@ -309,7 +308,7 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
   </dd>
 </dl>
 
-<p class="reference">References <a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam()</a>, and <a class="el" href="classksf_1_1misc_1_1ks_config.html#a5fd2d16273d7fea3717f020bf47389b7">ksf::misc::ksConfig::getParam()</a>.</p>
+<p class="reference">References <a class="el" href="#a6b17eeb01e313fb4074b598f669541ce">addNewParam()</a>, and <a class="el" href="classksf_1_1misc_1_1ks_config.html#a6673c9964c0382202adc43556f709571">ksf::misc::ksConfig::getParam()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#ad41f00507bd0d2ec465cb4dd68884199">ksf::comps::ksMqttConfigProvider::readParams()</a>.</p>
 
@@ -344,6 +343,28 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 <p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a84143a4d98122f3f1d8c42df4742158d">ksf::ksComponent</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a7beec06b6bb4bec54f95b5f7919dafcf">ksf::comps::ksMqttConfigProvider</a>.</p>
+
+</div>
+</div>
+<a id="a15e1288f8c0f9ea8b83885ab500ba20d" name="a15e1288f8c0f9ea8b83885ab500ba20d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15e1288f8c0f9ea8b83885ab500ba20d">&#9670;&#160;</a></span>getParameters()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt; <a class="el" href="structksf_1_1comps_1_1ks_config_parameter.html">ksConfigParameter</a> &gt; &amp; ksf::comps::ksConfigProvider::getParameters </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Provides reference to the list of managed parameters. </p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the list of configuration parameters. </dd></dl>
+
+<p class="reference">References <a class="el" href="#ada21e72b8c09bb566639a70426e3a101">params</a>.</p>
 
 </div>
 </div>
