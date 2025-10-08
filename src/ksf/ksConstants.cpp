@@ -233,7 +233,7 @@ namespace ksf
 	const std::string getUptimeFromSeconds(uint32_t sec)
 	{
 		std::string result;
-		result.reserve(32);  // Pre-allocate space for typical uptime string
+		result.reserve(32);
 		result += to_string(sec / 60 / 60 / 24);
 		result += "d ";
 		result += to_string(sec / 60 / 60 % 24);
@@ -254,7 +254,6 @@ namespace ksf
 	std::string json_escape(const std::string& input)
 	{
 		std::string output;
-		// Reserve space with multiplier for potential escape sequences
 		output.reserve(input.size() * 6 / 5);
 
 		for (auto ch : input)
