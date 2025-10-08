@@ -91,6 +91,7 @@ namespace ksf::comps
 		public:
 			/*!
 				@brief Provides reference to the list of managed parameters.
+				@return A reference to the list of configuration parameters.
 			*/
 			std::list<ksConfigParameter>& getParameters();
 
