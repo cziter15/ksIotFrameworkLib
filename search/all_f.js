@@ -10,10 +10,10 @@ var searchData=
   ['reportdevstats_7',['reportDevStats',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a4c5d0897b01f93c21dace3130746bdc5',1,'ksf::comps::ksDevStatMqttReporter']]],
   ['reportertimer_8',['reporterTimer',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a438be9e2f2a5749db02d729aaf76cae9',1,'ksf::comps::ksDevStatMqttReporter']]],
   ['requestappbreak_9',['requestAppBreak',['../classksf_1_1comps_1_1ks_device_portal.html#a493f65235eb09023daeae7db6a800f0d',1,'ksf::comps::ksDevicePortal']]],
-  ['requests_10',['Before pull requests',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md3',1,'']]],
+  ['requests_10',['Before pull requests',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md4',1,'']]],
   ['requiredauthtoken_11',['requiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a2e142ee4cd90503c7f7d718c872d6134',1,'ksf::misc::ksWSServer']]],
   ['restart_12',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
-  ['rotator_13',['🔁 Application rotator',['../index.html#autotoc_md21',1,'']]],
-  ['rtti_14',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md24',1,'']]],
-  ['rules_15',['🔅 Rules',['../index.html#autotoc_md16',1,'']]]
+  ['rotator_13',['🔁 Application rotator',['../index.html#autotoc_md22',1,'']]],
+  ['rtti_14',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md25',1,'']]],
+  ['rules_15',['🔅 Rules',['../index.html#autotoc_md17',1,'']]]
 ];
