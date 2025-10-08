@@ -13,7 +13,7 @@ var searchData=
   ['requests_10',['Before pull requests',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md3',1,'']]],
   ['requiredauthtoken_11',['requiredAuthToken',['../classksf_1_1misc_1_1ks_w_s_server.html#a2e142ee4cd90503c7f7d718c872d6134',1,'ksf::misc::ksWSServer']]],
   ['restart_12',['restart',['../classksf_1_1misc_1_1ks_simple_timer.html#a84d7d0c50b00503cba5b9e6c0bb4d323',1,'ksf::misc::ksSimpleTimer']]],
-  ['rotator_13',['🔁 Application rotator',['../index.html#autotoc_md21',1,'']]],
-  ['rtti_14',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md24',1,'']]],
-  ['rules_15',['🔅 Rules',['../index.html#autotoc_md16',1,'']]]
+  ['rotator_13',['🔁 Application rotator',['../index.html#autotoc_md20',1,'']]],
+  ['rtti_14',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md23',1,'']]],
+  ['rules_15',['🔅 Rules',['../index.html#autotoc_md15',1,'']]]
 ];

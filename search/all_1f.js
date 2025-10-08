@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🔅_20rules_0',['🔅 Rules',['../index.html#autotoc_md16',1,'']]]
+  ['🔎_20how_20it_20works_0',['🔎 How It Works',['../index.html#autotoc_md18',1,'']]]
 ];

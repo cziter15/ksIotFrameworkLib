@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🌱_20building_20the_20application_0',['🌱 Building the Application',['../index.html#autotoc_md18',1,'']]]
+  ['📏_20utilities_20and_20components_20structure_0',['📏 Utilities and components structure',['../index.html#autotoc_md14',1,'']]]
 ];

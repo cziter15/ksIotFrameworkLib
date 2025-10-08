@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['🔎_20how_20it_20works_0',['🔎 How It Works',['../index.html#autotoc_md19',1,'']]]
+  ['🔡_20frameworks_0',['🔡 Frameworks',['../index.html#autotoc_md27',1,'']]],
+  ['🔡_20libraries_1',['🔡 Libraries',['../index.html#autotoc_md28',1,'']]]
 ];

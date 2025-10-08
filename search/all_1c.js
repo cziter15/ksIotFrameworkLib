@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📜_20motivation_20to_20create_20the_20library_0',['📜 Motivation to create the library',['../index.html#autotoc_md9',1,'']]]
+  ['📟_20examples_0',['📟 Examples',['../index.html#autotoc_md10',1,'']]]
 ];
