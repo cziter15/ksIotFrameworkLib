@@ -139,12 +139,24 @@ namespace ksf::comps
 	void ksMqttConnector::subscribe(const std::string& topic, bool skipDevicePrefix, ksMqttConnector::QosLevel qos)
 	{
 		uint8_t qosLevel{static_cast<uint8_t>(qos)};
-		mqttClientUq->subscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), qosLevel);
+		if (skipDevicePrefix)
+			mqttClientUq->subscribe(topic.c_str(), qosLevel);
+		else
+		{
+			std::string fullTopic{prefix + topic};
+			mqttClientUq->subscribe(fullTopic.c_str(), qosLevel);
+		}
 	}
 
 	void ksMqttConnector::unsubscribe(const std::string& topic, bool skipDevicePrefix)
 	{
-		mqttClientUq->unsubscribe(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str());
+		if (skipDevicePrefix)
+			mqttClientUq->unsubscribe(topic.c_str());
+		else
+		{
+			std::string fullTopic{prefix + topic};
+			mqttClientUq->unsubscribe(fullTopic.c_str());
+		}
 	}
 
 	void ksMqttConnector::publish(const std::string& topic, const std::string& payload, bool retain, bool skipDevicePrefix)
@@ -162,7 +174,13 @@ namespace ksf::comps
 			out += payload;
 		});
 #endif
-		mqttClientUq->publish(skipDevicePrefix ? topic.c_str() : std::string(prefix + topic).c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
+		if (skipDevicePrefix)
+			mqttClientUq->publish(topic.c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
+		else
+		{
+			std::string fullTopic{prefix + topic};
+			mqttClientUq->publish(fullTopic.c_str(), reinterpret_cast<const uint8_t*>(payload.c_str()), payload.length(), retain);
+		}
 	}
 
 	bool ksMqttConnector::connectToBroker()
