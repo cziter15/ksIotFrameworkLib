@@ -332,6 +332,7 @@ namespace ksf::comps
 
 	void ksDevicePortal::handle_getIdentity(std::string& response)
 	{
+		response.reserve(512);  // Pre-allocate space for JSON response
 		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
 		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
@@ -381,6 +382,7 @@ namespace ksf::comps
 	{
 		if (auto scanResult{WiFi.scanComplete()}; scanResult > 0)
 		{
+			response.reserve(scanResult * 64);  // Pre-allocate approximate space for network list
 			response += '[';
 			for (int i{0}; i < scanResult; ++i)
 			{
@@ -425,6 +427,7 @@ namespace ksf::comps
 		app->findComponents<ksConfigProvider>(configCompsWp);
 
 		auto isInConfigMode{static_cast<bool>(WiFi.getMode() & WIFI_AP)};
+		response.reserve(256);  // Pre-allocate space for device params JSON
 		response += PSTR("{\"isConfigMode\": ");
 		response += isInConfigMode ? PSTR("true") : PSTR("false");
 
