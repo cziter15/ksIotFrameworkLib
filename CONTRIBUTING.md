@@ -24,5 +24,3 @@ Use clear commit messages for consistency and automated releases.
 - Follow commit format
 - Describe changes clearly
 - Ensure builds and tests pass
-
-## Thank you for contributing!
