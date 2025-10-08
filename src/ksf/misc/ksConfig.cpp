@@ -104,14 +104,7 @@
 	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
 		auto it{configParams.find(paramName)};
-		if (it != configParams.end())
-			return it->second;
-		
-		if (!defaultValue.empty())
-			return defaultValue;
-		
-		static const std::string emptyString;
-		return emptyString;
+		return (it == configParams.end()) ? defaultValue : it->second;
 	}
 	
 	ksConfig::operator bool() const

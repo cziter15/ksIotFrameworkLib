@@ -21,6 +21,9 @@
 
 namespace ksf::misc
 {
+	// Static empty string for use as default parameter
+	inline static const std::string emptyString{};
+
 	/*!
 		@brief Implements low-level configuration file handling.
 
@@ -60,7 +63,7 @@ namespace ksf::misc
 				@param defaultValue Default value to return if parameter does not exist.
 				@return Parameter value string (or defaultValue).
 			*/
-			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
+			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = emptyString) const;
 
 			/*!
 				@brief Operator bool override. Returns true if configFilename is not empty.
