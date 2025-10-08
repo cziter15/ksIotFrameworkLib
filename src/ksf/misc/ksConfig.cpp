@@ -74,8 +74,8 @@
 					isReadingKey = true;
 				}
 			}
+			fileReader.close();
 		}
-		fileReader.close();
 	}
 	
 	ksConfig::~ksConfig()

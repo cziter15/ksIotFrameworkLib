@@ -35,8 +35,10 @@ namespace ksf::misc
 			std::string configPath;									//!< Config filename.
 
 		public:
+			inline static const std::string emptyString{};			//!< Static empty string for use as default parameter.
+
 			/*!
-				@brief Constructor tha opens or creates configuration file.
+				@brief Constructor that opens or creates configuration file.
 				@param fileName Config filename.
 			*/
 			ksConfig(const std::string& fileName);
@@ -52,7 +54,7 @@ namespace ksf::misc
 				@param paramName Parameter name.
 				@param paramValue Parameter value (use std::move when possible).
 			*/
-			void setParam(const std::string& paramName, const std::string paramValue);
+			void setParam(const std::string& paramName, std::string paramValue);
 
 			/*!
 				@brief Retrieves parameter value.
@@ -60,7 +62,7 @@ namespace ksf::misc
 				@param defaultValue Default value to return if parameter does not exist.
 				@return Parameter value string (or defaultValue).
 			*/
-			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = std::string()) const;
+			const std::string& getParam(const std::string& paramName, const std::string& defaultValue = ksConfig::emptyString) const;
 
 			/*!
 				@brief Operator bool override. Returns true if configFilename is not empty.
