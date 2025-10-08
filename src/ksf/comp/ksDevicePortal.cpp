@@ -62,7 +62,7 @@ namespace ksf::comps
 	static constexpr char PROGMEM_IF_NONE_MATCH[] PROGMEM {"If-None-Match"};
 	static constexpr char PROGMEM_NO_ID_RESPONSE[] PROGMEM {"null\n"};
 
-	inline uint64_t generateAuthToken(const std::string& password)
+	inline uint64_t generateAuthToken(const & password)
 	{
 #if defined(ESP32)
 		uint64_t chipId{ESP.getEfuseMac()};
@@ -72,7 +72,7 @@ namespace ksf::comps
 #else
 		#error Platform not implemented.
 #endif
-		std::hash<std::string> hasher;
+		std::hash<> hasher;
 		return chipId ^ hasher(password);
 	}
 
@@ -332,6 +332,7 @@ namespace ksf::comps
 
 	void ksDevicePortal::handle_getIdentity(std::string& response)
 	{
+		response.reserve(512);
 		response += PSTR("[{\"name\":\"MCU chip\",\"value\":\"");
 		response += PSTR(HARDWARE " (");
 		response += ksf::to_string(ESP.getCpuFreqMHz());
@@ -381,6 +382,7 @@ namespace ksf::comps
 	{
 		if (auto scanResult{WiFi.scanComplete()}; scanResult > 0)
 		{
+			response.reserve(scanResult * 64);
 			response += '[';
 			for (int i{0}; i < scanResult; ++i)
 			{
@@ -425,6 +427,7 @@ namespace ksf::comps
 		app->findComponents<ksConfigProvider>(configCompsWp);
 
 		auto isInConfigMode{static_cast<bool>(WiFi.getMode() & WIFI_AP)};
+		response.reserve(256);
 		response += PSTR("{\"isConfigMode\": ");
 		response += isInConfigMode ? PSTR("true") : PSTR("false");
 
@@ -453,7 +456,7 @@ namespace ksf::comps
 			paramListRef.clear();
 			configCompSp->readParams();
 
-			for (auto paramRef : paramListRef)
+			for (const auto& paramRef : paramListRef)
 			{
 				response += PSTR("{\"id\": \"");
 				response += ksf::json_escape(paramRef.id);
