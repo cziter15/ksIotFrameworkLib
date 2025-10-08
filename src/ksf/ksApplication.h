@@ -96,9 +96,8 @@ namespace ksf
 				{
 					if (comp->isA(TComponentType::getClassType()))
 					{
-						std::weak_ptr<TComponentType> castedCompWp{std::static_pointer_cast<TComponentType>(comp)};
-						if (!castedCompWp.expired())
-							outComponents.push_back(std::move(castedCompWp));
+						auto castedCompSp{std::static_pointer_cast<TComponentType>(comp)};
+						outComponents.emplace_back(castedCompSp);
 					}
 				}
 			}
@@ -116,8 +115,13 @@ namespace ksf
 				);
 
 				for (const auto& comp : components)
+				{
 					if (comp->isA(TComponentType::getClassType()))
-						return std::static_pointer_cast<TComponentType>(comp);
+					{
+						auto castedCompSp{std::static_pointer_cast<TComponentType>(comp)};
+						return std::weak_ptr<TComponentType>(castedCompSp);
+					}
+				}
 
 				return std::weak_ptr<TComponentType>();
 			}
