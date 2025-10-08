@@ -4,7 +4,7 @@ Use clear commit messages for consistency and automated releases.
 
 ## Format
 
-(type) short description #issue_number
+`(type) short description #issue_number`
 
 ## Commit Types
 
@@ -20,8 +20,8 @@ Use clear commit messages for consistency and automated releases.
 
 ## Tips
 
-Be concise and specific
-Reference issues when possible
+- Be concise and specific
+- Reference issues when possible
 
 ## Before pull requests
 
@@ -29,4 +29,4 @@ Reference issues when possible
 - Describe changes clearly
 - Ensure builds and tests pass
 
-## Thank you for contributing
+## Thank you for contributing!
