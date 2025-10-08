@@ -13,7 +13,7 @@
     }
   ],
   "build": {
-    "extraScript": "platformio/libsetup.py"
+    "extraScript": "scripts/setup_library_env.py"
   },
   "license": "MIT",
   "dependencies": {
