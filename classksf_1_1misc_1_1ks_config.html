@@ -90,6 +90,7 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classksf_1_1misc_1_1ks_config-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ksf::misc::ksConfig Class Reference</div></div>
@@ -113,12 +114,19 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksConfig</b> ()</
 <tr class="memitem:a4d21b774f647ba3adce5f164122d87ba" id="r_a4d21b774f647ba3adce5f164122d87ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d21b774f647ba3adce5f164122d87ba">setParam</a> (const std::string &amp;paramName, std::string paramValue)</td></tr>
 <tr class="memdesc:a4d21b774f647ba3adce5f164122d87ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets parameter value (creates new parameter if it does not exist).  <br /></td></tr>
 <tr class="separator:a4d21b774f647ba3adce5f164122d87ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6673c9964c0382202adc43556f709571" id="r_a6673c9964c0382202adc43556f709571"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6673c9964c0382202adc43556f709571">getParam</a> (const std::string &amp;paramName, const std::string &amp;defaultValue=emptyString) const</td></tr>
-<tr class="memdesc:a6673c9964c0382202adc43556f709571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves parameter value.  <br /></td></tr>
-<tr class="separator:a6673c9964c0382202adc43556f709571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c825fae5f9424fbfc14a8df1cd33fb6" id="r_a6c825fae5f9424fbfc14a8df1cd33fb6"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6c825fae5f9424fbfc14a8df1cd33fb6">getParam</a> (const std::string &amp;paramName, const std::string &amp;defaultValue=<a class="el" href="#ac62b2c70784f9dfea5b0b5df7cd25ec9">ksConfig::emptyString</a>) const</td></tr>
+<tr class="memdesc:a6c825fae5f9424fbfc14a8df1cd33fb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves parameter value.  <br /></td></tr>
+<tr class="separator:a6c825fae5f9424fbfc14a8df1cd33fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef3eb1177e7b6deb4c67c07069d90cdb" id="r_aef3eb1177e7b6deb4c67c07069d90cdb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef3eb1177e7b6deb4c67c07069d90cdb">operator bool</a> () const</td></tr>
 <tr class="memdesc:aef3eb1177e7b6deb4c67c07069d90cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator bool override. Returns true if configFilename is not empty.  <br /></td></tr>
 <tr class="separator:aef3eb1177e7b6deb4c67c07069d90cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ac62b2c70784f9dfea5b0b5df7cd25ec9" id="r_ac62b2c70784f9dfea5b0b5df7cd25ec9"><td class="memItemLeft" align="right" valign="top"><a id="ac62b2c70784f9dfea5b0b5df7cd25ec9" name="ac62b2c70784f9dfea5b0b5df7cd25ec9"></a>
+static const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>emptyString</b> {}</td></tr>
+<tr class="memdesc:ac62b2c70784f9dfea5b0b5df7cd25ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static empty string for use as default parameter. <br /></td></tr>
+<tr class="separator:ac62b2c70784f9dfea5b0b5df7cd25ec9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -167,8 +175,8 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6673c9964c0382202adc43556f709571" name="a6673c9964c0382202adc43556f709571"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6673c9964c0382202adc43556f709571">&#9670;&#160;</a></span>getParam()</h2>
+<a id="a6c825fae5f9424fbfc14a8df1cd33fb6" name="a6c825fae5f9424fbfc14a8df1cd33fb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c825fae5f9424fbfc14a8df1cd33fb6">&#9670;&#160;</a></span>getParam()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -181,7 +189,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>configPath</b>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>defaultValue</em></span><span class="paramdefsep"> = </span><span class="paramdefval">emptyString</span>&#160;) const</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>defaultValue</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#ac62b2c70784f9dfea5b0b5df7cd25ec9">ksConfig::emptyString</a></span>&#160;) const</td>
         </tr>
       </table>
 </div><div class="memdoc">
