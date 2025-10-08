@@ -184,7 +184,7 @@ namespace ksf::comps
 				return response;
 		}
 
-		return PSTR("[ DevicePortal ] Command not recognized: ") + std::string(body);
+		return std::string{PSTR("[ DevicePortal ] Command not recognized: ")} + std::string(body);
 	}
 
 	void ksDevicePortal::updateFinished(bool fromPortal)
@@ -453,7 +453,7 @@ namespace ksf::comps
 			paramListRef.clear();
 			configCompSp->readParams();
 
-			for (auto paramRef : paramListRef)
+			for (const auto& paramRef : paramListRef)
 			{
 				response += PSTR("{\"id\": \"");
 				response += ksf::json_escape(paramRef.id);
