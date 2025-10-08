@@ -74,8 +74,8 @@
 					isReadingKey = true;
 				}
 			}
+			fileReader.close();
 		}
-		fileReader.close();
 	}
 	
 	ksConfig::~ksConfig()
@@ -101,7 +101,7 @@
 		configParams[paramName] = std::move(paramValue);
 	}
 	
-	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
+	std::string ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
 		auto it{configParams.find(paramName)};
 		return (it == configParams.end()) ? defaultValue : it->second;
