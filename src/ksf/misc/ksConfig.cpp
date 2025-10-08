@@ -101,10 +101,17 @@
 		configParams[paramName] = std::move(paramValue);
 	}
 	
-	std::string ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
+	const std::string& ksConfig::getParam(const std::string& paramName, const std::string& defaultValue) const
 	{
 		auto it{configParams.find(paramName)};
-		return (it == configParams.end()) ? defaultValue : it->second;
+		if (it != configParams.end())
+			return it->second;
+		
+		if (!defaultValue.empty())
+			return defaultValue;
+		
+		static const std::string emptyString;
+		return emptyString;
 	}
 	
 	ksConfig::operator bool() const

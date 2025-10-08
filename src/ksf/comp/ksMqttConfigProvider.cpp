@@ -46,12 +46,12 @@ namespace ksf::comps
 		USING_CONFIG_FILE(MQTT_FILENAME_TEXT)
 		{
 			/*
-				These parameters are retrieved and stored as strings.
+				These parameters are taken by reference as no transfer of the data is needed or possible.
 				Port is converted to int, fingerprint is mapped to a vector of bytes and broker is copied internally.
 			*/
-			const auto savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
-			const auto port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
-			const auto fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
+			const auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
+			const auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
+			const auto& fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
 			
 			/* These parameters are copied here. Later they are moved directly to the fields of the connector. */
 			auto login{config_file.getParam(USER_TEXT_PGM)};
