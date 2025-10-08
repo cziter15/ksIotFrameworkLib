@@ -14,7 +14,7 @@ var searchData=
   ['configtimeout_11',['configTimeout',['../classksf_1_1comps_1_1ks_wifi_configurator.html#ab502467cdd0cf7a827a8391166ab107e',1,'ksf::comps::ksWifiConfigurator']]],
   ['connecttobroker_12',['connectToBroker',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ad3410bf2428ffe086fad10bbffb5384c',1,'ksf::comps::ksMqttConnector']]],
   ['conneventhandle_13',['connEventHandle',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a9941dae7a03633582619f2bf6973f7e4',1,'ksf::comps::ksDevStatMqttReporter']]],
-  ['contributing_14',['Thank you for contributing',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]],
+  ['contributing_14',['Thank you for contributing!',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]],
   ['contributing_20to_20ksiotframeworklib_15',['Contributing to ksIotFrameworkLib',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html',1,'']]],
   ['create_20the_20library_16',['📜 Motivation to create the library',['../index.html#autotoc_md10',1,'']]],
   ['custom_20rtti_17',['🔣 Compiler flags / Custom RTTI',['../index.html#autotoc_md25',1,'']]]

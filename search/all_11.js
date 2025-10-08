@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['thank_20you_20for_20contributing_0',['Thank you for contributing',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]],
+  ['thank_20you_20for_20contributing_0',['Thank you for contributing!',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md5',1,'']]],
   ['the_20application_1',['🌱 Building the Application',['../index.html#autotoc_md19',1,'']]],
   ['the_20library_2',['📜 Motivation to create the library',['../index.html#autotoc_md10',1,'']]],
   ['tips_3',['Tips',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md3',1,'']]],
