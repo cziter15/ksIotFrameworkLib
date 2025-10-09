@@ -1,11 +1,11 @@
-#include "BlinkApp.h"
+#include "LedBlinkingApp.h"
 #include "BlinkConfigProvider.h"
 #include "ConfigApp.h"
 #include "../board.h"
 
 namespace apps
 {
-	bool BlinkApp::init()
+	bool LedBlinkingApp::init()
 	{
 		// Step 1: Read the blink interval from configuration
 		// We create a temporary ConfigProvider to read the saved configuration
@@ -42,7 +42,7 @@ namespace apps
 		return true;
 	}
 
-	bool BlinkApp::loop()
+	bool LedBlinkingApp::loop()
 	{
 		// The LED component automatically handles blinking in its own loop
 		// We just need to call the base class loop to let all components run

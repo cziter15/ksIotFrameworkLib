@@ -13,7 +13,7 @@ A comprehensive tutorial demonstrating how to build a configurable LED blink app
 - [Step-by-Step Guide](#step-by-step-guide)
 - [Configuration](#configuration)
 - [Troubleshooting](#troubleshooting)
-- [Next Steps](#next-steps)
+- [Key Concepts Summary](#key-concepts-summary)
 
 ## 🎯 Overview
 
@@ -67,27 +67,19 @@ For setup instructions, see the [main examples README](../readme.md).
 
 The firmware uses an **application rotator** pattern with two applications:
 
-#### 1. BlinkApp (Primary Mode)
-```
-┌─────────────────────────────────┐
-│         BlinkApp                │
-│  ┌───────────────────────────┐  │
-│  │  1. Connect to WiFi       │  │
-│  │  2. Read blink interval   │  │
-│  │  3. Start LED blinking    │  │
-│  │  4. Maintain connection   │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
-          ↓ (if WiFi fails)
-┌─────────────────────────────────┐
-│        ConfigApp                │
-│  ┌───────────────────────────┐  │
-│  │  1. Create Access Point   │  │
-│  │  2. Start web interface   │  │
-│  │  3. Accept configuration  │  │
-│  │  4. Save and reboot       │  │
-│  └───────────────────────────┘  │
-└─────────────────────────────────┘
+#### 1. LedBlinkingApp (Primary Mode)
+
+```mermaid
+graph TD
+    A[LedBlinkingApp] --> B[1. Connect to WiFi]
+    B --> C[2. Read blink interval]
+    C --> D[3. Start LED blinking]
+    D --> E[4. Maintain connection]
+    E -->|WiFi fails| F[ConfigApp]
+    F --> G[1. Create Access Point]
+    G --> H[2. Start web interface]
+    H --> I[3. Accept configuration]
+    I --> J[4. Save and reboot]
 ```
 
 #### 2. ConfigApp (Configuration Mode)
@@ -102,56 +94,43 @@ The firmware uses an **application rotator** pattern with two applications:
 
 ### Component Interaction
 
-```
-┌──────────────────────────────────────────────────────┐
-│                   ksApplication                      │
-│  ┌────────────────────────────────────────────────┐  │
-│  │          ksWifiConnector Component             │  │
-│  │  • Manages WiFi connection                     │  │
-│  │  • Handles reconnection                        │  │
-│  │  • Provides mDNS service                       │  │
-│  └────────────────────────────────────────────────┘  │
-│  ┌────────────────────────────────────────────────┐  │
-│  │             ksLed Component                    │  │
-│  │  • Controls GPIO pin                           │  │
-│  │  • Implements blinking logic                   │  │
-│  │  • Automatic state toggling                    │  │
-│  └────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph ksApplication
+        A[ksWifiConnector Component]
+        B[ksLed Component]
+    end
+    A -->|Manages WiFi connection| C[WiFi Network]
+    A -->|Handles reconnection| C
+    A -->|Provides mDNS service| C
+    B -->|Controls GPIO pin| D[LED Hardware]
+    B -->|Implements blinking logic| D
+    B -->|Automatic state toggling| D
 ```
 
 ### Configuration Flow
 
-```
-User Action                Framework Action              Storage
-───────────                ─────────────────              ───────
-                           
-1. Device boots     ──────> Check for config    ──────>  [Read from
-                                                          filesystem]
-                                                               │
-2. No config found  <────── Config missing      <──────┘      │
-   │                                                           │
-   └──> Start ConfigApp                                       │
-   │                                                           │
-   └──> Connect to "LedBlinkDevice" AP                        │
-   │                                                           │
-   └──> Open 192.168.4.1 in browser                          │
-   │                                                           │
-   └──> Enter WiFi credentials & interval                     │
-   │                                                           │
-3. Click "Save"     ──────> Save parameters    ──────>  [Write to
-   │                                                     filesystem]
-   │                                                           │
-   └──> Device reboots <────── Reboot         <──────┘       │
-                           triggered                           │
-4. Device boots     ──────> Check for config   ──────>  [Read from
-   │                                                     filesystem]
-   │                                                           │
-   └──> Config found  <───── Load config      <──────┘       │
-   │                                                           │
-   └──> Start BlinkApp                                        │
-   │                                                           │
-   └──> LED blinks at configured interval                     │
+```mermaid
+sequenceDiagram
+    participant User
+    participant Device
+    participant Storage
+    
+    User->>Device: 1. Device boots
+    Device->>Storage: Check for config
+    Storage-->>Device: No config found
+    Device->>Device: Start ConfigApp
+    User->>Device: Connect to "LedBlinkDevice" AP
+    User->>Device: Open 192.168.4.1 in browser
+    User->>Device: Enter WiFi credentials & interval
+    User->>Device: Click "Save"
+    Device->>Storage: Save parameters
+    Storage-->>Device: Saved
+    Device->>Device: Reboot
+    Device->>Storage: Check for config
+    Storage-->>Device: Config found
+    Device->>Device: Start LedBlinkingApp
+    Device->>Device: LED blinks at configured interval
 ```
 
 ## 📁 Code Structure
@@ -164,10 +143,10 @@ led-blink/
     ├── board.h                 # Hardware pin definitions
     ├── main.cpp               # Entry point with app rotator
     └── apps/
-        ├── BlinkApp.h         # Main application header
-        ├── BlinkApp.cpp       # Main application implementation
-        ├── ConfigApp.h        # Configuration app header
-        ├── ConfigApp.cpp      # Configuration app implementation
+        ├── LedBlinkingApp.h         # Main application header
+        ├── LedBlinkingApp.cpp       # Main application implementation
+        ├── ConfigApp.h         # Configuration app header
+        ├── ConfigApp.cpp       # Configuration app implementation
         ├── BlinkConfigProvider.h   # Config provider header
         └── BlinkConfigProvider.cpp # Config provider implementation
 ```
@@ -185,12 +164,12 @@ The application entry point. Uses `KSF_IMPLEMENT_APP_ROTATOR` macro to define th
 ```cpp
 KSF_IMPLEMENT_APP_ROTATOR
 (
-    BlinkApp,    // Try this first
-    ConfigApp    // Fallback to this if BlinkApp fails
+    LedBlinkingApp,    // Try this first
+    ConfigApp    // Fallback to this if LedBlinkingApp fails
 )
 ```
 
-#### `BlinkApp` (Main Application)
+#### `LedBlinkingApp` (Main Application)
 The primary application that runs when WiFi is configured:
 - Reads the blink interval from storage
 - Creates WiFi and LED components
@@ -348,43 +327,17 @@ To modify the configuration after initial setup:
 - Verify all dependencies are installed
 - Check available flash memory
 
-## 🚀 Next Steps
-
-Now that you've mastered the LED blink example, try these enhancements:
-
-### Beginner Enhancements
-1. **Multiple LEDs**: Add more LED components on different pins
-2. **Button Control**: Add a button to manually trigger blinking patterns
-3. **Different Patterns**: Implement SOS morse code or other patterns
-
-### Intermediate Enhancements
-1. **MQTT Integration**: Report LED state to an MQTT broker
-2. **Web Dashboard**: Create a real-time web interface to control the LED
-3. **Time-based Control**: Use NTP time to blink only during certain hours
-4. **Brightness Control**: Add PWM support for LED brightness
-
-### Advanced Enhancements
-1. **Multiple Devices**: Synchronize blinking across multiple devices
-2. **REST API**: Create a RESTful API for LED control
-3. **Mobile App**: Build a mobile app to control the device
-4. **Voice Control**: Integrate with Alexa or Google Home
-
-### Explore Other Examples
-
-- **[basic-config](../basic-config)**: Learn about MQTT connectivity and device reporting
-- Check the [ksIotFrameworkLib documentation](../../README.md) for more features
-
 ## 📚 Key Concepts Summary
 
 This example demonstrates these framework concepts:
 
 | Concept | Description | Used In |
 |---------|-------------|---------|
-| **ksApplication** | Base class for applications | BlinkApp, ConfigApp |
+| **ksApplication** | Base class for applications | LedBlinkingApp, ConfigApp |
 | **ksComponent** | Reusable functional units | ksLed, ksWifiConnector |
 | **Application Rotator** | Automatic app switching | main.cpp |
 | **Config Storage** | Persistent configuration | BlinkConfigProvider |
-| **Weak Pointers** | Safe component references | BlinkApp::ledWp |
+| **Weak Pointers** | Safe component references | LedBlinkingApp::ledWp |
 | **Component Lifecycle** | init() and loop() pattern | All components |
 
 ## 📝 Code Comments
@@ -403,7 +356,6 @@ Read through the source files to understand the implementation details!
 - **Use Serial Monitor**: Monitor debug output to understand what's happening
 - **Read Comments**: The code is extensively documented
 - **Experiment**: Try different intervals and modifications
-- **Learn by Doing**: Implement the suggested enhancements
 
 ## 🤝 Contributing
 

@@ -15,7 +15,7 @@ namespace apps
 	 * The LED blink interval can be configured through the ConfigApp interface
 	 * and is persisted in non-volatile storage, surviving device reboots.
 	 */
-	class BlinkApp : public ksf::ksApplication
+	class LedBlinkingApp : public ksf::ksApplication
 	{
 		protected:
 			std::weak_ptr<ksf::comps::ksLed> ledWp;  // Weak pointer to LED component
