@@ -80,6 +80,7 @@ In this directory, you will find examples that guide you through building variou
 A comprehensive tutorial that teaches the fundamentals of ksIotFrameworkLib through a simple LED blinking application. **Perfect for beginners!**
 
 **What you'll learn:**
+
 - Creating applications and using components
 - Managing configuration with persistent storage
 - Implementing automatic application rotation
@@ -87,6 +88,7 @@ A comprehensive tutorial that teaches the fundamentals of ksIotFrameworkLib thro
 - Controlling hardware (GPIO pins and LEDs)
 
 **Features:**
+
 - User-configurable LED blink interval
 - WiFi connectivity with automatic reconnection
 - Web-based configuration portal
@@ -99,6 +101,7 @@ This example is designed as a tutorial with detailed explanations of every conce
 This application demonstrates how to create a typical IoT application stack with MQTT connectivity. One ksApplication handles device logic while another provides configuration capabilities.
 
 **Features:**
+
 - MQTT integration for device communication
 - Device status reporting
 - WiFi configuration interface
