@@ -4,6 +4,8 @@
 
 ---
 
+<div align="center">
+ 
 [![Docs at Doxygen](https://img.shields.io/badge/Docs%20at-Doxygen-darkblue?style=for-the-badge&labelColor=blue&logo=doxygen)](https://cziter15.github.io/ksIotFrameworkLib)
 [![Docs at Wiki](https://img.shields.io/badge/Docs%20at-Wiki-darkblue?style=for-the-badge&labelColor=blue&logo=wikidotjs)](https://github.com/cziter15/ksIotFrameworkLib/wiki)
 [![License](https://img.shields.io/badge/License-MIT%20(no%20AI%20training%20allowed)-darkblue?style=for-the-badge&labelColor=blue)](https://github.com/cziter15/ksIotFrameworkLib?tab=License-1-ov-file#readme)
@@ -15,6 +17,8 @@
 [![Powered by pioarduino](https://img.shields.io/badge/powered%20by-pioarduino-royalblue?logo=arduino)](https://github.com/pioarduino)
 
 ![header](https://github.com/user-attachments/assets/45c5a63f-9042-4637-b5c7-a17b84811493)
+
+</div>
 
 ## 🌟 Introduction
 
