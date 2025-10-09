@@ -73,6 +73,36 @@ In this directory, you will find examples that guide you through building variou
 
 8. Now all that's left to do is implement the components and logic of your device. 
 
-## [basic-config](basic-config)
+## Available Examples
 
-This application demonstrates how create most typical application stack. One ksApplication is responsible for device logic and the another is the application that is used to configure the device.
+### [led-blink](led-blink) 🔰 **Start Here!**
+
+A comprehensive tutorial that teaches the fundamentals of ksIotFrameworkLib through a simple LED blinking application. **Perfect for beginners!**
+
+**What you'll learn:**
+
+- Creating applications and using components
+- Managing configuration with persistent storage
+- Implementing automatic application rotation
+- Building a web-based configuration interface
+- Controlling hardware (GPIO pins and LEDs)
+
+**Features:**
+
+- User-configurable LED blink interval
+- WiFi connectivity with automatic reconnection
+- Web-based configuration portal
+- Extensively documented code
+
+This example is designed as a tutorial with detailed explanations of every concept, making it the ideal starting point for learning the framework.
+
+### [basic-config](basic-config)
+
+This application demonstrates how to create a typical IoT application stack with MQTT connectivity. One ksApplication handles device logic while another provides configuration capabilities.
+
+**Features:**
+
+- MQTT integration for device communication
+- Device status reporting
+- WiFi configuration interface
+- Multiple application pattern
