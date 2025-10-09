@@ -96,6 +96,28 @@ A comprehensive tutorial that teaches the fundamentals of ksIotFrameworkLib thro
 
 This example is designed as a tutorial with detailed explanations of every concept, making it the ideal starting point for learning the framework.
 
+### [mqtt-led](mqtt-led)
+
+A practical example demonstrating MQTT-based remote control of an LED. This example shows how to build an IoT device that responds to cloud commands in real-time.
+
+**What you'll learn:**
+
+- Integrating MQTT broker connectivity
+- Subscribing to MQTT topics
+- Handling incoming MQTT messages
+- Controlling hardware based on remote commands
+- Event-driven architecture with callbacks
+
+**Features:**
+
+- Remote LED control via MQTT messages
+- Subscribe to custom MQTT topics
+- Process "on" and "off" commands
+- MQTT broker configuration interface
+- Automatic connection management
+
+This example builds upon the concepts from led-blink and adds MQTT communication, making it ideal for learning IoT device control patterns.
+
 ### [basic-config](basic-config)
 
 This application demonstrates how to create a typical IoT application stack with MQTT connectivity. One ksApplication handles device logic while another provides configuration capabilities.
