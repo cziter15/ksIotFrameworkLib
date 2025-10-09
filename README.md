@@ -16,7 +16,7 @@
 [![Powered by platformio](https://img.shields.io/badge/powered%20by-platformio-royalblue?logo=platformio)](https://platformio.org)
 [![Powered by pioarduino](https://img.shields.io/badge/powered%20by-pioarduino-royalblue?logo=arduino)](https://github.com/pioarduino)
 
-![header](https://github.com/user-attachments/assets/45c5a63f-9042-4637-b5c7-a17b84811493)
+![Header](https://github.com/user-attachments/assets/fae20c8a-8126-4d79-a364-339d72a3f51f)
 
 </div>
 
