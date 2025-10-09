@@ -21,7 +21,7 @@
  *    - If WiFi connection fails, rotates to ConfigApp
  * 
  * 2. ConfigApp (Configuration Mode):
- *    - Creates an Access Point named "LedBlinkDevice"
+ *    - Creates an Access Point named "LedBlink-XXXX"
  *    - Provides a web interface to configure:
  *      * WiFi credentials (SSID and password)
  *      * LED blink interval
@@ -35,7 +35,7 @@
  * FIRST-TIME SETUP:
  * 1. Flash the firmware to your ESP device
  * 2. The device will start in ConfigApp mode (no WiFi credentials saved)
- * 3. Connect to "LedBlinkDevice" WiFi network
+ * 3. Connect to "LedBlink-XXXX" WiFi network (XXXX = device UUID)
  * 4. Open a browser and navigate to the device's IP (usually 192.168.4.1)
  * 5. Configure WiFi credentials and LED blink interval
  * 6. Save settings - device will reboot and start blinking

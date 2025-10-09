@@ -5,12 +5,12 @@
 namespace apps
 {
 	// Define the device name that will be shown in AP mode
-	const char ConfigApp::myDeviceName[] = "LedBlinkDevice";
+	const char ConfigApp::myDeviceName[] = "LedBlink";
 
 	bool ConfigApp::init()
 	{
 		// Add WiFi configurator component - creates AP and web interface
-		// Users can connect to "LedBlinkDevice" AP to configure WiFi settings
+		// Users can connect to "LedBlink-XXXX" AP to configure WiFi settings
 		addComponent<ksf::comps::ksWifiConfigurator>(myDeviceName);
 
 		// Add our custom configuration provider for the blink interval

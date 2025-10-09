@@ -84,7 +84,7 @@ graph TD
 
 #### 2. ConfigApp (Configuration Mode)
 
-- Creates a WiFi Access Point named "LedBlinkDevice"
+- Creates a WiFi Access Point named "LedBlink-XXXX" (where XXXX is the device UUID)
 - Hosts a web server at `192.168.4.1`
 - Provides a configuration interface for:
   - WiFi SSID and password
@@ -120,7 +120,7 @@ sequenceDiagram
     Device->>Storage: Check for config
     Storage-->>Device: No config found
     Device->>Device: Start ConfigApp
-    User->>Device: Connect to "LedBlinkDevice" AP
+    User->>Device: Connect to "LedBlink-XXXX" AP
     User->>Device: Open 192.168.4.1 in browser
     User->>Device: Enter WiFi credentials & interval
     User->>Device: Click "Save"
@@ -223,7 +223,7 @@ Manages the custom "blink interval" configuration parameter:
 ### Step 5: Initial Configuration
 
 1. After upload, the device will start in **ConfigApp** mode (no WiFi configured yet)
-2. On your phone or computer, connect to the WiFi network named **"LedBlinkDevice"**
+2. On your phone or computer, connect to the WiFi network named **"LedBlink-XXXX"** (where XXXX is your device's unique ID)
 3. Open a web browser and navigate to `http://192.168.4.1`
 4. You'll see the configuration interface with these fields:
    - **SSID**: Your WiFi network name
@@ -260,18 +260,13 @@ The blink interval is specified in **milliseconds**. Here are some example value
 
 To modify the configuration after initial setup:
 
-**Method 1: Clear Configuration**
-1. Use a serial terminal to connect to the device
-2. Erase the configuration (implementation-specific)
-3. Device will reboot into ConfigApp mode
-
-**Method 2: Can't Connect to WiFi**
+**Method 1: Can't Connect to WiFi**
 - If the device can't connect to the configured WiFi network, it automatically enters ConfigApp mode
 - Simply disconnect your WiFi router or change its name temporarily
 
-**Method 3: Filesystem Access**
+**Method 2: Filesystem Access**
 - The configuration is stored in `/nvs/led_blink.cfg`
-- You can delete this file via serial filesystem access
+- Advanced users can access this file through the filesystem to modify or delete it
 
 ## 🐛 Troubleshooting
 
@@ -282,16 +277,15 @@ To modify the configuration after initial setup:
 **Solutions**:
 - Verify `LED_PIN` matches your hardware in `board.h`
 - Check that the blink interval is not set to `0`
-- Ensure WiFi connection is successful (check serial monitor)
+- Ensure WiFi connection is successful
 - Try a longer interval like `2000` to make blinking more visible
 
-### Can't Connect to "LedBlinkDevice"
+### Can't Connect to "LedBlink-XXXX"
 
 **Problem**: WiFi network not visible
 
 **Solutions**:
 - Verify the device is powered and running
-- Check serial output for errors
 - Ensure device is in ConfigApp mode (first boot or WiFi failure)
 - Try rebooting the device
 - Check that your phone/computer supports 2.4GHz WiFi
@@ -302,7 +296,6 @@ To modify the configuration after initial setup:
 
 **Solutions**:
 - Verify filesystem is properly initialized
-- Check serial output for error messages
 - Ensure you clicked "Save" in the web interface
 - Try erasing flash and reflashing firmware
 
@@ -316,16 +309,6 @@ To modify the configuration after initial setup:
 - Ensure your WiFi is 2.4GHz (ESP8266/ESP32 don't support 5GHz)
 - Check WiFi signal strength at device location
 - Disable MAC address filtering on your router
-
-### Serial Monitor Shows Errors
-
-**Problem**: Error messages appear in serial output
-
-**Solutions**:
-- Note the specific error message
-- Check if filesystem is corrupted (try reflashing)
-- Verify all dependencies are installed
-- Check available flash memory
 
 ## 📚 Key Concepts Summary
 
@@ -353,7 +336,6 @@ Read through the source files to understand the implementation details!
 ## 💡 Tips
 
 - **Start Simple**: Begin with the default configuration before customizing
-- **Use Serial Monitor**: Monitor debug output to understand what's happening
 - **Read Comments**: The code is extensively documented
 - **Experiment**: Try different intervals and modifications
 
