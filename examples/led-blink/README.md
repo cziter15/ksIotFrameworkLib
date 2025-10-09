@@ -4,16 +4,16 @@ A comprehensive tutorial demonstrating how to build a configurable LED blink app
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Learning Objectives](#learning-objectives)
-- [Hardware Requirements](#hardware-requirements)
-- [Software Requirements](#software-requirements)
-- [How It Works](#how-it-works)
-- [Code Structure](#code-structure)
-- [Step-by-Step Guide](#step-by-step-guide)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Key Concepts Summary](#key-concepts-summary)
+- [🎯 Overview](#-overview)
+- [📚 Learning Objectives](#-learning-objectives)
+- [🔌 Hardware Requirements](#-hardware-requirements)
+- [💻 Software Requirements](#-software-requirements)
+- [⚙️ How It Works](#️-how-it-works)
+- [📁 Code Structure](#-code-structure)
+- [📖 Step-by-Step Guide](#-step-by-step-guide)
+- [🔧 Configuration](#-configuration)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [📚 Key Concepts Summary](#-key-concepts-summary)
 
 ## 🎯 Overview
 
@@ -46,7 +46,8 @@ By studying this example, you will learn how to:
 ### Wiring Diagram
 
 For external LED:
-```
+
+```text
 ESP GPIO Pin (default: 2) ---> [LED Anode (+)]
                                [LED Cathode (-)] ---> [Resistor] ---> GND
 ```
@@ -135,7 +136,7 @@ sequenceDiagram
 
 ## 📁 Code Structure
 
-```
+```text
 led-blink/
 ├── platformio.ini              # PlatformIO configuration
 ├── README.md                   # This file
@@ -154,13 +155,17 @@ led-blink/
 ### Key Files Explained
 
 #### `board.h`
+
 Defines hardware-specific constants. Change `LED_PIN` to match your hardware:
+
 ```cpp
 #define LED_PIN 2  // GPIO pin number for LED
 ```
 
 #### `main.cpp`
+
 The application entry point. Uses `KSF_IMPLEMENT_APP_ROTATOR` macro to define the application rotation order:
+
 ```cpp
 KSF_IMPLEMENT_APP_ROTATOR
 (
@@ -170,20 +175,26 @@ KSF_IMPLEMENT_APP_ROTATOR
 ```
 
 #### `LedBlinkingApp` (Main Application)
+
 The primary application that runs when WiFi is configured:
+
 - Reads the blink interval from storage
 - Creates WiFi and LED components
 - Starts LED blinking
 - Maintains WiFi connection
 
 #### `ConfigApp` (Configuration Application)
+
 The configuration interface:
+
 - Creates an Access Point
 - Provides web-based configuration
 - Saves settings to storage
 
 #### `BlinkConfigProvider`
+
 Manages the custom "blink interval" configuration parameter:
+
 - Defines the parameter structure
 - Handles reading from storage
 - Handles saving to storage
@@ -201,6 +212,7 @@ Manages the custom "blink interval" configuration parameter:
 
 1. Open `src/board.h`
 2. Modify `LED_PIN` if needed to match your hardware:
+
    ```cpp
    #define LED_PIN 2  // Change this to your LED's GPIO pin
    ```
@@ -234,7 +246,7 @@ Manages the custom "blink interval" configuration parameter:
 7. Click **Save**
 8. The device will save settings and reboot
 
-### Step 6: Watch It Blink!
+### Step 6: Watch It Blink
 
 1. After reboot, the device connects to your WiFi
 2. The LED starts blinking at your configured interval
@@ -260,11 +272,13 @@ The blink interval is specified in **milliseconds**. Here are some example value
 
 To modify the configuration after initial setup:
 
-**Method 1: Can't Connect to WiFi**
+#### Method 1: Can't Connect to WiFi
+
 - If the device can't connect to the configured WiFi network, it automatically enters ConfigApp mode
 - Simply disconnect your WiFi router or change its name temporarily
 
-**Method 2: Filesystem Access**
+#### Method 2: Filesystem Access
+
 - The configuration is stored in `/nvs/led_blink.cfg`
 - Advanced users can access this file through the filesystem to modify or delete it
 
@@ -275,6 +289,7 @@ To modify the configuration after initial setup:
 **Problem**: LED stays on or off continuously
 
 **Solutions**:
+
 - Verify `LED_PIN` matches your hardware in `board.h`
 - Check that the blink interval is not set to `0`
 - Ensure WiFi connection is successful
@@ -285,6 +300,7 @@ To modify the configuration after initial setup:
 **Problem**: WiFi network not visible
 
 **Solutions**:
+
 - Verify the device is powered and running
 - Ensure device is in ConfigApp mode (first boot or WiFi failure)
 - Try rebooting the device
@@ -295,6 +311,7 @@ To modify the configuration after initial setup:
 **Problem**: Settings revert after reboot
 
 **Solutions**:
+
 - Verify filesystem is properly initialized
 - Ensure you clicked "Save" in the web interface
 - Try erasing flash and reflashing firmware
@@ -304,6 +321,7 @@ To modify the configuration after initial setup:
 **Problem**: Device keeps returning to ConfigApp mode
 
 **Solutions**:
+
 - Double-check WiFi SSID spelling (case-sensitive)
 - Verify WiFi password is correct
 - Ensure your WiFi is 2.4GHz (ESP8266/ESP32 don't support 5GHz)
@@ -326,6 +344,7 @@ This example demonstrates these framework concepts:
 ## 📝 Code Comments
 
 All source files are heavily commented to explain:
+
 - **What** the code does
 - **Why** specific approaches are used
 - **How** different parts interact
@@ -349,4 +368,4 @@ This example is part of ksIotFrameworkLib and follows the same license. See the 
 
 ---
 
-**Happy Blinking! 💡**
+Happy Blinking 💡
