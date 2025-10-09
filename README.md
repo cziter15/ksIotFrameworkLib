@@ -6,9 +6,9 @@
 
 <div align="center">
  
-[![Docs at Doxygen](https://img.shields.io/badge/Docs%20at-Doxygen-darkblue?style=for-the-badge&labelColor=blue&logo=doxygen)](https://cziter15.github.io/ksIotFrameworkLib)
-[![Docs at Wiki](https://img.shields.io/badge/Docs%20at-Wiki-darkblue?style=for-the-badge&labelColor=blue&logo=wikidotjs)](https://github.com/cziter15/ksIotFrameworkLib/wiki)
-[![License](https://img.shields.io/badge/License-MIT%20(no%20AI%20training%20allowed)-darkblue?style=for-the-badge&labelColor=blue)](https://github.com/cziter15/ksIotFrameworkLib?tab=License-1-ov-file#readme)
+[![Docs at Doxygen](https://img.shields.io/badge/Docs%20at-Doxygen-005A9E?style=for-the-badge&logo=doxygen&logoColor=white)](https://cziter15.github.io/ksIotFrameworkLib)
+[![Docs at Wiki](https://img.shields.io/badge/Docs%20at-Wiki-D84315?style=for-the-badge&logo=wikidotjs&logoColor=white)](https://github.com/cziter15/ksIotFrameworkLib/wiki)
+[![License](https://img.shields.io/badge/License-MIT--NON--AI-2E7D32?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](https://github.com/cziter15/ksIotFrameworkLib?tab=License-1-ov-file#readme)
 
 [![build-examples](https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml/badge.svg)](https://github.com/cziter15/ksIotFrameworkLib/actions/workflows/build-examples.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/956910bb43464108883bdcf57b1f6943)](https://app.codacy.com/gh/cziter15/ksIotFrameworkLib/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
