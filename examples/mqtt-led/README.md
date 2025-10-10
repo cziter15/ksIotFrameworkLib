@@ -24,7 +24,8 @@ The MQTT LED example shows how to build a simple IoT device that can be controll
 - USB cable for programming
 
 ### Wiring
-```
+
+```text
 ESP Board          LED
 GPIO 2 ------------|>|---[220Ω]--- GND
 (or pin in board.h)
@@ -68,6 +69,7 @@ Once configured, the device will:
 - Subscribe to the topic: `<prefix>/led`
 
 **To control the LED**, publish messages to this topic:
+
 ```bash
 # Turn LED on
 mosquitto_pub -h mqtt.example.com -t "home/led1/led" -m "on"
@@ -106,7 +108,7 @@ The firmware uses an **application rotator** pattern with two applications:
 
 ### Component Interaction
 
-```
+```text
 MqttLedApp
   ├── ksWifiConnector (handles WiFi connection)
   ├── ksMqttConnector (handles MQTT connection)
@@ -133,10 +135,10 @@ mqtt-led/
 ├── README.md                   # This file
 └── src/
     ├── board.h                 # Hardware pin definitions
-    ├── main.cpp               # Entry point with app rotator
+    ├── main.cpp                # Entry point with app rotator
     └── apps/
-        ├── MqttLedApp.h         # Main application header
-        ├── MqttLedApp.cpp       # Main application implementation
+        ├── MqttLedApp.h        # Main application header
+        ├── MqttLedApp.cpp      # Main application implementation
         ├── ConfigApp.h         # Configuration app header
         └── ConfigApp.cpp       # Configuration app implementation
 ```
@@ -144,19 +146,24 @@ mqtt-led/
 ### Key Files Explained
 
 #### `board.h`
+
 Defines the hardware pin configuration:
+
 ```cpp
 #define LED_PIN 2  // Change this to match your LED pin
 ```
 
 #### `main.cpp`
+
 Sets up the application rotator:
 
 - Tries `MqttLedApp` first (normal operation)
 - Falls back to `ConfigApp` if connection fails
 
 #### `MqttLedApp` (Main Application)
+
 The primary application that:
+
 - Manages WiFi and MQTT connections
 - Subscribes to control topics
 - Handles incoming MQTT messages
@@ -170,6 +177,7 @@ Key methods:
 - `loop()`: Main execution loop (delegated to framework)
 
 #### `ConfigApp` (Configuration Application)
+
 The configuration interface that:
 
 - Creates an Access Point
@@ -182,18 +190,21 @@ The configuration interface that:
 ### MQTT Topic Structure
 
 The device uses a prefix-based topic structure:
-```
+
+```text
 <configured_prefix>/led
 ```
 
 For example, if you set the prefix to `home/livingroom`, the LED control topic will be:
-```
+
+```text
 home/livingroom/led
 ```
 
 ### Accepted Commands
 
 Only two commands are recognized:
+
 - `"on"` - Turn LED on (case-sensitive)
 - `"off"` - Turn LED off (case-sensitive)
 
@@ -202,6 +213,7 @@ Any other messages are ignored.
 ## 🎓 Learning Objectives
 
 This example teaches:
+
 - How to integrate MQTT into your IoT application
 - How to subscribe to MQTT topics and handle messages
 - How to control hardware based on remote commands
