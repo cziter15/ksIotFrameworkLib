@@ -10,11 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Validate PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           set -euo pipefail
-          
-          # Get the PR title
-          PR_TITLE="${{ github.event.pull_request.title }}"
           
           echo "Validating PR title: $PR_TITLE"
           echo ""
