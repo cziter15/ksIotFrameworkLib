@@ -99,7 +99,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Bump version to ${NEW_VERSION}"
+            git commit -m "(chore) Bump version to ${NEW_VERSION}"
             git push
           fi
       - name: Create and push tag
