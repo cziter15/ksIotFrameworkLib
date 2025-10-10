@@ -36,6 +36,8 @@ jobs:
         pio run
         cd ../led-blink
         pio run
+        cd ../mqtt-led
+        pio run
     - name: Deploy firmware artifacts (basic-config esp8266)
       uses: actions/upload-artifact@v4
       with:
@@ -56,3 +58,13 @@ jobs:
       with:
         name: led-blink-esp32-${{ github.run_id }}
         path: examples/led-blink/.pio/build/esp32/firmware.bin
+    - name: Deploy firmware artifacts (mqtt-led esp8266)
+      uses: actions/upload-artifact@v4
+      with:
+        name: mqtt-led-esp8266-${{ github.run_id }}
+        path: examples/mqtt-led/.pio/build/esp8266dev/firmware.bin
+    - name: Deploy firmware artifacts (mqtt-led esp32)
+      uses: actions/upload-artifact@v4
+      with:
+        name: mqtt-led-esp32-${{ github.run_id }}
+        path: examples/mqtt-led/.pio/build/esp32/firmware.bin
