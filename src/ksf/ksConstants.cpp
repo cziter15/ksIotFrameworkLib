@@ -193,15 +193,14 @@ namespace ksf
 
 	const std::string getResetReason()
 	{
-		auto otaType{getOtaBootType()};
 #if defined(ESP32)
 		switch (esp_reset_reason())
 		{
 			case ESP_RST_POWERON:
 				return PSTR("Power On");
 			case ESP_RST_SW:
-				if (otaType != EOTAType::NO_OTA)
-					return otaTypeToString(otaType);
+				if (otaBootType != EOTAType::NO_OTA)
+					return otaTypeToString(otaBootType);
 				return PSTR("Software/System restart");
 			case ESP_RST_PANIC:
 				return PSTR("Exception");
@@ -221,8 +220,8 @@ namespace ksf
 				return PSTR("Unknown");
 		}
 #elif defined(ESP8266)
-		if (otaType != EOTAType::NO_OTA && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
-			return otaTypeToString(otaType);
+		if (otaBootType != EOTAType::NO_OTA && ESP.getResetInfoPtr()->reason == REASON_SOFT_RESTART)
+			return otaTypeToString(otaBootType);
 
 		return {ESP.getResetReason().c_str()};
 #else			
