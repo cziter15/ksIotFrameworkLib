@@ -88,16 +88,13 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<p>Use clear commit messages following the <a href="https://www.conventionalcommits.org/">Conventional Commits</a> specification for consistency and automated releases.</p>
+<p>Use clear PR titles following the <a href="https://www.conventionalcommits.org/">Conventional Commits</a> specification for consistency and automated releases.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Commit Message Format</h1>
-<p>Each commit message should follow this structure:</p>
+PR Title Format</h1>
+<p>When creating a pull request, the PR title should follow this structure:</p>
 <div class="fragment"><div class="line">&lt;type&gt;[optional scope]: &lt;description&gt;</div>
-<div class="line"> </div>
-<div class="line">[optional body]</div>
-<div class="line"> </div>
-<div class="line">[optional footer(s)]</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
+</div><!-- fragment --><p>This format will be used as the commit message when your PR is merged.</p>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Commit Types</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -144,19 +141,19 @@ Breaking Changes</h2>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Tips</h1>
 <ul>
-<li>Keep the subject line under 72 characters</li>
+<li>Keep the PR title under 72 characters</li>
 <li>Use lowercase for type and description</li>
-<li>Don't end the subject line with a period</li>
+<li>Don't end the PR title with a period</li>
 <li>Use the imperative mood ("add feature" not "added feature")</li>
 <li>Be concise and specific</li>
 <li>Reference issues when possible (e.g., <code>fixes #123</code>)</li>
-<li>Use the body to explain <em>what</em> and <em>why</em>, not <em>how</em></li>
+<li>Individual commits within the PR can use any format</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md5"></a>
 Before pull requests</h1>
 <ul>
-<li>Follow commit format</li>
-<li>Describe changes clearly</li>
+<li>Follow PR title format (will be validated automatically)</li>
+<li>Describe changes clearly in PR description</li>
 <li>Ensure builds and tests pass </li>
 </ul>
 </div></div><!-- contents -->
