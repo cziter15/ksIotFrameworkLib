@@ -88,34 +88,71 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p>
-<p>Use clear commit messages for consistency and automated releases.</p>
+<p>Use clear commit messages following the <a href="https://www.conventionalcommits.org/">Conventional Commits</a> specification for consistency and automated releases.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-Commit format / type</h1>
+Commit Message Format</h1>
+<p>Each commit message should follow this structure:</p>
+<div class="fragment"><div class="line">&lt;type&gt;[optional scope]: &lt;description&gt;</div>
+<div class="line"> </div>
+<div class="line">[optional body]</div>
+<div class="line"> </div>
+<div class="line">[optional footer(s)]</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
+Commit Types</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">Description   </th><th class="markdownTableHeadNone">Example    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>feat</b>   </td><td class="markdownTableBodyNone">Adds a new feature or capability   </td><td class="markdownTableBodyNone"><code>(feat) Add WiFi reconnection logic</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>feat</b>   </td><td class="markdownTableBodyNone">Adds a new feature or capability   </td><td class="markdownTableBodyNone"><code>feat: add WiFi reconnection logic</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>fix</b>   </td><td class="markdownTableBodyNone">Resolves a bug or issue   </td><td class="markdownTableBodyNone"><code>(fix) Handle MQTT reconnect crash #12</code>    </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>feat(mqtt): add auto-reconnect support</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>docs</b>   </td><td class="markdownTableBodyNone">Updates or improves documentation   </td><td class="markdownTableBodyNone"><code>(docs) Update README with setup steps</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>fix</b>   </td><td class="markdownTableBodyNone">Resolves a bug or issue   </td><td class="markdownTableBodyNone"><code>fix: handle MQTT reconnect crash</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>chore</b>   </td><td class="markdownTableBodyNone">Maintenance or build-related task   </td><td class="markdownTableBodyNone"><code>(chore) Update dependency versions</code>    </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>fix(wifi): resolve connection timeout #12</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>perf</b>   </td><td class="markdownTableBodyNone">Improves performance or efficiency   </td><td class="markdownTableBodyNone"><code>(perf) Reduce memory usage in parser</code>    </td></tr>
+<td class="markdownTableBodyNone"><b>docs</b>   </td><td class="markdownTableBodyNone">Updates or improves documentation   </td><td class="markdownTableBodyNone"><code>docs: update README with setup steps</code>    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>refactor</b>   </td><td class="markdownTableBodyNone">Code cleanup or structure change   </td><td class="markdownTableBodyNone"><code>(refactor) Simplify config loader</code>    </td></tr>
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>docs(api): add missing parameter descriptions</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><b>test</b>   </td><td class="markdownTableBodyNone">Adds or updates tests   </td><td class="markdownTableBodyNone"><code>(test) Add unit tests for network manager</code>   </td></tr>
+<td class="markdownTableBodyNone"><b>chore</b>   </td><td class="markdownTableBodyNone">Maintenance or build-related task   </td><td class="markdownTableBodyNone"><code>chore: update dependency versions</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>chore(ci): update workflow actions</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>perf</b>   </td><td class="markdownTableBodyNone">Improves performance or efficiency   </td><td class="markdownTableBodyNone"><code>perf: reduce memory usage in parser</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>refactor</b>   </td><td class="markdownTableBodyNone">Code cleanup or structure change   </td><td class="markdownTableBodyNone"><code>refactor: simplify config loader</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>test</b>   </td><td class="markdownTableBodyNone">Adds or updates tests   </td><td class="markdownTableBodyNone"><code>test: add unit tests for network manager</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>build</b>   </td><td class="markdownTableBodyNone">Changes to build system or deps   </td><td class="markdownTableBodyNone"><code>build: add support for ESP32-S3</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>ci</b>   </td><td class="markdownTableBodyNone">Changes to CI configuration   </td><td class="markdownTableBodyNone"><code>ci: add automated release workflow</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>style</b>   </td><td class="markdownTableBodyNone">Code style changes (formatting)   </td><td class="markdownTableBodyNone"><code>style: format code according to guidelines</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><b>revert</b>   </td><td class="markdownTableBodyNone">Reverts a previous commit   </td><td class="markdownTableBodyNone"><code>revert: revert "feat: add new feature"</code>   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Breaking Changes</h2>
+<p>If your commit introduces breaking changes, add <code>!</code> after the type/scope:</p>
+<div class="fragment"><div class="line">feat!: remove deprecated WiFi API</div>
+</div><!-- fragment --><p>Or add a footer:</p>
+<div class="fragment"><div class="line">feat: update WiFi connection API</div>
+<div class="line"> </div>
+<div class="line">BREAKING CHANGE: WiFi.connect() now requires explicit credentials parameter</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Tips</h1>
 <ul>
+<li>Keep the subject line under 72 characters</li>
+<li>Use lowercase for type and description</li>
+<li>Don't end the subject line with a period</li>
+<li>Use the imperative mood ("add feature" not "added feature")</li>
 <li>Be concise and specific</li>
-<li>Reference issues when possible</li>
+<li>Reference issues when possible (e.g., <code>fixes #123</code>)</li>
+<li>Use the body to explain <em>what</em> and <em>why</em>, not <em>how</em></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Before pull requests</h1>
 <ul>
 <li>Follow commit format</li>
