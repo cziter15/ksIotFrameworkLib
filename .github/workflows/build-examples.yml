@@ -32,22 +32,10 @@ jobs:
       run: |
         cd examples
         pio upgrade
-        cd basic-config
-        pio run
-        cd ../led-blink
+        cd led-blink
         pio run
         cd ../mqtt-led
         pio run
-    - name: Deploy firmware artifacts (basic-config esp8266)
-      uses: actions/upload-artifact@v4
-      with:
-        name: basic-esp8266-config-${{ github.run_id }}
-        path: examples/basic-config/.pio/build/esp8266dev/firmware.bin
-    - name: Deploy firmware artifacts (basic-config esp32)
-      uses: actions/upload-artifact@v4
-      with:
-        name: basic-esp32-config-${{ github.run_id }}
-        path: examples/basic-config/.pio/build/esp32/firmware.bin
     - name: Deploy firmware artifacts (led-blink esp8266)
       uses: actions/upload-artifact@v4
       with:

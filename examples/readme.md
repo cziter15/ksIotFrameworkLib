@@ -117,14 +117,3 @@ A practical example demonstrating MQTT-based remote control of an LED. This exam
 - Automatic connection management
 
 This example builds upon the concepts from led-blink and adds MQTT communication, making it ideal for learning IoT device control patterns.
-
-### [basic-config](basic-config)
-
-This application demonstrates how to create a typical IoT application stack with MQTT connectivity. One ksApplication handles device logic while another provides configuration capabilities.
-
-**Features:**
-
-- MQTT integration for device communication
-- Device status reporting
-- WiFi configuration interface
-- Multiple application pattern
