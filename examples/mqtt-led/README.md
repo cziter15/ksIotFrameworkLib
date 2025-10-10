@@ -18,6 +18,7 @@ The MQTT LED example shows how to build a simple IoT device that can be controll
 ## 🔧 Hardware Setup
 
 ### Requirements
+
 - ESP8266 or ESP32 development board
 - LED with current-limiting resistor (220-330Ω)
 - USB cable for programming
@@ -61,6 +62,7 @@ On first boot, the device has no saved configuration and will automatically ente
 ### 3. Control the LED
 
 Once configured, the device will:
+
 - Connect to your WiFi network
 - Connect to the MQTT broker
 - Subscribe to the topic: `<prefix>/led`
@@ -149,6 +151,7 @@ Defines the hardware pin configuration:
 
 #### `main.cpp`
 Sets up the application rotator:
+
 - Tries `MqttLedApp` first (normal operation)
 - Falls back to `ConfigApp` if connection fails
 
@@ -160,6 +163,7 @@ The primary application that:
 - Controls the LED hardware
 
 Key methods:
+
 - `init()`: Sets up components and registers callbacks
 - `onMqttConnected()`: Subscribes to topics when MQTT connects
 - `onMqttMessage()`: Processes incoming MQTT commands
@@ -167,6 +171,7 @@ Key methods:
 
 #### `ConfigApp` (Configuration Application)
 The configuration interface that:
+
 - Creates an Access Point
 - Hosts a web configuration page
 - Saves settings to persistent storage
@@ -194,39 +199,6 @@ Only two commands are recognized:
 
 Any other messages are ignored.
 
-### Changing Configuration Later
-
-To modify the configuration after initial setup:
-
-#### Method 1: Connection Failure
-- If the device can't connect to WiFi or MQTT, it automatically enters ConfigApp mode
-- Temporarily disconnect your WiFi router or MQTT broker
-
-#### Method 2: Filesystem Access
-- The configuration is stored in `/nvs/mqtt.conf` and `/nvs/wifi.conf`
-- Advanced users can access these files through the filesystem to modify or delete them
-
-## 🔍 Troubleshooting
-
-### LED doesn't respond to MQTT messages
-
-1. **Check MQTT connection**: Look at the device logs to ensure it's connected
-2. **Verify topic**: Make sure you're publishing to `<prefix>/led`
-3. **Check message format**: Use exactly `"on"` or `"off"` (case-sensitive)
-4. **Test with mosquitto_sub**: Subscribe to all topics to see what the device receives
-
-### Device keeps entering ConfigApp mode
-
-1. **WiFi credentials**: Verify SSID and password are correct
-2. **MQTT broker**: Ensure the broker address is reachable
-3. **Network firewall**: Check if MQTT port (usually 1883) is not blocked
-
-### Cannot connect to ConfigApp
-
-1. **Network name**: Look for `MqttLed-XXXX` network
-2. **Wait for AP**: Give the device 10-20 seconds to start the Access Point
-3. **IP address**: Try `http://192.168.4.1` in your browser
-
 ## 🎓 Learning Objectives
 
 This example teaches:
@@ -236,17 +208,6 @@ This example teaches:
 - How to use the ksMqttConnector component
 - How to implement event-driven architecture with callbacks
 - How to structure an application with configuration mode
-
-## 🚀 Next Steps
-
-This example provides a foundation for building more complex IoT devices. Consider extending it to:
-
-1. **Add more LEDs**: Control multiple LEDs with different topics
-2. **Add status publishing**: Publish LED state back to MQTT
-3. **Add brightness control**: Use PWM to control LED brightness via MQTT
-4. **Add sensors**: Read sensor data and publish to MQTT
-5. **Add schedules**: Implement time-based LED control
-6. **Add Home Assistant integration**: Create MQTT discovery messages
 
 ## 📚 Related Examples
 
