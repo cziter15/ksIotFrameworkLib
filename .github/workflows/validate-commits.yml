@@ -1,0 +1,49 @@
+name: Validate PR Title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-pr-title:
+    name: Validate PR Title (Conventional Commits)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+          
+          echo "Validating PR title: $PR_TITLE"
+          echo ""
+          
+          # Conventional commits regex pattern
+          # Matches: type[(scope)][!]: description
+          # Where type is one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+          PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?!?: .{1,}'
+          
+          if [[ ! "$PR_TITLE" =~ $PATTERN ]]; then
+            echo "================================================"
+            echo "❌ Invalid PR title"
+            echo "================================================"
+            echo ""
+            echo "PR title must follow the Conventional Commits specification:"
+            echo ""
+            echo "Format: <type>[optional scope]: <description>"
+            echo ""
+            echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+            echo ""
+            echo "Examples:"
+            echo "  ✅ feat: add WiFi reconnection logic"
+            echo "  ✅ fix(mqtt): handle reconnect crash"
+            echo "  ✅ docs: update README with setup steps"
+            echo "  ✅ feat!: remove deprecated API"
+            echo ""
+            echo "Please see CONTRIBUTING.md for more details."
+            exit 1
+          else
+            echo "================================================"
+            echo "✅ PR title is valid"
+            echo "================================================"
+          fi

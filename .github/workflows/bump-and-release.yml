@@ -99,7 +99,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "(chore) Bump version to ${NEW_VERSION}"
+            git commit -m "chore: bump version to ${NEW_VERSION}"
             git push
           fi
       - name: Create and push tag
@@ -121,38 +121,50 @@ jobs:
           else
             RANGE="--no-merges HEAD"
           fi
-          # Use subject-only (no short-hash) so grep patterns can match the start of the subject
+          # Use subject-only format with author
           git log $RANGE --pretty=format:'%s (%an)' > commits.raw || true
           printf "# Release %s\n\n" "${NEW_VERSION}" > release_notes.md
-          for type in feat fix docs chore perf refactor test; do
-            # Match either conventional 'type:' or 'type(scope):' OR the alternative '(type) ' prefix
-            if grep -Ei "^(.*: )?(\(${type}\)|${type}(\(.+\))?:) " commits.raw >/dev/null 2>&1; then
-              header=$(case $type in
-                feat) echo "Features";;
-                fix) echo "Fixes";;
-                docs) echo "Documentation";;
-                chore) echo "Chores";;
-                perf) echo "Performance";;
-                refactor) echo "Refactors";;
-                test) echo "Tests";;
-                *) echo ""
-              esac)
+          
+          # Define commit types and their headers
+          declare -A type_headers=(
+            ["feat"]="✨ Features"
+            ["fix"]="🐛 Bug Fixes"
+            ["docs"]="📚 Documentation"
+            ["perf"]="⚡ Performance Improvements"
+            ["refactor"]="♻️ Code Refactoring"
+            ["test"]="✅ Tests"
+            ["build"]="🔧 Build System"
+            ["ci"]="👷 Continuous Integration"
+            ["chore"]="🔨 Chores"
+            ["style"]="💄 Styles"
+            ["revert"]="⏪ Reverts"
+          )
+          
+          # Process commits by type
+          for type in feat fix docs perf refactor test build ci chore style revert; do
+            # Match conventional commits format: type(scope): or type:
+            # This will match lines starting with the type followed by optional scope and colon
+            if grep -E "^${type}(\(.+\))?!?: " commits.raw >/dev/null 2>&1; then
+              header="${type_headers[$type]}"
               printf "## %s\n\n" "$header" >> release_notes.md
-              # Remove either leading "(type) " or "type(scope): " or "type: " and strip trailing author
-              grep -Ei "^(.*: )?(\(${type}\)|${type}(\(.+\))?:) " commits.raw \
-                | sed -E 's/^\([a-zA-Z]+\)\s*//; s/^([a-z]+)(\(.+\))?: //I; s/\s+\([^)]+\)$//' \
+              
+              # Extract commits of this type
+              grep -E "^${type}(\(.+\))?!?: " commits.raw \
+                | sed -E "s/^${type}(\(.+\))?!?: //; s/\s+\([^)]+\)$//" \
                 | sed 's/^/- /' >> release_notes.md
               echo >> release_notes.md
             fi
           done
-          # Any remaining lines that do not match the known types go into "Other changes"
-          if grep -Eiv "^(.*: )?(\((feat|fix|docs|chore|perf|refactor|test)\)|feat|fix|docs|chore|perf|refactor|test)(\(.+\))?:? " commits.raw >/dev/null 2>&1; then
-            printf "## Other changes\n\n" >> release_notes.md
-            grep -Eiv "^(.*: )?(\((feat|fix|docs|chore|perf|refactor|test)\)|feat|fix|docs|chore|perf|refactor|test)(\(.+\))?:? " commits.raw \
-              | sed -E 's/^\([a-zA-Z]+\)\s*//; s/^([a-z]+)(\(.+\))?: //I; s/\s+\([^)]+\)$//' \
+          
+          # Handle any commits that don't match conventional commits format
+          if grep -Ev "^(feat|fix|docs|perf|refactor|test|build|ci|chore|style|revert)(\(.+\))?!?: " commits.raw >/dev/null 2>&1; then
+            printf "## 📝 Other Changes\n\n" >> release_notes.md
+            grep -Ev "^(feat|fix|docs|perf|refactor|test|build|ci|chore|style|revert)(\(.+\))?!?: " commits.raw \
+              | sed 's/\s\+([^)]\+)$//' \
               | sed 's/^/- /' >> release_notes.md
             echo >> release_notes.md
           fi
+          
           [ -s release_notes.md ] || echo -e "# Release ${NEW_VERSION}\n\nNo changes detected." > release_notes.md
       - name: Create GitHub Release with notes-file
         env:
