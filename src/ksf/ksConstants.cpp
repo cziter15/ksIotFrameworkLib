@@ -33,7 +33,7 @@ namespace ksf
 	const char SSID_PARAM_NAME[] PROGMEM {"ssid"};						// Param name from progmem - ssid
 	const char PASSWORD_PARAM_NAME[] PROGMEM {"password"};				// Param name from progmem - password
 
-	static EOTAType::Type otaBootType{EOTAType::NO_OTA};				// Will be true if this launch is just after OTA flash.
+	static EOTAType::Type otaBootType{EOTAType::NO_OTA};				// Stores the OTA boot type if this launch is just after OTA flash.
 	static uint32_t uptime_low32, uptime_high32;						// Variables for assembling 64-bit version of millis.
 
 	void initializeFramework()
@@ -193,7 +193,6 @@ namespace ksf
 
 	const std::string getResetReason()
 	{
-		auto otaBootType{getOtaBootType()};
 #if defined(ESP32)
 		switch (esp_reset_reason())
 		{
