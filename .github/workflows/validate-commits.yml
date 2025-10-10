@@ -1,0 +1,79 @@
+name: Validate Commit Messages
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate-commits:
+    name: Validate Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history to check all commits in PR
+
+      - name: Validate commit messages
+        run: |
+          set -euo pipefail
+          
+          # Get the base branch (target of the PR)
+          BASE_REF="${{ github.event.pull_request.base.sha }}"
+          HEAD_REF="${{ github.event.pull_request.head.sha }}"
+          
+          echo "Validating commits from $BASE_REF to $HEAD_REF"
+          
+          # Get all commit messages in the PR
+          COMMITS=$(git log --format=%s "$BASE_REF".."$HEAD_REF")
+          
+          if [ -z "$COMMITS" ]; then
+            echo "No commits found in PR"
+            exit 0
+          fi
+          
+          # Conventional commits regex pattern
+          # Matches: type[(scope)][!]: description
+          # Where type is one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+          PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?!?: .{1,}'
+          
+          INVALID_COMMITS=0
+          
+          echo "Checking commit messages..."
+          echo ""
+          
+          while IFS= read -r commit_msg; do
+            if [[ ! "$commit_msg" =~ $PATTERN ]]; then
+              echo "❌ Invalid commit message: $commit_msg"
+              INVALID_COMMITS=$((INVALID_COMMITS + 1))
+            else
+              echo "✅ Valid commit message: $commit_msg"
+            fi
+          done <<< "$COMMITS"
+          
+          echo ""
+          
+          if [ $INVALID_COMMITS -gt 0 ]; then
+            echo "================================================"
+            echo "❌ Found $INVALID_COMMITS invalid commit message(s)"
+            echo "================================================"
+            echo ""
+            echo "Commit messages must follow the Conventional Commits specification:"
+            echo ""
+            echo "Format: <type>[optional scope]: <description>"
+            echo ""
+            echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+            echo ""
+            echo "Examples:"
+            echo "  ✅ feat: add WiFi reconnection logic"
+            echo "  ✅ fix(mqtt): handle reconnect crash"
+            echo "  ✅ docs: update README with setup steps"
+            echo "  ✅ feat!: remove deprecated API"
+            echo ""
+            echo "Please see CONTRIBUTING.md for more details."
+            exit 1
+          else
+            echo "================================================"
+            echo "✅ All commit messages are valid"
+            echo "================================================"
+          fi
