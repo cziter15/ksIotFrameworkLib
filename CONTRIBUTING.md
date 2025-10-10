@@ -1,18 +1,16 @@
 # Contributing to ksIotFrameworkLib
 
-Use clear commit messages following the [Conventional Commits](https://www.conventionalcommits.org/) specification for consistency and automated releases.
+Use clear PR titles following the [Conventional Commits](https://www.conventionalcommits.org/) specification for consistency and automated releases.
 
-## Commit Message Format
+## PR Title Format
 
-Each commit message should follow this structure:
+When creating a pull request, the PR title should follow this structure:
 
 ```
 <type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
 ```
+
+This format will be used as the commit message when your PR is merged.
 
 ### Commit Types
 
@@ -52,16 +50,16 @@ BREAKING CHANGE: WiFi.connect() now requires explicit credentials parameter
 
 ## Tips
 
-- Keep the subject line under 72 characters
+- Keep the PR title under 72 characters
 - Use lowercase for type and description
-- Don't end the subject line with a period
+- Don't end the PR title with a period
 - Use the imperative mood ("add feature" not "added feature")
 - Be concise and specific
 - Reference issues when possible (e.g., `fixes #123`)
-- Use the body to explain *what* and *why*, not *how*
+- Individual commits within the PR can use any format
 
 ## Before pull requests
 
-- Follow commit format
-- Describe changes clearly
+- Follow PR title format (will be validated automatically)
+- Describe changes clearly in PR description
 - Ensure builds and tests pass
