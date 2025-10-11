@@ -9,8 +9,7 @@ namespace apps
 	 * 
 	 * This application creates an Access Point (AP) mode configuration interface
 	 * where users can set up WiFi credentials and adjust the LED blink interval.
-	 * It's typically activated when the device cannot connect to WiFi or when
-	 * configuration needs to be changed.
+	 * It's activated when WiFi credentials are not configured on the device.
 	 */
 	class ConfigApp : public ksf::ksApplication
 	{
