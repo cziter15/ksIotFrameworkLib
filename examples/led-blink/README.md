@@ -23,7 +23,6 @@ This example creates a WiFi-enabled IoT device that blinks an LED at a user-conf
 - **WiFi Connectivity**: Automatic connection and reconnection to your WiFi network
 - **Web Configuration**: Easy setup through a mobile-friendly configuration portal
 - **Persistent Storage**: Configuration survives device reboots
-- **Automatic Fallback**: Switches to configuration mode if WiFi connection fails
 
 ## 📚 Learning Objectives
 
@@ -32,7 +31,7 @@ By studying this example, you will learn how to:
 1. **Create Applications**: Structure your code using the ksApplication framework
 2. **Use Components**: Leverage built-in components like ksLed and ksWifiConnector
 3. **Manage Configuration**: Implement custom configuration parameters
-4. **Handle Application Rotation**: Set up automatic fallback between applications
+4. **Handle Application Rotation**: Set up application rotation between different modes
 5. **Work with Storage**: Read and write configuration to non-volatile memory
 6. **Control Hardware**: Interact with GPIO pins to control an LED
 
@@ -70,18 +69,13 @@ The firmware uses an **application rotator** pattern with two applications:
 
 #### 1. LedBlinkingApp (Primary Mode)
 
-```mermaid
-graph TD
-    A[LedBlinkingApp] --> B[1. Connect to WiFi]
-    B --> C[2. Read blink interval]
-    C --> D[3. Start LED blinking]
-    D --> E[4. Maintain connection]
-    E -->|WiFi fails| F[ConfigApp]
-    F --> G[1. Create Access Point]
-    G --> H[2. Start web interface]
-    H --> I[3. Accept configuration]
-    I --> J[4. Save and reboot]
-```
+This is the main application that runs when WiFi credentials are configured:
+
+- Reads the LED blink interval from configuration storage
+- Connects to WiFi using saved credentials
+- Creates and controls the LED component
+- Blinks the LED at the configured interval
+- If initialization fails (e.g., no WiFi credentials), the application rotator switches to ConfigApp
 
 #### 2. ConfigApp (Configuration Mode)
 
@@ -272,10 +266,11 @@ The blink interval is specified in **milliseconds**. Here are some example value
 
 To modify the configuration after initial setup:
 
-#### Method 1: Can't Connect to WiFi
+#### Method 1: Erase Configuration
 
-- If the device can't connect to the configured WiFi network, it automatically enters ConfigApp mode
-- Simply disconnect your WiFi router or change its name temporarily
+- Use your development environment to erase the flash/filesystem
+- On next boot, the device will start in ConfigApp mode (no credentials found)
+- Reconfigure through the web interface
 
 #### Method 2: Filesystem Access
 
@@ -318,7 +313,7 @@ To modify the configuration after initial setup:
 
 ### WiFi Connection Fails
 
-**Problem**: Device keeps returning to ConfigApp mode
+**Problem**: Device doesn't connect to WiFi or LED doesn't blink
 
 **Solutions**:
 
@@ -327,6 +322,7 @@ To modify the configuration after initial setup:
 - Ensure your WiFi is 2.4GHz (ESP8266/ESP32 don't support 5GHz)
 - Check WiFi signal strength at device location
 - Disable MAC address filtering on your router
+- Check serial monitor for connection status messages
 
 ## 📚 Key Concepts Summary
 

@@ -18,7 +18,7 @@
  *    - Connects to WiFi using saved credentials
  *    - Reads the blink interval from configuration
  *    - Blinks the LED at the configured interval
- *    - If WiFi connection fails, rotates to ConfigApp
+ *    - If initialization fails (e.g., no WiFi credentials), rotates to ConfigApp
  * 
  * 2. ConfigApp (Configuration Mode):
  *    - Creates an Access Point named "LedBlink-XXXX"
@@ -41,8 +41,8 @@
  * 6. Save settings - device will reboot and start blinking
  * 
  * CHANGING CONFIGURATION:
- * - If the device cannot connect to WiFi, it automatically enters ConfigApp mode
- * - You can also trigger ConfigApp by erasing configuration or using OTA update
+ * - If the device has no WiFi credentials, it starts in ConfigApp mode
+ * - To reconfigure, erase the device configuration/filesystem and reboot
  */
 
 #include "apps/ConfigApp.h"
@@ -53,8 +53,8 @@ using namespace apps;
 // Application rotator macro - defines the order of applications
 // The framework will try each application in sequence:
 // - First attempts LedBlinkingApp (normal operation)
-// - If LedBlinkingApp fails (e.g., WiFi connection issue), tries ConfigApp
-// This provides automatic fallback to configuration mode when needed
+// - If LedBlinkingApp initialization fails (e.g., no WiFi credentials), tries ConfigApp
+// This provides a mechanism to enter configuration mode when needed
 KSF_IMPLEMENT_APP_ROTATOR
 (
 	LedBlinkingApp,
