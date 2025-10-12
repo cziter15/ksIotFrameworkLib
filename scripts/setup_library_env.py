@@ -17,8 +17,6 @@ try:
 		e.ProcessFlags("-std=gnu++2a")
 		e.ProcessFlags("-DNO_GLOBAL_ARDUINO_OTA=1")
 		e.ProcessFlags("-DWEBSOCKETS_SAVE_RAM=1")
-		
-		# Enable stricter compilation warnings for better code quality
 		e.ProcessFlags("-Wunused-variable")           # Warn about unused local variables
 		e.ProcessFlags("-Wunused-parameter")          # Warn about unused function parameters
 		e.ProcessFlags("-Wunused-function")           # Warn about unused static functions
