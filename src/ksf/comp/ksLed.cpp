@@ -27,7 +27,7 @@ namespace ksf::comps
 		pinMode(pin, INPUT);
 	}
 
-	bool ksLed::init(ksApplication* owner)
+	bool ksLed::init([[maybe_unused]] ksApplication* owner)
 	{
 		if (!bitflags.driveAsPushPull)
 			pinMode(pin, OUTPUT);
