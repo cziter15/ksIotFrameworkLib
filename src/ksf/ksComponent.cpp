@@ -11,17 +11,17 @@
 
 namespace ksf 
 {
-	bool ksComponent::init(ksApplication* app)
+	bool ksComponent::init([[maybe_unused]] ksApplication* app)
 	{
 		return true;
 	}
 
-	bool ksComponent::loop(ksApplication* app)
+	bool ksComponent::loop([[maybe_unused]] ksApplication* app)
 	{
 		return true;
 	}
 
-	bool ksComponent::postInit(ksApplication* app) 
+	bool ksComponent::postInit([[maybe_unused]] ksApplication* app) 
 	{
 		return true;
 	}

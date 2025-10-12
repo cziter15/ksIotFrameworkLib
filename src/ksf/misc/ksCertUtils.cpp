@@ -87,7 +87,7 @@ namespace ksf::misc
 		return false;
 	}
 
-	bool ksCertFingerprintESP8266::verify(ksCertUtilsNetCLientSecure_t* client) const
+	bool ksCertFingerprintESP8266::verify([[maybe_unused]] ksCertUtilsNetCLientSecure_t* client) const
 	{
 		return true;
 	}

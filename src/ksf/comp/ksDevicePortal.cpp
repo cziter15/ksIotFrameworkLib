@@ -624,7 +624,7 @@ namespace ksf::comps
 		webSocket->begin();
 	}
 
-	bool ksDevicePortal::loop(ksApplication* app)
+	bool ksDevicePortal::loop([[maybe_unused]] ksApplication* app)
 	{
 		loopExecutionTime = micros() - lastLoopExecutionTimestamp;
 
