@@ -41,7 +41,7 @@ namespace ksf
 				@param id Type ID to check against.
 				@return True if object is of given type, otherwise false.
 			*/ 
-			virtual bool isA(const std::size_t id) const
+			virtual bool isA([[maybe_unused]] const std::size_t id) const
 			{
 				return false;
 			}
