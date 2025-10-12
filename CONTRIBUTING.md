@@ -48,15 +48,36 @@ feat: update WiFi connection API
 BREAKING CHANGE: WiFi.connect() now requires explicit credentials parameter
 ```
 
+## Requirements
+
+The PR title validation enforces these rules:
+
+- **Type**: Must be lowercase (e.g., `feat`, not `Feat`)
+- **Scope**: Optional, must be lowercase alphanumeric with hyphens, underscores, or slashes (e.g., `wifi`, `mqtt`, `esp32-s3`, `wifi/manager`)
+- **Separator**: Must have exactly ONE space after the colon (`: `)
+- **Description**: Must start with a lowercase letter and be at least 3 characters long
+- Individual commits within the PR can use any format
+
+## Common Mistakes
+
+Avoid these common errors:
+
+- ❌ `Feat: add feature` - Type must be lowercase
+- ❌ `feat: Add feature` - Description must start with lowercase
+- ❌ `feat:add feature` - Missing space after colon
+- ❌ `feat:  add feature` - Multiple spaces after colon
+- ❌ `feat: a` - Description too short (minimum 3 characters)
+- ❌ `feat(Bad Scope): add` - Scope must be lowercase
+- ❌ `feat(scope with spaces): add` - Scope can't contain spaces
+- ✅ `feat: add feature` - Correct format
+
 ## Tips
 
 - Keep the PR title under 72 characters
-- Use lowercase for type and description
 - Don't end the PR title with a period
 - Use the imperative mood ("add feature" not "added feature")
-- Be concise and specific
+- Be concise but meaningful (avoid very short descriptions)
 - Reference issues when possible (e.g., `fixes #123`)
-- Individual commits within the PR can use any format
 
 ## Before pull requests
 

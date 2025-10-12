@@ -20,8 +20,12 @@ jobs:
           
           # Conventional commits regex pattern
           # Matches: type[(scope)][!]: description
-          # Where type is one of: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
-          PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?!?: .{1,}'
+          # Where:
+          #   - type: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert (lowercase)
+          #   - scope: optional, lowercase alphanumeric with hyphens/underscores/slashes
+          #   - !: optional breaking change indicator
+          #   - description: must start with lowercase, at least 3 characters total
+          PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9_/-]+\))?!?: [a-z].{2,}$'
           
           if [[ ! "$PR_TITLE" =~ $PATTERN ]]; then
             echo "================================================"
@@ -34,11 +38,25 @@ jobs:
             echo ""
             echo "Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
             echo ""
+            echo "Requirements:"
+            echo "  • Type must be lowercase"
+            echo "  • Scope (optional) must be lowercase, alphanumeric with -/_"
+            echo "  • Must have exactly ONE space after the colon"
+            echo "  • Description must start with lowercase letter"
+            echo "  • Description must be at least 3 characters"
+            echo ""
             echo "Examples:"
             echo "  ✅ feat: add WiFi reconnection logic"
             echo "  ✅ fix(mqtt): handle reconnect crash"
-            echo "  ✅ docs: update README with setup steps"
+            echo "  ✅ docs: update readme with setup steps"
             echo "  ✅ feat!: remove deprecated API"
+            echo ""
+            echo "Common mistakes:"
+            echo "  ❌ feat: a (description too short)"
+            echo "  ❌ feat:  double space (multiple spaces)"
+            echo "  ❌ Feat: capitalized type"
+            echo "  ❌ feat: Add (capitalized description)"
+            echo "  ❌ feat(Bad Scope): invalid scope"
             echo ""
             echo "Please see CONTRIBUTING.md for more details."
             exit 1
