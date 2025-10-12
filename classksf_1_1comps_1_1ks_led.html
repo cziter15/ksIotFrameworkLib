@@ -129,9 +129,9 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksLed</b> ()</td></tr>
 <tr class="memdesc:a1c87003b2282ae75929235a58f7ced0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructs the component and restores INPUT mode on the assigned pin. <br /></td></tr>
 <tr class="separator:a1c87003b2282ae75929235a58f7ced0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54708ddd80553023003ce7bba9f7430e" id="r_a54708ddd80553023003ce7bba9f7430e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54708ddd80553023003ce7bba9f7430e">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *owner) override</td></tr>
-<tr class="memdesc:a54708ddd80553023003ce7bba9f7430e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the LED component.  <br /></td></tr>
-<tr class="separator:a54708ddd80553023003ce7bba9f7430e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a136952cad318f57bcd67010114543ee0" id="r_a136952cad318f57bcd67010114543ee0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a136952cad318f57bcd67010114543ee0">init</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
+<tr class="memdesc:a136952cad318f57bcd67010114543ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the LED component.  <br /></td></tr>
+<tr class="separator:a136952cad318f57bcd67010114543ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6cd28057f07fee5642be46b1e96926f" id="r_ab6cd28057f07fee5642be46b1e96926f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6cd28057f07fee5642be46b1e96926f">loop</a> (<a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *app) override</td></tr>
 <tr class="memdesc:ab6cd28057f07fee5642be46b1e96926f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes core of the LED component logic.  <br /></td></tr>
 <tr class="separator:ab6cd28057f07fee5642be46b1e96926f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -321,8 +321,8 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 
 </div>
 </div>
-<a id="a54708ddd80553023003ce7bba9f7430e" name="a54708ddd80553023003ce7bba9f7430e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54708ddd80553023003ce7bba9f7430e">&#9670;&#160;</a></span>init()</h2>
+<a id="a136952cad318f57bcd67010114543ee0" name="a136952cad318f57bcd67010114543ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a136952cad318f57bcd67010114543ee0">&#9670;&#160;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -333,7 +333,7 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
         <tr>
           <td class="memname">bool ksf::comps::ksLed::init </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *</td>          <td class="paramname"><span class="paramname"><em>owner</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classksf_1_1ks_application.html">ksApplication</a> *</td>          <td class="paramname"><span class="paramname"><em>app</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -347,7 +347,7 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 <p>Initializes the LED component. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">owner</td><td>Pointer to parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object. </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to parent <a class="el" href="classksf_1_1ks_application.html" title="A class that serves as the base for user-defined applications.">ksApplication</a> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -559,7 +559,7 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 
 <p class="reference">References <a class="el" href="#a5a944a7741ab9a0f1437021784a8d1e1">pin</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="#a54708ddd80553023003ce7bba9f7430e">init()</a>, <a class="el" href="#ab6cd28057f07fee5642be46b1e96926f">loop()</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#af940a4472153cb497d35bf1ffe035dc2">ksf::comps::ksWifiConfigurator::postInit()</a>, <a class="el" href="#ac4b5388865229bfb8b841df7b690900a">setBlinking()</a>, and <a class="el" href="#ab6948ea0404741b5bd8c8ed6e1c957b2">setDriveAsPushPull()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="#a136952cad318f57bcd67010114543ee0">init()</a>, <a class="el" href="#ab6cd28057f07fee5642be46b1e96926f">loop()</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#af940a4472153cb497d35bf1ffe035dc2">ksf::comps::ksWifiConfigurator::postInit()</a>, <a class="el" href="#ac4b5388865229bfb8b841df7b690900a">setBlinking()</a>, and <a class="el" href="#ab6948ea0404741b5bd8c8ed6e1c957b2">setDriveAsPushPull()</a>.</p>
 
 </div>
 </div>
