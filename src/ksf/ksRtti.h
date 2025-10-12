@@ -34,7 +34,7 @@ namespace ksf
 				@brief Retrieves type ID of the object.
 				@return Object type ID.
 			*/
-			virtual std::size_tgetInstanceType() const = 0;
+			virtual std::size_t getInstanceType() const = 0;
 
 			/*!
 				@brief Checks whether object is of given type.
