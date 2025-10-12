@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 #include "../evt/ksEvent.h"
 #include "../ksComponent.h"
 
