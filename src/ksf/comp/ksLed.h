@@ -53,10 +53,10 @@ namespace ksf::comps
 
 			/*!
 				@brief Initializes the LED component.
-				@param owner Pointer to parent ksApplication object.
+				@param app Pointer to parent ksApplication object.
 				@return True if init succedeed, otherwise false.
 			*/
-			bool init(ksApplication* owner) override;
+			bool init(ksApplication* app) override;
 
 			/*!
 				@brief Executes core of the LED component logic.
