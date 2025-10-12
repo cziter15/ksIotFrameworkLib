@@ -63,7 +63,7 @@ namespace ksf::comps
 	static constexpr char PROGMEM_IF_NONE_MATCH[] PROGMEM {"If-None-Match"};
 	static constexpr char PROGMEM_NO_ID_RESPONSE[] PROGMEM {"null\n"};
 
-	inline uint64_t generateAuthToken(const std::string& password)
+	uint64_t generateAuthToken(const std::string& password)
 	{
 #if defined(ESP32)
 		uint64_t chipId{ESP.getEfuseMac()};
