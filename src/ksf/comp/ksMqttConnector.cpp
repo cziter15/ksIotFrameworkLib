@@ -253,7 +253,7 @@ namespace ksf::comps
 		return mqttClientUq->connect(WiFi.macAddress().c_str(), login.c_str(), password.c_str(), 0, 0, false, 0, !bitflags.usePersistentSession);
 	}
 
-	bool ksMqttConnector::loop(ksApplication* app)
+	bool ksMqttConnector::loop([[maybe_unused]] ksApplication* app)
 	{		
 		/* If MQTT is connected, process it. */
 		if (mqttClientUq->loop())

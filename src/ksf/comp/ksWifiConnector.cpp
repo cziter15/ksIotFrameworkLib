@@ -74,7 +74,7 @@ namespace ksf::comps
 #endif
 	}
 
-	bool ksWifiConnector::init(ksApplication* app)
+	bool ksWifiConnector::init([[maybe_unused]] ksApplication* app)
 	{
 		std::string ssid, pass;
 		ksf::loadCredentials(ssid, pass);
@@ -90,7 +90,7 @@ namespace ksf::comps
 		return true;
 	}
 
-	bool ksWifiConnector::loop(ksApplication* app)
+	bool ksWifiConnector::loop([[maybe_unused]] ksApplication* app)
 	{
 		/*
 			It's good to have manual timer for checking if IP address is set. 

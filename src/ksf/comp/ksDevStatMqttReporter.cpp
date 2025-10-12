@@ -62,7 +62,7 @@ namespace ksf::comps
 		onReportCustomStats->broadcast(mqttConnSp);
 	}
 	
-	bool ksDevStatMqttReporter::loop(ksApplication* app)
+	bool ksDevStatMqttReporter::loop([[maybe_unused]] ksApplication* app)
 	{
 		if (reporterTimer.triggered())
 			reportDevStats();

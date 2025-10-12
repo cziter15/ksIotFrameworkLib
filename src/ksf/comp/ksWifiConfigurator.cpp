@@ -63,7 +63,7 @@ namespace ksf::comps
 			configTimeout.restart();
 	}
 
-	bool ksWifiConfigurator::loop(ksApplication* app)
+	bool ksWifiConfigurator::loop([[maybe_unused]] ksApplication* app)
 	{
 		if (periodicTasksTimeout.triggered())
 			handlePeriodicTasks();
