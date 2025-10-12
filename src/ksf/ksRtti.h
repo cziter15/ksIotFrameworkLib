@@ -34,7 +34,7 @@ namespace ksf
 				@brief Retrieves type ID of the object.
 				@return Object type ID.
 			*/
-			virtual const std::size_t getInstanceType() const = 0;
+			virtual std::size_tgetInstanceType() const = 0;
 
 			/*!
 				@brief Checks whether object is of given type.
@@ -77,11 +77,11 @@ namespace ksf
 
 	#define KSF_RTTI_DECLARATIONS(_Type, _ParentType)								\
 		public:																		\
-			virtual const std::size_t getInstanceType() const						\
+			virtual std::size_t getInstanceType() const						\
 			{																		\
 				return _Type::getClassType(); 										\
 			}																		\
-			static const std::size_t getClassType()									\
+			static std::size_t getClassType() const							\
 			{																		\
 				static int d{0}; return (std::size_t)&d; 							\
 			}																		\
