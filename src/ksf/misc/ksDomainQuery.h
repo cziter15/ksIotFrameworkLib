@@ -11,7 +11,7 @@
 
 #include <Arduino.h>
 #include <IPAddress.h>
-#include <inttypes.h>
+#include <cstdint>
 #include <memory>
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)

@@ -10,7 +10,7 @@
 #pragma once
 
 #include <memory>
-#include <inttypes.h>
+#include <cstdint>
 #include <functional>
 #include <string_view>
 #include <WebSocketsServer.h>
