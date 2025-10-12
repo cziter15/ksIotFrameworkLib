@@ -127,6 +127,7 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a12149c3ecf1b3c5ac7d617aef59fe779" id="r_a12149c3ecf1b3c5ac7d617aef59fe779"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a12149c3ecf1b3c5ac7d617aef59fe779">getInstanceType</a> () const</td></tr>
+<tr class="memdesc:a12149c3ecf1b3c5ac7d617aef59fe779"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
 <tr class="separator:a12149c3ecf1b3c5ac7d617aef59fe779"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a66432b7e14ce14d34f55153f8070c5" id="r_a3a66432b7e14ce14d34f55153f8070c5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a66432b7e14ce14d34f55153f8070c5">isA</a> (const std::size_t id) const</td></tr>
 <tr class="memdesc:a3a66432b7e14ce14d34f55153f8070c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
@@ -174,9 +175,6 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksMqttConnector</
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksRtti</b> ()=default</td></tr>
 <tr class="memdesc:a784999298d3e1fbf23e0dc9e5c79181d inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:a784999298d3e1fbf23e0dc9e5c79181d inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti" id="r_a9535f435e46315520479f1a822d3e286"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a9535f435e46315520479f1a822d3e286">std::size_tgetInstanceType</a> () const =0</td></tr>
-<tr class="memdesc:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
-<tr class="separator:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
 <tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter.  <br /></td></tr>
@@ -415,7 +413,10 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html">ksf::ksComponent</a>.</p>
+<p>Retrieves type ID of the object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Object type ID. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classksf_1_1ks_component.html#a468ed4e402000780e4123ed355c242d8">ksf::ksComponent</a>.</p>
 
 </div>
 </div>

@@ -20,7 +20,6 @@ var searchData=
   ['setupmacaddress_17',['setupMacAddress',['../classksf_1_1comps_1_1ks_wifi_connector.html#ac52bb4438c4024c91066caec2795f2dc',1,'ksf::comps::ksWifiConnector']]],
   ['setupmqttconnector_18',['setupMqttConnector',['../classksf_1_1comps_1_1ks_mqtt_config_provider.html#ab7ed416913dd45cd2f2ef3dd3f85bb2e',1,'ksf::comps::ksMqttConfigProvider']]],
   ['setupwsserver_19',['setupWsServer',['../classksf_1_1comps_1_1ks_device_portal.html#a2fc892e79d3813ab7b6135df5a475aee',1,'ksf::comps::ksDevicePortal']]],
-  ['std_3a_3asize_5ftgetinstancetype_20',['size_tgetInstanceType',['../classksf_1_1ks_rtti.html#a9535f435e46315520479f1a822d3e286',1,'ksf::ksRtti']]],
-  ['structure_21',['📏 Utilities and components structure',['../index.html#autotoc_md16',1,'']]],
-  ['subscribe_22',['subscribe',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a327f16a26deb354be7374bdb0e26cdbd',1,'ksf::comps::ksMqttConnector']]]
+  ['structure_20',['📏 Utilities and components structure',['../index.html#autotoc_md16',1,'']]],
+  ['subscribe_21',['subscribe',['../classksf_1_1comps_1_1ks_mqtt_connector.html#a327f16a26deb354be7374bdb0e26cdbd',1,'ksf::comps::ksMqttConnector']]]
 ];

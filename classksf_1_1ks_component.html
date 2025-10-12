@@ -124,8 +124,8 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a468ed4e402000780e4123ed355c242d8" id="r_a468ed4e402000780e4123ed355c242d8"><td class="memItemLeft" align="right" valign="top"><a id="a468ed4e402000780e4123ed355c242d8" name="a468ed4e402000780e4123ed355c242d8"></a>
-virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getInstanceType</b> () const</td></tr>
+<tr class="memitem:a468ed4e402000780e4123ed355c242d8" id="r_a468ed4e402000780e4123ed355c242d8"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a468ed4e402000780e4123ed355c242d8">getInstanceType</a> () const</td></tr>
+<tr class="memdesc:a468ed4e402000780e4123ed355c242d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
 <tr class="separator:a468ed4e402000780e4123ed355c242d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21b807fa08051e1dbada776449485379" id="r_a21b807fa08051e1dbada776449485379"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21b807fa08051e1dbada776449485379">isA</a> (const std::size_t id) const</td></tr>
 <tr class="memdesc:a21b807fa08051e1dbada776449485379"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
@@ -144,9 +144,6 @@ virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>getIns
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksRtti</b> ()=default</td></tr>
 <tr class="memdesc:a784999298d3e1fbf23e0dc9e5c79181d inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:a784999298d3e1fbf23e0dc9e5c79181d inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti" id="r_a9535f435e46315520479f1a822d3e286"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a9535f435e46315520479f1a822d3e286">std::size_tgetInstanceType</a> () const =0</td></tr>
-<tr class="memdesc:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
-<tr class="separator:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
 <tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter.  <br /></td></tr>
@@ -179,6 +176,40 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ksApplication</b></t
 <div class="textblock"><p>Base component class. </p>
 <p>A component is a part of the application that can be configured and managed by the application. As it uses <a class="el" href="classksf_1_1ks_rtti.html" title="Implements RTTI (run-time type information) for objects.">ksRtti</a>, it must include KSF_RTTI_DECLARATIONS for proper initialization. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a468ed4e402000780e4123ed355c242d8" name="a468ed4e402000780e4123ed355c242d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a468ed4e402000780e4123ed355c242d8">&#9670;&#160;</a></span>getInstanceType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::size_t ksf::ksComponent::getInstanceType </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrieves type ID of the object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Object type ID. </dd></dl>
+
+<p>Implements <a class="el" href="classksf_1_1ks_rtti.html#a5c4287448f2c388429e744c323a221df">ksf::ksRtti</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a5980ed831e13c25ca1203ffe860874a0">ksf::comps::ksConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_device_portal.html#a3cae2ce4fc5fbe9b08979fcb2a71c587">ksf::comps::ksDevicePortal</a>, <a class="el" href="classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a6d2055dc4463032b8dc5d49fee8193ec">ksf::comps::ksDevStatMqttReporter</a>, <a class="el" href="classksf_1_1comps_1_1ks_led.html#ad3fddb032fe8ee4e8fb21c5ccda4351a">ksf::comps::ksLed</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_config_provider.html#a8706a68659d637c14124806b8816e14f">ksf::comps::ksMqttConfigProvider</a>, <a class="el" href="classksf_1_1comps_1_1ks_mqtt_connector.html#a12149c3ecf1b3c5ac7d617aef59fe779">ksf::comps::ksMqttConnector</a>, <a class="el" href="classksf_1_1comps_1_1ks_reset_button.html#a5dc5cca27801b0e723ee11fd02cb14de">ksf::comps::ksResetButton</a>, <a class="el" href="classksf_1_1comps_1_1ks_wifi_configurator.html#a4677f9d762a75b1371ae1cf59acae772">ksf::comps::ksWifiConfigurator</a>, and <a class="el" href="classksf_1_1comps_1_1ks_wifi_connector.html#abb0d96ef12055bd923061c955f6a0366">ksf::comps::ksWifiConnector</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="classksf_1_1ks_application.html#ac418c7eb9b021d7b52e20cf7e870bc91">ksf::ksApplication::addComponent()</a>, <a class="el" href="classksf_1_1ks_application.html#a944269df1630cce9506ee228c12e1ebb">ksf::ksApplication::findComponent()</a>, and <a class="el" href="classksf_1_1ks_application.html#aa37ddabda1c13f2e1ab3e94babcfcc43">ksf::ksApplication::findComponents()</a>.</p>
+
+</div>
+</div>
 <a id="a684f870e77ac3795b3cf789a8a81cdde" name="a684f870e77ac3795b3cf789a8a81cdde"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a684f870e77ac3795b3cf789a8a81cdde">&#9670;&#160;</a></span>init()</h2>
 

@@ -117,6 +117,7 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a8706a68659d637c14124806b8816e14f" id="r_a8706a68659d637c14124806b8816e14f"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8706a68659d637c14124806b8816e14f">getInstanceType</a> () const</td></tr>
+<tr class="memdesc:a8706a68659d637c14124806b8816e14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
 <tr class="separator:a8706a68659d637c14124806b8816e14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a708c4427f57d233fe3951f9718e6ad0f" id="r_a708c4427f57d233fe3951f9718e6ad0f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a708c4427f57d233fe3951f9718e6ad0f">isA</a> (const std::size_t id) const</td></tr>
 <tr class="memdesc:a708c4427f57d233fe3951f9718e6ad0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether object is of given type.  <br /></td></tr>
@@ -149,9 +150,6 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksRtti</b> ()=default</td></tr>
 <tr class="memdesc:a784999298d3e1fbf23e0dc9e5c79181d inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br /></td></tr>
 <tr class="separator:a784999298d3e1fbf23e0dc9e5c79181d inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti" id="r_a9535f435e46315520479f1a822d3e286"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a9535f435e46315520479f1a822d3e286">std::size_tgetInstanceType</a> () const =0</td></tr>
-<tr class="memdesc:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves type ID of the object.  <br /></td></tr>
-<tr class="separator:a9535f435e46315520479f1a822d3e286 inherit pub_methods_classksf_1_1ks_rtti"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti" id="r_a33f1522c53fd457d441f9203ed04a628"><td class="memTemplParams" colspan="2">template&lt;typename TType &gt; </td></tr>
 <tr class="memitem:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="memTemplItemLeft" align="right" valign="top">TType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classksf_1_1ks_rtti.html#a33f1522c53fd457d441f9203ed04a628">as</a> ()</td></tr>
 <tr class="memdesc:a33f1522c53fd457d441f9203ed04a628 inherit pub_methods_classksf_1_1ks_rtti"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tries to cast object to the type provided as a template parameter.  <br /></td></tr>
@@ -222,7 +220,10 @@ ksComponentState::TYPE&#160;</td><td class="memItemRight" valign="bottom"><b>com
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented from <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html">ksf::comps::ksConfigProvider</a>.</p>
+<p>Retrieves type ID of the object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Object type ID. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classksf_1_1comps_1_1ks_config_provider.html#a5980ed831e13c25ca1203ffe860874a0">ksf::comps::ksConfigProvider</a>.</p>
 
 </div>
 </div>
