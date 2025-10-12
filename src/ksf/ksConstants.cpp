@@ -178,7 +178,7 @@ namespace ksf
 		return to_string(static_cast<double>(value), base);
 	}
 
-	inline const std::string otaTypeToString(EOTAType::Type type)
+	const std::string otaTypeToString(EOTAType::Type type)
 	{
 		switch (type)
 		{
