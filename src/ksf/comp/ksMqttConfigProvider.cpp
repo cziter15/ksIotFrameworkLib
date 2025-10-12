@@ -47,9 +47,9 @@ namespace ksf::comps
 		{
 			/*
 				These parameters are taken by reference as no transfer of the data is needed or possible.
-				Port is converted to int, fingerprint is mapped to a vector of bytes and broker is copied internally.
+				Port is converted to int, fingerprint is mapped to a vector of bytes.
 			*/
-			const auto& savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
+			auto savedBroker{config_file.getParam(BROKER_TEXT_PGM)};
 			const auto& port{config_file.getParam(PORT_TEXT_PGM, DEFPORT_AS_TEXT_PGM)};
 			const auto& fingerprint{config_file.getParam(FINGERPRINT_TEXT_PGM)};
 			
