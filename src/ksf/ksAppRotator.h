@@ -10,7 +10,7 @@
 #pragma once
 
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 #include <Arduino.h>
 
 #include "ksApplication.h"

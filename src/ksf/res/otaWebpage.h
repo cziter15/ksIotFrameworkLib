@@ -12,7 +12,7 @@
 #ifndef devicefrontend_webpage_h
 #define devicefrontend_webpage_h
 
-#include <stdint.h>
+#include <cstdint>
 #include <pgmspace.h>
 
 const uint32_t DEVICE_FRONTEND_HTML_SIZE = 152206;

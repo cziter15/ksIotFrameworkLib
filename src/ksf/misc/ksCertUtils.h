@@ -10,7 +10,7 @@
 #pragma once
 
 #include <string>
-#include <stdint.h>
+#include <cstdint>
 
 #if (defined(ESP32))
 	#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)

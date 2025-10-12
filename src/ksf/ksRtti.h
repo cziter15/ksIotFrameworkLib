@@ -81,7 +81,7 @@ namespace ksf
 			{																		\
 				return _Type::getClassType(); 										\
 			}																		\
-			static std::size_t getClassType() const							\
+			static std::size_t getClassType()									\
 			{																		\
 				static int d{0}; return (std::size_t)&d; 							\
 			}																		\
