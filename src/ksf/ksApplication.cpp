@@ -18,9 +18,6 @@ namespace ksf
 
 	bool ksApplication::loop()
 	{
-		/* This call will keep millis64 on track (handles rollover). */
-		updateDeviceUptime();
-
 		/* Process all components. */
 		for (auto it{components.begin()}; it != components.end();)
 		{
@@ -28,7 +25,7 @@ namespace ksf
 			switch (comp->componentState)
 			{
 				case ksComponentState::Active:
-					if (!comp->loop(this))
+					if (__builtin_expect(!comp->loop(this), false))
 						return false;
 				break;
 
@@ -37,13 +34,13 @@ namespace ksf
 				continue;
 
 				case ksComponentState::NotInitialized:
-					if (!comp->init(this))
+					if (__builtin_expect(!comp->init(this), false))
 						return false;
 					comp->componentState = ksComponentState::Initialized;
 				break;
 				
 				case ksComponentState::Initialized:
-					if (!comp->postInit(this))
+					if (__builtin_expect(!comp->postInit(this), false))
 						return false;
 					comp->componentState = ksComponentState::Active;
 				break;

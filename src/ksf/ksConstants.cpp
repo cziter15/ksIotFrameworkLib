@@ -154,16 +154,12 @@ namespace ksf
 		return otaBootType;
 	}
 
-	void updateDeviceUptime()
+	uint64_t millis64() 
 	{
 		auto new_low32{static_cast<uint32_t>(millis())};
 		if (new_low32 < uptime_low32) 
 			uptime_high32++;
 		uptime_low32 = new_low32;
-	}
-
-	uint64_t millis64() 
-	{
 		return (static_cast<uint64_t>(uptime_high32) << 32) | uptime_low32;
 	}
 
