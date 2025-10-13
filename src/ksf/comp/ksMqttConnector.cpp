@@ -119,6 +119,7 @@ namespace ksf::comps
 		
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
+			out.reserve(64 + topicStr.length() + payloadStr.length());
 			out += PSTR("[ MqttConnector ] Received on topic: ");
 			out += topicStr;
 			out += PSTR(", value: ");
