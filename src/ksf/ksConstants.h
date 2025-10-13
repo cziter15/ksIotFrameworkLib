@@ -110,10 +110,12 @@ namespace ksf
 	extern bool eraseConfigData();
 
 	/*!
+		@brief Updates the device uptime, handling millis() function rollover.
+	*/
+	extern void updateDeviceUptime();
+
+	/*!
 		@brief Retrieves the device uptime in milliseconds (64 bit wide).
-		
-		This function also handles millis() function rollover internally.
-		
 		@return Milliseconds that have passed since device boot/restart.
 	*/
 	extern uint64_t millis64();

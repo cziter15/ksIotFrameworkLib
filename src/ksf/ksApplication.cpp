@@ -18,6 +18,9 @@ namespace ksf
 
 	bool ksApplication::loop()
 	{
+		/* This call will keep millis64 on track (handles rollover). */
+		updateDeviceUptime();
+
 		/* Process all components. */
 		for (auto it{components.begin()}; it != components.end();)
 		{
