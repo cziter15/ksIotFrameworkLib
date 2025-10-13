@@ -25,32 +25,38 @@ namespace ksf
 		for (auto it{components.begin()}; it != components.end();)
 		{
 			auto& comp{*it};
-			switch (comp->componentState)
+			
+			/* Hint that Active state is the most common case. */
+			if (__builtin_expect(comp->componentState == ksComponentState::Active, true))
 			{
-				case ksComponentState::Active:
-					if (__builtin_expect(!comp->loop(this), false))
-						return false;
-				break;
-
-				case ksComponentState::ToRemove:
-					 it = components.erase(it);
-				continue;
-
-				case ksComponentState::NotInitialized:
-					if (__builtin_expect(!comp->init(this), false))
-						return false;
-					comp->componentState = ksComponentState::Initialized;
-				break;
-				
-				case ksComponentState::Initialized:
-					if (__builtin_expect(!comp->postInit(this), false))
-						return false;
-					comp->componentState = ksComponentState::Active;
-				break;
-				
-				default: break;
+				if (__builtin_expect(!comp->loop(this), false))
+					return false;
+				++it;
 			}
-			++it;
+			else
+			{
+				switch (comp->componentState)
+				{
+					case ksComponentState::ToRemove:
+						 it = components.erase(it);
+					continue;
+
+					case ksComponentState::NotInitialized:
+						if (__builtin_expect(!comp->init(this), false))
+							return false;
+						comp->componentState = ksComponentState::Initialized;
+					break;
+					
+					case ksComponentState::Initialized:
+						if (__builtin_expect(!comp->postInit(this), false))
+							return false;
+						comp->componentState = ksComponentState::Active;
+					break;
+					
+					default: break;
+				}
+				++it;
+			}
 		}
 
 		return true;
