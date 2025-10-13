@@ -45,6 +45,7 @@ By handling these repetitive foundations, `ksIotFrameworkLib` lets you concentra
 ### 📚 Documentation
 
 - Detailed documentation can be found [here](https://cziter15.github.io/ksIotFrameworkLib).
+- Performance analysis and bottlenecks: [docs/PERFORMANCE_ANALYSIS.md](docs/PERFORMANCE_ANALYSIS.md)
 
 ### 📟 Examples
 
