@@ -1,6 +1,6 @@
 # Quick Reference: Performance Bottlenecks Summary
 
-This is a quick reference guide for the detailed analysis in [PERFORMANCE_ANALYSIS.md](PERFORMANCE_ANALYSIS.md).
+This document provides a quick reference guide summarizing performance bottlenecks identified through static code analysis of the ksIotFrameworkLib framework.
 
 ## Top 10 Bottlenecks (Prioritized)
 
@@ -101,12 +101,3 @@ Before optimizing:
 2. Create benchmark applications
 3. Test on target hardware (ESP32/ESP8266)
 4. A/B test each optimization
-
-## More Details
-
-See [PERFORMANCE_ANALYSIS.md](PERFORMANCE_ANALYSIS.md) for:
-- Detailed code analysis
-- Specific optimization techniques
-- Code examples
-- Testing recommendations
-- Complete architectural considerations
