@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "cziter15/pubsubclient3": "https://github.com/cziter15/pubsubclient3",
+    "cziter15/pubsubclient3": "https://github.com/cziter15/pubsubclient",
     "cziter15/arduinoWebSockets": "https://github.com/cziter15/arduinoWebSockets"
   },
   "frameworks": "arduino",
