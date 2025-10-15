@@ -244,5 +244,5 @@ This design is highly flexible. For example, you can trigger a failure (`return 
 
 #### 🔡 Libraries
 
-- [PubSubClient](https://github.com/cziter15/pubsubclient) originally developed @knolleary
-- [arduinoWebSockets](https://github.com/cziter15/arduinoWebSockets) originally developed by @Links2004
+- [PubSubClient](https://github.com/cziter15/pubsubclient) originally developed by [@knolleary](https://github.com/knolleary)
+- [arduinoWebSockets](https://github.com/cziter15/arduinoWebSockets) originally developed by [@Links2004](https://github.com/Links2004)
