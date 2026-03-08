@@ -25,8 +25,8 @@ namespace ksf
 	class ksRtti
 	{
 		public:
-			/*! 
-				@brief  Destructor. 
+			/*!
+				@brief Destructor.
 			*/
 			virtual ~ksRtti() = default;
 

@@ -49,7 +49,7 @@ namespace ksf
 			 AppLogCallbackFunc_t appLogCallback;					//!< Callback function for logging
 #endif
 		public:
-			/*! 
+			/*!
 				@brief Destructor.
 			*/
 			virtual ~ksApplication();
@@ -103,7 +103,7 @@ namespace ksf
 			}
 
 			/*!
-				@brief  Iterates through all components and returns a weak pointer to the first component that matches the type passed as a template parameter.
+				@brief Iterates through all components and returns a weak pointer to the first component that matches the type passed as a template parameter.
 				@tparam TComponentType A type of the component to look for.
 				@return Weak pointer to the first component that matches the type passed as a template parameter.
 			*/

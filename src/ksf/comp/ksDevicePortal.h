@@ -95,6 +95,7 @@ namespace ksf::comps
 
 			/*!
 				@brief Implements post-OTA update actions.
+				@param fromPortal True if the update was triggered from the portal, false otherwise.
 			*/
 			void updateFinished(bool fromPortal); 
 
@@ -104,7 +105,7 @@ namespace ksf::comps
 			void rebootDevice();
 
 			/*!
-				@brief  Checks if current HTTP request requires authentication.
+				@brief Checks if current HTTP request requires authentication.
 			*/
 			bool inRequest_NeedAuthentication();
 
@@ -159,7 +160,7 @@ namespace ksf::comps
 
 			/*!
 				@brief Websocket handler for device parameters endpoint.
-				@param response Response reference . This method will output device configuration parameters into this string.
+				@param response Response reference. This method will output device configuration parameters into this string.
 			*/
 			void handle_getDeviceParams(std::string& response);
 
@@ -178,15 +179,15 @@ namespace ksf::comps
 
 		public:
 			/*!
-				Update start (OTA) event. No parameters.
+				@brief Update start (OTA) event. No parameters.
 			*/
 			DECLARE_KS_EVENT(onUpdateStart)
 			/*!
-				Update end (OTA) event. No parameters.
+				@brief Update end (OTA) event. No parameters.
 			*/
 			DECLARE_KS_EVENT(onUpdateEnd)
 			/*!
-				Custom command handler event.
+				@brief Custom command handler event.
 				@param param_1 String view of the command coming from the browser.
 				@param param_2 Reference of boolean value indicating if the command was handled. Set to true to stop further processing and return response.
 				@param param_3 Reference of the string containing the command response. Append results here.

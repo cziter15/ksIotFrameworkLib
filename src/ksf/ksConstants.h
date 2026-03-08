@@ -20,10 +20,10 @@
 #define KSF_ONE_SEC_MS 1000UL
 
 /*!
-	Macro used to convert seconds to milliseconds.
+	@brief Macro used to convert seconds to milliseconds.
 	@param seconds Seconds
 	@return Milliseconds
- */
+*/
 #define KSF_SEC_TO_MS(seconds) (seconds*1000UL)
 
 #ifndef KSF_MQTT_RECONNECT_DELAY_MS
@@ -76,12 +76,9 @@ namespace ksf
 		*/
 		enum Type
 		{
-			/*! No OTA happened. */
-			NO_OTA,
-			/*! Generic OTA happened. */
-			OTA_GENERIC,
-			/*! OTA happened through captive portal. */
-			OTA_PORTAL,
+			NO_OTA,			//!< No OTA happened.
+			OTA_GENERIC,	//!< Generic OTA happened.
+			OTA_PORTAL,		//!< OTA happened through captive portal.
 		};
 	}
 

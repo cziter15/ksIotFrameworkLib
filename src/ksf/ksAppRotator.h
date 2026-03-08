@@ -16,7 +16,7 @@
 #include "ksApplication.h"
 
 /*!
-	Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait).
+	@brief Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait).
 	@param ... List of application classes.
 */
 #define KSF_IMPLEMENT_APP_ROTATOR(...)				\
@@ -25,7 +25,7 @@
 	void loop() { appRotator.loop(1); }
 
 /*!
-	Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait).
+	@brief Helper macro that handles app (appClass) initialization and calls loop method every delayTime ms (wait).
 	@param delayBetweenLoops Delay time in milliseconds.
 	@param ... List of application classes.
 */
