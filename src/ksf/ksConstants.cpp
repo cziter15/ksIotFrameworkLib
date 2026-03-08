@@ -149,11 +149,6 @@ namespace ksf
 		}
 	}
 
-	EOTAType::Type getOtaBootType()
-	{
-		return otaBootType;
-	}
-
 	void updateDeviceUptime()
 	{
 		auto new_low32{static_cast<uint32_t>(millis())};

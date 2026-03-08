@@ -205,16 +205,6 @@ namespace ksf
 	std::string getDeviceUuidHex();
 
 	/*!
-		@brief Retrieves OTA boot type from device filesystem. If not found, returns EOTAType::NO_OTA.
-
-		There are few OTA boot types, which are defined in EOTAType::Type enum. This value is used to determine reset reason.
-		In case of system restart, if there's OTA boot set, it will be used to determine correct reset reason for System Restart.
-
-		@return OTA boot type.
-	*/
-	extern EOTAType::Type getOtaBootType();
-
-	/*!
 		@brief Saves OTA boot type to device filesystem.
 
 		This value will be used on next boot to determine OTA boot type. Upon read, the file containing this value will be removed.
