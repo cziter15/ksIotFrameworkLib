@@ -33,29 +33,6 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
-	class ksMqttTransport : public Client
-	{
-		private:
-			Client& client;
-
-		public:
-			explicit ksMqttTransport(Client& client) : client(client) {}
-
-			// Only the connector may establish and verify a new connection.
-			int connect(IPAddress, uint16_t) override { return 0; }
-			int connect(const char*, uint16_t) override { return 0; }
-			size_t write(uint8_t data) override { return client.write(data); }
-			size_t write(const uint8_t* data, size_t size) override { return client.write(data, size); }
-			int available() override { return client.available(); }
-			int read() override { return client.read(); }
-			int read(uint8_t* data, size_t size) override { return client.read(data, size); }
-			int peek() override { return client.peek(); }
-			void flush() override { client.flush(); }
-			void stop() override { client.stop(); }
-			uint8_t connected() override { return client.connected(); }
-			operator bool() override { return static_cast<bool>(client); }
-	};
-
 	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus, bool usePersistentSession)
 		: reconnectTimer(KSF_MQTT_RECONNECT_DELAY_MS)
 	{
@@ -92,7 +69,6 @@ namespace ksf::comps
 	void ksMqttConnector::setupConnection(std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
 		mqttClientUq.reset();
-		mqttTransportUq.reset();
 		netClientUq.reset();
 		certFingerprint.reset();
 		/*
@@ -126,8 +102,7 @@ namespace ksf::comps
 		ksf::from_chars(port, portNumber);
 
 		/* Create MQTT client. */
-		mqttTransportUq = std::make_unique<ksMqttTransport>(*netClientUq);
-		mqttClientUq = std::make_unique<PubSubClient>(*mqttTransportUq);
+		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq);
 		mqttClientUq->setServer(IPAddress(0, 0, 0, 0), 0);
 	}
 
