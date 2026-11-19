@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['value_0',['value',['../structksf_1_1comps_1_1ks_config_parameter.html#a8720c6e0ac785bff8d7c787fae173c3e',1,'ksf::comps::ksConfigParameter']]],
-  ['verify_1',['verify',['../classksf_1_1misc_1_1ks_cert_fingerprint.html#a73f2788c294f0a5a0b79a80011ad8cf9',1,'ksf::misc::ksCertFingerprint']]]
+  ['value_0',['value',['../structksf_1_1comps_1_1ks_config_parameter.html#a8720c6e0ac785bff8d7c787fae173c3e',1,'ksf::comps::ksConfigParameter']]]
 ];
