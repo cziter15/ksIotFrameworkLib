@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <Arduino.h>
+#include <cstdint>
 
 #include "../ksComponent.h"
 
@@ -31,7 +31,7 @@ namespace ksf::comps
 			uint8_t pin{0};						//!< Cached pin number.
 			uint8_t triggerState{0};			//!< State that triggers reset logic.
 			uint8_t lastState{0};				//!< Previous state (for debouncing).
-			uint8_t mode{INPUT};				//!< Cached pin mode.
+			uint8_t mode;				//!< Cached pin mode.
 			uint32_t pressedTime{0};			//!< Press timestamp (milliseconds since boot).
 			uint32_t releasedTime{0};			//!< Release timestamp (milliseconds since boot).
 
