@@ -9,10 +9,14 @@
 
 #pragma once
 
-#include <Arduino.h>
 #include <IPAddress.h>
 #include <cstdint>
 #include <memory>
+#include <string>
+
+#ifdef ESP32
+	#include <esp_arduino_version.h>
+#endif
 
 #if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 	#define ksUdpClient_t NetworkUDP

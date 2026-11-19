@@ -13,6 +13,8 @@
 #include <list>
 #include <string>
 #include <functional>
+#include <vector>
+#include <type_traits>
 
 #include "ksComponent.h"
 

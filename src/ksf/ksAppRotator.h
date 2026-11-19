@@ -10,6 +10,7 @@
 #pragma once
 
 #include <memory>
+#include <array>
 #include <cstdint>
 #include <Arduino.h>
 

@@ -7,6 +7,9 @@
  *	https://github.com/cziter15/ksIotFrameworkLib/blob/master/LICENSE
  */
 
+#include <Arduino.h>
+#include <stdlib_noniso.h>
+
 #if defined(ESP32)
 	#include <WiFi.h>
 	#include <esp_phy_init.h>

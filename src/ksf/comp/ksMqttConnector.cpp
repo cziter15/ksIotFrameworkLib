@@ -10,12 +10,10 @@
 #if defined(ESP32)
 	#include <esp_wifi.h>
 	#include <WiFi.h>
-	#include <WiFiClientSecure.h>
 #elif defined(ESP8266)
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
-	#include <WiFiClientSecure.h>
-#else 			
+#else
 	#error Platform not implemented.
 #endif
 #include <PubSubClient.h>
@@ -23,7 +21,7 @@
 #include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "../misc/ksConfig.h"
-#include "../misc/ksCertUtils.h"
+#include "../misc/ksPinnedTlsClient.h"
 #include "ksWifiConnector.h"
 #include "ksMqttConfigProvider.h"
 
@@ -68,18 +66,15 @@ namespace ksf::comps
 
 	void ksMqttConnector::setupConnection(std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
+		mqttClientUq.reset();
+		netClientUq.reset();
 		/*
 			If present, fingerprint is used in the process of creating secure MQTT connection.
 			If fingerprint is empty, the connection will be insecure.
 		*/
 		if (!fingerprint.empty())
-		{
-			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
-			certFingerprint = std::make_unique<misc::ksCertFingerprintHolder>();
-			if (certFingerprint->setup(secureClient.get(), fingerprint))
-				netClientUq = std::move(secureClient);
-		}
-		else netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
+			netClientUq = misc::createPinnedTlsClient(fingerprint);
+		else netClientUq = std::make_unique<misc::ksNetworkClient_t>();
 
 		/* Whoops, it looks like fingerprint validation failed. */
 		if (!netClientUq)
@@ -96,7 +91,8 @@ namespace ksf::comps
 		ksf::from_chars(port, portNumber);
 
 		/* Create MQTT client. */
-		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
+		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq);
+		mqttClientUq->setServer(IPAddress(0, 0, 0, 0), 0);
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
@@ -223,18 +219,6 @@ namespace ksf::comps
 		if (!netClientUq->connected())
 			return false;
 
-		/* Verify certificate fingerprint. */
-		if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
-		{
-#ifdef APP_LOG_ENABLED
-			app->log([&](std::string& out) {
-				out += PSTR("[ MqttConnector ] Invalid certificate fingerprint! Disconnecting.");
-			});
-#endif
-			netClientUq->stop();
-			return false;
-		}
-
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {
 			out += PSTR("[ MqttConnector ] Connected successfully and will now authenticate.");
@@ -256,6 +240,9 @@ namespace ksf::comps
 
 	bool ksMqttConnector::loop([[maybe_unused]] ksApplication* app)
 	{		
+		if (!mqttClientUq)
+			return false;
+
 		/* If MQTT is connected, process it. */
 		if (mqttClientUq->loop())
 			return true;

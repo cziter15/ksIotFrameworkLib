@@ -9,12 +9,10 @@
 
 #pragma once
 
-#include <Arduino.h>
 #include <cstdint>
-#include <limits>
 #include <string>
 #include <charconv>
-#include <stdlib_noniso.h>
+#include <algorithm>
 
 /*! One second in milliseconds. */
 #define KSF_ONE_SEC_MS 1000UL
