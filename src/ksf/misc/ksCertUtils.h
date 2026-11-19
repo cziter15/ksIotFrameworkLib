@@ -16,13 +16,15 @@
 	#include <esp_arduino_version.h>
 	#if ESP_ARDUINO_VERSION_MAJOR >= 4
 		#include <WiFiClientSecure.h>
-	#endif
-	#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
+		namespace ksf::misc { class ksPinnedTlsClientESP32; }
+		#define ksCertUtilsNetCLientSecure_t ksf::misc::ksPinnedTlsClientESP32
+	#elif ESP_ARDUINO_VERSION_MAJOR >= 3
 		#define ksCertUtilsNetCLientSecure_t NetworkClientSecure
+		class ksCertUtilsNetCLientSecure_t;
 	#else
 		#define ksCertUtilsNetCLientSecure_t WiFiClientSecure
+		class ksCertUtilsNetCLientSecure_t;
 	#endif
-	class ksCertUtilsNetCLientSecure_t;
 #elif (defined(ESP8266))
 	namespace BearSSL{class WiFiClientSecure;}
 	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
@@ -96,9 +98,8 @@ namespace ksf::misc
 				@brief Performs fingerprint setup (platform dependent).
 				
 				On ESP32 it will copy fingerprint into fingerprintBytes.
-				On Arduino-ESP32 4.x verification requires ksPinnedTlsClientESP32;
-				a plain NetworkClientSecure cannot install the
-				required handshake callback and therefore fails verification.
+				On Arduino-ESP32 4.x the client type is ksPinnedTlsClientESP32 and
+				setup() also binds this verifier to it.
 				
 				@param client Pointer to ksCertUtilsNetCLientSecure_t
 				@param fingerprint Fingerprint string

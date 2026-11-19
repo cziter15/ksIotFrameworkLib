@@ -72,6 +72,7 @@ namespace ksf::misc
 			clientSecure->setInsecure();
 #if ESP_ARDUINO_VERSION_MAJOR >= 4
 			configuredClient = clientSecure;
+			clientSecure->setFingerprintVerifier(*this);
 #endif
 			return true;
 		}

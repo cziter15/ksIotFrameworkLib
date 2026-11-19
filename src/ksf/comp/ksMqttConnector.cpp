@@ -103,9 +103,6 @@ namespace ksf::comps
 		{
 			auto verifier{std::make_unique<misc::ksCertFingerprintHolder>()};
 			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
-#if defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 4
-			secureClient->setFingerprintVerifier(*verifier);
-#endif
 			if (verifier->setup(secureClient.get(), fingerprint))
 			{
 				certFingerprint = std::move(verifier);
