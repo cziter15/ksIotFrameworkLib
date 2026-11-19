@@ -89,31 +89,27 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classksf_1_1misc_1_1ks_w_s_server-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ksf::misc::ksWSServer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>A wrapper around WebSocketsServerCore that adds WebSocket authentication and enhanced message handling.  
+<p>A WebSocket server with authentication and text message handling.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ks_w_s_server_8h_source.html">ksWSServer.h</a>&gt;</code></p>
-<div id="dynsection-0" onclick="return dynsection.toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ksf::misc::ksWSServer:</div>
-<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-0-content" class="dyncontent" style="display:none;">
- <div class="center">
-  <img src="classksf_1_1misc_1_1ks_w_s_server.png" alt=""/>
- </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classksf_1_1misc_1_1ks_w_s_server_1_1_impl.html">Impl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a450f4ebefd18543c646d577136774e72" id="r_a450f4ebefd18543c646d577136774e72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a450f4ebefd18543c646d577136774e72">ksWSServer</a> (uint16_t port)</td></tr>
-<tr class="memdesc:a450f4ebefd18543c646d577136774e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares ksWebServer on specified port without actually starting it.  <br /></td></tr>
+<tr class="memdesc:a450f4ebefd18543c646d577136774e72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepares <a class="el" href="classksf_1_1misc_1_1ks_w_s_server.html" title="A WebSocket server with authentication and text message handling.">ksWSServer</a> on specified port without actually starting it.  <br /></td></tr>
 <tr class="separator:a450f4ebefd18543c646d577136774e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2224ec4f425cd7938cd89880cb5ce771" id="r_a2224ec4f425cd7938cd89880cb5ce771"><td class="memItemLeft" align="right" valign="top"><a id="a2224ec4f425cd7938cd89880cb5ce771" name="a2224ec4f425cd7938cd89880cb5ce771"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><b>~ksWSServer</b> ()</td></tr>
@@ -136,30 +132,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>loop</b> ()</td></tr>
 <tr class="memitem:ab6465499a17fef0e369e9f0f5802ef13" id="r_ab6465499a17fef0e369e9f0f5802ef13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6465499a17fef0e369e9f0f5802ef13">setMessageHandler</a> (ksWsServerMessageFunc_t func)</td></tr>
 <tr class="memdesc:ab6465499a17fef0e369e9f0f5802ef13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Installs a message handler to receive WebSocket text messages.  <br /></td></tr>
 <tr class="separator:ab6465499a17fef0e369e9f0f5802ef13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:ad15ba719689c843931612f3c9d41111b" id="r_ad15ba719689c843931612f3c9d41111b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad15ba719689c843931612f3c9d41111b">handleNonWebsocketConnection</a> (WSclient_t *client) override</td></tr>
-<tr class="memdesc:ad15ba719689c843931612f3c9d41111b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handler for non-WebSocket connections on websocket port.  <br /></td></tr>
-<tr class="separator:ad15ba719689c843931612f3c9d41111b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a169aaf6bac76dfc12f9137307ad190dd" id="r_a169aaf6bac76dfc12f9137307ad190dd"><td class="memItemLeft" align="right" valign="top"><a id="a169aaf6bac76dfc12f9137307ad190dd" name="a169aaf6bac76dfc12f9137307ad190dd"></a>
-std::unique_ptr&lt; WEBSOCKETS_NETWORK_SERVER_CLASS &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>wsListener</b></td></tr>
-<tr class="memdesc:a169aaf6bac76dfc12f9137307ad190dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">WS server (listener). <br /></td></tr>
-<tr class="separator:a169aaf6bac76dfc12f9137307ad190dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e142ee4cd90503c7f7d718c872d6134" id="r_a2e142ee4cd90503c7f7d718c872d6134"><td class="memItemLeft" align="right" valign="top"><a id="a2e142ee4cd90503c7f7d718c872d6134" name="a2e142ee4cd90503c7f7d718c872d6134"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>requiredAuthToken</b> {0}</td></tr>
-<tr class="memdesc:a2e142ee4cd90503c7f7d718c872d6134"><td class="mdescLeft">&#160;</td><td class="mdescRight">WS auth token. <br /></td></tr>
-<tr class="separator:a2e142ee4cd90503c7f7d718c872d6134"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a507b6d18fbe0c211bec2bb593173d885" id="r_a507b6d18fbe0c211bec2bb593173d885"><td class="memItemLeft" align="right" valign="top"><a id="a507b6d18fbe0c211bec2bb593173d885" name="a507b6d18fbe0c211bec2bb593173d885"></a>
-ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>onWebsocketTextMessage</b></td></tr>
-<tr class="memdesc:a507b6d18fbe0c211bec2bb593173d885"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback function to receive messages. <br /></td></tr>
-<tr class="separator:a507b6d18fbe0c211bec2bb593173d885"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7cf68ddf5e332bfe96db8e395afd43c" id="r_af7cf68ddf5e332bfe96db8e395afd43c"><td class="memItemLeft" align="right" valign="top"><a id="af7cf68ddf5e332bfe96db8e395afd43c" name="af7cf68ddf5e332bfe96db8e395afd43c"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>sendTXT</b> (uint8_t client, const char *payload, std::size_t length=0)</td></tr>
+<tr class="memdesc:af7cf68ddf5e332bfe96db8e395afd43c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a text message to one client. A zero length uses a null-terminated payload. <br /></td></tr>
+<tr class="separator:af7cf68ddf5e332bfe96db8e395afd43c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4d2c77be0f2081d9387eb2f2f65b8e0" id="r_ab4d2c77be0f2081d9387eb2f2f65b8e0"><td class="memItemLeft" align="right" valign="top"><a id="ab4d2c77be0f2081d9387eb2f2f65b8e0" name="ab4d2c77be0f2081d9387eb2f2f65b8e0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>broadcastTXT</b> (const char *payload, std::size_t length=0)</td></tr>
+<tr class="memdesc:ab4d2c77be0f2081d9387eb2f2f65b8e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a text message to all clients. A zero length uses a null-terminated payload. <br /></td></tr>
+<tr class="separator:ab4d2c77be0f2081d9387eb2f2f65b8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4e511e315f461d2afcb5a48ae8abbbc" id="r_ac4e511e315f461d2afcb5a48ae8abbbc"><td class="memItemLeft" align="right" valign="top"><a id="ac4e511e315f461d2afcb5a48ae8abbbc" name="ac4e511e315f461d2afcb5a48ae8abbbc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>enableHeartbeat</b> (uint32_t pingInterval, uint32_t pongTimeout, uint8_t disconnectTimeoutCount)</td></tr>
+<tr class="memdesc:ac4e511e315f461d2afcb5a48ae8abbbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures heartbeat intervals in milliseconds and the missed-pong limit. <br /></td></tr>
+<tr class="separator:ac4e511e315f461d2afcb5a48ae8abbbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A wrapper around WebSocketsServerCore that adds WebSocket authentication and enhanced message handling. </p>
+<div class="textblock"><p>A WebSocket server with authentication and text message handling. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a450f4ebefd18543c646d577136774e72" name="a450f4ebefd18543c646d577136774e72"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a450f4ebefd18543c646d577136774e72">&#9670;&#160;</a></span>ksWSServer()</h2>
@@ -176,7 +163,7 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
       </table>
 </div><div class="memdoc">
 
-<p>Prepares ksWebServer on specified port without actually starting it. </p>
+<p>Prepares <a class="el" href="classksf_1_1misc_1_1ks_w_s_server.html" title="A WebSocket server with authentication and text message handling.">ksWSServer</a> on specified port without actually starting it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">port</td><td>Port to listen for incoming WebSocket connections. </td></tr>
@@ -207,41 +194,6 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
 <p>Generally, this token should be generated earlier, then the WebServer should use Cookie to transmit it to the browser and then the browser should pass it with WebSocket requests (via HTTP Cookie header).</p>
 <dl class="section return"><dt>Returns</dt><dd>Auth token for WebSocket </dd></dl>
 
-<p class="reference">References <a class="el" href="#a2e142ee4cd90503c7f7d718c872d6134">requiredAuthToken</a>.</p>
-
-</div>
-</div>
-<a id="ad15ba719689c843931612f3c9d41111b" name="ad15ba719689c843931612f3c9d41111b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad15ba719689c843931612f3c9d41111b">&#9670;&#160;</a></span>handleNonWebsocketConnection()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ksf::misc::ksWSServer::handleNonWebsocketConnection </td>
-          <td>(</td>
-          <td class="paramtype">WSclient_t *</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Handler for non-WebSocket connections on websocket port. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">client</td><td>Pointer to the WSclient_t object. </td></tr>
-  </table>
-  </dd>
-</dl>
-
 </div>
 </div>
 <a id="ab6465499a17fef0e369e9f0f5802ef13" name="ab6465499a17fef0e369e9f0f5802ef13"></a>
@@ -266,8 +218,6 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
   </table>
   </dd>
 </dl>
-
-<p class="reference">References <a class="el" href="#a507b6d18fbe0c211bec2bb593173d885">onWebsocketTextMessage</a>.</p>
 
 </div>
 </div>
@@ -294,8 +244,6 @@ ksWsServerMessageFunc_t&#160;</td><td class="memItemRight" valign="bottom"><b>on
   </table>
   </dd>
 </dl>
-
-<p class="reference">References <a class="el" href="#a2e142ee4cd90503c7f7d718c872d6134">requiredAuthToken</a>.</p>
 
 </div>
 </div>

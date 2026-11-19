@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['postinit_0',['postInit',['../classksf_1_1comps_1_1ks_device_portal.html#a3943c29bbb8bea8568154903c379a8a4',1,'ksf::comps::ksDevicePortal::postInit()'],['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a762ce8b72ef72aa6142a318ad5752c7a',1,'ksf::comps::ksDevStatMqttReporter::postInit()'],['../classksf_1_1comps_1_1ks_mqtt_connector.html#ae1e46595b6c1a5760c31149355e751c4',1,'ksf::comps::ksMqttConnector::postInit()'],['../classksf_1_1comps_1_1ks_wifi_configurator.html#af940a4472153cb497d35bf1ffe035dc2',1,'ksf::comps::ksWifiConfigurator::postInit()'],['../classksf_1_1ks_component.html#ac952d4ad53c77639a2bb6015c11800fb',1,'ksf::ksComponent::postInit()']]],
-  ['process_1',['process',['../classksf_1_1misc_1_1ks_domain_query.html#a90739cb6ac868a2ea5646054daa05bf8',1,'ksf::misc::ksDomainQuery']]],
-  ['publish_2',['publish',['../classksf_1_1comps_1_1ks_mqtt_connector.html#ab101e26b5ea98a8b3e35295ab2b00680',1,'ksf::comps::ksMqttConnector']]]
+  ['onapplog_0',['onAppLog',['../classksf_1_1comps_1_1ks_device_portal.html#a71a92f3fba9cf819aad4115ae41b9b9a',1,'ksf::comps::ksDevicePortal']]],
+  ['onconnected_1',['onConnected',['../classksf_1_1comps_1_1ks_dev_stat_mqtt_reporter.html#a50a8b87a541070e20616a0815ce881d8',1,'ksf::comps::ksDevStatMqttReporter']]],
+  ['onrequest_5findex_2',['onRequest_index',['../classksf_1_1comps_1_1ks_device_portal.html#a80b467535ec6279ad36ffaa1c181ad90',1,'ksf::comps::ksDevicePortal']]],
+  ['onrequest_5fnotfound_3',['onRequest_notFound',['../classksf_1_1comps_1_1ks_device_portal.html#a8feb8377e4cebd8c15e64071a62ae9fa',1,'ksf::comps::ksDevicePortal']]],
+  ['onrequest_5fotachunk_4',['onRequest_otaChunk',['../classksf_1_1comps_1_1ks_device_portal.html#a874a08f061b795a96dc4badf7415fd82',1,'ksf::comps::ksDevicePortal']]],
+  ['onrequest_5fotafinish_5',['onRequest_otaFinish',['../classksf_1_1comps_1_1ks_device_portal.html#aaf77328746a9a3f01a584ffdf53a90c8',1,'ksf::comps::ksDevicePortal']]],
+  ['onwebsockettextmessage_6',['onWebsocketTextMessage',['../classksf_1_1comps_1_1ks_device_portal.html#a2992c9c68c1b62d4ddc6e0a64e1edfc7',1,'ksf::comps::ksDevicePortal']]],
+  ['operator_20bool_7',['operator bool',['../classksf_1_1misc_1_1ks_config.html#aef3eb1177e7b6deb4c67c07069d90cdb',1,'ksf::misc::ksConfig']]]
 ];

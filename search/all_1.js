@@ -9,5 +9,6 @@ var searchData=
   ['breakapp_6',['breakApp',['../classksf_1_1comps_1_1ks_device_portal.html#a573eb03602ce8a4352af1963ff80b748',1,'ksf::comps::ksDevicePortal']]],
   ['breaking_20changes_7',['Breaking Changes',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md3',1,'']]],
   ['broadcast_8',['broadcast',['../classksf_1_1evt_1_1ks_event.html#af5b0ecfe3c6f6c4093e316c8d3c7299f',1,'ksf::evt::ksEvent']]],
-  ['building_20the_20application_9',['🌱 Building the Application',['../index.html#autotoc_md19',1,'']]]
+  ['broadcasttxt_9',['broadcastTXT',['../classksf_1_1misc_1_1ks_w_s_server.html#ab4d2c77be0f2081d9387eb2f2f65b8e0',1,'ksf::misc::ksWSServer']]],
+  ['building_20the_20application_10',['🌱 Building the Application',['../index.html#autotoc_md19',1,'']]]
 ];
