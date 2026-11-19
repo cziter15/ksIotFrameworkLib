@@ -12,7 +12,7 @@
 #include <string>
 #include <cstdint>
 
-#if (defined(ESP32))
+#if defined(ESP32)
 	#include <esp_arduino_version.h>
 	#include <WiFiClientSecure.h>
 	#if ESP_ARDUINO_VERSION_MAJOR >= 3
@@ -20,127 +20,51 @@
 	#else
 		#define ksCertUtilsBaseClientSecure_t WiFiClientSecure
 	#endif
-	namespace ksf::misc { class ksPinnedTlsClientESP32; }
-	#define ksCertUtilsNetCLientSecure_t ksf::misc::ksPinnedTlsClientESP32
-#elif (defined(ESP8266))
-	namespace BearSSL{class WiFiClientSecure;}
-	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
-#else 
-	#error Platform not implemented.
-#endif
-
-namespace ksf::misc { class ksPinnedTlsClientESP32; }
-		#define ksCertUtilsNetCLientSecure_t ksf::misc::ksPinnedTlsClientESP32
-	#elif ESP_ARDUINO_VERSION_MAJOR >= 3
-		#define ksCertUtilsNetCLientSecure_t NetworkClientSecure
-		class ksCertUtilsNetCLientSecure_t;
-	#else
-		#define ksCertUtilsNetCLientSecure_t WiFiClientSecure
-		class ksCertUtilsNetCLientSecure_t;
-	#endif
-#elif (defined(ESP8266))
-	namespace BearSSL{class WiFiClientSecure;}
-	#define ksCertUtilsNetCLientSecure_t BearSSL::WiFiClientSecure
-#else 
+#elif defined(ESP8266)
+	#include <WiFiClientSecure.h>
+	#define ksCertUtilsBaseClientSecure_t BearSSL::WiFiClientSecure
+#else
 	#error Platform not implemented.
 #endif
 
 namespace ksf::misc
 {
 	/*!
-		@brief Interface for certificate fingerprint verification.
+		@brief Secure client pinned to a single certificate fingerprint.
 
-		Implements platform-specific certificate fingerprint verification. 
-		This allows validation of certificate fingerprints without requiring certificate-chain verification.
+		Allows validation of certificate fingerprint without certificate-chain verification.
+		The platform-specific details are hidden inside, so callers never need platform ifdefs.
+		A connection is considered established only if the fingerprint matches.
 	*/
-	class ksCertFingerprint
+	class ksPinnedTlsClient : public ksCertUtilsBaseClientSecure_t
 	{
-		protected:
-			/*!
-				@brief Converts fingerprint string into array of bytes.
-				@param fingerprint Fingerprint string
-				@param bytes Output buffer pointer
-				@param bytesLen Output buffer size
-				@return True if fingerprint seems to be OK, otherwise false.
-			*/
-			bool fingerprintToBytes(const std::string& fingerprint, uint8_t* bytes, uint8_t bytesLen) const;
-
-		public:
-			/*!
-				@brief Constructor.
-			*/
-			ksCertFingerprint();
-
-			/*!
-				@brief Destructor.
-			*/
-			virtual ~ksCertFingerprint();
-
-			/*!
-				@brief Performs certificate fingerprint setup (platform dependent).
-				@param client Pointer of ksCertUtilsNetCLientSecure_t
-				@param fingerprint Fingerprint string
-				@return True if setup has been successfull, otherwise false.
-			*/
-			virtual bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) = 0;
-
-			/*!
-				@brief Performs certificate fingerprint validation (platform dependent).
-				@param client Pointer of ksCertUtilsNetCLientSecure_t
-				@return True on verification pass, otherwise false.
-			*/
-			virtual bool verify(ksCertUtilsNetCLientSecure_t* client) const = 0;
-	};
-
+		private:
+			static constexpr size_t fingerprintSize{
 #ifdef ESP32
-	class ksCertFingerprintESP32 : public ksCertFingerprint
-	{
-		private:
-			uint8_t fingerprintBytes[32]{};	//!< Fingerprint string transformed into array of bytes.
-			friend class ksPinnedTlsClientESP32;
-			ksCertUtilsNetCLientSecure_t* configuredClient{nullptr};
-			bool verified{false};
+				32	// SHA-256
+#else
+				20	// SHA-1
+#endif
+			};
 
-		public:
-			/*!
-				@brief Performs fingerprint setup (platform dependent).
-				
-				On ESP32 it will copy fingerprint into fingerprintBytes.
-				The client type is ksPinnedTlsClientESP32 and setup() also binds this verifier to it.
-				The client verifies the pin on every connect and refuses I/O otherwise.
-				
-				@param client Pointer to ksCertUtilsNetCLientSecure_t
-				@param fingerprint Fingerprint string
-				@return True if setup passed, otherwise false.
-			*/
-			bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) override;
-
-			/*!
-				@brief Checks the certificate fingerprint for the current connection.
-				@param client Pointer to ksCertUtilsNetCLientSecure_t
-				@return True if verification passed, otherwise false.
-			*/
-			bool verify(ksCertUtilsNetCLientSecure_t* client) const override;
-	};
-
-	using ksCertFingerprintHolder = ksCertFingerprintESP32;
-
-	class ksPinnedTlsClientESP32 : public ksCertUtilsBaseClientSecure_t
-	{
-		private:
-			ksCertFingerprintESP32* fingerprint{nullptr};
-
+			uint8_t fingerprintBytes[fingerprintSize]{};	//!< Fingerprint transformed into array of bytes.
+#ifdef ESP32
+			bool configured{false};							//!< True if fingerprint has been set.
+			bool verified{false};							//!< True if current connection passed verification.
 #if ESP_ARDUINO_VERSION_MAJOR >= 4
 			static int verifyCertificate(void* context, mbedtls_x509_crt* cert, int depth, uint32_t* flags);
+#endif
 #endif
 
 		public:
 			/*!
-				@brief Sets the verifier, which must outlive this client.
-				@param verifier Fingerprint verifier to use for subsequent connections.
+				@brief Sets the pinned fingerprint and configures the client for fingerprint-only validation.
+				@param fingerprint Fingerprint string (hex).
+				@return True if fingerprint is valid and setup passed, otherwise false.
 			*/
-			void setFingerprintVerifier(ksCertFingerprintESP32& verifier);
+			bool setPinnedFingerprint(const std::string& fingerprint);
 
+#ifdef ESP32
 			int connect(IPAddress ip, uint16_t port, int32_t timeout) override;
 			int connect(IPAddress ip, uint16_t port) override;
 			int connect(const char* host, uint16_t port, int32_t timeout) override;
@@ -148,32 +72,6 @@ namespace ksf::misc
 			void stop() override;
 			size_t write(const uint8_t* data, size_t size) override;
 			size_t write(uint8_t data) override;
-	};
 #endif
-
-#ifdef ESP8266
-	class ksCertFingerprintESP8266 : public ksCertFingerprint
-	{
-		public:
-			/*!
-				@brief Performs fingerprint setup (platform dependent).
-				@param client Pointer of ksCertUtilsNetCLientSecure_t.
-				@param fingerprint Fingerprint string.
-				@return True if setup passed, otherwise false.
-			*/
-			bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) override;
-
-			/*!
-				@brief Converts bytes into a string and performs fingerprint validation.
-
-				Always returns true on ESP8266 as this functionality is handled under the hood.
-
-				@param client Pointer to ksCertUtilsNetCLientSecure_t
-				@return Always true in case of ESP8266.
-			*/
-			bool verify(ksCertUtilsNetCLientSecure_t* client) const override;
 	};
-
-	using ksCertFingerprintHolder = ksCertFingerprintESP8266;
-#endif
 }

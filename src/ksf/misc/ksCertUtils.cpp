@@ -25,10 +25,7 @@
 
 namespace ksf::misc
 {
-	ksCertFingerprint::ksCertFingerprint() = default;
-	ksCertFingerprint::~ksCertFingerprint() = default;
-
-	bool ksCertFingerprint::fingerprintToBytes(const std::string& fingerprint, uint8_t * bytes, uint8_t bytesLen) const
+	static bool fingerprintToBytes(const std::string& fingerprint, uint8_t* bytes, uint8_t bytesLen)
 	{
 		if (fingerprint.size() != bytesLen * 2)
 			return false;
@@ -56,41 +53,24 @@ namespace ksf::misc
 	}
 
 #ifdef ESP32
-	bool ksCertFingerprintESP32::setup(ksCertUtilsNetCLientSecure_t* clientSecure, const std::string& fingerprint)
-	{
-		configuredClient = nullptr;
-		verified = false;
-		if (!clientSecure)
-			return false;
-
-		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
-		{
-			constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS / KSF_ONE_SEC_MS};
-			clientSecure->setHandshakeTimeout(handshakeTimeoutSec);
-			clientSecure->setInsecure();
-			configuredClient = clientSecure;
-			clientSecure->setFingerprintVerifier(*this);
-			return true;
-		}
-		return false;
-	}
-
-	bool ksCertFingerprintESP32::verify(ksCertUtilsNetCLientSecure_t* client) const
-	{
-		return client && client == configuredClient && verified && client->connected();
-	}
-
-	void ksPinnedTlsClientESP32::setFingerprintVerifier(ksCertFingerprintESP32& verifier)
+	bool ksPinnedTlsClient::setPinnedFingerprint(const std::string& fingerprint)
 	{
 		stop();
-		fingerprint = &verifier;
-		fingerprint->verified = false;
+		configured = false;
+		if (!fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
+			return false;
+
+		constexpr auto handshakeTimeoutSec{KSF_MQTT_TIMEOUT_MS / KSF_ONE_SEC_MS};
+		setHandshakeTimeout(handshakeTimeoutSec);
+		setInsecure();
+		configured = true;
+		return true;
 	}
 
 #if ESP_ARDUINO_VERSION_MAJOR >= 4
-	int ksPinnedTlsClientESP32::verifyCertificate(void* context, mbedtls_x509_crt* cert, int depth, uint32_t* flags)
+	int ksPinnedTlsClient::verifyCertificate(void* context, mbedtls_x509_crt* cert, int depth, uint32_t* flags)
 	{
-		auto& pin{*static_cast<ksCertFingerprintESP32*>(context)};
+		auto& pin{*static_cast<ksPinnedTlsClient*>(context)};
 		*flags = 0;
 		if (depth != 0)
 			return 0;
@@ -117,108 +97,92 @@ namespace ksf::misc
 	}
 #endif
 
-	int ksPinnedTlsClientESP32::connect(IPAddress ip, uint16_t port, int32_t timeout)
+	int ksPinnedTlsClient::connect(IPAddress ip, uint16_t port, int32_t timeout)
 	{
 		stop();
-		if (!fingerprint)
-			return 0;
-		if (fingerprint->configuredClient != this)
+		if (!configured)
 			return 0;
 
 		_timeout = timeout;
-#if ESP_ARDUINO_VERSION_MAJOR < 4
-		if (!ksCertUtilsBaseClientSecure_t::connect(ip, port, timeout))
-			return 0;
-
-		static constexpr char hexChars[]{"0123456789ABCDEF"};
-		char hexBuffer[sizeof(fingerprint->fingerprintBytes) * 2 + 1];
-		char* ptr{hexBuffer};
-		for (const auto byte : fingerprint->fingerprintBytes)
-		{
-			*ptr++ = hexChars[byte >> 4];
-			*ptr++ = hexChars[byte & 0x0F];
-		}
-		*ptr = '\0';
-		if (!verify(hexBuffer, nullptr))
-		{
-			stop();
-			return 0;
-		}
-		fingerprint->verified = true;
-		return 1;
-#else
+#if ESP_ARDUINO_VERSION_MAJOR >= 4
 		setPlainStart();
 		if (!NetworkClientSecure::connect(ip, port, nullptr, nullptr, nullptr, nullptr))
 			return 0;
 
 		// No CA is configured: the callback and post-handshake check enforce the pin.
 		mbedtls_ssl_conf_authmode(&sslclient->ssl_conf, MBEDTLS_SSL_VERIFY_OPTIONAL);
-		mbedtls_ssl_set_verify(&sslclient->ssl_ctx, verifyCertificate, fingerprint);
-		if (!startTLS() || !fingerprint->verified || mbedtls_ssl_get_verify_result(&sslclient->ssl_ctx) != 0)
+		mbedtls_ssl_set_verify(&sslclient->ssl_ctx, verifyCertificate, this);
+		if (!startTLS() || !verified || mbedtls_ssl_get_verify_result(&sslclient->ssl_ctx) != 0)
 		{
-			fingerprint->verified = false;
 			stop();
 			return 0;
 		}
-		return 1;
+#else
+		if (!ksCertUtilsBaseClientSecure_t::connect(ip, port, timeout))
+			return 0;
+
+		static constexpr char hexChars[]{"0123456789ABCDEF"};
+		char hexBuffer[sizeof(fingerprintBytes) * 2 + 1];
+		char* ptr{hexBuffer};
+		for (const auto byte : fingerprintBytes)
+		{
+			*ptr++ = hexChars[byte >> 4];
+			*ptr++ = hexChars[byte & 0x0F];
+		}
+		*ptr = '\0';
+		if (!ksCertUtilsBaseClientSecure_t::verify(hexBuffer, nullptr))
+		{
+			stop();
+			return 0;
+		}
+		verified = true;
 #endif
+		return 1;
 	}
 
-	int ksPinnedTlsClientESP32::connect(IPAddress ip, uint16_t port)
+	int ksPinnedTlsClient::connect(IPAddress ip, uint16_t port)
 	{
 		return connect(ip, port, _timeout);
 	}
 
-	int ksPinnedTlsClientESP32::connect(const char*, uint16_t, int32_t)
+	int ksPinnedTlsClient::connect(const char*, uint16_t, int32_t)
 	{
 		stop();
 		return 0;
 	}
 
-	int ksPinnedTlsClientESP32::connect(const char* host, uint16_t port)
+	int ksPinnedTlsClient::connect(const char* host, uint16_t port)
 	{
 		return connect(host, port, _timeout);
 	}
 
-	void ksPinnedTlsClientESP32::stop()
+	void ksPinnedTlsClient::stop()
 	{
-		if (fingerprint)
-			fingerprint->verified = false;
+		verified = false;
 		ksCertUtilsBaseClientSecure_t::stop();
 	}
 
-	size_t ksPinnedTlsClientESP32::write(const uint8_t* data, size_t size)
+	size_t ksPinnedTlsClient::write(const uint8_t* data, size_t size)
 	{
-		if (!fingerprint || fingerprint->configuredClient != this || !fingerprint->verified
-#if ESP_ARDUINO_VERSION_MAJOR >= 4
-			|| stillInPlainStart()
-#endif
-		)
+		if (!verified)
 			return 0;
 		return ksCertUtilsBaseClientSecure_t::write(data, size);
 	}
 
-	size_t ksPinnedTlsClientESP32::write(uint8_t data)
+	size_t ksPinnedTlsClient::write(uint8_t data)
 	{
 		return write(&data, 1);
 	}
 #endif
 
 #ifdef ESP8266
-	bool ksCertFingerprintESP8266::setup(ksCertUtilsNetCLientSecure_t* clientSecure, const std::string& fingerprint)
+	bool ksPinnedTlsClient::setPinnedFingerprint(const std::string& fingerprint)
 	{
-		uint8_t fingerprintBytes[20];
-		if (fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
-		{
-			clientSecure->setFingerprint(fingerprintBytes);
-			return true;
-		}
+		if (!fingerprintToBytes(fingerprint, fingerprintBytes, sizeof(fingerprintBytes)))
+			return false;
 
-		return false;
-	}
-
-	bool ksCertFingerprintESP8266::verify([[maybe_unused]] ksCertUtilsNetCLientSecure_t* client) const
-	{
+		/* BearSSL validates the fingerprint under the hood during connect. */
+		setFingerprint(fingerprintBytes);
 		return true;
 	}
 #endif

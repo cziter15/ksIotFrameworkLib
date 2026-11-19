@@ -70,20 +70,15 @@ namespace ksf::comps
 	{
 		mqttClientUq.reset();
 		netClientUq.reset();
-		certFingerprint.reset();
 		/*
 			If present, fingerprint is used in the process of creating secure MQTT connection.
 			If fingerprint is empty, the connection will be insecure.
 		*/
 		if (!fingerprint.empty())
 		{
-			auto verifier{std::make_unique<misc::ksCertFingerprintHolder>()};
-			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
-			if (verifier->setup(secureClient.get(), fingerprint))
-			{
-				certFingerprint = std::move(verifier);
+			auto secureClient{std::make_unique<misc::ksPinnedTlsClient>()};
+			if (secureClient->setPinnedFingerprint(fingerprint))
 				netClientUq = std::move(secureClient);
-			}
 		}
 		else netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
 
@@ -229,18 +224,6 @@ namespace ksf::comps
 		/* If not connected, return. */
 		if (!netClientUq->connected())
 			return false;
-
-		/* Verify certificate fingerprint. */
-		if (certFingerprint && !certFingerprint->verify(static_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
-		{
-#ifdef APP_LOG_ENABLED
-			app->log([&](std::string& out) {
-				out += PSTR("[ MqttConnector ] Invalid certificate fingerprint! Disconnecting.");
-			});
-#endif
-			netClientUq->stop();
-			return false;
-		}
 
 #ifdef APP_LOG_ENABLED
 		app->log([&](std::string& out) {

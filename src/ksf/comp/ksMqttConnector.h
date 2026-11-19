@@ -20,8 +20,6 @@
 
 #if (defined(ESP32))
 	#include <esp_arduino_version.h>
-	namespace ksf::misc { class ksPinnedTlsClientESP32; }
-	#define ksMqttConnectorNetClientSecure_t ksf::misc::ksPinnedTlsClientESP32
 	#if ESP_ARDUINO_VERSION_MAJOR >= 3
 		#define ksMqttConnectorNetClient_t NetworkClient
 	#else
@@ -29,8 +27,6 @@
 	#endif
 	class ksMqttConnectorNetClient_t;
 #elif defined(ESP8266)
-	namespace BearSSL{class WiFiClientSecure;}
-	#define ksMqttConnectorNetClientSecure_t BearSSL::WiFiClientSecure
 	#define ksMqttConnectorNetClient_t WiFiClient
 	class ksMqttConnectorNetClient_t;
 #else
@@ -39,11 +35,6 @@
 
 class PubSubClient;
 class Client;
-
-namespace ksf::misc
-{
-	class ksCertFingerprint;
-}
 
 namespace ksf::comps
 {
@@ -67,7 +58,6 @@ namespace ksf::comps
 #endif
 
 			misc::ksDomainQuery domainResolver;								//!< Domain query used to resolve MQTT broker address.
-			std::unique_ptr<misc::ksCertFingerprint> certFingerprint;		//!< Shared pointer to fingerprint validator.
 			std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
 			std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 			std::weak_ptr<ksWifiConnector> wifiConnWp;						//!< Weak pointer to WiFi connector.
