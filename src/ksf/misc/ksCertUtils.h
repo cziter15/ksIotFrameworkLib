@@ -13,6 +13,10 @@
 #include <cstdint>
 
 #if (defined(ESP32))
+	#include <esp_arduino_version.h>
+	#if ESP_ARDUINO_VERSION_MAJOR >= 4
+		#include <WiFiClientSecure.h>
+	#endif
 	#if (defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 3)
 		#define ksCertUtilsNetCLientSecure_t NetworkClientSecure
 	#else
@@ -74,16 +78,27 @@ namespace ksf::misc
 	};
 
 #ifdef ESP32
+#if ESP_ARDUINO_VERSION_MAJOR >= 4
+	class ksPinnedTlsClientESP32;
+#endif
 	class ksCertFingerprintESP32 : public ksCertFingerprint
 	{
 		private:
-			uint8_t fingerprintBytes[32];	//!< Fingerprint string transformed into array of bytes.
+			uint8_t fingerprintBytes[32]{};	//!< Fingerprint string transformed into array of bytes.
+#if ESP_ARDUINO_VERSION_MAJOR >= 4
+			friend class ksPinnedTlsClientESP32;
+			ksCertUtilsNetCLientSecure_t* configuredClient{nullptr};
+			bool verified{false};
+#endif
 
 		public:
 			/*!
 				@brief Performs fingerprint setup (platform dependent).
 				
 				On ESP32 it will copy fingerprint into fingerprintBytes.
+				On Arduino-ESP32 4.x verification requires ksPinnedTlsClientESP32;
+				a plain NetworkClientSecure cannot install the
+				required handshake callback and therefore fails verification.
 				
 				@param client Pointer to ksCertUtilsNetCLientSecure_t
 				@param fingerprint Fingerprint string
@@ -92,7 +107,7 @@ namespace ksf::misc
 			bool setup(ksCertUtilsNetCLientSecure_t* client, const std::string& fingerprint) override;
 
 			/*!
-				@brief Converts bytes into a string and performs fingerprint validation.
+				@brief Checks the certificate fingerprint for the current connection.
 				@param client Pointer to ksCertUtilsNetCLientSecure_t
 				@return True if verification passed, otherwise false.
 			*/
@@ -100,6 +115,31 @@ namespace ksf::misc
 	};
 
 	using ksCertFingerprintHolder = ksCertFingerprintESP32;
+
+#if ESP_ARDUINO_VERSION_MAJOR >= 4
+	class ksPinnedTlsClientESP32 : public NetworkClientSecure
+	{
+		private:
+			ksCertFingerprintESP32* fingerprint{nullptr};
+
+			static int verifyCertificate(void* context, mbedtls_x509_crt* cert, int depth, uint32_t* flags);
+
+		public:
+			/*!
+				@brief Sets the verifier, which must outlive this client.
+				@param verifier Fingerprint verifier to use for subsequent connections.
+			*/
+			void setFingerprintVerifier(ksCertFingerprintESP32& verifier);
+
+			int connect(IPAddress ip, uint16_t port, int32_t timeout) override;
+			int connect(IPAddress ip, uint16_t port) override;
+			int connect(const char* host, uint16_t port, int32_t timeout) override;
+			int connect(const char* host, uint16_t port) override;
+			void stop() override;
+			size_t write(const uint8_t* data, size_t size) override;
+			size_t write(uint8_t data) override;
+	};
+#endif
 #endif
 
 #ifdef ESP8266

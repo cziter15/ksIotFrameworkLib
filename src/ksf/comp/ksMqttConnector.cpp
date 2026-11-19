@@ -33,6 +33,29 @@ using namespace std::placeholders;
 
 namespace ksf::comps
 {
+	class ksMqttTransport : public Client
+	{
+		private:
+			Client& client;
+
+		public:
+			explicit ksMqttTransport(Client& client) : client(client) {}
+
+			// Only the connector may establish and verify a new connection.
+			int connect(IPAddress, uint16_t) override { return 0; }
+			int connect(const char*, uint16_t) override { return 0; }
+			size_t write(uint8_t data) override { return client.write(data); }
+			size_t write(const uint8_t* data, size_t size) override { return client.write(data, size); }
+			int available() override { return client.available(); }
+			int read() override { return client.read(); }
+			int read(uint8_t* data, size_t size) override { return client.read(data, size); }
+			int peek() override { return client.peek(); }
+			void flush() override { client.flush(); }
+			void stop() override { client.stop(); }
+			uint8_t connected() override { return client.connected(); }
+			operator bool() override { return static_cast<bool>(client); }
+	};
+
 	ksMqttConnector::ksMqttConnector(bool sendConnectionStatus, bool usePersistentSession)
 		: reconnectTimer(KSF_MQTT_RECONNECT_DELAY_MS)
 	{
@@ -68,16 +91,26 @@ namespace ksf::comps
 
 	void ksMqttConnector::setupConnection(std::string broker, const std::string& port, std::string login, std::string password, std::string prefix, const std::string& fingerprint)
 	{
+		mqttClientUq.reset();
+		mqttTransportUq.reset();
+		netClientUq.reset();
+		certFingerprint.reset();
 		/*
 			If present, fingerprint is used in the process of creating secure MQTT connection.
 			If fingerprint is empty, the connection will be insecure.
 		*/
 		if (!fingerprint.empty())
 		{
+			auto verifier{std::make_unique<misc::ksCertFingerprintHolder>()};
 			auto secureClient{std::make_unique<ksMqttConnectorNetClientSecure_t>()};
-			certFingerprint = std::make_unique<misc::ksCertFingerprintHolder>();
-			if (certFingerprint->setup(secureClient.get(), fingerprint))
+#if defined(ESP32) && ESP_ARDUINO_VERSION_MAJOR >= 4
+			secureClient->setFingerprintVerifier(*verifier);
+#endif
+			if (verifier->setup(secureClient.get(), fingerprint))
+			{
+				certFingerprint = std::move(verifier);
 				netClientUq = std::move(secureClient);
+			}
 		}
 		else netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
 
@@ -96,7 +129,9 @@ namespace ksf::comps
 		ksf::from_chars(port, portNumber);
 
 		/* Create MQTT client. */
-		mqttClientUq = std::make_unique<PubSubClient>(*netClientUq.get());
+		mqttTransportUq = std::make_unique<ksMqttTransport>(*netClientUq);
+		mqttClientUq = std::make_unique<PubSubClient>(*mqttTransportUq);
+		mqttClientUq->setServer(IPAddress(0, 0, 0, 0), 0);
 	}
 
 	void ksMqttConnector::mqttConnectedInternal()
@@ -224,7 +259,7 @@ namespace ksf::comps
 			return false;
 
 		/* Verify certificate fingerprint. */
-		if (certFingerprint && !certFingerprint->verify(reinterpret_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
+		if (certFingerprint && !certFingerprint->verify(static_cast<ksMqttConnectorNetClientSecure_t*>(netClientUq.get())))
 		{
 #ifdef APP_LOG_ENABLED
 			app->log([&](std::string& out) {
@@ -256,6 +291,9 @@ namespace ksf::comps
 
 	bool ksMqttConnector::loop([[maybe_unused]] ksApplication* app)
 	{		
+		if (!mqttClientUq)
+			return false;
+
 		/* If MQTT is connected, process it. */
 		if (mqttClientUq->loop())
 			return true;

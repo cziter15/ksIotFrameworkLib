@@ -19,14 +19,20 @@
 #include "../misc/ksDomainQuery.h"
 
 #if (defined(ESP32))
-	#if ESP_ARDUINO_VERSION_MAJOR >= 3
+	#include <esp_arduino_version.h>
+	#if ESP_ARDUINO_VERSION_MAJOR >= 4
+		namespace ksf::misc { class ksPinnedTlsClientESP32; }
+		#define ksMqttConnectorNetClient_t NetworkClient
+		#define ksMqttConnectorNetClientSecure_t ksf::misc::ksPinnedTlsClientESP32
+	#elif ESP_ARDUINO_VERSION_MAJOR >= 3
 		#define ksMqttConnectorNetClient_t NetworkClient
 		#define ksMqttConnectorNetClientSecure_t NetworkClientSecure
+		class ksMqttConnectorNetClientSecure_t;
 	#else
 		#define ksMqttConnectorNetClient_t WiFiClient
 		#define ksMqttConnectorNetClientSecure_t WiFiClientSecure
+		class ksMqttConnectorNetClientSecure_t;
 	#endif
-	class ksMqttConnectorNetClientSecure_t;
 	class ksMqttConnectorNetClient_t;
 #elif defined(ESP8266)
 	namespace BearSSL{class WiFiClientSecure;}
@@ -38,6 +44,7 @@
 #endif
 
 class PubSubClient;
+class Client;
 
 namespace ksf::misc
 {
@@ -66,7 +73,9 @@ namespace ksf::comps
 #endif
 
 			misc::ksDomainQuery domainResolver;								//!< Domain query used to resolve MQTT broker address.
+			std::unique_ptr<misc::ksCertFingerprint> certFingerprint;		//!< Shared pointer to fingerprint validator.
 			std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
+			std::unique_ptr<Client> mqttTransportUq;							//!< MQTT transport that cannot reconnect without verification.
 			std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 			std::weak_ptr<ksWifiConnector> wifiConnWp;						//!< Weak pointer to WiFi connector.
 			misc::ksSimpleTimer reconnectTimer;								//!< Timer that counts time between reconnection attempts.
@@ -86,8 +95,6 @@ namespace ksf::comps
 			std::string password;											//!< Saved MQTT password.
 			std::string prefix;												//!< Saved MQTT prefix.
 			uint16_t portNumber{1883};										//!< Saved MQTT port number.
-
-			std::unique_ptr<misc::ksCertFingerprint> certFingerprint;		//!< Shared pointer to fingerprint validator.
 
 			/*!
 				@brief Connects to the MQTT broker.
