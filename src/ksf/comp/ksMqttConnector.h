@@ -18,23 +18,9 @@
 #include "../misc/ksSimpleTimer.h"
 #include "../misc/ksDomainQuery.h"
 
-#if (defined(ESP32))
-	#include <esp_arduino_version.h>
-	#if ESP_ARDUINO_VERSION_MAJOR >= 3
-		#define ksMqttConnectorNetClient_t NetworkClient
-	#else
-		#define ksMqttConnectorNetClient_t WiFiClient
-	#endif
-	class ksMqttConnectorNetClient_t;
-#elif defined(ESP8266)
-	#define ksMqttConnectorNetClient_t WiFiClient
-	class ksMqttConnectorNetClient_t;
-#else
-	#error Platform not implemented.
-#endif
+#include "../misc/ksPinnedTlsClient.h"
 
 class PubSubClient;
-class Client;
 
 namespace ksf::comps
 {
@@ -58,7 +44,7 @@ namespace ksf::comps
 #endif
 
 			misc::ksDomainQuery domainResolver;								//!< Domain query used to resolve MQTT broker address.
-			std::unique_ptr<ksMqttConnectorNetClient_t> netClientUq;		//!< Shared pointer to WiFiClient used to connect to MQTT.
+			std::unique_ptr<misc::ksNetworkClient_t> netClientUq;		//!< Network client owned by the MQTT connector.
 			std::unique_ptr<PubSubClient> mqttClientUq;						//!< Shared pointer to PubSubClient used to connect to MQTT.
 			std::weak_ptr<ksWifiConnector> wifiConnWp;						//!< Weak pointer to WiFi connector.
 			misc::ksSimpleTimer reconnectTimer;								//!< Timer that counts time between reconnection attempts.

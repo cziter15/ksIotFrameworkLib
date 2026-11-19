@@ -10,12 +10,10 @@
 #if defined(ESP32)
 	#include <esp_wifi.h>
 	#include <WiFi.h>
-	#include <WiFiClientSecure.h>
 #elif defined(ESP8266)
 	#include <user_interface.h>
 	#include <ESP8266WiFi.h>
-	#include <WiFiClientSecure.h>
-#else 			
+#else
 	#error Platform not implemented.
 #endif
 #include <PubSubClient.h>
@@ -23,7 +21,7 @@
 #include "../ksApplication.h"
 #include "../ksConstants.h"
 #include "../misc/ksConfig.h"
-#include "../misc/ksCertUtils.h"
+#include "../misc/ksPinnedTlsClient.h"
 #include "ksWifiConnector.h"
 #include "ksMqttConfigProvider.h"
 
@@ -75,12 +73,8 @@ namespace ksf::comps
 			If fingerprint is empty, the connection will be insecure.
 		*/
 		if (!fingerprint.empty())
-		{
-			auto secureClient{std::make_unique<misc::ksPinnedTlsClient>()};
-			if (secureClient->setPinnedFingerprint(fingerprint))
-				netClientUq = std::move(secureClient);
-		}
-		else netClientUq = std::make_unique<ksMqttConnectorNetClient_t>();
+			netClientUq = misc::createPinnedTlsClient(fingerprint);
+		else netClientUq = std::make_unique<misc::ksNetworkClient_t>();
 
 		/* Whoops, it looks like fingerprint validation failed. */
 		if (!netClientUq)

@@ -136,7 +136,7 @@ flowchart TD
     │   ├── 📄 ksEventHandle            ─── Event handle management
     │   └── 📄 ksEventInterface         ─── Event interface definition
     ├── 📂 misc
-    │   ├── 📄 ksCertUtils              ─── MQTT certificate utilities
+    │   ├── 📄 ksPinnedTlsClient        ─── Fingerprint-pinned TLS client
     │   ├── 📄 ksConfig                 ─── Configuration file handling
     │   ├── 📄 ksDomainQuery            ─── Custom DNS implementation
     │   ├── 📄 ksSimpleTimer            ─── Simple timer functionality
